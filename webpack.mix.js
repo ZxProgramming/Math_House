@@ -6,6 +6,7 @@ const rimraf = require('rimraf');
 const WebpackRTLPlugin = require('webpack-rtl-plugin');
 const del = require('del');
 const fs = require('fs');
+    //  Test
 
 /*
  |--------------------------------------------------------------------------
