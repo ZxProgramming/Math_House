@@ -19,11 +19,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-<<<<<<< HEAD
 //  Hello MR Ahmed 
-=======
 
->>>>>>> a7cbfe107d60b03a8b1baab2e425365abf308dc1
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
