@@ -15,8 +15,10 @@
                 {{$item->name}}
             </td>
             <td data-order="2023-10-25T00:00:00+03:00">
-                @php
-                @endphp
+                Super Admin
+            </td>
+            <td>
+                Null
             </td>
         </tr>
         @endforeach
@@ -27,7 +29,40 @@
             </td>
             <td data-order="2023-10-25T00:00:00+03:00">
                 @php
+                $roles = DB::table('admin_roles')
+                ->where('user_id', $item->id)
+                ->get();
                 @endphp
+                @foreach( $roles as $element )
+                {{$element->admin_role}}
+                <br />
+                @endforeach
+            </td>
+            <td>
+            <div class="mt-3">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
+                          Edit
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true" style="display: none;">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="modalCenterTitle">Edit Role</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div> 
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
+                                  Close
+                                </button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
             </td>
         </tr>
         @endforeach

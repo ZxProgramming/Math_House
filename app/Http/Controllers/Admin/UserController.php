@@ -5,18 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\Admin_role;
+use App\Models\User;
 
 class UserController extends Controller
 {
     public function admins(){
-        $admins = Admin_role::
-        user()
-        ->where('position', 'admin')
+        $admins = User::where('position', 'admin')
         ->get();
-        $sup_admins = Admin_role::
-        user()
-        ->where('position', 'super_admin')
+        $sup_admins = User::where('position', 'super_admin')
         ->get();
 
         return view('Admin.Users.Admin',
