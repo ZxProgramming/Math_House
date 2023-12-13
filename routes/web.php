@@ -4,8 +4,12 @@ use App\Http\Controllers\Apps\PermissionManagementController;
 use App\Http\Controllers\Apps\RoleManagementController;
 use App\Http\Controllers\Apps\UserManagementController;
 use App\Http\Controllers\Auth\SocialiteController;
+<<<<<<< HEAD
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
+=======
+use App\Http\Controllers\DashboardController;
+>>>>>>> 0ee02dc7361ff5729f37f4535f96078c4a84f4e7
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,9 +22,18 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+<<<<<<< HEAD
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/Users/Admin', [UserController::class, 'admins'])->name('admins_list');
+=======
+
+
+//  Hello MR Ahmed 
+
+Route::get('/', [DashboardController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+>>>>>>> 0ee02dc7361ff5729f37f4535f96078c4a84f4e7
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
