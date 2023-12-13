@@ -11,9 +11,13 @@ class UserController extends Controller
 {
     public function admins(){
         $admins = Admin_role::
-        get();
+        user()
+        ->where('position', 'admin')
+        ->get();
         $sup_admins = Admin_role::
-        get();
+        user()
+        ->where('position', 'super_admin')
+        ->get();
 
         return view('Admin.Users.Admin',
         compact('admins', 'sup_admins'));
