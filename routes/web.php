@@ -4,8 +4,7 @@ use App\Http\Controllers\Apps\PermissionManagementController;
 use App\Http\Controllers\Apps\RoleManagementController;
 use App\Http\Controllers\Apps\UserManagementController;
 use App\Http\Controllers\Auth\SocialiteController;
-use App\Http\Controllersz\DashboardController;
-use App\Http\Controllersz\UserController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,11 +17,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Hello Mr Ziad
+
+
+//  Hello MR Ahmed 
 
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/User/Admins', [UserController::class, 'admins'])->name('admins_list');
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
