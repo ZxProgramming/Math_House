@@ -4,7 +4,7 @@ use App\Http\Controllers\Apps\PermissionManagementController;
 use App\Http\Controllers\Apps\RoleManagementController;
 use App\Http\Controllers\Apps\UserManagementController;
 use App\Http\Controllers\Auth\SocialiteController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardControgit fa-pull-leftller;
 use Illuminate\Support\Facades\Route;
 
 /*
