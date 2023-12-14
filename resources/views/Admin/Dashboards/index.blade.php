@@ -1,7 +1,4 @@
 <x-default-layout>
-
- 
-
     <!--begin::Row-->
     <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
         <!--begin::Col-->

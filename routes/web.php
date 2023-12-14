@@ -22,7 +22,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/Users/RoleAdmin', [UserController::class, 'role_admins'])->name('role_admins_list');
+Route::post('/Users/RoleAdmin/Edit', [UserController::class, 'role_admin_edit'])->name('role_admin_edit');
+Route::get('/Users/RoleAdmin/Del/{id}', [UserController::class, 'role_del_admin'])->name('role_del_admin');
 Route::get('/Users/Admin', [UserController::class, 'admins'])->name('admins_list');
+Route::post('/Users/Admin/Edit', [UserController::class, 'admin_edit'])->name('admin_edit');
+Route::get('/Users/Admin/Del/{id}', [UserController::class, 'del_admin'])->name('del_admin');
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
