@@ -5,6 +5,6 @@
 <a href="{{route('admins_list')}}" class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-150px h-35px">
     Admin List
 </a>
-<a href="" class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-150px h-35px">
+<a href="{{route('admin_add')}}" class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-150px h-35px">
     Add Admin 
 </a>

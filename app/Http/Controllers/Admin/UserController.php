@@ -61,4 +61,8 @@ class UserController extends Controller
 
         return redirect()->back();
     }
+
+    public function admin_add(){
+        return view('Admin.Users.AddAdmin');
+    }
 }
