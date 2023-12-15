@@ -20,12 +20,12 @@
         <!--begin::Heading-->
 
         <!--begin::Login options-->
-        <div class="row g-3 mb-9">
+        {{-- <div class="row g-3 mb-9">
             <!--begin::Col-->
             <div class="col-md-6">
                 <!--begin::Google link--->
                 <a href="{{ url('/auth/redirect/google') }}?redirect_uri={{ url()->current() }}" class="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100">
-                    <img alt="Logo" src="{{ image('svg/brand-logos/google-icon.svg') }}" class="h-15px me-3"/>
+                    <img alt="Logo" src="{{ image('svg/brand-logos/Maths-house.png') }}" class="h-15px me-3"/>
                     Sign in with Google
                 </a>
                 <!--end::Google link--->
@@ -43,7 +43,7 @@
                 <!--end::Google link--->
             </div>
             <!--end::Col-->
-        </div>
+        </div> --}}
         <!--end::Login options-->
 
         <!--begin::Separator-->
