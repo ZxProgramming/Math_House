@@ -65,4 +65,18 @@ class UserController extends Controller
     public function admin_add(){
         return view('Admin.Users.AddAdmin');
     }
+
+    public function add_admin( Request $req ){
+        $arr = $req->only('name', 'email', 'phone');
+        $arr['password'] = bcrypt($req->password);
+        $arr['position'] = 'admin';
+        $user = User::create($arr);
+        foreach ( $req->roles as $item ) {
+            Admin_role::create([
+                'user_id' => $user->id,
+                'admin_role' => $item,
+            ]);
+        }
+        return redirect()->back();
+    }
 }

@@ -29,6 +29,7 @@ Route::get('/Users/Admin', [UserController::class, 'admins'])->name('admins_list
 Route::post('/Users/Admin/Edit', [UserController::class, 'admin_edit'])->name('admin_edit');
 Route::get('/Users/Admin/Del/{id}', [UserController::class, 'del_admin'])->name('del_admin');
 Route::get('/Users/Admin_Add', [UserController::class, 'admin_add'])->name('admin_add');
+Route::post('/Users/Admin/Add', [UserController::class, 'add_admin'])->name('add_admin');
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
