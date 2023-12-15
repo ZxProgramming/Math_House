@@ -4,7 +4,7 @@
 <div class='my-3'>
   <form class='d-flex' action="{{route('admin_filter')}}" method='POST'>
     @csrf
-    <select class='form-control mx-2'>
+    <select name='admin_role' class='form-control mx-2'>
       <option disabled>
         Select Role
       </option>

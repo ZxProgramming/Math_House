@@ -89,7 +89,7 @@
 							</span>
 							<span class="menu-title">Admins</span>
 						</a>
-						<a class="menu-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
+						<a class="menu-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('student') }}">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>

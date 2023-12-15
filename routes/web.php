@@ -27,8 +27,10 @@ Route::get('/Users/RoleAdmin', [UserController::class, 'role_admins'])->name('ro
 Route::post('/Users/RoleAdmin/Edit', [UserController::class, 'role_admin_edit'])->name('role_admin_edit');
 Route::get('/Users/RoleAdmin/Del/{id}', [UserController::class, 'role_del_admin'])->name('role_del_admin');
 Route::get('/Users/Admin', [UserController::class, 'admins'])->name('admins_list');
+Route::post('/Users/Admin/Filter', [UserController::class, 'admin_filter'])->name('admin_filter');
 
-
+// Students 
+Route::get('/Users/Student', [UserController::class, 'student'])->name('student');
 //  Hello MR Ahmed 
 
 Route::get('/', [DashboardController::class, 'index']);

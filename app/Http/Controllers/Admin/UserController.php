@@ -79,4 +79,23 @@ class UserController extends Controller
         }
         return redirect()->back();
     }
+    
+    public function admin_filter( Request $req ){
+        $users_id = Admin_role::
+        where('admin_role', $req->admin_role)
+        ->pluck('user_id');
+
+        $sup_admins = [];
+        $admins = User::whereIn('id', $users_id)
+        ->get();
+
+        return view('Admin.Users.Admins', compact('sup_admins', 'admins'));
+    }
+
+    public function student(){
+        $students = User::where('position', 'student')
+        ->get();
+
+        return view('Admin.Users.Students', compact('students'));
+    }
 }
