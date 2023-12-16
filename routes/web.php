@@ -32,6 +32,9 @@ Route::post('/Users/Admin/Filter', [UserController::class, 'admin_filter'])->nam
 // Students  
 Route::get('/Users/Student', [UserController::class, 'student'])->name('student');
 Route::get('/Users/Student/Info', [UserController::class, 'stu_info'])->name('stu_info');
+Route::get('/Users/Add_Student', [UserController::class, 'add_student'])->name('add_student');
+Route::post('/Users/Student/Add', [UserController::class, 'student_add'])->name('student_add');
+Route::post('/Users/Student/Edit', [UserController::class, 'stu_edit'])->name('stu_edit');
 //  Hello MR Ahmed 
 
 Route::get('/', [DashboardController::class, 'index']);

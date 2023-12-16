@@ -106,4 +106,27 @@ class UserController extends Controller
 
         return view('Admin.Users.StudentsInfo', compact('students'));
     }
+
+    public function add_student(){
+        return view('Admin.Users.AddStudent');
+    }
+
+    public function student_add( Request $req ){
+        $arr = $req->only('name', 'email', 'phone', 'parent_email', 'parent_phone');
+        $arr['password'] = bcrypt($req->password);
+        User::create($arr);
+
+        return redirect()->back();
+    }
+
+    public function stu_edit( Request $req ){
+        $arr = $req->only('name', 'email', 'phone', 'parent_email', 'parent_phone');
+        $arr['password'] = bcrypt($req->password);
+        User::
+        where('id', $req->user_id)
+        ->update($arr);
+
+        return redirect()->back();
+    }
+
 }
