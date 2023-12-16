@@ -7,6 +7,9 @@ use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\login\LoginController;
+
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,8 +22,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/Users/RoleAdmin', [UserController::class, 'role_admins'])->name('role_admins_list');
+Route::post('/Users/RoleAdmin/Edit', [UserController::class, 'role_admin_edit'])->name('role_admin_edit');
+Route::get('/Users/RoleAdmin/Del/{id}', [UserController::class, 'role_del_admin'])->name('role_del_admin');
 Route::get('/Users/Admin', [UserController::class, 'admins'])->name('admins_list');
 
 
@@ -28,6 +35,12 @@ Route::get('/Users/Admin', [UserController::class, 'admins'])->name('admins_list
 
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+=======
+Route::post('/Users/Admin/Edit', [UserController::class, 'admin_edit'])->name('admin_edit');
+Route::get('/Users/Admin/Del/{id}', [UserController::class, 'del_admin'])->name('del_admin');
+Route::get('/Users/Admin_Add', [UserController::class, 'admin_add'])->name('admin_add');
+
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::name('user-management.')->group(function () {
