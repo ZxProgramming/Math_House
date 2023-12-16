@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\User;
 use App\Models\Admin_role;
+use App\Models\Marketing;
 
 class UserController extends Controller
 {
@@ -97,5 +98,12 @@ class UserController extends Controller
         ->get();
 
         return view('Admin.Users.Students', compact('students'));
+    }
+
+    public function stu_info(){
+        $students = User::where('position', 'student')
+        ->get();
+
+        return view('Admin.Users.StudentsInfo', compact('students'));
     }
 }

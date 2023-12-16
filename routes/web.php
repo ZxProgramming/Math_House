@@ -29,8 +29,9 @@ Route::get('/Users/RoleAdmin/Del/{id}', [UserController::class, 'role_del_admin'
 Route::get('/Users/Admin', [UserController::class, 'admins'])->name('admins_list');
 Route::post('/Users/Admin/Filter', [UserController::class, 'admin_filter'])->name('admin_filter');
 
-// Students 
+// Students  
 Route::get('/Users/Student', [UserController::class, 'student'])->name('student');
+Route::get('/Users/Student/Info', [UserController::class, 'stu_info'])->name('stu_info');
 //  Hello MR Ahmed 
 
 Route::get('/', [DashboardController::class, 'index']);

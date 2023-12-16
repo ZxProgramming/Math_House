@@ -1,5 +1,5 @@
 <x-default-layout>
-@include('Admin.Users.header')
+@include('Admin.Users.admin_header')
 
 <form class="px-3" method="POST" action="{{route('add_admin')}}">
     @csrf

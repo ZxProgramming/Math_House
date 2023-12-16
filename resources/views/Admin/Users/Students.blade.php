@@ -1,25 +1,6 @@
 <x-default-layout>
-@include('Admin.Users.header')
+@include('Admin.Users.stu_header')
 
-<div class='my-3'>
-  <form class='d-flex' action="{{route('admin_filter')}}" method='POST'>
-    @csrf
-    <select name='admin_role' class='form-control mx-2'>
-      <option disabled>
-        Select Role
-      </option>
-      <option value='Marketing'>Marketing</option>
-      <option value='Questions'>Questions</option>
-      <option value='Teacher'>Teacher</option>
-      <option value='Student'>Student</option>
-      <option value='Lesson'>Lesson</option>
-    </select>
-
-    <button class='btn btn-primary'>
-      Search
-    </button>
-  </form>
-</div>
 <table id="kt_profile_overview_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable no-footer">
     <thead class="fs-7 text-gray-500 text-uppercase">
         <tr>
@@ -51,13 +32,114 @@
             <td class="sorting_1">
                 {{$item->parent_email}}
             </td> 
+            <td class="sorting_1">
+                @php
+                $marketing = DB::table('marketings')
+                ->where('student_id', $item->id)
+                ->get();
+                $arr = [];
+                foreach($marketing as $item){
+                  if(!empty($item->category_id)){
+                    $arr[] = DB::table('marketings')
+                    ->select('*', 'categories.cate_price AS arr_price', 'categories.cate_name as arr_name')
+                    ->where('marketings.id', $item->id)
+                    ->leftJoin('categories', 'marketings.category_id', '=', 'categories.id')
+                    ->first();
+                  }
+                  elseif(!empty($item->chapter_id)){
+                    $arr[] = DB::table('marketings')
+                    ->select('*', 'chapters.ch_price AS arr_price', 'chapters.chapter_name AS arr_name')
+                    ->where('marketings.id', $item->id)
+                    ->leftJoin('chapters', 'marketings.chapter_id', '=', 'chapters.id')
+                    ->leftJoin('courses', 'chapters.course_id', '=', 'courses.id')
+                    ->leftJoin('categories', 'courses.category_id', '=', 'categories.id')
+                    ->first();
+                  }
+                  elseif(!empty($item->course_id)){
+                    $arr[] = DB::table('marketings')
+                    ->select('*', 'courses.course_price AS arr_price', 'courses.course_name AS arr_name')
+                    ->where('marketings.id', $item->id)
+                    ->leftJoin('courses', 'marketings.course_id', '=', 'courses.id')
+                    ->leftJoin('categories', 'courses.category_id', '=', 'categories.id')
+                    ->first();
+                  }
+                  elseif(!empty($item->lesson_id)){
+                    $arr[] = DB::table('marketings')
+                    ->select('*', 'lessons.lesson_price AS arr_price', 'lessons.lesson_name AS arr_name')
+                    ->where('marketings.id', $item->id)
+                    ->leftJoin('lessons', 'marketings.lesson_id', '=', 'lessons.id')
+                    ->leftJoin('chapters', 'lessons.chapter_id', '=', 'chapters.id')
+                    ->leftJoin('courses', 'chapters.course_id', '=', 'courses.id')
+                    ->leftJoin('categories', 'courses.category_id', '=', 'categories.id')
+                    ->first();
+                  }
+                  elseif(!empty($item->question_id)){
+                    $arr[] = DB::table('marketings')
+                    ->select('*', 'questions.q_price AS arr_price', 'questions.question AS arr_name')
+                    ->where('marketings.id', $item->id)
+                    ->leftJoin('questions', 'marketings.question_id', '=', 'questions.id')
+                    ->leftJoin('lessons', 'questions.lesson_id', '=', 'lessons.id')
+                    ->leftJoin('chapters', 'lessons.chapter_id', '=', 'chapters.id')
+                    ->leftJoin('courses', 'chapters.course_id', '=', 'courses.id')
+                    ->leftJoin('categories', 'courses.category_id', '=', 'categories.id')
+                    ->first();
+                  }
+                }
+                @endphp
+                {{@$arr[0]->cate_name}}
+            </td>
+
+            <td>
+              @php
+              $arr_item = null;
+              foreach($arr as $item){
+                if( isset($item->course_name) && $item->course_name != $arr_item ){
+                  echo $arr_item;
+                  $arr_item = $item->course_name;
+                }
+              }
+              @endphp
+            </td>
+
+            <td>
+              <button class='btn btn-primary show_history'>
+                View
+              </button>
+              <div class="history d-none">
+                @foreach($arr as $item)
+                {{$item->arr_name}}
+                @endforeach
+              </div>
+            </td>
+
+            <td>
+              @php
+              $total = 0;
+              foreach($arr as $item){
+                $total += $item->arr_price;
+              }
+              @endphp
+              {{$total}}
+            </td>
         </tr>
         @endforeach
     
     </tbody>
 </table>
 
-
+<script>
+  let show_history = document.querySelectorAll('.show_history');
+  let history = document.querySelectorAll('.history');
+  for (let i = 0, end = show_history.length; i < end; i++) {
+    show_history[i].addEventListener('click', (e)=> {
+      for (let j = 0; j < end; j++) {
+        if(e.target == show_history[j]){
+          history[j].classList.toggle('d-none');
+        }
+      }
+    })
+  }
+</script>
 
 
 </x-default-layout>
