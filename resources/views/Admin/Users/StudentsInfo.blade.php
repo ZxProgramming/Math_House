@@ -138,7 +138,7 @@
                                 <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
                                   Close
                                 </button>
-                                <a href="{{route('del_admin', ['id'=>$item->id])}}" class="btn btn-danger">Delete</a>
+                                <a href="{{route('del_stu', ['id'=>$item->id])}}" class="btn btn-danger">Delete</a>
                               </div>
                             </div>
                           </div>

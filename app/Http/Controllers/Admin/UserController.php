@@ -114,6 +114,7 @@ class UserController extends Controller
     public function student_add( Request $req ){
         $arr = $req->only('name', 'email', 'phone', 'parent_email', 'parent_phone');
         $arr['password'] = bcrypt($req->password);
+        $arr['position'] = 'student';
         User::create($arr);
 
         return redirect()->back();
@@ -125,6 +126,13 @@ class UserController extends Controller
         User::
         where('id', $req->user_id)
         ->update($arr);
+
+        return redirect()->back();
+    }
+
+    public function del_stu( $id ){
+        User::where('id', $id)
+        ->delete();
 
         return redirect()->back();
     }
