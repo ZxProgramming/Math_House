@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('chapters', function (Blueprint $table) {
             $table->string('chapter_name');
             $table->foreignId('course_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->float('ch_price');
             $table->string('ch_des');
             $table->string('ch_url');

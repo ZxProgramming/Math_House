@@ -15,7 +15,7 @@
             <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Wallet</th>
     </thead>
     <tbody class="fs-6">
-        @foreach( $students as $item )
+        @foreach( $teachers as $item )
         <tr class="odd">
             <td class="sorting_1">
                 {{$item->name}}

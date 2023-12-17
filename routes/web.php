@@ -41,12 +41,13 @@ Route::post('/Users/Student/Edit', [UserController::class, 'stu_edit'])->name('s
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-
+// Admin
 Route::post('/Users/Admin/Edit', [UserController::class, 'admin_edit'])->name('admin_edit');
 Route::get('/Users/Admin/Del/{id}', [UserController::class, 'del_admin'])->name('del_admin');
 Route::get('/Users/Admin_Add', [UserController::class, 'admin_add'])->name('admin_add');
 Route::post('/Users/Admin/Add', [UserController::class, 'add_admin'])->name('add_admin');
 
+// Teacher
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::name('user-management.')->group(function () {

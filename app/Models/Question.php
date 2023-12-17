@@ -12,7 +12,6 @@ class Question extends Model
     use HasFactory;
     
     protected $fillable = [
-        'teacher_id', 
         'lesson_id', 
         'question', 
         'q_price', 

@@ -137,4 +137,12 @@ class UserController extends Controller
         return redirect()->back();
     }
 
+    public function teacher(){
+        $teachers = User::where('position', 'teacher')
+        ->get();
+
+        return view('Admin.Users.Teachers',
+        compact('teachers'));
+    }
+
 }
