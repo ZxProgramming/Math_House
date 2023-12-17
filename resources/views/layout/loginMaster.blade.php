@@ -35,28 +35,21 @@ License: For each use you must have a valid license purchased only from above li
 		<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
+		@yield('styleCssSection')
 		<script>// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }</script>
 	</head>
+	@yield('styleSection')
 	<!--end::Head-->
 	<!--begin::Body-->
 	<body id="kt_body" class="app-blank">
-            @yield('contentScript')
-	
-
-            @yield('content')
-
-
-
-
-
-
-
-
-
-
-
+        
+		
+		@yield('contentScript')
+        @yield('content')
         @yield('script')
    
+
+
     </body>
 	<!--end::Body-->
 </html>
