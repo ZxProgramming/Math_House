@@ -1,7 +1,7 @@
 <x-default-layout>
-@include('Admin.Users.header')
+@include('Admin.Users.admin_header')
 
-<form class="px-3" method="POST" action="">
+<form class="px-3" method="POST" action="{{route('add_admin')}}">
     @csrf
     <div class='my-3'>
         <label>Name</label>
@@ -14,6 +14,10 @@
     <div class='my-3'>
         <label>Phone</label>
         <input class='form-control' name="phone" placeholder="Phone" />
+    </div>
+    <div class='my-3'>
+        <label>Password</label>
+        <input class='form-control' type="password" name="password" placeholder="Password" />
     </div>
     
     <div class="my-3 form-check form-switch form-switch-sm form-check-custom form-check-solid">

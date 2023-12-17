@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\login\LoginController;
+
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -19,13 +20,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
     $controller_path = 'App\Http\Controllers' ;
-Route::get('/', [DashboardController::class, 'index']);
-Route::get('/dashboard', [$controller_path. DashboardController::class, 'index'])->name('dashboard');
-Route::get('/Users/RoleAdmin', [UserController::class, 'role_admins'])->name('role_admins_list');
-Route::post('/Users/RoleAdmin/Edit', [UserController::class, 'role_admin_edit'])->name('role_admin_edit');
-Route::get('/Users/RoleAdmin/Del/{id}', [UserController::class, 'role_del_admin'])->name('role_del_admin');
-Route::get('/Users/Admin', [UserController::class, 'admins'])->name('admins_list');
-
 
 //  Hello MR Ahmed 
         Route::middleware(['auth','auth.Admin'])->group(function(){
@@ -36,10 +30,29 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::post('/Users/Admin/Edit', [UserController::class, 'admin_edit'])->name('admin_edit');
 Route::get('/Users/Admin/Del/{id}', [UserController::class, 'del_admin'])->name('del_admin');
 Route::get('/Users/Admin_Add', [UserController::class, 'admin_add'])->name('admin_add');
+Route::post('/Users/Admin/Add', [UserController::class, 'add_admin'])->name('add_admin');
+
+Route::get('/', [DashboardController::class, 'index']);
+Route::get('/dashboard', [ DashboardController::class, 'index'])->name('dashboard');
+Route::get('/Users/RoleAdmin', [UserController::class, 'role_admins'])->name('role_admins_list');
+Route::post('/Users/RoleAdmin/Edit', [UserController::class, 'role_admin_edit'])->name('role_admin_edit');
+Route::get('/Users/RoleAdmin/Del/{id}', [UserController::class, 'role_del_admin'])->name('role_del_admin');
+Route::get('/Users/Admin', [UserController::class, 'admins'])->name('admins_list');
+Route::post('/Users/Admin/Filter', [UserController::class, 'admin_filter'])->name('admin_filter');
+
+// Students  
+Route::get('/Users/Student', [UserController::class, 'student'])->name('student');
+Route::get('/Users/Student/Info', [UserController::class, 'stu_info'])->name('stu_info');
+Route::get('/Users/Add_Student', [UserController::class, 'add_student'])->name('add_student');
+Route::get('/Users/Student/Del/{id}', [UserController::class, 'del_stu'])->name('del_stu');
+Route::post('/Users/Student/Add', [UserController::class, 'student_add'])->name('student_add');
+Route::post('/Users/Student/Edit', [UserController::class, 'stu_edit'])->name('stu_edit');
 });
             // Route::middleware(['auth','auth.teacher'])->group(function(){
                 
             // });
+
+
 
 
 
