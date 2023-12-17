@@ -46,6 +46,11 @@ Route::get('/Users/Admin/Del/{id}', [UserController::class, 'del_admin'])->name(
 Route::get('/Users/Admin_Add', [UserController::class, 'admin_add'])->name('admin_add');
 Route::post('/Users/Admin/Add', [UserController::class, 'add_admin'])->name('add_admin');
 
+// Teacher
+Route::get('/Users/Teacher', [UserController::class, 'teacher'])->name('teacher');
+Route::post('/Users/Teacher_Edit', [UserController::class, 'teacher_edit'])->name('teacher_edit');
+Route::get('/Users/Teacher_Add', [UserController::class, 'teacher_add'])->name('teacher_add');
+
 // Students  
 Route::get('/Users/Student', [UserController::class, 'student'])->name('student');
 Route::get('/Users/Student/Info', [UserController::class, 'stu_info'])->name('stu_info');
@@ -58,7 +63,6 @@ Route::post('/Users/Student/Edit', [UserController::class, 'stu_edit'])->name('s
 
 
 
-// Teacher
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::name('user-management.')->group(function () {

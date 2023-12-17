@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Admin_role;
 use App\Models\Marketing;
+use App\Models\Category;
+use App\Models\Course;
 
 class UserController extends Controller
 {
@@ -139,10 +141,14 @@ class UserController extends Controller
 
     public function teacher(){
         $teachers = User::where('position', 'teacher')
+        ->leftJoin('categories', 'users.category_id', '=', 'categories.id')
+        ->leftJoin('courses', 'users.course_id', '=', 'courses.id')
         ->get();
+        $categories = Category::all();
+        $courses = Course::all();
 
         return view('Admin.Users.Teachers',
-        compact('teachers'));
+        compact('teachers', 'categories', 'courses'));
     }
 
 }
