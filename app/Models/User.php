@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use App\Models\Course;
+use App\Models\Category;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -21,8 +23,6 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     
     protected $fillable = [
-    
-        
         'name',
         'email',
         'phone',
@@ -68,6 +68,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function addresses()
     {
         return $this->hasMany(Address::class);
+    }
+
+    public function course()
+    {
+        return $this->hasMany(Course::class, 'teacher_id');
+    }
+    public function category()
+    {
+        return $this->hasMany(Category::class, 'teacher_id');
     }
 
     public function getDefaultAddressAttribute()

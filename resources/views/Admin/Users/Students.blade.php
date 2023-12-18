@@ -39,11 +39,11 @@
                 ->get();
                 $arr = [];
                 foreach($marketing as $item){
-                  if(!empty($item->category_id)){
+                  if(!empty($item->cate_id)){
                     $arr[] = DB::table('marketings')
                     ->select('*', 'categories.cate_price AS arr_price', 'categories.cate_name as arr_name')
                     ->where('marketings.id', $item->id)
-                    ->leftJoin('categories', 'marketings.category_id', '=', 'categories.id')
+                    ->leftJoin('categories', 'marketings.cate_id', '=', 'categories.id')
                     ->first();
                   }
                   elseif(!empty($item->chapter_id)){
@@ -84,7 +84,7 @@
                     ->leftJoin('categories', 'courses.category_id', '=', 'categories.id')
                     ->first();
                   }
-                }
+                } 
                 @endphp
                 {{@$arr[0]->cate_name}}
             </td>
@@ -114,12 +114,55 @@
 
             <td>
               @php
+              $wallet = DB::table('wallets')
+              ->where('student_id', $item->student_id)
+              ->get();
               $total = 0;
-              foreach($arr as $item){
-                $total += $item->arr_price;
-              }
               @endphp
-              {{$total}}
+          <div class='d-flex align-items-center w-200px'>
+          <button type="button" class="btn btn-primary show_wallet">
+            View
+          </button>
+          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalCenter{{$item->id}}">
+            Top up
+          </button>
+          </div>
+          <div class='wallet_h d-none'>
+            @php
+            foreach($wallet as $item){
+              echo $item->wallet . '$ at ' . $item->date . '<br/>';
+              $total += $item->wallet;
+            }
+            @endphp
+          </div>
+<!-- Modal -->
+<div class="modal fade" id="modalCenter{{$item->id}}" tabindex="-1" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalCenterTitle">Top Up</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div> 
+      
+      <div class='p-3'>
+        Wallet
+        <span class='text-danger'>
+          {{$total}} ??
+        </span>
+      </div>
+        <input class="form-control" type="number" />
+      <div class="modal-footer">
+        <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">
+          Confirm
+        </button>
+        
+      </div>
+    </div>
+  </div>
+</div>
             </td>
         </tr>
         @endforeach
@@ -135,6 +178,17 @@
       for (let j = 0; j < end; j++) {
         if(e.target == show_history[j]){
           history[j].classList.toggle('d-none');
+        }
+      }
+    })
+  } 
+  let show_wallet = document.querySelectorAll('.show_wallet');
+  let wallet_h = document.querySelectorAll('.wallet_h');
+  for (let i = 0, end = show_wallet.length; i < end; i++) {
+    show_wallet[i].addEventListener('click', (e) => {
+      for (let j = 0; j < end; j++) {
+        if ( e.target == show_wallet[j] ) {
+          wallet_h[j].classList.toggle('d-none')
         }
       }
     })

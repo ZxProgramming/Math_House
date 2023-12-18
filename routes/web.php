@@ -48,6 +48,20 @@ Route::get('/Users/RoleAdmin/Del/{id}', [UserController::class, 'role_del_admin'
 Route::get('/Users/Admin', [UserController::class, 'admins'])->name('admins_list');
 Route::post('/Users/Admin/Filter', [UserController::class, 'admin_filter'])->name('admin_filter');
 
+// Admin
+Route::post('/Users/Admin/Edit', [UserController::class, 'admin_edit'])->name('admin_edit');
+Route::get('/Users/Admin/Del/{id}', [UserController::class, 'del_admin'])->name('del_admin');
+Route::get('/Users/Admin_Add', [UserController::class, 'admin_add'])->name('admin_add');
+Route::post('/Users/Admin/Add', [UserController::class, 'add_admin'])->name('add_admin');
+
+// Teacher
+Route::post('/Users/Teacher_Filter', [UserController::class, 'teacher_filter'])->name('teacher_filter');
+Route::get('/Users/Teacher', [UserController::class, 'teacher'])->name('teacher');
+Route::post('/Users/Teacher_Edit', [UserController::class, 'teacher_edit'])->name('teacher_edit');
+Route::post('/Users/Teacher/Add', [UserController::class, 'add_teacher'])->name('add_teacher');
+Route::get('/Users/Teacher_Add', [UserController::class, 'teacher_add'])->name('teacher_add');
+Route::get('/Users/Teacher/Del/{id}', [UserController::class, 'del_teacher'])->name('del_teacher');
+
 // Students  
 Route::get('/Users/Student', [UserController::class, 'student'])->name('student');
 Route::get('/Users/Student/Info', [UserController::class, 'stu_info'])->name('stu_info');
@@ -59,10 +73,11 @@ Route::post('/Users/Student/Edit', [UserController::class, 'stu_edit'])->name('s
 Route::controller(CategoryController::class)->group(function(){
     Route::get('/category/Information','index')->name('category');
     Route::post('/category/categoryAdd','createCategory')->name('addCategories');
+});
 
     
   });
-});
+
           
 
 

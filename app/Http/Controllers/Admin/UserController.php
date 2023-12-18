@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Admin_role;
 use App\Models\Marketing;
+use App\Models\Category;
+use App\Models\Course;
 
 class UserController extends Controller
 {
@@ -134,6 +136,76 @@ class UserController extends Controller
         User::where('id', $id)
         ->delete();
 
+        return redirect()->back();
+    }
+
+    public function teacher(){
+        $teachers = User::
+        select('*', 'users.id as u_id')
+        ->where('position', 'teacher')
+        ->get();
+        $categories = Category::all();
+        $courses = Course::all();
+
+        return view('Admin.Users.Teachers',
+        compact('teachers', 'categories', 'courses'));
+    }
+
+    public function teacher_filter(Request $req){
+        $teachers = Course::
+        select('*', 'users.id as u_id')
+        ->leftJoin('users', 'courses.teacher_id', '=', 'users.id')
+        ->where('courses.id', $req->t_course)
+        ->get();
+        $categories = Category::all();
+        $courses = Course::all();
+
+        return view('Admin.Users.Teachers_Filter',
+        compact('teachers', 'categories', 'courses'));
+    }
+
+    public function teacher_edit( Request $req ){
+        $arr = $req->only('name', 'email', 'phone', 'category_id', 'course_id');
+        User::where('id', $req->user_id)
+        ->update($arr);
+
+        return redirect()->back();
+    }
+
+    public function del_teacher($id){
+        User::where('id', $id)
+        ->where('position', '!=', 'super_admin')
+        ->delete();
+
+        return redirect()->back();
+    }
+
+    public function teacher_add(){
+        $categories = Category::all();
+        $courses    = Course::all();
+        return view('Admin.Users.AddTeacher', compact('categories', 'courses'));
+    }
+
+    public function add_teacher( Request $req ){
+        $arr = $req->only('name', 'email', 'phone', 'category_id', 'course_id');
+        $arr['password'] = bcrypt($req->password);
+        $arr['position'] = 'teacher';
+        extract($_FILES['image']);
+        $img_name = null;
+        if ( !empty($name) ) {
+            $extention_arr = ['jpg', 'jpeg', 'png', 'svg'];
+            $extention = explode('.', $name);
+            $extention = end($extention);
+            $extention = strtolower($extention);
+            if ( in_array($extention, $extention_arr)) {
+                $img_name = now() . rand(1, 10000) . $name;
+                $img_name = str_replace([' ', ':', '-'], 'X', $img_name);
+                $arr['image'] = $img_name;
+            }
+        }
+
+        move_uploaded_file($tmp_name, 'public/images/users/' . $img_name);
+        User::create($arr);
         return redirect()->back();
     }
 

@@ -18,14 +18,15 @@ class Course extends Model
         'course_price', 
         'course_des', 
         'course_url', 
+        'user_id', 
     ];
  
     public function teacher()
     {
-        return $this->hasMany(User::class, 'teacher_id');
+        return $this->belongsTo(User::class);
     }
     public function category()
     {
-        return $this->hasMany(Category::class, 'cate_id');
+        return $this->belongsTo(Category::class);
     }
 }
