@@ -72,11 +72,11 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function course()
     {
-        return $this->hasOne(Course::class, 'course_id');
+        return $this->hasMany(Course::class, 'teacher_id');
     }
     public function category()
     {
-        return $this->hasOne(Category::class, 'category_id');
+        return $this->hasMany(Category::class, 'teacher_id');
     }
 
     public function getDefaultAddressAttribute()

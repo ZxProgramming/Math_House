@@ -10,11 +10,8 @@ class Marketing extends Model
     use HasFactory;
     
     protected $fillable = [
-        'cate_id',
         'course_id',
         'chapter_id',
-        'lesson_id',
-        'question_id',
         'affilate_id',
         'student_id',
     ];

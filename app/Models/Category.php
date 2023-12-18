@@ -13,9 +13,9 @@ class Category extends Model
     protected $fillable = [
         'cate_name',
         'teacher_id', 
-        'cate_price',
         'cate_des',
         'cate_url',
+        'user_id', 
     ];
 
     public function teacher()

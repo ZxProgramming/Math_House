@@ -14,7 +14,6 @@ class Question extends Model
     protected $fillable = [
         'lesson_id', 
         'question', 
-        'q_price', 
         'q_url',  
     ];
 

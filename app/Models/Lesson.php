@@ -15,7 +15,6 @@ class Lesson extends Model
         'lesson_name', 
         'teacher_id', 
         'chapter_id', 
-        'lesson_price', 
         'lesson_des', 
         'lesson_url', 
     ];
