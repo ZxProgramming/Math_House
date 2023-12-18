@@ -98,8 +98,17 @@ class UserController extends Controller
     public function student(){
         $students = User::where('position', 'student')
         ->get();
+        $courses = Course::all();
 
-        return view('Admin.Users.Students', compact('students'));
+        return view('Admin.Users.Students', compact('students', 'courses'));
+    }
+
+    public function student_filter(){
+        $students = Marketing::
+        get();
+        $courses = Course::all();
+
+        return $students;
     }
 
     public function stu_info(){
@@ -142,6 +151,8 @@ class UserController extends Controller
     public function teacher(){
         $teachers = User::
         select('*', 'users.id as u_id')
+        ->leftJoin('courses', 'courses.id', '=', 'users.course_id')
+        ->leftJoin('categories', 'categories.id', '=', 'users.category_id')
         ->where('position', 'teacher')
         ->get();
         $categories = Category::all();
@@ -152,10 +163,11 @@ class UserController extends Controller
     }
 
     public function teacher_filter(Request $req){
-        $teachers = Course::
+        $teachers = User::
         select('*', 'users.id as u_id')
-        ->leftJoin('users', 'courses.teacher_id', '=', 'users.id')
-        ->where('courses.id', $req->t_course)
+        ->leftJoin('courses', 'courses.id', '=', 'users.course_id')
+        ->leftJoin('categories', 'categories.id', '=', 'users.category_id')
+        ->where('course_id', $req->t_course)
         ->get();
         $categories = Category::all();
         $courses = Course::all();
@@ -204,7 +216,7 @@ class UserController extends Controller
             }
         }
 
-        move_uploaded_file($tmp_name, 'public/images/users/' . $img_name);
+        move_uploaded_file($tmp_name, 'images/users/' . $img_name);
         User::create($arr);
         return redirect()->back();
     }

@@ -34,6 +34,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'last_login_at',
         'last_login_ip',
         'profile_photo_path',
+        'course_id',
+        'category_id'
     ];
 
     /**
@@ -72,11 +74,11 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function course()
     {
-        return $this->hasMany(Course::class, 'teacher_id');
+        return $this->belongsTo(Course::class);
     }
     public function category()
     {
-        return $this->hasMany(Category::class, 'teacher_id');
+        return $this->belongsTo(Category::class);
     }
 
     public function getDefaultAddressAttribute()
