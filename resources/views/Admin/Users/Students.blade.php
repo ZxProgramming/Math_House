@@ -1,6 +1,26 @@
 <x-default-layout>
 @include('Admin.Users.stu_header')
 
+<div class='my-3'>
+  <form class='d-flex' action="{{route('student_filter')}}" method='POST'>
+    @csrf
+    <select name='t_course' class='form-control mx-2'>
+      <option disabled selected>
+        Select Course
+      </option>
+      @foreach($courses as $course)
+      <option value="{{$course->id}}">
+        {{$course->course_name}}
+      </option>
+      @endforeach
+    </select>
+
+    <button class='btn btn-primary'>
+      Search
+    </button>
+  </form>
+</div>
+
 <table id="kt_profile_overview_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable no-footer">
     <thead class="fs-7 text-gray-500 text-uppercase">
         <tr>

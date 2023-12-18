@@ -45,16 +45,10 @@
                 {{$item->email}}
             </td> 
             <td class="sorting_1">
-              @foreach($item->category as $element)
-                {{$element->cate_name}}
-                <br />
-              @endforeach
+                {{$item->cate_name}}
             </td>
             <td class="sorting_1">
-              @foreach($item->course as $element)
-                {{$element->course_name}}
-              <br />
-              @endforeach
+                {{$item->course_name}}
             </td>
             <td>
               <img src="{{asset('/images/users/' . $item->image)}}" style="height: 120px;width:120px;border-raduis:50%;" />

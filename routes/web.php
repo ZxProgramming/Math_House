@@ -54,7 +54,7 @@ Route::get('/Users/Admin/Del/{id}', [UserController::class, 'del_admin'])->name(
 Route::get('/Users/Admin_Add', [UserController::class, 'admin_add'])->name('admin_add');
 Route::post('/Users/Admin/Add', [UserController::class, 'add_admin'])->name('add_admin');
 
-// Teacher
+// Teacher 
 Route::post('/Users/Teacher_Filter', [UserController::class, 'teacher_filter'])->name('teacher_filter');
 Route::get('/Users/Teacher', [UserController::class, 'teacher'])->name('teacher');
 Route::post('/Users/Teacher_Edit', [UserController::class, 'teacher_edit'])->name('teacher_edit');
@@ -64,6 +64,7 @@ Route::get('/Users/Teacher/Del/{id}', [UserController::class, 'del_teacher'])->n
 
 // Students  
 Route::get('/Users/Student', [UserController::class, 'student'])->name('student');
+Route::post('/Users/Student_Filter', [UserController::class, 'student_filter'])->name('student_filter');
 Route::get('/Users/Student/Info', [UserController::class, 'stu_info'])->name('stu_info');
 Route::get('/Users/Add_Student', [UserController::class, 'add_student'])->name('add_student');
 Route::get('/Users/Student/Del/{id}', [UserController::class, 'del_stu'])->name('del_stu');
