@@ -40,16 +40,7 @@
                         <!--end::Breadcrumb-->
                     </div>
                     <!--end::Page title-->
-                    <!--begin::Actions-->
-                        <div class="d-flex align-items-center gap-2 gap-lg-3">
-                        
-                            <!--begin::Secondary button-->
-                            <!--end::Secondary button-->
-                            <!--begin::Primary button-->
-                            <a href="#" class="btn btn-sm fw-bold btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Create</a>
-                            <!--end::Primary button-->
-                        </div>
-                    <!--end::Actions-->
+                  
                 </div>
                 <!--end::Toolbar container-->
             </div>
@@ -73,7 +64,7 @@
                                 <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
                                
                                     <!--begin::Add customer-->
-                                    <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_create_api_key">Create API Key</a>
+                                    <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_create_api_key">Cteate New Category</a>
 
                                     <!--end::Add customer-->
                                 </div>
