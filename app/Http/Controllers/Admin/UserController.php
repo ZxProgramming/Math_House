@@ -103,12 +103,13 @@ class UserController extends Controller
         return view('Admin.Users.Students', compact('students', 'courses'));
     }
 
-    public function student_filter(){
+    public function student_filter(Request $req){
         $students = Marketing::
-        get();
+        where('course_id', $req->course_id)
+        ->get();
         $courses = Course::all();
 
-        return $students;
+        return view('Admin.Users.Students_Filter', compact('students', 'courses'));
     }
 
     public function stu_info(){

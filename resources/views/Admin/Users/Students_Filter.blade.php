@@ -38,24 +38,24 @@
         @foreach( $students as $item )
         <tr class="odd">
             <td class="sorting_1">
-                {{$item->name}}
+                {{$item->student->name}}
             </td>
             <td class="sorting_1">
-                {{$item->phone}}
+                {{$item->student->phone}}
             </td>
             <td class="sorting_1">
-                {{$item->email}}
+                {{$item->student->email}}
             </td> 
             <td class="sorting_1">
-                {{$item->parent_phone}}
+                {{$item->student->parent_phone}}
             </td> 
             <td class="sorting_1">
-                {{$item->parent_email}}
+                {{$item->student->parent_email}}
             </td> 
             <td class="sorting_1">
                 @php
                 $marketing = DB::table('marketings')
-                ->where('student_id', $item->id)
+                ->where('student_id', $item->student->id)
                 ->get();
                 $arr = [];
                 foreach($marketing as $item){
