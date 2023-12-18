@@ -6,6 +6,7 @@ use App\Http\Controllers\Apps\UserManagementController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\login\LoginController;
 
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
     $controller_path = 'App\Http\Controllers' ;
+
+    Route::controller(LoginController::class)->group(function(){
+        Route::get('/login','index')->name('login.index');
+        Route::post('/login.store','store')->name('login.store');
+        Route::get('/logout','destroy')->name('logout');
+        
+      });
 
 //  Hello MR Ahmed 
         Route::middleware(['auth','auth.Admin'])->group(function(){
@@ -47,11 +55,15 @@ Route::get('/Users/Add_Student', [UserController::class, 'add_student'])->name('
 Route::get('/Users/Student/Del/{id}', [UserController::class, 'del_stu'])->name('del_stu');
 Route::post('/Users/Student/Add', [UserController::class, 'student_add'])->name('student_add');
 Route::post('/Users/Student/Edit', [UserController::class, 'stu_edit'])->name('stu_edit');
-});
-            // Route::middleware(['auth','auth.teacher'])->group(function(){
-                
-            // });
+// Category
+Route::controller(CategoryController::class)->group(function(){
+    Route::get('/category/Information','index')->name('category');
+    Route::post('/category/categoryAdd','createCategory')->name('addCategories');
 
+    
+  });
+});
+          
 
 
 
@@ -67,10 +79,3 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
 
-
-Route::controller(LoginController::class)->group(function(){
-    Route::get('/login','index')->name('login.index');
-    Route::post('/login.store','store')->name('login.store');
-    Route::get('/logout','destroy')->name('logout');
-    
-  });

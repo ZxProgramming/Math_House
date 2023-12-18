@@ -11,11 +11,10 @@ class Category extends Model
     use HasFactory;
      
     protected $fillable = [
-        'teacher_id',
+        'user_id',
         'cate_name',
-        'cate_price',
         'cate_des',
-        'cate_url',
+        'image',
     ];
 
     public function teacher()
