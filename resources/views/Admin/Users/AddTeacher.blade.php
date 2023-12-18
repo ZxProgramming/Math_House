@@ -1,7 +1,7 @@
 <x-default-layout>
 @include('Admin.Users.teacher_header')
 
-<form class="px-3" method="POST" action="{{route('add_teacher')}}">
+<form class="px-3" action="{{route('add_teacher')}}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class='my-3'>
         <label>Name</label>

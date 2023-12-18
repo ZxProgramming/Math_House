@@ -189,6 +189,7 @@ class UserController extends Controller
     public function add_teacher( Request $req ){
         $arr = $req->only('name', 'email', 'phone', 'category_id', 'course_id');
         $arr['password'] = bcrypt($req->password);
+        $arr['position'] = 'teacher';
         extract($_FILES['image']);
         $img_name = null;
         if ( !empty($name) ) {
@@ -203,8 +204,8 @@ class UserController extends Controller
             }
         }
 
-        User::create($arr);
         move_uploaded_file($tmp_name, 'public/images/users/' . $img_name);
+        User::create($arr);
         return redirect()->back();
     }
 
