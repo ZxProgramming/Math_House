@@ -12,7 +12,7 @@ class ChaptersController extends Controller
 {
     
     public function chapter(){
-        $chapters = Chapters::get();
+        $chapters = Chapter::get();
         $courses = Course::get();
 
         return view('Admin.courses.Chapters.Chapters'
