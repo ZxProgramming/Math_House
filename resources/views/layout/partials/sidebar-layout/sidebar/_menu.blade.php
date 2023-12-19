@@ -138,6 +138,12 @@
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
+							<span class="menu-title">Chapters</span>
+						</a>
+						<a class="menu-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
 							<span class="menu-title">Lessons</span>
 						</a>
 						<a class="menu-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">

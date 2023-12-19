@@ -79,6 +79,7 @@ Route::controller(CoursesController::class)->group(function(){
     Route::post('/Courses/Edit','course_edit')->name('course_edit');
     Route::get('/Courses/Del/{id}','del_course')->name('del_course');
     Route::get('/Courses/Add_Courses','add_courses')->name('add_courses');
+    Route::post('/Courses/Courses/Add','course_add')->name('course_add');
 });
 
 // Category

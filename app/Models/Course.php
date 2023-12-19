@@ -15,10 +15,14 @@ class Course extends Model
     protected $fillable = [
         'course_name', 
         'teacher_id', 
-        'cate_id', 
+        'category_id', 
         'course_price', 
         'course_des', 
         'course_url', 
+        'pre_requisition',
+        'gain',
+        'duration',
+        'discount',
         'user_id', 
     ];
  
