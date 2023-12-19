@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CoursesController;
 use App\Http\Controllers\login\LoginController;
 
 use Illuminate\Support\Facades\Route;
@@ -70,6 +71,15 @@ Route::get('/Users/Add_Student', [UserController::class, 'add_student'])->name('
 Route::get('/Users/Student/Del/{id}', [UserController::class, 'del_stu'])->name('del_stu');
 Route::post('/Users/Student/Add', [UserController::class, 'student_add'])->name('student_add');
 Route::post('/Users/Student/Edit', [UserController::class, 'stu_edit'])->name('stu_edit');
+
+// Courses 
+Route::controller(CoursesController::class)->group(function(){
+    Route::get('/Courses','courses')->name('courses');
+    Route::post('/Courses/Edit','course_edit')->name('course_edit');
+    Route::get('/Courses/Del/{id}','del_course')->name('del_course');
+    Route::get('/Courses/Add_Courses','add_courses')->name('add_courses');
+});
+
 // Category
 Route::controller(CategoryController::class)->group(function(){
     Route::get('/category/Information','index')->name('category');
