@@ -63,4 +63,17 @@ class CoursesController extends Controller
         return redirect()->back();
     }
 
+    public function course_filter( Request $req ){
+        if ( $req->category_id == "all" ) {
+            $courses = Course::all();
+        }
+        else{
+            $courses = Course::
+            where('category_id', $req->category_id)
+            ->get();
+        }
+        $categories = Category::all();
+        return view('Admin.courses.Courses.Course', compact('courses', 'categories'));
+    }
+
 }
