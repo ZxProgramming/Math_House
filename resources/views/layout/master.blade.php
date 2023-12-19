@@ -69,7 +69,7 @@
 <!--end::Custom Javascript-->
 @stack('scripts')
 <!--end::Javascript-->
-
+@yield('script')
 <script>
     document.addEventListener('livewire:load', () => {
         Livewire.on('success', (message) => {

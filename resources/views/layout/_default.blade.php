@@ -43,5 +43,5 @@
     @include('partials/_modals')
 
     @include('partials/_scrolltop')
-
+    
 @endsection
