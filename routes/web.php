@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ChaptersController;
 use App\Http\Controllers\Admin\CoursesController;
 use App\Http\Controllers\login\LoginController;
+use App\Http\Controllers\Admin\LessonController;
 
 use Illuminate\Support\Facades\Route;
 /*
@@ -94,8 +95,12 @@ Route::controller(CategoryController::class)->group(function(){
     Route::post('/category/categoryAdd','createCategory')->name('addCategories');
     Route::get('/category/categoryDelete/{id}','categoryDelete')->name('categoryDelete');
 });
+        Route::controller(LessonController::class)->group(function(){
+                Route::get('Lesson/Lessons','index')->name('lesson');
+        });
+   
 
-    
+
   });
 
           
