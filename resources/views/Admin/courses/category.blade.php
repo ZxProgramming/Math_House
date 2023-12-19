@@ -5,8 +5,7 @@
     @endphp
 
     @section('title','category')
-
-
+       @include('success')
 
 
     <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
@@ -118,7 +117,10 @@
 
                                         <a href="#" class="text-gray-600 text-hover-primary mb-1">{{  $category->cate_des }}</a>
                                     </td>
-                                    <td>{{ $category->image }}</td>
+                                    <td>
+                                        
+                                       <img src="../images/category/{{ $category->image }}" alt="" width="200px" style="max-width: 150px;max-height: 100;overflow: hidden;"> 
+                                    </td>
                                   
                                   
                                     <td data-filter="mastercard">
@@ -136,7 +138,7 @@
                                             <!--end::Menu item-->
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Delete</a>
+                                                <a href="{{ route('categoryDelete',['id'=>$category->id]) }}" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Delete</a>
                                             </div>
                                             <!--end::Menu item-->
                                         </div>
@@ -147,7 +149,9 @@
                                        @endforeach
                                    
                                 </tbody>
-                            </table></div><div class="row"><div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start"><div class="dataTables_length" id="kt_customers_table_length"><label><select name="kt_customers_table_length" aria-controls="kt_customers_table" class="form-select form-select-sm form-select-solid"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></label></div></div><div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end"><div class="dataTables_paginate paging_simple_numbers" id="kt_customers_table_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="kt_customers_table_previous"><a href="#" aria-controls="kt_customers_table" data-dt-idx="0" tabindex="0" class="page-link"><i class="previous"></i></a></li><li class="paginate_button page-item active"><a href="#" aria-controls="kt_customers_table" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="kt_customers_table" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="kt_customers_table" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="kt_customers_table" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item next" id="kt_customers_table_next"><a href="#" aria-controls="kt_customers_table" data-dt-idx="5" tabindex="0" class="page-link"><i class="next"></i></a></li></ul></div></div></div></div>
+                            </table>
+                        </div>
+                       
                             <!--end::Table-->
                         </div>
                         <!--end::Card body-->
@@ -460,26 +464,7 @@
         <!--end::Modal dialog-->
     </div>
                 
-<script>
-     <script>var hostUrl = "assets/";</script>
-                    <!--begin::Global Javascript Bundle(mandatory for all pages)-->
-                    <script src="assets/plugins/global/plugins.bundle.js"></script>
-                    <script src="assets/js/scripts.bundle.js"></script>
-                    <!--end::Global Javascript Bundle-->
-                    <!--begin::Vendors Javascript(used for this page only)-->
-                    <script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
-                    <!--end::Vendors Javascript-->
-                    <!--begin::Custom Javascript(used for this page only)-->
-                    <script src="assets/js/custom/apps/customers/list/export.js"></script>
-                    <script src="assets/js/custom/apps/customers/list/list.js"></script>
-                    <script src="assets/js/custom/apps/customers/add.js"></script>
-                    <script src="assets/js/widgets.bundle.js"></script>
-                    <script src="assets/js/custom/widgets.js"></script>
-                    <script src="assets/js/custom/apps/chat/chat.js"></script>
-                    <script src="assets/js/custom/utilities/modals/upgrade-plan.js"></script>
-                    <script src="assets/js/custom/utilities/modals/create-app.js"></script>
-                    <script src="assets/js/custom/utilities/modals/users-search.js"></script>
-    </script>                   
+                   
 </x-default-layout>
 
 

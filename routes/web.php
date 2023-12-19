@@ -85,6 +85,7 @@ Route::controller(CoursesController::class)->group(function(){
 Route::controller(CategoryController::class)->group(function(){
     Route::get('/category/Information','index')->name('category');
     Route::post('/category/categoryAdd','createCategory')->name('addCategories');
+    Route::get('/category/categoryDelete/{id}','categoryDelete')->name('categoryDelete');
 });
 
     
