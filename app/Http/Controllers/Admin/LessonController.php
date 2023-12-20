@@ -11,4 +11,7 @@ class LessonController extends Controller
             public function index(){
                 return view('Admin.lessons.lesson');
             }
+            public function addLesson(request $request){
+            dd( $request);
+            }
 }

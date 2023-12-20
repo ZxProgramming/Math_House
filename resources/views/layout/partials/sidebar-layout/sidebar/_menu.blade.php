@@ -134,13 +134,13 @@
 							</span>
 							<span class="menu-title">courses</span>
 						</a>
-						<a class="menu-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('lesson') }}">
+						<a class="menu-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
 							<span class="menu-title">Chapters</span>
 						</a>
-						<a class="menu-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
+						<a class="menu-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('lesson') }}">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>

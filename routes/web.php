@@ -90,6 +90,7 @@ Route::controller(CategoryController::class)->group(function(){
 });
         Route::controller(LessonController::class)->group(function(){
                 Route::get('Lesson/Lessons','index')->name('lesson');
+                Route::post('Lesson/AddLesson','addLesson')->name('addLesson');
         });
    
 
