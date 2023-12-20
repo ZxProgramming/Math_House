@@ -29,8 +29,9 @@
                 <!--begin::Modal header-->
                 <!--begin::Modal body-->
                 <div class="modal-body scroll-y m-5">
+                    <div class="d-flex">
                     <!--begin::Input group-->
-                    <div class="mb-10 fv-row"> 
+                    <div class="mb-10 fv-row w-300px mx-2"> 
                         <!--begin::Label-->
                         <label class="required form-label mb-3">Category Name</label>
                         <!--end::Label-->
@@ -50,7 +51,7 @@
                     <!--end::Input group--> 
                     
                     <!--begin::Input group-->
-                    <div class="mb-10 fv-row"> 
+                    <div class="mb-10 fv-row w-300px mx-2"> 
                         <!--begin::Label-->
                         <label class="required form-label mb-3">Course Name</label>
                         <!--end::Label-->
@@ -70,7 +71,7 @@
                     <!--end::Input group--> 
                     
                     <!--begin::Input group-->
-                    <div class="mb-10 fv-row"> 
+                    <div class="mb-10 fv-row w-300px mx-2"> 
                         <!--begin::Label-->
                         <label class="required form-label mb-3">Chapter Name</label>
                         <!--end::Label-->
@@ -90,7 +91,7 @@
                     <!--end::Input group--> 
                     
                     <!--begin::Input group-->
-                    <div class="mb-10 fv-row"> 
+                    <div class="mb-10 fv-row w-300px mx-2"> 
                         <!--begin::Label-->
                         <label class="required form-label mb-3">Lesson Name</label>
                         <!--end::Label-->
@@ -107,7 +108,8 @@
                         </select>
                         <!--end::Input-->
                     </div>
-                    <!--end::Input group--> 
+                    <!--end::Input group-->
+</div> 
                 </div>
                 <!--begin::Modal body-->
             </div>
