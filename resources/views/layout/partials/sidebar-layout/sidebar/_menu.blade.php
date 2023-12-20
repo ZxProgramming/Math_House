@@ -134,11 +134,7 @@
 							</span>
 							<span class="menu-title">courses</span>
 						</a>
-<<<<<<< HEAD
-						<a class="menu-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
-=======
 						<a class="menu-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('chapter') }}">
->>>>>>> 7e47f5da81e3a2dd8974e43579a76fcd31df7fe2
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
