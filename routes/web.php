@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ChaptersController;
 use App\Http\Controllers\Admin\CoursesController;
 use App\Http\Controllers\login\LoginController;
 use App\Http\Controllers\Admin\LessonController;
@@ -76,10 +77,19 @@ Route::post('/Users/Student/Edit', [UserController::class, 'stu_edit'])->name('s
 // Courses 
 Route::controller(CoursesController::class)->group(function(){
     Route::get('/Courses','courses')->name('courses');
+    Route::post('/Courses_Filter','course_filter')->name('course_filter');
     Route::post('/Courses/Edit','course_edit')->name('course_edit');
     Route::get('/Courses/Del/{id}','del_course')->name('del_course');
     Route::get('/Courses/Add_Courses','add_courses')->name('add_courses');
     Route::post('/Courses/Courses/Add','course_add')->name('course_add');
+});
+
+// Chapters 
+Route::controller(ChaptersController::class)->group(function(){
+    Route::get('/Chapter','chapter')->name('chapter');
+    Route::post('/Chapter_Filter','ch_filter')->name('ch_filter');
+    Route::post('/Chapter/Edit','chapter_edit')->name('chapter_edit');
+    Route::get('/Chapter/Del/{id}','del_chapter')->name('del_chapter');
 });
 
 // Category
