@@ -87,6 +87,9 @@ Route::controller(CoursesController::class)->group(function(){
 // Chapters 
 Route::controller(ChaptersController::class)->group(function(){
     Route::get('/Chapter','chapter')->name('chapter');
+    Route::post('/Chapter_Filter','ch_filter')->name('ch_filter');
+    Route::post('/Chapter/Edit','chapter_edit')->name('chapter_edit');
+    Route::get('/Chapter/Del/{id}','del_chapter')->name('del_chapter');
 });
 
 // Category
