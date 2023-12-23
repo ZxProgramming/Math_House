@@ -96,6 +96,8 @@ Route::controller(ChaptersController::class)->group(function(){
 // Questions 
 Route::controller(QuestionController::class)->group(function(){
     Route::get('/Question','question')->name('question');
+    Route::post('/Question/Edit','q_edit')->name('q_edit');
+    Route::get('/Question/Del/{id}','del_q')->name('del_q');
 });
 
 // Category

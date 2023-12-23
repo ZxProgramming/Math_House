@@ -29,7 +29,14 @@ class QuestionController extends Controller
         $arr = $req->only('question', 'q_type', 'year', 'month', 'q_code', 'section', 'q_num', 'difficulty');
         Question::where('id', $req->id)
         ->update($arr);
-        
+
+        return redirect()->back();
+    }
+
+    public function del_q( $id ){
+        Question::where('id', $id)
+        ->delete();
+
         return redirect()->back();
     }
 }
