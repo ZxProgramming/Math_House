@@ -292,25 +292,176 @@
             </div>
         </div>
     </div>
-
-    
-
+    </div></div></div>
+                
 <table id="kt_profile_overview_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable no-footer">
     <thead class="fs-7 text-gray-500 text-uppercase">
-        <tr>
-            <th class="min-w-250px sorting sorting_desc" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Manager: activate to sort column ascending" style="width: 336.359px;" aria-sort="descending">Name</th>
-            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Phone</th>
-            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Email</th>
-            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Parent Phone</th>
-            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Parent Email</th>
-            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Category</th>
-            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Course</th>
-            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">History</th>
-            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Wallet</th>
+            <th class="min-w-250px sorting sorting_desc" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Manager: activate to sort column ascending" style="width: 336.359px;" aria-sort="descending">#</th>
+            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Question</th>
+            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">type</th>
+            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">year</th>
+            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">month</th>
+            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">code</th>
+            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Section</th>
+            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Question No.</th>
+            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Difficulty</th>
+            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Action</th>
     </thead>
     <tbody class="fs-6">
+        @foreach($questions as $question)
+        <tr>
+            <td>
+                {{$loop->iteration}}
+            </td>
+            <td>
+                {{$question->question}}
+            </td>
+            <td>
+                {{$question->q_type}}
+            </td>
+            <td>
+                {{$question->year}}
+            </td>
+            <td>
+                {{$question->month}}
+            </td>
+            <td>
+                {{$question->q_code}}
+            </td>
+            <td>
+                {{$question->section}}
+            </td>
+            <td>
+                {{$question->q_num}}
+            </td>
+            <td>
+                {{$question->difficulty}}
+            </td>
+            <td>
+            <div class="mt-3">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter{{$question->id}}">
+                          Edit
+                        </button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{$question->id}}">
+                          Delete
+                        </button>
+
+                        <!-- Modal -->
+                        <form method="POST" action="{{route('admin_edit')}}">
+                          @csrf
+                        <div class="modal fade" id="modalCenter{{$question->id}}" tabindex="-1" aria-hidden="true" style="display: none;">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                
+                                <h5 class="modal-title" id="modalCenterTitle">Edit Question</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div> 
+
+                            <div class="my-2 px-3">
+                              <label>
+                                Question
+                              </label>
+                              <input class='form-control' name="question" value="{{$question->question}}" placeholder="Question" />
+                            </div>
+
+                            <div class="my-2 px-3">
+                              <label>
+                                Type
+                              </label>
+                              <input class='form-control' name="q_type" value="{{$question->q_type}}" placeholder="Type" />
+                            </div>
+
+                            <div class="my-2 px-3">
+                            <label>
+                                Year
+                            </label>
+                            <input class='form-control' name="year" value="{{$question->year}}" placeholder="Year" />
+                            </div>
+
+                            <div class="my-2 px-3">
+                            <label>
+                                Month
+                            </label>
+                            <input class='form-control' name="month" value="{{$question->month}}" placeholder="Month" />
+                            </div>
+
+                            <div class="my-2 px-3">
+                            <label>
+                                Code
+                            </label>
+                            <input class='form-control' name="q_code" value="{{$question->q_code}}" placeholder="Code" />
+                            </div>
+
+                            <div class="my-2 px-3">
+                            <label>
+                                Section
+                            </label>
+                            <input class='form-control' name="section" value="{{$question->section}}" placeholder="Section" />
+                            </div>
+
+                            <div class="my-2 px-3">
+                            <label>
+                                Question No.
+                            </label>
+                            <input class='form-control' name="q_num" value="{{$question->q_num}}" placeholder="Question No." />
+                            </div>
+
+                            <div class="my-2 px-3">
+                            <label>
+                                Difficulty
+                            </label>
+                            <input class='form-control' name="difficulty" value="{{$question->difficulty}}" placeholder="Difficulty" />
+                            </div>
+
+
+                              <input type="hidden" value="{{$question->id}}" name="id" />
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
+                                  Close
+                                </button>
+                                <button class="btn btn-primary">Submit</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        </form>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="modalDelete{{$question->id}}" tabindex="-1" aria-hidden="true" style="display: none;">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                
+                                <h5 class="modal-title" id="modalCenterTitle">Edit Role</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div> 
+                              
+                              <div class='p-3'>
+                                Are You Sure To Delete
+                                <span class='text-danger'>
+                                  {{$question->question}} ??
+                                </span>
+                              </div>
+
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
+                                  Close
+                                </button>
+                                <a href="{{route('del_admin', ['id'=>$question->id])}}" class="btn btn-danger">Delete</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+            </td>
+        </tr>
+        @endforeach
     </tbody>
 </table>
+    
+
        @section('script')
        <script>
         <!--begin::Javascript-->

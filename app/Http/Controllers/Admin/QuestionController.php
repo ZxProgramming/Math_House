@@ -25,4 +25,11 @@ class QuestionController extends Controller
         compact('categories', 'courses', 'chapters', 'lessons', 'questions'));
     }
 
+    public function q_edit( Request $req ){
+        $arr = $req->only('question', 'q_type', 'year', 'month', 'q_code', 'section', 'q_num', 'difficulty');
+        Question::where('id', $req->id)
+        ->update($arr);
+        
+        return redirect()->back();
+    }
 }
