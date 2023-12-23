@@ -17,7 +17,7 @@ class ChapterPrice extends Model
         'chapter_id '
     ];
     
-    public function price()
+    public function chapter()
     {
         return $this->belongsTo(Chapter::class);
     }

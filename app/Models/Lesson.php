@@ -21,10 +21,10 @@ class Lesson extends Model
 
     public function teacher()
     {
-        return $this->hasMany(User::class, 'teacher_id');
+        return $this->belongsTo(User::class, 'teacher_id');
     }
     public function chapter()
     {
-        return $this->hasMany(Chapter::class, 'chapter_id');
+        return $this->belongsTo(Chapter::class, 'chapter_id');
     }
 }

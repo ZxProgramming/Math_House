@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('lesson_name');            
             $table->foreignId('chapter_id')->constrained()->onDelete('cascade')->onUpdate('cascade'); 
+            $table->foreign('teacher_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->float('lesson_price');
             $table->string('lesson_des');
             $table->string('lesson_url'); 

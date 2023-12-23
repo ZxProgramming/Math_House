@@ -24,6 +24,6 @@ class Category extends Model
 
     public function teacher()
     {
-        return $this->hasMany(User::class, 'teacher_id');
+        return $this->belongsTo(User::class, 'teacher_id');
     }
 }

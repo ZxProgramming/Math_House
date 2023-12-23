@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('wallets', function (Blueprint $table) {
-            $table->id();
+            $table->id(); 
+            $table->unsignedBigInteger('student_id');
+            $table->float('wallet');
+            $table->date('date');
+            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

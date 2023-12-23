@@ -13,16 +13,20 @@ class Question extends Model
     
     protected $fillable = [
         'lesson_id', 
-        'question', 
+        'question',
+
+        'q_code',  
+        'q_type',  
+        'month',   
+        'year',  
+        'section',  
+        'difficulty',  
+        
         'q_url',  
     ];
 
-    public function teachers()
-    {
-        return $this->hasMany(User::class, 'teacher_id');
-    }
     public function lessons()
     {
-        return $this->hasMany(Lesson::class, 'lesson_id');
+        return $this->belongsTo(Lesson::class, 'lesson_id');
     }
 }
