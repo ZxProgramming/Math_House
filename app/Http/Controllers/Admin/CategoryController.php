@@ -10,9 +10,9 @@ use App\Models\User;
 class CategoryController extends Controller
 {
     // View Category
-    private $columns = ['user_id','cate_name' ,'cate_des'];
+    private $columns = ['teacher_id','cate_name' ,'cate_des'];
             public function index(){
-                    $dataCategory = Category::all()->where('user_id',auth()->user()->id);
+                    $dataCategory = Category::all()->where('teacher_id',auth()->user()->id);
                     return view('Admin.courses.category' , compact('dataCategory'));
             }
 

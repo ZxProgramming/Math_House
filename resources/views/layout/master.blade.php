@@ -13,8 +13,9 @@
     <meta property="og:type" content="article"/>
     <meta property="og:title" content=""/>
     <link rel="canonical" href=""/>
+    <link rel="icon" type="image/x-icon" href="../../public/assets/media/logos/Maths-house.png">
 
-    {!! includeFavicon() !!}
+    {{-- {!! includeFavicon('assets/media/logos/Maths-house.png') !!} --}}
 
     <!--begin::Fonts-->
     {!! includeFonts() !!}
