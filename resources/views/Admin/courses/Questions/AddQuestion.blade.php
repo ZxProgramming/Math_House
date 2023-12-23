@@ -81,7 +81,7 @@
                                             <option value="MCQ">
                                                 MCQ
                                             </option>
-                                            <option value="Grid in">
+                                            <option value="Grid_in">
                                                 Grid in
                                             </option>
                                         </select>
@@ -94,7 +94,7 @@
                                         <label class="required form-label mb-3">Difficulty</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <select class="form-control" name="course_id">
+                                        <select class="form-control" name="difficulty">
                                             <option disabled selected>
                                                 Select Difficulty
                                             </option>
@@ -121,7 +121,7 @@
                                         <label class="required form-label mb-3">Question Type</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <select class="form-control" name="course_id">
+                                        <select class="form-control" name="q_type">
                                             <option disabled selected>
                                                 Select Question Type
                                             </option>
@@ -156,7 +156,7 @@
                                         <!--End::Label-->
                                             
                                         <!--begin::Input-->
-                                        <select class="form-control" name="teacher_id">
+                                        <select class="form-control" name="category_id">
                                             <option disabled selected>
                                                 Select Category
                                             </option>
@@ -176,7 +176,7 @@
                                         <!--End::Label-->
                                             
                                         <!--begin::Input-->
-                                        <select class="form-control" name="teacher_id">
+                                        <select class="form-control" name="course_id">
                                             <option disabled selected>
                                                 Select Course
                                             </option>
@@ -196,7 +196,7 @@
                                         <!--End::Label-->
                                             
                                         <!--begin::Input-->
-                                        <select class="form-control" name="teacher_id">
+                                        <select class="form-control" name="chapter_id">
                                             <option disabled selected>
                                                 Select Chapter
                                             </option>
@@ -215,7 +215,7 @@
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold mb-2">Lesson</label>
                                         <!--begin::Input-->
-                                        <select class="form-control" name="teacher_id">
+                                        <select class="form-control" name="lesson_id">
                                             <option disabled selected>
                                                 Select Lesson
                                             </option>
@@ -235,7 +235,7 @@
                                         <!--End::Label-->
                                             
                                         <!--begin::Input-->
-                                        <select class="form-control" name="teacher_id">
+                                        <select class="form-control" name="year">
                                             <option disabled selected>
                                                 Select Year
                                             </option>
@@ -255,7 +255,7 @@
                                         <!--End::Label-->
                                             
                                         <!--begin::Input-->
-                                        <input class="form-control" name="" type="month" />
+                                        <input class="form-control" name="month" type="month" />
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Input group-->
@@ -266,7 +266,7 @@
                                         <!--End::Label-->
                                             
                                         <!--begin::Input-->
-                                        <input class="form-control" name="" placeholde="Code" />
+                                        <input class="form-control" name="q_code" placeholde="Code" />
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Input group-->
@@ -275,7 +275,7 @@
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold mb-2">Section</label>
                                         <!--begin::Input-->
-                                        <select class="form-control" name="teacher_id">
+                                        <select class="form-control" name="section">
                                             <option disabled selected>
                                                 Select Section
                                             </option>
