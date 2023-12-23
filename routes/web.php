@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ChaptersController;
 use App\Http\Controllers\Admin\CoursesController;
 use App\Http\Controllers\login\LoginController;
 use App\Http\Controllers\Admin\LessonController;
+use App\Http\Controllers\Admin\QuestionController;
 
 use Illuminate\Support\Facades\Route;
 /*
@@ -90,6 +91,11 @@ Route::controller(ChaptersController::class)->group(function(){
     Route::post('/Chapter_Filter','ch_filter')->name('ch_filter');
     Route::post('/Chapter/Edit','chapter_edit')->name('chapter_edit');
     Route::get('/Chapter/Del/{id}','del_chapter')->name('del_chapter');
+});
+
+// Questions 
+Route::controller(QuestionController::class)->group(function(){
+    Route::get('/Question','question')->name('question');
 });
 
 // Category
