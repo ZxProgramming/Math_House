@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('chapters', function (Blueprint $table) {
+            $table->id();
             $table->string('chapter_name');
             $table->foreignId('course_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->float('ch_price');
             $table->string('ch_des');
             $table->string('ch_url');
+            $table->timestamps();
         });
     }
 
@@ -27,4 +29,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('chapters');
     }
+   
 };

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->float('course_price');
             $table->string('course_des');
+            $table->unsignedBigInteger('teacher_id');
+            $table->foreign('teacher_id')->references('id')->on('users');
             $table->string('course_url');
             $table->timestamps();
         });

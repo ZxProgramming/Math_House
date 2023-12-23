@@ -414,7 +414,7 @@
                                 <label class="required fs-5 fw-semibold mb-2">Category Name</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="hidden" value="{{ auth()->user()->id }}" name="user_id">
+                                <input type="hidden" value="{{ auth()->user()->id }}" name="teacher_id">
                                 <input type="text" class="form-control form-control-solid" placeholder="Your Category Name" name="cate_name" />
                                 <!--end::Input-->
                             </div>

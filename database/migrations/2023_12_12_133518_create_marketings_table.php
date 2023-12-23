@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignId('chapter_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('lesson_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('question_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('affilate_id');
+            $table->unsignedBigInteger('student_id');
             $table->foreign('affilate_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

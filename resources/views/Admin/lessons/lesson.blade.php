@@ -9,6 +9,10 @@
 	<!--begin::Action-->
     <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_create_campaign">Create Campaign</a>
     <!--end::Action-->
+    <script>
+        let element = document.getElementByClassName('idea');
+                   console.log(element);
+      </script>
     
     <div class="modal fade" id="kt_modal_create_campaign" tabindex="-1" aria-hidden="true">
         <!--begin::Modal dialog-->
@@ -107,7 +111,9 @@
 									<label class="required fs-6 fw-semibold mb-2">Category</label>
 									<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Category" name="category">
 										<option value="">Select Category...</option>
-										<option value="1">Karina Clark</option>
+										@foreach($categories as $category)
+                                        <option value="{{ $category->id}}">{{ $category->cate_name }}</option>
+                                        @endforeach
 									
 									</select>
 								</div>
@@ -118,7 +124,11 @@
 									<label class="required fs-6 fw-semibold mb-2">Courses</label>
 									<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Courses" name="course">
 										<option value="">Select Courses...</option>
-										<option value="1">Karina Clark</option>
+
+                                        @foreach($courses as $course)
+                                            
+										<option value="{{ $course->id }}">{{ $course->course_name }}</option>
+                                        @endforeach
 									
 									</select>
 								</div>
@@ -129,7 +139,11 @@
 									<label class="required fs-6 fw-semibold mb-2">Chapter</label>
 									<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Chapter" name="chapter">
 										<option value="">Select Chapter...</option>
-										<option value="1">Karina Clark</option>
+
+                                        @foreach($chapters as $chapter)
+                                            
+										<option value="{{$chapter->id}}">{{ $chapter->chapter_name }}</option>
+                                        @endforeach
 									
 									</select>
 								</div>
@@ -429,6 +443,7 @@
 
 
                                    </div>
+                                   <button class="btn btn-primary">Add New Idea</button>
                                 </div>
                                 <!--end::Wrapper-->
                             </div>
@@ -569,8 +584,9 @@
                 <!--begin::Modal body-->
             </div>
         </div>
-    </div>
+    </div>  
        @section('script')
+  
        <script>
         <!--begin::Javascript-->
 		<script>var hostUrl = "assets/";</script>
@@ -584,8 +600,9 @@
 		<!--begin::Custom Javascript(used for this page only)-->
 		<script src="../../assets/js/widgets.bundle.js"></script>
 		<script src="{{ asset('assets/js/custom/utilities/modals/create-campaign.js') }}"></script>
-        
+               
        </script>
+      
        @endsection      
 </x-default-layout>
 
