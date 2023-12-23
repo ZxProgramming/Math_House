@@ -64,7 +64,7 @@
                                         <label class="required form-label mb-3">Question</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <textarea id="question" class="form-control"></textarea>
+                                        <textarea name="question" class="form-control"></textarea>
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Input group-->  
