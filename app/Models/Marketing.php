@@ -22,11 +22,11 @@ class Marketing extends Model
     }
     public function course()
     {
-        return $this->hasMany(Course::class, 'course_id');
+        return $this->belongsTo(Course::class, 'course_id');
     }
     public function chapter()
     {
-        return $this->hasMany(Chapter::class, 'chapter_id');
+        return $this->belongsTo(Chapter::class, 'chapter_id');
     }
     public function lesson()
     {
@@ -38,7 +38,7 @@ class Marketing extends Model
     }
     public function affilate()
     {
-        return $this->hasMany(User::class, 'affilate_id');
+        return $this->belongsTo(User::class, 'affilate_id');
     }
     public function student()
     {

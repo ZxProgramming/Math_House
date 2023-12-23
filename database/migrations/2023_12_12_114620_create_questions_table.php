@@ -15,9 +15,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('lesson_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('question');
-            $table->float('q_price');
             $table->string('q_url');
+            $table->string('q_code');
+            $table->string('q_month');
+            $table->string('q_year');
+            $table->enum('section', ['Blank', '1', '2', '3', '4']);
             $table->enum('q_type', ['trail', 'extra', 'parallel']);
+            $table->enum('difficulty', ['1', '2', '3', '4']);
             $table->timestamps();
         });
     }
