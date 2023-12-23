@@ -28,6 +28,8 @@
                 </div>
                 <!--begin::Modal header-->
                 <!--begin::Modal body-->
+            <form action="{{route('filter_question')}}" method="POST">
+                @csrf
                 <div class="modal-body scroll-y m-5">
                     <div class="d-flex">
                     <!--begin::Input group-->
@@ -36,7 +38,7 @@
                         <label class="required form-label mb-3">Category Name</label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <select class="form-control sel_cate">
+                        <select name="category_id" class="form-control sel_cate">
                             <option disabled selected>
                                 Select Category
                             </option>
@@ -59,7 +61,7 @@
                         <label class="required form-label mb-3">Course Name</label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <select class="form-control sel_course">
+                        <select name="course_id" class="form-control sel_course">
                             <option disabled selected>
                                 Select Course
                             </option>
@@ -79,7 +81,7 @@
                         <label class="required form-label mb-3">Chapter Name</label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <select class="form-control sel_chapter">
+                        <select name="chapter_id" class="form-control sel_chapter">
                             <option disabled selected>
                                 Select Chapter
                             </option>
@@ -99,7 +101,7 @@
                         <label class="required form-label mb-3">Lesson Name</label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <select class="form-control sel_lesson">
+                        <select name="lesson_id" class="form-control sel_lesson">
                             <option disabled selected>
                                 Select Lesson
                             </option>
@@ -120,7 +122,7 @@
                         <label class="required form-label mb-3">Type</label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <select class="form-control">
+                        <select name="q_type" class="form-control">
                             <option disabled selected>
                                 Select Type
                             </option>
@@ -142,7 +144,7 @@
                         <label class="required form-label mb-3">Section</label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <select class="form-control">
+                        <select name="section" class="form-control">
                             <option disabled selected>
                                 Select Section
                             </option>
@@ -170,7 +172,7 @@
                         <label class="required form-label mb-3">Year</label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <select class="form-control">
+                        <select name="year" class="form-control">
                             <option disabled selected>
                                 Select Year
                             </option>
@@ -188,7 +190,7 @@
                         <label class="required form-label mb-3">Month</label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <select class="form-control">
+                        <select name="month" class="form-control">
                             <option disabled selected>
                                 Select Month
                             </option>
@@ -209,7 +211,7 @@
                         <label class="required form-label mb-3">Difficulty</label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <select class="form-control">
+                        <select name="difficulty" class="form-control">
                             <option disabled selected>
                                 Select Difficulty
                             </option>
@@ -237,6 +239,7 @@
                         Filter
                     </button>
                 </div>
+            </form>
                 <!--begin::Modal body-->
             </div>
         </div>
