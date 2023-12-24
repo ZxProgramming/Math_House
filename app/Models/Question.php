@@ -14,14 +14,12 @@ class Question extends Model
     protected $fillable = [
         'lesson_id', 
         'question',
-
         'q_code',  
         'q_type',  
         'month',   
         'year',  
         'section',  
         'difficulty',  
-        
         'q_url',  
     ];
 
