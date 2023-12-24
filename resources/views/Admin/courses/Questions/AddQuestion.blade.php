@@ -329,27 +329,43 @@
                                 <!--begin::Wrapper-->
                                 <div class="w-100">
                                     <!--begin::Heading-->
-                                    <div class="pb-12 text-center">
+                                    <div class="pb-10 pb-lg-12">
                                         <!--begin::Title-->
-                                        <h1 class="fw-bold text-gray-900">Campaign Created!</h1>
+                                        <h1 class="fw-bold text-gray-900">Ideas</h1>
                                         <!--end::Title-->
                                         <!--begin::Description-->
-                                        <div class="fw-semibold text-muted fs-4">You will receive an email with with the summary of your newly created campaign!</div>
+                                        <div class="text-muted fw-semibold fs-2 d-flex align-items-center">If you need add more idea, please check 
+                                        <div class="section_add_idea" style="margin-left:15px ">
+                                            <button id="add_idea" type="button" class="btn_add btn btn-lg btn-primary d-inline-block">Add New Idea</button>
+                                        </div>
+                                    </div>
                                         <!--end::Description-->
                                     </div>
                                     <!--end::Heading-->
-                                    <!--begin::Actions-->
-                                    <div class="d-flex flex-center pb-20">
-                                        <button id="kt_modal_create_campaign_create_new" type="button" class="btn btn-lg btn-light me-3" data-kt-element="complete-start">Create New Campaign</button>
-                                        <a href="" class="btn btn-lg btn-primary" data-bs-toggle="tooltip" title="Coming Soon">View Campaign</a>
+                                    <!--begin::Input group-->
+                                   <div class="ideas" id="ideas">
+
+                                    <div class="idea">
+                                        <div class="section_idea">
+                                            <span>Idea</span>
+                                            <input type="text" class="form-control form-control-lg form-control-solid">
+                                        </div>
+                                        <div class="section_syllabus">
+                                            <span>Syllabus</span>
+                                            <input type="text" class="form-control form-control-lg form-control-solid">
+                                        </div>
+                                        <div class="section_pdf">
+                                            <span>Pdf</span>
+                                            <input type="file">
+                                        </div>
+                                        <div class="section_video_link">
+                                            <span>Video Link</span>
+                                            <input type="text" class="form-control form-control-lg form-control-solid">
+                                        </div>
                                     </div>
-                                    <!--end::Actions-->
-                                    <!--begin::Illustration-->
-                                    <div class="text-center px-4">
-                                        <img src="assets/media/illustrations/sketchy-1/9.png" alt="" class="mww-100 mh-350px" />
-                                    </div>
-                                    <!--end::Illustration-->
                                 </div>
+                                </div>
+                                <!--end::Wrapper-->
                             </div>
                             <!--end::Step 5-->
                             <!--begin::Actions-->
@@ -457,6 +473,8 @@ sel_chapter2.addEventListener('change', ( e ) => {
 		<script src="{{asset('assets/js/custom/utilities/modals/create-app.js')}}"></script>
 		<script src="{{asset('assets/js/custom/utilities/modals/create-campaign.js')}}"></script>
 		<script src="{{asset('assets/js/custom/utilities/modals/users-search.js')}}"></script>
+		<script src="assets/plugins/global/lessonSc.js"></script>
+		<script src="{{ asset('assets/js/custom/utilities/modals/lessonSc.js') }}"></script>
 
 		<script src="{{asset('ckeditor5/ckeditor.js')}}"></script>
         <script>

@@ -385,7 +385,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                </div>
                                 <!--end::Wrapper-->
                             </div>
                             <!--end::Step 3-->
