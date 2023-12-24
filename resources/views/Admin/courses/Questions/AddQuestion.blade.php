@@ -51,12 +51,12 @@
                         </div>
                         <!--end::Nav-->
                         <!--begin::Form-->
-                        <form class="mx-auto w-100 mw-600px pt-15 pb-10" novalidate="novalidate" id="kt_modal_create_campaign_stepper_form">
+                        <form action="{{route('add_q')}}" method="POST" enctype="multipart/form-data" class="mx-auto w-100 mw-600px pt-15 pb-10" novalidate="novalidate" id="kt_modal_create_campaign_stepper_form">
                             <!--begin::Step 1-->
                             <div class="current" data-kt-stepper-element="content">
                                 <!--begin::Wrapper-->
                                 <div class="w-100">
-                                    
+                                    @csrf
                                 <div>
                                     <!--begin::Input group-->
                                     <div class="mb-10 fv-row">
@@ -64,7 +64,7 @@
                                         <label class="required form-label mb-3">Question</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <textarea id="ckeditor" class="form-control"></textarea>
+                                        <textarea id="ckeditor" name="question" class="form-control"></textarea>
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Input group-->  
@@ -166,7 +166,7 @@
                                         <!--End::Label-->
                                             
                                         <!--begin::Input-->
-                                        <select class="form-control" name="category_id">
+                                        <select class="form-control sel_cate2" name="category_id">
                                             <option disabled selected>
                                                 Select Category
                                             </option>
@@ -186,7 +186,7 @@
                                         <!--End::Label-->
                                             
                                         <!--begin::Input-->
-                                        <select class="form-control" name="course_id">
+                                        <select class="form-control sel_course2" name="course_id">
                                             <option disabled selected>
                                                 Select Course
                                             </option>
@@ -206,7 +206,7 @@
                                         <!--End::Label-->
                                             
                                         <!--begin::Input-->
-                                        <select class="form-control" name="chapter_id">
+                                        <select class="form-control sel_chapter2" name="chapter_id">
                                             <option disabled selected>
                                                 Select Chapter
                                             </option>
@@ -225,7 +225,7 @@
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold mb-2">Lesson</label>
                                         <!--begin::Input-->
-                                        <select class="form-control" name="lesson_id">
+                                        <select class="form-control sel_lesson2" name="lesson_id">
                                             <option disabled selected>
                                                 Select Lesson
                                             </option>
@@ -277,6 +277,17 @@
                                             
                                         <!--begin::Input-->
                                         <input class="form-control" name="q_code" placeholde="Code" />
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="mb-10">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold mb-2">Question Num</label>
+                                        <!--End::Label-->
+                                            
+                                        <!--begin::Input-->
+                                        <input class="form-control" name="q_num" placeholde="Question Num" />
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Input group-->
@@ -354,14 +365,8 @@
                                 <!--end::Wrapper-->
                                 <!--begin::Wrapper-->
                                 <div>
-                                    <button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="submit">
-                                        <span class="indicator-label">Submit 
-                                        <i class="ki-duotone ki-arrow-right fs-3 ms-2 me-0">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                        </i></span>
-                                        <span class="indicator-progress">Please wait... 
-                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                    <button class="btn btn-lg btn-primary" >
+                                        Submit 
                                     </button>
                                     <button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Continue 
                                     <i class="ki-duotone ki-arrow-right fs-3 ms-1 me-0">
@@ -382,6 +387,58 @@
         </div>
     </div>
        @section('script')
+<script>
+let sel_cate2 = document.querySelector('.sel_cate2');
+let sel_course2 = document.querySelector('.sel_course2');
+let sel_chapter2 = document.querySelector('.sel_chapter2');
+let sel_lesson2 = document.querySelector('.sel_lesson2');
+sel_cate2.addEventListener('change', ( e ) => {
+    sel_course2.innerHTML = `                            
+    <option disabled selected>
+        Select Course
+    </option>`;
+    courses.forEach(element => {
+        if ( e.target.value == element.category_id ) {
+        sel_course2.innerHTML += `                            
+        <option value="${element.id}">
+            ${element.course_name}
+        </option>`;
+            
+        }
+    });
+});
+sel_course2.addEventListener('change', ( e ) => {
+    sel_chapter2.innerHTML = `                            
+    <option disabled selected>
+        Select Chapter
+    </option>`;
+    chapters.forEach(element => {
+        if ( e.target.value == element.course_id ) {
+        sel_chapter2.innerHTML += `                            
+        <option value="${element.id}">
+            ${element.chapter_name}
+        </option>`;
+            
+        }
+    });
+});
+sel_chapter2.addEventListener('change', ( e ) => {
+    sel_lesson2.innerHTML = `                            
+    <option disabled selected>
+        Select Lesson
+    </option>`;
+    lessons.forEach(element => {
+        if ( e.target.value == element.chapter_id ) {
+        sel_lesson2.innerHTML += `                            
+        <option value="${element.id}">
+            ${element.lesson_name}
+        </option>`;
+            
+        }
+    });
+});
+</script>
+
        <script>
         <!--begin::Javascript-->
 		<script>var hostUrl = "assets/";</script>

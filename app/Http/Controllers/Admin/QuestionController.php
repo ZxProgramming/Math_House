@@ -128,4 +128,21 @@ class QuestionController extends Controller
         return view('Admin.courses.Questions.Questions', 
         compact('categories', 'courses', 'chapters', 'lessons', 'questions'));
     }
+
+    public function add_q( Request $req ){
+        $arr = $req->only('lesson_id', 'q_code', 'q_type', 'q_num',
+        'month', 'year', 'section', 'difficulty', 'question', 'ans_type');
+
+        extract($_FILES['q_url']);
+        $img_name = null;
+        if ( !empty($name) ) {
+            $img_name = now() . rand(1, 10000) . $name;
+            $img_name = str_replace([' ', ':', '-'], 'X', $img_name);
+            $arr['q_url'] = $img_name;
+        }
+
+        move_uploaded_file($tmp_name, 'images/questions/' . $img_name);
+        Question::create($arr);
+        return redirect()->back();
+    }
 }

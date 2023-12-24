@@ -6,13 +6,91 @@
 
     @section('title','Lesson')
        @include('success')
+
+       <style>
+        .ideas{
+        width: 100%;
+        display: flex; 
+        flex-direction: column;
+        align-items: center;
+        justify-content:flex-start;
+        row-gap: 1.2rem;
+        }
+        .idea{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        row-gap: 1rem;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #dbdbdb;
+        }
+        .idea .section_idea{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            
+        }
+        .idea .section_idea > span{
+            font-size: 1.2rem
+        }
+        .idea .section_idea > input{
+            width: 80% !important;
+        }
+        .idea .section_syllabus{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            
+        }
+        .idea .section_syllabus > span{
+            font-size: 1.2rem
+        }
+        .idea .section_syllabus > input{
+            width: 80% !important;
+        }
+        .idea .section_pdf{
+            display: flex;
+            align-items: center;
+        }
+        .idea .section_pdf > span{
+            font-size: 1.2rem;
+            margin-right: 15px;
+        }
+        .idea .section_pdf > input{
+            font-size: 1.1rem;
+        }
+        .idea .section_video_link{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            
+        }
+        .idea .section_video_link > span{
+            font-size: 1.2rem
+        }
+        .idea .section_video_link > input{
+            width: 80% !important;
+        }
+        .idea .section_add_idea{
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        .idea .section_add_idea  > button{
+            background: red !important;
+        }
+        .idea .section_add_idea  > button:hover:not(.btn-active){
+            background: rgb(144, 18, 18) !important;
+        }
+    </style>
+
+    <script>
+
+    </script>
 	<!--begin::Action-->
     <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_create_campaign">Create Campaign</a>
     <!--end::Action-->
-    <script>
-        let element = document.getElementByClassName('idea');
-                   console.log(element);
-      </script>
     
     <div class="modal fade" id="kt_modal_create_campaign" tabindex="-1" aria-hidden="true">
         <!--begin::Modal dialog-->
@@ -35,18 +113,18 @@
                 </div>
                 <!--begin::Modal header-->
                 <!--begin::Modal body-->
-                <div class="modal-body scroll-y m-5">
+                <div class="modal-body m-5">
                     <!--begin::Stepper-->
                     <div class="stepper stepper-links d-flex flex-column" id="kt_modal_create_campaign_stepper">
                         <!--begin::Nav-->
                         <div class="stepper-nav justify-content-center py-2">
                             <!--begin::Step 1-->
                             <div class="stepper-item me-5 me-md-15 current" data-kt-stepper-element="nav">
-                                <h3 class="stepper-title">INFO</h3>
+                                <h3 class="stepper-title"></h3>
                             </div>
                             <!--end::Step 1-->
                             <!--begin::Step 2-->
-                            <div class="stepper-item me-5 me-md-15" data-kt-stepper-element="nav">
+                            <div class="stepper-item me-5 me-md-15 current" data-kt-stepper-element="nav">
                                 <h3 class="stepper-title">INFO</h3>
                             </div>
                             <!--end::Step 2-->
@@ -65,13 +143,14 @@
                                 <h3 class="stepper-title">Finaly</h3>
                             </div>
                             <!--end::Step 5-->
-                            <div class="stepper-item" data-kt-stepper-element="nav">
-                            </div>
+                            {{-- <div class="stepper-item" data-kt-stepper-element="nav">
+                                <h3 class="stepper-title">Finaly2</h3>
+                            </div> --}}
                             <!--end::Step 5-->
-                        </div>
-                        <!--end::Nav-->
-                        <!--begin::Form-->
-                        <form class="mx-auto w-100 mw-600px pt-15 pb-10" method="POST" action="{{ route('addLesson') }}" novalidate="novalidate" id="kt_modal_create_campaign_stepper_form" enctype="multipart/form-data">
+                         </div>
+                         <!--end::Nav-->
+                         <!--begin::Form-->
+                         <form class="mx-auto w-100 mw-600px pt-15 pb-10" method="POST" action="{{ route('addLesson') }}" novalidate="novalidate" id="kt_modal_create_campaign_stepper_form" enctype="multipart/form-data">
                             @csrf
                             <!--begin::Step 1-->
                             <div class="current" data-kt-stepper-element="content">
@@ -111,9 +190,7 @@
 									<label class="required fs-6 fw-semibold mb-2">Category</label>
 									<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Category" name="category">
 										<option value="">Select Category...</option>
-										@foreach($categories as $category)
-                                        <option value="{{ $category->id}}">{{ $category->cate_name }}</option>
-                                        @endforeach
+										<option value="1">Karina Clark</option>
 									
 									</select>
 								</div>
@@ -124,11 +201,7 @@
 									<label class="required fs-6 fw-semibold mb-2">Courses</label>
 									<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Courses" name="course">
 										<option value="">Select Courses...</option>
-
-                                        @foreach($courses as $course)
-                                            
-										<option value="{{ $course->id }}">{{ $course->course_name }}</option>
-                                        @endforeach
+										<option value="1">Karina Clark</option>
 									
 									</select>
 								</div>
@@ -139,11 +212,7 @@
 									<label class="required fs-6 fw-semibold mb-2">Chapter</label>
 									<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Chapter" name="chapter">
 										<option value="">Select Chapter...</option>
-
-                                        @foreach($chapters as $chapter)
-                                            
-										<option value="{{$chapter->id}}">{{ $chapter->chapter_name }}</option>
-                                        @endforeach
+										<option value="1">Karina Clark</option>
 									
 									</select>
 								</div>
@@ -151,7 +220,7 @@
 								<!--begin::Col-->
 							
 								<!--end::Col-->
-							</div>
+							    </div>
                                     {{-- Start Selector category --}}
                                     <div class="fv-row mb-10">
                                         <!--begin::Label-->
@@ -226,6 +295,7 @@
                                 <!--end::Wrapper-->
                             </div>
                             <!--end::Step 1-->
+
                             <!--begin::Step 2-->
                             <div data-kt-stepper-element="content">
                                 <!--begin::Wrapper-->
@@ -273,7 +343,7 @@
                                     <!--end::Input group-->
                            
                                     <!--end::Wrapper-->
-                                </div>
+                            </div>
                             <!--end::Step 2-->
                             <!--begin::Step 3-->
                             <div data-kt-stepper-element="content">
@@ -282,25 +352,28 @@
                                     <!--begin::Heading-->
                                     <div class="pb-10 pb-lg-12">
                                         <!--begin::Title-->
-                                        <h1 class="fw-bold text-gray-900">Configure Audiences</h1>
+                                        <h1 class="fw-bold text-gray-900">Ideas</h1>
                                         <!--end::Title-->
                                         <!--begin::Description-->
-                                        <div class="text-muted fw-semibold fs-4">If you need more info, please check 
-                                        <a href="#" class="link-primary">Campaign Guidelines</a></div>
+                                        <div class="text-muted fw-semibold fs-2 d-flex align-items-center">If you need add more idea, please check 
+                                        <div class="section_add_idea" style="margin-left:15px ">
+                                            <button id="add_idea" type="button" class="btn_add btn btn-lg btn-primary d-inline-block">Add New Idea</button>
+                                        </div>
+                                    </div>
                                         <!--end::Description-->
                                     </div>
                                     <!--end::Heading-->
                                     <!--begin::Input group-->
-                                   <div class="ideas" style="width: 200%; display: flex; flex-wrap: wrap; align-items: center;justify-content: center;">
+                                   <div class="ideas" id="ideas">
 
                                     <div class="idea">
                                         <div class="section_idea">
                                             <span>Idea</span>
-                                            <input type="text">
+                                            <input type="text" class="form-control form-control-lg form-control-solid">
                                         </div>
                                         <div class="section_syllabus">
                                             <span>Syllabus</span>
-                                            <input type="text">
+                                            <input type="text" class="form-control form-control-lg form-control-solid">
                                         </div>
                                         <div class="section_pdf">
                                             <span>Pdf</span>
@@ -308,143 +381,11 @@
                                         </div>
                                         <div class="section_video_link">
                                             <span>Video Link</span>
-                                            <input type="text">
-                                        </div>
-                                        <div class="section_add_idea">
-                                            <button class="btn_add">Add New Idea</button>
+                                            <input type="text" class="form-control form-control-lg form-control-solid">
                                         </div>
                                     </div>
-                                    <div class="idea">
-                                        <div class="section_idea">
-                                            <span>Idea</span>
-                                            <input type="text">
-                                        </div>
-                                        <div class="section_syllabus">
-                                            <span>Syllabus</span>
-                                            <input type="text">
-                                        </div>
-                                        <div class="section_pdf">
-                                            <span>Pdf</span>
-                                            <input type="file">
-                                        </div>
-                                        <div class="section_video_link">
-                                            <span>Video Link</span>
-                                            <input type="text">
-                                        </div>
-                                        <div class="section_add_idea">
-                                            <button class="btn_add">Add New Idea</button>
-                                        </div>
-                                    </div>
-                                    <div class="idea">
-                                        <div class="section_idea">
-                                            <span>Idea</span>
-                                            <input type="text">
-                                        </div>
-                                        <div class="section_syllabus">
-                                            <span>Syllabus</span>
-                                            <input type="text">
-                                        </div>
-                                        <div class="section_pdf">
-                                            <span>Pdf</span>
-                                            <input type="file">
-                                        </div>
-                                        <div class="section_video_link">
-                                            <span>Video Link</span>
-                                            <input type="text">
-                                        </div>
-                                        <div class="section_add_idea">
-                                            <button class="btn_add">Add New Idea</button>
-                                        </div>
-                                    </div>
-                                    <div class="idea">
-                                        <div class="section_idea">
-                                            <span>Idea</span>
-                                            <input type="text">
-                                        </div>
-                                        <div class="section_syllabus">
-                                            <span>Syllabus</span>
-                                            <input type="text">
-                                        </div>
-                                        <div class="section_pdf">
-                                            <span>Pdf</span>
-                                            <input type="file">
-                                        </div>
-                                        <div class="section_video_link">
-                                            <span>Video Link</span>
-                                            <input type="text">
-                                        </div>
-                                        <div class="section_add_idea">
-                                            <button class="btn_add">Add New Idea</button>
-                                        </div>
-                                    </div>
-                                    <div class="idea">
-                                        <div class="section_idea">
-                                            <span>Idea</span>
-                                            <input type="text">
-                                        </div>
-                                        <div class="section_syllabus">
-                                            <span>Syllabus</span>
-                                            <input type="text">
-                                        </div>
-                                        <div class="section_pdf">
-                                            <span>Pdf</span>
-                                            <input type="file">
-                                        </div>
-                                        <div class="section_video_link">
-                                            <span>Video Link</span>
-                                            <input type="text">
-                                        </div>
-                                        <div class="section_add_idea">
-                                            <button class="btn_add">Add New Idea</button>
-                                        </div>
-                                    </div>
-                                    <div class="idea">
-                                        <div class="section_idea">
-                                            <span>Idea</span>
-                                            <input type="text">
-                                        </div>
-                                        <div class="section_syllabus">
-                                            <span>Syllabus</span>
-                                            <input type="text">
-                                        </div>
-                                        <div class="section_pdf">
-                                            <span>Pdf</span>
-                                            <input type="file">
-                                        </div>
-                                        <div class="section_video_link">
-                                            <span>Video Link</span>
-                                            <input type="text">
-                                        </div>
-                                        <div class="section_add_idea">
-                                            <button class="btn_add">Add New Idea</button>
-                                        </div>
-                                    </div>
-                                    <div class="idea">
-                                        <div class="section_idea">
-                                            <span>Idea</span>
-                                            <input type="text">
-                                        </div>
-                                        <div class="section_syllabus">
-                                            <span>Syllabus</span>
-                                            <input type="text">
-                                        </div>
-                                        <div class="section_pdf">
-                                            <span>Pdf</span>
-                                            <input type="file">
-                                        </div>
-                                        <div class="section_video_link">
-                                            <span>Video Link</span>
-                                            <input type="text">
-                                        </div>
-                                        <div class="section_add_idea">
-                                            <button class="btn_add">Add New Idea</button>
-                                        </div>
-                                    </div>
-
-
-                                   </div>
-                                   <button class="btn btn-primary">Add New Idea</button>
                                 </div>
+                            </div>
                                 <!--end::Wrapper-->
                             </div>
                             <!--end::Step 3-->
@@ -584,14 +525,14 @@
                 <!--begin::Modal body-->
             </div>
         </div>
-    </div>  
+    </div>
        @section('script')
-  
        <script>
         <!--begin::Javascript-->
 		<script>var hostUrl = "assets/";</script>
 		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
 		<script src="assets/plugins/global/plugins.bundle.js"></script>
+		<script src="assets/plugins/global/lessonSc.js"></script>
 		<script src="assets/js/scripts.bundle.js"></script>
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Vendors Javascript(used for this page only)-->
@@ -600,9 +541,9 @@
 		<!--begin::Custom Javascript(used for this page only)-->
 		<script src="../../assets/js/widgets.bundle.js"></script>
 		<script src="{{ asset('assets/js/custom/utilities/modals/create-campaign.js') }}"></script>
-               
+		<script src="{{ asset('assets/js/custom/utilities/modals/lessonSc.js') }}"></script>
+
        </script>
-      
        @endsection      
 </x-default-layout>
 

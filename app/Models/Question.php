@@ -20,7 +20,9 @@ class Question extends Model
         'year',  
         'section',  
         'difficulty',  
-        'q_url',  
+        'q_url',
+        'q_num',
+        'ans_type',
     ];
 
     public function lessons()
