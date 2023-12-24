@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\CoursesController;
 use App\Http\Controllers\login\LoginController;
 use App\Http\Controllers\Admin\LessonController;
 use App\Http\Controllers\Admin\QuestionController;
+use App\Http\Controllers\Admin\ExamController;
 
 use Illuminate\Support\Facades\Route;
 /*
@@ -99,6 +100,12 @@ Route::controller(QuestionController::class)->group(function(){
     Route::post('/Question/Edit','q_edit')->name('q_edit');
     Route::post('/Question/Filter','filter_question')->name('filter_question');
     Route::get('/Question/Del/{id}','del_q')->name('del_q');
+});
+
+
+// Exam 
+Route::controller(ExamController::class)->group(function(){
+    Route::get('/Exam','index')->name('exam');
 });
 
 // Category

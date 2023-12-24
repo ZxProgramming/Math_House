@@ -64,7 +64,17 @@
                                         <label class="required form-label mb-3">Question</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <textarea name="question" class="form-control"></textarea>
+                                        <textarea id="ckeditor" class="form-control"></textarea>
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Input group-->  
+                                    <!--begin::Input group-->
+                                    <div class="mb-10 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="required form-label mb-3">Question Image</label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <input name="q_url" type="file" class="form-control" />
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Input group-->  
@@ -393,7 +403,7 @@
 
 		<script src="{{asset('ckeditor5/ckeditor.js')}}"></script>
         <script>
-            CKEDITOR.replace("question");
+            CKEDITOR.replace("ckeditor");
         </script>
        </script>
        @endsection 

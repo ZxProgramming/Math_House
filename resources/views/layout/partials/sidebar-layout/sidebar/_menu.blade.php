@@ -152,11 +152,11 @@
 							</span>
 							<span class="menu-title">Questions</span>
 						</a>
-						<a class="menu-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
+						<a class="menu-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('exam') }}">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
-							<span class="menu-title">Quizzes</span>
+							<span class="menu-title">Exam</span>
 						</a>
 						<!--end:Menu link-->
 					</div>

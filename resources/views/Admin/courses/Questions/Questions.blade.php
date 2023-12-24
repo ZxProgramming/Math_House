@@ -436,85 +436,85 @@
   @include('Admin.courses.Questions.AddQuestion')
 
 <script>
-                    let sel_cate = document.querySelector('.sel_cate');
-                    let sel_course = document.querySelector('.sel_course');
-                    let sel_chapter = document.querySelector('.sel_chapter');
-                    let sel_lesson = document.querySelector('.sel_lesson');
-                    let categories = document.querySelector('.categories');
-                    let courses = document.querySelector('.courses');
-                    let chapters = document.querySelector('.chapters');
-                    let lessons = document.querySelector('.lessons');
-                    courses = courses.value;
-                    courses = JSON.parse(courses);
-                    chapters = chapters.value;
-                    chapters = JSON.parse(chapters);
-                    lessons = lessons.value;
-                    lessons = JSON.parse(lessons);
-                    sel_cate.addEventListener('change', ( e ) => {
-                        sel_course.innerHTML = `                            
-                        <option disabled selected>
-                            Select Course
-                        </option>`;
-                        courses.forEach(element => {
-                            if ( e.target.value == element.category_id ) {
-                            sel_course.innerHTML += `                            
-                            <option value="${element.id}">
-                                ${element.course_name}
-                            </option>`;
-                                
-                            }
-                        });
-                    });
-                    sel_course.addEventListener('change', ( e ) => {
-                        sel_chapter.innerHTML = `                            
-                        <option disabled selected>
-                            Select Chapter
-                        </option>`;
-                        chapters.forEach(element => {
-                            if ( e.target.value == element.course_id ) {
-                            sel_chapter.innerHTML += `                            
-                            <option value="${element.id}">
-                                ${element.chapter_name}
-                            </option>`;
-                                
-                            }
-                        });
-                    });
-                    sel_chapter.addEventListener('change', ( e ) => {
-                        sel_lesson.innerHTML = `                            
-                        <option disabled selected>
-                            Select Lesson
-                        </option>`;
-                        lessons.forEach(element => {
-                            if ( e.target.value == element.chapter_id ) {
-                            sel_lesson.innerHTML += `                            
-                            <option value="${element.id}">
-                                ${element.lesson_name}
-                            </option>`;
-                                
-                            }
-                        });
-                    });
-                </script>
-       @section('script')
-       <script>
-        <!--begin::Javascript-->
-		<script>var hostUrl = "assets/";</script>
-		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
-		<script src="assets/plugins/global/plugins.bundle.js"></script>
-		<script src="assets/js/scripts.bundle.js"></script>
-		<!--end::Global Javascript Bundle-->
-		<!--begin::Vendors Javascript(used for this page only)-->
-		<script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
-		<!--end::Vendors Javascript-->
-		<!--begin::Custom Javascript(used for this page only)-->
-		<script src="{{asset('assets/js/widgets.bundle.js')}}"></script>
-		<script src="{{asset('assets/js/custom/widgets.js')}}"></script>
-		<script src="{{asset('assets/js/custom/apps/chat/chat.js')}}"></script>
-		<script src="{{asset('assets/js/custom/utilities/modals/upgrade-plan.js')}}"></script>
-		<script src="{{asset('assets/js/custom/utilities/modals/create-app.js')}}"></script>
-		<script src="{{asset('assets/js/custom/utilities/modals/create-campaign.js')}}"></script>
-		<script src="{{asset('assets/js/custom/utilities/modals/users-search.js')}}"></script>
-       </script>
-       @endsection 
+let sel_cate = document.querySelector('.sel_cate');
+let sel_course = document.querySelector('.sel_course');
+let sel_chapter = document.querySelector('.sel_chapter');
+let sel_lesson = document.querySelector('.sel_lesson');
+let categories = document.querySelector('.categories');
+let courses = document.querySelector('.courses');
+let chapters = document.querySelector('.chapters');
+let lessons = document.querySelector('.lessons');
+courses = courses.value;
+courses = JSON.parse(courses);
+chapters = chapters.value;
+chapters = JSON.parse(chapters);
+lessons = lessons.value;
+lessons = JSON.parse(lessons);
+sel_cate.addEventListener('change', ( e ) => {
+    sel_course.innerHTML = `                            
+    <option disabled selected>
+        Select Course
+    </option>`;
+    courses.forEach(element => {
+        if ( e.target.value == element.category_id ) {
+        sel_course.innerHTML += `                            
+        <option value="${element.id}">
+            ${element.course_name}
+        </option>`;
+            
+        }
+    });
+});
+sel_course.addEventListener('change', ( e ) => {
+    sel_chapter.innerHTML = `                            
+    <option disabled selected>
+        Select Chapter
+    </option>`;
+    chapters.forEach(element => {
+        if ( e.target.value == element.course_id ) {
+        sel_chapter.innerHTML += `                            
+        <option value="${element.id}">
+            ${element.chapter_name}
+        </option>`;
+            
+        }
+    });
+});
+sel_chapter.addEventListener('change', ( e ) => {
+    sel_lesson.innerHTML = `                            
+    <option disabled selected>
+        Select Lesson
+    </option>`;
+    lessons.forEach(element => {
+        if ( e.target.value == element.chapter_id ) {
+        sel_lesson.innerHTML += `                            
+        <option value="${element.id}">
+            ${element.lesson_name}
+        </option>`;
+            
+        }
+    });
+});
+</script>
+@section('script')
+<script>
+<!--begin::Javascript-->
+<script>var hostUrl = "assets/";</script>
+<!--begin::Global Javascript Bundle(mandatory for all pages)-->
+<script src="assets/plugins/global/plugins.bundle.js"></script>
+<script src="assets/js/scripts.bundle.js"></script>
+<!--end::Global Javascript Bundle-->
+<!--begin::Vendors Javascript(used for this page only)-->
+<script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
+<!--end::Vendors Javascript-->
+<!--begin::Custom Javascript(used for this page only)-->
+<script src="{{asset('assets/js/widgets.bundle.js')}}"></script>
+<script src="{{asset('assets/js/custom/widgets.js')}}"></script>
+<script src="{{asset('assets/js/custom/apps/chat/chat.js')}}"></script>
+<script src="{{asset('assets/js/custom/utilities/modals/upgrade-plan.js')}}"></script>
+<script src="{{asset('assets/js/custom/utilities/modals/create-app.js')}}"></script>
+<script src="{{asset('assets/js/custom/utilities/modals/create-campaign.js')}}"></script>
+<script src="{{asset('assets/js/custom/utilities/modals/users-search.js')}}"></script>
+</script>
+@endsection 
 </x-default-layout>
