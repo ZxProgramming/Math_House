@@ -115,10 +115,14 @@ Route::controller(CategoryController::class)->group(function(){
     Route::post('/category/categoryAdd','createCategory')->name('addCategories');
     Route::get('/category/categoryDelete/{id}','categoryDelete')->name('categoryDelete');
 });
-        Route::controller(LessonController::class)->group(function(){
-                Route::get('Lesson/Lessons','index')->name('lesson');
-                Route::post('Lesson/AddLesson','addLesson')->name('addLesson');
-        });
+
+// Lesson 
+Route::controller(LessonController::class)->group(function(){
+        Route::get('Lesson/Lessons','index')->name('lesson');
+        Route::post('Lesson/AddLesson','addLesson')->name('addLesson');
+        Route::post('Lesson/Edit','lesson_edit')->name('lesson_edit');
+        Route::get('Lesson/Del/{id}','del_lesson')->name('del_lesson');
+});
    
 
 

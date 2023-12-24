@@ -10,6 +10,7 @@ use App\Models\Course;
 use App\Models\Chapter;
 use App\Models\Lesson;
 use App\Models\Question;
+use App\Models\Q_ans;
 
 class QuestionController extends Controller
 {
@@ -140,9 +141,25 @@ class QuestionController extends Controller
             $img_name = str_replace([' ', ':', '-'], 'X', $img_name);
             $arr['q_url'] = $img_name;
         }
-
         move_uploaded_file($tmp_name, 'images/questions/' . $img_name);
-        Question::create($arr);
+        $question = Question::create($arr);
+
+        $ans_pdf_file = $_FILES['ans_pdf'];
+        $ans_video_file = $_FILES['ans_video'];
+        for ($i=0, $end = count($req->ans_pdf); $i < $end; $i++) { 
+            $pdf_name = now() . $ans_pdf_file['name'][$i];
+            $v_name   = now() . $ans_video_file['name'][$i];
+            $pdf_name = str_replace([':', ' ', '-'], 'X', $pdf_name);
+            $v_name   = str_replace([':', ' ', '-'], 'X', $v_name);
+            Q_ans::create([
+                'ans_pdf'   => $pdf_name,
+                'ans_video' => $v_name,
+                'Q_id'      => $question->id,
+            ]);
+            move_uploaded_file($ans_pdf_file['tmp_name'][$i], 'files/q_answers/' . $pdf_name);
+            move_uploaded_file($ans_video_file['tmp_name'][$i], 'files/q_answers/' . $v_name);
+        }
+
         return redirect()->back();
     }
 }

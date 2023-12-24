@@ -331,12 +331,12 @@
                                     <!--begin::Heading-->
                                     <div class="pb-10 pb-lg-12">
                                         <!--begin::Title-->
-                                        <h1 class="fw-bold text-gray-900">Ideas</h1>
+                                        <h1 class="fw-bold text-gray-900">Answers</h1>
                                         <!--end::Title-->
                                         <!--begin::Description-->
-                                        <div class="text-muted fw-semibold fs-2 d-flex align-items-center">If you need add more idea, please check 
+                                        <div class="text-muted fw-semibold fs-2 d-flex align-items-center"> 
                                         <div class="section_add_idea" style="margin-left:15px ">
-                                            <button id="add_idea" type="button" class="btn_add btn btn-lg btn-primary d-inline-block">Add New Idea</button>
+                                            <button id="add_new_idea" type="button" class="my-3 btn_add btn btn-lg btn-primary d-inline-block">Add New Answer</button>
                                         </div>
                                     </div>
                                         <!--end::Description-->
@@ -347,26 +347,36 @@
 
                                     <div class="idea">
                                         <div class="section_idea">
-                                            <span>Idea</span>
-                                            <input type="text" class="form-control form-control-lg form-control-solid">
+                                            <span>Answer PDF</span>
+                                            <input type="file" name="ans_pdf[]" class="form-control form-control-lg form-control-solid">
                                         </div>
                                         <div class="section_syllabus">
-                                            <span>Syllabus</span>
-                                            <input type="text" class="form-control form-control-lg form-control-solid">
-                                        </div>
-                                        <div class="section_pdf">
-                                            <span>Pdf</span>
-                                            <input type="file">
-                                        </div>
-                                        <div class="section_video_link">
-                                            <span>Video Link</span>
-                                            <input type="text" class="form-control form-control-lg form-control-solid">
+                                            <span>Answer Video</span>
+                                            <input type="file" name="ans_video[]" class="form-control form-control-lg form-control-solid">
                                         </div>
                                     </div>
                                 </div>
                                 </div>
                                 <!--end::Wrapper-->
                             </div>
+                                    <script>
+                                        let add_new_idea = document.querySelector('#add_new_idea');
+                                        let ideas = document.querySelector('.ideas');
+                                        add_new_idea.addEventListener('click', () => {
+                                            ideas.innerHTML += `
+                                            <hr />
+                                            <div class="idea">
+                                                <div class="section_idea">
+                                                    <span>Answer PDF</span>
+                                                    <input type="file" name="ans_pdf[]" class="form-control form-control-lg form-control-solid">
+                                                </div>
+                                                <div class="section_syllabus">
+                                                    <span>Answer Video</span>
+                                                    <input type="file" name="ans_video[]" class="form-control form-control-lg form-control-solid">
+                                                </div>
+                                            </div>`;
+                                        })
+                                    </script>
                             <!--end::Step 5-->
                             <!--begin::Actions-->
                             <div class="d-flex flex-stack pt-10">

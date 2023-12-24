@@ -7,18 +7,37 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Course;
 use App\Models\Chapter;
+use App\Models\Lesson;
 
 class LessonController extends Controller
 {
-    // This Start About Lessons 
-            public function index(){
-                $categories = Category::all();
-                $courses = Course::all();
-                $chapters = Chapter::all();
-                return view('Admin.lessons.lesson',compact('categories','courses','chapters'));
+// This Start About Lessons 
+    public function index(){
+        $categories = Category::all();
+        $courses = Course::all();
+        $chapters = Chapter::all();
+        $lessons = Lesson::all();
+        return view('Admin.lessons.lesson',compact('categories','courses','chapters', 'lessons'));
 
-            }
-            public function addLesson(request $request){
-            dd( $request);
-            }
+    }
+
+    public function lesson_edit( Request $req ){
+        $arr = $req->only('lesson_name', 'lesson_des', 'chapter_id');
+        Lesson::where('id', $req->id)
+        ->update($arr);
+
+        return redirect()->back();
+    }
+
+    public function del_lesson($id){
+        Lesson::where('id', $id)
+        ->delete();
+
+        return redirect()->back();
+    }
+
+    public function addLesson(request $request){
+    dd( $request);
+    }
 }
+

@@ -12,5 +12,6 @@ class Q_ans extends Model
     protected $fillable = [
         'ans_pdf',
         'ans_video',
+        'Q_id',
     ];
 }
