@@ -89,10 +89,10 @@
 
     </script>
 	<!--begin::Action-->
-    <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_create_campaign">Create Campaign</a>
+    <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_create_campaign">Add Lesson</a>
     <!--end::Action-->
-    
-                
+
+
 <table id="kt_profile_overview_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable no-footer">
     <thead class="fs-7 text-gray-500 text-uppercase">
             <th class="min-w-250px sorting sorting_desc" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Manager: activate to sort column ascending" style="width: 336.359px;" aria-sort="descending">#</th>
@@ -218,6 +218,7 @@
         @endforeach
     </tbody>
 </table>
+
     <div class="modal fade" id="kt_modal_create_campaign" tabindex="-1" aria-hidden="true">
         <!--begin::Modal dialog-->
         <div class="modal-dialog modal-fullscreen p-9">
@@ -226,7 +227,7 @@
                 <!--begin::Modal header-->
                 <div class="modal-header py-7 d-flex justify-content-between">
                     <!--begin::Modal title-->
-                    <h2>Create Campaign</h2>
+                    <h2>Add Lesson</h2>
                     <!--end::Modal title-->
                     <!--begin::Close-->
                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
@@ -264,15 +265,6 @@
                                 <h3 class="stepper-title">Ideas</h3>
                             </div>
                             <!--end::Step 4-->
-                            <!--begin::Step 5-->
-                            <div class="stepper-item" data-kt-stepper-element="nav">
-                                <h3 class="stepper-title">Finaly</h3>
-                            </div>
-                            <!--end::Step 5-->
-                            {{-- <div class="stepper-item" data-kt-stepper-element="nav">
-                                <h3 class="stepper-title">Finaly2</h3>
-                            </div> --}}
-                            <!--end::Step 5-->
                          </div>
                          <!--end::Nav-->
                          <!--begin::Form-->
@@ -301,10 +293,10 @@
                                     <!--begin::Input group-->
                                     <div class="mb-10 fv-row">
                                         <!--begin::Label-->
-                                        <label class="required form-label mb-3">Campaign Name</label>
+                                        <label class="required form-label mb-3">Lesson Name</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <input type="text" class="form-control form-control-lg form-control-solid" name="lessonName" placeholder="" value="" />
+                                        <input type="text" class="form-control form-control-lg form-control-solid" name="lesson_name" placeholder="" value="" />
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Input group-->
@@ -314,10 +306,11 @@
 								<!--begin::Col-->
 								<div class="col-md-6 fv-row">
 									<label class="required fs-6 fw-semibold mb-2">Category</label>
-									<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Category" name="category">
-										<option value="">Select Category...</option>
-										<option value="1">Karina Clark</option>
-									
+									<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Category" name="category_id">
+										<option disable selected>Select Category...</option>
+                                        @foreach($categories as $category)
+										<option value="{{$category->id}}">{{$category->cate_name}}</option>
+                                        @endforeach
 									</select>
 								</div>
 								<!--end::Col-->
@@ -325,10 +318,11 @@
 								<!--begin::Col-->
 								<div class="col-md-6 fv-row">
 									<label class="required fs-6 fw-semibold mb-2">Courses</label>
-									<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Courses" name="course">
-										<option value="">Select Courses...</option>
-										<option value="1">Karina Clark</option>
-									
+									<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Courses" name="course_id">
+										<option disable selected>Select Course...</option>
+                                        @foreach($courses as $course)
+										<option value="{{$course->id}}">{{$course->course_name}}</option>
+                                        @endforeach
 									</select>
 								</div>
 								<!--end::Col-->
@@ -336,11 +330,24 @@
 								<!--begin::Col-->
 								<div class="col-md-6 fv-row">
 									<label class="required fs-6 fw-semibold mb-2">Chapter</label>
-									<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Chapter" name="chapter">
-										<option value="">Select Chapter...</option>
-										<option value="1">Karina Clark</option>
-									
+									<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Chapter" name="chapter_id">
+										<option disable selected>Select Chapter...</option>
+                                        @foreach($chapters as $chapter)
+										<option value="{{$chapter->id}}">{{$chapter->chapter_name}}</option>
+                                        @endforeach
 									</select>
+								</div>
+								<!--end::Col-->
+								<!--begin::Col-->
+								<div class="col-md-12 fv-row">
+									<label class="required fs-6 fw-semibold mb-2">Descrition</label>
+									<textarea name="lesson_des" class="form-control" placeholder="Description"></textarea>
+								</div>
+								<!--end::Col-->
+								<!--begin::Col-->
+								<div class="col-md-12 fv-row">
+									<label class="required fs-6 fw-semibold mb-2">Image</label>
+									<Input name="lesson_url" class="form-control" type="file" />
 								</div>
 								<!--end::Col-->
 								<!--begin::Col-->
@@ -348,73 +355,6 @@
 								<!--end::Col-->
 							    </div>
                                     {{-- Start Selector category --}}
-                                    <div class="fv-row mb-10">
-                                        <!--begin::Label-->
-                                        <label class="d-block fw-semibold fs-6 mb-5">
-                                            <span class="required">Company Logo</span>
-                                            <span class="ms-1" data-bs-toggle="tooltip" title="E.g. Select a logo to represent the company that's running the campaign.">
-                                                <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                    <span class="path1"></span>
-                                                    <span class="path2"></span>
-                                                    <span class="path3"></span>
-                                                </i>
-                                            </span>
-                                        </label>
-                                        <!--end::Label-->
-                                        <br>
-                                        <br>
-                                        {{-- Start Descreption Lesson --}}
-                                        <div class="d-flex flex-column mb-5 fv-row">
-                                            <!--begin::Label-->
-                                            <label class="required fs-5 fw-semibold mb-2">Short Description</label>
-                                            <!--end::Label-->
-                                            <!--begin::Input-->
-                                            <textarea class="form-control form-control-solid" rows="3" name="desc_lesson" placeholder="Describe your Category"></textarea>
-                                            <!--end::Input-->
-                                        </div>
-                                        {{-- Start Descreption Lesson --}}
-                                        <!--begin::Image input placeholder-->
-                                        <style>.image-input-placeholder { background-image: url('assets/media/svg/files/blank-image.svg'); } [data-bs-theme="dark"] .image-input-placeholder { background-image: url('assets/media/svg/files/blank-image-dark.svg'); }</style>
-                                        <!--end::Image input placeholder-->
-                                        <!--begin::Image input-->
-                                        <div class="image-input image-input-empty image-input-outline image-input-placeholder" data-kt-image-input="true">
-                                            <!--begin::Preview existing avatar-->
-                                            <div class="image-input-wrapper w-125px h-125px"></div>
-                                            <!--end::Preview existing avatar-->
-                                            <!--begin::Label-->
-                                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
-                                                <i class="ki-duotone ki-pencil fs-7">
-                                                    <span class="path1"></span>
-                                                    <span class="path2"></span>
-                                                </i>
-                                                <!--begin::Inputs-->
-                                                <input type="file" name="image" accept=".png, .jpg, .jpeg" />
-                                                <input type="hidden" name="image" />
-                                                <!--end::Inputs-->
-                                            </label>
-                                            <!--end::Label-->
-                                            <!--begin::Cancel-->
-                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
-                                                <i class="ki-duotone ki-cross fs-2">
-                                                    <span class="path1"></span>
-                                                    <span class="path2"></span>
-                                                </i>
-                                            </span>
-                                            <!--end::Cancel-->
-                                            <!--begin::Remove-->
-                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
-                                                <i class="ki-duotone ki-cross fs-2">
-                                                    <span class="path1"></span>
-                                                    <span class="path2"></span>
-                                                </i>
-                                            </span>
-                                            <!--end::Remove-->
-                                        </div>
-                                        <!--end::Image input-->
-                                        <!--begin::Hint-->
-                                        <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
-                                        <!--end::Hint-->
-                                    </div>
                                     <!--end::Input group-->
                                  
                                 </div>
@@ -442,10 +382,11 @@
                                         <!--begin::Col-->
                                         <div class="col-md-6 fv-row">
                                             <label class="required fs-6 fw-semibold mb-2">Teacher</label>
-                                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Category" name="teacher">
-                                                <option value="">Select Teacher...</option>
-                                                <option value="1">Karina Clark</option>
-                                            
+                                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Category" name="teacher_id">
+                                                <option disabled selected>Select Teacher...</option>
+                                                @foreach($teachers as $teacher)
+                                                <option value="{{$teacher->id}}">{{$teacher->name}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -455,7 +396,7 @@
                                         <label class="required fs-5 fw-semibold mb-2">Pre requisition</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <textarea class="form-control form-control-solid" rows="3" name="desc_requisition" placeholder="Describe your Category"></textarea>
+                                        <textarea class="form-control form-control-solid" rows="3" name="pre_requisition" placeholder="Pre requisition"></textarea>
                                         <!--end::Input-->
                                     </div>
                                 
@@ -463,7 +404,7 @@
                                         <label class="required fs-5 fw-semibold mb-2">What you Gain</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <textarea class="form-control form-control-solid" rows="3" name="desc_WhatGain" placeholder="Describe your Category"></textarea>
+                                        <textarea class="form-control form-control-solid" rows="3" name="gain" placeholder="What you Gain"></textarea>
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Input group-->
@@ -495,19 +436,19 @@
                                     <div class="idea">
                                         <div class="section_idea">
                                             <span>Idea</span>
-                                            <input type="text" class="form-control form-control-lg form-control-solid">
+                                            <input type="text" class="form-control form-control-lg">
                                         </div>
                                         <div class="section_syllabus">
                                             <span>Syllabus</span>
-                                            <input type="text" class="form-control form-control-lg form-control-solid">
+                                            <input type="text" class="form-control form-control-lg">
                                         </div>
                                         <div class="section_pdf">
                                             <span>Pdf</span>
-                                            <input type="file">
+                                            <input type="file" class="form-control form-control-lg">
                                         </div>
                                         <div class="section_video_link">
                                             <span>Video Link</span>
-                                            <input type="text" class="form-control form-control-lg form-control-solid">
+                                            <input type="text" class="form-control form-control-lg">
                                         </div>
                                     </div>
                                 </div>
