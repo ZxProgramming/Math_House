@@ -4,6 +4,7 @@
     @endphp
  
 	<!--begin::Action-->
+    @include('success')
     <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_create_question">Add Question</a>
     <!--end::Action-->
     
@@ -84,7 +85,7 @@
                                         <label class="required form-label mb-3">Answer Type</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <select class="form-control" name="ans_type">
+                                        <select class="form-control ans_type" name="ans_type">
                                             <option disabled selected>
                                                 Select Answer Type
                                             </option>
@@ -96,6 +97,13 @@
                                             </option>
                                         </select>
                                         <!--end::Input-->
+                                    </div>
+                                    
+                                    <div class="d-flex add_ans d-none">
+                                        <input type="number" class="form-control" name="grid_ans[]" placeholder="Answer" />
+                                        <button type="button" class="btn add_ans_btn btn-success mx-2">Add</button>
+                                    </div>
+                                    <div class="mb-10 fv-row ans_div">
                                     </div>
                                     <!--end::Input group-->  
                                     <!--begin::Input group-->
@@ -190,11 +198,6 @@
                                             <option disabled selected>
                                                 Select Course
                                             </option>
-                                            @foreach($courses as $course)
-                                            <option value="{{$course->id}}">
-                                                {{$course->course_name}}
-                                            </option>
-                                            @endforeach
                                         </select>
                                         <!--end::Input-->
                                     </div>
@@ -210,11 +213,6 @@
                                             <option disabled selected>
                                                 Select Chapter
                                             </option>
-                                            @foreach($chapters as $chapter)
-                                            <option value="{{$chapter->id}}">
-                                                {{$chapter->chapter_name}}
-                                            </option>
-                                            @endforeach
                                         </select>
                                         <!--end::Input-->
                                     </div>
@@ -229,11 +227,6 @@
                                             <option disabled selected>
                                                 Select Lesson
                                             </option>
-                                            @foreach($lessons as $lesson)
-                                            <option value="{{$lesson->id}}">
-                                                {{$lesson->lesson_name}}
-                                            </option>
-                                            @endforeach
                                         </select>
                                         <!--end::Input-->
                                     </div>
@@ -265,7 +258,20 @@
                                         <!--End::Label-->
                                             
                                         <!--begin::Input-->
-                                        <input class="form-control" name="month" type="month" />
+                                        <select class="form-control" name="month">
+                                            <option value="Jan">Jan</div>
+                                            <option value="Fab">Fab</div>
+                                            <option value="Mar">Mar</div>
+                                            <option value="April">April</div>
+                                            <option value="May">May</div>
+                                            <option value="June">June</div>
+                                            <option value="July">July</div>
+                                            <option value="Aug">Aug</div>
+                                            <option value="Sept">Sept</div>
+                                            <option value="Oct">Oct</div>
+                                            <option value="Nov">Nov</div>
+                                            <option value="Dec">Dec</div>
+                                        </select>
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Input group-->
@@ -287,7 +293,7 @@
                                         <!--End::Label-->
                                             
                                         <!--begin::Input-->
-                                        <input class="form-control" name="q_num" placeholde="Question Num" />
+                                        <input type="number" min="0" max="80" class="form-control" name="q_num" placeholde="Question Num" required />
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Input group-->
@@ -299,9 +305,6 @@
                                         <select class="form-control" name="section">
                                             <option disabled selected>
                                                 Select Section
-                                            </option>
-                                            <option value="Blank">
-                                                Blank
                                             </option>
                                             <option value="1">
                                                 1
@@ -374,8 +377,19 @@
                                                     <span>Answer Video</span>
                                                     <input type="file" name="ans_video[]" class="form-control form-control-lg form-control-solid">
                                                 </div>
+                                                <button type="button" class="btn btn-danger btn_remove_idea">Remove</button>
                                             </div>`;
-                                        })
+                                        let btn_remove_idea = document.querySelectorAll('.btn_remove_idea');
+                                        for (let i = 0, end = btn_remove_idea.length; i < end; i++) {
+                                            btn_remove_idea[i].addEventListener('click', ( e ) => {
+                                                for (let j = 0; j < end; j++) {
+                                                    if ( e.target == btn_remove_idea[j] ) {
+                                                        btn_remove_idea[j].parentElement.remove()
+                                                    }
+                                                }
+                                            });
+                                        }
+                                        });
                                     </script>
                             <!--end::Step 5-->
                             <!--begin::Actions-->
@@ -414,6 +428,52 @@
     </div>
        @section('script')
 <script>
+    let ans_type = document.querySelector('.ans_type');
+    let ans_div = document.querySelector('.ans_div');
+    let add_ans = document.querySelector('.add_ans');
+    let add_ans_btn = document.querySelector('.add_ans_btn');
+    add_ans_btn.addEventListener('click', () => {
+    ans_div.innerHTML +=
+    `<input type="number" class="form-control my-2" name="grid_ans[]" placeholder="Answer" />`;
+    });
+    ans_type.addEventListener('change', () => {
+        ans_div.innerHTML =``;
+        if ( ans_type.value == 'MCQ' ) {
+            add_ans.classList.add('d-none');
+            ans_div.innerHTML =
+            `<div class="my-2">
+            <input name="mcq_answers" value="A" id="mcq_a" type="radio" />
+            <label for="mcq_a">
+                A
+            </label>
+            <input class="form-control" name="mcq_ans[]" placeholder="Answer A" />
+            </div>
+            <div class="my-2">
+            <input name="mcq_answers" value="B" id="mcq_b" type="radio" />
+            <label for="mcq_b">
+                B
+            </label>
+            <input class="form-control" name="mcq_ans[]" placeholder="Answer B" />
+            </div>
+            <div class="my-2">
+            <input name="mcq_answers" value="C" id="mcq_c" type="radio" />
+            <label for="mcq_c">
+                C
+            </label>
+            <input class="form-control" name="mcq_ans[]" placeholder="Answer C" />
+            </div>
+            <div class="my-2">
+            <input name="mcq_answers" value="D" id="mcq_d" type="radio" />
+            <label for="mcq_d">
+                D
+            </label>
+            <input class="form-control" name="mcq_ans[]" placeholder="Answer D" />
+            </div>`;
+        }
+        else if( ans_type.value == 'Grid_in' ){ 
+            add_ans.classList.remove('d-none');
+        }
+    })
 let sel_cate2 = document.querySelector('.sel_cate2');
 let sel_course2 = document.querySelector('.sel_course2');
 let sel_chapter2 = document.querySelector('.sel_chapter2');

@@ -13,6 +13,7 @@ use App\Http\Controllers\login\LoginController;
 use App\Http\Controllers\Admin\LessonController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\ExamController;
+use App\Http\Controllers\Admin\CourseSettingController;
 
 use Illuminate\Support\Facades\Route;
 /*
@@ -103,6 +104,10 @@ Route::controller(QuestionController::class)->group(function(){
     Route::get('/Question/Del/{id}','del_q')->name('del_q');
 });
 
+//Course Setting
+Route::controller(CourseSettingController::class)->group(function(){
+    Route::get('/Courses/Settingy','course_setting')->name('course_setting');
+});
 
 // Exam 
 Route::controller(ExamController::class)->group(function(){
