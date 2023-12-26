@@ -152,8 +152,6 @@ class QuestionController extends Controller
             $img_name = str_replace([' ', ':', '-'], 'X', $img_name);
             $arr['q_url'] = $img_name;
         }
-        move_uploaded_file($tmp_name, 'images/questions/' . $img_name);
-        $question = Question::create($arr);
 
         if ( !empty($question_statue) && $req->q_type == 'Trail' ) {
             session()->flash('faild','Question Is Not Trail');
@@ -163,6 +161,8 @@ class QuestionController extends Controller
             session()->flash('faild','Question Is Not Parallel');
             return redirect()->back();
         }
+        move_uploaded_file($tmp_name, 'images/questions/' . $img_name);
+        $question = Question::create($arr);
         if ( !empty($req->mcq_ans) && count($req->mcq_ans) > 0 ) {
             for ($i=0,$end = count($req->mcq_ans); $i < $end; $i++) { 
                 Mcq_ans::create([

@@ -424,14 +424,14 @@
                                         <!--begin::Description-->
                                         <div class="text-muted fw-semibold fs-2 d-flex align-items-center">If you need add more idea, please check 
                                         <div class="section_add_idea" style="margin-left:15px ">
-                                            <button id="add_idea" type="button" class="btn_add btn btn-lg btn-primary d-inline-block">Add New Idea</button>
+                                            <button id="add_idea" type="button" class="btn_add btn btn-lg btn-primary add_idea_btn d-inline-block">Add New Idea</button>
                                         </div>
                                     </div>
                                         <!--end::Description-->
                                     </div>
                                     <!--end::Heading-->
                                     <!--begin::Input group-->
-                                   <div class="ideas" id="ideas">
+                                   <div class="ideas_div">
 
                                     <div class="idea">
                                         <div class="section_idea">
@@ -451,6 +451,42 @@
                                             <input type="text" class="form-control form-control-lg">
                                         </div>
                                     </div>
+                                    <script>
+                                        let add_idea_btn = document.querySelector('.add_idea_btn');
+                                        let ideas_div = document.querySelector('.ideas_div');
+                                        add_idea_btn.addEventListener('click', () => {
+                                            ideas_div.innerHTML += `
+                                    <div class="idea">
+                                        <div class="section_idea">
+                                            <span>Idea</span>
+                                            <input type="text" class="form-control form-control-lg">
+                                        </div>
+                                        <div class="section_syllabus">
+                                            <span>Syllabus</span>
+                                            <input type="text" class="form-control form-control-lg">
+                                        </div>
+                                        <div class="section_pdf">
+                                            <span>Pdf</span>
+                                            <input type="file" class="form-control form-control-lg">
+                                        </div>
+                                        <div class="section_video_link">
+                                            <span>Video Link</span>
+                                            <input type="text" class="form-control form-control-lg">
+                                        </div>
+                                                <button type="button" class="btn btn-danger btn_remove_idea">Remove</button>
+                                    </div>`;
+                                        let btn_remove_idea = document.querySelectorAll('.btn_remove_idea');
+                                        for (let i = 0, end = btn_remove_idea.length; i < end; i++) {
+                                            btn_remove_idea[i].addEventListener('click', ( e ) => {
+                                                for (let j = 0; j < end; j++) {
+                                                    if ( e.target == btn_remove_idea[j] ) {
+                                                        btn_remove_idea[j].parentElement.remove()
+                                                    }
+                                                }
+                                            });
+                                        }
+                                        })
+                                    </script>
                                 </div>
                                 </div>
                                 <!--end::Wrapper-->
