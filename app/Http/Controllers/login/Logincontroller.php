@@ -13,7 +13,7 @@ class Logincontroller extends Controller
                 return view('pages.authanticated.login');                
                             
         }
-        public function store(request $request){
+        public function store(Request $request){
                 $request->validate([
                 'email'=> 'required|email',
                 'password'=> 'required'
@@ -23,32 +23,43 @@ class Logincontroller extends Controller
                 'password.required'=> 'Email or Password Invalid',
                 ]);
 
-                                $user = User::where('email',$request->input('email'))->first();
+                        $user = User::where('email',$request->input('email'))->first();
                                     
                                         if(!$user){
                                 return redirect()->route('login.index')->withErrors(['error'=>'The Email or Password Invalid']);
 
-                                        }
-                                        if(!password_verify($request->input('password'),$user->password)){
+                        }
+                        if(!password_verify($request->input('password'),$user->password)){
                                 return redirect()->route('login.index')->withErrors(['error'=>'The  Password Invalid']);
 
-                                        }
+                        }
 			Auth::loginUsingId($user->id);
 
-                                $credetional = $request->only('email','password');
+                                $credentials = $request->only('email','password');
 
                                 
-                        $authantecated = Auth::attempt($credetional);
+                        $authantecated = Auth::attempt($credentials);
+                        
+                        if($authantecated){
+                                $user = User::where('email',$request->email)->first();
+                                $token = $user->createToken("user")->plainTextToken;
+                                $user->token =$token ;
+                                if( $user->position == 'admin'){
+                                          return redirect()->route('dashboard')->with(['success'=>'Loged In']);
+         
+         
+                                }
+                                elseif( $user->position == 'teacher'){
+                                 return 'Welcome Teacher';
+                                }
+                                elseif( $user->position == 'student'){
+                                 return redirect()->route('stu_dashboard');
+                                }
+                                return view();
+                        }
                         if(!$authantecated){
                                 return redirect()->route('login.index')->withErrors(['error'=>'The Email or Password Invalid']);
                         }
-                       if( $user->position == 'admin'){
-                                 return redirect()->route('dashboard')->with(['success'=>'Loged In']);
-
-
-                       }elseif( $user->position == 'teacher'){
-                        return 'Welcome Teacher';
-                       }
 
                            
         }

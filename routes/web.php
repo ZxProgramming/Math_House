@@ -15,6 +15,8 @@ use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Admin\CourseSettingController;
 
+use App\Http\Controllers\Student\Stu_DashboardController;
+
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +38,7 @@ use Illuminate\Support\Facades\Route;
       });
 
 //  Hello MR Ahmed 
-        Route::middleware(['auth','auth.Admin'])->group(function(){
+Route::middleware(['auth','auth.Admin'])->group(function(){
             
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -135,8 +137,13 @@ Route::controller(LessonController::class)->group(function(){
   });
 
           
+  
 
-
+Route::middleware(['auth','auth.student'])->group(function(){
+    Route::controller(Stu_DashboardController::class)->group(function(){
+        Route::get('/Student','index')->name('stu_dashboard');
+    });
+});
 
 
 Route::middleware(['auth', 'verified'])->group(function () {

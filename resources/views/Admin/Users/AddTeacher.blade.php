@@ -23,7 +23,7 @@
 
     <div class='my-3'>
         <label>Category</label>
-        <select name="category_id" class="form-control">
+        <select name="category_id" class="form-control sel_cate">
             <option disabled selected>
                 Select Category
             </option>
@@ -34,18 +34,14 @@
             @endforeach
         </select>
     </div>
-
+    <input class="categories" value="{{$categories}}" type="hidden" />
+    <input class="courses" value="{{$courses}}" type="hidden" />
     <div class='my-3'>
         <label>Course</label>
-        <select name="course_id" class="form-control">
+        <select name="course_id" class="form-control sel_course">
             <option disabled selected>
                 Select Course
             </option>
-            @foreach($courses as $course)
-            <option value="{{$course->id}}">
-                {{$course->course_name}}
-            </option>
-            @endforeach
         </select>
     </div>
 
@@ -61,4 +57,26 @@
     </div>
 </form>
 
+<script>
+        let sel_cate = document.querySelector('.sel_cate');
+        let sel_course = document.querySelector('.sel_course');
+        let courses = document.querySelector('.courses');
+        courses = courses.value;
+        courses = JSON.parse(courses);
+        
+        sel_cate.addEventListener('change', () => {
+            sel_course.innerHTML = `
+            <option disabled selected>
+                Select Course
+            </option>`;
+            courses.forEach(element => {
+                if ( sel_cate.value == element.category_id ) {
+                    sel_course.innerHTML += `
+                    <option value="${element.id}">
+                        ${element.course_name}
+                    </option>`;
+                }
+            });
+        });
+    </script>
 </x-default-layout>

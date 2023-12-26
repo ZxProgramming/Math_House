@@ -9,7 +9,7 @@
         "diglactic/laravel-breadcrumbs": "^8.1",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.0",
-        "laravel/sanctum": "^3.0",
+        "laravel/sanctum": "^3.3",
         "laravel/socialite": "^5.6",
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.12",

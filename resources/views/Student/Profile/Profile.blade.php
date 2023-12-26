@@ -1,0 +1,2 @@
+
+@include('Student.inc.menu')
