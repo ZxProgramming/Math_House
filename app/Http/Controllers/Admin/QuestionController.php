@@ -135,7 +135,6 @@ class QuestionController extends Controller
     }
 
     public function add_q( Request $req ){
-       //"":[],"":[],"":"A"
         $arr = $req->only('lesson_id', 'q_code', 'q_type', 'q_num',
         'month', 'year', 'section', 'difficulty', 'question', 'ans_type');
         $question_statue = Question::
