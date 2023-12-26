@@ -106,7 +106,8 @@ Route::controller(QuestionController::class)->group(function(){
 
 //Course Setting
 Route::controller(CourseSettingController::class)->group(function(){
-    Route::get('/Courses/Settingy','course_setting')->name('course_setting');
+    Route::get('/Courses/CodeExam','course_setting')->name('course_setting');
+    Route::post('/Courses/CodeExam/Add','code_exam_add')->name('code_exam_add');
 });
 
 // Exam 

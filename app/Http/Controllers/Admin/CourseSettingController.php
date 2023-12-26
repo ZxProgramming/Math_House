@@ -13,4 +13,10 @@ class CourseSettingController extends Controller
         return view('Admin.courses.Settings.ExamCode',
         compact('exam_codes'));
     }
+
+    public function code_exam_add( Request $req ){
+        ExamCodes::create($req->only('exam_code'));
+        return redirect()->back();
+    }
+
 }

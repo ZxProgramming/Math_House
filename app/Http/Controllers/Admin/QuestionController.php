@@ -13,6 +13,7 @@ use App\Models\Question;
 use App\Models\Q_ans;
 use App\Models\Mcq_ans;
 use App\Models\Grid_ans;
+use App\Models\ExamCodes;
 
 class QuestionController extends Controller
 {
@@ -23,9 +24,10 @@ class QuestionController extends Controller
         $chapters = Chapter::all();
         $lessons = Lesson::all();
         $questions = Question::all();
+        $exams = ExamCodes::all();
 
         return view('Admin.courses.Questions.Questions', 
-        compact('categories', 'courses', 'chapters', 'lessons', 'questions'));
+        compact('categories', 'courses', 'chapters', 'lessons', 'questions', 'exams'));
     }
 
     public function q_edit( Request $req ){

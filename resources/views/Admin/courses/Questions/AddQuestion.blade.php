@@ -282,7 +282,12 @@
                                         <!--End::Label-->
                                             
                                         <!--begin::Input-->
-                                        <input class="form-control" name="q_code" placeholde="Code" />
+                                        <select name="q_code" class="form-control">
+                                            <option disabled selected>Select Exam Code</option>
+                                            @foreach($exams as $exam)
+                                            <option value="{{$exam->id}}">{{$exam->exam_code}}</option>
+                                            @endforeach 
+                                        </select>
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Input group-->
@@ -367,8 +372,8 @@
                                         let ideas = document.querySelector('.ideas');
                                         add_new_idea.addEventListener('click', () => {
                                             ideas.innerHTML += `
-                                            <hr />
                                             <div class="idea">
+                                            <hr />
                                                 <div class="section_idea">
                                                     <span>Answer PDF</span>
                                                     <input type="file" name="ans_pdf[]" class="form-control form-control-lg form-control-solid">
@@ -396,7 +401,7 @@
                             <div class="d-flex flex-stack pt-10">
                                 <!--begin::Wrapper-->
                                 <div class="me-2">
-                                    <button type="button" class="btn btn-lg btn-light-primary me-3" data-kt-stepper-action="previous" data-kt-stepper-state="hide-on-last-step">
+                                    <button type="button" class="btn btn-lg btn-light-primary me-3" data-kt-stepper-action="previous">
                                     <i class="ki-duotone ki-arrow-left fs-3 me-1">
                                         <span class="path1"></span>
                                         <span class="path2"></span>

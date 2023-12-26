@@ -3,7 +3,7 @@
 <div class="my-2">
     <select class="form-control">
         <option disabled selected>
-            Exam Codes
+            Exams Codes
         </option>
         @foreach($exam_codes as $item)
         <option value="{{$item->id}}">
@@ -13,8 +13,14 @@
     </select>
 </div>
 
-<div class="my-2">
+<form class="my-2" action="{{route('code_exam_add')}}" method="POST">
+    @csrf
     <label class="py-2">Enter Exam Code</label>
-    <input class="form-control" placeholder="Enter Exam Code" />
-</div>
+    <div class="d-flex">
+        <input name="exam_code" class="form-control" placeholder="Enter Exam Code" />
+        <button class="btn btn-primary mx-2">
+            Add
+        </button>
+    </div>
+</form>
 </x-default-layout>
