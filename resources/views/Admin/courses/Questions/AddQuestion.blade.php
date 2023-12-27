@@ -552,8 +552,33 @@ sel_chapter2.addEventListener('change', ( e ) => {
 		<script src="{{ asset('assets/js/custom/utilities/modals/lessonSc.js') }}"></script>
 
 		<script src="{{asset('ckeditor5/ckeditor.js')}}"></script>
-        <script>
-            CKEDITOR.replace("ckeditor");
-        </script>
+      
        </script>
+
+<script>
+    CKEDITOR.replace("ckeditor");
+
+    
+</script>
+       <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
+       <script>
+           ClassicEditor
+               .create( document.querySelector( '#content'),{
+                   ckfinder:
+                   {
+                       uploadUrl:'fileupload.php'
+                   }
+               })
+                   .then(editor => {
+                       console.log(editor);
+                   })  
+                   .then( editor => {
+           window.editor = editor;
+       })
+             
+               .catch( error => {
+                   console.error( error );
+               } );
+       </script>
+       
        @endsection 
