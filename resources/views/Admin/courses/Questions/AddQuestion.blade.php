@@ -65,7 +65,7 @@
                                         <label class="required form-label mb-3">Question</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <textarea id="ckeditor" name="question" class="form-control"></textarea>
+                                        <textarea id="content" name="question" class="form-control"></textarea>
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Input group-->  
