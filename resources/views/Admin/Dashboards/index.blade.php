@@ -1,4 +1,7 @@
 
+@php
+  $admin = 'admin';
+@endphp
 <x-default-layout>
 
 @section('title','Dashboard')

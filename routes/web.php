@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Admin\CourseSettingController;
 
 use App\Http\Controllers\Student\Stu_DashboardController;
+use App\Http\Controllers\Student\Stu_ProfileController;
 
 use Illuminate\Support\Facades\Route;
 /*
@@ -142,6 +143,11 @@ Route::controller(LessonController::class)->group(function(){
 Route::middleware(['auth','auth.student'])->group(function(){
     Route::controller(Stu_DashboardController::class)->group(function(){
         Route::get('/Student','index')->name('stu_dashboard');
+    });
+
+    Route::controller(Stu_ProfileController::class)->group(function(){
+        Route::get('/Student/Profile','index')->name('stu_profile');
+        Route::post('/Student/Profile/Edit','stu_edit_profile')->name('stu_edit_profile');
     });
 });
 

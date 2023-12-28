@@ -1,4 +1,7 @@
 
+@php
+  $admin = 'admin';
+@endphp
 <x-default-layout>
 <div class="my-2">
     <select class="form-control">

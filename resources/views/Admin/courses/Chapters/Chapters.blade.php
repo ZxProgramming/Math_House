@@ -1,4 +1,8 @@
-<x-default-layout>
+
+@php
+  $admin = 'admin';
+@endphp
+  <x-default-layout>
   @include('Admin.courses.Chapters.AddChapter')
 
 <div class='my-3'>  

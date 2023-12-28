@@ -1,8 +1,8 @@
 
+@php
+  $admin = 'admin';
+@endphp
 <x-default-layout>
-    @php
-     $admin = 'admin';
-    @endphp
 
     @section('title','category')
        @include('success')

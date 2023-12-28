@@ -1,4 +1,7 @@
- 
-@include('Student.inc.header')
-@include('Student.inc.menu')
-@include('Student.inc.footer')
+
+@php 
+    $student = null;
+@endphp
+<x-default-layout>
+
+</x-default-layout>

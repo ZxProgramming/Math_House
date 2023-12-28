@@ -1,7 +1,8 @@
+
+@php
+  $admin = 'admin';
+@endphp
 <x-default-layout> 
-    @php
-     $admin = 'admin';
-    @endphp
  
 	<!--begin::Action-->
     <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_create_campaign">Questions Filter</a>

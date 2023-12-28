@@ -1,3 +1,7 @@
+
+@php
+  $admin = 'admin';
+@endphp
 <x-default-layout>
 @include('Admin.Users.admin_header')
 

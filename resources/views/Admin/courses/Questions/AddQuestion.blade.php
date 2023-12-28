@@ -65,7 +65,7 @@
                                         <label class="required form-label mb-3">Question</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <textarea id="content" name="question" class="form-control"></textarea>
+                                        <textarea id="question" name="question" class="form-control"></textarea>
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Input group-->  
@@ -554,31 +554,20 @@ sel_chapter2.addEventListener('change', ( e ) => {
 		<script src="{{asset('ckeditor5/ckeditor.js')}}"></script>
       
        </script>
-
-<script>
-    CKEDITOR.replace("ckeditor");
-
+ 
+    <script src="https://cdn.ckeditor.com/4.23.0-lts/standard-all/ckeditor.js"></script>
     
-</script>
-       <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
-       <script>
-           ClassicEditor
-               .create( document.querySelector( '#content'),{
-                   ckfinder:
-                   {
-                       uploadUrl:'fileupload.php'
-                   }
-               })
-                   .then(editor => {
-                       console.log(editor);
-                   })  
-                   .then( editor => {
-           window.editor = editor;
-       })
-             
-               .catch( error => {
-                   console.error( error );
-               } );
-       </script>
+    <script>
+    CKEDITOR.replace('question', {
+      extraPlugins: 'mathjax',
+      mathJaxLib: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML',
+      height: 320,
+      removeButtons: 'PasteFromWord'
+    });
+
+    if (CKEDITOR.env.ie && CKEDITOR.env.version == 8) {
+      document.getElementById('ie8-warning').className = 'tip alert';
+    }
+  </script>
        
        @endsection 
