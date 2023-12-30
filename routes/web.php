@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\CourseSettingController;
 
 use App\Http\Controllers\Student\Stu_DashboardController;
 use App\Http\Controllers\Student\Stu_ProfileController;
+use App\Http\Controllers\Student\Stu_MyCourseController;
 
 use Illuminate\Support\Facades\Route;
 /*
@@ -30,10 +31,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
     $controller_path = 'App\Http\Controllers' ;
-
+    
     Route::controller(LoginController::class)->group(function(){
         Route::get('/login','index')->name('login.index');
         Route::post('/login.store','store')->name('login.store');
+        Route::get('/sign_up','sign_up')->name('sign_up');
+        Route::post('/sign_up/Add','sign_up_add')->name('sign_up_add');
         Route::get('/logout','destroy')->name('logout');
         
       });
@@ -148,6 +151,12 @@ Route::middleware(['auth','auth.student'])->group(function(){
     Route::controller(Stu_ProfileController::class)->group(function(){
         Route::get('/Student/Profile','index')->name('stu_profile');
         Route::post('/Student/Profile/Edit','stu_edit_profile')->name('stu_edit_profile');
+    });
+
+    Route::controller(Stu_MyCourseController::class)->group(function(){
+        Route::get('/Student/MyCourses','index')->name('stu_my_courses');
+        Route::get('/Student/MyCourses/Courses','courses')->name('stu_courses');
+        Route::get('/Student/MyCourses/Chapters','chapters')->name('stu_chapters');
     });
 });
 

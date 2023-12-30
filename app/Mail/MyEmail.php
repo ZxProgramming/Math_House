@@ -23,12 +23,6 @@ class MyEmail extends Mailable
         $this->body = $body;
     }
 
-    public function build(){
-        return $this->from('ahmedahmadahmid73@gmail.com', 'Math House')
-        ->subject([$this->title, $this->body])
-        ->view('mail', [$this->title, $this->body])
-        ->with('item', [$this->title, $this->body]);
-    }
 
     /**
      * Get the message envelope.
@@ -46,7 +40,7 @@ class MyEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail',
+            view: 'mail',  
         );
     }
 

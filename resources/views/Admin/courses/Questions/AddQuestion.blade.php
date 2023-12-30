@@ -1,7 +1,9 @@
  
-    @php
-     $admin = 'admin';
-    @endphp
+@php
+  function fun_admin(){
+    return 'admin';
+  }
+@endphp
  
 	<!--begin::Action-->
     @include('success')

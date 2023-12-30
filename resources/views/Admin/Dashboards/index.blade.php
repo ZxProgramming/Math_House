@@ -1,6 +1,9 @@
 
 @php
-  $admin = 'admin';
+  function fun_admin(){
+    return 'admin';
+  }
+@endphp
 @endphp
 <x-default-layout>
 

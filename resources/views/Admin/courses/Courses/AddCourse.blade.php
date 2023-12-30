@@ -1,6 +1,8 @@
 
 @php
-  $admin = 'admin';
+  function fun_admin(){
+    return 'admin';
+  }
 @endphp
 <x-default-layout>
 @include('Admin.courses.Courses.course_header')

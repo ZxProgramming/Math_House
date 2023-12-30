@@ -1,4 +1,4 @@
-@if (  isset($admin) )
+@if ( fun_admin() == 'admin' )
 <!--begin::sidebar menu-->
 <div class="app-sidebar-menu overflow-hidden flex-column-fluid">
 	<!--begin::Menu wrapper-->

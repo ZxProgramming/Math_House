@@ -7,7 +7,8 @@
 </head>
 <body>
     <div>
-        Welcome Mr Ziad
+        {{$title}}
+        {{$body}}
     </div>
 </body>
 </html>

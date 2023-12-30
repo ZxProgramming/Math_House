@@ -1,7 +1,9 @@
 
-@php 
-    $student = null;
-@endphp
+@php
+  function fun_admin(){
+    return 'student';
+  }
+  @endphp
 <x-default-layout>
 
 
@@ -28,7 +30,7 @@
             <input
               type="file"
               id="upload"
-              name="imageProfile"
+              name="image"
               value="{{auth()->user()->image }}"
               class="account-file-input"
               hidden

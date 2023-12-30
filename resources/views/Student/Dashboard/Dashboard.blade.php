@@ -1,6 +1,8 @@
 
-@php 
-    $student = null;
+@php
+  function fun_admin(){
+    return 'student';
+  }
 @endphp
 <x-default-layout>
 

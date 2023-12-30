@@ -16,10 +16,6 @@ class Marketing extends Model
         'student_id',
     ];
 
-    public function category()
-    {
-        return $this->hasMany(Category::class, 'cate_id');
-    }
     public function course()
     {
         return $this->belongsTo(Course::class, 'course_id');
@@ -28,14 +24,7 @@ class Marketing extends Model
     {
         return $this->belongsTo(Chapter::class, 'chapter_id');
     }
-    public function lesson()
-    {
-        return $this->hasMany(Lesson::class, 'lesson_id');
-    }
-    public function question()
-    {
-        return $this->hasMany(Question::class, 'question_id');
-    }
+    
     public function affilate()
     {
         return $this->belongsTo(User::class, 'affilate_id');

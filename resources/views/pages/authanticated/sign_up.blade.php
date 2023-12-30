@@ -45,6 +45,7 @@
 	@if(session()->has('success'))
 	{{ session()->get('success') }}
 @endif
+@include('success')
 	<div class="d-flex flex-column flex-root" id="kt_app_root">
 
 		<!--begin::Authentication - Sign-in -->
@@ -72,14 +73,14 @@
 					<!--begin::Body-->
 					<div class="py-20">
 						<!--begin::Form-->
-						<form class="form w-100" action='{{ 'login.store' }}' method="POST" novalidate="novalidate" id="kt_sign_in_form">
+						<form class="form w-100" action="{{ route('sign_up_add') }}" method="POST" novalidate="novalidate" id="kt_sign_in_form">
 							@csrf
 							<!--begin::Body-->
 							<div class="card-body">
 								<!--begin::Heading-->
 								<div class="text-start mb-10">
 									<!--begin::Title-->
-									<h1 class="text-gray-900 mb-3 fs-3x" data-kt-translate="sign-in-title">Sign In</h1>
+									<h1 class="text-gray-900 mb-3 fs-3x" data-kt-translate="sign-in-title">Sign Up</h1>
 									<!--end::Title-->
 									<!--begin::Text-->
 									<div class="text-gray-500 fw-semibold fs-6" data-kt-translate="general-desc">Get unlimited access & earn money</div>
@@ -90,39 +91,44 @@
 									@error('error')
 										<span style="color: red">{{ $message }}</span>
 									@enderror
-								<div class="fv-row mb-8">
+								<div class="fv-row mb-8 d-flex">
 									<!--begin::Email-->
-									<input type="text" placeholder="Email" name="email" autocomplete="off" value="ziad57@yahoo.com" data-kt-translate="sign-in-input-email" class="form-control form-control-solid" />
+									<input type="text" placeholder="User Name" name="name" class="form-control form-control-solid ml-2" />
+									<input type="email" placeholder="Email" name="email" autocomplete="off" data-kt-translate="sign-in-input-email" class="form-control form-control-solid mr-2" />
 										@error('email')
 										<span> 	{{ $message }} </span>
 										@enderror
 									<!--end::Email-->
 								</div>
 								<!--end::Input group=-->
-								<div class="fv-row mb-7">
+								<div class="fv-row mb-7 d-flex">
 									<!--begin::Password-->
-									<input type="password" placeholder="Password" name="password" value="Makemesmile123" autocomplete="off" data-kt-translate="sign-in-input-password" class="form-control form-control-solid" />
+									<input type="password" placeholder="Password" name="password" autocomplete="off" data-kt-translate="sign-in-input-password" class="form-control form-control-solid mr-2" />
+									<input type="password" placeholder="Confirm Password" name="conf_password" autocomplete="off" data-kt-translate="sign-in-input-password" class="form-control form-control-solid ml-2" />
 									@error('password')
 								<span>	{{ $message }} </span>
 									@enderror										
 									<!--end::Password-->
 								</div>
 								<!--end::Input group=-->
+								<div class="fv-row mb-8 d-flex">
+									<!--begin::Email-->
+									<input type="text" placeholder="Phone" name="phone" autocomplete="off" data-kt-translate="sign-in-input-email" class="form-control form-control-solid mr-2" />
+									<input type="text" placeholder="Parent Phone" name="parent_phone" autocomplete="off" data-kt-translate="sign-in-input-email" class="form-control form-control-solid ml-2" />
+										@error('email')
+										<span> 	{{ $message }} </span>
+										@enderror
+									<!--end::Email-->
+								</div>
 								<!--begin::Wrapper-->
 								<div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-10">
-									<div></div>
-									<!--begin::Link-->
-									<a href="authentication/layouts/fancy/reset-password.html" class="link-primary" data-kt-translate="sign-in-forgot-password">Forgot Password ?</a>
-									<!--end::Link-->
+									<div></div> 
 								</div>
 								<!--end::Wrapper-->
 								<!--begin::Actions-->
 								<div class="d-flex flex-stack">
 									<!--begin::Submit-->
-									<input type="submit" value="Login"  class="btn btn-primary me-2 flex-shrink-0">
-									<a href="{{route('sign_up')}}" class="btn btn-success px-5">
-										Sign Up
-									</a>
+									<input type="submit"   class="btn btn-primary me-2 flex-shrink-0"> 
 								</div>
 								<!--end::Actions-->
 							</div>
