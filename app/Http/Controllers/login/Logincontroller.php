@@ -115,7 +115,6 @@ class Logincontroller extends Controller
                                 'state' => 'Show'
                         ]);
                 }
-
                 return redirect()->back();
         }
 
