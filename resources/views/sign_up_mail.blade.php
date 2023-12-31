@@ -7,7 +7,6 @@
 <h2>
 
 <form action="{{route('signup_confirm')}}" method="GET">
-    @csrf
     <input type="hidden" name="email" value="{{ $email}}" />
     <input type="hidden" name="code" value="{{ $code}}" />
     <button>
