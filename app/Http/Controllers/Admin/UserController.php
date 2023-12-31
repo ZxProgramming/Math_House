@@ -73,6 +73,7 @@ class UserController extends Controller
         $arr = $req->only('name', 'email', 'phone');
         $arr['password'] = bcrypt($req->password);
         $arr['position'] = 'admin';
+        $arr['state'] = 'Show';
         $user = User::create($arr);
         foreach ( $req->roles as $item ) {
             Admin_role::create([
@@ -127,6 +128,7 @@ class UserController extends Controller
         $arr = $req->only('name', 'email', 'phone', 'parent_email', 'parent_phone');
         $arr['password'] = bcrypt($req->password);
         $arr['position'] = 'student';
+        $arr['state'] = 'Show';
         User::create($arr);
 
         return redirect()->back();
@@ -203,6 +205,7 @@ class UserController extends Controller
         $arr = $req->only('name', 'email', 'phone', 'category_id', 'course_id');
         $arr['password'] = bcrypt($req->password);
         $arr['position'] = 'teacher';
+        $arr['state'] = 'Show';
         extract($_FILES['image']);
         $img_name = null;
         if ( !empty($name) ) {

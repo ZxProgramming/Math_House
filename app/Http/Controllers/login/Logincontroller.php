@@ -92,6 +92,10 @@ class Logincontroller extends Controller
                 $arr['state'] = 'hidden';
                 $arr['password'] = bcrypt($req->password);
                 $code = rand(0, 10000);
+                $user = ConfirmSign::create([
+                        'code' => $code,
+                        'email' => $req->email,
+                ]); 
                 Mail::To($req->email)->send(new Sign_upEmail($req->email, $code));
                 $user = User::create($arr);
                 
@@ -113,6 +117,23 @@ class Logincontroller extends Controller
                 }
 
                 return redirect()->back();
+        }
+
+        public function profile_confirm(Request $req){
+                if ( $req->type == 'extra' ) {
+                        User::where('id', $req->user_id)
+                        ->update([
+                                'extra_email' => $req->email
+                        ]);
+                }
+                elseif ( $req->type == 'parent' ) {
+                        User::where('id', $req->user_id)
+                        ->update([
+                                'parent_email' => $req->email
+                        ]);
+                }
+
+                return redirect()->route('stu_dashboard');
         }
 
 }

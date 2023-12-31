@@ -36,19 +36,20 @@ class Stu_ProfileController extends Controller
             $arr['password'] = bcrypt($req->password);
         }
         if ( !empty($req->parent_email) ) {
-            $emails[] = $req->parent_email;
+            $email = $req->parent_email;
+            $type = "parent";
+            $user_id = auth()->user()->id;
+            Mail::To($email)->send(new MyEmail($email, $type, $user_id));
         }
         if ( !empty($req->parent_phone) ) {
             $arr['parent_phone'] = $req->parent_phone;
         }
         if ( !empty($req->extra_email) ) {
-            $emails[] = $req->extra_email;
-        }
-        foreach ($emails as $email) {
-            $title = "Verfication Email";
-            $body = "Are you this email => " . auth()->user()->email . " Belongs you";
-            Mail::To($email)->send(new MyEmail($title, $body));
-        }
+            $email = $req->extra_email;
+            $type = "extra";
+            $user_id = auth()->user()->id;
+            Mail::To($email)->send(new MyEmail($email, $type, $user_id));
+        } 
         move_uploaded_file($tmp_name, 'images/users/' . $img_name);
         User::where('id', auth()->user()->id)
         ->update($arr);

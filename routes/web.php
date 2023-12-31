@@ -37,7 +37,8 @@ use Illuminate\Support\Facades\Route;
         Route::post('/login.store','store')->name('login.store');
         Route::get('/sign_up','sign_up')->name('sign_up');
 
-        Route::post('/SignupConfirm','signup_confirm')->name('signup_confirm');
+        Route::get('/SignupConfirm','signup_confirm')->name('signup_confirm');
+        Route::get('/ProfileConfirm','profile_confirm')->name('profile_confirm');
 
         Route::post('/sign_up/Add','sign_up_add')->name('sign_up_add');
         Route::get('/logout','destroy')->name('logout');

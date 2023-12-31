@@ -16,11 +16,12 @@ class MyEmail extends Mailable
     /**
      * Create a new message instance.
      */
-    public $title, $body;
-    public function __construct($title, $body)
+    public $type, $email, $user_id;
+    public function __construct($type, $email, $user_id)
     {
-        $this->title = $title;
-        $this->body = $body;
+        $this->type = $type;
+        $this->email = $email;
+        $this->user_id = $user_id;
     }
 
 
@@ -41,6 +42,7 @@ class MyEmail extends Mailable
     {
         return new Content(
             view: 'mail',  
+            with: ['type'=>$this->type, 'email'=>$this->email, 'user_id'=>$this->user_id]
         );
     }
 
