@@ -125,7 +125,7 @@ class Logincontroller extends Controller
                                 'extra_email' => $req->email
                         ]);
                 }
-                elseif ( $req->type == 'parent' ) {
+                if ( $req->type == 'parent' ) {
                         User::where('id', $req->user_id)
                         ->update([
                                 'parent_email' => $req->email

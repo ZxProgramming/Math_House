@@ -17,7 +17,7 @@ class MyEmail extends Mailable
      * Create a new message instance.
      */
     public $type, $email, $user_id;
-    public function __construct($type, $email, $user_id)
+    public function __construct($email, $type, $user_id)
     {
         $this->type = $type;
         $this->email = $email;

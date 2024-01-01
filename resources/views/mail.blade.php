@@ -5,10 +5,10 @@
 
 <h2>
 
-<form action="{{route('profile_confirm')}}" method="POST">
+<form action="{{route('profile_confirm')}}">
     <input type="hidden" name="user_id" value="{{ $user_id}}" />
     <input type="hidden" name="email" value="{{ $email}}" />
-    <input type="hidden" name="code" value="{{ $type}}" />
+    <input type="hidden" name="type" value="{{ $type}}" />
     <button>
         Confirm
     </button>
