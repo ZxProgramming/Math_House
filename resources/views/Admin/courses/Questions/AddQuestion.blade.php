@@ -82,10 +82,11 @@
                                         <!--begin::Label-->
                                         <label class="required form-label mb-3">Question</label>
                                         <!--end::Label-->
-        <div id="container">
-            <textarea name="question" id="editor">
-            </textarea>
-        </div>
+ 
+                                    <!--begin::Input-->
+                                    <textarea id="editor" name="question" class="form-control"></textarea>
+                                    <!--end::Input-->
+        
                                     </div>
                                     <!--end::Input group-->  
                                     <!--begin::Input group-->
