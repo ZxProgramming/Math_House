@@ -10,7 +10,7 @@ use App\Models\User;
 class CategoryController extends Controller
 {
     // View Category
-    private $columns = ['teacher_id','cate_name' ,'cate_des'];
+    private $columns = ['teacher_id','cate_name' ,'cate_des','cate_url','cate_price'];
     public function index(){
             $dataCategory = Category::all()->where('teacher_id',auth()->user()->id);
             return view('Admin.courses.category' , compact('dataCategory'));
@@ -40,7 +40,8 @@ class CategoryController extends Controller
                         
                 move_uploaded_file($tmp_name, 'images/category/' . $img_name);
                 $arr1 = $request->only($this->columns);
-                $arr1['image'] = $img_name;
+                $arr1['cate_url'] = $img_name;
+                $arr1['cate_price'] ='0';
                 $data= Category::create($arr1);
 
                 if($data){

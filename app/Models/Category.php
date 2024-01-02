@@ -14,12 +14,8 @@ class Category extends Model
         'user_id',
         'cate_name',
         'cate_des',
-        'image',
-        'cate_name',
         'teacher_id', 
-        'cate_des',
         'cate_url',
-        'user_id', 
     ];
 
     public function teacher()
