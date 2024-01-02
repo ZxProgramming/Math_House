@@ -34,11 +34,13 @@ class ChaptersController extends Controller
     public function ch_filter( Request $req ){
         $chapters = Chapter::
         where('course_id', $req->course_id)
-        ->get();
+        ->get(); 
+        $categories = Category::get();
         $courses = Course::get();
+        $teachers = User::get();
 
         return view('Admin.courses.Chapters.Chapters', 
-        compact('chapters', 'courses'));
+        compact('chapters', 'courses', 'categories', 'teachers'));
     }
 
     public function del_chapter($id){

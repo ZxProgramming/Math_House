@@ -200,4 +200,20 @@ class QuestionController extends Controller
 
         return redirect()->back();
     }
+
+    public function question_type( Request $req ){
+        $question_statue = Question::
+        where('year', $req->year)
+        ->where('month', $req->month)
+        ->where('section', $req->section)
+        ->where('q_num', $req->q_num)
+        ->first();
+        if ( $req->q_type == 'Trail' && !empty($question_statue) ) {
+            return $req->all();
+        }
+        if ( $req->q_type == 'Parallel' && empty($question_statue) ) {
+            return $req->all();
+        }
+        return $question_statue;
+    }
 }

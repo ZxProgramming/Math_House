@@ -159,7 +159,7 @@
                                         <label class="required form-label mb-3">Question Type</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <select class="form-control" name="q_type">
+                                        <select class="form-control q_type" name="q_type">
                                             <option disabled selected>
                                                 Select Question Type
                                             </option>
@@ -258,7 +258,7 @@
                                         <!--End::Label-->
                                             
                                         <!--begin::Input-->
-                                        <select class="form-control" name="year">
+                                        <select class="form-control year" name="year">
                                             <option disabled selected>
                                                 Select Year
                                             </option>
@@ -278,7 +278,7 @@
                                         <!--End::Label-->
                                             
                                         <!--begin::Input-->
-                                        <select class="form-control" name="month">
+                                        <select class="form-control month" name="month">
                                             <option value="Jan">Jan</div>
                                             <option value="Fab">Fab</div>
                                             <option value="Mar">Mar</div>
@@ -314,20 +314,9 @@
                                     <!--begin::Input group-->
                                     <div class="mb-10">
                                         <!--begin::Label-->
-                                        <label class="fs-6 fw-semibold mb-2">Question Num</label>
-                                        <!--End::Label-->
-                                            
-                                        <!--begin::Input-->
-                                        <input type="number" min="0" max="80" class="form-control" name="q_num" placeholde="Question Num" required />
-                                        <!--end::Input-->
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Input group-->
-                                    <div class="mb-10">
-                                        <!--begin::Label-->
                                         <label class="fs-6 fw-semibold mb-2">Section</label>
                                         <!--begin::Input-->
-                                        <select class="form-control" name="section">
+                                        <select class="form-control section" name="section">
                                             <option disabled selected>
                                                 Select Section
                                             </option>
@@ -344,6 +333,17 @@
                                                 4
                                             </option>
                                         </select>
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="mb-10">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold mb-2">Question Num</label>
+                                        <!--End::Label-->
+                                            
+                                        <!--begin::Input-->
+                                        <input type="number" min="0" max="80" class="form-control q_num" name="q_num" placeholde="Question Num" required />
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Input group-->
@@ -387,35 +387,35 @@
                                 </div>
                                 <!--end::Wrapper-->
                             </div>
-                                    <script>
-                                        let add_new_idea = document.querySelector('#add_new_idea');
-                                        let ideas = document.querySelector('.ideas');
-                                        add_new_idea.addEventListener('click', () => {
-                                            ideas.innerHTML += `
-                                            <div class="idea">
-                                            <hr />
-                                                <div class="section_idea">
-                                                    <span>Answer PDF</span>
-                                                    <input type="file" name="ans_pdf[]" class="form-control form-control-lg form-control-solid">
-                                                </div>
-                                                <div class="section_syllabus">
-                                                    <span>Answer Video</span>
-                                                    <input type="file" name="ans_video[]" class="form-control form-control-lg form-control-solid">
-                                                </div>
-                                                <button type="button" class="btn btn-danger btn_remove_idea">Remove</button>
-                                            </div>`;
-                                        let btn_remove_idea = document.querySelectorAll('.btn_remove_idea');
-                                        for (let i = 0, end = btn_remove_idea.length; i < end; i++) {
-                                            btn_remove_idea[i].addEventListener('click', ( e ) => {
-                                                for (let j = 0; j < end; j++) {
-                                                    if ( e.target == btn_remove_idea[j] ) {
-                                                        btn_remove_idea[j].parentElement.remove()
-                                                    }
-                                                }
-                                            });
+                            <script>
+                                let add_new_idea = document.querySelector('#add_new_idea');
+                                let ideas = document.querySelector('.ideas');
+                                add_new_idea.addEventListener('click', () => {
+                                    ideas.innerHTML += `
+                                    <div class="idea">
+                                    <hr />
+                                        <div class="section_idea">
+                                            <span>Answer PDF</span>
+                                            <input type="file" name="ans_pdf[]" class="form-control form-control-lg form-control-solid">
+                                        </div>
+                                        <div class="section_syllabus">
+                                            <span>Answer Video</span>
+                                            <input type="file" name="ans_video[]" class="form-control form-control-lg form-control-solid">
+                                        </div>
+                                        <button type="button" class="btn btn-danger btn_remove_idea">Remove</button>
+                                    </div>`;
+                                let btn_remove_idea = document.querySelectorAll('.btn_remove_idea');
+                                for (let i = 0, end = btn_remove_idea.length; i < end; i++) {
+                                    btn_remove_idea[i].addEventListener('click', ( e ) => {
+                                        for (let j = 0; j < end; j++) {
+                                            if ( e.target == btn_remove_idea[j] ) {
+                                                btn_remove_idea[j].parentElement.remove()
+                                            }
                                         }
-                                        });
-                                    </script>
+                                    });
+                                }
+                                });
+                            </script>
                             <!--end::Step 5-->
                             <!--begin::Actions-->
                             <div class="d-flex flex-stack pt-10">
@@ -433,7 +433,7 @@
                                     <button class="btn btn-lg btn-primary" >
                                         Submit 
                                     </button>
-                                    <button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Continue 
+                                    <button type="button" class="btn btn-lg btn-primary continue_btn" data-kt-stepper-action="next">Continue 
                                     <i class="ki-duotone ki-arrow-right fs-3 ms-1 me-0">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
@@ -547,6 +547,34 @@ sel_chapter2.addEventListener('change', ( e ) => {
             
         }
     });
+});
+
+let continue_btn = document.querySelector('.continue_btn');
+let q_num = document.querySelector('.q_num');
+let year = document.querySelector('.year');
+let month = document.querySelector('.month');
+let section = document.querySelector('.section');
+let q_type = document.querySelector('.q_type');
+
+continue_btn.addEventListener('click', () => {
+    if (q_num.value != "") {
+        let obj = {
+            'year': year.value,
+            'month': month.value,
+            'section': section.value,
+            'q_num': q_num.value,
+            'q_type' : q_type.value
+            };
+            
+        $.ajax({
+            type: 'POST',
+            url: "{{route('question_type')}}",
+            data: obj,
+            success:function(res){
+                console.log(res);
+            }
+        })
+    }
 });
 </script>
 

@@ -438,19 +438,23 @@
                                     <div class="idea">
                                         <div class="section_idea">
                                             <span>Idea</span>
-                                            <input type="text" class="form-control form-control-lg">
+                                            <input name="idea[]" type="text" class="form-control form-control-lg">
                                         </div>
                                         <div class="section_syllabus">
                                             <span>Syllabus</span>
-                                            <input type="text" class="form-control form-control-lg">
+                                            <input name="syllabus[]" type="text" class="form-control form-control-lg">
+                                        </div>
+                                        <div class="section_syllabus">
+                                            <span>Idea Order</span>
+                                            <input name="idea_order[]" type="text" class="form-control form-control-lg">
                                         </div>
                                         <div class="section_pdf">
                                             <span>Pdf</span>
-                                            <input type="file" class="form-control form-control-lg">
+                                            <input name="pdf[]" type="file" class="form-control form-control-lg">
                                         </div>
                                         <div class="section_video_link">
                                             <span>Video Link</span>
-                                            <input type="text" class="form-control form-control-lg">
+                                            <input name="v_link[]" type="text" class="form-control form-control-lg">
                                         </div>
                                     </div>
                                     <script>
@@ -461,21 +465,25 @@
                                     <div class="idea">
                                         <div class="section_idea">
                                             <span>Idea</span>
-                                            <input type="text" class="form-control form-control-lg">
+                                            <input name="idea[]" type="text" class="form-control form-control-lg">
                                         </div>
                                         <div class="section_syllabus">
                                             <span>Syllabus</span>
-                                            <input type="text" class="form-control form-control-lg">
+                                            <input name="syllabus[]" type="text" class="form-control form-control-lg">
+                                        </div>
+                                        <div class="section_syllabus">
+                                            <span>Idea Order</span>
+                                            <input name="idea_order[]" type="text" class="form-control form-control-lg">
                                         </div>
                                         <div class="section_pdf">
                                             <span>Pdf</span>
-                                            <input type="file" class="form-control form-control-lg">
+                                            <input name="pdf[]" type="file" class="form-control form-control-lg">
                                         </div>
                                         <div class="section_video_link">
                                             <span>Video Link</span>
-                                            <input type="text" class="form-control form-control-lg">
+                                            <input name="v_link[]" type="text" class="form-control form-control-lg">
                                         </div>
-                                                <button type="button" class="btn btn-danger btn_remove_idea">Remove</button>
+                                        <button type="button" class="btn btn-danger btn_remove_idea">Remove</button>
                                     </div>`;
                                         let btn_remove_idea = document.querySelectorAll('.btn_remove_idea');
                                         for (let i = 0, end = btn_remove_idea.length; i < end; i++) {
@@ -610,7 +618,7 @@
                                 <!--end::Wrapper-->
                                 <!--begin::Wrapper-->
                                <div>
-										<button type="submit" class="btn btn-lg btn-primary" data-kt-stepper-action="submit">
+										<button type="submit" class="btn btn-lg btn-primary">
 											Done
 										</button>
 										<button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Continue 

@@ -86,6 +86,12 @@
                             </div>
                             <div class="my-2">
                                 <label>
+                                    Duration
+                                </label>
+                                <input name="duration" class="form-control" value="{{$item->duration}}" placeholder="Duration"/>
+                            </div>
+                            <div class="my-2">
+                                <label>
                                     Course Price
                                 </label>
                                 <input name="course_price" class="form-control" value="{{$item->course_price}}" placeholder="Course Price"/>
