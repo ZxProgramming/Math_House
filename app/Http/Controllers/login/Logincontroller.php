@@ -10,6 +10,8 @@ use App\Mail\Sign_upEmail;
 
 use App\Models\User;
 use App\Models\ConfirmSign;
+use App\Models\Country;
+use App\Models\City;
 
 class Logincontroller extends Controller
 {
@@ -79,7 +81,10 @@ class Logincontroller extends Controller
         } 
 
         public function sign_up(){
-                return view('pages.authanticated.sign_up');
+               $countries = Country::all();
+                $cities = City::all();
+                return view('pages.authanticated.sign_up', 
+                compact('countries', 'cities'));
         }
 
         public function sign_up_add( Request $req ){
@@ -87,7 +92,8 @@ class Logincontroller extends Controller
                         session()->flash('faild','Confirm Password Wrong');
                         return redirect()->back();
                  }
-                $arr = $req->only('email', 'name', 'phone', 'parent_phone');
+                 
+                $arr = $req->only('f_name', 'l_name', 'email', 'name', 'phone', 'city_id', 'grade');
                 $arr['position'] = 'student';
                 $arr['state'] = 'hidden';
                 $arr['password'] = bcrypt($req->password);

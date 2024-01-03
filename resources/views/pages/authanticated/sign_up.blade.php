@@ -93,13 +93,31 @@
 									@enderror
 								<div class="fv-row mb-8 d-flex">
 									<!--begin::Email-->
-									<input type="text" placeholder="User Name" name="name" class="form-control form-control-solid ml-2" />
-									<input type="email" placeholder="Email" name="email" autocomplete="off" data-kt-translate="sign-in-input-email" class="form-control form-control-solid mr-2" />
-										@error('email')
-										<span> 	{{ $message }} </span>
-										@enderror
+									<input type="text" placeholder="First Name" name="f_name" class="form-control form-control-solid ml-2" />
+									<input type="text" placeholder="Last Name" name="l_name" class="form-control form-control-solid ml-2" />
+									
 									<!--end::Email-->
 								</div>
+								<!--end::Input group=-->
+								<div class="fv-row mb-7 d-flex">
+									<!--begin::Password-->
+									<input placeholder="Nick Name" name="name" autocomplete="off" data-kt-translate="sign-in-input-email" class="form-control form-control-solid mr-2" />
+									<!--begin::Password-->
+									<input type="email" placeholder="Email" name="email" autocomplete="off" data-kt-translate="sign-in-input-email" class="form-control form-control-solid mr-2" />
+									@error('email')
+										<span> 	{{ $message }} </span>
+									@enderror										
+									<!--end::Password-->
+								</div>
+								<!--end::Input group=-->
+								<div class="fv-row mb-7 d-flex">
+									<input placeholder="Phone" name="phone" autocomplete="off" data-kt-translate="sign-in-input-email" class="form-control form-control-solid mr-2" />
+									@error('password')
+								<span>	{{ $message }} </span>
+									@enderror										
+									<!--end::Password-->
+								</div>
+								<!--end::Input group=-->
 								<!--end::Input group=-->
 								<div class="fv-row mb-7 d-flex">
 									<!--begin::Password-->
@@ -111,14 +129,45 @@
 									<!--end::Password-->
 								</div>
 								<!--end::Input group=-->
+								<!--end::Input group=-->
+								<div class="fv-row mb-7 d-flex">
+									<!--begin::Password-->
+									<select class="form-control form-control-solid mr-2" name="country">
+										<option disabled selected>
+											Select Country
+										</option>
+										@foreach( $countries as $country )
+										<option value="{{$country->id}}" >
+											{{$country->name}}
+										</option>
+										@endforeach
+									</select>									
+									<!--end::Password-->
+									<!--begin::Password-->
+									<select class="form-control form-control-solid ml-2" name="city_id">
+										<option disabled selected>
+											Select City
+										</option>
+										@foreach( $cities as $city )
+										<option value="{{$city->id}}" >
+											{{$city->city}}
+										</option>
+										@endforeach
+									</select>									
+									<!--end::Password-->
+								</div>
+								<!--end::Input group=-->
 								<div class="fv-row mb-8 d-flex">
-									<!--begin::Email-->
-									<input type="text" placeholder="Phone" name="phone" autocomplete="off" data-kt-translate="sign-in-input-email" class="form-control form-control-solid mr-2" />
-									<input type="text" placeholder="Parent Phone" name="parent_phone" autocomplete="off" data-kt-translate="sign-in-input-email" class="form-control form-control-solid ml-2" />
-										@error('email')
-										<span> 	{{ $message }} </span>
-										@enderror
-									<!--end::Email-->
+									<select class="form-control form-control-solid ml-2" name="grade">
+										<option disabled selected>
+											Select Grade
+										</option>
+										@for( $i = 1; $i < 14; $i++ )
+										<option value="{{$i}}" >
+											{{$i}}
+										</option>
+										@endfor
+									</select>
 								</div>
 								<!--begin::Wrapper-->
 								<div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-10">
