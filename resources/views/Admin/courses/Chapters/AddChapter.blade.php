@@ -49,7 +49,8 @@
                         </div>
                         <!--end::Nav-->
                         <!--begin::Form-->
-                        <form class="mx-auto w-100 mw-600px pt-15 pb-10" novalidate="novalidate" id="kt_modal_create_campaign_stepper_form">
+                        <form method="POST" action="{{route('add_chapter')}}" class="mx-auto w-100 mw-600px pt-15 pb-10" novalidate="novalidate" id="kt_modal_create_campaign_stepper_form">
+                            @csrf
                             <!--begin::Step 1-->
                             <div class="current" data-kt-stepper-element="content">
                                 <!--begin::Wrapper-->
@@ -72,7 +73,7 @@
                                         <label class="required form-label mb-3">Category</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <select class="form-control" name="category_id">
+                                        <select class="form-control sel_cate" name="category_id">
                                             <option disabled selected>
                                                 Select Category
                                             </option>
@@ -82,6 +83,8 @@
                                             </option>
                                             @endforeach
                                         </select>
+                                        <input type="hidden" class="categories" value="{{$categories}}" />
+                                        <input type="hidden" class="courses" value="{{$courses}}" />
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Input group-->  
@@ -91,15 +94,10 @@
                                         <label class="required form-label mb-3">Course</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <select class="form-control" name="course_id">
+                                        <select class="form-control sel_course" name="course_id">
                                             <option disabled selected>
                                                 Select Course
                                             </option>
-                                            @foreach($courses as $course)
-                                            <option value="{{$course->id}}">
-                                                {{$course->course_name}}
-                                            </option>
-                                            @endforeach
                                         </select>
                                         <!--end::Input-->
                                     </div>
@@ -185,7 +183,76 @@
                             <div data-kt-stepper-element="content">
                                 <!--begin::Wrapper-->
                                 <div class="w-100">
-                                    ghfgh
+                                    
+                                    <!--begin::Heading-->
+                                    <div class="pb-10 pb-lg-12">
+                                        <!--begin::Title-->
+                                        <h1 class="fw-bold text-gray-900">Pricing</h1>
+                                        <!--end::Title-->
+                                        <!--begin::Description-->
+                                        <div class="text-muted fw-semibold fs-2 d-flex align-items-center"> 
+                                        <div class="section_add_idea" style="margin-left:15px ">
+                                            <button id="add_new_idea" type="button" class="my-3 btn_add btn btn-lg btn-primary d-inline-block">Add New Pricing</button>
+                                        </div>
+                                    </div>
+                                        <!--end::Description-->
+                                    </div>
+                                    <!--end::Heading-->
+                                    <!--begin::Input group-->
+                                   <div class="ideas" id="ideas">
+
+                                    <div class="idea">
+                                        <div class="section_idea my-2 d-flex align-items-center">
+                                            <span>Duration</span>
+                                            <input type="number" name="duration[]" class="form-control mx-2 form-control-lg">
+                                            <span>Dayes</span>
+                                        </div>
+                                        <div class="section_idea my-2">
+                                            <span>Price</span>
+                                            <input name="price[]" class="form-control form-control-lg">
+                                        </div>
+                                        <div class="section_idea my-2">
+                                            <span>Discount</span>
+                                            <input name="discount[]" class="form-control form-control-lg">
+                                        </div>
+                                    </div>
+
+                                    
+                            <script>
+                                let add_new_idea = document.querySelector('#add_new_idea');
+                                let ideas = document.querySelector('.ideas');
+                                add_new_idea.addEventListener('click', () => {
+                                    ideas.innerHTML += `
+                                    <div class="idea">
+                                    <hr />
+                                        <div class="section_idea my-2 d-flex align-items-center">
+                                            <span>Duration</span>
+                                            <input type="number" name="duration[]" class="form-control mx-2 form-control-lg">
+                                            <span>Dayes</span>
+                                        </div>
+                                        <div class="section_idea my-2">
+                                            <span>Price</span>
+                                            <input name="price[]" class="form-control form-control-lg">
+                                        </div>
+                                        <div class="section_idea my-2">
+                                            <span>Discount</span>
+                                            <input name="discount[]" class="form-control form-control-lg">
+                                        </div>
+                                        <button type="button" class="btn btn-danger btn_remove_idea">Remove</button>
+                                    </div>`;
+                                let btn_remove_idea = document.querySelectorAll('.btn_remove_idea');
+                                for (let i = 0, end = btn_remove_idea.length; i < end; i++) {
+                                    btn_remove_idea[i].addEventListener('click', ( e ) => {
+                                        for (let j = 0; j < end; j++) {
+                                            if ( e.target == btn_remove_idea[j] ) {
+                                                btn_remove_idea[j].parentElement.remove()
+                                            }
+                                        }
+                                    });
+                                }
+                                });
+                            </script>
+                            </div>
                                 </div>
                             </div>
                             <!--end::Step 5-->
@@ -193,7 +260,7 @@
                             <div class="d-flex flex-stack pt-10">
                                 <!--begin::Wrapper-->
                                 <div class="me-2">
-                                    <button type="button" class="btn btn-lg btn-light-primary me-3" data-kt-stepper-action="previous" data-kt-stepper-state="hide-on-last-step">
+                                    <button type="button" class="btn btn-lg btn-light-primary me-3" data-kt-stepper-action="previous">
                                     <i class="ki-duotone ki-arrow-left fs-3 me-1">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
@@ -202,7 +269,7 @@
                                 <!--end::Wrapper-->
                                 <!--begin::Wrapper-->
                                 <div>
-                                    <button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="submit">
+                                    <button class="btn btn-lg btn-primary">
                                         <span class="indicator-label">Submit 
                                         <i class="ki-duotone ki-arrow-right fs-3 ms-2 me-0">
                                             <span class="path1"></span>
@@ -229,6 +296,28 @@
             </div>
         </div>
     </div>
+    <script>
+        let sel_cate = document.querySelector('.sel_cate');
+        let sel_course = document.querySelector('.sel_course');
+        let categories = document.querySelector('.categories');
+        let courses = document.querySelector('.courses');
+        courses = courses.value;
+        courses = JSON.parse(courses);
+        sel_cate.addEventListener('change', ()=>{
+            sel_course.innerHTML = `
+            <option disabled selected>
+                Select Course
+            </option>`;
+            courses.forEach(element => {
+                if ( sel_cate.value == element.category_id ) {
+                    sel_course.innerHTML += `
+                    <option value="${element.id}">
+                        ${element.course_name}
+                    </option>`;
+                }
+            });
+        })
+    </script>
        @section('script')
        <script>
         <!--begin::Javascript-->

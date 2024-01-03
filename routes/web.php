@@ -107,6 +107,7 @@ Route::controller(ChaptersController::class)->group(function(){
     Route::get('/Chapter','chapter')->name('chapter');
     Route::post('/Chapter_Filter','ch_filter')->name('ch_filter');
     Route::post('/Chapter/Edit','chapter_edit')->name('chapter_edit');
+    Route::post('/Chapter/Add','add_chapter')->name('add_chapter');
     Route::get('/Chapter/Del/{id}','del_chapter')->name('del_chapter');
 });
 
