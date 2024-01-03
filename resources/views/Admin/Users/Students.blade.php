@@ -10,15 +10,15 @@
 <div class='my-3'>
   <form class='d-flex' action="{{route('student_filter')}}" method='POST'>
     @csrf
-    <select name='course_id' class='form-control mx-2'>
+    <select name='grade' class='form-control mx-2'>
       <option disabled selected>
-        Select Course
+        Select Grade
       </option>
-      @foreach($courses as $course)
-      <option value="{{$course->id}}">
-        {{$course->course_name}}
-      </option>
-      @endforeach
+      @for($i = 1; $i < 14; $i++ )
+        <option value="{{$i}}">
+          {{$i}}
+        </option>
+      @endfor
     </select>
 
     <button class='btn btn-primary'>

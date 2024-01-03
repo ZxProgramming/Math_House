@@ -126,7 +126,7 @@
 
                                 </div>
                                 <!--end::Wrapper-->
-                            </div>
+</div>
                             <!--end::Step 1-->
                             <!--begin::Step 2-->
                             <div data-kt-stepper-element="content">
@@ -218,40 +218,8 @@
                                     </div>
 
                                     
-                            <script>
-                                let add_new_idea = document.querySelector('#add_new_idea');
-                                let ideas = document.querySelector('.ideas');
-                                add_new_idea.addEventListener('click', () => {
-                                    ideas.innerHTML += `
-                                    <div class="idea">
-                                    <hr />
-                                        <div class="section_idea my-2 d-flex align-items-center">
-                                            <span>Duration</span>
-                                            <input type="number" name="duration[]" class="form-control mx-2 form-control-lg">
-                                            <span>Dayes</span>
-                                        </div>
-                                        <div class="section_idea my-2">
-                                            <span>Price</span>
-                                            <input name="price[]" class="form-control form-control-lg">
-                                        </div>
-                                        <div class="section_idea my-2">
-                                            <span>Discount</span>
-                                            <input name="discount[]" class="form-control form-control-lg">
-                                        </div>
-                                        <button type="button" class="btn btn-danger btn_remove_idea">Remove</button>
-                                    </div>`;
-                                let btn_remove_idea = document.querySelectorAll('.btn_remove_idea');
-                                for (let i = 0, end = btn_remove_idea.length; i < end; i++) {
-                                    btn_remove_idea[i].addEventListener('click', ( e ) => {
-                                        for (let j = 0; j < end; j++) {
-                                            if ( e.target == btn_remove_idea[j] ) {
-                                                btn_remove_idea[j].parentElement.remove()
-                                            }
-                                        }
-                                    });
-                                }
-                                });
-                            </script>
+                            
+                            
                             </div>
                                 </div>
                             </div>
@@ -297,6 +265,38 @@
         </div>
     </div>
     <script>
+    let add_new_idea = document.querySelector('#add_new_idea');
+    let ideas = document.querySelector('.ideas');
+    add_new_idea.addEventListener('click', () => {
+        ideas.innerHTML += `
+        <div class="idea">
+        <hr />
+            <div class="section_idea my-2 d-flex align-items-center">
+                <span>Duration</span>
+                <input type="number" name="duration[]" class="form-control mx-2 form-control-lg">
+                <span>Dayes</span>
+            </div>
+            <div class="section_idea my-2">
+                <span>Price</span>
+                <input name="price[]" class="form-control form-control-lg">
+            </div>
+            <div class="section_idea my-2">
+                <span>Discount</span>
+                <input name="discount[]" class="form-control form-control-lg">
+            </div>
+            <button type="button" class="btn btn-danger btn_remove_idea">Remove</button>
+        </div>`;
+    let btn_remove_idea = document.querySelectorAll('.btn_remove_idea');
+    for (let i = 0, end = btn_remove_idea.length; i < end; i++) {
+        btn_remove_idea[i].addEventListener('click', ( e ) => {
+            for (let j = 0; j < end; j++) {
+                if ( e.target == btn_remove_idea[j] ) {
+                    btn_remove_idea[j].parentElement.remove()
+                }
+            }
+        });
+    }
+    }); 
         let sel_cate = document.querySelector('.sel_cate');
         let sel_course = document.querySelector('.sel_course');
         let categories = document.querySelector('.categories');

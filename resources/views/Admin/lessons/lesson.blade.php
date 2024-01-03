@@ -308,19 +308,39 @@
 								<!--begin::Col-->
 								<div class="col-md-6 fv-row">
 									<label class="required fs-6 fw-semibold mb-2">Category</label>
-									<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Category" name="category_id">
+									<select class="form-select sel_cate form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Category" name="category_id">
 										<option disable selected>Select Category...</option>
                                         @foreach($categories as $category)
 										<option value="{{$category->id}}">{{$category->cate_name}}</option>
                                         @endforeach
 									</select>
 								</div>
+                                
+                                <input type="hidden" class="categories" value="{{$categories}}" />
+                                <input type="hidden" class="courses" value="{{$courses}}" />
+                                <input type="hidden" class="chapters" value="{{$chapters}}" />
+                                <script>
+                                    let categories = document.querySelector('.categories');
+                                    let courses = document.querySelector('.courses');
+                                    let chapters = document.querySelector('.chapters');
+                                    let sel_cate = document.querySelector('.sel_cate');
+                                    let sel_course = document.querySelector('.sel_course');
+                                    let sel_chapter = document.querySelector('.sel_chapter');
+                                    courses = courses.value;
+                                    courses = JSON.parse(courses);
+                                    sel_cate.addEventListener('change', () => {
+                                        sel_course.innerHTML=`<option disable selected>Select Course...</option>`;
+                                        courses.forEach(element => {
+                                            
+                                        });
+                                    });
+                                </script>
 								<!--end::Col-->
 								<!--begin::Col-->
 								<!--begin::Col-->
 								<div class="col-md-6 fv-row">
 									<label class="required fs-6 fw-semibold mb-2">Courses</label>
-									<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Courses" name="course_id">
+									<select class="form-select sel_course form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Courses" name="course_id">
 										<option disable selected>Select Course...</option>
                                         @foreach($courses as $course)
 										<option value="{{$course->id}}">{{$course->course_name}}</option>
@@ -332,7 +352,7 @@
 								<!--begin::Col-->
 								<div class="col-md-6 fv-row">
 									<label class="required fs-6 fw-semibold mb-2">Chapter</label>
-									<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Chapter" name="chapter_id">
+									<select class="form-select sel_chapter form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Chapter" name="chapter_id">
 										<option disable selected>Select Chapter...</option>
                                         @foreach($chapters as $chapter)
 										<option value="{{$chapter->id}}">{{$chapter->chapter_name}}</option>
