@@ -45,103 +45,112 @@
 	@if(session()->has('success'))
 	{{ session()->get('success') }}
 @endif
-	<div class="d-flex flex-column flex-root" id="kt_app_root">
 
-		<!--begin::Authentication - Sign-in -->
-		<div class="d-flex flex-column flex-lg-row flex-column-fluid">
-			<!--begin::Logo-->
-			<a href="index.html" class="d-block d-lg-none mx-auto py-20">
-				<img alt="Logo" src="assets/media/logos/default.svg" class="theme-light-show h-25px" />
-				<img alt="Logo" src="assets/media/logos/default-dark.svg" class="theme-dark-show h-25px" />
-			</a>
-			<!--end::Logo-->
+
+
+<div class="d-flex flex-column flex-root" id="kt_app_root">
+	<!--begin::Page bg image-->
+	<style>body { background-image: url('assets/media/auth/bg4.jpg'); } [data-bs-theme="dark"] body { background-image: url('assets/media/auth/bg4-dark.jpg'); }</style>
+	<!--end::Page bg image-->
+	<!--begin::Authentication - Sign-in -->
+	<div class="d-flex flex-column flex-column-fluid flex-lg-row">
+		<!--begin::Aside-->
+		<div class="d-flex flex-center w-lg-50 pt-15 pt-lg-0 px-10">
 			<!--begin::Aside-->
-			<div class="d-flex flex-column flex-column-fluid flex-center w-lg-50 p-10">
+			<div class="d-flex flex-center flex-lg-start flex-column">
+				<!--begin::Logo-->
+				<a href="index.html" class="mb-7">
+					<img alt="Logo" src="assets/media/logos/Maths-house.png" width = '300px' />
+				</a>
+				<!--end::Logo-->
+				<!--begin::Title-->
+				<h2 class="text-white fw-normal m-0">Welcome To Math House</h2>
+				<!--end::Title-->
+			</div>
+			<!--begin::Aside-->
+		</div>
+		<!--begin::Aside-->
+		<!--begin::Body-->
+		<div class="d-flex flex-column-fluid flex-lg-row-auto justify-content-center justify-content-lg-end p-12 p-lg-20">
+			<!--begin::Card-->
+			<div class="bg-body d-flex flex-column align-items-stretch flex-center rounded-4 w-md-600px p-20">
 				<!--begin::Wrapper-->
-				<div class="d-flex justify-content-between flex-column-fluid flex-column w-100 mw-450px">
-					<!--begin::Header-->
-					<div class="d-flex flex-stack py-2">
-						<!--begin::Back link-->
-						<div class="me-2"></div>
-						<!--end::Back link-->
-						<!--begin::Sign Up link-->
-					
-						<!--end::Sign Up link=-->
-					</div>
-					<!--end::Header-->
-					<!--begin::Body-->
-					<div class="py-20">
-						<!--begin::Form-->
-						<form class="form w-100" action='{{ 'login.store' }}' method="POST" novalidate="novalidate" id="kt_sign_in_form">
-							@csrf
-							<!--begin::Body-->
-							<div class="card-body">
-								<!--begin::Heading-->
-								<div class="text-start mb-10">
-									<!--begin::Title-->
-									<h1 class="text-gray-900 mb-3 fs-3x" data-kt-translate="sign-in-title">Sign In</h1>
-									<!--end::Title-->
-									<!--begin::Text-->
-									<div class="text-gray-500 fw-semibold fs-6" data-kt-translate="general-desc">Get unlimited access & earn money</div>
-									<!--end::Link-->
-								</div>
-								<!--begin::Heading-->
-								<!--begin::Input group=-->
-									@error('error')
-										<span style="color: red">{{ $message }}</span>
-									@enderror
-								<div class="fv-row mb-8">
-									<!--begin::Email-->
-									<input type="text" placeholder="Email" name="email" autocomplete="off" value="ziad57@yahoo.com" data-kt-translate="sign-in-input-email" class="form-control form-control-solid" />
-										@error('email')
-										<span> 	{{ $message }} </span>
-										@enderror
-									<!--end::Email-->
-								</div>
-								<!--end::Input group=-->
-								<div class="fv-row mb-7">
-									<!--begin::Password-->
-									<input type="password" placeholder="Password" name="password" value="Makemesmile123" autocomplete="off" data-kt-translate="sign-in-input-password" class="form-control form-control-solid" />
-									@error('password')
-								<span>	{{ $message }} </span>
-									@enderror										
-									<!--end::Password-->
-								</div>
-								<!--end::Input group=-->
-								<!--begin::Wrapper-->
-								<div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-10">
-									<div></div>
-									<!--begin::Link-->
-									<a href="authentication/layouts/fancy/reset-password.html" class="link-primary" data-kt-translate="sign-in-forgot-password">Forgot Password ?</a>
-									<!--end::Link-->
-								</div>
-								<!--end::Wrapper-->
-								<!--begin::Actions-->
-								<div class="d-flex flex-stack">
-									<!--begin::Submit-->
-									<input type="submit" value="Login"  class="btn btn-primary me-2 flex-shrink-0">
-									<a href="{{route('sign_up')}}" class="btn btn-success px-5">
-										Sign Up
-									</a>
-								</div>
-								<!--end::Actions-->
-							</div>
-							<!--begin::Body-->
-						</form>
-						<!--end::Form-->
-					</div>
-					<!--end::Body-->
-					
+				<div class="d-flex flex-center flex-column flex-column-fluid px-lg-10 pb-15 pb-lg-20">
+					<!--begin::Form-->
+<form class="form w-100" action='{{ 'login.store' }}' method="POST" novalidate="novalidate" id="kt_sign_in_form">
+		@csrf
+						<!--begin::Heading-->
+						<div class="text-center mb-11">
+							<!--begin::Title-->
+							<h1 class="text-gray-900 fw-bolder mb-3">Sign In</h1>
+							<!--end::Title-->
+							<!--begin::Subtitle-->
+							<div class="text-gray-500 fw-semibold fs-6">Your Social Campaigns</div>
+							<!--end::Subtitle=-->
+						</div>
+						<!--begin::Heading-->
+						
+						<!--begin::Separator-->
+						
+						<!--end::Separator-->
+						<!--begin::Input group=-->
+						<div class="fv-row mb-8">
+							@error('error')
+							<span style="color: red">{{ $message }}</span>
+						@enderror
+							<!--begin::Email-->
+							<input type="text" placeholder="Email" name="email" autocomplete="off" value="ziad57@yahoo.com" data-kt-translate="sign-in-input-email" class="form-control form-control-solid" />
+							@error('email')
+							<span> 	{{ $message }} </span>
+							@enderror
+							<!--end::Email-->
+						</div>
+						<!--end::Input group=-->
+						<div class="fv-row mb-3">
+							<!--begin::Password-->
+							<input type="password" placeholder="Password" name="password" value="Makemesmile123" autocomplete="off" data-kt-translate="sign-in-input-password" class="form-control form-control-solid" />
+							@error('password')
+							<span>	{{ $message }} </span>
+								@enderror	
+							<!--end::Password-->
+						</div>
+						<!--end::Input group=-->
+						<!--begin::Wrapper-->
+						<div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
+							<div></div>
+							<!--begin::Link-->
+							{{-- <a href="authentication/layouts/creative/reset-password.html" class="link-primary">Forgot Password ?</a> --}}
+							<!--end::Link-->
+						</div>
+						<!--end::Wrapper-->
+						<!--begin::Submit button-->
+						<div class="d-grid mb-10">
+							<button type="submit" value="Sign In"  class="btn btn-primary">
+								Sign In
+							</button>
+						</div>
+						<!--end::Submit button-->
+						<!--begin::Sign up-->
+						<div class="text-gray-500 text-center fw-semibold fs-6">Not a Member yet? 
+						<a href="{{ route('sign_up') }}" class="link-primary">Sign up</a></div>
+						<!--end::Sign up-->
+					</form>
+					<!--end::Form-->
 				</div>
 				<!--end::Wrapper-->
+				<!--begin::Footer-->
+				<div class="d-flex flex-stack px-lg-10">
+					<!--begin::Languages-->
+			
+				</div>
+				<!--end::Footer-->
 			</div>
-			<!--end::Aside-->
-			<!--begin::Body-->
-			<div class="d-none d-lg-flex flex-lg-row-fluid w-50 bgi-size-cover bgi-position-y-center bgi-position-x-start bgi-no-repeat" style="background-image: url(assets/media/auth/Maths-house.png);background-size: contain;background-color: black;"></div>
-			<!--begin::Body-->
+			<!--end::Card-->
 		</div>
-		<!--end::Authentication - Sign-in-->
+		<!--end::Body-->
 	</div>
+	<!--end::Authentication - Sign-in-->
+</div>
 		
 	@endsection
 	
@@ -161,3 +170,32 @@
 	@endsection
 	@endif
 	
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
