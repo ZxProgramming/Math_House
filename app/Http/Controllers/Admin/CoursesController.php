@@ -20,7 +20,7 @@ class CoursesController extends Controller
 
     public function course_edit( Request $req ){
         Course::where('id', $req->course_id)
-        ->update($req->only('course_name', 'course_des', 'course_price', 'category_id'));
+        ->update($req->only('course_name', 'course_des', 'course_price', 'category_id', 'duration'));
 
         return redirect()->back();
     } 

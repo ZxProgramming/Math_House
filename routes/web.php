@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\LessonController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Admin\CourseSettingController;
+use App\Http\Controllers\Admin\MarketingController;
 
 use App\Http\Controllers\Student\Stu_DashboardController;
 use App\Http\Controllers\Student\Stu_ProfileController;
@@ -50,6 +51,10 @@ Route::middleware(['auth','auth.Admin'])->group(function(){
             
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+// Marketing
+Route::get('/Marketing/Commission', [MarketingController::class, 'commission'])->name('commission');
+Route::post('/Marketing/Commission/Edit', [MarketingController::class, 'edit_commission'])->name('edit_commission');
 
 Route::post('/Users/Admin/Edit', [UserController::class, 'admin_edit'])->name('admin_edit');
 Route::get('/Users/Admin/Del/{id}', [UserController::class, 'del_admin'])->name('del_admin');
@@ -102,6 +107,7 @@ Route::controller(ChaptersController::class)->group(function(){
     Route::get('/Chapter','chapter')->name('chapter');
     Route::post('/Chapter_Filter','ch_filter')->name('ch_filter');
     Route::post('/Chapter/Edit','chapter_edit')->name('chapter_edit');
+    Route::post('/Chapter/Add','add_chapter')->name('add_chapter');
     Route::get('/Chapter/Del/{id}','del_chapter')->name('del_chapter');
 });
 

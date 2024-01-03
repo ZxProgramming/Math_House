@@ -431,6 +431,16 @@
                                 <textarea class="form-control form-control-solid" rows="3" name="cate_des" placeholder="Describe your Category"></textarea>
                                 <!--end::Input-->
                             </div>
+                            <!--begin::Input group-->
+                        
+                            <div class="d-flex flex-column mb-5 fv-row">
+                                <!--begin::Label-->
+                                <label class="required fs-5 fw-semibold mb-2">Categry Price</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input class="form-control form-control-solid" rows="3" name="cate_price" placeholder="Categry Price" />
+                                <!--end::Input-->
+                            </div>
                             <div class="d-flex flex-column mb-5 fv-row">
                                 <!--begin::Label-->
                                 <label class="required fs-5 fw-semibold mb-2">Category Image</label>

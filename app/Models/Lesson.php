@@ -16,7 +16,9 @@ class Lesson extends Model
         'teacher_id', 
         'chapter_id', 
         'lesson_des', 
-        'lesson_url', 
+        'lesson_url',
+        'pre_requisition',
+        'gain',
     ];
 
     public function teacher()

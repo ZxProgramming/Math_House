@@ -12,29 +12,32 @@ class CategoryController extends Controller
     // View Category
     private $columns = ['teacher_id','cate_name' ,'cate_des','cate_url','cate_price'];
     public function index(){
-            $dataCategory = Category::all()->where('teacher_id',auth()->user()->id);
+            $dataCategory = Category::all();
             return view('Admin.courses.category' , compact('dataCategory'));
     }
 
     public function createCategory(request $request ){
-            $request->validate([
-                'cate_name'=>'required',
-                'image'=>'required',
-                'cate_des'=>'required',
-                ]);
-                $img_name = null;
-                extract($_FILES['image']);
-                if( !empty($name) ){
-                    $extension_arr = ['png', 'jpg', 'jpeg', 'svg', 'webp'];
-                    $extension = explode('.', $name);
-                    $extension = end($extension);
-                    $extension = strtolower($extension);
-                    if ( in_array($extension, $extension_arr) ) {
-                        $img_name = rand(0, 1000) . now() . $name;
-                        $img_name = str_replace([' ', ':', '-'], 'X', $img_name);
-                        $arr['image'] = $img_name;
-                    }
+        $request->validate([
+            'cate_name'=>'required',
+            'image'=>'required',
+            'cate_des'=>'required',
+            ]);
+            $img_name = null;
+            extract($_FILES['image']);
+            if( !empty($name) ){
+                $extension_arr = ['png', 'jpg', 'jpeg', 'svg', 'webp'];
+                $extension = explode('.', $name);
+                $extension = end($extension);
+                $extension = strtolower($extension);
+                if ( in_array($extension, $extension_arr) ) {
+                    $img_name = rand(0, 1000) . now() . $name;
+                    $img_name = str_replace([' ', ':', '-'], 'X', $img_name);
+                }
+                
+            }
+            
                     
+<<<<<<< HEAD
                 }
                 
                         
@@ -43,14 +46,17 @@ class CategoryController extends Controller
                 $arr1['cate_url'] = $img_name;
                 $arr1['cate_price'] ='0';
                 $data= Category::create($arr1);
+=======
+            move_uploaded_file($tmp_name, 'images/category/' . $img_name);
+            $arr1 = $request->only($this->columns);
+            $arr1['cate_url'] = $img_name;
+            $data= Category::create($arr1);
+>>>>>>> e9651499e3a219de14e33ea2c568920686853244
 
-                if($data){
-        return redirect()->route('category')->with('success','Data Inserted Success');
-
-                }
-                
-        
-                        
+            if($data){
+                return redirect()->route('category')->with('success','Data Inserted Success');
+            }
+            
     }
     public function categoryDelete($id){
         Category::where('id',$id)->delete();
