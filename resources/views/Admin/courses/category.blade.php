@@ -121,7 +121,7 @@
                                     </td>
                                     <td>
                                         
-                                       <img src="../images/category/{{ $category->image }}" alt="" width="200px" style="max-width: 150px;max-height: 100;overflow: hidden;"> 
+                                       <img src="{{ asset('images/category'. $category->image ) }}" alt="" width="200px" style="max-width: 150px;max-height: 100;overflow: hidden;"> 
                                     </td>
                                   
                                   
@@ -436,7 +436,7 @@
                                 <label class="required fs-5 fw-semibold mb-2">Category Image</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="file" class="form-control form-control-solid" name="image" rows="3" name="cate_des" placeholder="Category Url">
+                                <input type="file" class="form-control form-control-solid" name="image" rows="3"  placeholder="Category Url">
                                 <!--end::Input-->
                             </div>
                             <!--end::Input group-->
