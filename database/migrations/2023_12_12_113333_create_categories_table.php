@@ -14,8 +14,8 @@ return new class extends Migration
             $table->id();
             $table->string('cate_name');
             $table->string('cate_des');
-            $table->string('image');
             $table->unsignedBigInteger('teacher_id');
+            $table->string('cate_url');
             $table->foreign('teacher_id')->references('id')->on('users');
             $table->timestamps();
         });
