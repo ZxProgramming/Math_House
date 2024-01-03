@@ -319,22 +319,6 @@
                                 <input type="hidden" class="categories" value="{{$categories}}" />
                                 <input type="hidden" class="courses" value="{{$courses}}" />
                                 <input type="hidden" class="chapters" value="{{$chapters}}" />
-                                <script>
-                                    let categories = document.querySelector('.categories');
-                                    let courses = document.querySelector('.courses');
-                                    let chapters = document.querySelector('.chapters');
-                                    let sel_cate = document.querySelector('.sel_cate');
-                                    let sel_course = document.querySelector('.sel_course');
-                                    let sel_chapter = document.querySelector('.sel_chapter');
-                                    courses = courses.value;
-                                    courses = JSON.parse(courses);
-                                    sel_cate.addEventListener('change', () => {
-                                        sel_course.innerHTML=`<option disable selected>Select Course...</option>`;
-                                        courses.forEach(element => {
-                                            
-                                        });
-                                    });
-                                </script>
 								<!--end::Col-->
 								<!--begin::Col-->
 								<!--begin::Col-->
@@ -342,9 +326,6 @@
 									<label class="required fs-6 fw-semibold mb-2">Courses</label>
 									<select class="form-select sel_course form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Courses" name="course_id">
 										<option disable selected>Select Course...</option>
-                                        @foreach($courses as $course)
-										<option value="{{$course->id}}">{{$course->course_name}}</option>
-                                        @endforeach
 									</select>
 								</div>
 								<!--end::Col-->
@@ -354,9 +335,6 @@
 									<label class="required fs-6 fw-semibold mb-2">Chapter</label>
 									<select class="form-select sel_chapter form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Chapter" name="chapter_id">
 										<option disable selected>Select Chapter...</option>
-                                        @foreach($chapters as $chapter)
-										<option value="{{$chapter->id}}">{{$chapter->chapter_name}}</option>
-                                        @endforeach
 									</select>
 								</div>
 								<!--end::Col-->
@@ -659,6 +637,43 @@
             </div>
         </div>
     </div>
+                                <script>
+                                    let categories = document.querySelector('.categories');
+                                    let courses = document.querySelector('.courses');
+                                    let chapters = document.querySelector('.chapters');
+                                    let sel_cate = document.querySelector('.sel_cate');
+                                    let sel_course = document.querySelector('.sel_course');
+                                    let sel_chapter = document.querySelector('.sel_chapter');
+                                    courses = courses.value;
+                                    courses = JSON.parse(courses);
+                                    chapters = chapters.value;
+                                    chapters = JSON.parse(chapters); 
+                                    
+                                    sel_cate.onchange = ()=>{
+                                        sel_course.innerHTML=`<option disable selected>Select Course...</option>`;
+                                        courses.forEach(element => {
+                                            if ( sel_cate.value == element.category_id  ) {
+                                                sel_course.innerHTML +=`
+                                                <option value="${element.id}">
+                                                    ${element.course_name}
+                                                <option>`;
+                                        
+                                            }
+                                        });}
+                                    sel_course.onchange = () => {
+                                        console.log(65);
+                                        sel_chapter.innerHTML=`<option disable selected>Select Chapter...</option>`;
+                                        chapters.forEach(element => {
+                                            if ( sel_course.value == element.course_id   ) {
+                                                sel_chapter.innerHTML +=`
+                                                <option value="${element.id}">
+                                                    ${element.chapter_name}
+                                                <option>`;
+                                        
+                                            }
+                                        });
+                                    }
+                                </script>
        @section('script')
        <script>
         <!--begin::Javascript-->
