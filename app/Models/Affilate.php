@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Affilate extends Model
 {
     use HasFactory;
+    protected $table = 'affilate';
     
     protected $fillable = [
         'name', 

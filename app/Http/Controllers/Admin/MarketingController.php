@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Commission;
+use App\Models\Affilate;
 
 class MarketingController extends Controller
 {
@@ -21,4 +22,9 @@ class MarketingController extends Controller
         return redirect()->back();
     }
 
+    public function users(){
+        $users = Affilate::all();
+
+        return view('Admin.Marketing.Users', compact('users'));
+    }
 }

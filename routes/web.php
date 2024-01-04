@@ -55,6 +55,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 // Marketing
 Route::get('/Marketing/Commission', [MarketingController::class, 'commission'])->name('commission');
 Route::post('/Marketing/Commission/Edit', [MarketingController::class, 'edit_commission'])->name('edit_commission');
+Route::get('/Marketing/Users', [MarketingController::class, 'users'])->name('m_users');
 
 Route::post('/Users/Admin/Edit', [UserController::class, 'admin_edit'])->name('admin_edit');
 Route::get('/Users/Admin/Del/{id}', [UserController::class, 'del_admin'])->name('del_admin');

@@ -208,7 +208,7 @@
 						</a>
 						<!--end:Menu link-->
 						<!--begin:Menu link-->
-						<a class="menu-link " href="{{ route('category') }}">
+						<a class="menu-link " href="{{ route('m_users') }}">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
