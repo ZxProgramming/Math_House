@@ -23,13 +23,50 @@
                 position: fixed;
                 height: 100vh;
                 width: 100vw;
+                top: 0;
+                left: 0;
+                background-color: #000000cc;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 111111;
+            }
+            .screen_popup{
+                height: 300px;
+                width: 300px;
+                background-color: #fff;
+                padding: 30px;
+                position: relative;
+            }
+            .screen_popup img{
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+                border: 1px solid #ccc;
+            }
+            .screen_text{
+                color: red;
+                font-weight: bold;
+            }
+            .close_btn{
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                cursor: pointer;
             }
         </style>
 
 
-<div class="screen">
+<div class="screen d-none">
     <div class="screen_popup">
         <img src="{{asset('images/inc/1.jpg')}}" />
+        <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+            <i class="ki-duotone close_btn ki-cross fs-1">
+                <span class="path1"></span>
+                <span class="path2"></span>
+            </i>
+        </div>
+        <div class="screen_text"></div>
     </div>
 </div>
 
@@ -754,6 +791,13 @@ let year = document.querySelector('.year');
 let month = document.querySelector('.month');
 let section = document.querySelector('.section');
 let q_type = document.querySelector('.q_type');
+let close_btn = document.querySelector('.close_btn');
+let screen = document.querySelector('.screen');
+let screen_text = document.querySelector('.screen_text');
+    
+close_btn.addEventListener('click', () => {
+    screen.classList.add('d-none');
+});
 
 continue_btn.addEventListener('click', () => {
     if ($('.q_num').val() != "") {
@@ -771,8 +815,10 @@ continue_btn.addEventListener('click', () => {
             type: 'POST',
             data: obj,
             success:function(data){
-                if ( !data['q_num'] ) {
-                    console.log(data);
+                console.log(data);
+                if ( data != 1 ) {
+                screen.classList.remove('d-none');
+                screen_text.innerHTML = data;
                 }
             }
         })
