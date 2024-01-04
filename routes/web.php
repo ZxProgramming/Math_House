@@ -136,6 +136,7 @@ Route::controller(CategoryController::class)->group(function(){
     Route::get('/category/Information','index')->name('category');
     Route::post('/category/categoryAdd','createCategory')->name('addCategories');
     Route::get('/category/categoryDelete/{id}','categoryDelete')->name('categoryDelete');
+    Route::post('/category/categoryEdit','editCategory')->name('categoryEdit');
 });
 
 // Lesson 
