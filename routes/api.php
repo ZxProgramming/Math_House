@@ -20,7 +20,7 @@ use App\Http\Controllers\Admin\QuestionController;
 |
 */
 
-Route::post('/question_type', [QuestionController::class, 'question_type'])->name('question_type');
+Route::post('/question_type', [QuestionController::class, 'question_type'])->name('question_type')->middleware('auth:sanctum');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

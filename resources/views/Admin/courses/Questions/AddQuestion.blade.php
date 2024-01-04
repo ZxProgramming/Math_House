@@ -452,131 +452,6 @@
         </div>
     </div>
        @section('script')
-<script>
-    let ans_type = document.querySelector('.ans_type');
-    let ans_div = document.querySelector('.ans_div');
-    let add_ans = document.querySelector('.add_ans');
-    let add_ans_btn = document.querySelector('.add_ans_btn');
-    add_ans_btn.addEventListener('click', () => {
-    ans_div.innerHTML +=
-    `<input type="number" class="form-control my-2" name="grid_ans[]" placeholder="Answer" />`;
-    });
-    ans_type.addEventListener('change', () => {
-        ans_div.innerHTML =``;
-        if ( ans_type.value == 'MCQ' ) {
-            add_ans.classList.add('d-none');
-            ans_div.innerHTML =
-            `<div class="my-2">
-            <input name="mcq_answers" value="A" id="mcq_a" type="radio" />
-            <label for="mcq_a">
-                A
-            </label>
-            <input class="form-control" name="mcq_ans[]" placeholder="Answer A" />
-            </div>
-            <div class="my-2">
-            <input name="mcq_answers" value="B" id="mcq_b" type="radio" />
-            <label for="mcq_b">
-                B
-            </label>
-            <input class="form-control" name="mcq_ans[]" placeholder="Answer B" />
-            </div>
-            <div class="my-2">
-            <input name="mcq_answers" value="C" id="mcq_c" type="radio" />
-            <label for="mcq_c">
-                C
-            </label>
-            <input class="form-control" name="mcq_ans[]" placeholder="Answer C" />
-            </div>
-            <div class="my-2">
-            <input name="mcq_answers" value="D" id="mcq_d" type="radio" />
-            <label for="mcq_d">
-                D
-            </label>
-            <input class="form-control" name="mcq_ans[]" placeholder="Answer D" />
-            </div>`;
-        }
-        else if( ans_type.value == 'Grid_in' ){ 
-            add_ans.classList.remove('d-none');
-        }
-    })
-let sel_cate2 = document.querySelector('.sel_cate2');
-let sel_course2 = document.querySelector('.sel_course2');
-let sel_chapter2 = document.querySelector('.sel_chapter2');
-let sel_lesson2 = document.querySelector('.sel_lesson2');
-sel_cate2.addEventListener('change', ( e ) => {
-    sel_course2.innerHTML = `                            
-    <option disabled selected>
-        Select Course
-    </option>`;
-    courses.forEach(element => {
-        if ( e.target.value == element.category_id ) {
-        sel_course2.innerHTML += `                            
-        <option value="${element.id}">
-            ${element.course_name}
-        </option>`;
-            
-        }
-    });
-});
-sel_course2.addEventListener('change', ( e ) => {
-    sel_chapter2.innerHTML = `                            
-    <option disabled selected>
-        Select Chapter
-    </option>`;
-    chapters.forEach(element => {
-        if ( e.target.value == element.course_id ) {
-        sel_chapter2.innerHTML += `                            
-        <option value="${element.id}">
-            ${element.chapter_name}
-        </option>`;
-            
-        }
-    });
-});
-sel_chapter2.addEventListener('change', ( e ) => {
-    sel_lesson2.innerHTML = `                            
-    <option disabled selected>
-        Select Lesson
-    </option>`;
-    lessons.forEach(element => {
-        if ( e.target.value == element.chapter_id ) {
-        sel_lesson2.innerHTML += `                            
-        <option value="${element.id}">
-            ${element.lesson_name}
-        </option>`;
-            
-        }
-    });
-});
-
-let continue_btn = document.querySelector('.continue_btn');
-let q_num = document.querySelector('.q_num');
-let year = document.querySelector('.year');
-let month = document.querySelector('.month');
-let section = document.querySelector('.section');
-let q_type = document.querySelector('.q_type');
-
-continue_btn.addEventListener('click', () => {
-    if ($('.q_num').val() != "") {
-        let obj = {
-            'year': year.value,
-            'month': month.value,
-            'section': section.value,
-            'q_num': q_num.value,
-            'q_type' : q_type.value
-            };
-            
-        $.ajax({
-            url: "{{route('question_type')}}",
-            type: 'POST',
-            data: obj,
-            success:function(data){
-                console.log(data);
-            }
-        })
-    }
-});
-</script>
 
        <script>
         <!--begin::Javascript-->
@@ -764,5 +639,132 @@ continue_btn.addEventListener('click', () => {
                 ]
             });
         </script>
+<script>
+    let ans_type = document.querySelector('.ans_type');
+    let ans_div = document.querySelector('.ans_div');
+    let add_ans = document.querySelector('.add_ans');
+    let add_ans_btn = document.querySelector('.add_ans_btn');
+    add_ans_btn.addEventListener('click', () => {
+    ans_div.innerHTML +=
+    `<input type="number" class="form-control my-2" name="grid_ans[]" placeholder="Answer" />`;
+    });
+    ans_type.addEventListener('change', () => {
+        ans_div.innerHTML =``;
+        if ( ans_type.value == 'MCQ' ) {
+            add_ans.classList.add('d-none');
+            ans_div.innerHTML =
+            `<div class="my-2">
+            <input name="mcq_answers" value="A" id="mcq_a" type="radio" />
+            <label for="mcq_a">
+                A
+            </label>
+            <input class="form-control" name="mcq_ans[]" placeholder="Answer A" />
+            </div>
+            <div class="my-2">
+            <input name="mcq_answers" value="B" id="mcq_b" type="radio" />
+            <label for="mcq_b">
+                B
+            </label>
+            <input class="form-control" name="mcq_ans[]" placeholder="Answer B" />
+            </div>
+            <div class="my-2">
+            <input name="mcq_answers" value="C" id="mcq_c" type="radio" />
+            <label for="mcq_c">
+                C
+            </label>
+            <input class="form-control" name="mcq_ans[]" placeholder="Answer C" />
+            </div>
+            <div class="my-2">
+            <input name="mcq_answers" value="D" id="mcq_d" type="radio" />
+            <label for="mcq_d">
+                D
+            </label>
+            <input class="form-control" name="mcq_ans[]" placeholder="Answer D" />
+            </div>`;
+        }
+        else if( ans_type.value == 'Grid_in' ){ 
+            add_ans.classList.remove('d-none');
+        }
+    })
+let sel_cate2 = document.querySelector('.sel_cate2');
+let sel_course2 = document.querySelector('.sel_course2');
+let sel_chapter2 = document.querySelector('.sel_chapter2');
+let sel_lesson2 = document.querySelector('.sel_lesson2');
+sel_cate2.addEventListener('change', ( e ) => {
+    sel_course2.innerHTML = `                            
+    <option disabled selected>
+        Select Course
+    </option>`;
+    courses.forEach(element => {
+        if ( e.target.value == element.category_id ) {
+        sel_course2.innerHTML += `                            
+        <option value="${element.id}">
+            ${element.course_name}
+        </option>`;
+            
+        }
+    });
+});
+sel_course2.addEventListener('change', ( e ) => {
+    sel_chapter2.innerHTML = `                            
+    <option disabled selected>
+        Select Chapter
+    </option>`;
+    chapters.forEach(element => {
+        if ( e.target.value == element.course_id ) {
+        sel_chapter2.innerHTML += `                            
+        <option value="${element.id}">
+            ${element.chapter_name}
+        </option>`;
+            
+        }
+    });
+});
+sel_chapter2.addEventListener('change', ( e ) => {
+    sel_lesson2.innerHTML = `                            
+    <option disabled selected>
+        Select Lesson
+    </option>`;
+    lessons.forEach(element => {
+        if ( e.target.value == element.chapter_id ) {
+        sel_lesson2.innerHTML += `                            
+        <option value="${element.id}">
+            ${element.lesson_name}
+        </option>`;
+            
+        }
+    });
+});
+
+let continue_btn = document.querySelector('.continue_btn');
+let q_num = document.querySelector('.q_num');
+let year = document.querySelector('.year');
+let month = document.querySelector('.month');
+let section = document.querySelector('.section');
+let q_type = document.querySelector('.q_type');
+
+continue_btn.addEventListener('click', () => {
+    if ($('.q_num').val() != "") {
+        let obj = {
+            'year': year.value,
+            'month': month.value,
+            'section': section.value,
+            'q_num': q_num.value,
+            'q_type' : q_type.value,
+            '_token': "{{ csrf_token() }}"
+            };
+            
+        $.ajax({
+            url: "{{route('question_type')}}",
+            type: 'POST',
+            data: obj,
+            success:function(data){
+                data = 
+                console.log(data.msg);
+            }
+        })
+    }
+});
+</script>
        
        @endsection 
