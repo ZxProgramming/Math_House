@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 03, 2024 at 09:04 AM
+-- Generation Time: Jan 04, 2024 at 12:10 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.12
 
@@ -64,7 +64,8 @@ INSERT INTO `admin_roles` (`id`, `user_id`, `admin_role`, `created_at`, `updated
 (23, 57, 'Questions', '2024-01-01 09:54:47', '2024-01-01 09:54:47'),
 (24, 57, 'Teacher', '2024-01-01 09:54:47', '2024-01-01 09:54:47'),
 (25, 57, 'Student', '2024-01-01 09:54:47', '2024-01-01 09:54:47'),
-(26, 57, 'Lesson', '2024-01-01 09:54:47', '2024-01-01 09:54:47');
+(26, 57, 'Lesson', '2024-01-01 09:54:47', '2024-01-01 09:54:47'),
+(31, 44, 'Questions', '2024-01-04 06:14:37', '2024-01-04 06:14:37');
 
 -- --------------------------------------------------------
 
@@ -105,7 +106,8 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` (`id`, `cate_name`, `cate_des`, `cate_url`, `created_at`, `updated_at`, `teacher_id`) VALUES
 (1, 'Category 1', 'Category One', '', NULL, NULL, 1),
 (2, 'Category 2', 'Category Two', '', NULL, NULL, 1),
-(4, 'category 3', 'sfggd', '4522024X01X02X11X08X4420231001083656153827_2318787155110616_6392255175880343552_n.jpg', '2024-01-02 09:08:44', '2024-01-02 09:08:44', 8);
+(4, 'category 3', 'sfggd', '4522024X01X02X11X08X4420231001083656153827_2318787155110616_6392255175880343552_n.jpg', '2024-01-02 09:08:44', '2024-01-02 09:08:44', 8),
+(5, 'asd', 'asd', '2152024X01X04X08X43X2620231001083656153827_2318787155110616_6392255175880343552_n.jpg', '2024-01-04 06:43:26', '2024-01-04 06:43:26', 8);
 
 -- --------------------------------------------------------
 
@@ -148,6 +150,29 @@ CREATE TABLE `chapter_prices` (
   `price` float NOT NULL,
   `discount` float NOT NULL,
   `chapter_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `chapter_prices`
+--
+
+INSERT INTO `chapter_prices` (`id`, `duration`, `price`, `discount`, `chapter_id`, `created_at`, `updated_at`) VALUES
+(1, '33', 23, 231, NULL, '2024-01-04', '2024-01-04'),
+(2, '33', 23, 231, NULL, '2024-01-04', '2024-01-04'),
+(3, '33', 23, 2, NULL, '2024-01-04', '2024-01-04');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cities`
+--
+
+CREATE TABLE `cities` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `country_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   `updated_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -199,7 +224,233 @@ CREATE TABLE `confirm_sign` (
 INSERT INTO `confirm_sign` (`id`, `email`, `code`, `created_at`, `updated_at`) VALUES
 (1, 'ahmedahmadahmid73@gmail.com', '1873', '2023-12-31', '2023-12-31'),
 (2, 'ziadm57@yahoo.com', '1756', '2023-12-31', '2023-12-31'),
-(3, 'ziadm0176@gmail.com', '5567', '2023-12-31', '2023-12-31');
+(3, 'ziadm0176@gmail.com', '5567', '2023-12-31', '2023-12-31'),
+(4, 'admin@gmail.com', '6618', '2024-01-03', '2024-01-03'),
+(5, 'admin@gmail.com', '3021', '2024-01-03', '2024-01-03'),
+(6, 'admin@gmail.com', '6842', '2024-01-03', '2024-01-03'),
+(7, 'admin2312@gmail.com', '9858', '2024-01-03', '2024-01-03'),
+(8, 'karimelfakey84@gmail.com', '9349', '2024-01-04', '2024-01-04'),
+(9, 'karimelfakey84@gmail.com', '5987', '2024-01-04', '2024-01-04'),
+(10, 'karimelfakey84@gmail.com', '9299', '2024-01-04', '2024-01-04'),
+(11, 'sdfs@gmail.com', '1039', '2024-01-04', '2024-01-04'),
+(12, 'sdfs@gmail.com', '3273', '2024-01-04', '2024-01-04'),
+(13, 'sdfs@gmail.com', '2720', '2024-01-04', '2024-01-04'),
+(14, 'sdfs@gmail.com', '7016', '2024-01-04', '2024-01-04');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `countries`
+--
+
+CREATE TABLE `countries` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `countries`
+--
+
+INSERT INTO `countries` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(10, 'Afghanistan', '2023-05-02 04:20:41', '2023-05-02 04:20:41'),
+(11, 'Albania', '2023-05-02 04:20:54', '2023-05-02 04:20:54'),
+(12, 'Algeria', '2023-05-02 04:21:05', '2023-05-02 04:21:05'),
+(13, 'Andorra', '2023-05-02 04:21:18', '2023-05-02 04:21:18'),
+(14, 'Angola', '2023-05-02 04:21:32', '2023-05-02 04:21:32'),
+(15, 'Antigua and Barbuda', '2023-05-02 04:21:47', '2023-05-02 04:21:47'),
+(16, 'Argentina', '2023-05-02 04:24:32', '2023-05-02 04:24:32'),
+(17, 'Armenia', '2023-05-02 04:24:48', '2023-05-02 04:24:48'),
+(18, 'Australia', '2023-05-02 04:24:59', '2023-05-02 04:24:59'),
+(19, 'Austria', '2023-05-02 04:25:10', '2023-05-02 04:25:10'),
+(20, 'Azerbaijan', '2023-05-02 04:25:21', '2023-05-02 04:25:21'),
+(21, 'Bahamas', '2023-05-02 04:25:33', '2023-05-02 04:25:33'),
+(22, 'Bahrain', '2023-05-02 04:25:43', '2023-05-02 04:25:43'),
+(23, 'Bangladesh', '2023-05-02 04:25:53', '2023-05-02 04:25:53'),
+(24, 'Barbados', '2023-05-02 04:27:02', '2023-05-02 04:27:02'),
+(25, 'Belarus', '2023-05-02 04:27:27', '2023-05-02 04:27:27'),
+(26, 'Belgium', '2023-05-02 04:28:46', '2023-05-02 04:28:46'),
+(27, 'Belize', '2023-05-02 04:28:57', '2023-05-02 04:28:57'),
+(28, 'Benin', '2023-05-02 04:32:12', '2023-05-02 04:32:12'),
+(29, 'Bhutan', '2023-05-02 04:32:45', '2023-05-02 04:32:45'),
+(30, 'Bolivia', '2023-05-02 04:32:59', '2023-05-02 04:32:59'),
+(31, 'Bosnia and Herzegovina', '2023-05-02 04:33:17', '2023-05-02 04:33:17'),
+(32, 'Botswana', '2023-05-02 04:33:31', '2023-05-02 04:33:31'),
+(33, 'Brazil', '2023-05-02 04:45:12', '2023-05-02 04:45:12'),
+(34, 'Brunei', '2023-05-02 04:45:41', '2023-05-02 04:45:41'),
+(35, 'Bulgaria', '2023-05-02 04:52:29', '2023-05-02 04:52:29'),
+(36, 'Burkina Faso', '2023-05-02 04:53:34', '2023-05-02 04:53:34'),
+(37, 'Burundi', '2023-05-02 04:53:53', '2023-05-02 04:53:53'),
+(38, 'Côte d\'Ivoire', '2023-05-02 04:54:04', '2023-05-02 04:54:04'),
+(39, 'Cabo Verde', '2023-05-02 04:54:15', '2023-05-02 04:54:15'),
+(40, 'Cambodia', '2023-05-02 04:57:48', '2023-05-02 04:57:48'),
+(41, 'Cameroon', '2023-05-02 04:57:58', '2023-05-02 04:57:58'),
+(42, 'Canada', '2023-05-02 04:58:09', '2023-05-02 04:58:09'),
+(43, 'Central African Republic', '2023-05-02 04:58:21', '2023-05-02 04:58:21'),
+(44, 'Chad', '2023-05-02 05:00:10', '2023-05-02 05:00:10'),
+(45, 'Chile', '2023-05-02 05:00:22', '2023-05-02 05:00:22'),
+(46, 'China', '2023-05-02 05:00:34', '2023-05-02 05:00:34'),
+(47, 'Colombia', '2023-05-02 05:00:44', '2023-05-02 05:00:44'),
+(48, 'Comoros', '2023-05-02 05:01:00', '2023-05-02 05:01:00'),
+(49, 'Congo (Congo-Brazzaville)', '2023-05-02 05:01:16', '2023-05-02 05:01:16'),
+(50, 'Costa Rica', '2023-05-02 05:01:27', '2023-05-02 05:01:27'),
+(51, 'Croatia', '2023-05-02 05:01:39', '2023-05-02 05:01:39'),
+(52, 'Cuba', '2023-05-02 05:01:50', '2023-05-02 05:01:50'),
+(53, 'Cyprus', '2023-05-02 05:02:01', '2023-05-02 05:02:01'),
+(54, 'Czechia (Czech Republic)', '2023-05-02 05:02:21', '2023-05-02 05:02:21'),
+(55, 'Democratic Republic of the Congo', '2023-05-02 05:02:38', '2023-05-02 05:02:38'),
+(56, 'Denmark', '2023-05-02 05:02:50', '2023-05-02 05:02:50'),
+(57, 'Djibouti', '2023-05-02 05:03:06', '2023-05-02 05:03:06'),
+(58, 'Dominica', '2023-05-02 05:03:17', '2023-05-02 05:03:17'),
+(59, 'Dominican Republic', '2023-05-02 05:03:29', '2023-05-02 05:03:29'),
+(60, 'Ecuador', '2023-05-02 05:03:40', '2023-05-02 05:03:40'),
+(61, 'Egypt', '2023-05-02 05:03:50', '2023-05-02 05:03:50'),
+(62, 'El Salvador', '2023-05-02 05:04:18', '2023-05-02 05:04:18'),
+(63, 'Equatorial Guinea', '2023-05-02 05:04:28', '2023-05-02 05:04:28'),
+(64, 'Eritrea', '2023-05-02 05:04:39', '2023-05-02 05:04:39'),
+(65, 'Estonia', '2023-05-02 05:04:49', '2023-05-02 05:04:49'),
+(66, 'Eswatini (fmr. \"Swaziland\")', '2023-05-02 05:05:02', '2023-05-02 05:05:02'),
+(67, 'Ethiopia', '2023-05-02 05:05:12', '2023-05-02 05:05:12'),
+(68, 'Fiji', '2023-05-02 05:05:23', '2023-05-02 05:05:23'),
+(69, 'Finland', '2023-05-02 05:05:32', '2023-05-02 05:05:32'),
+(70, 'France', '2023-05-02 05:05:42', '2023-05-02 05:05:42'),
+(71, 'Gabon', '2023-05-02 05:05:54', '2023-05-02 05:05:54'),
+(72, 'Gambia', '2023-05-02 05:06:08', '2023-05-02 05:06:08'),
+(73, 'Georgia', '2023-05-02 05:06:36', '2023-05-02 05:06:36'),
+(74, 'Germany', '2023-05-02 05:06:46', '2023-05-02 05:06:46'),
+(75, 'Ghana', '2023-05-02 05:06:58', '2023-05-02 05:06:58'),
+(76, 'Greece', '2023-05-02 05:07:07', '2023-05-02 05:07:07'),
+(77, 'Grenada', '2023-05-02 05:07:21', '2023-05-02 05:07:21'),
+(78, 'Guatemala', '2023-05-02 05:07:34', '2023-05-02 05:07:34'),
+(79, 'Guinea', '2023-05-02 05:07:43', '2023-05-02 05:07:43'),
+(80, 'Guinea-Bissau', '2023-05-02 05:07:53', '2023-05-02 05:07:53'),
+(81, 'Guyana', '2023-05-02 05:08:02', '2023-05-02 05:08:02'),
+(82, 'Haiti', '2023-05-02 05:08:14', '2023-05-02 05:08:14'),
+(83, 'Holy See', '2023-05-02 05:08:25', '2023-05-02 05:08:25'),
+(84, 'Honduras', '2023-05-02 05:08:45', '2023-05-02 05:08:45'),
+(85, 'Hungary', '2023-05-02 05:08:57', '2023-05-02 05:08:57'),
+(86, 'Iceland', '2023-05-02 05:09:09', '2023-05-02 05:09:09'),
+(87, 'India', '2023-05-02 05:09:20', '2023-05-02 05:09:20'),
+(88, 'Indonesia', '2023-05-02 05:10:10', '2023-05-02 05:10:10'),
+(89, 'Iran', '2023-05-02 05:10:23', '2023-05-02 05:10:23'),
+(90, 'Iraq', '2023-05-02 05:10:34', '2023-05-02 05:10:34'),
+(91, 'Ireland', '2023-05-02 05:10:44', '2023-05-02 05:10:44'),
+(92, 'Italy', '2023-05-02 05:11:03', '2023-05-02 05:11:03'),
+(93, 'Jamaica', '2023-05-02 05:11:17', '2023-05-02 05:11:17'),
+(94, 'Japan', '2023-05-02 05:11:31', '2023-05-02 05:11:31'),
+(95, 'Jordan', '2023-05-02 05:11:47', '2023-05-02 05:11:47'),
+(96, 'Kazakhstan', '2023-05-02 05:11:59', '2023-05-02 05:11:59'),
+(97, 'Kenya', '2023-05-02 05:12:09', '2023-05-02 05:12:09'),
+(98, 'Kiribati', '2023-05-02 05:12:19', '2023-05-02 05:12:19'),
+(99, 'Kuwait', '2023-05-02 05:12:54', '2023-05-02 05:12:54'),
+(100, 'Kyrgyzstan', '2023-05-02 05:13:26', '2023-05-02 05:13:26'),
+(101, 'Laos', '2023-05-02 05:13:37', '2023-05-02 05:13:37'),
+(102, 'Latvia', '2023-05-02 05:13:46', '2023-05-02 05:13:46'),
+(103, 'Lebanon', '2023-05-02 05:14:50', '2023-05-02 05:14:50'),
+(104, 'Lesotho', '2023-05-02 05:15:22', '2023-05-02 05:15:22'),
+(105, 'Liberia', '2023-05-02 05:15:34', '2023-05-02 05:15:34'),
+(106, 'Libya', '2023-05-02 05:15:48', '2023-05-02 05:15:48'),
+(107, 'Libya', '2023-05-02 05:15:48', '2023-05-02 05:15:48'),
+(108, 'Liechtenstein', '2023-05-02 05:17:24', '2023-05-02 05:17:24'),
+(109, 'Lithuania', '2023-05-02 05:17:45', '2023-05-02 05:17:45'),
+(110, 'Luxembourg', '2023-05-02 06:31:48', '2023-05-02 06:31:48'),
+(111, 'Madagascar', '2023-05-02 06:42:28', '2023-05-02 06:42:28'),
+(112, 'Malawi', '2023-05-02 06:42:46', '2023-05-02 06:42:46'),
+(113, 'Malaysia', '2023-05-02 06:43:49', '2023-05-02 06:43:49'),
+(114, 'Maldives', '2023-05-02 06:44:17', '2023-05-02 06:44:17'),
+(115, 'Malta', '2023-05-02 09:41:04', '2023-05-02 09:41:04'),
+(116, 'Marshall Islands', '2023-05-02 09:41:15', '2023-05-02 09:41:15'),
+(117, 'Mauritania', '2023-05-02 09:41:27', '2023-05-02 09:41:27'),
+(118, 'Mauritius', '2023-05-02 09:41:54', '2023-05-02 09:41:54'),
+(119, 'Mexico', '2023-05-02 09:42:05', '2023-05-02 09:42:05'),
+(120, 'Micronesia', '2023-05-02 09:43:01', '2023-05-02 09:43:01'),
+(121, 'Moldova', '2023-05-02 09:43:11', '2023-05-02 09:43:11'),
+(122, 'Monaco', '2023-05-02 09:43:23', '2023-05-02 09:43:23'),
+(123, 'Mongolia', '2023-05-02 09:43:35', '2023-05-02 09:43:35'),
+(124, 'Montenegro', '2023-05-02 09:43:44', '2023-05-02 09:43:44'),
+(125, 'Morocco', '2023-05-02 09:43:54', '2023-05-02 09:43:54'),
+(126, 'Mozambique', '2023-05-02 09:44:04', '2023-05-02 09:44:04'),
+(127, 'Myanmar (formerly Burma)', '2023-05-02 09:44:15', '2023-05-02 09:44:15'),
+(128, 'Namibia', '2023-05-02 09:45:21', '2023-05-02 09:45:21'),
+(129, 'Nauru', '2023-05-02 09:45:32', '2023-05-02 09:45:32'),
+(130, 'Nepal', '2023-05-02 09:47:31', '2023-05-02 09:47:31'),
+(131, 'Nepal', '2023-05-02 09:48:06', '2023-05-02 09:48:06'),
+(132, 'Netherlands', '2023-05-02 09:48:20', '2023-05-02 09:48:20'),
+(133, 'New Zealand', '2023-05-02 09:48:30', '2023-05-02 09:48:30'),
+(134, 'Nicaragua', '2023-05-02 09:48:40', '2023-05-02 09:48:40'),
+(135, 'Niger', '2023-05-02 09:48:50', '2023-05-02 09:48:50'),
+(136, 'Nigeria', '2023-05-02 09:49:01', '2023-05-02 09:49:01'),
+(137, 'North Korea', '2023-05-02 09:49:22', '2023-05-02 09:49:22'),
+(138, 'North Macedonia', '2023-05-02 09:49:32', '2023-05-02 09:49:32'),
+(139, 'Norway', '2023-05-02 09:49:46', '2023-05-02 09:49:46'),
+(140, 'Oman', '2023-05-02 09:49:57', '2023-05-02 09:49:57'),
+(141, 'Pakistan', '2023-05-02 09:50:07', '2023-05-02 09:50:07'),
+(142, 'Palau', '2023-05-02 09:50:21', '2023-05-02 09:50:21'),
+(143, 'Palestine State', '2023-05-02 09:51:02', '2023-05-02 09:51:02'),
+(144, 'Panama', '2023-05-02 09:51:13', '2023-05-02 09:51:13'),
+(145, 'Papua New Guinea', '2023-05-02 09:51:28', '2023-05-02 09:51:28'),
+(146, 'Paraguay', '2023-05-02 09:52:02', '2023-05-02 09:52:02'),
+(147, 'Peru', '2023-05-02 09:52:14', '2023-05-02 09:52:14'),
+(148, 'Philippines', '2023-05-02 09:52:23', '2023-05-02 09:52:23'),
+(149, 'Poland', '2023-05-02 09:52:35', '2023-05-02 09:52:35'),
+(150, 'Portugal', '2023-05-02 09:52:47', '2023-05-02 09:52:47'),
+(151, 'Qatar', '2023-05-02 09:52:58', '2023-05-02 09:52:58'),
+(152, 'Romania', '2023-05-02 09:53:07', '2023-05-02 09:53:07'),
+(153, 'Russia', '2023-05-02 09:53:17', '2023-05-02 09:53:17'),
+(154, 'Rwanda', '2023-05-02 09:53:26', '2023-05-02 09:53:26'),
+(155, 'Saint Kitts and Nevis', '2023-05-02 09:53:35', '2023-05-02 09:53:35'),
+(156, 'Saint Lucia', '2023-05-02 09:53:43', '2023-05-02 09:53:43'),
+(157, 'Saint Vincent and the Grenadines', '2023-05-02 09:53:57', '2023-05-02 09:53:57'),
+(158, 'Samoa', '2023-05-02 09:54:06', '2023-05-02 09:54:06'),
+(159, 'San Marino', '2023-05-02 09:54:15', '2023-05-02 09:54:15'),
+(160, 'Sao Tome and Principe', '2023-05-02 09:54:25', '2023-05-02 09:54:25'),
+(161, 'Saudi Arabia', '2023-05-02 09:54:36', '2023-05-02 09:54:36'),
+(162, 'Senegal', '2023-05-02 09:54:46', '2023-05-02 09:54:46'),
+(163, 'Serbia', '2023-05-02 09:54:56', '2023-05-02 09:54:56'),
+(164, 'Seychelles', '2023-05-02 09:55:07', '2023-05-02 09:55:07'),
+(165, 'Sierra Leone', '2023-05-02 09:55:17', '2023-05-02 09:55:17'),
+(166, 'Singapore', '2023-05-02 09:55:25', '2023-05-02 09:55:25'),
+(167, 'Slovakia', '2023-05-02 09:55:50', '2023-05-02 09:55:50'),
+(168, 'Slovenia', '2023-05-02 09:56:10', '2023-05-02 09:56:10'),
+(169, 'Solomon Islands', '2023-05-02 09:56:28', '2023-05-02 09:56:28'),
+(170, 'Somalia', '2023-05-02 09:56:39', '2023-05-02 09:56:39'),
+(171, 'South Africa', '2023-05-02 09:56:50', '2023-05-02 09:56:50'),
+(172, 'South Korea', '2023-05-02 09:59:19', '2023-05-02 09:59:19'),
+(173, 'South Sudan', '2023-05-02 09:59:28', '2023-05-02 09:59:28'),
+(174, 'Spain', '2023-05-02 09:59:38', '2023-05-02 09:59:38'),
+(175, 'Sri Lanka', '2023-05-02 09:59:49', '2023-05-02 09:59:49'),
+(176, 'Sudan', '2023-05-02 09:59:59', '2023-05-02 09:59:59'),
+(177, 'Suriname', '2023-05-02 10:00:09', '2023-05-02 10:00:09'),
+(178, 'Sweden', '2023-05-02 10:00:19', '2023-05-02 10:00:19'),
+(179, 'Switzerland', '2023-05-03 03:38:16', '2023-05-03 03:38:16'),
+(180, 'Switzerland', '2023-05-03 03:38:17', '2023-05-03 03:38:17'),
+(181, 'Syria', '2023-05-03 03:38:27', '2023-05-03 03:38:27'),
+(182, 'Tajikistan', '2023-05-03 03:39:25', '2023-05-03 03:39:25'),
+(183, 'Tanzania', '2023-05-03 03:39:36', '2023-05-03 03:39:36'),
+(184, 'Thailand', '2023-05-03 03:39:46', '2023-05-03 03:39:46'),
+(185, 'Timor-Leste', '2023-05-03 03:39:59', '2023-05-03 03:39:59'),
+(186, 'Togo', '2023-05-03 03:40:10', '2023-05-03 03:40:10'),
+(187, 'Tonga', '2023-05-03 03:40:21', '2023-05-03 03:40:21'),
+(188, 'Trinidad and Tobago', '2023-05-03 03:40:33', '2023-05-03 03:40:33'),
+(189, 'Tunisia', '2023-05-03 03:40:45', '2023-05-03 03:40:45'),
+(190, 'Turkey', '2023-05-03 03:41:57', '2023-05-03 03:41:57'),
+(191, 'Turkmenistan', '2023-05-03 03:42:08', '2023-05-03 03:42:08'),
+(192, 'Tuvalu', '2023-05-03 03:42:20', '2023-05-03 03:42:20'),
+(193, 'Uganda', '2023-05-03 03:42:30', '2023-05-03 03:42:30'),
+(194, 'Ukraine', '2023-05-03 03:42:40', '2023-05-03 03:42:40'),
+(195, 'United Arab Emirates', '2023-05-03 03:42:54', '2023-05-03 03:42:54'),
+(196, 'United Kingdom', '2023-05-03 03:43:19', '2023-05-03 03:43:19'),
+(197, 'United States of America', '2023-05-03 03:43:35', '2023-05-03 03:43:35'),
+(198, 'Uruguay', '2023-05-03 03:43:47', '2023-05-03 03:43:47'),
+(199, 'Uzbekistan', '2023-05-03 03:45:03', '2023-05-03 03:45:03'),
+(200, 'Vanuatu', '2023-05-03 03:45:18', '2023-05-03 03:45:18'),
+(201, 'Venezuela', '2023-05-03 03:45:31', '2023-05-03 03:45:31'),
+(202, 'Vietnam', '2023-05-03 03:45:39', '2023-05-03 03:45:39'),
+(203, 'Yemen', '2023-05-03 03:45:51', '2023-05-03 03:45:51'),
+(204, 'Zambia', '2023-05-03 03:46:01', '2023-05-03 03:46:01'),
+(205, 'Zimbabwe', '2023-05-03 03:46:17', '2023-05-03 03:46:17');
 
 -- --------------------------------------------------------
 
@@ -317,7 +568,8 @@ CREATE TABLE `idea_lessons` (
 INSERT INTO `idea_lessons` (`id`, `idea`, `syllabus`, `idea_order`, `pdf`, `v_link`, `lesson_id`, `created_at`, `updated_at`) VALUES
 (1, 'nm', 'ljk', 1, '2024V01V02V09V50V20202307190927Capture.PNG', 'h', NULL, '2024-01-02', '2024-01-02'),
 (2, 'nm', 'ljk', 1, '2024V01V02V09V50V36202307190927Capture.PNG', 'h', NULL, '2024-01-02', '2024-01-02'),
-(3, 'nm', 'ljk', 1, '2024V01V02V09V51V30202307190927Capture.PNG', 'h', NULL, '2024-01-02', '2024-01-02');
+(3, 'nm', 'ljk', 1, '2024V01V02V09V51V30202307190927Capture.PNG', 'h', NULL, '2024-01-02', '2024-01-02'),
+(4, 'nm', 'ljk', 1, '2024V01V04V08V47V2320231001083656153827_2318787155110616_6392255175880343552_n.jpg', 'h', NULL, '2024-01-04', '2024-01-04');
 
 -- --------------------------------------------------------
 
@@ -348,7 +600,9 @@ INSERT INTO `lessons` (`id`, `lesson_name`, `chapter_id`, `teacher_id`, `lesson_
 (6, 'Lesson 1', 4, 5, 'fg', 'C:\\xampp\\tmp\\php3126.tmp', 'jhf', 'g', '2024-01-02 07:49:37', '2024-01-02 07:49:37'),
 (7, 'Lesson 1', 4, 5, 'fg', 'C:\\xampp\\tmp\\phpD856.tmp', 'jhf', 'g', '2024-01-02 07:50:20', '2024-01-02 07:50:20'),
 (8, 'Lesson 1', 4, 5, 'fg', 'C:\\xampp\\tmp\\php163C.tmp', 'jhf', 'g', '2024-01-02 07:50:36', '2024-01-02 07:50:36'),
-(9, 'Lesson 1', 4, 5, 'fg', 'C:\\xampp\\tmp\\phpE94D.tmp', 'jhf', 'g', '2024-01-02 07:51:30', '2024-01-02 07:51:30');
+(9, 'Lesson 1', 4, 5, 'fg', 'C:\\xampp\\tmp\\phpE94D.tmp', 'jhf', 'g', '2024-01-02 07:51:30', '2024-01-02 07:51:30'),
+(10, 'l1', 4, 5, 'weqw', 'C:\\xampp\\tmp\\php45DF.tmp', 'sad', 'asd', '2024-01-04 06:47:23', '2024-01-04 06:47:23'),
+(11, 'Lesson 2', 4, 5, 'qdas', 'C:\\xampp\\tmp\\php6E15.tmp', 'asd', 'asd', '2024-01-04 06:48:38', '2024-01-04 06:48:38');
 
 -- --------------------------------------------------------
 
@@ -574,7 +828,15 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (68, 'App\\Models\\User', 8, 'user', '5e639c0d36f36aaac1d08bf41eebbf4793286776f2382d9d576160573586e43d', '[\"*\"]', NULL, NULL, '2024-01-02 05:32:58', '2024-01-02 05:32:58'),
 (69, 'App\\Models\\User', 8, 'user', 'd2b8f6603a1baa3b9764638319ab9b59022756e4a7337c8fa89e15863e408c7b', '[\"*\"]', NULL, NULL, '2024-01-02 06:04:01', '2024-01-02 06:04:01'),
 (70, 'App\\Models\\User', 8, 'user', '2e328daf79275dcf7bfaf61853b18bfb5b2e220362850685e09f60d1cc4163e0', '[\"*\"]', NULL, NULL, '2024-01-02 22:24:31', '2024-01-02 22:24:31'),
-(71, 'App\\Models\\User', 8, 'user', 'd8c5dbf7418bc6e906c4725167b00f5848ffdd4fadf004454648695fac659336', '[\"*\"]', NULL, NULL, '2024-01-03 05:53:57', '2024-01-03 05:53:57');
+(71, 'App\\Models\\User', 8, 'user', 'd8c5dbf7418bc6e906c4725167b00f5848ffdd4fadf004454648695fac659336', '[\"*\"]', NULL, NULL, '2024-01-03 05:53:57', '2024-01-03 05:53:57'),
+(72, 'App\\Models\\User', 59, 'user', 'ce05c06e8a2b40099b2b733f3018fa7790c0366688631259d9adf4d6bd0caff0', '[\"*\"]', NULL, NULL, '2024-01-03 07:52:53', '2024-01-03 07:52:53'),
+(73, 'App\\Models\\User', 8, 'user', 'b4cc2c592c366801e97c7fb221e515f5698511b644ed3f4209999ab20f9ab606', '[\"*\"]', NULL, NULL, '2024-01-03 09:14:20', '2024-01-03 09:14:20'),
+(74, 'App\\Models\\User', 8, 'user', 'a72a08d961af7d59769dfc0f2b5dadf7ba7348bb3f6c02560226c555ab392866', '[\"*\"]', NULL, NULL, '2024-01-03 10:23:40', '2024-01-03 10:23:40'),
+(75, 'App\\Models\\User', 8, 'user', '3eeb6f1cba20dfe5db7b890a1f2c9a68bcb3f1bff0e0fc9a7acba9b15209de39', '[\"*\"]', NULL, NULL, '2024-01-03 11:59:25', '2024-01-03 11:59:25'),
+(76, 'App\\Models\\User', 8, 'user', '9bc1c4d5c1631a84b825c72223eea9b8fdcd6f8cd09fb27c97343bfddd641dfb', '[\"*\"]', NULL, NULL, '2024-01-04 05:15:24', '2024-01-04 05:15:24'),
+(77, 'App\\Models\\User', 8, 'user', 'd7296ed9f9e78834772777b050cd225dd757dee125951521d4890ab5a71d1de0', '[\"*\"]', NULL, NULL, '2024-01-04 06:28:22', '2024-01-04 06:28:22'),
+(78, 'App\\Models\\User', 8, 'user', '92076edb48757fca6c7fadaaf27728a4217c614f6a4f39b443eb913f7c1fe969', '[\"*\"]', NULL, NULL, '2024-01-04 06:55:25', '2024-01-04 06:55:25'),
+(79, 'App\\Models\\User', 8, 'user', '1a70a7c645573cc4916ae9b9ac78c8961234ab6c3cc8c6754981a1205714de64', '[\"*\"]', NULL, NULL, '2024-01-04 07:10:57', '2024-01-04 07:10:57');
 
 -- --------------------------------------------------------
 
@@ -675,6 +937,8 @@ CREATE TABLE `teacher__courses` (
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `f_name` varchar(255) DEFAULT NULL,
+  `l_name` varchar(255) DEFAULT NULL,
   `name` varchar(191) NOT NULL,
   `email` varchar(191) NOT NULL,
   `profile_photo_path` varchar(2048) DEFAULT NULL,
@@ -683,7 +947,9 @@ CREATE TABLE `users` (
   `parent_phone` varchar(191) DEFAULT NULL,
   `parent_email` varchar(191) DEFAULT NULL,
   `image` varchar(255) NOT NULL DEFAULT 'default.png',
+  `city_id` bigint(20) UNSIGNED DEFAULT NULL,
   `position` enum('super_admin','admin','student','teacher','affilate') NOT NULL,
+  `grade` varchar(20) DEFAULT NULL,
   `course_id` bigint(20) UNSIGNED DEFAULT NULL,
   `category_id` bigint(20) UNSIGNED DEFAULT NULL,
   `password` varchar(191) NOT NULL,
@@ -701,17 +967,17 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `profile_photo_path`, `email_verified_at`, `phone`, `parent_phone`, `parent_email`, `image`, `position`, `course_id`, `category_id`, `password`, `state`, `avatar`, `remember_token`, `extra_email`, `created_at`, `updated_at`, `last_login_at`, `last_login_ip`) VALUES
-(1, 'Ahmed', 'Ahmed@gmail.com', NULL, NULL, '0113443534', '012345346', 'Ali@gmail.com', 'default.png', 'teacher', 2, 1, '$2y$10$O4pDFFvEQGAkfZ.mcGIhaOb0MQCocleYwEySm4OYgq9./pKT021de', 'Show', NULL, NULL, NULL, NULL, '2023-12-18 05:20:49', NULL, NULL),
-(5, 'Teacher 1', 'admin3@gmail.com', NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X42X459672202304300850download.png', 'super_admin', NULL, NULL, '$2y$10$abRantqLN7R8dKUzWPGSLebir7D.GcznzfflGYjquM59GZo9f5y3a', 'Show', NULL, NULL, NULL, '2023-12-18 09:42:45', '2023-12-18 09:42:45', NULL, NULL),
-(7, 'Teacher 1', 'admin4@gmail.com', NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X43X297615202304300850download.png', 'super_admin', NULL, NULL, '$2y$10$CWyZzMn0kdjZKf1f5z0ey.xXzyHVVwkvCFGwakJchI9dwNSyOEyQa', 'Show', NULL, NULL, NULL, '2023-12-18 09:43:29', '2023-12-18 09:43:29', NULL, NULL),
-(8, 'Teacher 1', 'admin@gmail.com', NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X44X145166202304300850download.png', 'admin', NULL, NULL, '$2y$10$3cpQN4tIOFxAS2hQ6vKbl.ho1zHxGGWGziGNHR3.JZsjUYJRADNXq', 'Show', NULL, NULL, NULL, '2023-12-18 09:44:14', '2023-12-18 09:44:14', NULL, NULL),
-(10, 'Teacher', 'teacher@gmail.com', NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X50X119775202304090932egyptXflagXwaveXiconX32.png', 'teacher', NULL, NULL, '$2y$10$EFSKaqvOqy3o.ihNqVWi7uCPCrFtflwUJGqEBFP1woOuxlRaIqN5u', 'Show', NULL, NULL, NULL, '2023-12-18 09:50:11', '2023-12-18 09:50:11', NULL, NULL),
-(11, 'Teacher2', 'teacher2@gmail.com', NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X52X277966202304090932egyptXflagXwaveXiconX32.png', 'teacher', 1, 1, '$2y$10$Y4fg1B5EpujC8OVSCO6fNOyxdAj2lPJDZWibbtD8j55Jik6fU4Uq6', 'Show', NULL, NULL, NULL, '2023-12-18 09:52:27', '2023-12-18 09:52:27', NULL, NULL),
-(44, 'admin@gmail.com', 'sad@gmail.com', NULL, NULL, '123', '123', NULL, 'default.png', 'admin', NULL, NULL, '$2y$10$RkeDuqhtAqMTRC7gfMFxG.Vl8pLtWGgj1jisi0ZkphX9LDVUQaZpO', 'Show', NULL, NULL, NULL, '2023-12-31 06:31:28', '2023-12-31 06:31:28', NULL, NULL),
-(46, 'asd', 'asd12@gmail.com', NULL, NULL, '123', '123', NULL, 'default.png', 'student', NULL, NULL, '$2y$10$fHxDlq7YyAFsRbhMc/GicuyEhWJZ2D7z75W/CDKEvcodtPdVstLVC', 'hidden', NULL, NULL, NULL, '2023-12-31 06:33:52', '2023-12-31 06:33:52', NULL, NULL),
-(48, 'admin@gmail.com', 'karimelfakey84@gmail.com', NULL, NULL, '01271684333', '01271546222', NULL, 'default.png', 'student', NULL, NULL, '$2y$10$32N1ELV4VDboOSV/2VrxQOjTkcK6f4exasrikJih1vkdwj.7cDG56', 'hidden', NULL, NULL, NULL, '2023-12-31 06:46:12', '2023-12-31 06:46:12', NULL, NULL),
-(57, 'ahmed', 'ahmedyahia@yahoo.com', NULL, NULL, '123456789', NULL, NULL, 'default.png', 'admin', NULL, NULL, '$2y$10$4CuUgVeM.E8K16Tbs5ZdJ.5SvzhdLRr08.J4gkehsTsGNl7g43eVu', 'hidden', NULL, NULL, NULL, '2024-01-01 09:54:47', '2024-01-01 09:54:47', NULL, NULL);
+INSERT INTO `users` (`id`, `f_name`, `l_name`, `name`, `email`, `profile_photo_path`, `email_verified_at`, `phone`, `parent_phone`, `parent_email`, `image`, `city_id`, `position`, `grade`, `course_id`, `category_id`, `password`, `state`, `avatar`, `remember_token`, `extra_email`, `created_at`, `updated_at`, `last_login_at`, `last_login_ip`) VALUES
+(1, NULL, NULL, 'Ahmed', 'Ahmed@gmail.com', NULL, NULL, '0113443534', '012345346', 'Ali@gmail.com', 'default.png', NULL, 'teacher', NULL, 2, 1, '$2y$10$O4pDFFvEQGAkfZ.mcGIhaOb0MQCocleYwEySm4OYgq9./pKT021de', 'Show', NULL, NULL, NULL, NULL, '2023-12-18 05:20:49', NULL, NULL),
+(5, NULL, NULL, 'Teacher 1', 'admin3@gmail.com', NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X42X459672202304300850download.png', NULL, 'super_admin', NULL, NULL, NULL, '$2y$10$abRantqLN7R8dKUzWPGSLebir7D.GcznzfflGYjquM59GZo9f5y3a', 'Show', NULL, NULL, NULL, '2023-12-18 09:42:45', '2023-12-18 09:42:45', NULL, NULL),
+(7, NULL, NULL, 'Teacher 1', 'admin4@gmail.com', NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X43X297615202304300850download.png', NULL, 'super_admin', NULL, NULL, NULL, '$2y$10$CWyZzMn0kdjZKf1f5z0ey.xXzyHVVwkvCFGwakJchI9dwNSyOEyQa', 'Show', NULL, NULL, NULL, '2023-12-18 09:43:29', '2023-12-18 09:43:29', NULL, NULL),
+(8, NULL, NULL, 'Teacher 1', 'admin@gmail.com', NULL, NULL, '01099475851111111114', NULL, NULL, '2023X12X18X11X44X145166202304300850download.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$3cpQN4tIOFxAS2hQ6vKbl.ho1zHxGGWGziGNHR3.JZsjUYJRADNXq', 'Show', NULL, NULL, NULL, '2023-12-18 09:44:14', '2024-01-04 06:15:04', NULL, NULL),
+(10, NULL, NULL, 'Teacher', 'teacher@gmail.com', NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X50X119775202304090932egyptXflagXwaveXiconX32.png', NULL, 'teacher', NULL, NULL, NULL, '$2y$10$EFSKaqvOqy3o.ihNqVWi7uCPCrFtflwUJGqEBFP1woOuxlRaIqN5u', 'Show', NULL, NULL, NULL, '2023-12-18 09:50:11', '2023-12-18 09:50:11', NULL, NULL),
+(11, NULL, NULL, 'Teacher2', 'teacher2@gmail.com', NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X52X277966202304090932egyptXflagXwaveXiconX32.png', NULL, 'teacher', NULL, 1, 1, '$2y$10$Y4fg1B5EpujC8OVSCO6fNOyxdAj2lPJDZWibbtD8j55Jik6fU4Uq6', 'Show', NULL, NULL, NULL, '2023-12-18 09:52:27', '2023-12-18 09:52:27', NULL, NULL),
+(44, NULL, NULL, 'admin@gmail.com', 'sad@gmail.com', NULL, NULL, '123', '123', NULL, 'default.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$RkeDuqhtAqMTRC7gfMFxG.Vl8pLtWGgj1jisi0ZkphX9LDVUQaZpO', 'Show', NULL, NULL, NULL, '2023-12-31 06:31:28', '2023-12-31 06:31:28', NULL, NULL),
+(46, NULL, NULL, 'asd', 'asd12@gmail.com', NULL, NULL, '123', '123', NULL, 'default.png', NULL, 'student', '1', NULL, NULL, '$2y$10$fHxDlq7YyAFsRbhMc/GicuyEhWJZ2D7z75W/CDKEvcodtPdVstLVC', 'hidden', NULL, NULL, NULL, '2023-12-31 06:33:52', '2023-12-31 06:33:52', NULL, NULL),
+(57, NULL, NULL, 'ahmed', 'ahmedyahia@yahoo.com', NULL, NULL, '123456789', NULL, NULL, 'default.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$4CuUgVeM.E8K16Tbs5ZdJ.5SvzhdLRr08.J4gkehsTsGNl7g43eVu', 'hidden', NULL, NULL, NULL, '2024-01-01 09:54:47', '2024-01-01 09:54:47', NULL, NULL),
+(59, 'as', 'as', 'as', 'admin2312@gmail.com', NULL, NULL, '213', NULL, NULL, 'default.png', NULL, 'student', '1', NULL, NULL, '$2y$10$UT7CEpaDZ6etgdvQDjN5huCPzvCM/xdiLbT02hZIZh.doXV6/SLRS', 'hidden', NULL, NULL, NULL, '2024-01-03 07:52:53', '2024-01-03 07:52:53', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -772,6 +1038,13 @@ ALTER TABLE `chapter_prices`
   ADD KEY `FK_Price_Chapter` (`chapter_id`);
 
 --
+-- Indexes for table `cities`
+--
+ALTER TABLE `cities`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_City_Country` (`country_id`);
+
+--
 -- Indexes for table `commissions`
 --
 ALTER TABLE `commissions`
@@ -781,6 +1054,12 @@ ALTER TABLE `commissions`
 -- Indexes for table `confirm_sign`
 --
 ALTER TABLE `confirm_sign`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `countries`
+--
+ALTER TABLE `countries`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -947,7 +1226,7 @@ ALTER TABLE `addresses`
 -- AUTO_INCREMENT for table `admin_roles`
 --
 ALTER TABLE `admin_roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `affilate`
@@ -959,18 +1238,24 @@ ALTER TABLE `affilate`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `chapters`
 --
 ALTER TABLE `chapters`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `chapter_prices`
 --
 ALTER TABLE `chapter_prices`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `cities`
+--
+ALTER TABLE `cities`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -983,7 +1268,13 @@ ALTER TABLE `commissions`
 -- AUTO_INCREMENT for table `confirm_sign`
 --
 ALTER TABLE `confirm_sign`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `countries`
+--
+ALTER TABLE `countries`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=206;
 
 --
 -- AUTO_INCREMENT for table `courses`
@@ -1013,13 +1304,13 @@ ALTER TABLE `grid_ans`
 -- AUTO_INCREMENT for table `idea_lessons`
 --
 ALTER TABLE `idea_lessons`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `lessons`
 --
 ALTER TABLE `lessons`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `marketings`
@@ -1049,7 +1340,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT for table `questions`
@@ -1079,7 +1370,7 @@ ALTER TABLE `teacher__courses`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- Constraints for dumped tables
@@ -1109,6 +1400,12 @@ ALTER TABLE `chapters`
 --
 ALTER TABLE `chapter_prices`
   ADD CONSTRAINT `FK_Price_Chapter` FOREIGN KEY (`chapter_id`) REFERENCES `chapters` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `cities`
+--
+ALTER TABLE `cities`
+  ADD CONSTRAINT `FK_City_Country` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `courses`
