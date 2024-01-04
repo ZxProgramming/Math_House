@@ -815,7 +815,8 @@ continue_btn.addEventListener('click', () => {
             type: 'POST',
             data: obj,
             success:function(data){
-                if ( !data['q_num'] ) {
+                console.log(data);
+                if ( data != 1 ) {
                 screen.classList.remove('d-none');
                 screen_text.innerHTML = data;
                 }

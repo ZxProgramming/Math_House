@@ -209,11 +209,11 @@ class QuestionController extends Controller
         ->where('q_num', $req->q_num)
         ->first();
         if ( $req->q_type == 'Trail' && !empty($question_statue) ) {
-            return json_encode(['msg' => 'Question is not Trial']);
+            return 'Question is not Trial';
         }
         if ( $req->q_type == 'Parallel' && empty($question_statue) ) {
-            return json_encode(['msg' => 'Question is not Parallel']);
+            return 'Question is not Parallel';
         }
-        return $question_statue;
+        return 1;
     }
 }
