@@ -50,12 +50,12 @@
                         <!--end::Nav-->
                         <!--begin::Form-->
                         <form method="POST" action="{{route('add_chapter')}}" class="mx-auto w-100 mw-600px pt-15 pb-10" novalidate="novalidate" id="kt_modal_create_campaign_stepper_form">
-                            @csrf
+                            
                             <!--begin::Step 1-->
                             <div class="current" data-kt-stepper-element="content">
                                 <!--begin::Wrapper-->
                                 <div class="w-100">
-                                    
+                                    @csrf
                                 <div>
                                     <!--begin::Input group-->
                                     <div class="mb-10 fv-row"> 
@@ -126,7 +126,7 @@
 
                                 </div>
                                 <!--end::Wrapper-->
-</div>
+                            </div>
                             <!--end::Step 1-->
                             <!--begin::Step 2-->
                             <div data-kt-stepper-element="content">
@@ -237,16 +237,10 @@
                                 <!--end::Wrapper-->
                                 <!--begin::Wrapper-->
                                 <div>
-                                    <button class="btn btn-lg btn-primary">
-                                        <span class="indicator-label">Submit 
-                                        <i class="ki-duotone ki-arrow-right fs-3 ms-2 me-0">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                        </i></span>
-                                        <span class="indicator-progress">Please wait... 
-                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                    <button class="btn btn-lg btn-primary" >
+                                        Submit 
                                     </button>
-                                    <button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Continue 
+                                    <button type="button" class="btn btn-lg btn-primary continue_btn" data-kt-stepper-action="next">Continue 
                                     <i class="ki-duotone ki-arrow-right fs-3 ms-1 me-0">
                                         <span class="path1"></span>
                                         <span class="path2"></span>

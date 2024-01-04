@@ -557,7 +557,7 @@ let section = document.querySelector('.section');
 let q_type = document.querySelector('.q_type');
 
 continue_btn.addEventListener('click', () => {
-    if (q_num.value != "") {
+    if ($('.q_num').val() != "") {
         let obj = {
             'year': year.value,
             'month': month.value,
@@ -567,11 +567,11 @@ continue_btn.addEventListener('click', () => {
             };
             
         $.ajax({
-            type: 'POST',
             url: "{{route('question_type')}}",
+            type: 'POST',
             data: obj,
-            success:function(res){
-                console.log(res);
+            success:function(data){
+                console.log(data);
             }
         })
     }
