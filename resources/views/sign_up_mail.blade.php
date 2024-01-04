@@ -6,7 +6,7 @@
 
 <h2>
 
-<form action="{{route('signup_confirm')}}" method="GET">
+<form action="{{route('login.index')}}" method="GET">
     <input type="hidden" name="email" value="{{ $email}}" />
     <input type="hidden" name="code" value="{{ $code}}" />
     <button>

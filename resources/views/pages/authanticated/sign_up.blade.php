@@ -136,7 +136,7 @@
 								<!--end::Input group=-->
 								<div class="fv-row mb-7 d-flex">
 									<!--begin::Password-->
-									<select class="form-control form-control-solid mr-2" name="country">
+									<select class="form-control sel_country form-control-solid mr-2" name="country">
 										<option disabled selected>
 											Select Country
 										</option>
@@ -147,16 +147,13 @@
 										@endforeach
 									</select>									
 									<!--end::Password-->
+									<input type="hidden" class="countries" value="{{$countries}}" />
+									<input type="hidden" class="cities" value="{{$cities}}" />
 									<!--begin::Password-->
-									<select class="form-control form-control-solid ml-2" name="city_id">
+									<select class="form-control sel_city form-control-solid ml-2" name="city_id">
 										<option disabled selected>
 											Select City
 										</option>
-										@foreach( $cities as $city )
-										<option value="{{$city->id}}" >
-											{{$city->city}}
-										</option>
-										@endforeach
 									</select>									
 									<!--end::Password-->
 								</div>
@@ -283,6 +280,23 @@
 	@endsection
 	
 	@section('script')
+	<script>
+		let sel_country = document.querySelector('.sel_country');
+		let sel_city = document.querySelector('.sel_city');
+		let countries = document.querySelector('.countries');
+		let cities = document.querySelector('.cities');
+		cities = cities.value;
+		cities = JSON.parse(cities);
+		sel_country.addEventListener('change', () => {
+			sel_city.innerHTML =`<option disabled selected>Select City ...</option>`;
+			cities.forEach(element => {
+				if ( sel_country.value == element.country_id ) {
+					sel_city.innerHTML +=`
+					<option value="${element.id}">${element.city}</option>`;
+				}
+			});
+		})
+	</script>
 	 <!--end::Root-->
 		<!--begin::Javascript-->
 		<script>var hostUrl = "assets/";</script>
