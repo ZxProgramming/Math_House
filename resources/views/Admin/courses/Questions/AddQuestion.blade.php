@@ -23,16 +23,55 @@
                 position: fixed;
                 height: 100vh;
                 width: 100vw;
+                top: 0;
+                left: 0;
+                background-color: #000000cc;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .screen_popup{
+                height: 300px;
+                width: 300px;
+                background-color: #fff;
+                padding: 30px;
+                position: relative;
+            }
+            .screen_popup img{
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+                border: 1px solid #ccc;
+            }
+            .screen_text{
+                color: red;
+                font-weight: bold;
+            }
+            .close_btn{
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                cursor: pointer;
             }
         </style>
 
 
-<div class="screen">
+<div class="screen d-flex">
     <div class="screen_popup">
         <img src="{{asset('images/inc/1.jpg')}}" />
+        <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+            <i class="ki-duotone close_btn ki-cross fs-1">
+                <span class="path1"></span>
+                <span class="path2"></span>
+            </i>
+        </div>
+        <div class="screen_text">dsfgg</div>
     </div>
 </div>
 
+<script>
+    let close_btn
+</script>
 	<!--begin::Action-->
     @include('success')
     <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_create_question">Add Question</a>
