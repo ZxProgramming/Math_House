@@ -14,7 +14,7 @@
     <meta property="og:title" content=""/>
     <link rel="canonical" href=""/>
     <link rel="icon" type="image/x-icon" href="../../public/assets/media/logos/Maths-house.png">
-
+        @yield('style')
     {{-- {!! includeFavicon('assets/media/logos/Maths-house.png') !!} --}}
 
     <!--begin::Fonts-->
