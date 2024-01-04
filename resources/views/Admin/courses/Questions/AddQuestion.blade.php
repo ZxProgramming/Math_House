@@ -19,8 +19,20 @@
                 max-width: 80%;
                 margin: 20px auto;
             }
+            .screen{
+                position: fixed;
+                height: 100vh;
+                width: 100vw;
+            }
         </style>
-        
+
+
+<div class="screen">
+    <div class="screen_popup">
+        <img src="{{asset('images/inc/1.jpg')}}" />
+    </div>
+</div>
+
 	<!--begin::Action-->
     @include('success')
     <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_create_question">Add Question</a>
@@ -759,8 +771,9 @@ continue_btn.addEventListener('click', () => {
             type: 'POST',
             data: obj,
             success:function(data){
-                data = 
-                console.log(data.msg);
+                if ( !data['q_num'] ) {
+                    console.log(data);
+                }
             }
         })
     }
