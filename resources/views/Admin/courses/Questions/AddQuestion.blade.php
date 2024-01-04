@@ -29,6 +29,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                z-index: 111111;
             }
             .screen_popup{
                 height: 300px;
@@ -56,7 +57,7 @@
         </style>
 
 
-<div class="screen d-flex">
+<div class="screen d-none">
     <div class="screen_popup">
         <img src="{{asset('images/inc/1.jpg')}}" />
         <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
@@ -65,13 +66,10 @@
                 <span class="path2"></span>
             </i>
         </div>
-        <div class="screen_text">dsfgg</div>
+        <div class="screen_text"></div>
     </div>
 </div>
 
-<script>
-    let close_btn
-</script>
 	<!--begin::Action-->
     @include('success')
     <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_create_question">Add Question</a>
@@ -793,6 +791,13 @@ let year = document.querySelector('.year');
 let month = document.querySelector('.month');
 let section = document.querySelector('.section');
 let q_type = document.querySelector('.q_type');
+let close_btn = document.querySelector('.close_btn');
+let screen = document.querySelector('.screen');
+let screen_text = document.querySelector('.screen_text');
+    
+close_btn.addEventListener('click', () => {
+    screen.classList.add('d-none');
+});
 
 continue_btn.addEventListener('click', () => {
     if ($('.q_num').val() != "") {
@@ -811,7 +816,8 @@ continue_btn.addEventListener('click', () => {
             data: obj,
             success:function(data){
                 if ( !data['q_num'] ) {
-                    console.log(data);
+                screen.classList.remove('d-none');
+                screen_text.innerHTML = data;
                 }
             }
         })
