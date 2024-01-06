@@ -9,6 +9,9 @@
     padding-top: 21rem !important;
     padding-bottom: 26rem !important;
 }
+				span{
+					color:red;
+				}
 			</style>
 		@endsection
 		@section('contentScript')
@@ -92,28 +95,37 @@
 								</div>
 								<!--begin::Heading-->
 								<!--begin::Input group=-->
-									@error('error')
+									@error('f_name')
 										<span style="color: red">{{ $message }}</span>
 									@enderror
+									@error('l_name')
+									<span style="color: red">{{ $message }}</span>
+								@enderror
 								<div class="fv-row mb-8 d-flex">
 									<!--begin::Email-->
 									<input type="text" placeholder="First Name" name="f_name" class="form-control form-control-solid ml-2" />
-									<input type="text" placeholder="Last Name" name="l_name" class="form-control form-control-solid ml-2" />
 									
+									<input type="text" placeholder="Last Name" name="l_name" class="form-control form-control-solid ml-2" />
+								
 									<!--end::Email-->
 								</div>
 								<!--end::Input group=-->
+								@error('email')
+								<span style="color"> 	{{ $message }} </span>
+							@enderror	
 								<div class="fv-row mb-7 d-flex">
 									<!--begin::Password-->
 									<input placeholder="Nick Name" name="name" autocomplete="off" data-kt-translate="sign-in-input-email" class="form-control form-control-solid mr-2" />
 									<!--begin::Password-->
 									<input type="email" placeholder="Email" name="email" autocomplete="off" data-kt-translate="sign-in-input-email" class="form-control form-control-solid mr-2" />
-									@error('email')
-										<span> 	{{ $message }} </span>
-									@enderror										
+																	
 									<!--end::Password-->
 								</div>
+							
 								<!--end::Input group=-->
+								@error('f_name')
+										<span style="color: red">{{ $message }}</span>
+									@enderror
 								<div class="fv-row mb-7 d-flex">
 									<input placeholder="Phone" name="phone" autocomplete="off" data-kt-translate="sign-in-input-email" class="form-control form-control-solid mr-2" />
 									@error('password')

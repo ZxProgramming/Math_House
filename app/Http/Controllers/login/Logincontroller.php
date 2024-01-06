@@ -88,6 +88,14 @@ class Logincontroller extends Controller
         }
 
         public function sign_up_add( Request $req ){
+
+                        $req->validate([
+                                'f_name'=>'required',
+                                'l_name'=>'required',
+                                'name'=>'required',
+                                'phone'=>'required',
+                        ]);
+                        
                  if ( $req->password != $req->conf_password ) {
                         session()->flash('faild','Confirm Password Wrong');
                         return redirect()->back();
@@ -98,6 +106,14 @@ class Logincontroller extends Controller
                 $arr['state'] = 'hidden';
                 $arr['password'] = bcrypt($req->password);
                 $code = rand(0, 10000);
+
+                         $email = $arr['email'];
+                        $check = User::where('email',$email);
+
+                        if($check){
+                                
+                                return redirect()->back()->withErrors(['email'=>'This Email Already Exist']) ; 
+                        }
                 $user = ConfirmSign::create([
                         'code' => $code,
                         'email' => $req->email,
@@ -120,8 +136,10 @@ class Logincontroller extends Controller
                         ->update([
                                 'state' => 'Show'
                         ]);
+
                 }
-                return redirect()->back();
+              ;
+                // return redirect()->back();
         }
 
         public function profile_confirm(Request $req){
