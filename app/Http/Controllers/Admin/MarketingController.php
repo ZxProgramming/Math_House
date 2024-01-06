@@ -27,4 +27,8 @@ class MarketingController extends Controller
 
         return view('Admin.Marketing.Users', compact('users'));
     }
+
+    public function m_add_users(){
+        return view('Admin.Marketing.Add_User');
+    }
 }
