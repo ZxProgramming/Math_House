@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Admin\CourseSettingController;
 use App\Http\Controllers\Admin\MarketingController;
+use App\Http\Controllers\Admin\QuizzeController;
 
 use App\Http\Controllers\Student\Stu_DashboardController;
 use App\Http\Controllers\Student\Stu_ProfileController;
@@ -51,6 +52,9 @@ Route::middleware(['auth','auth.Admin'])->group(function(){
             
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+// Quizze
+Route::get('/Quizze', [QuizzeController::class, 'quizze'])->name('quizze');
 
 // Marketing
 Route::get('/Marketing/Commission', [MarketingController::class, 'commission'])->name('commission');
