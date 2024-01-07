@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Admin\CourseSettingController;
 use App\Http\Controllers\Admin\MarketingController;
 use App\Http\Controllers\Admin\QuizzeController;
+use App\Http\Controllers\Admin\PaymentController;
 
 use App\Http\Controllers\Student\Stu_DashboardController;
 use App\Http\Controllers\Student\Stu_ProfileController;
@@ -56,6 +57,9 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 // Quizze 
 Route::get('/Quizze', [QuizzeController::class, 'quizze'])->name('quizze');
 Route::get('/Quizze/Del/{id}', [QuizzeController::class, 'del_quizze'])->name('del_quizze');
+
+// Payment
+Route::get('/Payment', [PaymentController::class, 'payment'])->name('payment');
 
 // Marketing
 Route::get('/Marketing/Commission', [MarketingController::class, 'commission'])->name('commission');
