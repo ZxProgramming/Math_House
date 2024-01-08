@@ -69,7 +69,7 @@ Route::get('/Marketing/Commission', [MarketingController::class, 'commission'])-
 Route::post('/Marketing/Commission/Edit', [MarketingController::class, 'edit_commission'])->name('edit_commission');
 Route::get('/Marketing/Users', [MarketingController::class, 'users'])->name('m_users');
 Route::get('/Marketing/Add_Users', [MarketingController::class, 'm_add_users'])->name('m_add_users');
-Route::get('/Marketing/Users/Add', [MarketingController::class, 'affilate_add'])->name('affilate_add');
+Route::post('/Marketing/Users/Add', [MarketingController::class, 'affilate_add'])->name('affilate_add');
 
 Route::post('/Users/Admin/Edit', [UserController::class, 'admin_edit'])->name('admin_edit');
 Route::get('/Users/Admin/Del/{id}', [UserController::class, 'del_admin'])->name('del_admin');

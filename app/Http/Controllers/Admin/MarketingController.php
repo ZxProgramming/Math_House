@@ -31,4 +31,12 @@ class MarketingController extends Controller
     public function m_add_users(){
         return view('Admin.Marketing.Add_User');
     }
+
+    public function affilate_add( Request $req ){
+        $arr = $req->only('name', 'email', 'phone', 'organization');
+        Affilate::create($arr);
+
+        return redirect()->back();
+    }
+
 }
