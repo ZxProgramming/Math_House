@@ -154,27 +154,27 @@
 
                 <div class="col-md-12 d-flex align-items-center justify-content-around">
                   <span class="col-md-2" style="font-size: 1.2rem;">Title: </span>
-                  <input type="text" name="title" class="col-md-9 form-control">
+                  <input type="text" name="title" placeholder="Title" class="col-md-9 form-control">
                 </div>
 
                 <div class="col-md-12 d-flex align-items-center justify-content-around">
                   <span class="col-md-2" style="font-size: 1.2rem;">Description: </span>
-                  <input type="text" name="description" class="col-md-9 form-control">
+                  <input type="text" name="description" placeholder="Description" class="col-md-9 form-control">
                 </div>
 
                 <div class="col-md-12 d-flex align-items-center justify-content-around">
                   <span class="col-md-2" style="font-size: 1.2rem;">Duration: </span>
-                  <input type="time" name="time" class="col-md-9 form-control">
+                  <input type="time" name="time" placeholder="Duration" class="col-md-9 form-control">
                 </div>
 
                 <div class="col-md-12 d-flex align-items-center justify-content-around">
                   <span class="col-md-2" style="font-size: 1.2rem;">Total Score: </span>
-                  <input type="text" name="score" class="col-md-9 form-control">
+                  <input type="text" name="score" placeholder="Total Score" class="col-md-9 form-control">
                 </div>
 
                 <div class="col-md-12 d-flex align-items-center justify-content-around">
                   <span class="col-md-2" style="font-size: 1.2rem;">Pass Score: </span>
-                  <input type="text" name="pass_score" class="col-md-9 form-control">
+                  <input type="text" name="pass_score" placeholder="Pass Score" class="col-md-9 form-control">
                 </div>
 
                 <div class="col-md-12 d-flex align-items-center justify-content-around">
