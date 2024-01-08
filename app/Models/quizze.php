@@ -14,8 +14,11 @@ class quizze extends Model
     protected $fillable = [
         'title', 
         'time', 
-        'score', 
+        'score',
+        'pass_score',
+        'description',
         'lesson_id',
+        'state',
     ];
 
     public function lesson()
