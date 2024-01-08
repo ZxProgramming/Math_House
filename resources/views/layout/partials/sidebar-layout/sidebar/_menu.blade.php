@@ -230,19 +230,11 @@
 						</a>
 						<!--end:Menu link-->
 						<!--begin:Menu link-->
-						<a class="menu-link " href="{{ route('category') }}">
+						<a class="menu-link " href="{{ route('payout_r') }}">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
 							<span class="menu-title">Payment Requests</span>
-						</a>
-						<!--end:Menu link-->
-						<!--begin:Menu link-->
-						<a class="menu-link " href="{{ route('category') }}">
-							<span class="menu-bullet">
-								<span class="bullet bullet-dot"></span>
-							</span>
-							<span class="menu-title">Payment Methods</span>
 						</a>
 						<!--end:Menu link-->
 					</div>
