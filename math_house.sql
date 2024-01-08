@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 08, 2024 at 09:04 AM
+-- Generation Time: Jan 08, 2024 at 09:38 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.12
 
@@ -83,6 +83,13 @@ CREATE TABLE `affilate` (
   `created_at` date DEFAULT NULL,
   `updated_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `affilate`
+--
+
+INSERT INTO `affilate` (`id`, `name`, `phone`, `email`, `organization`, `wallet`, `created_at`, `updated_at`) VALUES
+(1, 'vd1', '01099475854', 'admin@gmail.com', 'fd', NULL, '2024-01-08', '2024-01-08');
 
 -- --------------------------------------------------------
 
@@ -896,9 +903,12 @@ CREATE TABLE `questions` (
 CREATE TABLE `quizzes` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `title` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL,
   `time` varchar(255) DEFAULT NULL,
   `score` int(11) DEFAULT NULL,
+  `pass_score` float DEFAULT NULL,
   `lesson_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `state` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` date DEFAULT NULL,
   `updated_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -1308,7 +1318,7 @@ ALTER TABLE `admin_roles`
 -- AUTO_INCREMENT for table `affilate`
 --
 ALTER TABLE `affilate`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `categories`
