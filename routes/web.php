@@ -53,8 +53,9 @@ Route::middleware(['auth','auth.Admin'])->group(function(){
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-// Quizze
+// Quizze 
 Route::get('/Quizze', [QuizzeController::class, 'quizze'])->name('quizze');
+Route::get('/Quizze/Del/{id}', [QuizzeController::class, 'del_quizze'])->name('del_quizze');
 
 // Marketing
 Route::get('/Marketing/Commission', [MarketingController::class, 'commission'])->name('commission');
