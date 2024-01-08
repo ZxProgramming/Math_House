@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 08, 2024 at 09:38 AM
+-- Generation Time: Jan 08, 2024 at 01:23 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.12
 
@@ -753,6 +753,30 @@ INSERT INTO `payment_method` (`id`, `payment`, `logo`, `statue`, `created_at`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `payouts`
+--
+
+CREATE TABLE `payouts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `date` date NOT NULL,
+  `affilate_id` bigint(20) UNSIGNED NOT NULL,
+  `amount` float NOT NULL,
+  `payment_method` bigint(20) UNSIGNED DEFAULT NULL,
+  `statue` enum('pendding','approve','rejected') NOT NULL DEFAULT 'pendding',
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `payouts`
+--
+
+INSERT INTO `payouts` (`id`, `date`, `affilate_id`, `amount`, `payment_method`, `statue`, `created_at`, `updated_at`) VALUES
+(1, '2024-01-16', 1, 200, 2, 'pendding', NULL, '2024-01-08');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `permissions`
 --
 
@@ -894,6 +918,13 @@ CREATE TABLE `questions` (
   `created_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Dumping data for table `questions`
+--
+
+INSERT INTO `questions` (`id`, `lesson_id`, `question`, `q_url`, `q_code`, `q_type`, `month`, `q_num`, `year`, `section`, `difficulty`, `ans_type`, `updated_at`, `created_at`) VALUES
+(18, 4, 'question 1', NULL, '1234', 'Trail', '3', '2', '2022', '2', 'A', 'MCQ', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -912,6 +943,13 @@ CREATE TABLE `quizzes` (
   `created_at` date DEFAULT NULL,
   `updated_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `quizzes`
+--
+
+INSERT INTO `quizzes` (`id`, `title`, `description`, `time`, `score`, `pass_score`, `lesson_id`, `state`, `created_at`, `updated_at`) VALUES
+(1, 'Quizze 1', 'quizze One', '22 h', 20, 8, 5, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1219,6 +1257,14 @@ ALTER TABLE `payment_method`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `payouts`
+--
+ALTER TABLE `payouts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_Payout_Affilate` (`affilate_id`),
+  ADD KEY `FK_Payment_Method` (`payment_method`);
+
+--
 -- Indexes for table `permissions`
 --
 ALTER TABLE `permissions`
@@ -1423,6 +1469,12 @@ ALTER TABLE `payment_method`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `payouts`
+--
+ALTER TABLE `payouts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
@@ -1438,13 +1490,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `quizzes`
 --
 ALTER TABLE `quizzes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `q_ans`
@@ -1545,6 +1597,13 @@ ALTER TABLE `model_has_permissions`
 --
 ALTER TABLE `model_has_roles`
   ADD CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `payouts`
+--
+ALTER TABLE `payouts`
+  ADD CONSTRAINT `FK_Payment_Method` FOREIGN KEY (`payment_method`) REFERENCES `payment_method` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_Payout_Affilate` FOREIGN KEY (`affilate_id`) REFERENCES `affilate` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `questions`
