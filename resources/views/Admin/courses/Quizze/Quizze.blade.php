@@ -6,6 +6,7 @@
 @endphp
 <x-default-layout>
 @include('success')
+<<<<<<< HEAD
 {{-- Bootstrap pack --}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -378,6 +379,117 @@
                               <div class="my-2 px-3">
                               <label>
                                   item No.
+=======
+                
+<table id="kt_profile_overview_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable no-footer">
+    <thead class="fs-7 text-gray-500 text-uppercase">
+            <th class="min-w-250px sorting sorting_desc" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Manager: activate to sort column ascending" style="width: 336.359px;" aria-sort="descending">#</th>
+            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Title</th>
+            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Time</th>
+            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Score</th>
+            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">No. of Questions</th>
+            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Action</th>
+    </thead>
+    <tbody class="fs-6">
+        @foreach($quizzes as $item)
+        <tr>
+            <td>
+                {{$loop->iteration}}
+            </td>
+            <td>
+                {{$item->title}}
+            </td>
+            <td>
+                {{$item->time}}
+            </td>
+            <td>
+                {{$item->score}}
+            </td>
+            <td>
+                {{count($item->question)}}
+            </td>
+            <td>
+            <div class="mt-3">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter{{$item->id}}">
+                          Edit
+                        </button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{$item->id}}">
+                          Delete
+                        </button>
+
+                        <!-- Modal -->
+                        <form method="POST" action="{{route('q_edit')}}">
+                          @csrf
+                        <div class="modal fade" id="modalCenter{{$item->id}}" tabindex="-1" aria-hidden="true" style="display: none;">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                
+                                <h5 class="modal-title" id="modalCenterTitle">Edit item</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div> 
+
+                            <div class="my-2 px-3">
+                              <label>
+                                item
+                              </label>
+                              <input class='form-control' name="item" value="{{$item->item}}" placeholder="item" />
+                            </div>
+
+                            <div class="my-2 px-3">
+                              <label>
+                                Type
+                              </label>
+                            
+                              <select class="form-control" name="q_type">
+                                <option value="{{$item->q_type}}">{{$item->q_type}}</option>
+                                <option value="Trail">Trail</option> 
+                                <option value="Parallel">Parallel</option> 
+                                <option value="Extra">Extra</option>
+                            </select>  
+                            </div>
+
+                            <div class="my-2 px-3">
+                            <label>
+                                Year
+                            </label>
+                            <input class='form-control' name="year" value="{{$item->year}}" placeholder="Year" />
+                            </div>
+
+                            <div class="my-2 px-3">
+                            <label>
+                                Month
+                            </label>
+                            <input class='form-control' name="month" value="{{$item->month}}" placeholder="Month" />
+                            </div>
+
+                            <div class="my-2 px-3">
+                            <label>
+                                Code
+                            </label>
+                            <input class='form-control' name="q_code" value="{{$item->q_code}}" placeholder="Code" />
+                            </div>
+
+                            <div class="my-2 px-3">
+                            <label>
+                                Section
+                            </label> 
+                        
+                            <select class="form-control" name="section">
+                                <option value="{{$item->section}}">{{$item->section}}</option>
+                                <option value="Blank">Blank</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>     
+                            </div>
+
+                            <div class="my-2 px-3">
+                            <label>
+                                item No.
+>>>>>>> 549c091345352a5c1e325ca1b6a4dd117d9edcba
                             </label>
                             <input class='form-control' name="q_num" value="{{$item->q_num}}" placeholder="item No." />
                             </div>
@@ -394,7 +506,11 @@
                             </div>
                           </div>
                         </div>
+<<<<<<< HEAD
                       </form>
+=======
+                        </form>
+>>>>>>> 549c091345352a5c1e325ca1b6a4dd117d9edcba
 
                         <!-- Modal -->
                         <div class="modal fade" id="modalDelete{{$item->id}}" tabindex="-1" aria-hidden="true" style="display: none;">
@@ -428,6 +544,7 @@
         @endforeach
     </tbody>
 </table>
+<<<<<<< HEAD
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
   $("#menu_action").css("display","none");
@@ -459,4 +576,6 @@ $( document ).ready(function() {
 
 });
 </script>
+=======
+>>>>>>> 549c091345352a5c1e325ca1b6a4dd117d9edcba
 </x-default-layout>

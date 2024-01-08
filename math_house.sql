@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 04, 2024 at 12:10 PM
+-- Generation Time: Jan 07, 2024 at 08:57 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.12
 
@@ -723,6 +723,21 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `payment_method`
+--
+
+CREATE TABLE `payment_method` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `payment` varchar(255) NOT NULL,
+  `logo` varchar(255) DEFAULT NULL,
+  `statue` tinyint(1) DEFAULT 1,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `permissions`
 --
 
@@ -836,7 +851,8 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (76, 'App\\Models\\User', 8, 'user', '9bc1c4d5c1631a84b825c72223eea9b8fdcd6f8cd09fb27c97343bfddd641dfb', '[\"*\"]', NULL, NULL, '2024-01-04 05:15:24', '2024-01-04 05:15:24'),
 (77, 'App\\Models\\User', 8, 'user', 'd7296ed9f9e78834772777b050cd225dd757dee125951521d4890ab5a71d1de0', '[\"*\"]', NULL, NULL, '2024-01-04 06:28:22', '2024-01-04 06:28:22'),
 (78, 'App\\Models\\User', 8, 'user', '92076edb48757fca6c7fadaaf27728a4217c614f6a4f39b443eb913f7c1fe969', '[\"*\"]', NULL, NULL, '2024-01-04 06:55:25', '2024-01-04 06:55:25'),
-(79, 'App\\Models\\User', 8, 'user', '1a70a7c645573cc4916ae9b9ac78c8961234ab6c3cc8c6754981a1205714de64', '[\"*\"]', NULL, NULL, '2024-01-04 07:10:57', '2024-01-04 07:10:57');
+(79, 'App\\Models\\User', 8, 'user', '1a70a7c645573cc4916ae9b9ac78c8961234ab6c3cc8c6754981a1205714de64', '[\"*\"]', NULL, NULL, '2024-01-04 07:10:57', '2024-01-04 07:10:57'),
+(80, 'App\\Models\\User', 8, 'user', 'b8e00280da3240adece1c3c6ad264b374ebac01e1fd509b7fbc8d7239dab630b', '[\"*\"]', NULL, NULL, '2024-01-07 05:57:11', '2024-01-07 05:57:11');
 
 -- --------------------------------------------------------
 
@@ -1147,6 +1163,12 @@ ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
+-- Indexes for table `payment_method`
+--
+ALTER TABLE `payment_method`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `permissions`
 --
 ALTER TABLE `permissions`
@@ -1331,6 +1353,12 @@ ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT for table `payment_method`
+--
+ALTER TABLE `payment_method`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
@@ -1340,7 +1368,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `questions`

@@ -165,7 +165,14 @@
 							<span class="menu-title">Exam</span>
 						</a>
 
-						
+				
+					</div>
+					<!--end:Menu item-->
+				</div>
+				<!--end:Menu sub-->
+			</div>
+		
+
 			<div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('dashboard') ? '' : 'here show' }}">
 				<!--begin:Menu link-->
 				<span class="menu-link">
@@ -184,14 +191,15 @@
 							</span>
 							<span class="menu-title">Exam Code</span>
 						</a>
+						<!--begin:Menu link-->
+						<a class="menu-link " href="{{ route('payment') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Payment</span>
+						</a>
 				</div></div></div>
 						<!--end:Menu link-->
-					</div>
-					<!--end:Menu item-->
-				</div>
-				<!--end:Menu sub-->
-			</div>
-		
 
 			<div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('dashboard') ? '' : 'here show' }}">
 				<!--begin:Menu link-->

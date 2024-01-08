@@ -5,16 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Affilate extends Model
+class PaymentMethod extends Model
 {
     use HasFactory;
-    protected $table = 'affilate';
-    
+
+    protected $table = 'payment_method';
+
     protected $fillable = [
-        'name', 
-        'email',
-        'phone', 
-        'organization', 
-        'wallet', 
+        'payment',
+        'logo',
+        'statue',
     ];
 }

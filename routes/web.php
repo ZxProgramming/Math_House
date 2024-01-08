@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Admin\CourseSettingController;
 use App\Http\Controllers\Admin\MarketingController;
 use App\Http\Controllers\Admin\QuizzeController;
+use App\Http\Controllers\Admin\PaymentController;
 
 use App\Http\Controllers\Student\Stu_DashboardController;
 use App\Http\Controllers\Student\Stu_ProfileController;
@@ -56,12 +57,22 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 // Quizze 
 Route::get('/Quizze', [QuizzeController::class, 'quizze'])->name('quizze');
 Route::get('/Quizze/Del/{id}', [QuizzeController::class, 'del_quizze'])->name('del_quizze');
+<<<<<<< HEAD
+=======
+
+// Payment 
+Route::get('/Payment', [PaymentController::class, 'payment'])->name('payment');
+Route::post('/Payment/Add', [PaymentController::class, 'payment_add'])->name('payment_add');
+Route::post('/Payment/Edit', [PaymentController::class, 'payment_edit'])->name('payment_edit');
+Route::get('/Payment/Del', [PaymentController::class, 'del_payment'])->name('del_payment');
+>>>>>>> 549c091345352a5c1e325ca1b6a4dd117d9edcba
 
 // Marketing
 Route::get('/Marketing/Commission', [MarketingController::class, 'commission'])->name('commission');
 Route::post('/Marketing/Commission/Edit', [MarketingController::class, 'edit_commission'])->name('edit_commission');
 Route::get('/Marketing/Users', [MarketingController::class, 'users'])->name('m_users');
 Route::get('/Marketing/Add_Users', [MarketingController::class, 'm_add_users'])->name('m_add_users');
+Route::get('/Marketing/Users/Add', [MarketingController::class, 'affilate_add'])->name('affilate_add');
 
 Route::post('/Users/Admin/Edit', [UserController::class, 'admin_edit'])->name('admin_edit');
 Route::get('/Users/Admin/Del/{id}', [UserController::class, 'del_admin'])->name('del_admin');

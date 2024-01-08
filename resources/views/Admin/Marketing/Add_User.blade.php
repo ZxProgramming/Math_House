@@ -13,4 +13,32 @@
     Add User 
 </a>
 
+<form class="px-3" action="{{route('affilate_add')}}" method="POST" enctype="multipart/form-data">
+    @csrf
+      <div class='my-3'>
+          <label>Name</label>
+          <input class='form-control' name="name" placeholder="Name" />
+      </div>
+      
+      
+      <div class='my-3'>
+          <label>E-mail</label>
+          <input class='form-control' name="email" placeholder="E-mail" />
+      </div>
+
+      <div class='my-3'>
+          <label>Phone</label>
+          <input class='form-control' name="phone" placeholder="Phone" />
+      </div>
+      <div class='my-3'>
+          <label>Organization</label>
+          <input class='form-control' name="organization" placeholder="Organization" />
+      </div>
+      
+      <div class="mt-3">
+          <button class='btn btn-primary'>
+              Submit
+          </button>
+      </div>
+</form>
 </x-default-layout>
