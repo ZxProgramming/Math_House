@@ -12,6 +12,9 @@ class Affilate extends Model
     
     protected $fillable = [
         'name', 
-        'precentage', 
+        'email',
+        'phone', 
+        'organization', 
+        'wallet', 
     ];
 }
