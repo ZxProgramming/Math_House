@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 07, 2024 at 08:57 AM
+-- Generation Time: Jan 08, 2024 at 09:04 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.12
 
@@ -77,6 +77,7 @@ CREATE TABLE `affilate` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `phone` varchar(20) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
   `organization` varchar(255) DEFAULT NULL,
   `wallet` varchar(255) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
@@ -730,10 +731,17 @@ CREATE TABLE `payment_method` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `payment` varchar(255) NOT NULL,
   `logo` varchar(255) DEFAULT NULL,
-  `statue` tinyint(1) DEFAULT 1,
+  `statue` tinyint(1) DEFAULT 0,
   `created_at` date DEFAULT NULL,
   `updated_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `payment_method`
+--
+
+INSERT INTO `payment_method` (`id`, `payment`, `logo`, `statue`, `created_at`, `updated_at`) VALUES
+(2, '676', '2024X01X07X08X37X2161871.jfif', 1, '2024-01-07', '2024-01-07');
 
 -- --------------------------------------------------------
 
@@ -852,7 +860,9 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (77, 'App\\Models\\User', 8, 'user', 'd7296ed9f9e78834772777b050cd225dd757dee125951521d4890ab5a71d1de0', '[\"*\"]', NULL, NULL, '2024-01-04 06:28:22', '2024-01-04 06:28:22'),
 (78, 'App\\Models\\User', 8, 'user', '92076edb48757fca6c7fadaaf27728a4217c614f6a4f39b443eb913f7c1fe969', '[\"*\"]', NULL, NULL, '2024-01-04 06:55:25', '2024-01-04 06:55:25'),
 (79, 'App\\Models\\User', 8, 'user', '1a70a7c645573cc4916ae9b9ac78c8961234ab6c3cc8c6754981a1205714de64', '[\"*\"]', NULL, NULL, '2024-01-04 07:10:57', '2024-01-04 07:10:57'),
-(80, 'App\\Models\\User', 8, 'user', 'b8e00280da3240adece1c3c6ad264b374ebac01e1fd509b7fbc8d7239dab630b', '[\"*\"]', NULL, NULL, '2024-01-07 05:57:11', '2024-01-07 05:57:11');
+(80, 'App\\Models\\User', 8, 'user', 'b8e00280da3240adece1c3c6ad264b374ebac01e1fd509b7fbc8d7239dab630b', '[\"*\"]', NULL, NULL, '2024-01-07 05:57:11', '2024-01-07 05:57:11'),
+(81, 'App\\Models\\User', 8, 'user', 'a0848ebbd4273d7065cd3f70a41533d307f1aa534ea85c942c17d5c0c1f53576', '[\"*\"]', NULL, NULL, '2024-01-07 09:14:34', '2024-01-07 09:14:34'),
+(82, 'App\\Models\\User', 8, 'user', '430724e62921c13659f73275a1bce37d854066144ffc3d3d8e926f92c0062020', '[\"*\"]', NULL, NULL, '2024-01-08 05:24:23', '2024-01-08 05:24:23');
 
 -- --------------------------------------------------------
 
@@ -875,6 +885,22 @@ CREATE TABLE `questions` (
   `ans_type` enum('MCQ','Grid_in') DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
   `created_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quizzes`
+--
+
+CREATE TABLE `quizzes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `time` varchar(255) DEFAULT NULL,
+  `score` int(11) DEFAULT NULL,
+  `lesson_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -906,6 +932,20 @@ INSERT INTO `q_ans` (`id`, `ans_pdf`, `ans_video`, `Q_id`, `created_at`, `update
 (7, '2023X12X25X14X18X43202301111011mvf_light_logo.png', '2023X12X25X14X18X43202301111020C5631746XA3DDX43F6XA634X158716ABFA8B.jpeg', 11, '2023-12-25', '2023-12-25'),
 (8, '2023X12X26X11X07X34202301100934C5631746XA3DDX43F6XA634X158716ABFA8B.jpeg', '2023X12X26X11X07X34', 14, '2023-12-26', '2023-12-26'),
 (9, '2023X12X26X11X10X38202301100934C5631746XA3DDX43F6XA634X158716ABFA8B.jpeg', '2023X12X26X11X10X38', 16, '2023-12-26', '2023-12-26');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `q_quizes`
+--
+
+CREATE TABLE `q_quizes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `quizze_id` bigint(20) UNSIGNED NOT NULL,
+  `ques_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1191,10 +1231,24 @@ ALTER TABLE `questions`
   ADD KEY `FK_Q_Lesson` (`lesson_id`);
 
 --
+-- Indexes for table `quizzes`
+--
+ALTER TABLE `quizzes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_Quizze_Lesson` (`lesson_id`);
+
+--
 -- Indexes for table `q_ans`
 --
 ALTER TABLE `q_ans`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `q_quizes`
+--
+ALTER TABLE `q_quizes`
+  ADD KEY `FK_qq_Quizze` (`quizze_id`),
+  ADD KEY `FK_qq_Question` (`ques_id`);
 
 --
 -- Indexes for table `roles`
@@ -1356,7 +1410,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `payment_method`
 --
 ALTER TABLE `payment_method`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -1368,13 +1422,19 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `quizzes`
+--
+ALTER TABLE `quizzes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `q_ans`
@@ -1481,6 +1541,19 @@ ALTER TABLE `model_has_roles`
 --
 ALTER TABLE `questions`
   ADD CONSTRAINT `FK_Q_Lesson` FOREIGN KEY (`lesson_id`) REFERENCES `lessons` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `quizzes`
+--
+ALTER TABLE `quizzes`
+  ADD CONSTRAINT `FK_Quizze_Lesson` FOREIGN KEY (`lesson_id`) REFERENCES `lessons` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `q_quizes`
+--
+ALTER TABLE `q_quizes`
+  ADD CONSTRAINT `FK_qq_Question` FOREIGN KEY (`ques_id`) REFERENCES `questions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_qq_Quizze` FOREIGN KEY (`quizze_id`) REFERENCES `quizzes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `role_has_permissions`

@@ -57,15 +57,12 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 // Quizze 
 Route::get('/Quizze', [QuizzeController::class, 'quizze'])->name('quizze');
 Route::get('/Quizze/Del/{id}', [QuizzeController::class, 'del_quizze'])->name('del_quizze');
-<<<<<<< HEAD
-=======
 
 // Payment 
 Route::get('/Payment', [PaymentController::class, 'payment'])->name('payment');
 Route::post('/Payment/Add', [PaymentController::class, 'payment_add'])->name('payment_add');
 Route::post('/Payment/Edit', [PaymentController::class, 'payment_edit'])->name('payment_edit');
 Route::get('/Payment/Del', [PaymentController::class, 'del_payment'])->name('del_payment');
->>>>>>> 549c091345352a5c1e325ca1b6a4dd117d9edcba
 
 // Marketing
 Route::get('/Marketing/Commission', [MarketingController::class, 'commission'])->name('commission');
