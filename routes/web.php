@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\CourseSettingController;
 use App\Http\Controllers\Admin\MarketingController;
 use App\Http\Controllers\Admin\QuizzeController;
 use App\Http\Controllers\Admin\PaymentController;
+use App\Http\Controllers\Admin\LiveController;
 
 use App\Http\Controllers\Student\Stu_DashboardController;
 use App\Http\Controllers\Student\Stu_ProfileController;
@@ -74,6 +75,9 @@ Route::get('/Marketing/Payouts', [MarketingController::class, 'payout_r'])->name
 Route::post('/Marketing/Payouts_Reject/{id}', [MarketingController::class, 'reject_payout'])->name('reject_payout');
 Route::get('/Marketing/Accept_Payouts/{id}', [MarketingController::class, 'accept_payout'])->name('accept_payout');
 Route::post('/Marketing/Filter_Payouts', [MarketingController::class, 'filter_payment'])->name('filter_payment');
+
+// Live
+Route::get('/Live', [LiveController::class, 'index'])->name('sessions');
 
 Route::post('/Users/Admin/Edit', [UserController::class, 'admin_edit'])->name('admin_edit');
 Route::get('/Users/Admin/Del/{id}', [UserController::class, 'del_admin'])->name('del_admin');
