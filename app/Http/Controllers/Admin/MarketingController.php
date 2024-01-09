@@ -82,10 +82,11 @@ class MarketingController extends Controller
         return view('Admin.Marketing.Payout', compact('payouts', 'payments'));
     }
 
-    public function reject_payout( $id ){
+    public function reject_payout( $id, Request $req ){
         $payouts = Payout::where('id', $id)
         ->update([
-            'statue' => 'rejected'
+            'statue' => 'rejected',
+            'rejected_reason' => $req->rejected_reason,
         ]);
 
         return redirect()->back();

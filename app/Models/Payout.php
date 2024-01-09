@@ -18,6 +18,7 @@ class Payout extends Model
         'amount',
         'payment_method',
         'statue',
+        'rejected_reason',
     ];
     
     public function payment_m()

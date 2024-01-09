@@ -29,4 +29,8 @@ class Lesson extends Model
     {
         return $this->belongsTo(Chapter::class, 'chapter_id');
     }
+    public function quizze()
+    {
+        return $this->hasMany(quizze::class);
+    }
 }

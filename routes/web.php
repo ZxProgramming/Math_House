@@ -71,7 +71,7 @@ Route::get('/Marketing/Users', [MarketingController::class, 'users'])->name('m_u
 Route::get('/Marketing/Add_Users', [MarketingController::class, 'm_add_users'])->name('m_add_users');
 Route::post('/Marketing/Users/Add', [MarketingController::class, 'affilate_add'])->name('affilate_add');
 Route::get('/Marketing/Payouts', [MarketingController::class, 'payout_r'])->name('payout_r');
-Route::get('/Marketing/Payouts_Reject/{id}', [MarketingController::class, 'reject_payout'])->name('reject_payout');
+Route::post('/Marketing/Payouts_Reject/{id}', [MarketingController::class, 'reject_payout'])->name('reject_payout');
 Route::get('/Marketing/Accept_Payouts/{id}', [MarketingController::class, 'accept_payout'])->name('accept_payout');
 Route::post('/Marketing/Filter_Payouts', [MarketingController::class, 'filter_payment'])->name('filter_payment');
 

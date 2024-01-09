@@ -133,12 +133,16 @@
                         </span>
                         </div>
 
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
-                            Close
-                        </button>
-                        <a href="{{route('reject_payout', ['id'=>$item->id])}}" class="btn btn-danger">Reject</a>
-                        </div>
+                        <form action="{{route('reject_payout', ['id'=>$item->id])}}" method="POST">
+                            <input class="form-control" name="rejected_reason" placeholder="Rejected Reason" />
+                            @csrf
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
+                                Close
+                            </button>
+                            <button class="btn btn-danger">Reject</button>
+                            </div>
+                        </form>
                     </div>
                     </div>
                 </div>
