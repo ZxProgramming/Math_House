@@ -15,7 +15,7 @@
                         </button>
 
                         <!-- Modal -->
-                        <form method="POST" action="{{route('session_edit')}}">
+                        <form method="POST" action="{{route('add_session')}}">
                           @csrf
                         <div class="modal fade" id="AddmodalCenter" tabindex="-1" aria-hidden="true" style="display: none;">
                           <div class="modal-dialog modal-dialog-centered" role="document">

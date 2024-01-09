@@ -79,6 +79,7 @@ Route::post('/Marketing/Filter_Payouts', [MarketingController::class, 'filter_pa
 // Live 
 Route::get('/Live', [LiveController::class, 'index'])->name('sessions');
 Route::post('/Live/Edit', [LiveController::class, 'session_edit'])->name('session_edit');
+Route::post('/Live/Add', [LiveController::class, 'add_session'])->name('add_session');
 Route::get('/Live/Del/{id}', [LiveController::class, 'del_session'])->name('del_session');
 
 Route::post('/Users/Admin/Edit', [UserController::class, 'admin_edit'])->name('admin_edit');

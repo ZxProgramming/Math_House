@@ -48,4 +48,12 @@ class LiveController extends Controller
         return redirect()->back();
     }
 
+    public function add_session( Request $req ){
+        $arr = $req->only('link', 'date', 'from', 'to', 'lesson_id', 'type', 'teacher_id');
+        
+        Session::create($arr);
+        
+        return redirect()->back();
+    }
+
 }
