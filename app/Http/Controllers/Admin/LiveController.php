@@ -31,4 +31,21 @@ class LiveController extends Controller
         compact('sessions', 'categories', 'courses', 'chapters', 'lessons', 'teachers'));
     }
 
+    public function session_edit( Request $req ){
+        $arr = $req->only('link', 'date', 'from', 'to', 'lesson_id', 'type', 'teacher_id');
+        $sessions = Session::
+        where('id', $req->id)
+        ->update($arr);
+        
+        return redirect()->back();
+    }
+
+    public function del_session( $id ){
+        Session::
+        where('id', $id)
+        ->delete();
+        
+        return redirect()->back();
+    }
+
 }

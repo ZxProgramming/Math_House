@@ -76,8 +76,10 @@ Route::post('/Marketing/Payouts_Reject/{id}', [MarketingController::class, 'reje
 Route::get('/Marketing/Accept_Payouts/{id}', [MarketingController::class, 'accept_payout'])->name('accept_payout');
 Route::post('/Marketing/Filter_Payouts', [MarketingController::class, 'filter_payment'])->name('filter_payment');
 
-// Live
+// Live 
 Route::get('/Live', [LiveController::class, 'index'])->name('sessions');
+Route::post('/Live/Edit', [LiveController::class, 'session_edit'])->name('session_edit');
+Route::get('/Live/Del/{id}', [LiveController::class, 'del_session'])->name('del_session');
 
 Route::post('/Users/Admin/Edit', [UserController::class, 'admin_edit'])->name('admin_edit');
 Route::get('/Users/Admin/Del/{id}', [UserController::class, 'del_admin'])->name('del_admin');
