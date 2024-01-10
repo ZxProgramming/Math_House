@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 10, 2024 at 09:53 AM
+-- Generation Time: Jan 10, 2024 at 12:39 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.13
 
@@ -123,9 +123,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
 
 INSERT INTO `categories` (`id`, `cate_name`, `cate_des`, `cate_url`, `created_at`, `updated_at`, `teacher_id`) VALUES
 (1, 'Category 1', 'Category One', '', NULL, NULL, 1),
-(2, 'Category 2', 'Category Two', '', NULL, NULL, 1),
-(4, 'category 3', 'sfggd', '4522024X01X02X11X08X4420231001083656153827_2318787155110616_6392255175880343552_n.jpg', '2024-01-02 09:08:44', '2024-01-02 09:08:44', 8),
-(5, 'asd', 'asd', '2152024X01X04X08X43X2620231001083656153827_2318787155110616_6392255175880343552_n.jpg', '2024-01-04 06:43:26', '2024-01-04 06:43:26', 8);
+(2, 'Category 2', 'Category Two', '', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -605,7 +603,7 @@ CREATE TABLE IF NOT EXISTS `group_days` (
   `updated_at` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_GDays_Group` (`group_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1156,7 +1154,7 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   PRIMARY KEY (`id`),
   KEY `FK_Session_Lesson` (`lesson_id`),
   KEY `FK_Session_Teacher` (`teacher_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `sessions`
@@ -1181,7 +1179,7 @@ CREATE TABLE IF NOT EXISTS `session_groups` (
   `updated_at` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_SessionG_Teacher` (`teacher_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
