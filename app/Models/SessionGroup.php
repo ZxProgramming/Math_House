@@ -6,32 +6,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\User;
-use App\Models\Lesson;
 
-class Session extends Model
+class SessionGroup extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
-        'date', 
-        'link', 
-        'from', 
-        'to', 
-        'lesson_id', 
+        'name', 
         'teacher_id', 
-        'type', 
-        'price',
-        'access_dayes',
-        'repeat',
+        'state',
     ];
- 
-    public function lesson()
-    {
-        return $this->belongsTo(Lesson::class, 'lesson_id');
-    }
- 
+
     public function teacher()
     {
         return $this->belongsTo(User::class, 'teacher_id');
     }
+    // public function quizze()
+    // {
+    //     return $this->hasMany(quizze::class);
+    // }
 }

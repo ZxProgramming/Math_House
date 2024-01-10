@@ -32,7 +32,8 @@ class LiveController extends Controller
     }
 
     public function session_edit( Request $req ){
-        $arr = $req->only('link', 'date', 'from', 'to', 'lesson_id', 'type', 'teacher_id');
+        $arr = $req->only('link', 'date', 'from', 'to', 'lesson_id', 
+        'type', 'access_dayes', 'price', 'teacher_id', 'repeat');
         $sessions = Session::
         where('id', $req->id)
         ->update($arr);
@@ -49,11 +50,16 @@ class LiveController extends Controller
     }
 
     public function add_session( Request $req ){
-        $arr = $req->only('link', 'date', 'from', 'to', 'lesson_id', 'type', 'teacher_id');
+        $arr = $req->only('link', 'date', 'from', 'to', 'lesson_id', 
+        'type', 'teacher_id', 'price', 'access_dayes', 'repeat');
         
         Session::create($arr);
         
         return redirect()->back();
+    }
+
+    public function session_g(){
+        return view('Admin.Live.Groups');
     }
 
 }

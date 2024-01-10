@@ -81,6 +81,7 @@ Route::get('/Live', [LiveController::class, 'index'])->name('sessions');
 Route::post('/Live/Edit', [LiveController::class, 'session_edit'])->name('session_edit');
 Route::post('/Live/Add', [LiveController::class, 'add_session'])->name('add_session');
 Route::get('/Live/Del/{id}', [LiveController::class, 'del_session'])->name('del_session');
+Route::get('/Live/Groups', [LiveController::class, 'session_g'])->name('session_g');
 
 Route::post('/Users/Admin/Edit', [UserController::class, 'admin_edit'])->name('admin_edit');
 Route::get('/Users/Admin/Del/{id}', [UserController::class, 'del_admin'])->name('del_admin');

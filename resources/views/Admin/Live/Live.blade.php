@@ -56,6 +56,37 @@
 
                             <div class="my-2 px-3">
                             <label>
+                                Access Dayes
+                            </label>
+                            <input class='form-control' name="access_dayes" placeholder="Access Dayes" />
+                            </div>
+
+                            <div class="my-2 px-3">
+                            <label>
+                                Price
+                            </label>
+                            <input class='form-control' name="price" placeholder="Price" />
+                            </div>
+
+                            <div class="my-2 px-3">
+                            <label>
+                                Repeat
+                            </label>
+                            <select class="form-control" name="repeat">
+                                <option disabled>
+                                    Select ...
+                                </option>
+                                <option value="Once">
+                                    Once
+                                </option>
+                                <option value="Repeat">
+                                    Repeat
+                                </option>
+                            </select> 
+                            </div>
+
+                            <div class="my-2 px-3">
+                            <label>
                                 Category
                             </label>
                             <select class="form-control sel_cate1">
@@ -311,6 +342,40 @@
                                 To
                             </label>
                             <input class='form-control' name="to" type="time" value="{{$session->to}}" placeholder="Session To" />
+                            </div>
+
+                            <div class="my-2 px-3">
+                            <label>
+                                Access Dayes
+                            </label>
+                            <input class='form-control' value="{{$session->access_dayes}}" name="access_dayes" placeholder="Access Dayes" />
+                            </div>
+
+                            <div class="my-2 px-3">
+                            <label>
+                                Price
+                            </label>
+                            <input class='form-control' value="{{$session->price}}" name="price" placeholder="Price" />
+                            </div>
+
+                            <div class="my-2 px-3">
+                            <label>
+                                Repeat
+                            </label>
+                            <select class="form-control" name="repeat">
+                                <option disabled>
+                                    Select ...
+                                </option>
+                                <option value="{{$session->repeat}}" selected>
+                                    {{$session->repeat}}
+                                </option>
+                                <option value="Once">
+                                    Once
+                                </option>
+                                <option value="Repeat">
+                                    Repeat
+                                </option>
+                            </select> 
                             </div>
 
                             <div class="my-2 px-3">
