@@ -141,24 +141,57 @@
                                     <img src="assets/media/svg/card-logos/mastercard.svg" class="w-35px me-3" alt="">{{ $category->updated_at }}</td>
                                     <td data-order="2020-12-14T20:43:00+02:00">{{ $category->created_at }}</td>
                                     <td class="text-end">
-                                        <a href="#" class="btn btn-sm btn-light btn-flex btn-center btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions 
-                                        <i class="ki-duotone ki-down fs-5 ms-1"></i></a>
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
-                                            <!--begin::Menu item-->
                                             <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3" data-bs-toggle="modal" data-bs-target="#kt_modal_invite_friends{{ $category->id }}">Edit</a>
+                                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_invite_friends{{ $category->id }}">Edit</button>
                                             </div>
                                             <!--end::Menu item-->
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-3">
-                                                <a href="{{ route('categoryDelete',['id'=>$category->id]) }}" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Delete</a>
+                                                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#kt_del_btn{{ $category->id }}">Delete</button>
                                             </div>
                                             <!--end::Menu item-->
-                                        </div>
                                         <!--end::Menu-->
                                     </td>
                                 </tr>
+                                            <div class="modal fade" id="kt_del_btn{{ $category->id }}" tabindex="-1" aria-hidden="true">
+                                                <!--begin::Modal dialog-->
+                                                <div class="modal-dialog mw-650px">
+                                                    <!--begin::Modal content-->
+                                                    <div class="modal-content">
+                                                        <!--begin::Modal header-->
+                                                        <div class="modal-header pb-0 border-0 justify-content-end">
+                                                            <!--begin::Close-->
+                                                            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                                                <i class="ki-duotone ki-cross fs-1">
+                                                                    <span class="path1"></span>
+                                                                    <span class="path2"></span>
+                                                                </i>
+                                                            </div>
+                                                            <!--end::Close-->
+                                                        </div>
+                                                        <!--begin::Modal header-->
+                                                        <!--begin::Modal body-->
+                                                        <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
+                                                         
+                                                            Are You Sure Delete This Category
+                                                            <span class="text-danger">
+                                                                {{$category->cate_name}}
+                                                            </span>
+                                                        <div class="mt-5">
+                                                            <a href="{{ route('categoryDelete',['id'=>$category->id]) }}" class="btn btn-danger">
+                                                                Delete
+                                                            </a>
+                                                            <div class="btn btn-primary" data-bs-dismiss="modal">
+                                                                Cancel
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                        <!--end::Modal body-->
+                                                    </div>
+                                                    <!--end::Modal content-->
+                                                </div>
+                                                <!--end::Modal dialog-->
+                                            </div>
 
                                             {{-- start Model With Edit --}}
                                             <div class="modal fade" id="kt_modal_invite_friends{{ $category->id }}" tabindex="-1" aria-hidden="true">

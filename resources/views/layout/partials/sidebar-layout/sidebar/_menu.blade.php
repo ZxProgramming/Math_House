@@ -1,3 +1,9 @@
+<style>
+	.btn{
+		min-width:120px;
+		margin-top:3px;
+	}
+</style>
 @if ( fun_admin() == 'admin' )
 <!--begin::sidebar menu-->
 <div class="app-sidebar-menu overflow-hidden flex-column-fluid">
