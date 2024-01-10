@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class GroupDay extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'day',
+        'from',
+        'to',
+        'group_id',
+    ];
 }
