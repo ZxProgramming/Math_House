@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\QuestionController;
+use App\Http\Controllers\Admin\QuizzeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,7 @@ use App\Http\Controllers\Admin\QuestionController;
 */
 
 Route::post('/question_type', [QuestionController::class, 'question_type'])->name('question_type')->middleware('auth:sanctum');
+Route::get('/quize_data', [QuizzeController::class, 'quize_data'])->name('quize_data')->middleware('auth:sanctum');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

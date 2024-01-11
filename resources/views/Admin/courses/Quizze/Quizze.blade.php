@@ -747,7 +747,7 @@
 sel_category.addEventListener('change', () => {
       sel_course.innerHTML = `
       <option selected disabled>
-        Select Category
+        Select Course
       </option>
       `;
   course.forEach(element => {
@@ -764,7 +764,7 @@ sel_category.addEventListener('change', () => {
 sel_course.addEventListener('change', () => {
   sel_chapter.innerHTML = `
       <option selected disabled>
-        Select Category
+        Select Chapter
       </option>
       `;
   chapter.forEach(element => {
@@ -781,7 +781,7 @@ sel_course.addEventListener('change', () => {
 sel_chapter.addEventListener('change', () => {
   sel_lesson.innerHTML = `
       <option selected disabled>
-        Select Category
+        Select Lesson
       </option>
       `;
     lesson.forEach(element => {
@@ -795,6 +795,15 @@ sel_chapter.addEventListener('change', () => {
   });
 });
 
+sel_lesson.addEventListener('change', () => {
+  $.ajax("{{route('quize_data')}}", {
+      type: 'GET',  // http method
+      data: { lesson: sel_lesson.value },  // data to submit
+      success: function (data) {
+        console.log(data);
+      },
+  });
+});
 </script>
 <script>
   $("#menu_action").css("display","none");

@@ -23,6 +23,13 @@ class QuizzeController extends Controller
         compact('quizzes', 'categories', 'courses', 'chapters', 'lessons'));
     }
 
+    public function quize_data( Request $req ){
+        $quizzes = quizze::where('lesson_id', $req->lesson)
+        ->get();
+
+        return $quizzes;
+    }
+
     public function del_quizze($id){
         quizze::where('id', $id)
         ->delete();
