@@ -11,6 +11,8 @@ use App\Models\Course;
 use App\Models\Chapter;
 use App\Models\Lesson;
 use App\Models\User;
+use App\Models\SessionGroup;
+use App\Models\GroupDay;
 
 class LiveController extends Controller
 {
@@ -59,7 +61,39 @@ class LiveController extends Controller
     }
 
     public function session_g(){
-        return view('Admin.Live.Groups');
+        $session_g = SessionGroup::all();
+        $teachers = User::where('position', 'teacher')
+        ->get();
+        $students = User::where('position', 'student')
+        ->get();
+        return view('Admin.Live.Groups', 
+        compact('session_g', 'teachers', 'students'));
+    }
+
+    public function g_session_edit( Request $req ){ 
+        $arr = $req->only('name', 'teacher_id');
+        SessionGroup::where('id', $req->id)
+        ->update($arr);
+        GroupDay::where('group_id', $req->id)
+        ->delete();
+
+        for ($i=0, $end = count($req->day); $i < $end; $i++) { 
+            GroupDay::create([
+                'day' => $req->day[$i],
+                'from' => $req->from[$i],
+                'to' => $req->to[$i],
+                'group_id' => $req->id
+            ]);
+        }
+        
+        return redirect()->back();
+    }
+
+    public function del_session_g( $id ){
+        SessionGroup::where('id', $id)
+        ->delete();
+
+        return redirect()->back();
     }
 
 }
