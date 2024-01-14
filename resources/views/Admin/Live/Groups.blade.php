@@ -7,6 +7,123 @@
 <x-default-layout>
     @section('title','Groups')
     @include('success')
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModalCenter">
+  Edit
+</button>
+
+<!-- Modal -->
+<form method="POST" action="{{route('g_session_edit')}}">
+@csrf
+<div class="modal fade" id="addModalCenter" tabindex="-1" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <h5 class="modal-title" id="modalCenterTitle">Edit Session</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>  
+      <div class="px-2">
+      
+      <div class="my-2">
+        <label>
+          Group Name
+        </label>
+        <input class="form-control" name="name" value="{{$item->name}}" placeholder="Group Name" />
+      </div>
+      <div class="s_days">
+      @foreach($item->days as $element)
+      <div class="my-2 d-flex align-items-center s_days_item">
+        <label class="mx-2">
+          Days
+        </label>
+        <select name="day[]" class="form-control">
+          <option value="{{$element->day}}">
+            {{$element->day}}
+          </option>
+          <option value="Sat">
+            Sat
+          </option>
+          <option value="Sun">
+            Sun
+          </option>
+          <option value="Mon">
+            Mon
+          </option>
+          <option value="Tues">
+            Tues
+          </option>
+          <option value="Wed">
+            Wed
+          </option>
+          <option value="Thurs">
+            Thurs
+          </option>
+          <option value="Fri">
+            Fri
+          </option>
+        </select> 
+        <label class="mx-2">
+          From
+        </label>
+        <input type="time" class="form-control" value="{{$element->from}}" name="from[]" placeholder="From" />
+        <label class="mx-2">
+          To
+        </label>
+        <input type="time" class="form-control" value="{{$element->to}}" name="to[]" placeholder="To" />
+      
+        <div class="remove_day">
+        <i style="color:#ff0000; font-size:20px; cursor: pointer;" class="fa fa-minus mx-2"></i>
+        </div>
+      </div>
+      @endforeach
+
+</div>
+      <div class="add_day">
+        <i style="color:#00ff00; font-size:20px;cursor: pointer;" class="fa fa-plus"></i>
+      </div>
+</div>
+
+    <div class="my-2">
+      
+    <select name="teacher_id" class="form-control">
+      <option value="{{$item->teacher->id}}">
+        {{$item->teacher->name}}
+      </option>
+      @foreach( $teachers as $teacher )
+      <option value="{{$teacher->id}}">
+        {{$teacher->name}}
+      </option>
+      @endforeach
+    </select>
+    </div>
+<script>
+        let add_day = document.querySelector('.add_day');
+        let remove_day = document.querySelectorAll('.remove_day');
+        let s_days = document.querySelector('.s_days');
+        let s_days_item = document.querySelector('.s_days_item');
+        add_day.addEventListener('click', () => {
+          s_days.innerHTML += s_days_item.outerHTML;
+        });
+        for (let i = 0, end = remove_day.length; i < end; i++) {
+          remove_day[i].addEventListener('click', ( e ) => {
+              e.target.parentElement.parentElement.remove();
+          });
+        }
+      </script>
+
+      <input type="hidden" value="{{$item->id}}" name="id" />
+      <div class="modal-footer">
+        <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+
 <table id="kt_profile_overview_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable no-footer">
     <thead class="fs-7 text-gray-500 text-uppercase">
             <th class="min-w-250px sorting sorting_desc" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Manager: activate to sort column ascending" style="width: 336.359px;" aria-sort="descending">#</th>
@@ -64,7 +181,7 @@
 
                         <!-- Modal -->
                         <form method="POST" action="{{route('g_session_edit')}}">
-                          @csrf
+                        @csrf
                         <div class="modal fade" id="modalCenter{{$item->id}}" tabindex="-1" aria-hidden="true" style="display: none;">
                           <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">

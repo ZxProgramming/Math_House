@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Jan 10, 2024 at 12:39 PM
--- Server version: 8.2.0
--- PHP Version: 8.2.13
+-- Host: 127.0.0.1
+-- Generation Time: Jan 14, 2024 at 08:25 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,20 +27,18 @@ SET time_zone = "+00:00";
 -- Table structure for table `addresses`
 --
 
-DROP TABLE IF EXISTS `addresses`;
-CREATE TABLE IF NOT EXISTS `addresses` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` bigint UNSIGNED NOT NULL,
-  `address_line_1` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address_line_2` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `city` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `postal_code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `state` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `country` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` tinyint UNSIGNED NOT NULL,
+CREATE TABLE `addresses` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `address_line_1` varchar(191) NOT NULL,
+  `address_line_2` varchar(191) DEFAULT NULL,
+  `city` varchar(191) NOT NULL,
+  `postal_code` varchar(191) NOT NULL,
+  `state` varchar(191) NOT NULL,
+  `country` varchar(191) NOT NULL,
+  `type` tinyint(3) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -49,16 +47,13 @@ CREATE TABLE IF NOT EXISTS `addresses` (
 -- Table structure for table `admin_roles`
 --
 
-DROP TABLE IF EXISTS `admin_roles`;
-CREATE TABLE IF NOT EXISTS `admin_roles` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` bigint UNSIGNED NOT NULL,
-  `admin_role` enum('Marketing','Questions','Teacher','Student','Lesson') COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE `admin_roles` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `admin_role` enum('Marketing','Questions','Teacher','Student','Lesson') NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `admin_roles_user_id_foreign` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `admin_roles`
@@ -78,18 +73,16 @@ INSERT INTO `admin_roles` (`id`, `user_id`, `admin_role`, `created_at`, `updated
 -- Table structure for table `affilate`
 --
 
-DROP TABLE IF EXISTS `affilate`;
-CREATE TABLE IF NOT EXISTS `affilate` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `affilate` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `organization` varchar(255) DEFAULT NULL,
   `wallet` varchar(255) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
-  `updated_at` date DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `affilate`
@@ -104,18 +97,15 @@ INSERT INTO `affilate` (`id`, `name`, `phone`, `email`, `organization`, `wallet`
 -- Table structure for table `categories`
 --
 
-DROP TABLE IF EXISTS `categories`;
-CREATE TABLE IF NOT EXISTS `categories` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `cate_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cate_des` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cate_url` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE `categories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `cate_name` varchar(191) NOT NULL,
+  `cate_des` varchar(191) NOT NULL,
+  `cate_url` varchar(191) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `teacher_id` bigint UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_Categories_Teacher` (`teacher_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `teacher_id` bigint(20) UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `categories`
@@ -131,22 +121,18 @@ INSERT INTO `categories` (`id`, `cate_name`, `cate_des`, `cate_url`, `created_at
 -- Table structure for table `chapters`
 --
 
-DROP TABLE IF EXISTS `chapters`;
-CREATE TABLE IF NOT EXISTS `chapters` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `chapter_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `course_id` bigint UNSIGNED NOT NULL,
-  `ch_des` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ch_url` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pre_requisition` text COLLATE utf8mb4_unicode_ci,
-  `gain` text COLLATE utf8mb4_unicode_ci,
-  `teacher_id` bigint UNSIGNED DEFAULT NULL,
+CREATE TABLE `chapters` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `chapter_name` varchar(191) NOT NULL,
+  `course_id` bigint(20) UNSIGNED NOT NULL,
+  `ch_des` varchar(191) NOT NULL,
+  `ch_url` varchar(191) NOT NULL,
+  `pre_requisition` text DEFAULT NULL,
+  `gain` text DEFAULT NULL,
+  `teacher_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `chapters_course_id_foreign` (`course_id`),
-  KEY `FK_Chapters_Teacher` (`teacher_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `chapters`
@@ -164,18 +150,15 @@ INSERT INTO `chapters` (`id`, `chapter_name`, `course_id`, `ch_des`, `ch_url`, `
 -- Table structure for table `chapter_prices`
 --
 
-DROP TABLE IF EXISTS `chapter_prices`;
-CREATE TABLE IF NOT EXISTS `chapter_prices` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `chapter_prices` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `duration` varchar(20) NOT NULL,
   `price` float NOT NULL,
   `discount` float NOT NULL,
-  `chapter_id` bigint UNSIGNED DEFAULT NULL,
+  `chapter_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` date DEFAULT NULL,
-  `updated_at` date DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_Price_Chapter` (`chapter_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `chapter_prices`
@@ -192,16 +175,13 @@ INSERT INTO `chapter_prices` (`id`, `duration`, `price`, `discount`, `chapter_id
 -- Table structure for table `cities`
 --
 
-DROP TABLE IF EXISTS `cities`;
-CREATE TABLE IF NOT EXISTS `cities` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `cities` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `city` varchar(255) NOT NULL,
-  `country_id` bigint UNSIGNED DEFAULT NULL,
+  `country_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` date DEFAULT NULL,
-  `updated_at` date DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_City_Country` (`country_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -209,16 +189,14 @@ CREATE TABLE IF NOT EXISTS `cities` (
 -- Table structure for table `commissions`
 --
 
-DROP TABLE IF EXISTS `commissions`;
-CREATE TABLE IF NOT EXISTS `commissions` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `commissions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `precentage` float NOT NULL,
-  `state` tinyint(1) NOT NULL DEFAULT '1',
+  `state` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` date DEFAULT NULL,
-  `updated_at` date DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `commissions`
@@ -237,15 +215,13 @@ INSERT INTO `commissions` (`id`, `name`, `precentage`, `state`, `created_at`, `u
 -- Table structure for table `confirm_sign`
 --
 
-DROP TABLE IF EXISTS `confirm_sign`;
-CREATE TABLE IF NOT EXISTS `confirm_sign` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `confirm_sign` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `email` varchar(255) NOT NULL,
   `code` varchar(20) NOT NULL,
   `created_at` date DEFAULT NULL,
-  `updated_at` date DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3;
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `confirm_sign`
@@ -273,14 +249,12 @@ INSERT INTO `confirm_sign` (`id`, `email`, `code`, `created_at`, `updated_at`) V
 -- Table structure for table `countries`
 --
 
-DROP TABLE IF EXISTS `countries`;
-CREATE TABLE IF NOT EXISTS `countries` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `countries` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=206 DEFAULT CHARSET=latin1;
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `countries`
@@ -490,26 +464,22 @@ INSERT INTO `countries` (`id`, `name`, `created_at`, `updated_at`) VALUES
 -- Table structure for table `courses`
 --
 
-DROP TABLE IF EXISTS `courses`;
-CREATE TABLE IF NOT EXISTS `courses` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `course_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `category_id` bigint UNSIGNED NOT NULL,
+CREATE TABLE `courses` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `course_name` varchar(191) NOT NULL,
+  `category_id` bigint(20) UNSIGNED NOT NULL,
   `course_price` double(8,2) NOT NULL,
-  `course_des` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `course_url` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pre_requisition` text COLLATE utf8mb4_unicode_ci,
-  `gain` text COLLATE utf8mb4_unicode_ci,
+  `course_des` varchar(191) NOT NULL,
+  `course_url` varchar(191) NOT NULL,
+  `pre_requisition` text DEFAULT NULL,
+  `gain` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `teacher_id` bigint UNSIGNED DEFAULT NULL,
-  `user_id` bigint UNSIGNED DEFAULT NULL,
-  `duration` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `discount` float DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `courses_category_id_foreign` (`category_id`),
-  KEY `FK_Course_Teacher` (`teacher_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `teacher_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `duration` varchar(255) DEFAULT NULL,
+  `discount` float DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `courses`
@@ -527,14 +497,12 @@ INSERT INTO `courses` (`id`, `course_name`, `category_id`, `course_price`, `cour
 -- Table structure for table `exam_codes`
 --
 
-DROP TABLE IF EXISTS `exam_codes`;
-CREATE TABLE IF NOT EXISTS `exam_codes` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `exam_codes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `exam_code` varchar(255) NOT NULL,
   `created_at` date NOT NULL,
-  `updated_at` date NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+  `updated_at` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `exam_codes`
@@ -549,17 +517,14 @@ INSERT INTO `exam_codes` (`id`, `exam_code`, `created_at`, `updated_at`) VALUES
 -- Table structure for table `failed_jobs`
 --
 
-DROP TABLE IF EXISTS `failed_jobs`;
-CREATE TABLE IF NOT EXISTS `failed_jobs` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `uuid` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` varchar(191) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -568,15 +533,13 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
 -- Table structure for table `grid_ans`
 --
 
-DROP TABLE IF EXISTS `grid_ans`;
-CREATE TABLE IF NOT EXISTS `grid_ans` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `grid_ans` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `grid_ans` text NOT NULL,
-  `q_id` bigint UNSIGNED NOT NULL,
+  `q_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` date DEFAULT NULL,
-  `updated_at` date DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `grid_ans`
@@ -592,18 +555,45 @@ INSERT INTO `grid_ans` (`id`, `grid_ans`, `q_id`, `created_at`, `updated_at`) VA
 -- Table structure for table `group_days`
 --
 
-DROP TABLE IF EXISTS `group_days`;
-CREATE TABLE IF NOT EXISTS `group_days` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `group_days` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `day` enum('Sat','Sun','Mon','Tues','Wed','Thurs','Fri') NOT NULL,
   `from` time NOT NULL,
   `to` time NOT NULL,
-  `group_id` bigint UNSIGNED NOT NULL,
-  `created_at` int NOT NULL,
-  `updated_at` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_GDays_Group` (`group_id`)
+  `group_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `group_days`
+--
+
+INSERT INTO `group_days` (`id`, `day`, `from`, `to`, `group_id`, `created_at`, `updated_at`) VALUES
+(3, 'Sun', '10:44:21', '12:45:21', 1, '2024-01-11', '2024-01-11'),
+(4, 'Sun', '12:05:27', '11:05:27', 1, '2024-01-11', '2024-01-11');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `group_students`
+--
+
+CREATE TABLE `group_students` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `group_id` bigint(20) UNSIGNED NOT NULL,
+  `stu_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `group_students`
+--
+
+INSERT INTO `group_students` (`id`, `group_id`, `stu_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 5, '0000-00-00', '0000-00-00'),
+(2, 1, 7, '0000-00-00', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -611,20 +601,17 @@ CREATE TABLE IF NOT EXISTS `group_days` (
 -- Table structure for table `idea_lessons`
 --
 
-DROP TABLE IF EXISTS `idea_lessons`;
-CREATE TABLE IF NOT EXISTS `idea_lessons` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idea_lessons` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `idea` varchar(255) DEFAULT NULL,
   `syllabus` varchar(255) DEFAULT NULL,
-  `idea_order` int DEFAULT NULL,
+  `idea_order` int(11) DEFAULT NULL,
   `pdf` varchar(255) DEFAULT NULL,
   `v_link` varchar(255) DEFAULT NULL,
-  `lesson_id` bigint UNSIGNED DEFAULT NULL,
+  `lesson_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` date DEFAULT NULL,
-  `updated_at` date DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_Idea_Lesson` (`lesson_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `idea_lessons`
@@ -642,22 +629,18 @@ INSERT INTO `idea_lessons` (`id`, `idea`, `syllabus`, `idea_order`, `pdf`, `v_li
 -- Table structure for table `lessons`
 --
 
-DROP TABLE IF EXISTS `lessons`;
-CREATE TABLE IF NOT EXISTS `lessons` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `lesson_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `chapter_id` bigint UNSIGNED NOT NULL,
-  `teacher_id` bigint UNSIGNED DEFAULT NULL,
-  `lesson_des` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `lesson_url` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pre_requisition` text COLLATE utf8mb4_unicode_ci,
-  `gain` text COLLATE utf8mb4_unicode_ci,
+CREATE TABLE `lessons` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `lesson_name` varchar(191) NOT NULL,
+  `chapter_id` bigint(20) UNSIGNED NOT NULL,
+  `teacher_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `lesson_des` varchar(191) NOT NULL,
+  `lesson_url` varchar(191) NOT NULL,
+  `pre_requisition` text DEFAULT NULL,
+  `gain` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_Lesson_Chapter` (`chapter_id`),
-  KEY `FK_Lesson_Teacher` (`teacher_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `lessons`
@@ -679,19 +662,13 @@ INSERT INTO `lessons` (`id`, `lesson_name`, `chapter_id`, `teacher_id`, `lesson_
 -- Table structure for table `marketings`
 --
 
-DROP TABLE IF EXISTS `marketings`;
-CREATE TABLE IF NOT EXISTS `marketings` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `course_id` bigint UNSIGNED DEFAULT NULL,
-  `chapter_id` bigint UNSIGNED DEFAULT NULL,
-  `affilate_id` bigint UNSIGNED NOT NULL,
-  `student_id` bigint UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_Maketing_Affilate` (`affilate_id`),
-  KEY `FK_Maketing_Chapter` (`chapter_id`),
-  KEY `FK_Maketing_Course` (`course_id`),
-  KEY `FK_Maketing_Student` (`student_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb3;
+CREATE TABLE `marketings` (
+  `id` int(11) NOT NULL,
+  `course_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `chapter_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `affilate_id` bigint(20) UNSIGNED NOT NULL,
+  `student_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -699,16 +676,14 @@ CREATE TABLE IF NOT EXISTS `marketings` (
 -- Table structure for table `mcq_ans`
 --
 
-DROP TABLE IF EXISTS `mcq_ans`;
-CREATE TABLE IF NOT EXISTS `mcq_ans` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `mcq_ans` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `mcq_ans` varchar(255) DEFAULT NULL,
   `mcq_answers` varchar(255) DEFAULT NULL,
-  `q_id` bigint UNSIGNED NOT NULL,
+  `q_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` date DEFAULT NULL,
-  `updated_at` date DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb3;
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `mcq_ans`
@@ -737,13 +712,11 @@ INSERT INTO `mcq_ans` (`id`, `mcq_ans`, `mcq_answers`, `q_id`, `created_at`, `up
 -- Table structure for table `migrations`
 --
 
-DROP TABLE IF EXISTS `migrations`;
-CREATE TABLE IF NOT EXISTS `migrations` (
-  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(191) NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -769,13 +742,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- Table structure for table `model_has_permissions`
 --
 
-DROP TABLE IF EXISTS `model_has_permissions`;
-CREATE TABLE IF NOT EXISTS `model_has_permissions` (
-  `permission_id` bigint UNSIGNED NOT NULL,
-  `model_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `model_id` bigint UNSIGNED NOT NULL,
-  PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
-  KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`)
+CREATE TABLE `model_has_permissions` (
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(191) NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -784,13 +754,10 @@ CREATE TABLE IF NOT EXISTS `model_has_permissions` (
 -- Table structure for table `model_has_roles`
 --
 
-DROP TABLE IF EXISTS `model_has_roles`;
-CREATE TABLE IF NOT EXISTS `model_has_roles` (
-  `role_id` bigint UNSIGNED NOT NULL,
-  `model_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `model_id` bigint UNSIGNED NOT NULL,
-  PRIMARY KEY (`role_id`,`model_id`,`model_type`),
-  KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`)
+CREATE TABLE `model_has_roles` (
+  `role_id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(191) NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -799,12 +766,10 @@ CREATE TABLE IF NOT EXISTS `model_has_roles` (
 -- Table structure for table `password_resets`
 --
 
-DROP TABLE IF EXISTS `password_resets`;
-CREATE TABLE IF NOT EXISTS `password_resets` (
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  KEY `password_resets_email_index` (`email`)
+CREATE TABLE `password_resets` (
+  `email` varchar(191) NOT NULL,
+  `token` varchar(191) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -813,16 +778,14 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
 -- Table structure for table `payment_method`
 --
 
-DROP TABLE IF EXISTS `payment_method`;
-CREATE TABLE IF NOT EXISTS `payment_method` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `payment_method` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `payment` varchar(255) NOT NULL,
   `logo` varchar(255) DEFAULT NULL,
-  `statue` tinyint(1) DEFAULT '0',
+  `statue` tinyint(1) DEFAULT 0,
   `created_at` date DEFAULT NULL,
-  `updated_at` date DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `payment_method`
@@ -837,20 +800,16 @@ INSERT INTO `payment_method` (`id`, `payment`, `logo`, `statue`, `created_at`, `
 -- Table structure for table `payouts`
 --
 
-DROP TABLE IF EXISTS `payouts`;
-CREATE TABLE IF NOT EXISTS `payouts` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `payouts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `date` date NOT NULL,
-  `affilate_id` bigint UNSIGNED NOT NULL,
+  `affilate_id` bigint(20) UNSIGNED NOT NULL,
   `amount` float NOT NULL,
-  `payment_method` bigint UNSIGNED DEFAULT NULL,
+  `payment_method` bigint(20) UNSIGNED DEFAULT NULL,
   `statue` enum('pendding','approve','rejected') NOT NULL DEFAULT 'pendding',
   `created_at` date DEFAULT NULL,
-  `updated_at` date DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_Payout_Affilate` (`affilate_id`),
-  KEY `FK_Payment_Method` (`payment_method`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `payouts`
@@ -865,15 +824,12 @@ INSERT INTO `payouts` (`id`, `date`, `affilate_id`, `amount`, `payment_method`, 
 -- Table structure for table `permissions`
 --
 
-DROP TABLE IF EXISTS `permissions`;
-CREATE TABLE IF NOT EXISTS `permissions` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `guard_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE `permissions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `guard_name` varchar(191) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -882,22 +838,18 @@ CREATE TABLE IF NOT EXISTS `permissions` (
 -- Table structure for table `personal_access_tokens`
 --
 
-DROP TABLE IF EXISTS `personal_access_tokens`;
-CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `tokenable_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tokenable_id` bigint UNSIGNED NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci,
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(191) NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
-  KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `personal_access_tokens`
@@ -986,7 +938,10 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (80, 'App\\Models\\User', 8, 'user', 'b8e00280da3240adece1c3c6ad264b374ebac01e1fd509b7fbc8d7239dab630b', '[\"*\"]', NULL, NULL, '2024-01-07 05:57:11', '2024-01-07 05:57:11'),
 (81, 'App\\Models\\User', 8, 'user', 'a0848ebbd4273d7065cd3f70a41533d307f1aa534ea85c942c17d5c0c1f53576', '[\"*\"]', NULL, NULL, '2024-01-07 09:14:34', '2024-01-07 09:14:34'),
 (82, 'App\\Models\\User', 8, 'user', '430724e62921c13659f73275a1bce37d854066144ffc3d3d8e926f92c0062020', '[\"*\"]', NULL, NULL, '2024-01-08 05:24:23', '2024-01-08 05:24:23'),
-(83, 'App\\Models\\User', 8, 'user', 'd6632945fbaf153776c6417a3b477a454debd8cec6301f10d88bc8fe26e688b3', '[\"*\"]', NULL, NULL, '2024-01-10 07:17:40', '2024-01-10 07:17:40');
+(83, 'App\\Models\\User', 8, 'user', 'd6632945fbaf153776c6417a3b477a454debd8cec6301f10d88bc8fe26e688b3', '[\"*\"]', NULL, NULL, '2024-01-10 07:17:40', '2024-01-10 07:17:40'),
+(84, 'App\\Models\\User', 8, 'user', '5ba3fa08446f7bc39cc46d09e66f679f6bee57d3bee7ba70125dca65864ba70c', '[\"*\"]', NULL, NULL, '2024-01-10 15:06:34', '2024-01-10 15:06:34'),
+(85, 'App\\Models\\User', 8, 'user', 'a10327119e72251f73a5aad56fe379feb30332aa4bc8895f3c94323c8decb493', '[\"*\"]', NULL, NULL, '2024-01-11 07:59:46', '2024-01-11 07:59:46'),
+(86, 'App\\Models\\User', 8, 'user', '9a0ea9f880feeaf7097ba69fcac065817a258066cb9e9de21e07229248c689b6', '[\"*\"]', NULL, NULL, '2024-01-14 05:25:18', '2024-01-14 05:25:18');
 
 -- --------------------------------------------------------
 
@@ -994,10 +949,9 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 -- Table structure for table `questions`
 --
 
-DROP TABLE IF EXISTS `questions`;
-CREATE TABLE IF NOT EXISTS `questions` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `lesson_id` bigint UNSIGNED NOT NULL,
+CREATE TABLE `questions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `lesson_id` bigint(20) UNSIGNED NOT NULL,
   `question` text NOT NULL,
   `q_url` varchar(255) DEFAULT NULL,
   `q_code` varchar(255) DEFAULT NULL,
@@ -1009,10 +963,8 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `difficulty` enum('A','B','C','D','E') NOT NULL,
   `ans_type` enum('MCQ','Grid_in') DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
-  `created_at` date DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_Q_Lesson` (`lesson_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3;
+  `created_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `questions`
@@ -1027,21 +979,18 @@ INSERT INTO `questions` (`id`, `lesson_id`, `question`, `q_url`, `q_code`, `q_ty
 -- Table structure for table `quizzes`
 --
 
-DROP TABLE IF EXISTS `quizzes`;
-CREATE TABLE IF NOT EXISTS `quizzes` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `quizzes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `title` varchar(255) DEFAULT NULL,
-  `description` text,
+  `description` text DEFAULT NULL,
   `time` varchar(255) DEFAULT NULL,
-  `score` int DEFAULT NULL,
+  `score` int(11) DEFAULT NULL,
   `pass_score` float DEFAULT NULL,
-  `lesson_id` bigint UNSIGNED DEFAULT NULL,
-  `state` tinyint(1) NOT NULL DEFAULT '0',
+  `lesson_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `state` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` date DEFAULT NULL,
-  `updated_at` date DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_Quizze_Lesson` (`lesson_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `quizzes`
@@ -1056,16 +1005,14 @@ INSERT INTO `quizzes` (`id`, `title`, `description`, `time`, `score`, `pass_scor
 -- Table structure for table `q_ans`
 --
 
-DROP TABLE IF EXISTS `q_ans`;
-CREATE TABLE IF NOT EXISTS `q_ans` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `q_ans` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `ans_pdf` varchar(255) DEFAULT NULL,
   `ans_video` varchar(255) DEFAULT NULL,
-  `Q_id` bigint UNSIGNED NOT NULL,
+  `Q_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` date DEFAULT NULL,
-  `updated_at` date DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3;
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `q_ans`
@@ -1088,16 +1035,13 @@ INSERT INTO `q_ans` (`id`, `ans_pdf`, `ans_video`, `Q_id`, `created_at`, `update
 -- Table structure for table `q_quizes`
 --
 
-DROP TABLE IF EXISTS `q_quizes`;
-CREATE TABLE IF NOT EXISTS `q_quizes` (
-  `id` bigint UNSIGNED NOT NULL,
-  `quizze_id` bigint UNSIGNED NOT NULL,
-  `ques_id` bigint UNSIGNED NOT NULL,
+CREATE TABLE `q_quizes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `quizze_id` bigint(20) UNSIGNED NOT NULL,
+  `ques_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` date DEFAULT NULL,
-  `updated_at` date DEFAULT NULL,
-  KEY `FK_qq_Quizze` (`quizze_id`),
-  KEY `FK_qq_Question` (`ques_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1105,15 +1049,12 @@ CREATE TABLE IF NOT EXISTS `q_quizes` (
 -- Table structure for table `roles`
 --
 
-DROP TABLE IF EXISTS `roles`;
-CREATE TABLE IF NOT EXISTS `roles` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `guard_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE `roles` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `guard_name` varchar(191) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `roles_name_guard_name_unique` (`name`,`guard_name`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1122,12 +1063,9 @@ CREATE TABLE IF NOT EXISTS `roles` (
 -- Table structure for table `role_has_permissions`
 --
 
-DROP TABLE IF EXISTS `role_has_permissions`;
-CREATE TABLE IF NOT EXISTS `role_has_permissions` (
-  `permission_id` bigint UNSIGNED NOT NULL,
-  `role_id` bigint UNSIGNED NOT NULL,
-  PRIMARY KEY (`permission_id`,`role_id`),
-  KEY `role_has_permissions_role_id_foreign` (`role_id`)
+CREATE TABLE `role_has_permissions` (
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `role_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1136,25 +1074,21 @@ CREATE TABLE IF NOT EXISTS `role_has_permissions` (
 -- Table structure for table `sessions`
 --
 
-DROP TABLE IF EXISTS `sessions`;
-CREATE TABLE IF NOT EXISTS `sessions` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `sessions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `date` date NOT NULL,
   `link` varchar(255) NOT NULL,
   `from` time NOT NULL,
   `to` time NOT NULL,
-  `lesson_id` bigint UNSIGNED NOT NULL,
-  `teacher_id` bigint UNSIGNED NOT NULL,
+  `lesson_id` bigint(20) UNSIGNED NOT NULL,
+  `teacher_id` bigint(20) UNSIGNED NOT NULL,
   `type` enum('group','private','session') NOT NULL,
   `price` float NOT NULL,
-  `access_dayes` int NOT NULL,
+  `access_dayes` int(11) NOT NULL,
   `repeat` enum('Once','Repeat') NOT NULL,
   `created_at` date DEFAULT NULL,
-  `updated_at` date DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_Session_Lesson` (`lesson_id`),
-  KEY `FK_Session_Teacher` (`teacher_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `sessions`
@@ -1169,17 +1103,21 @@ INSERT INTO `sessions` (`id`, `date`, `link`, `from`, `to`, `lesson_id`, `teache
 -- Table structure for table `session_groups`
 --
 
-DROP TABLE IF EXISTS `session_groups`;
-CREATE TABLE IF NOT EXISTS `session_groups` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `session_groups` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
-  `teacher_id` bigint UNSIGNED NOT NULL,
-  `state` tinyint(1) NOT NULL DEFAULT '0',
+  `teacher_id` bigint(20) UNSIGNED NOT NULL,
+  `state` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` date DEFAULT NULL,
-  `updated_at` date DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_SessionG_Teacher` (`teacher_id`)
+  `updated_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `session_groups`
+--
+
+INSERT INTO `session_groups` (`id`, `name`, `teacher_id`, `state`, `created_at`, `updated_at`) VALUES
+(1, 'group 2', 10, 1, NULL, '2024-01-11');
 
 -- --------------------------------------------------------
 
@@ -1187,17 +1125,12 @@ CREATE TABLE IF NOT EXISTS `session_groups` (
 -- Table structure for table `teacher__courses`
 --
 
-DROP TABLE IF EXISTS `teacher__courses`;
-CREATE TABLE IF NOT EXISTS `teacher__courses` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` bigint UNSIGNED NOT NULL,
-  `course_id` bigint UNSIGNED NOT NULL,
-  `category_id` bigint UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_tc_category` (`category_id`),
-  KEY `FK_tc_course` (`course_id`),
-  KEY `FK_tc_user` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+CREATE TABLE `teacher__courses` (
+  `id` int(11) NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `course_id` bigint(20) UNSIGNED NOT NULL,
+  `category_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1205,38 +1138,33 @@ CREATE TABLE IF NOT EXISTS `teacher__courses` (
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `f_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `l_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `profile_photo_path` varchar(2048) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `f_name` varchar(255) DEFAULT NULL,
+  `l_name` varchar(255) DEFAULT NULL,
+  `name` varchar(191) NOT NULL,
+  `email` varchar(191) NOT NULL,
+  `profile_photo_path` varchar(2048) DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `phone` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `parent_phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `parent_email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'default.png',
-  `city_id` bigint UNSIGNED DEFAULT NULL,
-  `position` enum('super_admin','admin','student','teacher','affilate') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `grade` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `course_id` bigint UNSIGNED DEFAULT NULL,
-  `category_id` bigint UNSIGNED DEFAULT NULL,
-  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `state` enum('hidden','Show') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `avatar` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `extra_email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(191) NOT NULL,
+  `parent_phone` varchar(191) DEFAULT NULL,
+  `parent_email` varchar(191) DEFAULT NULL,
+  `image` varchar(255) NOT NULL DEFAULT 'default.png',
+  `city_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `position` enum('super_admin','admin','student','teacher','affilate') NOT NULL,
+  `grade` varchar(20) DEFAULT NULL,
+  `course_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `category_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `password` varchar(191) NOT NULL,
+  `state` enum('hidden','Show') NOT NULL,
+  `avatar` varchar(191) DEFAULT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
+  `extra_email` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `last_login_at` datetime DEFAULT NULL,
-  `last_login_ip` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`),
-  KEY `FK_Teacher_Categories` (`category_id`),
-  KEY `FK_Teacher_Course` (`course_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `last_login_ip` varchar(191) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
@@ -1260,14 +1188,492 @@ INSERT INTO `users` (`id`, `f_name`, `l_name`, `name`, `email`, `profile_photo_p
 -- Table structure for table `wallets`
 --
 
-DROP TABLE IF EXISTS `wallets`;
-CREATE TABLE IF NOT EXISTS `wallets` (
-  `id` bigint NOT NULL,
-  `student_id` bigint UNSIGNED NOT NULL,
-  `wallet` int NOT NULL,
-  `date` date NOT NULL,
-  KEY `FK_Wallet_Student` (`student_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+CREATE TABLE `wallets` (
+  `id` bigint(20) NOT NULL,
+  `student_id` bigint(20) UNSIGNED NOT NULL,
+  `wallet` int(11) NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `addresses`
+--
+ALTER TABLE `addresses`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `admin_roles`
+--
+ALTER TABLE `admin_roles`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `admin_roles_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `affilate`
+--
+ALTER TABLE `affilate`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_Categories_Teacher` (`teacher_id`);
+
+--
+-- Indexes for table `chapters`
+--
+ALTER TABLE `chapters`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `chapters_course_id_foreign` (`course_id`),
+  ADD KEY `FK_Chapters_Teacher` (`teacher_id`);
+
+--
+-- Indexes for table `chapter_prices`
+--
+ALTER TABLE `chapter_prices`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_Price_Chapter` (`chapter_id`);
+
+--
+-- Indexes for table `cities`
+--
+ALTER TABLE `cities`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_City_Country` (`country_id`);
+
+--
+-- Indexes for table `commissions`
+--
+ALTER TABLE `commissions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `confirm_sign`
+--
+ALTER TABLE `confirm_sign`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `countries`
+--
+ALTER TABLE `countries`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `courses`
+--
+ALTER TABLE `courses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `courses_category_id_foreign` (`category_id`),
+  ADD KEY `FK_Course_Teacher` (`teacher_id`);
+
+--
+-- Indexes for table `exam_codes`
+--
+ALTER TABLE `exam_codes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `grid_ans`
+--
+ALTER TABLE `grid_ans`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `group_days`
+--
+ALTER TABLE `group_days`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_GDays_Group` (`group_id`);
+
+--
+-- Indexes for table `group_students`
+--
+ALTER TABLE `group_students`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_GStu_Group` (`group_id`),
+  ADD KEY `FK_GStu_Student` (`stu_id`);
+
+--
+-- Indexes for table `idea_lessons`
+--
+ALTER TABLE `idea_lessons`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_Idea_Lesson` (`lesson_id`);
+
+--
+-- Indexes for table `lessons`
+--
+ALTER TABLE `lessons`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_Lesson_Chapter` (`chapter_id`),
+  ADD KEY `FK_Lesson_Teacher` (`teacher_id`);
+
+--
+-- Indexes for table `marketings`
+--
+ALTER TABLE `marketings`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_Maketing_Affilate` (`affilate_id`),
+  ADD KEY `FK_Maketing_Chapter` (`chapter_id`),
+  ADD KEY `FK_Maketing_Course` (`course_id`),
+  ADD KEY `FK_Maketing_Student` (`student_id`);
+
+--
+-- Indexes for table `mcq_ans`
+--
+ALTER TABLE `mcq_ans`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `model_has_permissions`
+--
+ALTER TABLE `model_has_permissions`
+  ADD PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
+  ADD KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`);
+
+--
+-- Indexes for table `model_has_roles`
+--
+ALTER TABLE `model_has_roles`
+  ADD PRIMARY KEY (`role_id`,`model_id`,`model_type`),
+  ADD KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`);
+
+--
+-- Indexes for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `payment_method`
+--
+ALTER TABLE `payment_method`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payouts`
+--
+ALTER TABLE `payouts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_Payout_Affilate` (`affilate_id`),
+  ADD KEY `FK_Payment_Method` (`payment_method`);
+
+--
+-- Indexes for table `permissions`
+--
+ALTER TABLE `permissions`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`);
+
+--
+-- Indexes for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indexes for table `questions`
+--
+ALTER TABLE `questions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_Q_Lesson` (`lesson_id`);
+
+--
+-- Indexes for table `quizzes`
+--
+ALTER TABLE `quizzes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_Quizze_Lesson` (`lesson_id`);
+
+--
+-- Indexes for table `q_ans`
+--
+ALTER TABLE `q_ans`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `q_quizes`
+--
+ALTER TABLE `q_quizes`
+  ADD KEY `FK_qq_Quizze` (`quizze_id`),
+  ADD KEY `FK_qq_Question` (`ques_id`);
+
+--
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `roles_name_guard_name_unique` (`name`,`guard_name`);
+
+--
+-- Indexes for table `role_has_permissions`
+--
+ALTER TABLE `role_has_permissions`
+  ADD PRIMARY KEY (`permission_id`,`role_id`),
+  ADD KEY `role_has_permissions_role_id_foreign` (`role_id`);
+
+--
+-- Indexes for table `sessions`
+--
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_Session_Lesson` (`lesson_id`),
+  ADD KEY `FK_Session_Teacher` (`teacher_id`);
+
+--
+-- Indexes for table `session_groups`
+--
+ALTER TABLE `session_groups`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_SessionG_Teacher` (`teacher_id`);
+
+--
+-- Indexes for table `teacher__courses`
+--
+ALTER TABLE `teacher__courses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_tc_category` (`category_id`),
+  ADD KEY `FK_tc_course` (`course_id`),
+  ADD KEY `FK_tc_user` (`user_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`),
+  ADD KEY `FK_Teacher_Categories` (`category_id`),
+  ADD KEY `FK_Teacher_Course` (`course_id`);
+
+--
+-- Indexes for table `wallets`
+--
+ALTER TABLE `wallets`
+  ADD KEY `FK_Wallet_Student` (`student_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `addresses`
+--
+ALTER TABLE `addresses`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `admin_roles`
+--
+ALTER TABLE `admin_roles`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT for table `affilate`
+--
+ALTER TABLE `affilate`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `chapters`
+--
+ALTER TABLE `chapters`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `chapter_prices`
+--
+ALTER TABLE `chapter_prices`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `cities`
+--
+ALTER TABLE `cities`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `commissions`
+--
+ALTER TABLE `commissions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `confirm_sign`
+--
+ALTER TABLE `confirm_sign`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `countries`
+--
+ALTER TABLE `countries`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=206;
+
+--
+-- AUTO_INCREMENT for table `courses`
+--
+ALTER TABLE `courses`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `exam_codes`
+--
+ALTER TABLE `exam_codes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `grid_ans`
+--
+ALTER TABLE `grid_ans`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `group_days`
+--
+ALTER TABLE `group_days`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `group_students`
+--
+ALTER TABLE `group_students`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `idea_lessons`
+--
+ALTER TABLE `idea_lessons`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `lessons`
+--
+ALTER TABLE `lessons`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `marketings`
+--
+ALTER TABLE `marketings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `mcq_ans`
+--
+ALTER TABLE `mcq_ans`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `payment_method`
+--
+ALTER TABLE `payment_method`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `payouts`
+--
+ALTER TABLE `payouts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `permissions`
+--
+ALTER TABLE `permissions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+
+--
+-- AUTO_INCREMENT for table `questions`
+--
+ALTER TABLE `questions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `quizzes`
+--
+ALTER TABLE `quizzes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `q_ans`
+--
+ALTER TABLE `q_ans`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `sessions`
+--
+ALTER TABLE `sessions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `session_groups`
+--
+ALTER TABLE `session_groups`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `teacher__courses`
+--
+ALTER TABLE `teacher__courses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- Constraints for dumped tables
@@ -1289,8 +1695,8 @@ ALTER TABLE `categories`
 -- Constraints for table `chapters`
 --
 ALTER TABLE `chapters`
-  ADD CONSTRAINT `chapters_course_id_foreign` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_Chapters_Teacher` FOREIGN KEY (`teacher_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_Chapters_Teacher` FOREIGN KEY (`teacher_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `chapters_course_id_foreign` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `chapter_prices`
@@ -1308,14 +1714,21 @@ ALTER TABLE `cities`
 -- Constraints for table `courses`
 --
 ALTER TABLE `courses`
-  ADD CONSTRAINT `courses_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_Course_Teacher` FOREIGN KEY (`teacher_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_Course_Teacher` FOREIGN KEY (`teacher_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `courses_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `group_days`
 --
 ALTER TABLE `group_days`
   ADD CONSTRAINT `FK_GDays_Group` FOREIGN KEY (`group_id`) REFERENCES `session_groups` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `group_students`
+--
+ALTER TABLE `group_students`
+  ADD CONSTRAINT `FK_GStu_Group` FOREIGN KEY (`group_id`) REFERENCES `session_groups` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_GStu_Student` FOREIGN KEY (`stu_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `idea_lessons`
