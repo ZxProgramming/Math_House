@@ -70,6 +70,21 @@ class LiveController extends Controller
         compact('session_g', 'teachers', 'students'));
     }
 
+    public function g_session_add( Request $req ){
+        $arr = $req->only('name', 'teacher_id', 'state');
+        $session_g = SessionGroup::create($arr);
+        for ($i=0, $end = count($req->day); $i < $end; $i++) {
+            GroupDay::create([
+                'day' => $req->day[$i],
+                'from' => $req->from[$i],
+                'to' => $req->to[$i],
+                'group_id' => $session_g->id,
+            ]);
+        }
+
+        return redirect()->back();
+    }
+
     public function g_session_edit( Request $req ){ 
         $arr = $req->only('name', 'teacher_id');
         SessionGroup::where('id', $req->id)

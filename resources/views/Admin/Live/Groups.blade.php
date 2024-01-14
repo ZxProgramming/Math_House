@@ -8,12 +8,25 @@
     @section('title','Groups')
     @include('success')
 <!-- Button trigger modal -->
+<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
+		<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+		<!--begin::Fonts(mandatory for all pages)-->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
+		<!--end::Fonts-->
+		<!--begin::Vendor Stylesheets(used for this page only)-->
+		<link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+		<!--end::Vendor Stylesheets-->
+		<!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+		<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+		<!--end::Global Stylesheets Bundle-->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModalCenter">
   Add New Group
 </button>
-
+<script>var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-bs-theme-mode")) { themeMode = document.documentElement.getAttribute("data-bs-theme-mode"); } else { if ( localStorage.getItem("data-bs-theme") !== null ) { themeMode = localStorage.getItem("data-bs-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-bs-theme", themeMode); }</script>
+		
 <!-- Modal -->
-<form method="POST" action="{{route('g_session_edit')}}">
+<form method="POST" action="{{route('g_session_add')}}">
 @csrf
 <div class="modal fade" id="addModalCenter" tabindex="-1" aria-hidden="true" style="display: none;">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -100,6 +113,31 @@
   @endforeach
 </select>
 </div>
+
+<div class="my-2">
+  <label class="form-check form-switch form-check-custom form-check-solid">
+    <input class="form-check-input" name="state" type="checkbox" value="1" checked="checked">
+    <span class="form-check-label fw-semibold text-muted">Active</span>
+  </label>
+</div>
+<div class="d-flex flex-column mb-8 fv-row">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+									<span>Student</span>
+									<span class="ms-1" data-bs-toggle="tooltip" aria-label="Specify a target priorty" data-bs-original-title="Specify a target priorty" data-kt-initialized="1">
+										<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+											<span class="path1">ddd</span>
+											<span class="path2">ddd</span>
+											<span class="path3">ddd</span>
+										</i>
+									</span>
+								</label>
+								<!--end::Label-->
+								<tags class="tagify form-control form-control-solid tagify--noTags tagify--empty" tabindex="-1" aria-expanded="false">
+            <span contenteditable="" tabindex="0" data-placeholder="​" aria-placeholder="" class="tagify__input" role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
+                ​
+        </tags><input class="form-control form-control-solid" value="Important, Urgent" name="tags" tabindex="-1">
+							</div>
 <script>
         let add_day = document.querySelector('.add_day');
         let remove_day = document.querySelectorAll('.remove_day');
@@ -266,27 +304,6 @@
                               @endforeach
                             </select>
                             </div>
-<script>
-                                let add_e_day = document.querySelectorAll('.add_e_day');
-                                let remove_e_day = document.querySelectorAll('.remove_e_day');
-                                let s_e_days = document.querySelectorAll('.s_e_days');
-                                let s_e_days_item = document.querySelectorAll('.s_e_days_item');
-                                for (let i = 0, end = add_e_day.length; i < end; i++) {
-                                  add_e_day[i].addEventListener('click', ( e ) => {
-                                    for (let j = 0; j < end; j++) {
-                                      if ( e.target == add_e_day[j] || e.target.parentElement == add_e_day[j] ) {
-                                        console.log(s_e_days);
-                                        s_e_days[j].innerHTML += s_e_days_item[j].outerHTML;
-                                      }
-                                    }
-                                  });
-                                }
-                                for (let i = 0, end = remove_e_day.length; i < end; i++) {
-                                  remove_e_day[i].addEventListener('click', ( e ) => {
-                                      e.target.parentElement.parentElement.remove();
-                                  });
-                                }
-                              </script>
 
                               <input type="hidden" value="{{$item->id}}" name="id" />
                               <div class="modal-footer">
@@ -332,4 +349,48 @@
         @endforeach
     </tbody>
 </table>
+
+<script>
+                                let add_e_day = document.querySelectorAll('.add_e_day');
+                                let remove_e_day = document.querySelectorAll('.remove_e_day');
+                                let s_e_days = document.querySelectorAll('.s_e_days');
+                                let s_e_days_item = document.querySelectorAll('.s_e_days_item');
+                                for (let i = 0, end = add_e_day.length; i < end; i++) {
+                                  add_e_day[i].addEventListener('click', ( e ) => {
+                                    for (let j = 0; j < end; j++) {
+                                      if ( e.target == add_e_day[j] || e.target.parentElement == add_e_day[j] ) {
+                                        s_e_days[j].innerHTML += s_e_days_item[j].outerHTML;
+                                      }
+                                    }
+                                  });
+                                }
+                                for (let i = 0, end = remove_e_day.length; i < end; i++) {
+                                  remove_e_day[i].addEventListener('click', ( e ) => {
+                                      e.target.parentElement.parentElement.remove();
+                                  });
+                                }
+                              </script>
+
+    
+    <!--end::Modal - Invite Friend-->
+		<!--end::Modals-->
+		<!--begin::Javascript-->
+		<script>var hostUrl = "assets/";</script>
+		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
+		<script src="{{asset('assets/plugins/global/plugins.bundle.js')}}"></script>
+		<script src="{{asset('assets/js/scripts.bundle.js')}}"></script>
+		<!--end::Global Javascript Bundle-->
+		<!--begin::Vendors Javascript(used for this page only)-->
+		<script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+		<!--end::Vendors Javascript-->
+		<!--begin::Custom Javascript(used for this page only)-->
+		<script src="{{asset('assets/js/widgets.bundle.js')}}"></script>
+		<script src="{{asset('assets/js/custom/widgets.js')}}"></script>
+		<script src="{{asset('assets/js/custom/apps/chat/chat.js')}}"></script>
+		<script src="{{asset('assets/js/custom/utilities/modals/upgrade-plan.js')}}"></script>
+		<script src="{{asset('assets/js/custom/utilities/modals/create-app.js')}}"></script>
+		<script src="{{asset('assets/js/custom/utilities/modals/new-target.js')}}"></script>
+		<script src="{{asset('assets/js/custom/utilities/modals/users-search.js')}}"></script>
+		<!--end::Custom Javascript-->
+		<!--end::Javascript-->
 </x-default-layout>
