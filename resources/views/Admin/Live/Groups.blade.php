@@ -9,7 +9,7 @@
     @include('success')
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModalCenter">
-  Edit
+  Add New Group
 </button>
 
 <!-- Modal -->
@@ -29,18 +29,15 @@
         <label>
           Group Name
         </label>
-        <input class="form-control" name="name" value="{{$item->name}}" placeholder="Group Name" />
+        <input class="form-control" name="name" placeholder="Group Name" />
       </div>
       <div class="s_days">
-      @foreach($item->days as $element)
       <div class="my-2 d-flex align-items-center s_days_item">
         <label class="mx-2">
           Days
         </label>
         <select name="day[]" class="form-control">
-          <option value="{{$element->day}}">
-            {{$element->day}}
-          </option>
+          <option selected disabled>Select Day</option>
           <option value="Sat">
             Sat
           </option>
@@ -66,17 +63,13 @@
         <label class="mx-2">
           From
         </label>
-        <input type="time" class="form-control" value="{{$element->from}}" name="from[]" placeholder="From" />
+        <input type="time" class="form-control" name="from[]" placeholder="From" />
         <label class="mx-2">
           To
         </label>
-        <input type="time" class="form-control" value="{{$element->to}}" name="to[]" placeholder="To" />
+        <input type="time" class="form-control" name="to[]" placeholder="To" />
       
-        <div class="remove_day">
-        <i style="color:#ff0000; font-size:20px; cursor: pointer;" class="fa fa-minus mx-2"></i>
-        </div>
       </div>
-      @endforeach
 
 </div>
       <div class="add_day">
@@ -84,19 +77,29 @@
       </div>
 </div>
 
-    <div class="my-2">
-      
-    <select name="teacher_id" class="form-control">
-      <option value="{{$item->teacher->id}}">
-        {{$item->teacher->name}}
-      </option>
-      @foreach( $teachers as $teacher )
-      <option value="{{$teacher->id}}">
-        {{$teacher->name}}
-      </option>
-      @endforeach
-    </select>
-    </div>
+<div class="my-2">
+  
+<select name="teacher_id" class="form-control">
+  <option selected disabled>Select Teacher...</option>
+  @foreach( $teachers as $teacher )
+  <option value="{{$teacher->id}}">
+    {{$teacher->name}}
+  </option>
+  @endforeach
+</select>
+</div>
+
+<div class="my-2">
+  
+<select name="teacher_id" class="form-control">
+  <option selected disabled>Select Student...</option>
+  @foreach( $students as $student )
+  <option value="{{$student->id}}">
+    {{$student->name}}
+  </option>
+  @endforeach
+</select>
+</div>
 <script>
         let add_day = document.querySelector('.add_day');
         let remove_day = document.querySelectorAll('.remove_day');
@@ -112,7 +115,6 @@
         }
       </script>
 
-      <input type="hidden" value="{{$item->id}}" name="id" />
       <div class="modal-footer">
         <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
           Close
@@ -198,9 +200,9 @@
                                 </label>
                                 <input class="form-control" name="name" value="{{$item->name}}" placeholder="Group Name" />
                               </div>
-                              <div class="s_days">
+                              <div class="s_e_days">
                               @foreach($item->days as $element)
-                              <div class="my-2 d-flex align-items-center s_days_item">
+                              <div class="my-2 d-flex align-items-center s_e_days_item">
                                 <label class="mx-2">
                                   Days
                                 </label>
@@ -239,14 +241,14 @@
                                 </label>
                                 <input type="time" class="form-control" value="{{$element->to}}" name="to[]" placeholder="To" />
                               
-                                <div class="remove_day">
+                                <div class="remove_e_day">
                                 <i style="color:#ff0000; font-size:20px; cursor: pointer;" class="fa fa-minus mx-2"></i>
                                 </div>
                               </div>
                               @endforeach
 
 </div>
-                              <div class="add_day">
+                              <div class="add_e_day">
                                 <i style="color:#00ff00; font-size:20px;cursor: pointer;" class="fa fa-plus"></i>
                               </div>
 </div>
@@ -265,15 +267,22 @@
                             </select>
                             </div>
 <script>
-                                let add_day = document.querySelector('.add_day');
-                                let remove_day = document.querySelectorAll('.remove_day');
-                                let s_days = document.querySelector('.s_days');
-                                let s_days_item = document.querySelector('.s_days_item');
-                                add_day.addEventListener('click', () => {
-                                  s_days.innerHTML += s_days_item.outerHTML;
-                                });
-                                for (let i = 0, end = remove_day.length; i < end; i++) {
-                                  remove_day[i].addEventListener('click', ( e ) => {
+                                let add_e_day = document.querySelectorAll('.add_e_day');
+                                let remove_e_day = document.querySelectorAll('.remove_e_day');
+                                let s_e_days = document.querySelectorAll('.s_e_days');
+                                let s_e_days_item = document.querySelectorAll('.s_e_days_item');
+                                for (let i = 0, end = add_e_day.length; i < end; i++) {
+                                  add_e_day[i].addEventListener('click', ( e ) => {
+                                    for (let j = 0; j < end; j++) {
+                                      if ( e.target == add_e_day[j] || e.target.parentElement == add_e_day[j] ) {
+                                        console.log(s_e_days);
+                                        s_e_days[j].innerHTML += s_e_days_item[j].outerHTML;
+                                      }
+                                    }
+                                  });
+                                }
+                                for (let i = 0, end = remove_e_day.length; i < end; i++) {
+                                  remove_e_day[i].addEventListener('click', ( e ) => {
                                       e.target.parentElement.parentElement.remove();
                                   });
                                 }
