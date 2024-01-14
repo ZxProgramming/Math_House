@@ -7,6 +7,43 @@
 <x-default-layout>
     @section('title','Live')
     @include('success')
+    <style>
+        
+        .screen{
+                position: fixed;
+                height: 100vh;
+                width: 100vw;
+                top: 0;
+                left: 0;
+                background-color: #000000cc;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 111111;
+            }
+            .screen_popup{
+                height: 380px;
+                width: 300px;
+                background-color: #fff;
+                padding: 30px;
+                position: relative;
+            }
+            .screen_popup img{
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+                border: 1px solid #ccc;
+            }
+            .screen_text{
+                font-weight: bold;
+            }
+            .close_btn{
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                cursor: pointer;
+            }
+    </style>
 
     
                         <!-- Button trigger modal -->
@@ -72,7 +109,7 @@
                             <label>
                                 Repeat
                             </label>
-                            <select class="form-control" name="repeat">
+                            <select class="form-control s_repeat" name="repeat">
                                 <option disabled>
                                     Select ...
                                 </option>
@@ -83,6 +120,81 @@
                                     Repeat
                                 </option>
                             </select> 
+                            </div>
+
+                            <div class="screen d-none">
+                                <div class="screen_popup">
+                                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                        <i class="ki-duotone close_btn ki-cross fs-1">
+                                            <span class="path1"></span>
+                                            <span class="path2"></span>
+                                        </i>
+                                    </div>
+                                    <div class="screen_text">
+                                        <div class="my-2">
+                                        <label>
+                                            Repeat
+                                        </label>
+                                        <div class="d-flex">
+                                            <input type="number" class="form-control" name="repeat_num" />
+                                            <label>
+                                                Times
+                                            </label>
+                                        </div>
+                                        </div>
+                                        
+                                        <div class="my-2">
+                                        <label>
+                                            Repeat every
+                                        </label>
+                                            <div>
+                                                <input id="SaturDay" type="checkbox" name="r_day[]" value="SaturDay" />
+                                                <label for="SaturDay">
+                                                    SaturDay
+                                                </label>
+                                            </div>
+                                            <div>
+                                                <input id="SunDay" type="checkbox" name="r_day[]" value="SunDay" />
+                                                <label for="SunDay">
+                                                    SunDay
+                                                </label>
+                                            </div>
+                                            <div>
+                                                <input id="MonDay" type="checkbox" name="r_day[]" value="MonDay" />
+                                                <label for="MonDay">
+                                                    MonDay
+                                                </label>
+                                            </div>
+                                            <div>
+                                                <input id="TuesDay" type="checkbox" name="r_day[]" value="TuesDay" />
+                                                <label for="TuesDay">
+                                                    TuesDay
+                                                </label>
+                                            </div>
+                                            <div>
+                                                <input id="WednesDay" type="checkbox" name="r_day[]" value="WednesDay" />
+                                                <label for="WednesDay">
+                                                    WednesDay
+                                                </label>
+                                            </div>
+                                            <div>
+                                                <input id="ThursDay" type="checkbox" name="r_day[]" value="ThursDay" />
+                                                <label for="ThursDay">
+                                                    ThursDay
+                                                </label>
+                                            </div>
+                                            <div>
+                                                <input id="FriDay" type="checkbox" name="r_day[]" value="FriDay" />
+                                                <label for="FriDay">
+                                                    FriDay
+                                                </label>
+                                            </div>
+                                            <button type="button" class="btn btn-primary days_done_btn">
+                                                Done
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="my-2 px-3">
@@ -599,4 +711,24 @@
         @endforeach
     </tbody>
 </table>
+
+<script>
+    let s_repeat = document.querySelector('.s_repeat');
+    let screen = document.querySelector('.screen');
+    let close_btn = document.querySelector('.close_btn');
+    let days_done_btn = document.querySelector('.days_done_btn');
+    
+    s_repeat.addEventListener('change', ( e ) => {
+        if ( s_repeat.value == 'Repeat' ) {
+            screen.classList.remove('d-none');
+        }
+    });
+    close_btn.addEventListener('click', () => {
+        screen.classList.add('d-none');
+    });
+    days_done_btn.addEventListener('click', () => {
+        screen.classList.add('d-none');
+    });
+
+</script>
 </x-default-layout>

@@ -13,6 +13,7 @@ use App\Models\Lesson;
 use App\Models\User;
 use App\Models\SessionGroup;
 use App\Models\GroupDay;
+use App\Models\SessionDay;
 
 class LiveController extends Controller
 {
@@ -55,7 +56,14 @@ class LiveController extends Controller
         $arr = $req->only('link', 'date', 'from', 'to', 'lesson_id', 
         'type', 'teacher_id', 'price', 'access_dayes', 'repeat');
         
-        Session::create($arr);
+        $session = Session::create($arr);
+        for ($i=0, $end = count($req->r_day); $i < $end; $i++) { 
+            SessionDay::create([
+                'session_id' => $session->id,
+                'day' => $req->r_day[$i],
+                'times' => $req->repeat_num
+            ]);
+        }
         
         return redirect()->back();
     }
