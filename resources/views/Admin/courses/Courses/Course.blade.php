@@ -6,6 +6,7 @@
 @endphp
 <x-default-layout>
 @include('Admin.courses.Courses.course_header')
+    @section('title','Course')
 
 <div class='my-3'>
   <form class='d-flex' action="{{route('course_filter')}}" method='POST'>

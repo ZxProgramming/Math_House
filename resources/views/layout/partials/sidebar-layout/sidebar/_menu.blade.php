@@ -203,6 +203,12 @@
 							</span>
 							<span class="menu-title">Groups</span>
 						</a>
+						<a class="menu-link " href="{{ route('private_request') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Private Request</span>
+						</a>
 					</div>
 				</div>
 			</div>

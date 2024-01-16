@@ -6,6 +6,7 @@
 @endphp
 <x-default-layout>
 @include('Admin.Users.teacher_header')
+    @section('title','Add Teacher')
 
 <form class="px-3" action="{{route('add_teacher')}}" method="POST" enctype="multipart/form-data">
     @csrf

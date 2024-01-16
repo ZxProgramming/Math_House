@@ -6,6 +6,7 @@
 @endphp
 <x-default-layout>
 @include('Admin.Users.stu_header')
+    @section('title','Students Info')
 
 <div class='my-3'>
   <form class='d-flex' action="{{route('admin_filter')}}" method='POST'>

@@ -6,6 +6,7 @@
 @endphp
 <x-default-layout>
 @include('Admin.Users.teacher_header')
+    @section('title','Teacher Filter')
 
 <div class='my-3'>
   <form class='d-flex' action="{{route('teacher_filter')}}" method='POST'>

@@ -5,6 +5,7 @@
   }
 @endphp
 <x-default-layout>
+    @section('title','Exam Code')
 <div class="my-2">
     <select class="form-control">
         <option disabled selected>

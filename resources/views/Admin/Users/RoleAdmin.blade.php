@@ -6,6 +6,7 @@
 @endphp
 <x-default-layout>
 @include('Admin.Users.admin_header')
+    @section('title','Role Admin')
 
 <table id="kt_profile_overview_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable no-footer">
     <thead class="fs-7 text-gray-500 text-uppercase">

@@ -5,8 +5,8 @@
   }
 @endphp
 <x-default-layout>
-@include('success')
-    @section('title','Quizze')
+  @section('title','Quizze')
+  @include('success')
 {{-- Bootstrap pack --}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -75,6 +75,10 @@
   transform: rotate(45deg);
 }
 
+
+
+
+
   #kt_app_toolbar{
     display: none;
   }
@@ -116,45 +120,7 @@
     background-color: #1b84ff !important;
     border-color: #dee2e6 #dee2e6 #fff;
   }
-  .add_qz{
-    font-size: 1.2rem;
-    font-weight: 500;
-    padding: 5px 10px;
-    border: none;
-    outline: none;
-    text-align: center;
-    margin-top: 2px;
-    color: #fff;
-    background: #14bc14;
-    border-radius: 10px;
-    transition: all 0.3s ease-in-out;
-  }
-  .add_qz:hover{
-    box-shadow:0px 0px 5px 5px rgb(134 134 134 / 22%);
-  }
-  .remove_qz{
-    font-size: 1.2rem;
-    font-weight: 500;
-    padding: 5px 25px;
-    border: none;
-    outline: none;
-    text-align: center;
-    margin-top: 2px;
-    color: #fff;
-    background: red;
-    border-radius: 10px;
-    transition: all 0.3s ease-in-out;
-  }
-  .remove_qz:hover{
-    box-shadow:0px 0px 5px 5px rgb(134 134 134 / 22%);
-  }
-  .avil{
-    font-size: 1.3rem !important;
-    font-weight: 500 !important;
-    color: #62a8aa !important;
-    letter-spacing: 1px !important;
-    text-align: center !important;
-  }
+
 </style>          
 <div class="section_add">
   <button class="btn_add_quizz" type="button" data-toggle="modal" data-target="#exampleModalCenter">New Quizze</button>
@@ -253,21 +219,20 @@
                       <span class="col-md-2" style="font-size: 1.2rem;">Category: </span>
                       <select name="select" id="sel_category" class="col-md-2 form-control">
                         <option value="" selected>Select Category</option>
-                        <option value="category1">Category 1</option>
-                        <option value="category2">Category 2</option>
-                        <option value="category3">Category 3</option>
-                        <option value="category4">Category 4</option>
+                        @foreach( $categories as $category )
+                        <option value="{{$category->id}}">{{$category->cate_name}}</option>
+                        @endforeach
                       </select>
                     </div>
 
+                    <input class="category" type="hidden" value="{{$categories}}" />
+                    <input class="course" type="hidden" value="{{$courses}}" />
+                    <input class="chapter" type="hidden" value="{{$chapters}}" />
+                    <input class="lesson" type="hidden" value="{{$lessons}}" />
                     <div style="width: 100%;" class="d-flex align-items-center justify-content-start">
                       <span class="col-md-2" style="font-size: 1.2rem;">Course: </span>
                       <select name="select" id="sel_course" class="col-md-2 form-control">
                         <option value="" selected>Select Course</option>
-                        <option value="course1">Course 1</option>
-                        <option value="course2">Course 2</option>
-                        <option value="course3">Course 3</option>
-                        <option value="course4">Course 4</option>
                       </select>
                     </div>
 
@@ -275,10 +240,6 @@
                       <span class="col-md-2" style="font-size: 1.2rem;">Chapter: </span>
                       <select name="select" id="sel_chapter" class="col-md-2 form-control">
                         <option value="" selected>Select Chapter</option>
-                        <option value="chapter1">Chapter 1</option>
-                        <option value="chapter2">Chapter 2</option>
-                        <option value="chapter2">Chapter 3</option>
-                        <option value="chapter4">Chapter 4</option>
                       </select>
                     </div>
 
@@ -286,10 +247,6 @@
                       <span class="col-md-2" style="font-size: 1.2rem;">Lesson: </span>
                       <select name="select" id="sel_lesson" class="col-md-2 form-control">
                         <option value="" selected>Select Lesson</option>
-                        <option value="lesson1">Lesson 1</option>
-                        <option value="lesson2">Lesson 2</option>
-                        <option value="lesson3">Lesson 3</option>
-                        <option value="lesson4">Lesson 4</option>
                       </select>
                     </div>
                   </div>
@@ -378,15 +335,183 @@
                           <option value="12">December</option>
                         </select>
                     </div>
-                    <div class="col-md-2 d-flex p-0" style="align-items: center; column-gap:10px">
+                    <div class="col-md-2 d-flex" style="align-items: center; column-gap:10px">
                       <span class="col-md-8">Question Num:</span>
-                       <input type="number" class="col-md-4 form-control" style="padding:.375rem 0 !important; padding-left: 5px !important;">
+                       <input type="number" class="form-control">
                     </div>
                     
                   </div>
                   
+                  <div style="height: 300px;overflow: scroll;padding: 12px 0; border-bottom: 2px solid #8f8f8f">
+                    <table class="table table-striped">
+                        <thead class="border-bottom">
+                          <tr>
+                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">Select</th>
+                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">#</th>
+                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">Type</th>
+                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">Year</th>
+                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">Month</th>
+                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">Code</th>
+                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">Section</th>
+                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">No</th>
+                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">Difficulty</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">
+                              <label class="btn-container">
+                                <input type="checkbox">
+                                <div class="checkmark"></div>
+                              </label>
+                            </th>
+                            <td>1</td>
+                            <td>Quizze</td>
+                            <td>2020</td>
+                            <td>04</td>
+                            <td>A12C2</td>
+                            <td>English</td>
+                            <td>No.Of</td>
+                            <td>Difficulty</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">
+                              <label class="btn-container">
+                                <input type="checkbox">
+                                <div class="checkmark"></div>
+                              </label>
+                            </th>
+                            <td>2</td>
+                          <td>Quizze</td>
+                            <td>2020</td>
+                            <td>04</td>
+                            <td>A12C2</td>
+                            <td>English</td>
+                            <td>No.Of</td>
+                            <td>Difficulty</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">
+                              <label class="btn-container">
+                                <input type="checkbox">
+                                <div class="checkmark"></div>
+                              </label>
+                            </th>
+                            <td>3</td>
+                            <td>Quizze</td>
+                            <td>2020</td>
+                            <td>04</td>
+                            <td>A12C2</td>
+                            <td>English</td>
+                            <td>No.Of</td>
+                            <td>Difficulty</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">
+                              <label class="btn-container">
+                                <input type="checkbox">
+                                <div class="checkmark"></div>
+                              </label>
+                            </th>
+                            <td>4</td>
+                            <td>Quizze</td>
+                            <td>2020</td>
+                            <td>04</td>
+                            <td>A12C2</td>
+                            <td>English</td>
+                            <td>No.Of</td>
+                            <td>Difficulty</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">
+                              <label class="btn-container">
+                                <input type="checkbox">
+                                <div class="checkmark"></div>
+                              </label>
+                            </th>
+                            <td>4</td>
+                            <td>Quizze</td>
+                            <td>2020</td>
+                            <td>04</td>
+                            <td>A12C2</td>
+                            <td>English</td>
+                            <td>No.Of</td>
+                            <td>Difficulty</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">
+                              <label class="btn-container">
+                                <input type="checkbox">
+                                <div class="checkmark"></div>
+                              </label>
+                            </th>
+                            <td>4</td>
+                            <td>Quizze</td>
+                            <td>2020</td>
+                            <td>04</td>
+                            <td>A12C2</td>
+                            <td>English</td>
+                            <td>No.Of</td>
+                            <td>Difficulty</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">
+                              <label class="btn-container">
+                                <input type="checkbox">
+                                <div class="checkmark"></div>
+                              </label>
+                            </th>
+                            <td>4</td>
+                            <td>Quizze</td>
+                            <td>2020</td>
+                            <td>04</td>
+                            <td>A12C2</td>
+                            <td>English</td>
+                            <td>No.Of</td>
+                            <td>Difficulty</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">
+                              <label class="btn-container">
+                                <input type="checkbox">
+                                <div class="checkmark"></div>
+                              </label>
+                            </th>
+                            <td>4</td>
+                            <td>Quizze</td>
+                            <td>2020</td>
+                            <td>04</td>
+                            <td>A12C2</td>
+                            <td>English</td>
+                            <td>No.Of</td>
+                            <td>Difficulty</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">
+                              <label class="btn-container">
+                                <input type="checkbox">
+                                <div class="checkmark"></div>
+                              </label>
+                            </th>
+                            <td>4</td>
+                            <td>Quizze</td>
+                            <td>2020</td>
+                            <td>04</td>
+                            <td>A12C2</td>
+                            <td>English</td>
+                            <td>No.Of</td>
+                            <td>Difficulty</td>
+                          </tr>
+                        </tbody>
+                    </table>
+                  </div>
+
+                  <div class="d-flex" style="align-items: center; justify-content: center">
+                    <span style="font-size: 2rem;font-weight: 500;background: #1b84ff;color: #fff;border-radius: 10px;padding: 10px 15px;margin-top: 10px;">Quizzes</span>
+                  </div>
+
                   <div style="max-height: 300px;overflow: scroll;padding: 12px 0; border-bottom: 2px solid #8f8f8f">
-                    <table class="table table-striped" id="tblData_Quizzes">
+                    <table class="table table-striped">
                         <thead class="border-bottom">
                           <tr>
                             <th scope="col" style="font-weight: 500; font-size: 1.1rem">#</th>
@@ -397,143 +522,26 @@
                             <th scope="col" style="font-weight: 500; font-size: 1.1rem">Section</th>
                             <th scope="col" style="font-weight: 500; font-size: 1.1rem">No</th>
                             <th scope="col" style="font-weight: 500; font-size: 1.1rem">Difficulty</th>
-                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">Select</th>
                           </tr>
                         </thead>
-   <tbody>
+                        <tbody>
                           <tr>
-                            <th scope="row" class="idd">1</th>
-                            <td class="type">Quizze1</td>
-                            <td class="year">2020</td>
-                            <td class="month">04</td>
-                            <td class="code">A12C2</td>
-                            <td class="section">English</td>
-                            <td class="noNum">No.Of</td>
-                            <td class="diff">Difficulty</td>
-                            <td class="p-0">
-                              <button type="button" class="add_qz">Add</button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row" class="idd">2</th>
-                            <td class="type">Quizze2</td>
-                            <td class="year">2013</td>
-                            <td class="month">07</td>
-                            <td class="code">vs452</td>
-                            <td class="section">English</td>
-                            <td class="noNum">No.Of</td>
-                            <td class="diff">Difficulty</td>
-                            <td class="p-0">
-                              <button type="button" class="add_qz">Add</button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row" class="idd">3</th>
-                            <td class="type">Quizze3</td>
-                            <td class="year">2022</td>
-                            <td class="month">09</td>
-                            <td class="code">552C2</td>
-                            <td class="section">English</td>
-                            <td class="noNum">No.Of</td>
-                            <td class="diff">Difficulty</td>
-                            <td class="p-0">
-                              <button type="button" class="add_qz">Add</button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row" class="idd">4</th>
-                            <td class="type">Quizze4</td>
-                            <td class="year">2021</td>
-                            <td class="month">01</td>
-                            <td class="code">222C2</td>
-                            <td class="section">English</td>
-                            <td class="noNum">No.Of</td>
-                            <td class="diff">Difficulty</td>
-                            <td class="p-0">
-                              <button type="button" class="add_qz">Add</button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row" class="idd">5</th>
-                            <td class="type">Quizze5</td>
-                            <td class="year">2020</td>
-                            <td class="month">06</td>
-                            <td class="code">A122C2</td>
-                            <td class="section">English</td>
-                            <td class="noNum">No.Of</td>
-                            <td class="diff">Difficulty</td>
-                            <td class="p-0">
-                              <button type="button" class="add_qz">Add</button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row" class="idd">6</th>
-                            <td class="type">Quizze6</td>
-                            <td class="year">2017</td>
-                            <td class="month">05</td>
-                            <td class="code">A5552C2</td>
-                            <td class="section">English</td>
-                            <td class="noNum">No.Of</td>
-                            <td class="diff">Difficulty</td>
-                            <td class="p-0">
-                              <button type="button" class="add_qz">Add</button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row" class="idd">7</th>
-                            <td class="type">Quizze7</td>
-                            <td class="year">2023</td>
-                            <td class="month">08</td>
-                            <td class="code">A155C2</td>
-                            <td class="section">English</td>
-                            <td class="noNum">No.Of</td>
-                            <td class="diff">Difficulty</td>
-                            <td class="p-0">
-                              <button type="button" class="add_qz">Add</button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row" class="idd">8</th>
-                            <td class="type">Quizze8</td>
-                            <td class="year">2018</td>
-                            <td class="month">02</td>
-                            <td class="code">A1545s2</td>
-                            <td class="section">English</td>
-                            <td class="noNum">No.Of</td>
-                            <td class="diff">Difficulty</td>
-                            <td class="p-0">
-                              <button type="button" class="add_qz">Add</button>
-                            </td>
+                            <th scope="row">1</th>
+                            <td>Quizze</td>
+                            <td>2020</td>
+                            <td>04</td>
+                            <td>A12C2</td>
+                            <td>English</td>
+                            <td>No.Of</td>
+                            <td>Difficulty</td>
                           </tr>
                         </tbody>
-                     
                     </table>
                   </div>
 
-                  <div class="d-flex" style="align-items: center; justify-content: center">
-                    <span style="font-size: 2rem;font-weight: 500;background: #1b84ff;color: #fff;border-radius: 10px;padding: 10px 15px;margin-top: 10px;">Quizzes</span>
-                  </div>
 
-                  <div style="max-height: 300px;overflow: scroll;padding: 12px 0; border-bottom: 2px solid #8f8f8f">
-                    <table class="table table-striped" id="tblData">
-                      <thead class="border-bottom">
-                        <tr>
-                          <th scope="col" style="font-weight: 500; font-size: 1.1rem">#</th>
-                          <th scope="col" style="font-weight: 500; font-size: 1.1rem">Type</th>
-                          <th scope="col" style="font-weight: 500; font-size: 1.1rem">Year</th>
-                          <th scope="col" style="font-weight: 500; font-size: 1.1rem">Month</th>
-                          <th scope="col" style="font-weight: 500; font-size: 1.1rem">Code</th>
-                          <th scope="col" style="font-weight: 500; font-size: 1.1rem">Section</th>
-                          <th scope="col" style="font-weight: 500; font-size: 1.1rem">No</th>
-                          <th scope="col" style="font-weight: 500; font-size: 1.1rem">Difficulty</th>
-                          <th scope="col" style="font-weight: 500; font-size: 1.1rem">Action</th>
-                        </tr>
-                      </thead>
 
-                        <tbody class="sel_quz"></tbody>
 
-                      </table>
-                  </div>
 
                   <div class="d-flex justify-content-end" style="column-gap: 16px; margin-top: 10px">
                     <a class="btnPrevious btn_add_quizz">Prev</a>
@@ -557,6 +565,7 @@
 
 <table id="kt_profile_overview_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable no-footer">
     <thead class="fs-7 text-gray-500 text-uppercase">
+            <th class="sorting sorting_desc" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Manager: activate to sort column ascending" style="width:calc(100% / 7);" aria-sort="descending">#</th>
             <th class="sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width:calc(100% / 7);">Serial no.</th>
             <th class="sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width:calc(100% / 7);">Title</th>
             <th class="sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width:calc(100% / 7);">Time</th>
@@ -583,8 +592,11 @@
                 {{count($item->question)}}
             </td>
             <td>
-              <div style="position: relative; text-align: left;">
-                           <i class="fa-solid fa-ellipsis-vertical" style="font-size: 1.7rem; margin-left: 20px;cursor: pointer;" id="show_menu"></i>
+              NO. OF QUESTIONS	
+            </td>
+            <td>
+            <div style="position: relative; text-align: left;">
+              <i class="fa-solid fa-ellipsis-vertical" style="font-size: 1.7rem; margin-left: 20px;cursor: pointer;" id="show_menu"></i>
                           <!-- Button trigger modal -->
                            <div style="width: 100px; position: absolute;z-index: 10; top: 0px;left: 30px; display: flex;flex-direction: column;background: #ececec;" id="menu_action">
                             <button type="button" style="width: 100%; background: none;border: none;outline: none;padding: 8px 20px;" data-bs-toggle="modal" data-bs-target="#modalCenter{{$item->id}}">
@@ -710,12 +722,90 @@
                             </div>
                           </div>
                         </div>
-              </div>
+                      </div>
             </td>
         </tr>
         @endforeach
     </tbody>
 </table>
+
+<script>
+  let sel_category = document.querySelector('#sel_category');
+  let sel_course = document.querySelector('#sel_course');
+  let sel_chapter = document.querySelector('#sel_chapter');
+  let sel_lesson = document.querySelector('#sel_lesson');
+  let category = document.querySelector('.category');
+  let course = document.querySelector('.course');
+  let chapter = document.querySelector('.chapter');
+  let lesson = document.querySelector('.lesson');
+  course = course.value;
+  course = JSON.parse(course);
+  chapter = chapter.value;
+  chapter = JSON.parse(chapter);
+  lesson = lesson.value;
+  lesson = JSON.parse(lesson);
+
+sel_category.addEventListener('change', () => {
+      sel_course.innerHTML = `
+      <option selected disabled>
+        Select Course
+      </option>
+      `;
+  course.forEach(element => {
+    if ( sel_category.value == element.category_id ) {
+      sel_course.innerHTML += `
+      <option value="${element.id}">
+      ${element.course_name}
+      </option>
+      `;
+    }
+  })
+});
+
+sel_course.addEventListener('change', () => {
+  sel_chapter.innerHTML = `
+      <option selected disabled>
+        Select Chapter
+      </option>
+      `;
+  chapter.forEach(element => {
+    if ( sel_course.value == element.course_id ) {
+      sel_chapter.innerHTML += `
+      <option value="${element.id}">
+      ${element.chapter_name}
+      </option>
+      `;
+    }
+  });
+});
+
+sel_chapter.addEventListener('change', () => {
+  sel_lesson.innerHTML = `
+      <option selected disabled>
+        Select Lesson
+      </option>
+      `;
+    lesson.forEach(element => {
+    if ( sel_chapter.value == element.chapter_id ) {
+      sel_lesson.innerHTML += `
+      <option value="${element.id}">
+      ${element.lesson_name}
+      </option>
+      `;
+    }
+  });
+});
+
+sel_lesson.addEventListener('change', () => {
+  $.ajax("{{route('quize_data')}}", {
+      type: 'GET',  // http method
+      data: { lesson: sel_lesson.value },  // data to submit
+      success: function (data) {
+        console.log(data);
+      },
+  });
+});
+</script>
 <script>
   $("#menu_action").css("display","none");
   $( document ).ready(function() {
@@ -747,137 +837,6 @@
     const prevTab = new bootstrap.Tab(prevTabLinkEl);
     prevTab.show();
   });
-
-  // addEmptyRow();
-  var emptyRow = "<tr><td colspan='12' class='avil'> No Quizzes Available</td></tr>"
-  
-  function addEmptyRow() {
-    // debugger;
-    if ($("#tblData tbody").children().children().length == 0) {
-      $("#tblData tbody").append(emptyRow);
-    };
-    if ($("#tblData_Quizzes tbody").children().children().length == 0) {
-      $("#tblData_Quizzes tbody").append(emptyRow);
-    };
-  };
-
-
-
-  if($("tbody").length >= 1){
-    console.log("yes")
-    addEmptyRow();
-  }else{
-    console.log("no")
-  }
-
-  
-  var quizzes = [];
-  
-  $(".add_qz").click(function(){
-    var quziId = $(this).closest("tr").find(".idd").text();
-    var quziType = $(this).closest("tr").find(".type").text();
-    var quziYear = $(this).closest("tr").find(".year").text();
-    var quziMonth = $(this).closest("tr").find(".month").text();
-    var quziCode = $(this).closest("tr").find(".code").text();
-    var quziNoNum = $(this).closest("tr").find(".noNum").text();
-    var quziSection = $(this).closest("tr").find(".section").text();
-    var quziDiff = $(this).closest("tr").find(".diff").text();
- 
-    console.log(quziId)
-    console.log(quziType)
-    console.log(quziYear)
-    console.log(quziMonth)
-    console.log(quziCode)
-    console.log(quziNoNum)
-    console.log(quziSection)
-    console.log(quziDiff)
-
-    var quziObject = {
-      id: quziId,
-      type: quziType,
-      year: quziYear,
-      month: quziMonth,
-      code: quziCode,
-      section: quziSection,
-      noNum: quziNoNum,
-      diff: quziDiff,
-    }
-    quizzes.push(quziObject);
-    console.log(quizzes);
-
-
-    var object_serialized = JSON.stringify(quizzes);
-
-    localStorage.setItem("quizzes", object_serialized)
-    console.log(localStorage);
-
-    var myObjectDeserialized = JSON.parse(localStorage.getItem("quizzes"));
-    console.log(myObjectDeserialized);
-
-
-    var quizz_container = $(".sel_quz");
-
-    var removeBtn =  "<button type='button' class='remove_qz'>Remove</button>";
-
-    var index = 1;
-
-    myObjectDeserialized.forEach(element => {
-      var dynamicTR = "<tr>";
-        dynamicTR = dynamicTR + "<td class='iddd'> " + index + "</td>"; 
-        dynamicTR = dynamicTR + "<td> " + element.type + "</td>"; 
-        dynamicTR = dynamicTR + "<td> " + element.year + "</td>"; 
-        dynamicTR = dynamicTR + "<td> " + element.month + "</td>"; 
-        dynamicTR = dynamicTR + "<td> " + element.code + "</td>"; 
-        dynamicTR = dynamicTR + "<td> " + element.section + "</td>"; 
-        dynamicTR = dynamicTR + "<td> " + element.noNum + "</td>"; 
-        dynamicTR = dynamicTR + "<td> " + element.diff + "</td>"; 
-        dynamicTR = dynamicTR + "<td style='width: 150px !important; padding: 0 !important;' > " + removeBtn + "</td>"; 
-        
-        dynamicTR = dynamicTR + " </tr>";
-
-        index++;
-        
-        quizz_container.append(dynamicTR);
-      
-    });
-
-
-
-
-      console.log("#".repeat(15));
-      console.log(quizzes);
-      console.log("#".repeat(15));
-
-  
-
-      // $(".remove_qz").click(()=>{
-        // localStorage.clear();
-        // console.log()
-
-        // if($("tbody").length <= 1){
-        //   console.log("yes")
-        //   addEmptyRow();
-        // }else{
-        //   console.log("nooo")
-        //   $(".avil").parent().remove();
-        // };
-
-      // })
-
-
-    if($("tbody").length <= 1){
-      console.log("yes")
-      addEmptyRow();
-    }else{
-      console.log("nooo")
-      $(".avil").parent().remove();
-    };
-
-  });
-      $(".remove_qz").click(function(){
-        $(this).closest(".sel_quz").find("tr").hide()
-        console.log(quizzes)
-      })
 
 });
 </script>

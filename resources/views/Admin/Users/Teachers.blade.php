@@ -6,6 +6,7 @@
 @endphp
 <x-default-layout>
 @include('Admin.Users.teacher_header')
+    @section('title','Teachers')
 
 <div class='my-3'>
   <form class='d-flex' action="{{route('teacher_filter')}}" method='POST'>
@@ -37,6 +38,7 @@
             <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Course</th>
             <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Image</th>
             <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Action</th>
+        </tr>
     </thead>
     <tbody class="fs-6">
         @foreach( $teachers as $item )

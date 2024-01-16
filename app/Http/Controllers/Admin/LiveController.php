@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Models\SessionGroup;
 use App\Models\GroupDay;
 use App\Models\SessionDay;
+use App\Models\PrivateRequest;
 
 class LiveController extends Controller
 {
@@ -115,6 +116,35 @@ class LiveController extends Controller
     public function del_session_g( $id ){
         SessionGroup::where('id', $id)
         ->delete();
+
+        return redirect()->back();
+    }
+
+    public function private_request( ){
+        $private_r = PrivateRequest::
+        orderByDesc('id')
+        ->get();
+        
+        return view('Admin.Live.PrivateRequest', compact('private_r'));
+    }
+
+    public function private_session_approve( $id ){
+        PrivateRequest::
+        where('id', $id)
+        ->update([
+            'status' => 'Confirm',
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function private_request_rejected( Request $req ){
+        PrivateRequest::
+        where('id', $req->id)
+        ->update([
+            'status' => 'Rejected',
+            'rejected_reason' => $req->reject_reason,
+        ]);
 
         return redirect()->back();
     }

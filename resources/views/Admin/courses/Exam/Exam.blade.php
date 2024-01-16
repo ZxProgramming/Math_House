@@ -5,4 +5,5 @@
   }
 @endphp
 <x-default-layout>
+    @section('title','Exam')
 </x-default-layout>

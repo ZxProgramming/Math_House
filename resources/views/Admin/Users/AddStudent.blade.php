@@ -6,6 +6,7 @@
 @endphp
 <x-default-layout>
 @include('Admin.Users.stu_header')
+    @section('title','Add Student')
 
 <form class="px-3" method="POST" action="{{route('student_add')}}">
     @csrf

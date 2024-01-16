@@ -6,6 +6,7 @@
 @endphp
 <x-default-layout>
 @include('Admin.courses.Courses.course_header')
+    @section('title','Add Course')
 
 <form class="px-3" action="{{route('course_add')}}" method="POST" enctype="multipart/form-data">
     @csrf

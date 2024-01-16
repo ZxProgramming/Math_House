@@ -85,6 +85,9 @@ Route::get('/Live/Groups', [LiveController::class, 'session_g'])->name('session_
 Route::get('/Live/Session_G/Del/{id}', [LiveController::class, 'del_session_g'])->name('del_session_g');
 Route::post('/Live/Session_G', [LiveController::class, 'g_session_edit'])->name('g_session_edit');
 Route::post('/Live/Session_G/Add', [LiveController::class, 'g_session_add'])->name('g_session_add');
+Route::get('/Live/Private_Request', [LiveController::class, 'private_request'])->name('private_request');
+Route::get('/Live/Private_Request/Approve/{id}', [LiveController::class, 'private_session_approve'])->name('private_session_approve');
+Route::post('/Live/Private_Request/Rejected', [LiveController::class, 'private_request_rejected'])->name('private_request_rejected');
 
 Route::post('/Users/Admin/Edit', [UserController::class, 'admin_edit'])->name('admin_edit');
 Route::get('/Users/Admin/Del/{id}', [UserController::class, 'del_admin'])->name('del_admin');

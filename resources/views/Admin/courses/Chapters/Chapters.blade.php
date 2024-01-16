@@ -6,6 +6,7 @@
 @endphp
   <x-default-layout>
   @include('Admin.courses.Chapters.AddChapter')
+    @section('title','Chapters')
 
 <div class='my-3'>  
   <form class='d-flex' action="{{route('ch_filter')}}" method='POST'>
