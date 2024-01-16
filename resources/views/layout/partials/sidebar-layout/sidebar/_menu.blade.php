@@ -209,6 +209,12 @@
 							</span>
 							<span class="menu-title">Private Request</span>
 						</a>
+						<a class="menu-link " href="{{ route('cancelation') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Cancelation</span>
+						</a>
 					</div>
 				</div>
 			</div>

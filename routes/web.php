@@ -23,6 +23,9 @@ use App\Http\Controllers\Student\Stu_DashboardController;
 use App\Http\Controllers\Student\Stu_ProfileController;
 use App\Http\Controllers\Student\Stu_MyCourseController;
 
+use App\Http\Controllers\Visitor\HomeController;
+use App\Http\Controllers\Visitor\CoursesController as V_CoursesController;
+
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +50,11 @@ use Illuminate\Support\Facades\Route;
         Route::post('/sign_up/Add','sign_up_add')->name('sign_up_add');
         Route::get('/logout','destroy')->name('logout');
         
-      });
+    });
+    
+    Route::get('/Home', [HomeController::class, 'index'])->name('home');
+    Route::get('/Home/Courses', [V_CoursesController::class, 'categories'])->name('categories');
+    Route::get('/Home/Courses/{id}', [V_CoursesController::class, 'courses'])->name('v_courses');
 
 //  Hello MR Ahmed 
 Route::middleware(['auth','auth.Admin'])->group(function(){
@@ -88,6 +95,7 @@ Route::post('/Live/Session_G/Add', [LiveController::class, 'g_session_add'])->na
 Route::get('/Live/Private_Request', [LiveController::class, 'private_request'])->name('private_request');
 Route::get('/Live/Private_Request/Approve/{id}', [LiveController::class, 'private_session_approve'])->name('private_session_approve');
 Route::post('/Live/Private_Request/Rejected', [LiveController::class, 'private_request_rejected'])->name('private_request_rejected');
+Route::get('/Live/Cancelation', [LiveController::class, 'cancelation'])->name('cancelation');
 
 Route::post('/Users/Admin/Edit', [UserController::class, 'admin_edit'])->name('admin_edit');
 Route::get('/Users/Admin/Del/{id}', [UserController::class, 'del_admin'])->name('del_admin');
@@ -181,8 +189,7 @@ Route::controller(LessonController::class)->group(function(){
 });
    
 
-
-  });
+});
 
           
   

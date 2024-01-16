@@ -120,6 +120,10 @@ class LiveController extends Controller
         return redirect()->back();
     }
 
+    public function cancelation(){
+        return view('Admin.Live.Cancelation');
+    }
+
     public function private_request( ){
         $private_r = PrivateRequest::
         orderByDesc('id')
@@ -135,7 +139,7 @@ class LiveController extends Controller
             'status' => 'Confirm',
         ]);
 
-        return redirect()->back();
+        return redirect()->route('sessions');
     }
 
     public function private_request_rejected( Request $req ){
