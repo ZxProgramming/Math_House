@@ -58,6 +58,7 @@
 					<div class="row courses_container style2">
                         @foreach( $courses as $course )
 						<div class="col-lg-12 p0">
+							<a href>
 							<div class="courses_list_content">
 								<div class="top_courses list">
 									<div class="thumb">
@@ -68,7 +69,7 @@
 										</div>
 									</div>
                                     
-									<div class="details">
+									<a href="{{route('v_course', ['id' => $course->id]) }}" class="details">
 										<div class="tc_content">
 											<p>
                                                 {{$course->teacher->name}}
@@ -85,7 +86,7 @@
                                                 {{$course->course_price}}$
                                             </div>
 										</div>
-									</div>
+									</a>
 								</div>
 							</div>
 						</div>

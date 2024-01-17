@@ -55,6 +55,7 @@ use Illuminate\Support\Facades\Route;
     Route::get('/Home', [HomeController::class, 'index'])->name('home');
     Route::get('/Home/Courses', [V_CoursesController::class, 'categories'])->name('categories');
     Route::get('/Home/Courses/{id}', [V_CoursesController::class, 'courses'])->name('v_courses');
+    Route::get('/Home/Course/{id}', [V_CoursesController::class, 'course'])->name('v_course');
 
 //  Hello MR Ahmed 
 Route::middleware(['auth','auth.Admin'])->group(function(){
@@ -65,6 +66,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 // Quizze 
 Route::get('/Quizze', [QuizzeController::class, 'quizze'])->name('quizze');
 Route::get('/Quizze/Del/{id}', [QuizzeController::class, 'del_quizze'])->name('del_quizze');
+Route::post('/Quizze/Add', [QuizzeController::class, 'add_quizze'])->name('add_quizze');
 
 // Payment 
 Route::get('/Payment', [PaymentController::class, 'payment'])->name('payment');

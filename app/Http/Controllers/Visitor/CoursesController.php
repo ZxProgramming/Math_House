@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Category;
 use App\Models\Course;
+use App\Models\Chapter;
 
 class CoursesController extends Controller
 {
@@ -21,4 +22,12 @@ class CoursesController extends Controller
 
         return view('Visitor.Courses.Courses', compact('courses'));
     }
+
+    public function course($id){
+        $chapters = Chapter::where('course_id', $id)
+        ->get();
+
+        return $chapters;
+    }
+    
 }

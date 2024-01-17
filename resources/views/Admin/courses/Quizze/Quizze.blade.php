@@ -162,9 +162,8 @@
 <div class="modal fade" id="exampleModalCenter" style="transform: translate(20px, 0px); " tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" style="max-width: 1300px !important; display: flex;align-items: center;justify-content: center;" role="document">
     <div class="modal-content" style="border-radius: 15px;">
-      <form action="">
-
-
+      <form action="{{route('add_quizze')}}" method="POST">
+      @csrf
       <input type="hidden" class="questions_data" name="ques_id" />
         <div class="modal-header" style="border-bottom: 0 !important;">
           <h2 class="modal-title" id="exampleModalLongTitle">New Quizze</h2>
@@ -195,12 +194,12 @@
 
                   <div class="col-md-12 d-flex align-items-center justify-content-around">
                     <span class="col-md-2" style="font-size: 1.2rem;">Title: </span>
-                    <input type="text" class="col-md-9 form-control">
+                    <input type="text" name="title" class="col-md-9 form-control">
                   </div>
 
                   <div class="col-md-12 d-flex align-items-center justify-content-around">
                     <span class="col-md-2" style="font-size: 1.2rem;">Description: </span>
-                    <textarea class="col-md-9 form-control" name="dec_quizze" id="dec_quizze" cols="30" rows="3"></textarea>
+                    <textarea class="col-md-9 form-control" name="description" id="dec_quizze" cols="30" rows="3"></textarea>
                   </div>
 
                   <div class="col-md-12 d-flex align-items-center justify-content-around">
@@ -208,30 +207,30 @@
                     <div class="col-md-9" style="display: flex; align-items: center;padding: 0;justify-content: start">
                       <div class="d-flex col-md-2" style="align-items: center;padding: 0;  column-gap: 10px">
                         <span>Houre: </span>
-                        <input type="number" max="3" min="1" class="col-md-4 form-control">
+                        <input type="number" name="time_h" max="3" min="1" class="col-md-4 form-control">
                       </div>
                       <div class="d-flex col-md-2" style="align-items: center;padding: 0;  column-gap: 10px">
                         <span>Minets: </span>
-                        <input type="number" max="60" min="1" class="col-md-4 form-control">
+                        <input type="number" name="time_m" max="60" min="1" class="col-md-4 form-control">
                       </div>
                     </div>
                   </div>
 
                   <div class="col-md-12 d-flex align-items-center justify-content-around">
                     <span class="col-md-2" style="font-size: 1.2rem;">Total Score: </span>
-                    <input type="text" class="col-md-9 form-control">
+                    <input type="text" name="score" class="col-md-9 form-control">
                   </div>
 
                   <div class="col-md-12 d-flex align-items-center justify-content-around">
                     <span class="col-md-2" style="font-size: 1.2rem;">Pass Score: </span>
-                    <input type="text" class="col-md-9 form-control">
+                    <input type="text" name="pass_score" class="col-md-9 form-control">
                   </div>
 
                   <div class="col-md-12 d-flex align-items-center justify-content-around">
                     <span class="col-md-2" style="font-size: 1.2rem;">Active: </span>
                     <div class="col-md-9 p-0">
                       <label class="btn-container">
-                        <input type="checkbox">
+                        <input name="state" value="1" type="checkbox">
                         <div class="checkmark"></div>
                       </label>
                     </div>
@@ -275,7 +274,7 @@
 
                     <div style="width: 100%;" class="d-flex align-items-center justify-content-start">
                       <span class="col-md-2" style="font-size: 1.2rem;">Lesson: </span>
-                      <select name="select" id="sel_lesson" class="col-md-2 form-control">
+                      <select name="lesson_id" id="sel_lesson" class="col-md-2 form-control">
                         <option value="" selected>Select Lesson</option>
                       </select>
                     </div>
@@ -848,8 +847,7 @@ sel_lesson.addEventListener('change', () => {
           index++;
           //_____________________________________________________________________________
           quizz_container.append(dynamicTR);
-          questions_data.value = quizzes;
-          console.log(questions_data.value);
+          questions_data.value = JSON.stringify(quizzes);
           //_____________________________________________________________________________
       });
 
