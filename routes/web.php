@@ -13,6 +13,7 @@ use App\Http\Controllers\login\LoginController;
 use App\Http\Controllers\Admin\LessonController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\ExamController;
+use App\Http\Controllers\Admin\DiagnosticExamController;
 use App\Http\Controllers\Admin\CourseSettingController;
 use App\Http\Controllers\Admin\MarketingController;
 use App\Http\Controllers\Admin\QuizzeController;
@@ -169,9 +170,14 @@ Route::controller(CourseSettingController::class)->group(function(){
     Route::post('/Courses/CodeExam/Add','code_exam_add')->name('code_exam_add');
 });
 
+// Diagnostic Exam 
+Route::controller(DiagnosticExamController::class)->group(function(){ 
+    Route::get('/Diagnostic_Exam','index')->name('dia_exam');
+});
+
 // Exam 
 Route::controller(ExamController::class)->group(function(){
-    Route::get('/Exam','index')->name('exam');
+    Route::get('/Exam','index')->name('exam'); 
 });
 
 // Category

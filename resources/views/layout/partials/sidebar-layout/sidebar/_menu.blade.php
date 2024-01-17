@@ -164,6 +164,12 @@
 							</span>
 							<span class="menu-title">Questions</span>
 						</a>
+						<a class="menu-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dia_exam') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Diagnostic Exam</span>
+						</a>
 						<a class="menu-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('exam') }}">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>

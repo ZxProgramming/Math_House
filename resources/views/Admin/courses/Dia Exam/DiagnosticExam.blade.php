@@ -5,7 +5,6 @@
   }
 @endphp
 <x-default-layout>
-@section('title','Quizze')
 @include('success')
 {{-- Bootstrap pack --}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -476,13 +475,16 @@
             </td>
             <td>
               <div style="position: relative; text-align: left;">
- 
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter{{$item->id}}">
+                           <i class="fa-solid fa-ellipsis-vertical" style="font-size: 1.7rem; margin-left: 20px;cursor: pointer;" id="show_menu"></i>
+                          <!-- Button trigger modal -->
+                           <div style="width: 100px; position: absolute;z-index: 10; top: 0px;left: 30px; display: flex;flex-direction: column;background: #ececec;" id="menu_action">
+                            <button type="button" style="width: 100%; background: none;border: none;outline: none;padding: 8px 20px;" data-bs-toggle="modal" data-bs-target="#modalCenter{{$item->id}}">
                               Edit
                             </button>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{$item->id}}">
+                            <button type="button" class="text-danger" style="width: 100%; border-top: 1px solid #a7a7a7 !important; background: none;border: none;outline: none;padding: 8px 20px;" data-bs-toggle="modal" data-bs-target="#modalDelete{{$item->id}}">
                               Delete
                             </button>
+                          </div>
 
                           <!-- Modal -->
                           <form method="POST" action="{{route('q_edit')}}">
