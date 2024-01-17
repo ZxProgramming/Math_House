@@ -165,6 +165,7 @@
       <form action="">
 
 
+      <input type="hidden" class="questions_data" name="ques_id" />
         <div class="modal-header" style="border-bottom: 0 !important;">
           <h2 class="modal-title" id="exampleModalLongTitle">New Quizze</h2>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -607,6 +608,7 @@
         @endforeach
     </tbody>
 </table>
+
 <script>
   $("#menu_action").css("display","none");
 
@@ -619,6 +621,7 @@
   let course = document.querySelector('.course');
   let chapter = document.querySelector('.chapter');
   let lesson = document.querySelector('.lesson');
+  let questions_data = document.querySelector('.questions_data');
   course = course.value;
   course = JSON.parse(course);
   chapter = chapter.value;
@@ -843,8 +846,11 @@ sel_lesson.addEventListener('change', () => {
           dynamicTR = dynamicTR + " </tr>";
 
           index++;
-          
+          //_____________________________________________________________________________
           quizz_container.append(dynamicTR);
+          questions_data.value = quizzes;
+          console.log(questions_data.value);
+          //_____________________________________________________________________________
       });
 
       if($("tbody").length <= 1){
@@ -884,17 +890,7 @@ sel_lesson.addEventListener('change', () => {
   });
 });
 
-let add_btn = document.querySelector('.add_btn');
 
-add_btn.addEventListener('click', () => {
-$.ajax("{{route('add_quize_data')}}", {
-      type: 'GET',  // http method
-      data: { quizzes: quizzes},  // data to submit
-      success: function (data) {
-        console.log(data);
-      },
-  });
-})
 
 </script>
 </x-default-layout>

@@ -23,7 +23,6 @@ use App\Http\Controllers\Admin\QuizzeController;
 
 Route::post('/question_type', [QuestionController::class, 'question_type'])->name('question_type')->middleware('auth:sanctum');
 Route::get('/quize_data', [QuizzeController::class, 'quize_data'])->name('quize_data')->middleware('auth:sanctum');
-Route::get('/add_quize_data', [QuizzeController::class, 'add_quize_data'])->name('add_quize_data')->middleware('auth:sanctum');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

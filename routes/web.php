@@ -186,6 +186,7 @@ Route::controller(LessonController::class)->group(function(){
         Route::post('Lesson/AddLesson','addLesson')->name('addLesson');
         Route::post('Lesson/Edit','lesson_edit')->name('lesson_edit');
         Route::get('Lesson/Del/{id}','del_lesson')->name('del_lesson');
+        Route::post('Lesson/Lesson/Filter','filter_lesson')->name('filter_lesson');
 });
    
 

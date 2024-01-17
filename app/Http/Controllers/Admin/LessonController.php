@@ -39,6 +39,18 @@ class LessonController extends Controller
         return redirect()->back();
     }
 
+    public function filter_lesson( Request $req ){
+        $categories = Category::all();
+        $courses    = Course::all();
+        $chapters   = Chapter::all();
+        $lessons    = Lesson::
+        where('chapter_id', $req->chapter_id)
+        ->get();
+        $teachers   = User::all();
+        return view('Admin.lessons.lesson',compact('categories','courses','chapters', 'lessons', 'teachers'));
+
+    }
+
     public function addLesson(request $req){
         $data = $req->only('lesson_name', 'chapter_id', 'teacher_id', 'lesson_des',
         'lesson_url', 'pre_requisition', 'gain');

@@ -113,33 +113,38 @@
                     <!--end::Close-->
                 </div>
                 <!--begin::Modal header-->
+                <form action="{{route('filter_lesson')}}" method="POST">
                 <div class="p-5 d-flex">
-                    <select class="form-control sel_category">
-                        <option disabled selected>
-                            Select Category ...
-                        </option>
-                        @foreach( $categories as $category )
-                            <option value="{{$category->id}}">
-                                {{$category->cate_name}}
+                        @csrf
+                        <select class="form-control sel_category mx-2">
+                            <option disabled selected>
+                                Select Category ...
                             </option>
-                        @endforeach
-                    </select>
-                    
-                    <select class="form-control sel_course">
-                        <option disabled selected>
-                            Select Course ...
-                        </option>
-                    </select>
-                    
-                    <select class="form-control sel_chapter">
-                        <option disabled selected>
-                            Select Chapter ...
-                        </option>
-                    </select>
-                    <input type="hidden" value="{{$categories}}" class="category" />
-                    <input type="hidden" value="{{$courses}}" class="course" />
-                    <input type="hidden" value="{{$chapters}}" class="chapter" />
+                            @foreach( $categories as $category )
+                                <option value="{{$category->id}}">
+                                    {{$category->cate_name}}
+                                </option>
+                            @endforeach
+                        </select>
+                        
+                        <select class="form-control sel_course mx-2">
+                            <option disabled selected>
+                                Select Course ...
+                            </option>
+                        </select>
+                        
+                        <select name="chapter_id" class="form-control sel_chapter mx-2">
+                            <option disabled selected>
+                                Select Chapter ...
+                            </option>
+                        </select>
+                        <input type="hidden" value="{{$categories}}" class="category" />
+                        <input type="hidden" value="{{$courses}}" class="course" />
+                        <input type="hidden" value="{{$chapters}}" class="chapter" />
 
+                        <button class="btn btn-primary mx-2">
+                            Submit
+                        </button>
                     <script>
                         let sel_category = document.querySelector('.sel_category');
                         let sel_course = document.querySelector('.sel_course');
@@ -172,7 +177,7 @@
                             <option disabled selected>
                                 Select Chapter ...
                             </option>`;
-                            course.forEach( element => {
+                            chapter.forEach( element => {
                                 if( sel_course.value == element.course_id ){
                                     sel_chapter.innerHTML += `
                                     <option value="${element.id}">
@@ -183,6 +188,7 @@
                         })
                     </script>
                 </div>
+            </form>
             </div>
         </div>
     </div>
