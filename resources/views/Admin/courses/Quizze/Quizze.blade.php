@@ -685,9 +685,10 @@ sel_lesson.addEventListener('change', () => {
       success: function (data) {
           quizze_item.innerHTML = null;
           console.log(data);
-        data.forEach(element => {
+        data.forEach((element, index) => {
           quizze_item.innerHTML += `<tr>
-                            <th scope="row" class="idd">8</th>
+                            <th scope="row" class="idd d-none">${element.id}</th>
+                            <th>${index + 1}</th>
                             <td class="type">${element.q_type}</td>
                             <td class="year">${element.year}</td>
                             <td class="month">${element.month}</td>
@@ -883,17 +884,17 @@ sel_lesson.addEventListener('change', () => {
   });
 });
 
-// let add_btn = document.querySelector('.add_btn');
+let add_btn = document.querySelector('.add_btn');
 
-// add_btn.addEventListener('click', () => {
-// $.ajax("{{route('add_quize_data')}}", {
-//       type: 'GET',  // http method
-//       data: { quizzes: quizzes},  // data to submit
-//       success: function (data) {
-//         console.log(data);
-//       },
-//   });
-// })
+add_btn.addEventListener('click', () => {
+$.ajax("{{route('add_quize_data')}}", {
+      type: 'GET',  // http method
+      data: { quizzes: quizzes},  // data to submit
+      success: function (data) {
+        console.log(data);
+      },
+  });
+})
 
 </script>
 </x-default-layout>

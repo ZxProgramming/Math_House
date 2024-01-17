@@ -31,6 +31,7 @@ class QuizzeController extends Controller
         return $quizzes;
     }
 
+
     public function del_quizze($id){
         quizze::where('id', $id)
         ->delete();
