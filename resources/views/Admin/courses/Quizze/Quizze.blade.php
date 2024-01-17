@@ -6,7 +6,6 @@
 @endphp
 <x-default-layout>
 @include('success')
-    @section('title','Quizze')
 {{-- Bootstrap pack --}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -253,10 +252,9 @@
                       <span class="col-md-2" style="font-size: 1.2rem;">Category: </span>
                       <select name="select" id="sel_category" class="col-md-2 form-control">
                         <option value="" selected>Select Category</option>
-                        <option value="category1">Category 1</option>
-                        <option value="category2">Category 2</option>
-                        <option value="category3">Category 3</option>
-                        <option value="category4">Category 4</option>
+                        @foreach( $categories as $category )
+                        <option value="{{$category->id}}">{{$category->cate_name}}</option>
+                        @endforeach
                       </select>
                     </div>
 
@@ -264,10 +262,6 @@
                       <span class="col-md-2" style="font-size: 1.2rem;">Course: </span>
                       <select name="select" id="sel_course" class="col-md-2 form-control">
                         <option value="" selected>Select Course</option>
-                        <option value="course1">Course 1</option>
-                        <option value="course2">Course 2</option>
-                        <option value="course3">Course 3</option>
-                        <option value="course4">Course 4</option>
                       </select>
                     </div>
 
@@ -275,10 +269,6 @@
                       <span class="col-md-2" style="font-size: 1.2rem;">Chapter: </span>
                       <select name="select" id="sel_chapter" class="col-md-2 form-control">
                         <option value="" selected>Select Chapter</option>
-                        <option value="chapter1">Chapter 1</option>
-                        <option value="chapter2">Chapter 2</option>
-                        <option value="chapter2">Chapter 3</option>
-                        <option value="chapter4">Chapter 4</option>
                       </select>
                     </div>
 
@@ -286,10 +276,6 @@
                       <span class="col-md-2" style="font-size: 1.2rem;">Lesson: </span>
                       <select name="select" id="sel_lesson" class="col-md-2 form-control">
                         <option value="" selected>Select Lesson</option>
-                        <option value="lesson1">Lesson 1</option>
-                        <option value="lesson2">Lesson 2</option>
-                        <option value="lesson3">Lesson 3</option>
-                        <option value="lesson4">Lesson 4</option>
                       </select>
                     </div>
                   </div>
@@ -384,6 +370,10 @@
                     </div>
                     
                   </div>
+                    <input class="category" type="hidden" value="{{$categories}}" />
+                    <input class="course" type="hidden" value="{{$courses}}" />
+                    <input class="chapter" type="hidden" value="{{$chapters}}" />
+                    <input class="lesson" type="hidden" value="{{$lessons}}" />
                   
                   <div style="max-height: 300px;overflow: scroll;padding: 12px 0; border-bottom: 2px solid #8f8f8f">
                     <table class="table table-striped" id="tblData_Quizzes">
@@ -400,111 +390,8 @@
                             <th scope="col" style="font-weight: 500; font-size: 1.1rem">Select</th>
                           </tr>
                         </thead>
-   <tbody>
-                          <tr>
-                            <th scope="row" class="idd">1</th>
-                            <td class="type">Quizze1</td>
-                            <td class="year">2020</td>
-                            <td class="month">04</td>
-                            <td class="code">A12C2</td>
-                            <td class="section">English</td>
-                            <td class="noNum">No.Of</td>
-                            <td class="diff">Difficulty</td>
-                            <td class="p-0">
-                              <button type="button" class="add_qz">Add</button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row" class="idd">2</th>
-                            <td class="type">Quizze2</td>
-                            <td class="year">2013</td>
-                            <td class="month">07</td>
-                            <td class="code">vs452</td>
-                            <td class="section">English</td>
-                            <td class="noNum">No.Of</td>
-                            <td class="diff">Difficulty</td>
-                            <td class="p-0">
-                              <button type="button" class="add_qz">Add</button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row" class="idd">3</th>
-                            <td class="type">Quizze3</td>
-                            <td class="year">2022</td>
-                            <td class="month">09</td>
-                            <td class="code">552C2</td>
-                            <td class="section">English</td>
-                            <td class="noNum">No.Of</td>
-                            <td class="diff">Difficulty</td>
-                            <td class="p-0">
-                              <button type="button" class="add_qz">Add</button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row" class="idd">4</th>
-                            <td class="type">Quizze4</td>
-                            <td class="year">2021</td>
-                            <td class="month">01</td>
-                            <td class="code">222C2</td>
-                            <td class="section">English</td>
-                            <td class="noNum">No.Of</td>
-                            <td class="diff">Difficulty</td>
-                            <td class="p-0">
-                              <button type="button" class="add_qz">Add</button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row" class="idd">5</th>
-                            <td class="type">Quizze5</td>
-                            <td class="year">2020</td>
-                            <td class="month">06</td>
-                            <td class="code">A122C2</td>
-                            <td class="section">English</td>
-                            <td class="noNum">No.Of</td>
-                            <td class="diff">Difficulty</td>
-                            <td class="p-0">
-                              <button type="button" class="add_qz">Add</button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row" class="idd">6</th>
-                            <td class="type">Quizze6</td>
-                            <td class="year">2017</td>
-                            <td class="month">05</td>
-                            <td class="code">A5552C2</td>
-                            <td class="section">English</td>
-                            <td class="noNum">No.Of</td>
-                            <td class="diff">Difficulty</td>
-                            <td class="p-0">
-                              <button type="button" class="add_qz">Add</button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row" class="idd">7</th>
-                            <td class="type">Quizze7</td>
-                            <td class="year">2023</td>
-                            <td class="month">08</td>
-                            <td class="code">A155C2</td>
-                            <td class="section">English</td>
-                            <td class="noNum">No.Of</td>
-                            <td class="diff">Difficulty</td>
-                            <td class="p-0">
-                              <button type="button" class="add_qz">Add</button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row" class="idd">8</th>
-                            <td class="type">Quizze8</td>
-                            <td class="year">2018</td>
-                            <td class="month">02</td>
-                            <td class="code">A1545s2</td>
-                            <td class="section">English</td>
-                            <td class="noNum">No.Of</td>
-                            <td class="diff">Difficulty</td>
-                            <td class="p-0">
-                              <button type="button" class="add_qz">Add</button>
-                            </td>
-                          </tr>
+   <tbody class="quizze_item">
+    
                         </tbody>
                      
                     </table>
@@ -545,7 +432,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Add</button>
+          <button type="submit" class="btn btn-primary add_btn">Add</button>
         </div>
       </form>
     </div>
@@ -557,6 +444,7 @@
 
 <table id="kt_profile_overview_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable no-footer">
     <thead class="fs-7 text-gray-500 text-uppercase">
+            <th class="sorting sorting_desc" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Manager: activate to sort column ascending" style="width:calc(100% / 7);" aria-sort="descending">#</th>
             <th class="sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width:calc(100% / 7);">Serial no.</th>
             <th class="sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width:calc(100% / 7);">Title</th>
             <th class="sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width:calc(100% / 7);">Time</th>
@@ -581,6 +469,9 @@
             </td>
             <td>
                 {{count($item->question)}}
+            </td>
+            <td>
+              NO. OF QUESTIONS	
             </td>
             <td>
               <div style="position: relative; text-align: left;">
@@ -718,7 +609,98 @@
 </table>
 <script>
   $("#menu_action").css("display","none");
-  $( document ).ready(function() {
+
+
+  let sel_category = document.querySelector('#sel_category');
+  let sel_course = document.querySelector('#sel_course');
+  let sel_chapter = document.querySelector('#sel_chapter');
+  let sel_lesson = document.querySelector('#sel_lesson');
+  let category = document.querySelector('.category');
+  let course = document.querySelector('.course');
+  let chapter = document.querySelector('.chapter');
+  let lesson = document.querySelector('.lesson');
+  course = course.value;
+  course = JSON.parse(course);
+  chapter = chapter.value;
+  chapter = JSON.parse(chapter);
+  lesson = lesson.value;
+  lesson = JSON.parse(lesson);
+
+sel_category.addEventListener('change', () => {
+      sel_course.innerHTML = `
+      <option selected disabled>
+        Select Course
+      </option>
+      `;
+  course.forEach(element => {
+    if ( sel_category.value == element.category_id ) {
+      sel_course.innerHTML += `
+      <option value="${element.id}">
+      ${element.course_name}
+      </option>
+      `;
+    }
+  })
+});
+
+sel_course.addEventListener('change', () => {
+  sel_chapter.innerHTML = `
+      <option selected disabled>
+        Select Chapter
+      </option>
+      `;
+  chapter.forEach(element => {
+    if ( sel_course.value == element.course_id ) {
+      sel_chapter.innerHTML += `
+      <option value="${element.id}">
+      ${element.chapter_name}
+      </option>
+      `;
+    }
+  });
+});
+
+sel_chapter.addEventListener('change', () => {
+  sel_lesson.innerHTML = `
+      <option selected disabled>
+        Select Lesson
+      </option>
+      `;
+    lesson.forEach(element => {
+    if ( sel_chapter.value == element.chapter_id ) {
+      sel_lesson.innerHTML += `
+      <option value="${element.id}">
+      ${element.lesson_name}
+      </option>
+      `;
+    }
+  });
+});
+
+let quizze_item = document.querySelector('.quizze_item');
+sel_lesson.addEventListener('change', () => {
+  $.ajax("{{route('quize_data')}}", {
+      type: 'GET',  // http method
+      data: { lesson: sel_lesson.value },  // data to submit
+      success: function (data) {
+          quizze_item.innerHTML = null;
+          console.log(data);
+        data.forEach(element => {
+          quizze_item.innerHTML += `<tr>
+                            <th scope="row" class="idd">8</th>
+                            <td class="type">${element.q_type}</td>
+                            <td class="year">${element.year}</td>
+                            <td class="month">${element.month}</td>
+                            <td class="code">${element.q_code}</td>
+                            <td class="section">${element.section}</td>
+                            <td class="noNum">${element.q_num}</td>
+                            <td class="diff">${element.difficulty}</td>
+                            <td class="p-0">
+                              <button type="button" class="add_qz">Add</button>
+                            </td>
+                          </tr>`;
+        });
+        $( document ).ready(function() {
     $("#show_menu").click(function(){
         
       $("#menu_action").toggle(function(){
@@ -736,149 +718,182 @@
     });
 
 
-  $('.btnNext').click(function() {
-    const nextTabLinkEl = $('.nav-tabs .active').closest('li').next('li').find('a')[0];
-    const nextTab = new bootstrap.Tab(nextTabLinkEl);
-    nextTab.show();
-  });
+    $('.btnNext').click(function() {
+      const nextTabLinkEl = $('.nav-tabs .active').closest('li').next('li').find('a')[0];
+      const nextTab = new bootstrap.Tab(nextTabLinkEl);
+      nextTab.show();
+    });
 
-  $('.btnPrevious').click(function() {
-    const prevTabLinkEl = $('.nav-tabs .active').closest('li').prev('li').find('a')[0];
-    const prevTab = new bootstrap.Tab(prevTabLinkEl);
-    prevTab.show();
-  });
-
-  // addEmptyRow();
-  var emptyRow = "<tr><td colspan='12' class='avil'> No Quizzes Available</td></tr>"
-  
-  function addEmptyRow() {
-    // debugger;
-    if ($("#tblData tbody").children().children().length == 0) {
-      $("#tblData tbody").append(emptyRow);
-    };
-    if ($("#tblData_Quizzes tbody").children().children().length == 0) {
-      $("#tblData_Quizzes tbody").append(emptyRow);
-    };
-  };
-
-
-
-  if($("tbody").length >= 1){
-    console.log("yes")
-    addEmptyRow();
-  }else{
-    console.log("no")
-  }
-
-  
-  var quizzes = [];
-  
-  $(".add_qz").click(function(){
-    var quziId = $(this).closest("tr").find(".idd").text();
-    var quziType = $(this).closest("tr").find(".type").text();
-    var quziYear = $(this).closest("tr").find(".year").text();
-    var quziMonth = $(this).closest("tr").find(".month").text();
-    var quziCode = $(this).closest("tr").find(".code").text();
-    var quziNoNum = $(this).closest("tr").find(".noNum").text();
-    var quziSection = $(this).closest("tr").find(".section").text();
-    var quziDiff = $(this).closest("tr").find(".diff").text();
- 
-    console.log(quziId)
-    console.log(quziType)
-    console.log(quziYear)
-    console.log(quziMonth)
-    console.log(quziCode)
-    console.log(quziNoNum)
-    console.log(quziSection)
-    console.log(quziDiff)
-
-    var quziObject = {
-      id: quziId,
-      type: quziType,
-      year: quziYear,
-      month: quziMonth,
-      code: quziCode,
-      section: quziSection,
-      noNum: quziNoNum,
-      diff: quziDiff,
-    }
-    quizzes.push(quziObject);
-    console.log(quizzes);
-
-
-    var object_serialized = JSON.stringify(quizzes);
-
-    localStorage.setItem("quizzes", object_serialized)
-    console.log(localStorage);
-
-    var myObjectDeserialized = JSON.parse(localStorage.getItem("quizzes"));
-    console.log(myObjectDeserialized);
-
-
-    var quizz_container = $(".sel_quz");
-
-    var removeBtn =  "<button type='button' class='remove_qz'>Remove</button>";
-
-    var index = 1;
-
-    myObjectDeserialized.forEach(element => {
-      var dynamicTR = "<tr>";
-        dynamicTR = dynamicTR + "<td class='iddd'> " + index + "</td>"; 
-        dynamicTR = dynamicTR + "<td> " + element.type + "</td>"; 
-        dynamicTR = dynamicTR + "<td> " + element.year + "</td>"; 
-        dynamicTR = dynamicTR + "<td> " + element.month + "</td>"; 
-        dynamicTR = dynamicTR + "<td> " + element.code + "</td>"; 
-        dynamicTR = dynamicTR + "<td> " + element.section + "</td>"; 
-        dynamicTR = dynamicTR + "<td> " + element.noNum + "</td>"; 
-        dynamicTR = dynamicTR + "<td> " + element.diff + "</td>"; 
-        dynamicTR = dynamicTR + "<td style='width: 150px !important; padding: 0 !important;' > " + removeBtn + "</td>"; 
-        
-        dynamicTR = dynamicTR + " </tr>";
-
-        index++;
-        
-        quizz_container.append(dynamicTR);
-      
+    $('.btnPrevious').click(function() {
+      const prevTabLinkEl = $('.nav-tabs .active').closest('li').prev('li').find('a')[0];
+      const prevTab = new bootstrap.Tab(prevTabLinkEl);
+      prevTab.show();
     });
 
 
 
+    var emptyRow = "<tr><td colspan='12' class='avil'> No Quizzes Available</td></tr>"
+    
+    function addEmptyRow() {
+      if ($("#tblData tbody").children().children().length == 0) {
+        $("#tblData tbody").append(emptyRow);
+      };
+      if ($("#tblData_Quizzes tbody").children().children().length == 0) {
+        $("#tblData_Quizzes tbody").append(emptyRow);
+      };
+    };
 
-      console.log("#".repeat(15));
-      console.log(quizzes);
-      console.log("#".repeat(15));
-
-  
-
-      // $(".remove_qz").click(()=>{
-        // localStorage.clear();
-        // console.log()
-
-        // if($("tbody").length <= 1){
-        //   console.log("yes")
-        //   addEmptyRow();
-        // }else{
-        //   console.log("nooo")
-        //   $(".avil").parent().remove();
-        // };
-
-      // })
-
-
-    if($("tbody").length <= 1){
+    if($("tbody").length >= 1){
       console.log("yes")
       addEmptyRow();
     }else{
-      console.log("nooo")
-      $(".avil").parent().remove();
-    };
+      console.log("no")
+    }
+  
+
+
+    var quizzes = [];
+    
+    $(".add_qz").click(function(){
+
+      var quziId = $(this).closest("tr").find(".idd").text();
+      var quziType = $(this).closest("tr").find(".type").text();
+      var quziYear = $(this).closest("tr").find(".year").text();
+      var quziMonth = $(this).closest("tr").find(".month").text();
+      var quziCode = $(this).closest("tr").find(".code").text();
+      var quziNoNum = $(this).closest("tr").find(".noNum").text();
+      var quziSection = $(this).closest("tr").find(".section").text();
+      var quziDiff = $(this).closest("tr").find(".diff").text();
+
+      var allData = [];
+  
+      console.log(quziId)
+      console.log(quziType)
+      console.log(quziYear)
+      console.log(quziMonth)
+      console.log(quziCode)
+      console.log(quziNoNum)
+      console.log(quziSection)
+      console.log(quziDiff)
+
+
+      var quziObject = {
+        id: quziId,
+        type: quziType,
+        year: quziYear,
+        month: quziMonth,
+        code: quziCode,
+        section: quziSection,
+        noNum: quziNoNum,
+        diff: quziDiff,
+      }
+       
+      allData.push(quziObject);
+
+      quizzes.push(...allData);
+      
+      console.log("quizzes", quizzes);
+      console.log("#".repeat(15));
+      
+      console.log("allData", allData);
+      console.log("#".repeat(15));
+
+      // console.log(allQuizzes)
+      console.log("#".repeat(15));
+
+      var object_serialized = JSON.stringify(allData);
+
+
+      var allObject_serialized = JSON.stringify(quizzes);
+
+      localStorage.setItem("Allquizzes", allObject_serialized)
+
+
+
+       localStorage.setItem("quizzes", object_serialized)
+      
+      console.log("localStorage", localStorage);
+      console.log("#".repeat(15));
+
+       var myObjectDeserialized = JSON.parse(localStorage.getItem("quizzes"));
+      
+      console.log("myObjectDeserialized", myObjectDeserialized);
+
+      console.log("#".repeat(15));
+
+      var quizz_container = $(".sel_quz");
+
+      var index = quizzes.length;
+      var removeBtn =  "<button type='button' class='remove_qz'>Remove</button>";
+      
+      
+      myObjectDeserialized.forEach(element => {
+        var dynamicTR = "<tr>";
+          dynamicTR = dynamicTR + "<td class='iddd'> " + index + "</td>"; 
+          dynamicTR = dynamicTR + "<td> " + element.type + "</td>"; 
+          dynamicTR = dynamicTR + "<td> " + element.year + "</td>"; 
+          dynamicTR = dynamicTR + "<td> " + element.month + "</td>"; 
+          dynamicTR = dynamicTR + "<td> " + element.code + "</td>"; 
+          dynamicTR = dynamicTR + "<td> " + element.section + "</td>"; 
+          dynamicTR = dynamicTR + "<td> " + element.noNum + "</td>"; 
+          dynamicTR = dynamicTR + "<td> " + element.diff + "</td>"; 
+          dynamicTR = dynamicTR + "<td style='width: 150px !important; padding: 0 !important;'  > " + removeBtn + "</td>"; 
+          
+          dynamicTR = dynamicTR + " </tr>";
+
+          index++;
+          
+          quizz_container.append(dynamicTR);
+      });
+
+      if($("tbody").length <= 1){
+        console.log("yes")
+        addEmptyRow();
+      }else{
+        console.log("nooo")
+        $(".avil").parent().remove();
+      };
+
+      
+      // addEmptyRow()
+    });
+
+    $(document).on('click', '.remove_qz', function() {
+      // var getIndex = $(this).attr("data-index");
+      
+      console.log(quizzes);
+      console.log("#".repeat(15));
+      var getIndex = $(this).closest("tr").index();
+      
+        quizzes.splice(getIndex , 1);
+      
+      
+      // console.log(parseInt($(this).closest("tr").find(".iddd").html()));
+      console.log(parseInt($(this).closest("tr").index()));
+      console.log(getIndex);
+      console.log(quizzes);
+      $(this).closest("tr").remove();
+      addEmptyRow();
+    });
+
+     
 
   });
-      $(".remove_qz").click(function(){
-        $(this).closest(".sel_quz").find("tr").hide()
-        console.log(quizzes)
-      })
-
+      },
+  });
 });
+
+// let add_btn = document.querySelector('.add_btn');
+
+// add_btn.addEventListener('click', () => {
+// $.ajax("{{route('add_quize_data')}}", {
+//       type: 'GET',  // http method
+//       data: { quizzes: quizzes},  // data to submit
+//       success: function (data) {
+//         console.log(data);
+//       },
+//   });
+// })
+
 </script>
 </x-default-layout>

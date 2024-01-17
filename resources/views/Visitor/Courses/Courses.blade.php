@@ -61,34 +61,29 @@
 							<div class="courses_list_content">
 								<div class="top_courses list">
 									<div class="thumb">
-										<img class="img-whp" src="{{asset('')}}" alt="t1.jpg">
+										<img class="img-whp" src="{{asset('images/courses/' . $course->course_url)}}" alt="t1.jpg">
 										<div class="overlay">
-											<div class="icon"><span class="flaticon-like"></span></div>
+                                        <i style="font-size: 27px;" class="fa-solid fa-cart-plus cart_btn text-light m-3"></i> 
 											<a class="tc_preview_course" href="#">Preview Course</a>
 										</div>
 									</div>
+                                    
 									<div class="details">
 										<div class="tc_content">
-											<p>Ali TUFAN</p>
-											<h5>Introduction Web Design with HTML <span class="tag">Best Seller</span></h5>
-											<p>Learn how to build prototypes in Sketch. Find out how to prototype an image carousel for a website or mobile app, with these Sketch prototyping tips.</p>
+											<p>
+                                                {{$course->teacher->name}}
+                                            </p>
+											<h5>
+                                                {{$course->course_name}}
+                                            </h5>
+											<p>
+                                                {{$course->course_des}}
+                                            </p>
 										</div>
 										<div class="tc_footer">
-											<ul class="tc_meta float-left fn-414">
-												<li class="list-inline-item"><a href="#"><i class="flaticon-profile"></i></a></li>
-												<li class="list-inline-item"><a href="#">1548</a></li>
-												<li class="list-inline-item"><a href="#"><i class="flaticon-comment"></i></a></li>
-												<li class="list-inline-item"><a href="#">25</a></li>
-											</ul>
-											<div class="tc_price float-right fn-414">$69.95</div>
-											<ul class="tc_review float-right fn-414">
-												<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-												<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-												<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-												<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-												<li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-												<li class="list-inline-item"><a href="#">(5)</a></li>
-											</ul>
+											<div class="tc_price float-right fn-414">
+                                                {{$course->course_price}}$
+                                            </div>
 										</div>
 									</div>
 								</div>

@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Course;
 use App\Models\Chapter;
 use App\Models\Lesson;
+use App\Models\Question;
 
 class QuizzeController extends Controller
 {
@@ -24,7 +25,7 @@ class QuizzeController extends Controller
     }
 
     public function quize_data( Request $req ){
-        $quizzes = quizze::where('lesson_id', $req->lesson)
+        $quizzes = Question::where('lesson_id', $req->lesson)
         ->get();
 
         return $quizzes;
@@ -36,4 +37,5 @@ class QuizzeController extends Controller
 
         return redirect()->back();
     }
+
 }

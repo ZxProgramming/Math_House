@@ -87,11 +87,108 @@
         }
     </style>
 
-    <script>
 
-    </script>
+</div>
+    <button type="button" class='btn btn-primary mx-3' data-bs-toggle="modal" data-bs-target="#filter_modal">
+      Filter
+    </button>
+
+    <div class="modal fade" id="filter_modal" tabindex="-1" aria-hidden="true">
+        <!--begin::Modal dialog-->
+        <div class="modal-dialog modal-fullscreen p-9">
+            <!--begin::Modal content-->
+            <div class="modal-content modal-rounded">
+                <!--begin::Modal header-->
+                <div class="modal-header py-7 d-flex justify-content-between">
+                    <!--begin::Modal title-->
+                    <h2>Filter Lesson</h2>
+                    <!--end::Modal title-->
+                    <!--begin::Close-->
+                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                        <i class="ki-duotone ki-cross fs-1">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                    </div>
+                    <!--end::Close-->
+                </div>
+                <!--begin::Modal header-->
+                <div class="p-5 d-flex">
+                    <select class="form-control sel_category">
+                        <option disabled selected>
+                            Select Category ...
+                        </option>
+                        @foreach( $categories as $category )
+                            <option value="{{$category->id}}">
+                                {{$category->cate_name}}
+                            </option>
+                        @endforeach
+                    </select>
+                    
+                    <select class="form-control sel_course">
+                        <option disabled selected>
+                            Select Course ...
+                        </option>
+                    </select>
+                    
+                    <select class="form-control sel_chapter">
+                        <option disabled selected>
+                            Select Chapter ...
+                        </option>
+                    </select>
+                    <input type="hidden" value="{{$categories}}" class="category" />
+                    <input type="hidden" value="{{$courses}}" class="course" />
+                    <input type="hidden" value="{{$chapters}}" class="chapter" />
+
+                    <script>
+                        let sel_category = document.querySelector('.sel_category');
+                        let sel_course = document.querySelector('.sel_course');
+                        let sel_chapter = document.querySelector('.sel_chapter');
+                        let category = document.querySelector('.category');
+                        let course = document.querySelector('.course');
+                        let chapter = document.querySelector('.chapter');
+                        course = course.value;
+                        course = JSON.parse(course);
+                        chapter = chapter.value;
+                        chapter = JSON.parse(chapter);
+
+                        sel_category.addEventListener('change', () => {
+                            sel_course.innerHTML = `
+                            <option disabled selected>
+                                Select Course ...
+                            </option>`;
+                            course.forEach( element => {
+                                if( sel_category.value == element.category_id ){
+                                    sel_course.innerHTML += `
+                                    <option value="${element.id}">
+                                        ${element.course_name}
+                                    </option>`;
+                                }
+                            });
+                        })
+
+                        sel_course.addEventListener('change', () => {
+                            sel_chapter.innerHTML = `
+                            <option disabled selected>
+                                Select Chapter ...
+                            </option>`;
+                            course.forEach( element => {
+                                if( sel_course.value == element.course_id ){
+                                    sel_chapter.innerHTML += `
+                                    <option value="${element.id}">
+                                        ${element.chapter_name}
+                                    </option>`;
+                                }
+                            });
+                        })
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+
 	<!--begin::Action-->
-    <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_create_campaign">Add Lesson</a>
+    <a href="#" class="btn btn-primary er fs-6 px-8 py-4 mx-2" data-bs-toggle="modal" data-bs-target="#kt_modal_create_campaign">Add Lesson</a>
     <!--end::Action-->
 
 
