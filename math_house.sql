@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 14, 2024 at 08:25 AM
+-- Generation Time: Jan 17, 2024 at 01:31 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -65,7 +65,9 @@ INSERT INTO `admin_roles` (`id`, `user_id`, `admin_role`, `created_at`, `updated
 (24, 57, 'Teacher', '2024-01-01 09:54:47', '2024-01-01 09:54:47'),
 (25, 57, 'Student', '2024-01-01 09:54:47', '2024-01-01 09:54:47'),
 (26, 57, 'Lesson', '2024-01-01 09:54:47', '2024-01-01 09:54:47'),
-(31, 44, 'Questions', '2024-01-04 06:14:37', '2024-01-04 06:14:37');
+(31, 44, 'Questions', '2024-01-04 06:14:37', '2024-01-04 06:14:37'),
+(36, 8, 'Marketing', '2024-01-16 10:54:49', '2024-01-16 10:54:49'),
+(37, 8, 'Questions', '2024-01-16 10:54:49', '2024-01-16 10:54:49');
 
 -- --------------------------------------------------------
 
@@ -101,7 +103,7 @@ CREATE TABLE `categories` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `cate_name` varchar(191) NOT NULL,
   `cate_des` varchar(191) NOT NULL,
-  `cate_url` varchar(191) NOT NULL,
+  `cate_url` varchar(191) NOT NULL DEFAULT 'Default.jfif',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `teacher_id` bigint(20) UNSIGNED DEFAULT NULL
@@ -112,8 +114,8 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `cate_name`, `cate_des`, `cate_url`, `created_at`, `updated_at`, `teacher_id`) VALUES
-(1, 'Category 1', 'Category One', '', NULL, NULL, 1),
-(2, 'Category 2', 'Category Two', '', NULL, NULL, 1);
+(1, 'Category 1', 'Category One', 'Default.jfif', NULL, NULL, 1),
+(2, 'Category 2', 'Category Two', 'Default.jfif', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -470,7 +472,7 @@ CREATE TABLE `courses` (
   `category_id` bigint(20) UNSIGNED NOT NULL,
   `course_price` double(8,2) NOT NULL,
   `course_des` varchar(191) NOT NULL,
-  `course_url` varchar(191) NOT NULL,
+  `course_url` varchar(191) NOT NULL DEFAULT 'Default.jfif',
   `pre_requisition` text DEFAULT NULL,
   `gain` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -486,10 +488,29 @@ CREATE TABLE `courses` (
 --
 
 INSERT INTO `courses` (`id`, `course_name`, `category_id`, `course_price`, `course_des`, `course_url`, `pre_requisition`, `gain`, `created_at`, `updated_at`, `teacher_id`, `user_id`, `duration`, `discount`) VALUES
-(1, 'Course 1', 1, 300.00, 'Course One', '', NULL, NULL, NULL, '2024-01-02 09:13:51', 1, 1, '2', NULL),
-(2, 'Course 2', 1, 300.00, 'Course Two', '', NULL, NULL, NULL, NULL, 1, 1, NULL, NULL),
+(1, 'Course 1', 1, 300.00, 'Course One', 'Default.jfif', NULL, NULL, NULL, '2024-01-02 09:13:51', 1, 1, '2', NULL),
+(2, 'Course 2', 1, 300.00, 'Course Two', 'Default.jfif', NULL, NULL, NULL, NULL, 1, 1, NULL, NULL),
 (3, 'Course 11', 2, 1100.00, 'ccccccc', '2023X12X19X10X49X393752202304300850download.png', 'cccccccc', 'cccccccc', '2023-12-19 08:49:39', '2023-12-19 08:49:39', 8, NULL, '2', 22),
 (4, 'SAT', 1, 1100.00, 'hello', '2024X01X01X12X08X23612220231001083656153827_2318787155110616_6392255175880343552_n.jpg', 'Grid 10', 'hello', '2024-01-01 10:08:23', '2024-01-01 10:08:23', 1, NULL, '2', 22);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `diagnostic_exams`
+--
+
+CREATE TABLE `diagnostic_exams` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `time` varchar(255) NOT NULL,
+  `score` int(11) NOT NULL,
+  `pass_score` float NOT NULL,
+  `course_id` bigint(20) UNSIGNED NOT NULL,
+  `state` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -570,8 +591,10 @@ CREATE TABLE `group_days` (
 --
 
 INSERT INTO `group_days` (`id`, `day`, `from`, `to`, `group_id`, `created_at`, `updated_at`) VALUES
-(3, 'Sun', '10:44:21', '12:45:21', 1, '2024-01-11', '2024-01-11'),
-(4, 'Sun', '12:05:27', '11:05:27', 1, '2024-01-11', '2024-01-11');
+(7, 'Sat', '10:16:00', '00:17:00', 3, '2024-01-14', '2024-01-14'),
+(12, 'Mon', '10:44:21', '12:45:21', 1, '2024-01-15', '2024-01-15'),
+(13, 'Sat', '10:44:21', '12:45:21', 1, '2024-01-15', '2024-01-15'),
+(14, 'Sat', '10:44:21', '12:45:21', 1, '2024-01-15', '2024-01-15');
 
 -- --------------------------------------------------------
 
@@ -654,7 +677,7 @@ INSERT INTO `lessons` (`id`, `lesson_name`, `chapter_id`, `teacher_id`, `lesson_
 (8, 'Lesson 1', 4, 5, 'fg', 'C:\\xampp\\tmp\\php163C.tmp', 'jhf', 'g', '2024-01-02 07:50:36', '2024-01-02 07:50:36'),
 (9, 'Lesson 1', 4, 5, 'fg', 'C:\\xampp\\tmp\\phpE94D.tmp', 'jhf', 'g', '2024-01-02 07:51:30', '2024-01-02 07:51:30'),
 (10, 'l1', 4, 5, 'weqw', 'C:\\xampp\\tmp\\php45DF.tmp', 'sad', 'asd', '2024-01-04 06:47:23', '2024-01-04 06:47:23'),
-(11, 'Lesson 2', 4, 5, 'qdas', 'C:\\xampp\\tmp\\php6E15.tmp', 'asd', 'asd', '2024-01-04 06:48:38', '2024-01-04 06:48:38');
+(11, 'Lesson 2', 5, 5, 'qdas', 'C:\\xampp\\tmp\\php6E15.tmp', 'asd', 'asd', '2024-01-04 06:48:38', '2024-01-04 06:48:38');
 
 -- --------------------------------------------------------
 
@@ -941,7 +964,40 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (83, 'App\\Models\\User', 8, 'user', 'd6632945fbaf153776c6417a3b477a454debd8cec6301f10d88bc8fe26e688b3', '[\"*\"]', NULL, NULL, '2024-01-10 07:17:40', '2024-01-10 07:17:40'),
 (84, 'App\\Models\\User', 8, 'user', '5ba3fa08446f7bc39cc46d09e66f679f6bee57d3bee7ba70125dca65864ba70c', '[\"*\"]', NULL, NULL, '2024-01-10 15:06:34', '2024-01-10 15:06:34'),
 (85, 'App\\Models\\User', 8, 'user', 'a10327119e72251f73a5aad56fe379feb30332aa4bc8895f3c94323c8decb493', '[\"*\"]', NULL, NULL, '2024-01-11 07:59:46', '2024-01-11 07:59:46'),
-(86, 'App\\Models\\User', 8, 'user', '9a0ea9f880feeaf7097ba69fcac065817a258066cb9e9de21e07229248c689b6', '[\"*\"]', NULL, NULL, '2024-01-14 05:25:18', '2024-01-14 05:25:18');
+(86, 'App\\Models\\User', 8, 'user', '9a0ea9f880feeaf7097ba69fcac065817a258066cb9e9de21e07229248c689b6', '[\"*\"]', NULL, NULL, '2024-01-14 05:25:18', '2024-01-14 05:25:18'),
+(87, 'App\\Models\\User', 8, 'user', '8312c52e1ab165eae4947f6fbe2fe5ac6419b0f95fd248cf36e88e7e2a8f4105', '[\"*\"]', NULL, NULL, '2024-01-15 05:12:47', '2024-01-15 05:12:47'),
+(88, 'App\\Models\\User', 8, 'user', '6d6174775c1ba507a804871c7169e7178e0489a2d2a349f6cbf1cd5764270dda', '[\"*\"]', NULL, NULL, '2024-01-15 06:52:19', '2024-01-15 06:52:19'),
+(89, 'App\\Models\\User', 8, 'user', 'e077d7f8f24adef939f32dae60d5f506336088a713d68a1278b2743ea29a834b', '[\"*\"]', NULL, NULL, '2024-01-16 05:17:21', '2024-01-16 05:17:21'),
+(90, 'App\\Models\\User', 8, 'user', 'd8f1b93ec698f0c0908abe7f23e84bd96d8b209dff4bbcab2079582353063daa', '[\"*\"]', NULL, NULL, '2024-01-16 11:57:24', '2024-01-16 11:57:24'),
+(91, 'App\\Models\\User', 8, 'user', 'f25270b50ea191c0aea8c050323b33c351b882a9cf68f2480534aeb8a4fb5c45', '[\"*\"]', NULL, NULL, '2024-01-16 11:58:06', '2024-01-16 11:58:06'),
+(92, 'App\\Models\\User', 8, 'user', '1017ea0358e7d244add5b93b452dce2871cf20455caa12edb4e7130bc28927d3', '[\"*\"]', NULL, NULL, '2024-01-16 11:58:51', '2024-01-16 11:58:51'),
+(93, 'App\\Models\\User', 8, 'user', '30913192f3746a4b420ec1dea346385cc187a160434eefe1fd748f4eefcc7ef9', '[\"*\"]', NULL, NULL, '2024-01-17 05:35:20', '2024-01-17 05:35:20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `private_request`
+--
+
+CREATE TABLE `private_request` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `date` date NOT NULL,
+  `from` time NOT NULL,
+  `to` time NOT NULL,
+  `teacher_id` bigint(20) UNSIGNED NOT NULL,
+  `status` enum('Confirm','Pendding','Rejected') NOT NULL DEFAULT 'Pendding',
+  `rejected_reason` text DEFAULT NULL,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `private_request`
+--
+
+INSERT INTO `private_request` (`id`, `user_id`, `date`, `from`, `to`, `teacher_id`, `status`, `rejected_reason`, `created_at`, `updated_at`) VALUES
+(1, 5, '2023-11-08', '10:44:21', '12:45:21', 44, 'Rejected', NULL, NULL, '2024-01-16');
 
 -- --------------------------------------------------------
 
@@ -997,7 +1053,10 @@ CREATE TABLE `quizzes` (
 --
 
 INSERT INTO `quizzes` (`id`, `title`, `description`, `time`, `score`, `pass_score`, `lesson_id`, `state`, `created_at`, `updated_at`) VALUES
-(1, 'Quizze 1', 'quizze One', '22 h', 20, 8, 5, 0, NULL, NULL);
+(1, 'Quizze 1', 'quizze One', '22 h', 20, 8, 5, 0, NULL, NULL),
+(2, 'Quizze 2', 'Quizze Two', '2hours34M', 100, 48, 4, 1, '2024-01-17', '2024-01-17'),
+(3, 'Quizze 2', 'Quizze Two', '2hours34M', 100, 48, 4, 1, '2024-01-17', '2024-01-17'),
+(4, 'Quizze 2', 'Quizze Two', '2hours34M', 100, 48, 4, 1, '2024-01-17', '2024-01-17');
 
 -- --------------------------------------------------------
 
@@ -1042,6 +1101,16 @@ CREATE TABLE `q_quizes` (
   `created_at` date DEFAULT NULL,
   `updated_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `q_quizes`
+--
+
+INSERT INTO `q_quizes` (`id`, `quizze_id`, `ques_id`, `created_at`, `updated_at`) VALUES
+(1, 3, 18, '2024-01-17', '2024-01-17'),
+(2, 3, 18, '2024-01-17', '2024-01-17'),
+(3, 4, 18, '2024-01-17', '2024-01-17'),
+(4, 4, 18, '2024-01-17', '2024-01-17');
 
 -- --------------------------------------------------------
 
@@ -1095,7 +1164,40 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `date`, `link`, `from`, `to`, `lesson_id`, `teacher_id`, `type`, `price`, `access_dayes`, `repeat`, `created_at`, `updated_at`) VALUES
-(1, '0000-00-00', 'www.ggoogle.com', '00:00:00', '00:00:00', 4, 1, 'session', 6, 656, 'Repeat', '2024-01-24', '2024-01-11');
+(2, '2024-01-05', 'https//:-www.link.com1', '14:46:00', '14:46:00', 4, 1, 'session', 222, 13, 'Repeat', '2024-01-14', '2024-01-14'),
+(3, '2024-01-05', 'https//:-www.link.com1', '14:46:00', '14:46:00', 4, 1, 'session', 222, 13, 'Repeat', '2024-01-14', '2024-01-14'),
+(4, '2024-01-05', 'https//:-www.link.com1', '14:12:00', '14:12:00', 4, 1, 'private', 222, 13, 'Repeat', '2024-01-15', '2024-01-15'),
+(5, '2024-11-11', 'https//:-www.link.com', '22:14:00', '12:14:00', 11, 10, 'session', 200, 15, 'Once', '2024-01-15', '2024-01-15');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `session_days`
+--
+
+CREATE TABLE `session_days` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `session_id` bigint(20) UNSIGNED NOT NULL,
+  `day` varchar(255) NOT NULL,
+  `times` int(11) DEFAULT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `session_days`
+--
+
+INSERT INTO `session_days` (`id`, `session_id`, `day`, `times`, `created_at`, `updated_at`) VALUES
+(1, 3, 'SaturDay', NULL, '2024-01-14', '2024-01-14'),
+(2, 3, 'SunDay', NULL, '2024-01-14', '2024-01-14'),
+(3, 3, 'MonDay', NULL, '2024-01-14', '2024-01-14'),
+(4, 4, 'SaturDay', 6, '2024-01-15', '2024-01-15'),
+(5, 4, 'SunDay', 6, '2024-01-15', '2024-01-15'),
+(6, 4, 'MonDay', 6, '2024-01-15', '2024-01-15'),
+(7, 5, 'SunDay', NULL, '2024-01-15', '2024-01-15'),
+(8, 5, 'MonDay', NULL, '2024-01-15', '2024-01-15'),
+(9, 5, 'TuesDay', NULL, '2024-01-15', '2024-01-15');
 
 -- --------------------------------------------------------
 
@@ -1117,7 +1219,8 @@ CREATE TABLE `session_groups` (
 --
 
 INSERT INTO `session_groups` (`id`, `name`, `teacher_id`, `state`, `created_at`, `updated_at`) VALUES
-(1, 'group 2', 10, 1, NULL, '2024-01-11');
+(1, 'group', 1, 1, NULL, '2024-01-15'),
+(3, 'admin@gmail.com', 46, 1, '2024-01-14', '2024-01-14');
 
 -- --------------------------------------------------------
 
@@ -1274,6 +1377,12 @@ ALTER TABLE `courses`
   ADD KEY `FK_Course_Teacher` (`teacher_id`);
 
 --
+-- Indexes for table `diagnostic_exams`
+--
+ALTER TABLE `diagnostic_exams`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `exam_codes`
 --
 ALTER TABLE `exam_codes`
@@ -1394,6 +1503,14 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Indexes for table `private_request`
+--
+ALTER TABLE `private_request`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_Private_Teacher` (`teacher_id`),
+  ADD KEY `FK_Private_User` (`user_id`);
+
+--
 -- Indexes for table `questions`
 --
 ALTER TABLE `questions`
@@ -1417,6 +1534,7 @@ ALTER TABLE `q_ans`
 -- Indexes for table `q_quizes`
 --
 ALTER TABLE `q_quizes`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `FK_qq_Quizze` (`quizze_id`),
   ADD KEY `FK_qq_Question` (`ques_id`);
 
@@ -1441,6 +1559,12 @@ ALTER TABLE `sessions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_Session_Lesson` (`lesson_id`),
   ADD KEY `FK_Session_Teacher` (`teacher_id`);
+
+--
+-- Indexes for table `session_days`
+--
+ALTER TABLE `session_days`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `session_groups`
@@ -1487,7 +1611,7 @@ ALTER TABLE `addresses`
 -- AUTO_INCREMENT for table `admin_roles`
 --
 ALTER TABLE `admin_roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `affilate`
@@ -1544,6 +1668,12 @@ ALTER TABLE `courses`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `diagnostic_exams`
+--
+ALTER TABLE `diagnostic_exams`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `exam_codes`
 --
 ALTER TABLE `exam_codes`
@@ -1565,7 +1695,7 @@ ALTER TABLE `grid_ans`
 -- AUTO_INCREMENT for table `group_days`
 --
 ALTER TABLE `group_days`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `group_students`
@@ -1625,7 +1755,13 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+
+--
+-- AUTO_INCREMENT for table `private_request`
+--
+ALTER TABLE `private_request`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `questions`
@@ -1637,13 +1773,19 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT for table `quizzes`
 --
 ALTER TABLE `quizzes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `q_ans`
 --
 ALTER TABLE `q_ans`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `q_quizes`
+--
+ALTER TABLE `q_quizes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -1655,13 +1797,19 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `sessions`
 --
 ALTER TABLE `sessions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `session_days`
+--
+ALTER TABLE `session_days`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `session_groups`
 --
 ALTER TABLE `session_groups`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `teacher__courses`
@@ -1770,6 +1918,13 @@ ALTER TABLE `model_has_roles`
 ALTER TABLE `payouts`
   ADD CONSTRAINT `FK_Payment_Method` FOREIGN KEY (`payment_method`) REFERENCES `payment_method` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_Payout_Affilate` FOREIGN KEY (`affilate_id`) REFERENCES `affilate` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `private_request`
+--
+ALTER TABLE `private_request`
+  ADD CONSTRAINT `FK_Private_Teacher` FOREIGN KEY (`teacher_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_Private_User` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `questions`
