@@ -68,6 +68,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::get('/Quizze', [QuizzeController::class, 'quizze'])->name('quizze');
 Route::get('/Quizze/Del/{id}', [QuizzeController::class, 'del_quizze'])->name('del_quizze');
 Route::post('/Quizze/Add', [QuizzeController::class, 'add_quizze'])->name('add_quizze');
+Route::post('/Quizze/Edit/{id}', [QuizzeController::class, 'edit_quizze'])->name('edit_quizze');
 
 // Payment 
 Route::get('/Payment', [PaymentController::class, 'payment'])->name('payment');

@@ -50,6 +50,25 @@ class QuizzeController extends Controller
         return redirect()->back();
     }
 
+    public function edit_quizze( $id, Request $req ){
+        $ques_id = json_encode($req->ques_id);
+        $ques_id = json_decode($req->ques_id); 
+        
+        $arr = $req->only('title', 'description', 'time', 'score', 'pass_score', 'state', 'lesson_id');
+        quizze::where('id', $id)
+        ->update($arr);
+        QQuize::where('quizze_id', $id)
+        ->delete();
+        for ( $i=0, $end = count($ques_id); $i < $end; $i++ ) { 
+            QQuize::create([
+                'quizze_id' => $id,
+                'ques_id' => $ques_id[$i]->id,
+            ]);
+        }
+
+        return redirect()->back();
+    }
+
     public function del_quizze($id){
         quizze::where('id', $id)
         ->delete();

@@ -59,7 +59,7 @@
                         @foreach( $chapters as $chapter )
                         <div class="d-flex col-lg-12 p0 main_item_chapter">
                         <div style="height: 100%" class="d-flex align-items-center justify-content-center">
-                            <input id="ch_{{$chapter->id}}" type="checkbox" class="form-control " checked />
+                            <input id="ch_{{$chapter->id}}" type="checkbox" class="form-control chapter_item_check" checked />
                         </div>
 
 						<label for="ch_{{$chapter->id}}" class="">
@@ -85,6 +85,7 @@
 										<div class="tc_footer">
 											<div class="tc_price float-right fn-414">
                                                 {{$chapter->ch_price}}$
+												<input type="hidden" class="chapter_price" value="{{$chapter->ch_price}}" />
                                             </div>
 										</div>
 									</div>
@@ -98,19 +99,27 @@
 		</div>
 	</section>
 
-<div style="position: fixed;bottom:0; left:0; height:60px; width: 100vw; background-color: #774499;
+<div class="t_price" style="position: fixed;bottom:0; left:0; height:60px; width: 100vw; background-color: #774499;
 display:flex; justify-content:center; align-items:center; font-size: 25px; color:#ffffff; font-weight: bold;">
     {{$course_price->course_price}} $
 </div>
 <script>
-    let main_item_chapter = document.querySelectorAll('.main_item_chapter');
-
-    for (let i = 0, end = main_item_chapter.length; i < end; i++) {
-        main_item_chapter[i].addEventListener('click', ( e ) => {
+    let chapter_item_check = document.querySelectorAll('.chapter_item_check');
+    let chapter_price = document.querySelectorAll('.chapter_price');
+    let t_price = document.querySelector('.t_price');
+	let price = 0;
+    for (let i = 0, end = chapter_item_check.length; i < end; i++) {
+        chapter_item_check[i].addEventListener('change', ( e ) => {
             for (let j = 0; j < end; j++) {
-                if ( e.target == main_item_chapter[j] || e.target.parentElement == main_item_chapter[j]
-                || e.target.parentElement.parentElement == main_item_chapter[j] ) {
-                    console.log(453);
+                if ( e.target == chapter_item_check[j] || e.target.parentElement == chapter_item_check[j]
+                || e.target.parentElement.parentElement == chapter_item_check[j] ) {
+                    for (let k = 0; k < end; k++) {
+						if ( chapter_item_check[k].checked ) {
+							price += parseFloat(chapter_price[k].value);
+						} 
+					}
+					t_price.innerHTML = price;
+					price = 0;
                 }
             }
         })
