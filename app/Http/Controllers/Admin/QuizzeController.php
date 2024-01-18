@@ -15,6 +15,7 @@ use App\Models\QQuize;
 class QuizzeController extends Controller
 {
     public function quizze(){
+        $questions = Question::all();
         $quizzes = quizze::all();
         $categories = Category::all();
         $courses = Course::all();
@@ -22,7 +23,7 @@ class QuizzeController extends Controller
         $lessons = Lesson::all();
 
         return view('Admin.courses.Quizze.Quizze', 
-        compact('quizzes', 'categories', 'courses', 'chapters', 'lessons'));
+        compact('quizzes', 'questions', 'categories', 'courses', 'chapters', 'lessons'));
     }
 
     public function quize_data( Request $req ){

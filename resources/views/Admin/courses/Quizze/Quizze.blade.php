@@ -485,93 +485,323 @@
                             </button>
 
                           <!-- Modal -->
-                          <form method="POST" action="{{route('q_edit')}}">
-                             @csrf
-                           <div class="modal fade" id="modalCenter{{$item->id}}" tabindex="-1" aria-hidden="true" style="display: none;">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  
-                                  <h5 class="modal-title" id="modalCenterTitle">Edit item</h5>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div> 
+<div class="modal fade" id="modalCenter{{$item->id}}" style="transform: translate(20px, 0px); " tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 1300px !important; display: flex;align-items: center;justify-content: center;" role="document">
+    <div class="modal-content" style="border-radius: 15px;">
+      <form action="{{route('add_quizze')}}" method="POST">
+      @csrf
+      <input type="hidden" class="questions_data" name="ques_id" />
+        <div class="modal-header" style="border-bottom: 0 !important;">
+          <h2 class="modal-title" id="exampleModalLongTitle">New Quizze</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" style="font-size: 3rem;padding: 0;font-weight: 600 !important;color: #1b84ff;margin: 0;">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="padding: 0 1rem !important">
+          <!-- Nav tabs -->
+            <ul class="nav nav-tabs" style="margin-top: 20px;">
+              <li class="nav-item" style="width: calc(100% / 3);text-align: center;">
+                <a class="nav-link active" data-bs-toggle="tab" href="#home">INFO</a>
+              </li>
+              <li class="nav-item" style="width: calc(100% / 3);text-align: center;">
+                <a class="nav-link" data-bs-toggle="tab" href="#menu1">DETAILS</a>
+              </li>
+              <li class="nav-item" style="width: calc(100% / 3);text-align: center;">
+                <a class="nav-link" data-bs-toggle="tab" href="#menu2">QUESTIONS</a>
+              </li>
+            </ul>
 
-                              <div class="my-2 px-3">
-                                <label>
-                                  item
-                                </label>
-                                <input class='form-control' name="item" value="{{$item->item}}" placeholder="item" />
-                              </div>
+            <!-- Tab panes -->
+            <div class="tab-content">
+              {{-- Info --}}
+              <div class="tab-pane container active" style="min-height: 300px; max-width: 1340px !important;margin: 15px 0;" id="home">
 
-                              <div class="my-2 px-3">
-                                <label>
-                                  Type
-                                </label>
-                              
-                                <select class="form-control" name="q_type">
-                                  <option value="{{$item->q_type}}">{{$item->q_type}}</option>
-                                  <option value="Trail">Trail</option> 
-                                  <option value="Parallel">Parallel</option> 
-                                  <option value="Extra">Extra</option>
-                              </select>  
-                              </div>
+                <div class="" style="display: flex;flex-direction: column;align-items: flex-start;row-gap: 15px;">
 
-                              <div class="my-2 px-3">
-                              <label>
-                                  Year
-                              </label>
-                              <input class='form-control' name="year" value="{{$item->year}}" placeholder="Year" />
-                              </div>
+                  <div class="col-md-12 d-flex align-items-center justify-content-around">
+                    <span class="col-md-2" style="font-size: 1.2rem;">Title: </span>
+                    <input type="text" name="title" value="{{ $item->title }}" class="col-md-9 form-control">
+                  </div>
 
-                              <div class="my-2 px-3">
-                              <label>
-                                  Month
-                              </label>
-                              <input class='form-control' name="month" value="{{$item->month}}" placeholder="Month" />
-                              </div>
+                  <div class="col-md-12 d-flex align-items-center justify-content-around">
+                    <span class="col-md-2" style="font-size: 1.2rem;">Description: </span>
+                    <textarea class="col-md-9 form-control" value="{{ $item->description }}" name="description" id="dec_quizze" cols="30" rows="3"></textarea>
+                  </div>
 
-                              <div class="my-2 px-3">
-                              <label>
-                                  Code
-                              </label>
-                              <input class='form-control' name="q_code" value="{{$item->q_code}}" placeholder="Code" />
-                              </div>
+                  <div class="col-md-12 d-flex align-items-center justify-content-around">
+                    <span class="col-md-2" style="font-size: 1.2rem;">Duration: </span>
+                    <div class="col-md-9" style="display: flex; align-items: center;padding: 0;justify-content: start">
+                        <input name="time" value="{{ $item->time }}" max="60" min="1" class="col-md-4 form-control">
+                    </div>
+                  </div>
 
-                              <div class="my-2 px-3">
-                              <label>
-                                  Section
-                              </label> 
+                  <div class="col-md-12 d-flex align-items-center justify-content-around">
+                    <span class="col-md-2" style="font-size: 1.2rem;">Total Score: </span>
+                    <input type="text" name="score" value="{{ $item->score }}" class="col-md-9 form-control">
+                  </div>
+
+                  <div class="col-md-12 d-flex align-items-center justify-content-around">
+                    <span class="col-md-2" style="font-size: 1.2rem;">Pass Score: </span>
+                    <input type="text" name="pass_score" value="{{ $item->pass_score }}" class="col-md-9 form-control">
+                  </div>
+
+                  <div class="col-md-12 d-flex align-items-center justify-content-around">
+                    <span class="col-md-2" style="font-size: 1.2rem;">Active: </span>
+                    <div class="col-md-9 p-0">
+                      <label class="btn-container">
+                        @if( $item->state == 0 )
+                        <input name="state" value="1" type="checkbox" />
+                        @else
+                        <input name="state" value="1" type="checkbox" checked />
+                        @endif
+                        <div class="checkmark"></div>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-end" style="column-gap: 16px">
+                  <a class="btnNext btn_add_quizz">Next</a>
+                </div>
+              </div>
+              {{-- Details --}}
+              <div class="tab-pane container fade" style="height: 300px; max-width: 1340px !important;margin: 10px 0;" id="menu1">
+                
+                <div class="" style="display: flex;flex-direction: column;justify-content: space-between;height: 100%;">
+                
+                  <div class="" style="display: flex;flex-direction: column;align-items: flex-start; row-gap: 30px;">
+                  
+                    <div style="width: 100%;" class="d-flex align-items-center justify-content-start">
+                      <span class="col-md-2" style="font-size: 1.2rem;">Category: </span>
+                      <select name="select" id="sel_category" class="col-md-2 form-control">
+                        <option value="">Select Category</option>
+                        <option selected value="{{$item->lesson->chapter->course->category->id}}">{{$item->lesson->chapter->course->category->cate_name}}</option>
+                        @foreach( $categories as $category )
+                        <option value="{{$category->id}}">{{$category->cate_name}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+
+                    <div style="width: 100%;" class="d-flex align-items-center justify-content-start">
+                      <span class="col-md-2" style="font-size: 1.2rem;">Course: </span>
+                      <select name="select" id="sel_course" class="col-md-2 form-control">
+                        <option value="">Select Course</option>
+                        <option selected value="{{$item->lesson->chapter->course->id}}">{{$item->lesson->chapter->course->course_name}}</option>
+                      </select>
+                    </div>
+
+                    <div style="width: 100%;" class="d-flex align-items-center justify-content-start">
+                      <span class="col-md-2" style="font-size: 1.2rem;">Chapter: </span>
+                      <select name="select" id="sel_chapter" class="col-md-2 form-control">
+                        <option value="">Select Chapter</option>
+                        <option selected value="{{$item->lesson->chapter->id}}">{{$item->lesson->chapter->chapter_name}}</option>
+                      </select>
+                    </div>
+
+                    <div style="width: 100%;" class="d-flex align-items-center justify-content-start">
+                      <span class="col-md-2" style="font-size: 1.2rem;">Lesson: </span>
+                      <select name="lesson_id" id="sel_lesson" class="col-md-2 form-control">
+                        <option value="" selected>Select Lesson</option>
+                        <option selected value="{{$item->lesson->id}}">{{$item->lesson->lesson_name}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-end" style="column-gap: 16px">
+                    <a class="btnPrevious btn_add_quizz">Prev</a>
+                    <a class="btnNext btn_add_quizz">Next</a>
+                  </div>
+                </div>
+              </div>
+              {{-- Questions --}} 
+                
+              <div class="tab-pane container fade" style="min-height: 300px; max-width: 1340px !important;margin: 10px 0;" id="menu2">
+                
+                <div class="" style="display: flex;flex-direction: column;justify-content: space-between;height: 100%;">
+                    
+                  <div class="d-flex" style="margin-bottom: 1rem; align-items: center; justify-content: space-around; column-gap: 10px">
+                    <span style="font-size: 1.2rem;font-weight: 600;">Filter Quizzes :</span>
+                   
+                    <div class="col-md-2 d-flex" style="align-items: center; column-gap:10px">
+                      <span>Year:</span>
+                        <select id="sel_year" name="names" class="form-control">
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                            <option value="2020">2020</option>
+                            <option value="2019">2019</option>
+                            <option value="2018">2018</option>
+                            <option value="2017">2017</option>
+                            <option value="2016">2016</option>
+                            <option value="2015">2015</option>
+                            <option value="2014">2014</option>
+                            <option value="2013">2013</option>
+                            <option value="2012">2012</option>
+                            <option value="2011">2011</option>
+                            <option value="2010">2010</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 d-flex" style="align-items: center; column-gap:10px">
+                      <span>Month:</span>
+                        <select id="sel_month" name="names" class="form-control">
+                          <option value="01">January</option>
+                          <option value="02">February</option>
+                          <option value="03">March</option>
+                          <option value="04">April</option>
+                          <option value="05">May</option>
+                          <option value="06">June</option>
+                          <option value="07">July</option>
+                          <option value="08">August</option>
+                          <option value="09">September</option>
+                          <option value="10">October</option>
+                          <option value="11">November</option>
+                          <option value="12">December</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 d-flex" style="align-items: center; column-gap:10px">
+                      <span>Section:</span>
+                        <select id="sel_month" name="names" class="form-control">
+                          <option value="01">January</option>
+                          <option value="02">February</option>
+                          <option value="03">March</option>
+                          <option value="04">April</option>
+                          <option value="05">May</option>
+                          <option value="06">June</option>
+                          <option value="07">July</option>
+                          <option value="08">August</option>
+                          <option value="09">September</option>
+                          <option value="10">October</option>
+                          <option value="11">November</option>
+                          <option value="12">December</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 d-flex" style="align-items: center; column-gap:10px">
+                      <span>Code:</span>
+                        <select id="sel_month" name="names" class="form-control">
+                          <option value="01">January</option>
+                          <option value="02">February</option>
+                          <option value="03">March</option>
+                          <option value="04">April</option>
+                          <option value="05">May</option>
+                          <option value="06">June</option>
+                          <option value="07">July</option>
+                          <option value="08">August</option>
+                          <option value="09">September</option>
+                          <option value="10">October</option>
+                          <option value="11">November</option>
+                          <option value="12">December</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 d-flex p-0" style="align-items: center; column-gap:10px">
+                      <span class="col-md-8">Question Num:</span>
+                       <input type="number" class="col-md-4 form-control" style="padding:.375rem 0 !important; padding-left: 5px !important;">
+                    </div>
+                    
+                  </div>
+                    <input class="category" type="hidden" value="{{$categories}}" />
+                    <input class="course" type="hidden" value="{{$courses}}" />
+                    <input class="chapter" type="hidden" value="{{$chapters}}" />
+                    <input class="lesson" type="hidden" value="{{$lessons}}" />
+                  
+                  <div style="max-height: 300px;overflow: scroll;padding: 12px 0; border-bottom: 2px solid #8f8f8f">
+                    <table class="table table-striped" id="tblData_Quizzes">
+                        <thead class="border-bottom">
+                          <tr>
+                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">#</th>
+                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">Type</th>
+                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">Year</th>
+                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">Month</th>
+                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">Code</th>
+                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">Section</th>
+                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">No</th>
+                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">Difficulty</th>
+                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">Select</th>
+                          </tr>
+                        </thead>
+                        <tbody class="quizze_item lesson_quizze">
+                          @foreach( $questions as $question )
+                            @if( $question->lesson_id == $item->lesson_id )
+                              <tr>
+                                <th scope="row" class="idd d-none">{{$question->id}}</th>
+                                <th>{{$loop->iteration}}</th>
+                                <td class="type">{{$question->q_type}}</td>
+                                <td class="year">{{$question->year}}</td>
+                                <td class="month">{{$question->month}}</td>
+                                <td class="code">{{$question->q_code}}</td>
+                                <td class="section">{{$question->section}}</td>
+                                <td class="noNum">{{$question->q_num}}</td>
+                                <td class="diff">{{$question->difficulty}}</td>
+                                <td class="p-0">
+                                  <button type="button" class="add_qz">Add</button>
+                                </td>
+                              </tr>
+                            @endif
+                          @endforeach
+                        </tbody>
+                     
+                    </table>
+                  </div>
+
+                  <div class="d-flex" style="align-items: center; justify-content: center">
+                    <span style="font-size: 2rem;font-weight: 500;background: #1b84ff;color: #fff;border-radius: 10px;padding: 10px 15px;margin-top: 10px;">Quizzes</span>
+                  </div>
+
+                  <div style="max-height: 300px;overflow: scroll;padding: 12px 0; border-bottom: 2px solid #8f8f8f">
+                    <table class="table table-striped" id="tblData">
+                      <thead class="border-bottom">
+                        <tr>
+                          <th scope="col" style="font-weight: 500; font-size: 1.1rem">#</th>
+                          <th scope="col" style="font-weight: 500; font-size: 1.1rem">Type</th>
+                          <th scope="col" style="font-weight: 500; font-size: 1.1rem">Year</th>
+                          <th scope="col" style="font-weight: 500; font-size: 1.1rem">Month</th>
+                          <th scope="col" style="font-weight: 500; font-size: 1.1rem">Code</th>
+                          <th scope="col" style="font-weight: 500; font-size: 1.1rem">Section</th>
+                          <th scope="col" style="font-weight: 500; font-size: 1.1rem">No</th>
+                          <th scope="col" style="font-weight: 500; font-size: 1.1rem">Difficulty</th>
+                          <th scope="col" style="font-weight: 500; font-size: 1.1rem">Action</th>
+                        </tr>
+                      </thead>
+
+                        <tbody class="sel_quz">
                           
-                              <select class="form-control" name="section">
-                                  <option value="{{$item->section}}">{{$item->section}}</option>
-                                  <option value="Blank">Blank</option>
-                                  <option value="1">1</option>
-                                  <option value="2">2</option>
-                                  <option value="3">3</option>
-                                  <option value="4">4</option>
-                              </select>     
-                              </div>
+                        @foreach( $item->question as $question )
+                          <tr>
+                            <td scope="col" style="font-weight: 500; font-size: 1.1rem">
+                              {{$loop->iteration}}
+                            </td>
+                            <td scope="col" style="font-weight: 500; font-size: 1.1rem">{{$question->question->q_type}}</td>
+                            <td scope="col" style="font-weight: 500; font-size: 1.1rem">{{$question->question->year	}}</td>
+                            <td scope="col" style="font-weight: 500; font-size: 1.1rem">{{$question->question->month}}</td>
+                            <td scope="col" style="font-weight: 500; font-size: 1.1rem">{{$question->question->q_code}}</td>
+                            <td scope="col" style="font-weight: 500; font-size: 1.1rem">{{$question->question->section}}</td>
+                            <td scope="col" style="font-weight: 500; font-size: 1.1rem">{{$question->question->q_num}}</td>
+                            <td scope="col" style="font-weight: 500; font-size: 1.1rem">{{$question->question->difficulty}}</td>
+                            <td scope="col" style="font-weight: 500; font-size: 1.1rem">
+                              <button type='button' class='remove_qz'>Remove</button>
+                            </td>
+                          </tr>
+                          @endforeach
+                        </tbody>
 
-                              <div class="my-2 px-3">
-                              <label>
-                                  item No.
-                            </label>
-                            <input class='form-control' name="q_num" value="{{$item->q_num}}" placeholder="item No." />
-                            </div>
+                      </table>
+                  </div>
 
+                  <div class="d-flex justify-content-end" style="column-gap: 16px; margin-top: 10px">
+                    <a class="btnPrevious btn_add_quizz">Prev</a>
+                  </div>
 
-
-                              <input type="hidden" value="{{$item->id}}" name="id" />
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
-                                  Close
-                                </button>
-                                <button class="btn btn-primary">Submit</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        </form>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary add_btn">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
                         <!-- Modal -->
                         <div class="modal fade" id="modalDelete{{$item->id}}" tabindex="-1" aria-hidden="true" style="display: none;">

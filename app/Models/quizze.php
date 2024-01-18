@@ -28,6 +28,6 @@ class quizze extends Model
 
     public function question()
     {
-        return $this->hasMany(QQuize::class);
+        return $this->hasMany(QQuize::class, 'quizze_id');
     }
 }
