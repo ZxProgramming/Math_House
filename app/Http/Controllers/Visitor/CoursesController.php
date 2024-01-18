@@ -26,8 +26,10 @@ class CoursesController extends Controller
     public function course($id){
         $chapters = Chapter::where('course_id', $id)
         ->get();
+        $course_price = Course::where('id', $id)
+        ->first();
 
-        return $chapters;
+        return view('Visitor.Courses.Chapters', compact('chapters', 'course_price'));
     }
     
 }

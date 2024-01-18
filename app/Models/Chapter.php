@@ -22,7 +22,8 @@ class Chapter extends Model
         'gain', 
         'ch_price', 
         'ch_des', 
-        'ch_url', 
+        'ch_url',
+        'ch_price',
     ];
 
     public function teacher()
