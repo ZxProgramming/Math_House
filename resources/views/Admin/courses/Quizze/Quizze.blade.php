@@ -575,7 +575,6 @@
                       <span class="col-md-2" style="font-size: 1.2rem;">Category: </span>
                       <select name="select" id="sel_category" class="col-md-2 form-control">
                         <option value="">Select Category</option>
-                        <option selected value="{{$item->lesson->chapter->course->category->id}}">{{$item->lesson->chapter->course->category->cate_name}}</option>
                         @foreach( $categories as $category )
                         <option value="{{$category->id}}">{{$category->cate_name}}</option>
                         @endforeach
@@ -585,24 +584,21 @@
                     <div style="width: 100%;" class="d-flex align-items-center justify-content-start">
                       <span class="col-md-2" style="font-size: 1.2rem;">Course: </span>
                       <select name="select" id="sel_course" class="col-md-2 form-control">
-                        <option value="">Select Course</option>
-                        <option selected value="{{$item->lesson->chapter->course->id}}">{{$item->lesson->chapter->course->course_name}}</option>
+                        <option value="">Select Course</option> 
                       </select>
                     </div>
 
                     <div style="width: 100%;" class="d-flex align-items-center justify-content-start">
                       <span class="col-md-2" style="font-size: 1.2rem;">Chapter: </span>
                       <select name="select" id="sel_chapter" class="col-md-2 form-control">
-                        <option value="">Select Chapter</option>
-                        <option selected value="{{$item->lesson->chapter->id}}">{{$item->lesson->chapter->chapter_name}}</option>
+                        <option value="">Select Chapter</option> 
                       </select>
                     </div>
 
                     <div style="width: 100%;" class="d-flex align-items-center justify-content-start">
                       <span class="col-md-2" style="font-size: 1.2rem;">Lesson: </span>
                       <select name="lesson_id" id="sel_lesson" class="col-md-2 form-control">
-                        <option value="" selected>Select Lesson</option>
-                        <option selected value="{{$item->lesson->id}}">{{$item->lesson->lesson_name}}</option>
+                        <option value="" selected>Select Lesson</option> 
                       </select>
                     </div>
                   </div>

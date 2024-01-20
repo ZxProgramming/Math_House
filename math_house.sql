@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2024 at 01:31 PM
+-- Generation Time: Jan 18, 2024 at 01:42 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -128,6 +128,7 @@ CREATE TABLE `chapters` (
   `chapter_name` varchar(191) NOT NULL,
   `course_id` bigint(20) UNSIGNED NOT NULL,
   `ch_des` varchar(191) NOT NULL,
+  `ch_price` float DEFAULT NULL,
   `ch_url` varchar(191) NOT NULL,
   `pre_requisition` text DEFAULT NULL,
   `gain` text DEFAULT NULL,
@@ -140,11 +141,11 @@ CREATE TABLE `chapters` (
 -- Dumping data for table `chapters`
 --
 
-INSERT INTO `chapters` (`id`, `chapter_name`, `course_id`, `ch_des`, `ch_url`, `pre_requisition`, `gain`, `teacher_id`, `created_at`, `updated_at`) VALUES
-(4, 'Chapter 1', 1, 'Chapter One', '', NULL, NULL, NULL, NULL, NULL),
-(5, 'Chapter 22', 1, 'errw', '20230826085456153827_2318787155110616_6392255175880343552_n.jpg', NULL, NULL, 5, '2024-01-03 00:34:57', '2024-01-03 00:34:57'),
-(6, 'Chapter 22', 1, 'errw', '20230826085456153827_2318787155110616_6392255175880343552_n.jpg', NULL, NULL, 5, '2024-01-03 00:35:50', '2024-01-03 00:35:50'),
-(7, 'Chapter 22', 1, 'errw', '20230826085456153827_2318787155110616_6392255175880343552_n.jpg', NULL, NULL, 5, '2024-01-03 00:36:16', '2024-01-03 00:36:16');
+INSERT INTO `chapters` (`id`, `chapter_name`, `course_id`, `ch_des`, `ch_price`, `ch_url`, `pre_requisition`, `gain`, `teacher_id`, `created_at`, `updated_at`) VALUES
+(4, 'Chapter 1', 1, 'Chapter One', 100, 'Default.jfif', NULL, NULL, NULL, NULL, NULL),
+(5, 'Chapter 22', 1, 'errw', 200, 'Default.jfif', NULL, NULL, 5, '2024-01-03 00:34:57', '2024-01-03 00:34:57'),
+(6, 'Chapter 22', 1, 'errw', 200, '20230826085456153827_2318787155110616_6392255175880343552_n.jpg', NULL, NULL, 5, '2024-01-03 00:35:50', '2024-01-03 00:35:50'),
+(7, 'Chapter 22', 1, 'errw', 350, '20230826085456153827_2318787155110616_6392255175880343552_n.jpg', NULL, NULL, 5, '2024-01-03 00:36:16', '2024-01-03 00:36:16');
 
 -- --------------------------------------------------------
 
@@ -971,7 +972,8 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (90, 'App\\Models\\User', 8, 'user', 'd8f1b93ec698f0c0908abe7f23e84bd96d8b209dff4bbcab2079582353063daa', '[\"*\"]', NULL, NULL, '2024-01-16 11:57:24', '2024-01-16 11:57:24'),
 (91, 'App\\Models\\User', 8, 'user', 'f25270b50ea191c0aea8c050323b33c351b882a9cf68f2480534aeb8a4fb5c45', '[\"*\"]', NULL, NULL, '2024-01-16 11:58:06', '2024-01-16 11:58:06'),
 (92, 'App\\Models\\User', 8, 'user', '1017ea0358e7d244add5b93b452dce2871cf20455caa12edb4e7130bc28927d3', '[\"*\"]', NULL, NULL, '2024-01-16 11:58:51', '2024-01-16 11:58:51'),
-(93, 'App\\Models\\User', 8, 'user', '30913192f3746a4b420ec1dea346385cc187a160434eefe1fd748f4eefcc7ef9', '[\"*\"]', NULL, NULL, '2024-01-17 05:35:20', '2024-01-17 05:35:20');
+(93, 'App\\Models\\User', 8, 'user', '30913192f3746a4b420ec1dea346385cc187a160434eefe1fd748f4eefcc7ef9', '[\"*\"]', NULL, NULL, '2024-01-17 05:35:20', '2024-01-17 05:35:20'),
+(94, 'App\\Models\\User', 8, 'user', 'db610ec924ed595aa48fcce2428e268acd503c46e6c20dec60f3e1425d70cd25', '[\"*\"]', NULL, NULL, '2024-01-18 06:43:37', '2024-01-18 06:43:37');
 
 -- --------------------------------------------------------
 
@@ -1053,10 +1055,8 @@ CREATE TABLE `quizzes` (
 --
 
 INSERT INTO `quizzes` (`id`, `title`, `description`, `time`, `score`, `pass_score`, `lesson_id`, `state`, `created_at`, `updated_at`) VALUES
-(1, 'Quizze 1', 'quizze One', '22 h', 20, 8, 5, 0, NULL, NULL),
-(2, 'Quizze 2', 'Quizze Two', '2hours34M', 100, 48, 4, 1, '2024-01-17', '2024-01-17'),
-(3, 'Quizze 2', 'Quizze Two', '2hours34M', 100, 48, 4, 1, '2024-01-17', '2024-01-17'),
-(4, 'Quizze 2', 'Quizze Two', '2hours34M', 100, 48, 4, 1, '2024-01-17', '2024-01-17');
+(5, 'quizze 1', 'Quizze One', '22 h 33 m', 100, 40, 9, 1, NULL, NULL),
+(6, 'Quizze 2', 'Quizze Two', '2hours25M', 100, 48, 4, 1, '2024-01-18', '2024-01-18');
 
 -- --------------------------------------------------------
 
@@ -1107,10 +1107,8 @@ CREATE TABLE `q_quizes` (
 --
 
 INSERT INTO `q_quizes` (`id`, `quizze_id`, `ques_id`, `created_at`, `updated_at`) VALUES
-(1, 3, 18, '2024-01-17', '2024-01-17'),
-(2, 3, 18, '2024-01-17', '2024-01-17'),
-(3, 4, 18, '2024-01-17', '2024-01-17'),
-(4, 4, 18, '2024-01-17', '2024-01-17');
+(5, 6, 18, '2024-01-18', '2024-01-18'),
+(6, 5, 18, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1755,7 +1753,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT for table `private_request`
@@ -1773,7 +1771,7 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT for table `quizzes`
 --
 ALTER TABLE `quizzes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `q_ans`
@@ -1785,7 +1783,7 @@ ALTER TABLE `q_ans`
 -- AUTO_INCREMENT for table `q_quizes`
 --
 ALTER TABLE `q_quizes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `roles`

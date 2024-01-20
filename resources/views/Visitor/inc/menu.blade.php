@@ -36,10 +36,10 @@
 		                <a href="#"><span class="title">Live</span></a>
 		            </li>
 		            <li class="last">
-		                <a href="#"><span class="title">About</span></a>
+		                <a href="{{route('about')}}"><span class="title">About</span></a>
 		            </li>
 		            <li class="last">
-		                <a href="#"><span class="title">Contact</span></a>
+		                <a href="{{route('contact_us')}}"><span class="title">Contact</span></a>
 		            </li>
 		        </ul>
 		    </nav>
