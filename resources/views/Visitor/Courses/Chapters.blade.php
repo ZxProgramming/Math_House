@@ -547,6 +547,7 @@
                         				@foreach( $chapters as $chapter )
 										<div class="details d-flex align-items-center">
                             				<input type="checkbox" class="chapter_item_check" checked />
+											<input type="hidden" class="chapter_id" value="{{$chapter->id}}" />
 											<input type="hidden" class="chapter_price" value="{{$chapter->ch_price}}" />
 										  	<div id="accordion" class="panel-group w-100 ml-3 cc_tab">
 											    <div class="panel">
@@ -875,8 +876,8 @@
 				<div class="col-lg-4 col-xl-3">
 					<div class="instructor_pricing_widget">
 						<div class="price">Price $<label class="t_price price">{{$course_price->course_price}}</label></div>
-						<a href="#" class="cart_btnss">Add To Cart</a>
-						<a href="#" class="cart_btnss_white">Buy Now</a>
+						 
+						<a href="{{route('buy_course')}}" class="cart_btnss_white">Buy Now</a>
 						<h5 class="subtitle text-left">Includes</h5>
 						<ul class="price_quere_list text-left">
 							<li><a href="#"><span class="flaticon-play-button-1"></span> 11 hours on-demand video</a></li>
@@ -939,22 +940,26 @@
 <script>
     let chapter_item_check = document.querySelectorAll('.chapter_item_check');
     let chapter_price = document.querySelectorAll('.chapter_price');
+    let chapter_id = document.querySelectorAll('.chapter_id');
     let t_price = document.querySelector('.t_price');
 	let price = 0;
+	let arr;
     for (let i = 0, end = chapter_item_check.length; i < end; i++) {
         chapter_item_check[i].addEventListener('change', ( e ) => {
+			arr = [];
             for (let j = 0; j < end; j++) {
                 if ( e.target == chapter_item_check[j] || e.target.parentElement == chapter_item_check[j]
                 || e.target.parentElement.parentElement == chapter_item_check[j] ) {
                     for (let k = 0; k < end; k++) {
 						if ( chapter_item_check[k].checked ) {
 							price += parseFloat(chapter_price[k].value);
+							arr = [...arr, parseInt(chapter_id[k].value)];
 						} 
 					}
 					t_price.innerHTML = price;
 					price = 0;
                 }
-            }
+            }console.log(arr);
         })
     }
 </script>

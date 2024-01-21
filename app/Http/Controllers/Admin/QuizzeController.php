@@ -26,6 +26,22 @@ class QuizzeController extends Controller
         compact('quizzes', 'questions', 'categories', 'courses', 'chapters', 'lessons'));
     }
 
+    public function quize_del_q( Request $req ){
+        QQuize::where('id', $req->id)
+        ->delete();
+
+        return $req->all();
+    }
+
+    public function quize_add_q( Request $req ){
+        QQuize::create([
+            'quizze_id' => $req->quizze_id,
+            'ques_id' => $req->ques_id,
+        ]);
+
+        return $req->all();
+    }
+
     public function quize_data( Request $req ){
         $quizzes = Question::where('lesson_id', $req->lesson)
         ->get();
@@ -51,6 +67,7 @@ class QuizzeController extends Controller
     }
 
     public function edit_quizze( $id, Request $req ){
+        return $req->all();
         $ques_id = json_encode($req->ques_id);
         $ques_id = json_decode($req->ques_id); 
         

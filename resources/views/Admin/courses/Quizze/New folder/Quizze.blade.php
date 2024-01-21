@@ -720,7 +720,6 @@
                                             @endif
                                           @endforeach
                                         </tbody>
-                                    
                                     </table>
                                   </div>
 
@@ -743,7 +742,6 @@
                                           <th scope="col" style="font-weight: 500; font-size: 1.1rem">Action</th>
                                         </tr>
                                       </thead>
-                                        <input type="hidden" class="add_new_questions" name="add_new_questions" />
 
                                         <tbody class="sel_quz sel_quz_edit">
                                         @foreach( $item->question as $question )
@@ -823,8 +821,56 @@
 </table>
 
 <script>
-   $( document ).ready(function() {
+  let add_question = document.querySelectorAll('.add_question');
+  let question_id = document.querySelectorAll('.question_id');
+  let quizze_id = document.querySelectorAll('.quizze_id');
 
+  for (let i = 0, end = add_question.length; i < end; i++) {
+    add_question[i].addEventListener('click', ( e ) => {
+      for (let j = 0; j < end; j++) {
+        if ( e.target == add_question[j] ) {
+          let obj = {
+            quizze_id : quizze_id[j].value,
+            ques_id : question_id[j].value,
+          }
+          $.ajax("{{route('quize_add_q')}}", {
+          type: 'GET',
+          data: obj,
+          success: function ( res ) {
+            console.log(res);
+          },
+      });
+
+        }
+      }
+    })
+  }
+  
+  let remove_qz_edit = document.querySelectorAll('.remove_qz_edit');
+  let e_questions = document.querySelectorAll('.e_questions');
+
+  for (let i = 0, end = remove_qz_edit.length; i < end; i++) {
+    remove_qz_edit[i].addEventListener('click', ( e ) => {
+      for (let j = 0; j < end; j++) {
+        if ( e.target == remove_qz_edit[j] ) {
+          let obj = e_questions[j].value;
+          obj = JSON.parse(obj);
+          console.log(obj);
+          $.ajax("{{route('quize_del_q')}}", {
+          type: 'GET',
+          data: obj,
+          success: function ( res ) {
+            console.log(res);
+          },
+      });
+
+        }
+      }
+    })
+  }
+</script>
+<script>
+   $( document ).ready(function() {
           $("#show_menu").click(function(){
               
             $("#menu_action").toggle(function(){
@@ -888,54 +934,6 @@
         });
 </script>
 
-<script>
-  let add_question = document.querySelectorAll('.add_question');
-  let question_id = document.querySelectorAll('.question_id');
-  let quizze_id = document.querySelectorAll('.quizze_id');
-
-  for (let i = 0, end = add_question.length; i < end; i++) {
-    add_question[i].addEventListener('click', ( e ) => {
-      for (let j = 0; j < end; j++) {
-        if ( e.target == add_question[j] ) {
-          let obj = {
-            quizze_id : quizze_id[j].value,
-            ques_id : question_id[j].value,
-          }
-          $.ajax("{{route('quize_add_q')}}", {
-          type: 'GET',
-          data: obj,
-          success: function ( res ) {
-            console.log(res);
-          },
-      });
-
-        }
-      }
-    })
-  }
-  
-  let remove_qz_edit = document.querySelectorAll('.remove_qz_edit');
-  let e_questions = document.querySelectorAll('.e_questions');
-
-  for (let i = 0, end = remove_qz_edit.length; i < end; i++) {
-    remove_qz_edit[i].addEventListener('click', ( e ) => {
-      for (let j = 0; j < end; j++) {
-        if ( e.target == remove_qz_edit[j] ) {
-          let obj = e_questions[j].value;
-          obj = JSON.parse(obj); 
-          $.ajax("{{route('quize_del_q')}}", {
-          type: 'GET',
-          data: obj,
-          success: function ( res ) {
-            console.log(res);
-          },
-      });
-
-        }
-      }
-    })
-  }
-</script>
 
 <script>
   $("#menu_action").css("display","none");
@@ -1049,7 +1047,8 @@ sel_lesson.addEventListener('change', () => {
             var quziSection = $(this).closest("tr").find(".section").text();
             var quziDiff = $(this).closest("tr").find(".diff").text();
 
-            var allData = []; 
+            var allData = [];
+         
 
 
             var quziObject = {
@@ -1065,7 +1064,8 @@ sel_lesson.addEventListener('change', () => {
             
             allData.push(quziObject);
 
-            quizzes.push(...allData); 
+            quizzes.push(...allData);
+             
 
             var object_serialized = JSON.stringify(allData);
 
@@ -1080,7 +1080,7 @@ sel_lesson.addEventListener('change', () => {
              
 
             var myObjectDeserialized = JSON.parse(localStorage.getItem("quizzes"));
-             
+              
 
             var quizz_container = $(".sel_quz");
 
@@ -1137,7 +1137,6 @@ sel_lesson.addEventListener('change', () => {
 </script>
 <script>
   $(document).ready(()=>{
-
     var quizzesEdit = [];
       $(".edit_qz").click(function(){
 
@@ -1150,7 +1149,8 @@ sel_lesson.addEventListener('change', () => {
             var quziSection = $(this).closest("tr").find(".section").text();
             var quziDiff = $(this).closest("tr").find(".diff").text();
 
-            var allDataEdit = []; 
+            var allDataEdit = [];
+         
 
 
             var quziObjectEdit = {
@@ -1167,6 +1167,7 @@ sel_lesson.addEventListener('change', () => {
             allDataEdit.push(quziObjectEdit);
 
             quizzesEdit.push(...allDataEdit);
+             
 
             var object_serialized_edit = JSON.stringify(allDataEdit);
 

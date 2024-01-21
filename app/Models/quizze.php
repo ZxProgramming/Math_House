@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Lesson;
 use App\Models\QQuize;
+use App\Models\Question;
 
 class quizze extends Model
 {
