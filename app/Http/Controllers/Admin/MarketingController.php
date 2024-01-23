@@ -53,7 +53,6 @@ class MarketingController extends Controller
     }
 
     public function add_promo( Request $req ){
-        // courses":["1","2"]
         $arr = $req->only('name', 'starts', 'ends', 'num_usage', 'discount', 'code');
         $promo = PromoCode::create($arr);
         foreach ($req->courses as $course) {
@@ -74,9 +73,19 @@ class MarketingController extends Controller
     }
 
     public function edit_promo( $id, Request $req ){
+        // courses
         $arr = $req->only('name', 'starts', 'ends', 'num_usage', 'discount', 'code');
         PromoCode::where('id', $id)
         ->update($arr);
+        PromoCourse::where('promo_id', $id)
+        ->delete();
+
+        foreach ($req->courses as $course) {
+            PromoCourse::create([
+                'promo_id' => $id,
+                'course_id' => $course
+            ]);
+        }
 
         return redirect()->back();
     }
