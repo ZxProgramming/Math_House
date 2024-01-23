@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\PromoCode;
-use App\Models\Course;
+use App\Models\User;
 
-class PromoCourse extends Model
+class PromoUser extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'promo_id',
-        'course_id',
     ];
 
     public function promo()
@@ -22,8 +22,8 @@ class PromoCourse extends Model
         return $this->belongsTo(PromoCode::class, 'promo_id');
     }
 
-    public function course()
+    public function user()
     {
-        return $this->belongsTo(Course::class, 'course_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

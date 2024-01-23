@@ -88,6 +88,9 @@ Route::get('/Payment/Del', [PaymentController::class, 'del_payment'])->name('del
 // Marketing
 
 Route::get('/Marketing/PromoCode', [MarketingController::class, 'promo_code'])->name('promo_code');
+Route::post('/Marketing/PromoCode/Add', [MarketingController::class, 'add_promo'])->name('add_promo');
+Route::post('/Marketing/PromoCode/Edit/{id}', [MarketingController::class, 'edit_promo'])->name('edit_promo');
+Route::get('/Marketing/PromoCode/Del/{id}', [MarketingController::class, 'del_promo'])->name('del_promo');
 Route::get('/Marketing/Commission', [MarketingController::class, 'commission'])->name('commission');
 Route::post('/Marketing/Commission/Edit', [MarketingController::class, 'edit_commission'])->name('edit_commission');
 Route::get('/Marketing/Users', [MarketingController::class, 'users'])->name('m_users');

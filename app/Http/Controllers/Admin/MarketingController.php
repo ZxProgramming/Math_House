@@ -10,6 +10,8 @@ use App\Models\Affilate;
 use App\Models\Payout;
 use App\Models\PaymentMethod;
 use App\Models\PromoCode;
+use App\Models\PromoCourse;
+use App\Models\Course;
 
 class MarketingController extends Controller
 {
@@ -50,10 +52,41 @@ class MarketingController extends Controller
         return view('Admin.Marketing.Payout', compact('payouts', 'payments'));
     }
 
+    public function add_promo( Request $req ){
+        // courses":["1","2"]
+        $arr = $req->only('name', 'starts', 'ends', 'num_usage', 'discount', 'code');
+        $promo = PromoCode::create($arr);
+        foreach ($req->courses as $course) {
+            PromoCourse::create([
+                'promo_id' => $promo->id,
+                'course_id' => $course
+            ]);
+        }
+
+        return redirect()->back();
+    }
+
     public function promo_code(){
         $promo = PromoCode::all();
+        $courses = Course::all();
 
-        return view('Admin.Marketing.Promo_Code', compact('promo'));
+        return view('Admin.Marketing.Promo_Code', compact('promo', 'courses'));
+    }
+
+    public function edit_promo( $id, Request $req ){
+        $arr = $req->only('name', 'starts', 'ends', 'num_usage', 'discount', 'code');
+        PromoCode::where('id', $id)
+        ->update($arr);
+
+        return redirect()->back();
+    }
+
+    public function del_promo( $id, Request $req ){
+        $arr = $req->only('name', 'starts', 'ends', 'num_usage');
+        PromoCode::where('id', $id)
+        ->delete();
+
+        return redirect()->back();
     }
 
     public function filter_payment( Request $req ){
