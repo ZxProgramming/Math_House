@@ -43,6 +43,7 @@ use Illuminate\Support\Facades\Route;
     $controller_path = 'App\Http\Controllers' ;
     
     Route::controller(LoginController::class)->group(function(){
+        Route::post('/Market','market_login')->name('market_ch');
         Route::get('/login','index')->name('login.index');
         Route::post('/login.store','store')->name('login.store');
         Route::get('/sign_up','sign_up')->name('sign_up');
@@ -57,7 +58,9 @@ use Illuminate\Support\Facades\Route;
     
     Route::get('/Home', [HomeController::class, 'index'])->name('home');
     Route::get('/Home/Courses', [V_CoursesController::class, 'categories'])->name('categories');
+    Route::post('/Home/Buy_Course', [V_CoursesController::class, 'buy_course'])->name('buy_course');
     Route::get('/Home/Buy_Course', [V_CoursesController::class, 'buy_course'])->name('buy_course');
+    Route::get('/Home/Course_Payment', [V_CoursesController::class, 'course_payment'])->name('course_payment');
     Route::get('/Home/Courses/{id}', [V_CoursesController::class, 'courses'])->name('v_courses');
     Route::get('/Home/Course/{id}', [V_CoursesController::class, 'course'])->name('v_course');
     Route::get('/Home/About', [AboutController::class, 'index'])->name('about');
@@ -83,6 +86,8 @@ Route::post('/Payment/Edit', [PaymentController::class, 'payment_edit'])->name('
 Route::get('/Payment/Del', [PaymentController::class, 'del_payment'])->name('del_payment');
 
 // Marketing
+
+Route::get('/Marketing/PromoCode', [MarketingController::class, 'promo_code'])->name('promo_code');
 Route::get('/Marketing/Commission', [MarketingController::class, 'commission'])->name('commission');
 Route::post('/Marketing/Commission/Edit', [MarketingController::class, 'edit_commission'])->name('edit_commission');
 Route::get('/Marketing/Users', [MarketingController::class, 'users'])->name('m_users');

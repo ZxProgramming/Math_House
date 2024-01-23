@@ -329,21 +329,9 @@
                     <div class="col-md-2 d-flex" style="align-items: center; column-gap:10px">
                       <span>Year:</span>
                         <select id="sel_year" name="names" class="form-control">
-                            <option value="2024">2024</option>
-                            <option value="2023">2023</option>
-                            <option value="2022">2022</option>
-                            <option value="2021">2021</option>
-                            <option value="2020">2020</option>
-                            <option value="2019">2019</option>
-                            <option value="2018">2018</option>
-                            <option value="2017">2017</option>
-                            <option value="2016">2016</option>
-                            <option value="2015">2015</option>
-                            <option value="2014">2014</option>
-                            <option value="2013">2013</option>
-                            <option value="2012">2012</option>
-                            <option value="2011">2011</option>
-                            <option value="2010">2010</option>
+                          @for( $i = date('Y'); $i >= 1990; $i-- )
+                            <option value="{{$i}}">{{$i}}</option>
+                          @endfor
                         </select>
                     </div>
                     <div class="col-md-2 d-flex" style="align-items: center; column-gap:10px">
@@ -474,7 +462,6 @@
 
 <table id="kt_profile_overview_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable no-footer">
     <thead class="fs-7 text-gray-500 text-uppercase">
-            <th class="sorting sorting_desc" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Manager: activate to sort column ascending" style="width:calc(100% / 7);" aria-sort="descending">#</th>
             <th class="sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width:calc(100% / 7);">Serial no.</th>
             <th class="sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width:calc(100% / 7);">Title</th>
             <th class="sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width:calc(100% / 7);">Time</th>
@@ -499,9 +486,6 @@
             </td>
             <td>
                 {{count($item->question)}}
-            </td>
-            <td>
-              NO. OF QUESTIONS	
             </td>
             <td>
               <div style="position: relative; text-align: left;">
@@ -604,21 +588,9 @@
                                     <div class="col-md-2 d-flex" style="align-items: center; column-gap:10px">
                                       <span>Year:</span>
                                         <select id="sel_year" name="names" class="form-control">
-                                            <option value="2024">2024</option>
-                                            <option value="2023">2023</option>
-                                            <option value="2022">2022</option>
-                                            <option value="2021">2021</option>
-                                            <option value="2020">2020</option>
-                                            <option value="2019">2019</option>
-                                            <option value="2018">2018</option>
-                                            <option value="2017">2017</option>
-                                            <option value="2016">2016</option>
-                                            <option value="2015">2015</option>
-                                            <option value="2014">2014</option>
-                                            <option value="2013">2013</option>
-                                            <option value="2012">2012</option>
-                                            <option value="2011">2011</option>
-                                            <option value="2010">2010</option>
+                                          @for( $i = date('Y'); $i >= 1990; $i-- )
+                                            <option value="{{$i}}">{{$i}}</option>
+                                          @endfor
                                         </select>
                                     </div>
                                     <div class="col-md-2 d-flex" style="align-items: center; column-gap:10px">

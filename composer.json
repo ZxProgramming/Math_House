@@ -6,6 +6,7 @@
     "version": "8.2.1",
     "require": {
         "php": "^8.0.2",
+        "darryldecode/cart": "^4.2",
         "diglactic/laravel-breadcrumbs": "^8.1",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.0",

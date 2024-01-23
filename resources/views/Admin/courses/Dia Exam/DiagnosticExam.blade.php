@@ -5,6 +5,7 @@
   }
 @endphp
 <x-default-layout>
+@section('title','Quizze')
 @include('success')
 {{-- Bootstrap pack --}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -147,6 +148,38 @@
   .remove_qz:hover{
     box-shadow:0px 0px 5px 5px rgb(134 134 134 / 22%);
   }
+  .edit_qz{
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+    text-align: center;
+    margin-top: 2px;
+    color: #fff;
+    background: #14bc14;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+  }
+  .edit_qz:hover{
+    box-shadow:0px 0px 5px 5px rgb(134 134 134 / 22%);
+  }
+  .remove_qz_edit{
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 5px 25px;
+    border: none;
+    outline: none;
+    text-align: center;
+    margin-top: 2px;
+    color: #fff;
+    background: red;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+  }
+  .remove_qz_edit:hover{
+    box-shadow:0px 0px 5px 5px rgb(134 134 134 / 22%);
+  }
   .avil{
     font-size: 1.3rem !important;
     font-weight: 500 !important;
@@ -158,7 +191,7 @@
 <div class="section_add">
   <button class="btn_add_quizz" type="button" data-toggle="modal" data-target="#exampleModalCenter">New Quizze</button>
 </div> 
-<!-- Modal -->
+<!-- Modal Add Quizze -->
 <div class="modal fade" id="exampleModalCenter" style="transform: translate(20px, 0px); " tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" style="max-width: 1300px !important; display: flex;align-items: center;justify-content: center;" role="document">
     <div class="modal-content" style="border-radius: 15px;">
@@ -281,7 +314,7 @@
                   </div>
                   <div class="d-flex justify-content-end" style="column-gap: 16px">
                     <a class="btnPrevious btn_add_quizz">Prev</a>
-                    <a class="btnNext btn_add_quizz">Next</a>
+                    <a class="btnNext btn_add_quizz next_btn d-none">Next</a>
                   </div>
                 </div>
               </div>
@@ -296,21 +329,9 @@
                     <div class="col-md-2 d-flex" style="align-items: center; column-gap:10px">
                       <span>Year:</span>
                         <select id="sel_year" name="names" class="form-control">
-                            <option value="2024">2024</option>
-                            <option value="2023">2023</option>
-                            <option value="2022">2022</option>
-                            <option value="2021">2021</option>
-                            <option value="2020">2020</option>
-                            <option value="2019">2019</option>
-                            <option value="2018">2018</option>
-                            <option value="2017">2017</option>
-                            <option value="2016">2016</option>
-                            <option value="2015">2015</option>
-                            <option value="2014">2014</option>
-                            <option value="2013">2013</option>
-                            <option value="2012">2012</option>
-                            <option value="2011">2011</option>
-                            <option value="2010">2010</option>
+                          @for( $i = date('Y'); $i >= 1990; $i-- )
+                            <option value="{{$i}}">{{$i}}</option>
+                          @endfor
                         </select>
                     </div>
                     <div class="col-md-2 d-flex" style="align-items: center; column-gap:10px">
@@ -390,9 +411,8 @@
                             <th scope="col" style="font-weight: 500; font-size: 1.1rem">Select</th>
                           </tr>
                         </thead>
-   <tbody class="quizze_item">
-    
-                        </tbody>
+                        
+                        <tbody class="quizze_item"></tbody>
                      
                     </table>
                   </div>
@@ -440,11 +460,8 @@
 </div>
 
 
-
-
 <table id="kt_profile_overview_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable no-footer">
     <thead class="fs-7 text-gray-500 text-uppercase">
-            <th class="sorting sorting_desc" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Manager: activate to sort column ascending" style="width:calc(100% / 7);" aria-sort="descending">#</th>
             <th class="sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width:calc(100% / 7);">Serial no.</th>
             <th class="sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width:calc(100% / 7);">Title</th>
             <th class="sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width:calc(100% / 7);">Time</th>
@@ -471,142 +488,426 @@
                 {{count($item->question)}}
             </td>
             <td>
-              NO. OF QUESTIONS	
-            </td>
-            <td>
               <div style="position: relative; text-align: left;">
-                           <i class="fa-solid fa-ellipsis-vertical" style="font-size: 1.7rem; margin-left: 20px;cursor: pointer;" id="show_menu"></i>
-                          <!-- Button trigger modal -->
-                           <div style="width: 100px; position: absolute;z-index: 10; top: 0px;left: 30px; display: flex;flex-direction: column;background: #ececec;" id="menu_action">
-                            <button type="button" style="width: 100%; background: none;border: none;outline: none;padding: 8px 20px;" data-bs-toggle="modal" data-bs-target="#modalCenter{{$item->id}}">
-                              Edit
-                            </button>
-                            <button type="button" class="text-danger" style="width: 100%; border-top: 1px solid #a7a7a7 !important; background: none;border: none;outline: none;padding: 8px 20px;" data-bs-toggle="modal" data-bs-target="#modalDelete{{$item->id}}">
-                              Delete
-                            </button>
-                          </div>
+ 
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter{{$item->id}}">
+                  Edit
+                </button>
+                
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{$item->id}}">
+                  Delete
+                </button>
 
-                          <!-- Modal -->
-                          <form method="POST" action="{{route('q_edit')}}">
-                             @csrf
-                           <div class="modal fade" id="modalCenter{{$item->id}}" tabindex="-1" aria-hidden="true" style="display: none;">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  
-                                  <h5 class="modal-title" id="modalCenterTitle">Edit item</h5>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div> 
-
-                              <div class="my-2 px-3">
-                                <label>
-                                  item
-                                </label>
-                                <input class='form-control' name="item" value="{{$item->item}}" placeholder="item" />
-                              </div>
-
-                              <div class="my-2 px-3">
-                                <label>
-                                  Type
-                                </label>
-                              
-                                <select class="form-control" name="q_type">
-                                  <option value="{{$item->q_type}}">{{$item->q_type}}</option>
-                                  <option value="Trail">Trail</option> 
-                                  <option value="Parallel">Parallel</option> 
-                                  <option value="Extra">Extra</option>
-                              </select>  
-                              </div>
-
-                              <div class="my-2 px-3">
-                              <label>
-                                  Year
-                              </label>
-                              <input class='form-control' name="year" value="{{$item->year}}" placeholder="Year" />
-                              </div>
-
-                              <div class="my-2 px-3">
-                              <label>
-                                  Month
-                              </label>
-                              <input class='form-control' name="month" value="{{$item->month}}" placeholder="Month" />
-                              </div>
-
-                              <div class="my-2 px-3">
-                              <label>
-                                  Code
-                              </label>
-                              <input class='form-control' name="q_code" value="{{$item->q_code}}" placeholder="Code" />
-                              </div>
-
-                              <div class="my-2 px-3">
-                              <label>
-                                  Section
-                              </label> 
-                          
-                              <select class="form-control" name="section">
-                                  <option value="{{$item->section}}">{{$item->section}}</option>
-                                  <option value="Blank">Blank</option>
-                                  <option value="1">1</option>
-                                  <option value="2">2</option>
-                                  <option value="3">3</option>
-                                  <option value="4">4</option>
-                              </select>     
-                              </div>
-
-                              <div class="my-2 px-3">
-                              <label>
-                                  item No.
-                            </label>
-                            <input class='form-control' name="q_num" value="{{$item->q_num}}" placeholder="item No." />
-                            </div>
-
-
-
-                              <input type="hidden" value="{{$item->id}}" name="id" />
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
-                                  Close
-                                </button>
-                                <button class="btn btn-primary">Submit</button>
-                              </div>
-                            </div>
-                          </div>
+                {{-- Modal Edit Quizze --}}
+                <div class="modal fade modal_edit" id="modalCenter{{$item->id}}" style="transform: translate(20px, 0px); " tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" style="max-width: 1300px !important; display: flex;align-items: center;justify-content: center;" role="document">
+                    <div class="modal-content" style="border-radius: 15px;">
+                      <form action="{{route('edit_quizze', ['id' => $item->id])}}" method="POST">
+                      @csrf
+                      <input type="hidden" class="questions_data" name="ques_id" />
+                        <div class="modal-header" style="border-bottom: 0 !important;">
+                          <h2 class="modal-title" id="exampleModalLongTitle">Edit Quizze</h2>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" class="cls_edite" style="font-size: 3rem;padding: 0;font-weight: 600 !important;color: #1b84ff;margin: 0;">&times;</span>
+                          </button>
                         </div>
-                        </form>
+                      {{-- Content Modal --}}
+                        <div class="modal-body" style="padding: 0 1rem !important">
+                          <!-- Nav tabs -->
+                            <ul class="nav nav-edit nav-tabs" style="margin-top: 20px;">
+                              <li class="nav-item nav-info" style="width: calc(100% / 2);text-align: center;">
+                                <a class="nav-link active" data-bs-toggle="tab" href="#info_edit{{$item->id}}">INFO</a>
+                              </li>
+                              <li class="nav-item nav-question" style="width: calc(100% / 2);text-align: center;">
+                                <a class="nav-link" data-bs-toggle="tab" href="#question_edit{{$item->id}}">QUESTIONS</a>
+                              </li>
+                            </ul>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="modalDelete{{$item->id}}" tabindex="-1" aria-hidden="true" style="display: none;">
-                          <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                              {{-- Info --}}
+                              <div class="tab-pane container active" style="min-height: 300px; max-width: 1340px !important;margin: 15px 0;" id="info_edit{{$item->id}}">
+
+                                <div class="" style="display: flex;flex-direction: column;align-items: flex-start;row-gap: 15px;">
+
+                                  <div class="col-md-12 d-flex align-items-center justify-content-around">
+                                    <span class="col-md-2" style="font-size: 1.2rem;">Title: </span>
+                                    <input type="text" name="title" value="{{ $item->title }}" class="col-md-9 form-control">
+                                  </div>
+
+                                  <div class="col-md-12 d-flex align-items-center justify-content-around">
+                                    <span class="col-md-2" style="font-size: 1.2rem;">Description: </span>
+                                    <textarea class="col-md-9 form-control" value="{{ $item->description }}" name="description" id="dec_quizze" cols="30" rows="3"></textarea>
+                                  </div>
+
+                                  <div class="col-md-12 d-flex align-items-center justify-content-around">
+                                    <span class="col-md-2" style="font-size: 1.2rem;">Duration: </span>
+                                    <div class="col-md-9" style="display: flex; align-items: center;padding: 0;justify-content: start">
+                                        <input name="time" value="{{ $item->time }}" max="60" min="1" class="col-md-4 form-control">
+                                    </div>
+                                  </div>
+
+                                  <div class="col-md-12 d-flex align-items-center justify-content-around">
+                                    <span class="col-md-2" style="font-size: 1.2rem;">Total Score: </span>
+                                    <input type="text" name="score" value="{{ $item->score }}" class="col-md-9 form-control">
+                                  </div>
+
+                                  <div class="col-md-12 d-flex align-items-center justify-content-around">
+                                    <span class="col-md-2" style="font-size: 1.2rem;">Pass Score: </span>
+                                    <input type="text" name="pass_score" value="{{ $item->pass_score }}" class="col-md-9 form-control">
+                                  </div>
+
+                                  <div class="col-md-12 d-flex align-items-center justify-content-around">
+                                    <span class="col-md-2" style="font-size: 1.2rem;">Active: </span>
+                                    <div class="col-md-9 p-0">
+                                      <label class="btn-container">
+                                        @if( $item->state == 0 )
+                                        <input name="state" value="1" type="checkbox" />
+                                        @else
+                                        <input name="state" value="1" type="checkbox" checked />
+                                        @endif
+                                        <div class="checkmark"></div>
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                {{-- <div class="d-flex justify-content-end" style="column-gap: 16px">
+                                  <a class="btnNext btn_add_quizz nex_btn">Next</a>
+                                </div> --}}
+                              </div>
+                              {{-- Questions --}} 
                                 
-                                <h5 class="modal-title" id="modalCenterTitle">Delete Quizze</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div> 
-                              
-                              <div class='p-3'>
-                                Are You Sure To Delete
-                                <span class='text-danger'>
-                                  {{$item->title}} ??
-                                </span>
-                              </div>
+                              <div class="tab-pane container fade" style="min-height: 300px; max-width: 1340px !important;margin: 10px 0;" id="question_edit{{$item->id}}">
+                                
+                                <div class="" style="display: flex;flex-direction: column;justify-content: space-between;height: 100%;">
+                                    
+                                  <div class="d-flex" style="margin-bottom: 1rem; align-items: center; justify-content: space-around; column-gap: 10px">
+                                    <span style="font-size: 1.2rem;font-weight: 600;">Filter Quizzes :</span>
+                                  
+                                    <div class="col-md-2 d-flex" style="align-items: center; column-gap:10px">
+                                      <span>Year:</span>
+                                        <select id="sel_year" name="names" class="form-control">
+                                          @for( $i = date('Y'); $i >= 1990; $i-- )
+                                            <option value="{{$i}}">{{$i}}</option>
+                                          @endfor
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 d-flex" style="align-items: center; column-gap:10px">
+                                      <span>Month:</span>
+                                        <select id="sel_month" name="names" class="form-control">
+                                          <option value="01">January</option>
+                                          <option value="02">February</option>
+                                          <option value="03">March</option>
+                                          <option value="04">April</option>
+                                          <option value="05">May</option>
+                                          <option value="06">June</option>
+                                          <option value="07">July</option>
+                                          <option value="08">August</option>
+                                          <option value="09">September</option>
+                                          <option value="10">October</option>
+                                          <option value="11">November</option>
+                                          <option value="12">December</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 d-flex" style="align-items: center; column-gap:10px">
+                                      <span>Section:</span>
+                                        <select id="sel_month" name="names" class="form-control">
+                                          <option value="01">January</option>
+                                          <option value="02">February</option>
+                                          <option value="03">March</option>
+                                          <option value="04">April</option>
+                                          <option value="05">May</option>
+                                          <option value="06">June</option>
+                                          <option value="07">July</option>
+                                          <option value="08">August</option>
+                                          <option value="09">September</option>
+                                          <option value="10">October</option>
+                                          <option value="11">November</option>
+                                          <option value="12">December</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 d-flex" style="align-items: center; column-gap:10px">
+                                      <span>Code:</span>
+                                        <select id="sel_month" name="names" class="form-control">
+                                          <option value="01">January</option>
+                                          <option value="02">February</option>
+                                          <option value="03">March</option>
+                                          <option value="04">April</option>
+                                          <option value="05">May</option>
+                                          <option value="06">June</option>
+                                          <option value="07">July</option>
+                                          <option value="08">August</option>
+                                          <option value="09">September</option>
+                                          <option value="10">October</option>
+                                          <option value="11">November</option>
+                                          <option value="12">December</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 d-flex p-0" style="align-items: center; column-gap:10px">
+                                      <span class="col-md-8">Question Num:</span>
+                                      <input type="number" class="col-md-4 form-control" style="padding:.375rem 0 !important; padding-left: 5px !important;">
+                                    </div>
+                                    
+                                  </div>
+                                    <input class="category" type="hidden" value="{{$categories}}" />
+                                    <input class="course" type="hidden" value="{{$courses}}" />
+                                    <input class="chapter" type="hidden" value="{{$chapters}}" />
+                                    <input class="lesson" type="hidden" value="{{$lessons}}" />
+                                  
+                                  <div style="max-height: 300px;overflow: scroll;padding: 12px 0; border-bottom: 2px solid #8f8f8f">
+                                    <table class="table table-striped" id="tblData_Quizzes">
+                                        <thead class="border-bottom">
+                                          <tr>
+                                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">#</th>
+                                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">Type</th>
+                                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">Year</th>
+                                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">Month</th>
+                                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">Code</th>
+                                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">Section</th>
+                                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">No</th>
+                                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">Difficulty</th>
+                                            <th scope="col" style="font-weight: 500; font-size: 1.1rem">Select</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody class="quizze_item lesson_quizze">
+                                          @foreach( $questions as $question )
+                                            @if( $question->lesson_id == $item->lesson_id )
+                                              <input type="hidden" value="{{$question->id}}" class="question_id" />
+                                              <input type="hidden" value="{{$item->id}}" class="quizze_id" />
+                                              <tr>
+                                                <th scope="row" class="idd d-none">{{$question->id}}</th>
+                                                <th>{{$loop->iteration}}</th>
+                                                <td class="type">{{$question->q_type}}</td>
+                                                <td class="year">{{$question->year}}</td>
+                                                <td class="month">{{$question->month}}</td>
+                                                <td class="code">{{$question->q_code}}</td>
+                                                <td class="section">{{$question->section}}</td>
+                                                <td class="noNum">{{$question->q_num}}</td>
+                                                <td class="diff">{{$question->difficulty}}</td>
+                                                <td class="p-0">
+                                                  <button type="button" class="edit_qz add_question">Add</button>
+                                                </td>
+                                              </tr>
+                                            @endif
+                                          @endforeach
+                                        </tbody>
+                                    
+                                    </table>
+                                  </div>
 
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
-                                  Close
-                                </button>
-                                <a href="{{route('del_quizze', ['id'=>$item->id])}}" class="btn btn-danger">Delete</a>
+                                  <div class="d-flex" style="align-items: center; justify-content: center">
+                                    <span style="font-size: 2rem;font-weight: 500;background: #1b84ff;color: #fff;border-radius: 10px;padding: 10px 15px;margin-top: 10px;">Quizzes</span>
+                                  </div>
+
+                                  <div style="max-height: 300px;overflow: scroll;padding: 12px 0; border-bottom: 2px solid #8f8f8f">
+                                    <table class="table table-striped" id="tblData">
+                                      <thead class="border-bottom">
+                                        <tr>
+                                          <th scope="col" style="font-weight: 500; font-size: 1.1rem">#</th>
+                                          <th scope="col" style="font-weight: 500; font-size: 1.1rem">Type</th>
+                                          <th scope="col" style="font-weight: 500; font-size: 1.1rem">Year</th>
+                                          <th scope="col" style="font-weight: 500; font-size: 1.1rem">Month</th>
+                                          <th scope="col" style="font-weight: 500; font-size: 1.1rem">Code</th>
+                                          <th scope="col" style="font-weight: 500; font-size: 1.1rem">Section</th>
+                                          <th scope="col" style="font-weight: 500; font-size: 1.1rem">No</th>
+                                          <th scope="col" style="font-weight: 500; font-size: 1.1rem">Difficulty</th>
+                                          <th scope="col" style="font-weight: 500; font-size: 1.1rem">Action</th>
+                                        </tr>
+                                      </thead>
+                                        <input type="hidden" class="add_new_questions" name="add_new_questions" />
+
+                                        <tbody class="sel_quz sel_quz_edit">
+                                        @foreach( $item->question as $question )
+                                        <input type="hidden" class="e_questions" value="{{$question}}" />
+                                          <tr>
+                                            <td style="font-weight: 500; font-size: 1.1rem">
+                                              {{$loop->iteration}}
+                                            </td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->q_type}}</td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->year	}}</td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->month}}</td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->q_code}}</td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->section}}</td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->q_num}}</td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->difficulty}}</td>
+                                            <td style='width: 150px !important; padding: 0 !important;'>
+                                              <button type='button' class='remove_qz_edit'>Remove</button>
+                                            </td>
+                                          </tr>
+                                          @endforeach
+                                        </tbody>
+
+                                      </table>
+                                  </div>
+
+                                  {{-- <div class="d-flex justify-content-end" style="column-gap: 16px; margin-top: 10px">
+                                    <a class="btnPrevious btn_add_quizz pre_btn">Prev</a>
+                                  </div> --}}
+
+                                </div>
                               </div>
                             </div>
-                          </div>
+
                         </div>
+
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary close_btn"  data-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary add_btn">Edit</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Modal To Delete Quizze -->
+                <div class="modal fade" id="modalDelete{{$item->id}}" tabindex="-1" aria-hidden="true" style="display: none;">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        
+                        <h5 class="modal-title" id="modalCenterTitle">Delete Quizze</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div> 
+                      
+                      <div class='p-3'>
+                        Are You Sure To Delete
+                        <span class='text-danger'>
+                          {{$item->title}} ??
+                        </span>
+                      </div>
+
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
+                          Close
+                        </button>
+                        <a href="{{route('del_quizze', ['id'=>$item->id])}}" class="btn btn-danger">Delete</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </td>
         </tr>
         @endforeach
     </tbody>
 </table>
+
+<script>
+   $( document ).ready(function() {
+
+          $("#show_menu").click(function(){
+              
+            $("#menu_action").toggle(function(){
+              
+              $(this).addClass("d-flex"); 
+              }, function(){
+                $(this).removeClass("d-flex");
+
+              })
+              
+              $("#menu_action").click(function(){
+                $(this).hide()
+              })
+          });
+
+
+          $('.btnNext').click(function() {
+            const nextTabLinkEl = $('.nav-tabs .active').closest('li').next('li').find('a')[0];
+            const nextTab = new bootstrap.Tab(nextTabLinkEl);
+            nextTab.show();
+          });
+
+          $('.btnPrevious').click(function() {
+            const prevTabLinkEl = $('.nav-tabs .active').closest('li').prev('li').find('a')[0];
+            const prevTab = new bootstrap.Tab(prevTabLinkEl);
+            prevTab.show();
+          });
+
+          // $('.nex_btn').click(function() {
+          //   const nextTabLinkEl = $('.nav-edit .active').closest('.nav-item').next('li').find('a')[0];
+          //   const nextTab = new bootstrap.Tab(nextTabLinkEl);
+          //   nextTab.show();
+          // });
+
+          // $('.pre_btn').click(function() {
+          //   const prevTabLinkEl = $('.nav-edit .active').closest('.nav-question').prev('li').find('a')[0];
+          //   const prevTab = new bootstrap.Tab(prevTabLinkEl);
+          //   prevTab.show();
+          // });
+
+          $(".cls_edite").click(()=>{
+            $(".modal_edit").modal("hide");
+          })
+          $(".close_btn").click(()=>{
+            $(".modal_edit").modal("hide");
+          })
+
+
+
+          var emptyRow = "<tr><td colspan='12' class='avil'> No Quizzes Available</td></tr>"
+          
+          function addEmptyRow() {
+            if ($("#tblData tbody").html() == "") {
+              $("#tblData tbody").append(emptyRow);
+            };
+            if ($("#tblData_Quizzes tbody").html() == "") {
+              $("#tblData_Quizzes tbody").append(emptyRow);
+            };
+          };
+          addEmptyRow();
+        });
+</script>
+
+<script>
+  let add_question = document.querySelectorAll('.add_question');
+  let question_id = document.querySelectorAll('.question_id');
+  let quizze_id = document.querySelectorAll('.quizze_id');
+
+  for (let i = 0, end = add_question.length; i < end; i++) {
+    add_question[i].addEventListener('click', ( e ) => {
+      for (let j = 0; j < end; j++) {
+        if ( e.target == add_question[j] ) {
+          let obj = {
+            quizze_id : quizze_id[j].value,
+            ques_id : question_id[j].value,
+          }
+          $.ajax("{{route('quize_add_q')}}", {
+          type: 'GET',
+          data: obj,
+          success: function ( res ) {
+            console.log(res);
+          },
+      });
+
+        }
+      }
+    })
+  }
+  
+  let remove_qz_edit = document.querySelectorAll('.remove_qz_edit');
+  let e_questions = document.querySelectorAll('.e_questions');
+
+  for (let i = 0, end = remove_qz_edit.length; i < end; i++) {
+    remove_qz_edit[i].addEventListener('click', ( e ) => {
+      for (let j = 0; j < end; j++) {
+        if ( e.target == remove_qz_edit[j] ) {
+          let obj = e_questions[j].value;
+          obj = JSON.parse(obj); 
+          $.ajax("{{route('quize_del_q')}}", {
+          type: 'GET',
+          data: obj,
+          success: function ( res ) {
+            console.log(res);
+          },
+      });
+
+        }
+      }
+    })
+  }
+</script>
 
 <script>
   $("#menu_action").css("display","none");
@@ -663,232 +964,248 @@ sel_course.addEventListener('change', () => {
 });
 
 sel_chapter.addEventListener('change', () => {
-  sel_lesson.innerHTML = `
-      <option selected disabled>
-        Select Lesson
-      </option>
-      `;
-    lesson.forEach(element => {
-    if ( sel_chapter.value == element.chapter_id ) {
-      sel_lesson.innerHTML += `
-      <option value="${element.id}">
-      ${element.lesson_name}
-      </option>
-      `;
-    }
-  });
+    sel_lesson.innerHTML = `
+        <option selected disabled>
+          Select Lesson
+        </option>
+        `;
+      lesson.forEach(element => {
+      if ( sel_chapter.value == element.chapter_id ) {
+        sel_lesson.innerHTML += `
+        <option value="${element.id}">
+        ${element.lesson_name}
+        </option>
+        `;
+      }
+    });
 });
 
 let quizze_item = document.querySelector('.quizze_item');
+
 sel_lesson.addEventListener('change', () => {
+  
+  $(".next_btn").removeClass("d-none");
+
   $.ajax("{{route('quize_data')}}", {
       type: 'GET',  // http method
       data: { lesson: sel_lesson.value },  // data to submit
       success: function (data) {
-          quizze_item.innerHTML = null;
-          console.log(data);
-        data.forEach((element, index) => {
-          quizze_item.innerHTML += `<tr>
-                            <th scope="row" class="idd d-none">${element.id}</th>
-                            <th>${index + 1}</th>
-                            <td class="type">${element.q_type}</td>
-                            <td class="year">${element.year}</td>
-                            <td class="month">${element.month}</td>
-                            <td class="code">${element.q_code}</td>
-                            <td class="section">${element.section}</td>
-                            <td class="noNum">${element.q_num}</td>
-                            <td class="diff">${element.difficulty}</td>
-                            <td class="p-0">
-                              <button type="button" class="add_qz">Add</button>
-                            </td>
-                          </tr>`;
-        });
-        $( document ).ready(function() {
-    $("#show_menu").click(function(){
-        
-      $("#menu_action").toggle(function(){
-         
-        $(this).addClass("d-flex");
-          console.log("ssssssss");
-        }, function(){
-          $(this).removeClass("d-flex");
+          quizze_item.innerHTML = null; 
+          data.forEach((element, index) => {
+            quizze_item.innerHTML += `<tr>
+                              <th scope="row" class="idd d-none">${element.id}</th>
+                              <th>${index + 1}</th>
+                              <td class="type">${element.q_type}</td>
+                              <td class="year">${element.year}</td>
+                              <td class="month">${element.month}</td>
+                              <td class="code">${element.q_code}</td>
+                              <td class="section">${element.section}</td>
+                              <td class="noNum">${element.q_num}</td>
+                              <td class="diff">${element.difficulty}</td>
+                              <td class="p-0">
+                                <button type="button" class="add_qz">Add</button>
+                              </td>
+                            </tr>`;
+            });
 
-        })
-        
-        $("#menu_action").click(function(){
-          $(this).hide()
-        })
-    });
-
-
-    $('.btnNext').click(function() {
-      const nextTabLinkEl = $('.nav-tabs .active').closest('li').next('li').find('a')[0];
-      const nextTab = new bootstrap.Tab(nextTabLinkEl);
-      nextTab.show();
-    });
-
-    $('.btnPrevious').click(function() {
-      const prevTabLinkEl = $('.nav-tabs .active').closest('li').prev('li').find('a')[0];
-      const prevTab = new bootstrap.Tab(prevTabLinkEl);
-      prevTab.show();
-    });
-
-
-
-    var emptyRow = "<tr><td colspan='12' class='avil'> No Quizzes Available</td></tr>"
-    
-    function addEmptyRow() {
-      if ($("#tblData tbody").children().children().length == 0) {
-        $("#tblData tbody").append(emptyRow);
-      };
-      if ($("#tblData_Quizzes tbody").children().children().length == 0) {
-        $("#tblData_Quizzes tbody").append(emptyRow);
-      };
-    };
-
-    if($("tbody").length >= 1){
-      console.log("yes")
-      addEmptyRow();
-    }else{
-      console.log("no")
-    }
-  
-
-
-    var quizzes = [];
-    
-    $(".add_qz").click(function(){
-
-      var quziId = $(this).closest("tr").find(".idd").text();
-      var quziType = $(this).closest("tr").find(".type").text();
-      var quziYear = $(this).closest("tr").find(".year").text();
-      var quziMonth = $(this).closest("tr").find(".month").text();
-      var quziCode = $(this).closest("tr").find(".code").text();
-      var quziNoNum = $(this).closest("tr").find(".noNum").text();
-      var quziSection = $(this).closest("tr").find(".section").text();
-      var quziDiff = $(this).closest("tr").find(".diff").text();
-
-      var allData = [];
-  
-      console.log(quziId)
-      console.log(quziType)
-      console.log(quziYear)
-      console.log(quziMonth)
-      console.log(quziCode)
-      console.log(quziNoNum)
-      console.log(quziSection)
-      console.log(quziDiff)
-
-
-      var quziObject = {
-        id: quziId,
-        type: quziType,
-        year: quziYear,
-        month: quziMonth,
-        code: quziCode,
-        section: quziSection,
-        noNum: quziNoNum,
-        diff: quziDiff,
-      }
-       
-      allData.push(quziObject);
-
-      quizzes.push(...allData);
-      
-      console.log("quizzes", quizzes);
-      console.log("#".repeat(15));
-      
-      console.log("allData", allData);
-      console.log("#".repeat(15));
-
-      // console.log(allQuizzes)
-      console.log("#".repeat(15));
-
-      var object_serialized = JSON.stringify(allData);
-
-
-      var allObject_serialized = JSON.stringify(quizzes);
-
-      localStorage.setItem("Allquizzes", allObject_serialized)
-
-
-
-       localStorage.setItem("quizzes", object_serialized)
-      
-      console.log("localStorage", localStorage);
-      console.log("#".repeat(15));
-
-       var myObjectDeserialized = JSON.parse(localStorage.getItem("quizzes"));
-      
-      console.log("myObjectDeserialized", myObjectDeserialized);
-
-      console.log("#".repeat(15));
-
-      var quizz_container = $(".sel_quz");
-
-      var index = quizzes.length;
-      var removeBtn =  "<button type='button' class='remove_qz'>Remove</button>";
-      
-      
-      myObjectDeserialized.forEach(element => {
-        var dynamicTR = "<tr>";
-          dynamicTR = dynamicTR + "<td class='iddd'> " + index + "</td>"; 
-          dynamicTR = dynamicTR + "<td> " + element.type + "</td>"; 
-          dynamicTR = dynamicTR + "<td> " + element.year + "</td>"; 
-          dynamicTR = dynamicTR + "<td> " + element.month + "</td>"; 
-          dynamicTR = dynamicTR + "<td> " + element.code + "</td>"; 
-          dynamicTR = dynamicTR + "<td> " + element.section + "</td>"; 
-          dynamicTR = dynamicTR + "<td> " + element.noNum + "</td>"; 
-          dynamicTR = dynamicTR + "<td> " + element.diff + "</td>"; 
-          dynamicTR = dynamicTR + "<td style='width: 150px !important; padding: 0 !important;'  > " + removeBtn + "</td>"; 
+          var quizzes = [];
           
-          dynamicTR = dynamicTR + " </tr>";
+          $(".add_qz").click(function(){
 
-          index++;
-          //_____________________________________________________________________________
-          quizz_container.append(dynamicTR);
-          questions_data.value = JSON.stringify(quizzes);
-          //_____________________________________________________________________________
-      });
+            var quziId = $(this).closest("tr").find(".idd").text();
+            var quziType = $(this).closest("tr").find(".type").text();
+            var quziYear = $(this).closest("tr").find(".year").text();
+            var quziMonth = $(this).closest("tr").find(".month").text();
+            var quziCode = $(this).closest("tr").find(".code").text();
+            var quziNoNum = $(this).closest("tr").find(".noNum").text();
+            var quziSection = $(this).closest("tr").find(".section").text();
+            var quziDiff = $(this).closest("tr").find(".diff").text();
 
-      if($("tbody").length <= 1){
-        console.log("yes")
-        addEmptyRow();
-      }else{
-        console.log("nooo")
-        $(".avil").parent().remove();
-      };
+            var allData = []; 
 
-      
-      // addEmptyRow()
-    });
 
-    $(document).on('click', '.remove_qz', function() {
-      // var getIndex = $(this).attr("data-index");
-      
-      console.log(quizzes);
-      console.log("#".repeat(15));
-      var getIndex = $(this).closest("tr").index();
-      
-        quizzes.splice(getIndex , 1);
-      
-      
-      // console.log(parseInt($(this).closest("tr").find(".iddd").html()));
-      console.log(parseInt($(this).closest("tr").index()));
-      console.log(getIndex);
-      console.log(quizzes);
-      $(this).closest("tr").remove();
-      addEmptyRow();
-    });
+            var quziObject = {
+              id: quziId,
+              type: quziType,
+              year: quziYear,
+              month: quziMonth,
+              code: quziCode,
+              section: quziSection,
+              noNum: quziNoNum,
+              diff: quziDiff,
+            }
+            
+            allData.push(quziObject);
 
-     
+            quizzes.push(...allData); 
 
-  });
+            var object_serialized = JSON.stringify(allData);
+
+
+            var allObject_serialized = JSON.stringify(quizzes);
+
+            localStorage.setItem("Allquizzes", allObject_serialized)
+
+
+
+            localStorage.setItem("quizzes", object_serialized)
+             
+
+            var myObjectDeserialized = JSON.parse(localStorage.getItem("quizzes"));
+             
+
+            var quizz_container = $(".sel_quz");
+
+            var index = quizzes.length;
+            var removeBtn =  "<button type='button' class='remove_qz'>Remove</button>";
+            
+            
+            myObjectDeserialized.forEach(element => {
+              var dynamicTR = "<tr>";
+                dynamicTR = dynamicTR + "<td class='iddd'> " + index + "</td>"; 
+                dynamicTR = dynamicTR + "<td> " + element.type + "</td>"; 
+                dynamicTR = dynamicTR + "<td> " + element.year + "</td>"; 
+                dynamicTR = dynamicTR + "<td> " + element.month + "</td>"; 
+                dynamicTR = dynamicTR + "<td> " + element.code + "</td>"; 
+                dynamicTR = dynamicTR + "<td> " + element.section + "</td>"; 
+                dynamicTR = dynamicTR + "<td> " + element.noNum + "</td>"; 
+                dynamicTR = dynamicTR + "<td> " + element.diff + "</td>"; 
+                dynamicTR = dynamicTR + "<td style='width: 150px !important; padding: 0 !important;'  > " + removeBtn + "</td>"; 
+                
+                dynamicTR = dynamicTR + " </tr>";
+
+                index++;
+                //_____________________________________________________________________________
+                quizz_container.append(dynamicTR);
+                questions_data.value = JSON.stringify(quizzes);
+                //_____________________________________________________________________________
+            });
+
+            if($("tbody").length <= 1){ 
+              addEmptyRow();
+            }else{ 
+              $(".avil").parent().remove();
+            };
+          });
+
+          $(document).on('click', '.remove_qz', function() {
+            var emptyRow = "<tr><td colspan='12' class='avil'> No Quizzes Available</td></tr>";
+             
+            
+            var getIndex = $(this).closest("tr").index();
+            
+            quizzes.splice(getIndex , 1);
+             
+
+            $(this).closest("tr").remove();
+            
+            if ($("#tblData .sel_quz").html() == "") { 
+              $("#tblData .sel_quz").append(emptyRow);
+            };
+          });
       },
   });
 });
+</script>
+<script>
+  $(document).ready(()=>{
+
+    var quizzesEdit = [];
+      $(".edit_qz").click(function(){
+
+            var quziId = $(this).closest("tr").find(".idd").text();
+            var quziType = $(this).closest("tr").find(".type").text();
+            var quziYear = $(this).closest("tr").find(".year").text();
+            var quziMonth = $(this).closest("tr").find(".month").text();
+            var quziCode = $(this).closest("tr").find(".code").text();
+            var quziNoNum = $(this).closest("tr").find(".noNum").text();
+            var quziSection = $(this).closest("tr").find(".section").text();
+            var quziDiff = $(this).closest("tr").find(".diff").text();
+
+            var allDataEdit = []; 
 
 
+            var quziObjectEdit = {
+              id: quziId,
+              type: quziType,
+              year: quziYear,
+              month: quziMonth,
+              code: quziCode,
+              section: quziSection,
+              noNum: quziNoNum,
+              diff: quziDiff,
+            }
+            
+            allDataEdit.push(quziObjectEdit);
+
+            quizzesEdit.push(...allDataEdit);
+
+            var object_serialized_edit = JSON.stringify(allDataEdit);
+
+
+            var allObject_serialized_edit = JSON.stringify(quizzesEdit);
+
+            localStorage.setItem("AllquizzesEdit", allObject_serialized_edit)
+
+
+
+            localStorage.setItem("quizzesEdit", object_serialized_edit)
+             
+
+            var myObjectDeserializedEdit = JSON.parse(localStorage.getItem("quizzesEdit"));
+             
+
+            var quizz_container_edit = $(".sel_quz");
+
+            var index = quizzesEdit.length;
+            var removeBtn =  "<button type='button' class='remove_qz_edit'>Remove</button>";
+            
+            
+            myObjectDeserializedEdit.forEach(element => {
+              var dynamicTREdit = "<tr>";
+                dynamicTREdit = dynamicTREdit + "<td class='iddd'> " + index + "</td>"; 
+                dynamicTREdit = dynamicTREdit + "<td> " + element.type + "</td>"; 
+                dynamicTREdit = dynamicTREdit + "<td> " + element.year + "</td>"; 
+                dynamicTREdit = dynamicTREdit + "<td> " + element.month + "</td>"; 
+                dynamicTREdit = dynamicTREdit + "<td> " + element.code + "</td>"; 
+                dynamicTREdit = dynamicTREdit + "<td> " + element.section + "</td>"; 
+                dynamicTREdit = dynamicTREdit + "<td> " + element.noNum + "</td>"; 
+                dynamicTREdit = dynamicTREdit + "<td> " + element.diff + "</td>"; 
+                dynamicTREdit = dynamicTREdit + "<td style='width: 150px !important; padding: 0 !important;'> " + removeBtn + "</td>"; 
+                
+                dynamicTREdit = dynamicTREdit + " </tr>";
+
+                index++;
+                //_____________________________________________________________________________
+                quizz_container_edit.append(dynamicTREdit);
+                questions_data.value = JSON.stringify(quizzesEdit);
+                //_____________________________________________________________________________
+            });
+
+            if($("tbody").length <= 1){ 
+              addEmptyRow();
+            }else{ 
+              $(".avil").parent().remove();
+            };
+      });
+
+        $(document).on('click', '.remove_qz_edit', function() {
+            var emptyRowEdit = "<tr><td colspan='12' class='avil'> No Quizzes Available</td></tr>";
+             
+            
+            var getIndexEdit = $(this).closest("tr").index();
+            
+            quizzesEdit.splice(getIndexEdit , 1);
+             
+
+            $(this).closest("tr").remove();
+            
+            if ($("#tblData .sel_quz_edit").html() == "") { 
+              $("#tblData .sel_quz_edit").append(emptyRowEdit);
+            };
+          });
+  
+});
 
 </script>
 </x-default-layout>

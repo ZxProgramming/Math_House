@@ -289,6 +289,14 @@
 							<span class="menu-title">Payment Requests</span>
 						</a>
 						<!--end:Menu link-->
+						<!--begin:Menu link-->
+						<a class="menu-link " href="{{ route('promo_code') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Promo Codes</span>
+						</a>
+						<!--end:Menu link-->
 					</div>
 					</div>
 					</div>

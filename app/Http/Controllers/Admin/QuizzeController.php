@@ -14,7 +14,7 @@ use App\Models\QQuize;
 
 class QuizzeController extends Controller
 {
-    public function quizze(){
+    public function quizze(){ 
         $questions = Question::all();
         $quizzes = quizze::all();
         $categories = Category::all();
@@ -72,10 +72,8 @@ class QuizzeController extends Controller
         $ques_id = json_decode($req->ques_id); 
         
         $arr = $req->only('title', 'description', 'time', 'score', 'pass_score', 'state', 'lesson_id');
-        quizze::where('id', $id)
+        $quizze = quizze::where('id', $id)
         ->update($arr);
-        QQuize::where('quizze_id', $id)
-        ->delete();
         for ( $i=0, $end = count($ques_id); $i < $end; $i++ ) { 
             QQuize::create([
                 'quizze_id' => $id,

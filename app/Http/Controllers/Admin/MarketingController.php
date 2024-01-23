@@ -9,6 +9,7 @@ use App\Models\Commission;
 use App\Models\Affilate;
 use App\Models\Payout;
 use App\Models\PaymentMethod;
+use App\Models\PromoCode;
 
 class MarketingController extends Controller
 {
@@ -47,6 +48,12 @@ class MarketingController extends Controller
         $payments = PaymentMethod::all();
 
         return view('Admin.Marketing.Payout', compact('payouts', 'payments'));
+    }
+
+    public function promo_code(){
+        $promo = PromoCode::all();
+
+        return view('Admin.Marketing.Promo_Code', compact('promo'));
     }
 
     public function filter_payment( Request $req ){

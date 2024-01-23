@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\QuizzeController;
 
+use App\Http\Controllers\Visitor\CoursesController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -25,6 +27,7 @@ Route::post('/question_type', [QuestionController::class, 'question_type'])->nam
 Route::get('/quize_data', [QuizzeController::class, 'quize_data'])->name('quize_data')->middleware('auth:sanctum');
 Route::get('/quize_del_q', [QuizzeController::class, 'quize_del_q'])->name('quize_del_q')->middleware('auth:sanctum');
 Route::get('/quize_add_q', [QuizzeController::class, 'quize_add_q'])->name('quize_add_q')->middleware('auth:sanctum');
+Route::get('/buy_chapters', [CoursesController::class, 'buy_chapters'])->name('buy_chapters')->middleware('auth:sanctum');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

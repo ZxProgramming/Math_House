@@ -74,6 +74,58 @@ class Logincontroller extends Controller
                            
         }
         
+
+        public function market_login(Request $request){
+                $request->validate([
+                'email'=> 'required|email',
+                'password'=> 'required'
+                ],[
+                'email.required'=> 'Email or Password Invalid',
+                'email.email'=> 'Email or Password Invalid',
+                'password.required'=> 'Email or Password Invalid',
+                ]);
+
+                        $user = User::where('email',$request->input('email'))->first();
+                        if(!$user){
+                                return redirect()->back();
+
+                        }
+                        if ($user->state == 'hidden') {
+                                return redirect()->back();
+                        }
+                        if(!password_verify($request->input('password'),$user->password)){
+                                return redirect()->back();
+
+                        }
+			Auth::loginUsingId($user->id);
+
+                                $credentials = $request->only('email','password');
+
+                                
+                        $authantecated = Auth::attempt($credentials);
+                        
+                        if($authantecated){
+                                $user = User::where('email',$request->email)->first();
+                                $token = $user->createToken("user")->plainTextToken;
+                                $user->token =$token ;
+                                if( $user->position == 'admin'){
+                                        return redirect()->route('course_payment');
+                                }
+                                elseif( $user->position == 'teacher'){
+                                        return redirect()->route('course_payment');
+                                }
+                                elseif( $user->position == 'student'){
+                                        return redirect()->route('course_payment');
+                                }
+                                return view();
+                        }
+                        if(!$authantecated){
+                                return redirect()->back();
+                        }
+
+                           
+        }
+        
         public function destroy(){
                 Auth::logout();
                 return redirect()->route('login.index');
