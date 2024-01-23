@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 18, 2024 at 01:42 PM
+-- Generation Time: Jan 23, 2024 at 11:10 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -245,6 +245,29 @@ INSERT INTO `confirm_sign` (`id`, `email`, `code`, `created_at`, `updated_at`) V
 (12, 'sdfs@gmail.com', '3273', '2024-01-04', '2024-01-04'),
 (13, 'sdfs@gmail.com', '2720', '2024-01-04', '2024-01-04'),
 (14, 'sdfs@gmail.com', '7016', '2024-01-04', '2024-01-04');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact`
+--
+
+CREATE TABLE `contact` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `subject` varchar(255) DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `contact`
+--
+
+INSERT INTO `contact` (`id`, `name`, `email`, `subject`, `message`, `created_at`, `updated_at`) VALUES
+(1, 'mohamed yasen', 'admin@gmail.com', 'Hello', 'My Msg', '2024-01-20', '2024-01-20');
 
 -- --------------------------------------------------------
 
@@ -973,7 +996,24 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (91, 'App\\Models\\User', 8, 'user', 'f25270b50ea191c0aea8c050323b33c351b882a9cf68f2480534aeb8a4fb5c45', '[\"*\"]', NULL, NULL, '2024-01-16 11:58:06', '2024-01-16 11:58:06'),
 (92, 'App\\Models\\User', 8, 'user', '1017ea0358e7d244add5b93b452dce2871cf20455caa12edb4e7130bc28927d3', '[\"*\"]', NULL, NULL, '2024-01-16 11:58:51', '2024-01-16 11:58:51'),
 (93, 'App\\Models\\User', 8, 'user', '30913192f3746a4b420ec1dea346385cc187a160434eefe1fd748f4eefcc7ef9', '[\"*\"]', NULL, NULL, '2024-01-17 05:35:20', '2024-01-17 05:35:20'),
-(94, 'App\\Models\\User', 8, 'user', 'db610ec924ed595aa48fcce2428e268acd503c46e6c20dec60f3e1425d70cd25', '[\"*\"]', NULL, NULL, '2024-01-18 06:43:37', '2024-01-18 06:43:37');
+(94, 'App\\Models\\User', 8, 'user', 'db610ec924ed595aa48fcce2428e268acd503c46e6c20dec60f3e1425d70cd25', '[\"*\"]', NULL, NULL, '2024-01-18 06:43:37', '2024-01-18 06:43:37'),
+(95, 'App\\Models\\User', 8, 'user', '14f3b56d5a72ce09f8aa0d6e0ccb4e800596dfaab39d4d27b3e00f69173d536c', '[\"*\"]', NULL, NULL, '2024-01-20 10:13:39', '2024-01-20 10:13:39'),
+(96, 'App\\Models\\User', 8, 'user', '4bbc7145e8df3c737b2d5d5bdcc903c53255062d9fc61019b6dd7793881df658', '[\"*\"]', NULL, NULL, '2024-01-21 06:06:01', '2024-01-21 06:06:01'),
+(97, 'App\\Models\\User', 8, 'user', 'bbd198e6383ac8bda5306fa26aaf96b5fe00f62650699a7c5558185b2367e713', '[\"*\"]', NULL, NULL, '2024-01-22 05:43:34', '2024-01-22 05:43:34'),
+(98, 'App\\Models\\User', 8, 'user', '282d2f788fd1fb3839f78a06fdc2cc2e07fc4efe6ba7e87256f66226805885c7', '[\"*\"]', NULL, NULL, '2024-01-22 06:45:48', '2024-01-22 06:45:48'),
+(99, 'App\\Models\\User', 8, 'user', 'bf9e20f580afff475dc1414ce7e781b6da06d50f5a0f8d63336bd0e3b2945809', '[\"*\"]', NULL, NULL, '2024-01-22 06:55:19', '2024-01-22 06:55:19'),
+(100, 'App\\Models\\User', 8, 'user', 'b537fa34fa054f10be62fc02b6a5101cefa35bc56cf9b165e625a51e0fb76197', '[\"*\"]', NULL, NULL, '2024-01-22 06:56:49', '2024-01-22 06:56:49'),
+(101, 'App\\Models\\User', 8, 'user', 'b4cabf6328aa212934e771f76e871b643ca350fa9c4cfcb151e30226aa782b98', '[\"*\"]', NULL, NULL, '2024-01-22 06:59:52', '2024-01-22 06:59:52'),
+(102, 'App\\Models\\User', 8, 'user', '46609381546877b58273ddaba8b57cce0f51b623da363e8683d5a89d88ceb2f9', '[\"*\"]', NULL, NULL, '2024-01-22 07:06:45', '2024-01-22 07:06:45'),
+(103, 'App\\Models\\User', 8, 'user', '10ef0d453873ce17b0ade56184666dce09479c7d1b67ceb28e91f99a41aaf2c1', '[\"*\"]', NULL, NULL, '2024-01-22 07:18:42', '2024-01-22 07:18:42'),
+(104, 'App\\Models\\User', 8, 'user', 'a0b63200a88bd4402eeb242546ad279d74601b8ccf48c097a168c2e5fa12bf8e', '[\"*\"]', NULL, NULL, '2024-01-22 07:21:19', '2024-01-22 07:21:19'),
+(105, 'App\\Models\\User', 8, 'user', '1580dbc88f4ae6ebe11d3563155785f689324fbb2b2026b528b86cb6c1a7f8eb', '[\"*\"]', NULL, NULL, '2024-01-22 07:38:46', '2024-01-22 07:38:46'),
+(106, 'App\\Models\\User', 8, 'user', '071305102b4f9f919960741cdd5edbb83573597b36e210e0b720dc1b1f3fff57', '[\"*\"]', NULL, NULL, '2024-01-22 07:50:42', '2024-01-22 07:50:42'),
+(107, 'App\\Models\\User', 8, 'user', '1f96474cd50c8882b4c1e723bc520045520ea81f6382f06f2876d60b24e4c8ca', '[\"*\"]', NULL, NULL, '2024-01-22 10:03:07', '2024-01-22 10:03:07'),
+(108, 'App\\Models\\User', 8, 'user', '81d2ec2a189cb27d90d8d6382d7555c2a7aca84f7a6e29d84ec606075cdf09b4', '[\"*\"]', NULL, NULL, '2024-01-22 10:05:36', '2024-01-22 10:05:36'),
+(109, 'App\\Models\\User', 8, 'user', '63519d00e8edc4eb7be753d6dc91f9379174e3a5c65bae4d92dcb8ce2ee3e4aa', '[\"*\"]', NULL, NULL, '2024-01-22 10:52:02', '2024-01-22 10:52:02'),
+(110, 'App\\Models\\User', 8, 'user', '7b4dddae813c2eec8176e35fa8a1d78fe175448137ab4b4f5d47ea12180347a9', '[\"*\"]', NULL, NULL, '2024-01-22 11:01:04', '2024-01-22 11:01:04'),
+(111, 'App\\Models\\User', 8, 'user', 'fd02dc705bc6228bc9b5955972ac18cd891a9c0218399214b3a4c7b0025ad5cb', '[\"*\"]', NULL, NULL, '2024-01-23 05:30:06', '2024-01-23 05:30:06');
 
 -- --------------------------------------------------------
 
@@ -1000,6 +1040,69 @@ CREATE TABLE `private_request` (
 
 INSERT INTO `private_request` (`id`, `user_id`, `date`, `from`, `to`, `teacher_id`, `status`, `rejected_reason`, `created_at`, `updated_at`) VALUES
 (1, 5, '2023-11-08', '10:44:21', '12:45:21', 44, 'Rejected', NULL, NULL, '2024-01-16');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `promo_codes`
+--
+
+CREATE TABLE `promo_codes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `discount` float NOT NULL DEFAULT 0,
+  `starts` date DEFAULT NULL,
+  `ends` date DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `num_usage` int(11) DEFAULT NULL,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `promo_codes`
+--
+
+INSERT INTO `promo_codes` (`id`, `name`, `discount`, `starts`, `ends`, `code`, `num_usage`, `created_at`, `updated_at`) VALUES
+(2, 'Promo 1', 2.5, '2024-01-02', '2024-01-05', 'cxz1', 22, NULL, '2024-01-23'),
+(5, 'admin@gmail.com', 22, '2024-01-11', '2024-01-23', 'cxz1', 22, '2024-01-23', '2024-01-23');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `promo_courses`
+--
+
+CREATE TABLE `promo_courses` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `promo_id` bigint(20) UNSIGNED NOT NULL,
+  `course_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `promo_courses`
+--
+
+INSERT INTO `promo_courses` (`id`, `promo_id`, `course_id`, `created_at`, `updated_at`) VALUES
+(5, 5, 3, '2024-01-23', '2024-01-23'),
+(6, 5, 4, '2024-01-23', '2024-01-23'),
+(9, 2, 2, '2024-01-23', '2024-01-23');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `promo_users`
+--
+
+CREATE TABLE `promo_users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `promo_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1056,7 +1159,15 @@ CREATE TABLE `quizzes` (
 
 INSERT INTO `quizzes` (`id`, `title`, `description`, `time`, `score`, `pass_score`, `lesson_id`, `state`, `created_at`, `updated_at`) VALUES
 (5, 'quizze 1', 'Quizze One', '22 h 33 m', 100, 40, 9, 1, NULL, NULL),
-(6, 'Quizze 2', 'Quizze Two', '2hours25M', 100, 48, 4, 1, '2024-01-18', '2024-01-18');
+(6, 'Quizze 2', 'Quizze Two', '2hours25M', 100, 48, 4, 1, '2024-01-18', '2024-01-18'),
+(7, 'sa', 'ad', '1hours1M', 100, 48, NULL, 1, '2024-01-18', '2024-01-18'),
+(8, 'sa', 'ad', '1hours1M', 100, 48, NULL, 1, '2024-01-18', '2024-01-18'),
+(9, 'sa', 'ad', '1hours1M', 100, 48, NULL, 1, '2024-01-18', '2024-01-18'),
+(10, 'sa', 'ad', '1hours1M', 100, 48, NULL, 1, '2024-01-18', '2024-01-18'),
+(11, 'sa', 'ad', '1hours1M', 100, 48, NULL, 1, '2024-01-18', '2024-01-18'),
+(12, 'sa', 'ad', '1hours1M', 100, 48, 4, 1, '2024-01-18', '2024-01-18'),
+(13, 'dfe', 'edfw', '1hours1M', 100, 48, 4, 0, '2024-01-18', '2024-01-18'),
+(14, 'da', NULL, '3hours3M', 1, 8, 4, 0, '2024-01-20', '2024-01-20');
 
 -- --------------------------------------------------------
 
@@ -1107,8 +1218,14 @@ CREATE TABLE `q_quizes` (
 --
 
 INSERT INTO `q_quizes` (`id`, `quizze_id`, `ques_id`, `created_at`, `updated_at`) VALUES
-(5, 6, 18, '2024-01-18', '2024-01-18'),
-(6, 5, 18, NULL, NULL);
+(6, 5, 18, NULL, NULL),
+(7, 12, 18, '2024-01-18', '2024-01-18'),
+(8, 13, 18, '2024-01-18', '2024-01-18'),
+(9, 14, 18, '2024-01-20', '2024-01-20'),
+(10, 14, 18, '2024-01-20', '2024-01-20'),
+(11, 14, 18, '2024-01-20', '2024-01-20'),
+(42, 6, 18, '2024-01-21', '2024-01-21'),
+(43, 6, 18, '2024-01-21', '2024-01-21');
 
 -- --------------------------------------------------------
 
@@ -1361,6 +1478,12 @@ ALTER TABLE `confirm_sign`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `contact`
+--
+ALTER TABLE `contact`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `countries`
 --
 ALTER TABLE `countries`
@@ -1509,6 +1632,28 @@ ALTER TABLE `private_request`
   ADD KEY `FK_Private_User` (`user_id`);
 
 --
+-- Indexes for table `promo_codes`
+--
+ALTER TABLE `promo_codes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `promo_courses`
+--
+ALTER TABLE `promo_courses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_Promo` (`promo_id`),
+  ADD KEY `FK_Course` (`course_id`);
+
+--
+-- Indexes for table `promo_users`
+--
+ALTER TABLE `promo_users`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_Users` (`user_id`),
+  ADD KEY `FK_PromoC` (`promo_id`);
+
+--
 -- Indexes for table `questions`
 --
 ALTER TABLE `questions`
@@ -1654,6 +1799,12 @@ ALTER TABLE `confirm_sign`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
+-- AUTO_INCREMENT for table `contact`
+--
+ALTER TABLE `contact`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `countries`
 --
 ALTER TABLE `countries`
@@ -1753,13 +1904,31 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT for table `private_request`
 --
 ALTER TABLE `private_request`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `promo_codes`
+--
+ALTER TABLE `promo_codes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `promo_courses`
+--
+ALTER TABLE `promo_courses`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `promo_users`
+--
+ALTER TABLE `promo_users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `questions`
@@ -1771,7 +1940,7 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT for table `quizzes`
 --
 ALTER TABLE `quizzes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `q_ans`
@@ -1783,7 +1952,7 @@ ALTER TABLE `q_ans`
 -- AUTO_INCREMENT for table `q_quizes`
 --
 ALTER TABLE `q_quizes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -1923,6 +2092,20 @@ ALTER TABLE `payouts`
 ALTER TABLE `private_request`
   ADD CONSTRAINT `FK_Private_Teacher` FOREIGN KEY (`teacher_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_Private_User` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `promo_courses`
+--
+ALTER TABLE `promo_courses`
+  ADD CONSTRAINT `FK_Course` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_Promo` FOREIGN KEY (`promo_id`) REFERENCES `promo_codes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `promo_users`
+--
+ALTER TABLE `promo_users`
+  ADD CONSTRAINT `FK_PromoC` FOREIGN KEY (`promo_id`) REFERENCES `promo_codes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_Users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `questions`

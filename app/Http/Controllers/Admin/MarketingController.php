@@ -73,7 +73,6 @@ class MarketingController extends Controller
     }
 
     public function edit_promo( $id, Request $req ){
-        // courses
         $arr = $req->only('name', 'starts', 'ends', 'num_usage', 'discount', 'code');
         PromoCode::where('id', $id)
         ->update($arr);
