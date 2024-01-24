@@ -5,7 +5,7 @@
   }
 @endphp
 <x-default-layout>
-@section('title','Quizze')
+@section('title','Diagnostic Exam')
 @include('success')
 {{-- Bootstrap pack --}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -189,17 +189,17 @@
   }
 </style>          
 <div class="section_add">
-  <button class="btn_add_quizz" type="button" data-toggle="modal" data-target="#exampleModalCenter">New Quizze</button>
+  <button class="btn_add_quizz" type="button" data-toggle="modal" data-target="#exampleModalCenter">New Diagnostic Exam</button>
 </div> 
 <!-- Modal Add Quizze -->
 <div class="modal fade" id="exampleModalCenter" style="transform: translate(20px, 0px); " tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" style="max-width: 1300px !important; display: flex;align-items: center;justify-content: center;" role="document">
     <div class="modal-content" style="border-radius: 15px;">
-      <form action="{{route('add_quizze')}}" method="POST">
+      <form action="{{route('add_diaexam')}}" method="POST">
       @csrf
       <input type="hidden" class="questions_data" name="ques_id" />
         <div class="modal-header" style="border-bottom: 0 !important;">
-          <h2 class="modal-title" id="exampleModalLongTitle">New Quizze</h2>
+          <h2 class="modal-title" id="exampleModalLongTitle">New Exam</h2>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true" style="font-size: 3rem;padding: 0;font-weight: 600 !important;color: #1b84ff;margin: 0;">&times;</span>
           </button>
@@ -293,24 +293,11 @@
 
                     <div style="width: 100%;" class="d-flex align-items-center justify-content-start">
                       <span class="col-md-2" style="font-size: 1.2rem;">Course: </span>
-                      <select name="select" id="sel_course" class="col-md-2 form-control">
+                      <select name="course_id" id="sel_course" class="col-md-2 form-control">
                         <option value="" selected>Select Course</option>
                       </select>
-                    </div>
-
-                    <div style="width: 100%;" class="d-flex align-items-center justify-content-start">
-                      <span class="col-md-2" style="font-size: 1.2rem;">Chapter: </span>
-                      <select name="select" id="sel_chapter" class="col-md-2 form-control">
-                        <option value="" selected>Select Chapter</option>
-                      </select>
-                    </div>
-
-                    <div style="width: 100%;" class="d-flex align-items-center justify-content-start">
-                      <span class="col-md-2" style="font-size: 1.2rem;">Lesson: </span>
-                      <select name="lesson_id" id="sel_lesson" class="col-md-2 form-control">
-                        <option value="" selected>Select Lesson</option>
-                      </select>
-                    </div>
+                    </div> 
+ 
                   </div>
                   <div class="d-flex justify-content-end" style="column-gap: 16px">
                     <a class="btnPrevious btn_add_quizz">Prev</a>
@@ -392,9 +379,7 @@
                     
                   </div>
                     <input class="category" type="hidden" value="{{$categories}}" />
-                    <input class="course" type="hidden" value="{{$courses}}" />
-                    <input class="chapter" type="hidden" value="{{$chapters}}" />
-                    <input class="lesson" type="hidden" value="{{$lessons}}" />
+                    <input class="course" type="hidden" value="{{$courses}}" />  
                   
                   <div style="max-height: 300px;overflow: scroll;padding: 12px 0; border-bottom: 2px solid #8f8f8f">
                     <table class="table table-striped" id="tblData_Quizzes">
@@ -470,7 +455,7 @@
             <th class="sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width:calc(100% / 7);">Action</th>
     </thead>
     <tbody class="fs-6">
-        @foreach($quizzes as $item)
+        @foreach($exams as $item)
         <tr>
             <td>
                 {{$loop->iteration}}
@@ -506,7 +491,7 @@
                       @csrf
                       <input type="hidden" class="questions_data" name="ques_id" />
                         <div class="modal-header" style="border-bottom: 0 !important;">
-                          <h2 class="modal-title" id="exampleModalLongTitle">Edit Quizze</h2>
+                          <h2 class="modal-title" id="exampleModalLongTitle">Edit Exam</h2>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" class="cls_edite" style="font-size: 3rem;padding: 0;font-weight: 600 !important;color: #1b84ff;margin: 0;">&times;</span>
                           </button>
@@ -651,9 +636,7 @@
                                     
                                   </div>
                                     <input class="category" type="hidden" value="{{$categories}}" />
-                                    <input class="course" type="hidden" value="{{$courses}}" />
-                                    <input class="chapter" type="hidden" value="{{$chapters}}" />
-                                    <input class="lesson" type="hidden" value="{{$lessons}}" />
+                                    <input class="course" type="hidden" value="{{$courses}}" /> 
                                   
                                   <div style="max-height: 300px;overflow: scroll;padding: 12px 0; border-bottom: 2px solid #8f8f8f">
                                     <table class="table table-striped" id="tblData_Quizzes">
@@ -672,9 +655,9 @@
                                         </thead>
                                         <tbody class="quizze_item lesson_quizze">
                                           @foreach( $questions as $question )
-                                            @if( $question->lesson_id == $item->lesson_id )
+                                            @if( $question->course_id == $item->course_id )
                                               <input type="hidden" value="{{$question->id}}" class="question_id" />
-                                              <input type="hidden" value="{{$item->id}}" class="quizze_id" />
+                                              <input type="hidden" value="{{$item->id}}" class="exam_id" />
                                               <tr>
                                                 <th scope="row" class="idd d-none">{{$question->id}}</th>
                                                 <th>{{$loop->iteration}}</th>
@@ -766,7 +749,7 @@
                     <div class="modal-content">
                       <div class="modal-header">
                         
-                        <h5 class="modal-title" id="modalCenterTitle">Delete Quizze</h5>
+                        <h5 class="modal-title" id="modalCenterTitle">Delete Exam</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div> 
                       
@@ -781,7 +764,7 @@
                         <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
                           Close
                         </button>
-                        <a href="{{route('del_quizze', ['id'=>$item->id])}}" class="btn btn-danger">Delete</a>
+                        <a href="{{route('del_dia_exam', ['id'=>$item->id])}}" class="btn btn-danger">Delete</a>
                       </div>
                     </div>
                   </div>
@@ -863,21 +846,21 @@
 <script>
   let add_question = document.querySelectorAll('.add_question');
   let question_id = document.querySelectorAll('.question_id');
-  let quizze_id = document.querySelectorAll('.quizze_id');
+  let exam_id = document.querySelectorAll('.exam_id');
 
   for (let i = 0, end = add_question.length; i < end; i++) {
     add_question[i].addEventListener('click', ( e ) => {
       for (let j = 0; j < end; j++) {
         if ( e.target == add_question[j] ) {
           let obj = {
-            quizze_id : quizze_id[j].value,
+            daiExam_id : exam_id[j].value,
             ques_id : question_id[j].value,
           }
-          $.ajax("{{route('quize_add_q')}}", {
+          $.ajax("{{route('exam_add_q')}}", {
           type: 'GET',
           data: obj,
           success: function ( res ) {
-            console.log(res);
+            
           },
       });
 
@@ -895,11 +878,11 @@
         if ( e.target == remove_qz_edit[j] ) {
           let obj = e_questions[j].value;
           obj = JSON.parse(obj); 
-          $.ajax("{{route('quize_del_q')}}", {
+          $.ajax("{{route('exam_del_q')}}", {
           type: 'GET',
           data: obj,
           success: function ( res ) {
-            console.log(res);
+            
           },
       });
 
@@ -914,20 +897,12 @@
 
 
   let sel_category = document.querySelector('#sel_category');
-  let sel_course = document.querySelector('#sel_course');
-  let sel_chapter = document.querySelector('#sel_chapter');
-  let sel_lesson = document.querySelector('#sel_lesson');
+  let sel_course = document.querySelector('#sel_course'); 
   let category = document.querySelector('.category');
-  let course = document.querySelector('.course');
-  let chapter = document.querySelector('.chapter');
-  let lesson = document.querySelector('.lesson');
+  let course = document.querySelector('.course'); 
   let questions_data = document.querySelector('.questions_data');
   course = course.value;
-  course = JSON.parse(course);
-  chapter = chapter.value;
-  chapter = JSON.parse(chapter);
-  lesson = lesson.value;
-  lesson = JSON.parse(lesson);
+  course = JSON.parse(course); 
 
 sel_category.addEventListener('change', () => {
       sel_course.innerHTML = `
@@ -945,55 +920,25 @@ sel_category.addEventListener('change', () => {
     }
   })
 });
-
-sel_course.addEventListener('change', () => {
-  sel_chapter.innerHTML = `
-      <option selected disabled>
-        Select Chapter
-      </option>
-      `;
-  chapter.forEach(element => {
-    if ( sel_course.value == element.course_id ) {
-      sel_chapter.innerHTML += `
-      <option value="${element.id}">
-      ${element.chapter_name}
-      </option>
-      `;
-    }
-  });
-});
-
-sel_chapter.addEventListener('change', () => {
-    sel_lesson.innerHTML = `
-        <option selected disabled>
-          Select Lesson
-        </option>
-        `;
-      lesson.forEach(element => {
-      if ( sel_chapter.value == element.chapter_id ) {
-        sel_lesson.innerHTML += `
-        <option value="${element.id}">
-        ${element.lesson_name}
-        </option>
-        `;
-      }
-    });
-});
+ 
+ 
 
 let quizze_item = document.querySelector('.quizze_item');
 
-sel_lesson.addEventListener('change', () => {
+sel_course.addEventListener('change', () => {
   
   $(".next_btn").removeClass("d-none");
 
-  $.ajax("{{route('quize_data')}}", {
+  $.ajax("{{route('dia_exam_data')}}", {
       type: 'GET',  // http method
-      data: { lesson: sel_lesson.value },  // data to submit
+      data: { course_id: sel_course.value },  // data to submit
       success: function (data) {
           quizze_item.innerHTML = null; 
+          console.log(data);
+          console.log(data);
           data.forEach((element, index) => {
             quizze_item.innerHTML += `<tr>
-                              <th scope="row" class="idd d-none">${element.id}</th>
+                              <th scope="row" class="idd d-none">${element.question_id}</th>
                               <th>${index + 1}</th>
                               <td class="type">${element.q_type}</td>
                               <td class="year">${element.year}</td>
@@ -1038,7 +983,6 @@ sel_lesson.addEventListener('change', () => {
             allData.push(quziObject);
 
             quizzes.push(...allData); 
-
             var object_serialized = JSON.stringify(allData);
 
 

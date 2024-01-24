@@ -188,6 +188,8 @@ Route::controller(CourseSettingController::class)->group(function(){
 // Diagnostic Exam 
 Route::controller(DiagnosticExamController::class)->group(function(){ 
     Route::get('/Diagnostic_Exam','index')->name('dia_exam');
+    Route::post('/Diagnostic_Exam/Add','add_diaexam')->name('add_diaexam');
+    Route::get('/Diagnostic_Exam/Del/{id}','del_dia_exam')->name('del_dia_exam');
 });
 
 // Exam 
