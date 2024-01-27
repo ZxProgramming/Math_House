@@ -72,7 +72,7 @@
                         </button>
 
                         <!-- Modal -->
-                        <form method="POST" action="{{route('teacher_edit')}}">
+                        <form method="POST" action="{{route('teacher_edit')}}" enctype="multipart/form-data">
                           @csrf
                         <div class="modal fade" id="modalCenter{{$item->u_id}}" tabindex="-1" aria-hidden="true" style="display: none;">
                           <div class="modal-dialog modal-dialog-centered" role="document">
@@ -102,6 +102,13 @@
                                 Phone
                               </label>
                               <input class='form-control' name="phone" value="{{$item->phone}}" placeholder="Phone" />
+                            </div>
+
+                            <div class="my-2 px-3">
+                              <label>
+                                Image
+                              </label>
+                              <input class='form-control' name="image" type="file" />
                             </div>
 
                               <input type="hidden" value="{{$item->u_id}}" name="user_id" />

@@ -21,8 +21,15 @@ class MarketingController extends Controller
     }
 
     public function edit_commission( Request $req ){
+        $arr = $req->only('precentage', '');
+        if ( isset($req->state) && !empty($req->state) ) {
+            $arr['state'] = 1;
+        }
+        else{
+            $arr['state'] = 0;
+        }
         Commission::where('id', $req->id)
-        ->update($req->only('precentage', 'state'));
+        ->update( $arr );
 
         return redirect()->back();
     }

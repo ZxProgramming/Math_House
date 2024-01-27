@@ -173,12 +173,27 @@ class UserController extends Controller
         $categories = Category::all();
         $courses = Course::all();
 
-        return view('Admin.Users.Teachers_Filter',
+        return view('Admin.Users.Teachers',
         compact('teachers', 'categories', 'courses'));
     }
 
     public function teacher_edit( Request $req ){
         $arr = $req->only('name', 'email', 'phone', 'category_id', 'course_id');
+        if ( !empty($req->image) ) {
+            $img_name = null;
+            extract($_FILES['image']);
+            $extension_arr = ['png', 'jpg', 'jpeg', 'svg', 'webp'];
+            $extension = explode('.', $name);
+            $extension = end($extension);
+            $extension = strtolower($extension);
+            if ( in_array($extension, $extension_arr) ) {
+                $img_name = rand(0, 1000) . now() . $name;
+                $img_name = str_replace([' ', ':', '-'], 'X', $img_name);
+            }
+            $arr['image'] = $img_name;
+            
+            move_uploaded_file($tmp_name, 'images/users/' . $img_name);
+        }
         User::where('id', $req->user_id)
         ->update($arr);
 

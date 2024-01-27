@@ -103,6 +103,7 @@ Route::get('/Marketing/Payouts', [MarketingController::class, 'payout_r'])->name
 Route::post('/Marketing/Payouts_Reject/{id}', [MarketingController::class, 'reject_payout'])->name('reject_payout');
 Route::get('/Marketing/Accept_Payouts/{id}', [MarketingController::class, 'accept_payout'])->name('accept_payout');
 Route::post('/Marketing/Filter_Payouts', [MarketingController::class, 'filter_payment'])->name('filter_payment');
+Route::get('/Marketing/Filter_Payouts', [MarketingController::class, 'filter_payment'])->name('filter_payment');
 
 // Live 
 Route::get('/Live', [LiveController::class, 'index'])->name('sessions');
@@ -130,6 +131,7 @@ Route::post('/Users/RoleAdmin/Edit', [UserController::class, 'role_admin_edit'])
 Route::get('/Users/RoleAdmin/Del/{id}', [UserController::class, 'role_del_admin'])->name('role_del_admin');
 Route::get('/Users/Admin', [UserController::class, 'admins'])->name('admins_list');
 Route::post('/Users/Admin/Filter', [UserController::class, 'admin_filter'])->name('admin_filter');
+Route::get('/Users/Admin/Filter', [UserController::class, 'admin_filter'])->name('admin_filter');
 
 // Admin
 Route::post('/Users/Admin/Edit', [UserController::class, 'admin_edit'])->name('admin_edit');
@@ -139,6 +141,7 @@ Route::post('/Users/Admin/Add', [UserController::class, 'add_admin'])->name('add
 
 // Teacher 
 Route::post('/Users/Teacher_Filter', [UserController::class, 'teacher_filter'])->name('teacher_filter');
+Route::get('/Users/Teacher_Filter', [UserController::class, 'teacher_filter'])->name('teacher_filter');
 Route::get('/Users/Teacher', [UserController::class, 'teacher'])->name('teacher');
 Route::post('/Users/Teacher_Edit', [UserController::class, 'teacher_edit'])->name('teacher_edit');
 Route::post('/Users/Teacher/Add', [UserController::class, 'add_teacher'])->name('add_teacher');
@@ -181,6 +184,7 @@ Route::controller(QuestionController::class)->group(function(){
     Route::post('/Question/Edit','q_edit')->name('q_edit');
     Route::post('/Question/Add','add_q')->name('add_q');
     Route::post('/Question/Filter','filter_question')->name('filter_question');
+    Route::get('/Question/Filter','filter_question')->name('filter_question');
     Route::get('/Question/Del/{id}','del_q')->name('del_q');
 });
 
