@@ -565,7 +565,7 @@
 							<li><p>Academic English × 4 <span class="float-right">$590.00</span></p></li>
 							<li><p>Seo Books x 1 <span class="float-right">$99.00</span></p></li>
 							<li class="subtitle"><p>Subtotal <span class="float-right">Subtotal</span></p></li>
-							<li class="subtitle"><p>Total <span class="float-right totals color-orose">$3,589.00</span></p></li>
+							<li class="subtitle"><p>Total <span class="float-right totals color-orose">${{$price}}</span></p></li>
 						</ul>
 					</div>
 					<div class="payment_widget">

@@ -58,12 +58,14 @@ class LiveController extends Controller
         'type', 'teacher_id', 'price', 'access_dayes', 'repeat');
         
         $session = Session::create($arr);
-        for ($i=0, $end = count($req->r_day); $i < $end; $i++) { 
-            SessionDay::create([
-                'session_id' => $session->id,
-                'day' => $req->r_day[$i],
-                'times' => $req->repeat_num
-            ]);
+        if ( !empty($req->r_day) ) {
+            for ($i=0, $end = count($req->r_day); $i < $end; $i++) { 
+                SessionDay::create([
+                    'session_id' => $session->id,
+                    'day' => $req->r_day[$i],
+                    'times' => $req->repeat_num
+                ]);
+            }
         }
         
         return redirect()->back();

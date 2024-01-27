@@ -325,9 +325,9 @@
             <div class="mt-3">
     <button type="button" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_edit{{$question->id}}">Edit</button>
 
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{$question->id}}">
-                          Delete
-                        </button>
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{$question->id}}">
+        Delete
+    </button>
     
     <div class="modal fade" id="kt_modal_edit{{$question->id}}" tabindex="-1" aria-hidden="true">
         <!--begin::Modal dialog-->

@@ -74,8 +74,9 @@ class CoursesController extends Controller
 
     public function Use_Promocode( Request $req ){
         $uses = UsagePromo::where('user_id', auth()->user()->id)
-        ->where('promo_id', $req->promo_code)
-        ->first();
+        ->where('promo', $req->promo_code)
+        ->first(); 
+        
         if ( empty($uses) ) {
             $promo = PromoCode::where('starts', '<=', now())
             ->where('ends', '>=', now())
@@ -84,7 +85,7 @@ class CoursesController extends Controller
             ->first();
             if ( !empty($promo) ) {
                 $price = json_decode(Cache::get('chapters_price'));
-                $price = $price * $promo->discount	/ 100;
+                $price = $price - $price * $promo->discount	/ 100;
                 Cache::store('file')->put('chapters_price', $price, 10000);
                 PromoCode::where('id', $promo->id)
                 ->update([
@@ -93,6 +94,7 @@ class CoursesController extends Controller
                 UsagePromo::create([
                     'user_id' => auth()->user()->id,
                     'promo_id' => $promo->id,
+                    'promo' => $req->promo_code
                 ]);
                 return redirect()->route('check_out'); 
             }
@@ -101,7 +103,8 @@ class CoursesController extends Controller
     }
 
     public function check_out(){
-        return view('Visitor.Checkout.Checkout');
+        $price = json_decode(Cache::get('chapters_price'));
+        return view('Visitor.Checkout.Checkout', compact('price'));
     }
 
     public function new_payment(){
