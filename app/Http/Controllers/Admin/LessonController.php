@@ -43,9 +43,14 @@ class LessonController extends Controller
         $categories = Category::all();
         $courses    = Course::all();
         $chapters   = Chapter::all();
-        $lessons    = Lesson::
-        where('chapter_id', $req->chapter_id)
-        ->get();
+        if( empty($req->chapter_id) ){
+            $lessons = Lesson::get();
+        }
+        else{ 
+            $lessons = Lesson::
+            where('chapter_id', $req->chapter_id)
+            ->get();
+        }
         $teachers   = User::all();
         return view('Admin.lessons.lesson',compact('categories','courses','chapters', 'lessons', 'teachers'));
 

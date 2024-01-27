@@ -57,6 +57,9 @@ use Illuminate\Support\Facades\Route;
     });
     
     Route::get('/Home', [HomeController::class, 'index'])->name('home');
+    Route::post('/Home/Use_Promocode', [V_CoursesController::class, 'use_promocode'])->name('use_promocode');
+    Route::get('/Home/CheckOut', [V_CoursesController::class, 'check_out'])->name('check_out');
+    Route::get('/Home/BuyCourse', [V_CoursesController::class, 'new_payment'])->name('new_payment');
     Route::get('/Home/Courses', [V_CoursesController::class, 'categories'])->name('categories');
     Route::post('/Home/Buy_Course', [V_CoursesController::class, 'buy_course'])->name('buy_course');
     Route::get('/Home/Buy_Course', [V_CoursesController::class, 'buy_course'])->name('buy_course');
@@ -155,6 +158,7 @@ Route::post('/Users/Student/Edit', [UserController::class, 'stu_edit'])->name('s
 Route::controller(CoursesController::class)->group(function(){
     Route::get('/Courses','courses')->name('courses');
     Route::post('/Courses_Filter','course_filter')->name('course_filter');
+    Route::get('/Courses_Filter','course_filter')->name('course_filter');
     Route::post('/Courses/Edit','course_edit')->name('course_edit');
     Route::get('/Courses/Del/{id}','del_course')->name('del_course');
     Route::get('/Courses/Add_Courses','add_courses')->name('add_courses');
@@ -165,6 +169,7 @@ Route::controller(CoursesController::class)->group(function(){
 Route::controller(ChaptersController::class)->group(function(){
     Route::get('/Chapter','chapter')->name('chapter');
     Route::post('/Chapter_Filter','ch_filter')->name('ch_filter');
+    Route::get('/Chapter_Filter','ch_filter')->name('ch_filter');
     Route::post('/Chapter/Edit','chapter_edit')->name('chapter_edit');
     Route::post('/Chapter/Add','add_chapter')->name('add_chapter');
     Route::get('/Chapter/Del/{id}','del_chapter')->name('del_chapter');
@@ -211,7 +216,8 @@ Route::controller(LessonController::class)->group(function(){
         Route::post('Lesson/AddLesson','addLesson')->name('addLesson');
         Route::post('Lesson/Edit','lesson_edit')->name('lesson_edit');
         Route::get('Lesson/Del/{id}','del_lesson')->name('del_lesson');
-        Route::post('Lesson/Lesson/Filter','filter_lesson')->name('filter_lesson');
+        Route::post('Lesson/Filter','filter_lesson')->name('filter_lesson');
+        Route::get('Lesson/Filter','filter_lesson')->name('filter_lesson');
 });
    
 

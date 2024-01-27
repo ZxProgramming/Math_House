@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use app\Models\User;
-use app\Models\Lesson;
+use App\Models\User;
+use App\Models\Lesson;
+use App\Models\Mcq_ans;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,5 +29,9 @@ class Question extends Model
     public function lessons()
     {
         return $this->belongsTo(Lesson::class, 'lesson_id');
+    }
+
+    public function mcq(){
+        return $this->hasMany(Mcq_ans::class, 'q_id');
     }
 }

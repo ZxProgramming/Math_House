@@ -33,9 +33,14 @@ class ChaptersController extends Controller
     }
     
     public function ch_filter( Request $req ){
-        $chapters = Chapter::
-        where('course_id', $req->course_id)
-        ->get(); 
+        if ( empty( $req->course_id ) ) {
+            $chapters = Chapter::get(); 
+        }
+        else{
+            $chapters = Chapter::
+            where('course_id', $req->course_id)
+            ->get(); 
+        }
         $categories = Category::get();
         $courses = Course::get();
         $teachers = User::get();

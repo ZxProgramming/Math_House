@@ -1,4 +1,6 @@
 
+@include('Visitor.inc.header')
+@include('Visitor.inc.menu')
 <div class="wrapper">
 	<div class="preloader"></div>
 
@@ -719,3 +721,4 @@
 	</section>
 <a class="scrollToHome" href="#"><i class="flaticon-up-arrow-1"></i></a>
 </div>
+@include('Visitor.inc.footer')

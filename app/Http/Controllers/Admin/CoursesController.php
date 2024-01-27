@@ -15,7 +15,9 @@ class CoursesController extends Controller
     public function courses(){
         $courses = Course::all();
         $categories = Category::all();
-        return view('Admin.courses.Courses.Course', compact('courses', 'categories'));
+        $teachers = User::where('position', 'teacher')
+        ->get();
+        return view('Admin.courses.Courses.Course', compact('courses', 'teachers', 'categories'));
     }
 
     public function course_edit( Request $req ){
@@ -64,7 +66,7 @@ class CoursesController extends Controller
     }
 
     public function course_filter( Request $req ){
-        if ( $req->category_id == "all" ) {
+        if ( $req->category_id == "all" || empty($req->category_id) ) {
             $courses = Course::all();
         }
         else{

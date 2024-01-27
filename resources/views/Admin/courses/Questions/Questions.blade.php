@@ -264,7 +264,41 @@
                 {{$loop->iteration}}
             </td>
             <td>
-                {{$question->question}}
+    <a href="#" class="er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_question{{$question->id}}">view</a>
+    
+    <div class="modal fade" id="kt_modal_question{{$question->id}}" tabindex="-1" aria-hidden="true">
+        <!--begin::Modal dialog-->
+        <div class="modal-dialog modal-fullscreen p-9">
+            <!--begin::Modal content-->
+            <div class="modal-content modal-rounded">
+                <!--begin::Modal header-->
+                <div class="modal-header py-7 d-flex justify-content-between">
+                    <!--begin::Modal title-->
+                    <h2>Question</h2>
+                    <!--end::Modal title-->
+                    <!--begin::Close-->
+                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                        <i class="ki-duotone ki-cross fs-1">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                    </div>
+                    <!--end::Close-->
+                </div>
+                <!--begin::Modal header-->
+                <!--begin::Modal body-->
+                <div class="modal-body scroll-y m-5">
+                  {{$question->question}}
+                  <br />
+                  <br />
+                  @if( !empty($question->q_url) )
+                  <img src="{{asset('images/questions/' . $question->q_url)}}" />
+                  @endif
+                </div>
+                <!--begin::Modal body-->
+            </div>
+        </div>
+    </div>
             </td>
             <td>
                 {{$question->q_type}}
@@ -289,115 +323,485 @@
             </td>
             <td>
             <div class="mt-3">
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter{{$question->id}}">
-                          Edit
-                        </button>
+    <button type="button" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_edit{{$question->id}}">Edit</button>
+
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{$question->id}}">
                           Delete
                         </button>
-
-                        <!-- Modal -->
-                        <form method="POST" action="{{route('q_edit')}}">
-                          @csrf
-                        <div class="modal fade" id="modalCenter{{$question->id}}" tabindex="-1" aria-hidden="true" style="display: none;">
-                          <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                
-                                <h5 class="modal-title" id="modalCenterTitle">Edit Question</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div> 
-
-                            <div class="my-2 px-3">
-                              <label>
-                                Question
-                              </label>
-                              <input class='form-control' name="question" value="{{$question->question}}" placeholder="Question" />
+    
+    <div class="modal fade" id="kt_modal_edit{{$question->id}}" tabindex="-1" aria-hidden="true">
+        <!--begin::Modal dialog-->
+        <div class="modal-dialog modal-fullscreen p-9">
+            <!--begin::Modal content-->
+            <div class="modal-content modal-rounded">
+                <!--begin::Modal header-->
+                <div class="modal-header py-7 d-flex justify-content-between">
+                    <!--begin::Modal title-->
+                    <h2>Question</h2>
+                    <!--end::Modal title-->
+                    <!--begin::Close-->
+                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                        <i class="ki-duotone ki-cross fs-1">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                    </div>
+                    <!--end::Close-->
+                </div>
+                <!--begin::Modal header-->
+                <!--begin::Modal body-->
+                <div class="modal-body scroll-y m-5">
+                    <!--begin::Stepper-->
+                    <div class="stepper stepper-links d-flex flex-column" id="kt_modal_create_campaign_stepper">
+                        <!--begin::Nav-->
+                        <div class="stepper-nav justify-content-center py-2">
+                            <!--begin::Step 1-->
+                            <div class="stepper-item me-5 me-md-15 current" data-kt-stepper-element="nav">
+                                <h3 class="stepper-title">Info</h3>
                             </div>
-
-                            <div class="my-2 px-3">
-                              <label>
-                                Type
-                              </label>
-                            
-                              <select class="form-control" name="q_type">
-                                <option value="{{$question->q_type}}">{{$question->q_type}}</option>
-                                <option value="Trail">Trail</option> 
-                                <option value="Parallel">Parallel</option> 
-                                <option value="Extra">Extra</option>
-                            </select>  
+                            <!--end::Step 1-->
+                            <!--begin::Step 2-->
+                            <div class="stepper-item me-5 me-md-15" data-kt-stepper-element="nav">
+                                <h3 class="stepper-title">Details</h3>
                             </div>
-
-                            <div class="my-2 px-3">
-                            <label>
-                                Year
-                            </label>
-                            <input class='form-control' name="year" value="{{$question->year}}" placeholder="Year" />
+                            <!--end::Step 2-->
+                            <!--begin::Step 3-->
+                            <div class="stepper-item me-5 me-md-15" data-kt-stepper-element="nav">
+                                <h3 class="stepper-title">Answer</h3>
                             </div>
-
-                            <div class="my-2 px-3">
-                            <label>
-                                Month
-                            </label>
-                            <input class='form-control' name="month" value="{{$question->month}}" placeholder="Month" />
-                            </div>
-
-                            <div class="my-2 px-3">
-                            <label>
-                                Code
-                            </label>
-                            <input class='form-control' name="q_code" value="{{$question->q_code}}" placeholder="Code" />
-                            </div>
-
-                            <div class="my-2 px-3">
-                            <label>
-                                Section
-                            </label> 
-                        
-                            <select class="form-control" name="section">
-                                <option value="{{$question->section}}">{{$question->section}}</option>
-                                <option value="Blank">Blank</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>     
-                            </div>
-
-                            <div class="my-2 px-3">
-                            <label>
-                                Question No.
-                            </label>
-                            <input class='form-control' name="q_num" value="{{$question->q_num}}" placeholder="Question No." />
-                            </div>
-
-                            <div class="my-2 px-3">
-                            <label>
-                                Difficulty
-                            </label>
-                            <select class="form-control" name="difficulty">
-                                <option value="{{$question->difficulty}}">{{$question->difficulty}}</option>
-                                <option value="A">A</option>
-                                <option value="B">B</option>
-                                <option value="C">C</option>
-                                <option value="D">D</option>
-                                <option value="E">E</option>
-                            </select> 
-                            </div>
-
-
-                              <input type="hidden" value="{{$question->id}}" name="id" />
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
-                                  Close
-                                </button>
-                                <button class="btn btn-primary">Submit</button>
-                              </div>
-                            </div>
-                          </div>
+                            <!--end::Step 3--> 
                         </div>
+                        <!--end::Nav-->
+                        <!--begin::Form-->
+                        <form action="{{route('add_q')}}" method="POST" enctype="multipart/form-data" class="mx-auto w-100 mw-600px pt-15 pb-10" novalidate="novalidate" id="kt_modal_create_campaign_stepper_form">
+                            <!--begin::Step 1-->
+                            <div class="current" data-kt-stepper-element="content">
+                                <!--begin::Wrapper-->
+                                <div class="w-100">
+                                    @csrf
+                                <div>
+                                    <!--begin::Input group-->
+                                    <div class="mb-10 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="required form-label mb-3">Question</label>
+                                        <!--end::Label-->
+ 
+                                    <!--begin::Input-->
+                                    <textarea id="editor" name="question" class="form-control">{{$question->question}}</textarea>
+                                    <!--end::Input-->
+        
+                                    </div>
+                                    <!--end::Input group-->  
+                                    <!--begin::Input group-->
+                                    <div class="mb-10 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="required form-label mb-3">Question Image</label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <input name="q_url" type="file" class="form-control" />
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Input group-->  
+                                    <!--begin::Input group-->
+                                    <div class="mb-10 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="required form-label mb-3">Answer Type</label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <select class="form-control" name="ans_type">
+                                            <option selected value="{{$question->ans_type}}">
+                                                {{$question->ans_type}}
+                                            </option>
+                                            <option disabled>
+                                                Select Answer Type
+                                            </option>
+                                            <option value="MCQ">
+                                                MCQ
+                                            </option>
+                                            <option value="Grid_in">
+                                                Grid in
+                                            </option>
+                                        </select>
+                                        <!--end::Input-->
+                                    </div>
+                                    @if( $question->ans_type == 'MCQ' )
+                                    <div class="my-2">
+                                        <input name="mcq_answers" value="A" id="mcq_a" type="radio" />
+                                        <label for="mcq_a">
+                                            A
+                                        </label>
+                                        <input class="form-control" name="mcq_ans[]" placeholder="Answer A" />
+                                        </div>
+                                        <div class="my-2">
+                                        <input name="mcq_answers" value="B" id="mcq_b" type="radio" />
+                                        <label for="mcq_b">
+                                            B
+                                        </label>
+                                        <input class="form-control" name="mcq_ans[]" placeholder="Answer B" />
+                                        </div>
+                                        <div class="my-2">
+                                        <input name="mcq_answers" value="C" id="mcq_c" type="radio" />
+                                        <label for="mcq_c">
+                                            C
+                                        </label>
+                                        <input class="form-control" name="mcq_ans[]" placeholder="Answer C" />
+                                        </div>
+                                        <div class="my-2">
+                                        <input name="mcq_answers" value="D" id="mcq_d" type="radio" />
+                                        <label for="mcq_d">
+                                            D
+                                        </label>
+                                        <input class="form-control" name="mcq_ans[]" placeholder="Answer D" />
+                                    </div>
+                                    @else
+                                        <input type="number" class="form-control" name="grid_ans[]" placeholder="Answer" />
+                                        <button type="button" class="btn btn-success mx-2">Add</button>
+                                    @endif
+                                    <div class="mb-10 fv-row">
+                                    </div>
+                                    <!--end::Input group-->  
+                                    <!--begin::Input group-->
+                                    <div class="mb-10 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="required form-label mb-3">Difficulty</label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <select class="form-control" name="difficulty">
+                                            <option value="{{$question->difficulty}}" selected>
+                                            {{$question->difficulty}}
+                                            </option>
+                                            <option disabled>
+                                                Select Difficulty
+                                            </option>
+                                            <option value="A">
+                                                A
+                                            </option>
+                                            <option value="B">
+                                                B
+                                            </option>
+                                            <option value="C">
+                                                C
+                                            </option>
+                                            <option value="D">
+                                                D
+                                            </option>
+                                            <option value="E">
+                                                E
+                                            </option>
+                                        </select>
+                                        <!--end::Input-->
+                                    </div>
+                                    <div class="mb-10 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="required form-label mb-3">Question Type</label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <select class="form-control q_type" name="q_type">
+                                            <option value="{{$question->q_type}}" selected>
+                                                {{$question->q_type}}
+                                            </option>
+                                            <option disabled >
+                                                Select Question Type
+                                            </option>
+                                            <option value="Trail">
+                                                Trail
+                                            </option>
+                                            <option value="Parallel">
+                                                Parallel
+                                            </option>
+                                            <option value="Extra">
+                                                Extra
+                                            </option>
+                                        </select>
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+
+                                </div>
+                                <!--end::Wrapper-->
+                            </div>
+                            <!--end::Step 1-->
+                            <!--begin::Step 2-->
+                            <div data-kt-stepper-element="content">
+                                <!--begin::Wrapper-->
+                                <div class="w-100">
+                                    
+                                    <!--begin::Input group-->
+                                    <div class="mb-10">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold mb-2">Category</label>
+                                        <!--End::Label-->
+                                            
+                                        <!--begin::Input-->
+                                        <select class="form-control sel_cate2" name="category_id">
+                                            <option disabled selected>
+                                                Select Category
+                                            </option>
+                                            @foreach($categories as $category)
+                                            <option value="{{$category->id}}">
+                                                {{$category->cate_name}}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="mb-10">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold mb-2">Course</label>
+                                        <!--End::Label-->
+                                            
+                                        <!--begin::Input-->
+                                        <select class="form-control sel_course2" name="course_id">
+                                            <option disabled selected>
+                                                Select Course
+                                            </option>
+                                        </select>
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="mb-10">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold mb-2">Chapter</label>
+                                        <!--End::Label-->
+                                            
+                                        <!--begin::Input-->
+                                        <select class="form-control sel_chapter2" name="chapter_id">
+                                            <option disabled selected>
+                                                Select Chapter
+                                            </option>
+                                        </select>
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="mb-10">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold mb-2">Lesson</label>
+                                        <!--begin::Input-->
+                                        <select class="form-control sel_lesson2" name="lesson_id">
+                                            <option value="{{$question->lesson_id}}" selected>
+                                            {{$question->lessons->lesson_name}}
+                                            </option>
+                                            <option disabled>
+                                                Select Lesson
+                                            </option>
+                                        </select>
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="mb-10">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold mb-2">Year</label>
+                                        <!--End::Label-->
+                                            
+                                        <!--begin::Input-->
+                                        <select class="form-control year" name="year">
+                                            <option value="{{$question->year}}" selected>
+                                                {{$question->year}}
+                                            </option>
+                                            <option disabled>
+                                                Select Year
+                                            </option>
+                                            @for($i = 2000; $i <= date('Y'); $i++)
+                                            <option value="{{$i}}">
+                                                {{$i}}
+                                            </option>
+                                            @endfor
+                                        </select>
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="mb-10">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold mb-2">Month</label>
+                                        <!--End::Label-->
+                                            
+                                        <!--begin::Input-->
+                                        <select class="form-control month" name="month">
+                                            <option value="{{$question->month}}">{{$question->month}}</div>
+                                            <option value="Jan">Jan</div>
+                                            <option value="Fab">Fab</div>
+                                            <option value="Mar">Mar</div>
+                                            <option value="April">April</div>
+                                            <option value="May">May</div>
+                                            <option value="June">June</div>
+                                            <option value="July">July</div>
+                                            <option value="Aug">Aug</div>
+                                            <option value="Sept">Sept</div>
+                                            <option value="Oct">Oct</div>
+                                            <option value="Nov">Nov</div>
+                                            <option value="Dec">Dec</div>
+                                        </select>
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="mb-10">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold mb-2">Code</label>
+                                        <!--End::Label-->
+                                            
+                                        <!--begin::Input-->
+                                        <select name="q_code" class="form-control">
+                                            <option value="{{$question->q_code}}" selected>{{$question->q_code}}</option>
+                                            <option disabled>Select Exam Code</option>
+                                            @foreach($exams as $exam)
+                                            <option value="{{$exam->id}}">{{$exam->exam_code}}</option>
+                                            @endforeach 
+                                        </select>
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="mb-10">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold mb-2">Section</label>
+                                        <!--begin::Input-->
+                                        <select class="form-control section" name="section">
+                                            <option value="{{$question->section}}" selected>
+                                                {{$question->section}}
+                                            </option>
+                                            <option disabled>
+                                                Select Section
+                                            </option>
+                                            <option value="1">
+                                                1
+                                            </option>
+                                            <option value="2">
+                                                2
+                                            </option>
+                                            <option value="3">
+                                                3
+                                            </option>
+                                            <option value="4">
+                                                4
+                                            </option>
+                                        </select>
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="mb-10">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold mb-2">Question Num</label>
+                                        <!--End::Label-->
+                                            
+                                        <!--begin::Input-->
+                                        <input value="{{$question->q_num}}" type="number" min="0" max="80" class="form-control q_num" name="q_num" placeholde="Question Num" required />
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Input group-->
+                                    
+                                </div>
+                                <!--end::Wrapper-->
+                            </div>
+                            <!--end::Step 2-->
+                            <!--begin::Step 5-->
+                            <div data-kt-stepper-element="content">
+                                <!--begin::Wrapper-->
+                                <div class="w-100">
+                                    <!--begin::Heading-->
+                                    <div class="pb-10 pb-lg-12">
+                                        <!--begin::Title-->
+                                        <h1 class="fw-bold text-gray-900">Answers</h1>
+                                        <!--end::Title-->
+                                        <!--begin::Description-->
+                                        <div class="text-muted fw-semibold fs-2 d-flex align-items-center"> 
+                                        <div class="section_add_idea" style="margin-left:15px ">
+                                            <button id="add_new_idea" type="button" class="my-3 btn_add btn btn-lg btn-primary d-inline-block">Add New Answer</button>
+                                        </div>
+                                    </div>
+                                        <!--end::Description-->
+                                    </div>
+                                    <!--end::Heading-->
+                                    <!--begin::Input group-->
+                                   <div class="ideas" id="ideas">
+
+                                    <div class="idea">
+                                        <div class="section_idea">
+                                            <span>Answer PDF</span>
+                                            <input type="file" name="ans_pdf[]" class="form-control form-control-lg form-control-solid">
+                                        </div>
+                                        <div class="section_syllabus">
+                                            <span>Answer Video</span>
+                                            <input type="file" name="ans_video[]" class="form-control form-control-lg form-control-solid">
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <!--end::Wrapper-->
+                            </div>
+                            <script>
+                                let add_new_idea = document.querySelector('#add_new_idea');
+                                let ideas = document.querySelector('.ideas');
+                                add_new_idea.addEventListener('click', () => {
+                                    ideas.innerHTML += `
+                                    <div class="idea">
+                                    <hr />
+                                        <div class="section_idea">
+                                            <span>Answer PDF</span>
+                                            <input type="file" name="ans_pdf[]" class="form-control form-control-lg form-control-solid">
+                                        </div>
+                                        <div class="section_syllabus">
+                                            <span>Answer Video</span>
+                                            <input type="file" name="ans_video[]" class="form-control form-control-lg form-control-solid">
+                                        </div>
+                                        <button type="button" class="btn btn-danger btn_remove_idea">Remove</button>
+                                    </div>`;
+                                let btn_remove_idea = document.querySelectorAll('.btn_remove_idea');
+                                for (let i = 0, end = btn_remove_idea.length; i < end; i++) {
+                                    btn_remove_idea[i].addEventListener('click', ( e ) => {
+                                        for (let j = 0; j < end; j++) {
+                                            if ( e.target == btn_remove_idea[j] ) {
+                                                btn_remove_idea[j].parentElement.remove()
+                                            }
+                                        }
+                                    });
+                                }
+                                });
+                            </script>
+                            <!--end::Step 5-->
+                            <!--begin::Actions-->
+                            <div class="d-flex flex-stack pt-10">
+                                <!--begin::Wrapper-->
+                                <div class="me-2">
+                                    <button type="button" class="btn btn-lg btn-light-primary me-3" data-kt-stepper-action="previous">
+                                    <i class="ki-duotone ki-arrow-left fs-3 me-1">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                    </i>Back</button>
+                                </div>
+                                <!--end::Wrapper-->
+                                <!--begin::Wrapper-->
+                                <div>
+                                    <button class="btn btn-lg btn-primary" >
+                                        Submit 
+                                    </button>
+                                    <button type="button" class="btn btn-lg btn-primary continue_btn" data-kt-stepper-action="next">Continue 
+                                    <i class="ki-duotone ki-arrow-right fs-3 ms-1 me-0">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                    </i></button>
+                                </div>
+                                <!--end::Wrapper-->
+                            </div>
+                            <!--end::Actions-->
                         </form>
+                        <!--end::Form-->
+                    </div>
+                    <!--end::Stepper-->
+                </div>
+                <!--begin::Modal body-->
+            </div>
+        </div>
+    </div>
 
                         <!-- Modal -->
                         <div class="modal fade" id="modalDelete{{$question->id}}" tabindex="-1" aria-hidden="true" style="display: none;">

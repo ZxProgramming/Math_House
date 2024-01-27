@@ -50,6 +50,7 @@ class QuestionController extends Controller
         $courses = Course::all();
         $chapters = Chapter::all();
         $lessons = Lesson::all(); 
+        $exams = ExamCodes::all();
 
         $data = Question::
         leftJoin('lessons', 'questions.lesson_id', '=', 'lessons.id')
@@ -131,7 +132,7 @@ class QuestionController extends Controller
         }
 
         return view('Admin.courses.Questions.Questions', 
-        compact('categories', 'courses', 'chapters', 'lessons', 'questions'));
+        compact('categories', 'courses', 'chapters', 'lessons', 'questions', 'exams'));
     }
 
     public function add_q( Request $req ){
