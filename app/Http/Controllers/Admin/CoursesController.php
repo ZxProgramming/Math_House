@@ -22,10 +22,27 @@ class CoursesController extends Controller
     }
 
     public function course_edit( Request $req ){
-        //"":["3 days","5 dayes"],"":["600","600"],"":["5","5"]}
+        $arr = $req->only('course_name', 'teacher_id', 'course_des', 
+        'category_id', 'gain', 'pre_requisition');
+        
+        extract($_FILES['course_url']);
+        $img_name = null;
+        if ( !empty($name) ) {
+            $extention_arr = ['jpg', 'jpeg', 'png', 'svg'];
+            $extention = explode('.', $name);
+            $extention = end($extention);
+            $extention = strtolower($extention);
+            if ( in_array($extention, $extention_arr)) {
+                $img_name = now() . rand(1, 10000) . $name;
+                $img_name = str_replace([' ', ':', '-'], 'X', $img_name);
+                $arr['course_url'] = $img_name;
+            }
+        }
+
+        move_uploaded_file($tmp_name, 'images/courses/' . $img_name);
+
         Course::where('id', $req->course_id)
-        ->update($req->only('course_name', 'teacher_id', 'course_des', 
-         'category_id', 'gain', 'pre_requisition'));
+        ->update($arr);
         CoursePrice::where('course_id', $req->course_id)
         ->delete();
         for ($i=0, $end = count($req->duration); $i < $end; $i++) { 
