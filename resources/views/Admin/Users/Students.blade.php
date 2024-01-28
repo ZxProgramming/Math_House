@@ -65,45 +65,45 @@
                 ->where('student_id', $item->id)
                 ->get();
                 $arr = [];
-                foreach($marketing as $item){
-                  if(!empty($item->cate_id)){
+                foreach($marketing as $m_item){
+                  if(!empty($m_item->cate_id)){
                     $arr[] = DB::table('marketings')
                     ->select('*', 'categories.cate_price AS arr_price', 'categories.cate_name as arr_name')
-                    ->where('marketings.id', $item->id)
+                    ->where('marketings.id', $m_item->id)
                     ->leftJoin('categories', 'marketings.cate_id', '=', 'categories.id')
                     ->first();
                   }
-                  elseif(!empty($item->chapter_id)){
+                  elseif(!empty($m_item->chapter_id)){
                     $arr[] = DB::table('marketings')
                     ->select('*', 'chapters.ch_price AS arr_price', 'chapters.chapter_name AS arr_name')
-                    ->where('marketings.id', $item->id)
+                    ->where('marketings.id', $m_item->id)
                     ->leftJoin('chapters', 'marketings.chapter_id', '=', 'chapters.id')
                     ->leftJoin('courses', 'chapters.course_id', '=', 'courses.id')
                     ->leftJoin('categories', 'courses.category_id', '=', 'categories.id')
                     ->first();
                   }
-                  elseif(!empty($item->course_id)){
+                  elseif(!empty($m_item->course_id)){
                     $arr[] = DB::table('marketings')
                     ->select('*', 'courses.course_price AS arr_price', 'courses.course_name AS arr_name')
-                    ->where('marketings.id', $item->id)
+                    ->where('marketings.id', $m_item->id)
                     ->leftJoin('courses', 'marketings.course_id', '=', 'courses.id')
                     ->leftJoin('categories', 'courses.category_id', '=', 'categories.id')
                     ->first();
                   }
-                  elseif(!empty($item->lesson_id)){
+                  elseif(!empty($m_item->lesson_id)){
                     $arr[] = DB::table('marketings')
                     ->select('*', 'lessons.lesson_price AS arr_price', 'lessons.lesson_name AS arr_name')
-                    ->where('marketings.id', $item->id)
+                    ->where('marketings.id', $m_item->id)
                     ->leftJoin('lessons', 'marketings.lesson_id', '=', 'lessons.id')
                     ->leftJoin('chapters', 'lessons.chapter_id', '=', 'chapters.id')
                     ->leftJoin('courses', 'chapters.course_id', '=', 'courses.id')
                     ->leftJoin('categories', 'courses.category_id', '=', 'categories.id')
                     ->first();
                   }
-                  elseif(!empty($item->question_id)){
+                  elseif(!empty($m_item->question_id)){
                     $arr[] = DB::table('marketings')
                     ->select('*', 'questions.q_price AS arr_price', 'questions.question AS arr_name')
-                    ->where('marketings.id', $item->id)
+                    ->where('marketings.id', $m_item->id)
                     ->leftJoin('questions', 'marketings.question_id', '=', 'questions.id')
                     ->leftJoin('lessons', 'questions.lesson_id', '=', 'lessons.id')
                     ->leftJoin('chapters', 'lessons.chapter_id', '=', 'chapters.id')
@@ -119,8 +119,8 @@
             <td>
               @php
               $arr_item = null;
-              foreach($arr as $item){
-                if( isset($item->course_name) && $item->course_name != $arr_item ){
+              foreach($arr as $element){
+                if( isset($element->course_name) && $element->course_name != $arr_item ){
                   echo $arr_item;
                   $arr_item = $item->course_name;
                 }
@@ -133,8 +133,8 @@
                 View
               </button>
               <div class="history d-none">
-                @foreach($arr as $item)
-                {{$item->arr_name}}
+                @foreach($arr as $arr_item)
+                {{$arr_item->arr_name}}
                 @endforeach
               </div>
             </td>
@@ -142,10 +142,11 @@
             <td>
               @php
               $wallet = DB::table('wallets')
-              ->where('student_id', $item->student_id)
+              ->where('student_id', $item->id)
               ->get();
               $total = 0;
               @endphp
+              
           <div class='d-flex align-items-center w-200px'>
           <button type="button" class="btn btn-primary show_wallet">
             View
@@ -156,9 +157,9 @@
           </div>
           <div class='wallet_h d-none'>
             @php
-            foreach($wallet as $item){
-              echo $item->wallet . '$ at ' . $item->date . '<br/>';
-              $total += $item->wallet;
+            foreach($wallet as $w_item){
+              echo $w_item->wallet . '$ at ' . $w_item->date . '<br/>';
+              $total += $w_item->wallet;
             }
             @endphp
           </div>
@@ -170,23 +171,26 @@
         <h5 class="modal-title" id="modalCenterTitle">Top Up</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div> 
-      
+      <form method="POST" action="{{route('add_wallet')}}">
+        @csrf
       <div class='p-3'>
         Wallet
         <span class='text-danger'>
           {{$total}} ??
         </span>
       </div>
-        <input class="form-control" type="number" />
+        <input class="form-control" name="wallet" type="number" />
+        <input class="form-control" name="student_id" type="hidden" value="{{$item->id}}" />
       <div class="modal-footer">
         <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
           Close
         </button>
-        <button type="button" class="btn btn-success" data-bs-dismiss="modal">
+        <button class="btn btn-success" data-bs-dismiss="modal">
           Confirm
         </button>
         
       </div>
+      </form>
     </div>
   </div>
 </div>

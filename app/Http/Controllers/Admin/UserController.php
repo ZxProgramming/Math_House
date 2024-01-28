@@ -10,6 +10,7 @@ use App\Models\Admin_role;
 use App\Models\Marketing;
 use App\Models\Category;
 use App\Models\Course;
+use App\Models\Wallet;
 
 class UserController extends Controller
 {
@@ -175,6 +176,13 @@ class UserController extends Controller
 
         return view('Admin.Users.Teachers',
         compact('teachers', 'categories', 'courses'));
+    }
+    
+    public function add_wallet( Request $req ){
+        $arr = $req->only('wallet', 'student_id');
+        $arr['date'] = now();
+        Wallet::create($arr);
+        return redirect()->back();
     }
 
     public function teacher_edit( Request $req ){

@@ -158,6 +158,7 @@ Route::get('/Users/Teacher_Add', [UserController::class, 'teacher_add'])->name('
 Route::get('/Users/Teacher/Del/{id}', [UserController::class, 'del_teacher'])->name('del_teacher');
 
 // Students  
+Route::post('/Users/Add_Wallet', [UserController::class, 'add_wallet'])->name('add_wallet');
 Route::get('/Users/Student', [UserController::class, 'student'])->name('student');
 Route::post('/Users/Student_Filter', [UserController::class, 'student_filter'])->name('student_filter');
 Route::get('/Users/Student/Info', [UserController::class, 'stu_info'])->name('stu_info');
