@@ -7,27 +7,10 @@
 <x-default-layout>
 @include('Admin.Users.stu_header')
     @section('title','Students')
-
-<div class='my-3'>
-  <form class='d-flex' action="{{route('student_filter')}}" method='POST'>
-    @csrf
-    <select name='grade' class='form-control mx-2'>
-      <option disabled selected>
-        Select Grade
-      </option>
-      @for($i = 1; $i < 14; $i++ )
-        <option value="{{$i}}">
-          {{$i}}
-        </option>
-      @endfor
-    </select>
-
-    <button class='btn btn-primary'>
-      Search
-    </button>
-  </form>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<div style="display: flex; align-items: center;justify-content: flex-start">
+  <input type="text" class="form-control" placeholder="Search..." style="width: 200px;" id="myInput">
 </div>
-
 <table id="kt_profile_overview_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable no-footer">
     <thead class="fs-7 text-gray-500 text-uppercase">
         <tr>
@@ -41,7 +24,7 @@
             <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">History</th>
             <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Wallet</th>
     </thead>
-    <tbody class="fs-6">
+    <tbody class="fs-6" id="myTable">
         @foreach( $students as $item )
         <tr class="odd">
             <td class="sorting_1">
@@ -197,7 +180,6 @@
             </td>
         </tr>
         @endforeach
-    
     </tbody>
 </table>
 
@@ -225,6 +207,15 @@
     })
   }
 </script>
-
+<script>
+  $(document).ready(function(){
+    $("#myInput").on("keyup", ()=>{
+      var vale = $("#myInput").val().toLowerCase();
+      $("#myTable tr").filter(function(){
+          $(this).toggle($(this).text().toLowerCase().indexOf(vale)>-1);
+      })
+    })
+  })
+</script>
 
 </x-default-layout>
