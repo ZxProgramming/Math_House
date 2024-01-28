@@ -13,6 +13,7 @@ use App\Models\Chapter;
 use App\Models\UsagePromo;
 use App\Models\PromoCode;
 use App\Models\PaymentMethod;
+use App\Models\PaymentRequest;
 use Cart;
 
 class CoursesController extends Controller
@@ -124,6 +125,31 @@ class CoursesController extends Controller
             $chapters = empty($chapters) ? [] : $chapters;
             return view('Visitor.Cart', compact('chapters', 'chapters_price'));
         }
+    }
+
+    public function payment_money( Request $req ){
+        $arr = $req->only('payment_method_id');
+        $arr['price'] = json_decode(Cache::get('chapters_price'));
+        $arr['user_id'] = auth()->user()->id;
+        
+        extract($_FILES['image']);
+        $img_name = null;
+        if ( !empty($name) ) {
+            $extention_arr = ['jpg', 'jpeg', 'png', 'svg'];
+            $extention = explode('.', $name);
+            $extention = end($extention);
+            $extention = strtolower($extention);
+            if ( in_array($extention, $extention_arr)) {
+                $img_name = now() . rand(1, 10000) . $name;
+                $img_name = str_replace([' ', ':', '-'], 'X', $img_name);
+                $arr['image'] = $img_name;
+            }
+        }
+
+        move_uploaded_file($tmp_name, 'images/payment_reset/' . $img_name);
+        PaymentRequest::create($arr);
+        
+        return redirect()->route('home');
     }
 
 }

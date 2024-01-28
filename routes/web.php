@@ -58,8 +58,10 @@ use Illuminate\Support\Facades\Route;
     });
     
     Route::get('/Home', [HomeController::class, 'index'])->name('home');
+
     Route::post('/Home/Use_Promocode', [V_CoursesController::class, 'use_promocode'])->name('use_promocode');
     Route::get('/Home/CheckOut', [V_CoursesController::class, 'check_out'])->name('check_out');
+    Route::post('/Home/Payment_Money', [V_CoursesController::class, 'payment_money'])->name('payment_money');
     Route::get('/Home/BuyCourse', [V_CoursesController::class, 'new_payment'])->name('new_payment');
     Route::get('/Home/Courses', [V_CoursesController::class, 'categories'])->name('categories');
     Route::post('/Home/Buy_Course', [V_CoursesController::class, 'buy_course'])->name('buy_course');
@@ -67,6 +69,7 @@ use Illuminate\Support\Facades\Route;
     Route::get('/Home/Course_Payment', [V_CoursesController::class, 'course_payment'])->name('course_payment');
     Route::get('/Home/Courses/{id}', [V_CoursesController::class, 'courses'])->name('v_courses');
     Route::get('/Home/Course/{id}', [V_CoursesController::class, 'course'])->name('v_course');
+    
     Route::get('/Home/About', [AboutController::class, 'index'])->name('about');
     Route::get('/Home/Contact', [ContactController::class, 'index'])->name('contact_us');
     Route::post('/Home/Contact/Msg', [ContactController::class, 'contact_msg'])->name('contact_msg');

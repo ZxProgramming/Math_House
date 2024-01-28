@@ -477,12 +477,13 @@
 							<li class="subtitle"><p>Total <span class="float-right totals color-orose">${{$price}}</span></p></li>
 						</ul>
 					</div>
-					<form action="{{route('payment_money')}}">
+					<form action="{{route('payment_money')}}" method="POST" enctype="multipart/form-data">
+						@csrf
 						<div class="payment_widget">
 							<div class="ui_kit_checkbox style2">
 								@foreach( $payment_methods as $item )
 								<div class="custom-control custom-checkbox">
-									<input type="radio" name="payment_method" value="{{$item->id}}" class="custom-control-input" id="customCheck80{{$item->id}}" checked />
+									<input type="radio" name="payment_method_id" value="{{$item->id}}" class="custom-control-input" id="customCheck80{{$item->id}}" checked />
 									<label class="custom-control-label" for="customCheck80{{$item->id}}">{{$item->payment}}
 										<img style="height:50px; width:70px;" src="{{asset('images/payment/' . $item->logo)}}" class="pr15" />
 									</label>
@@ -493,7 +494,15 @@
 										{{$item->description}}
 									</p>
 								</div>
+
 								@endforeach
+
+								<input type="file" id="reset_img" name="image" class="form-control d-none" />	
+								<label style="cursor: pointer;" for="reset_img">
+									<h3>
+										Upload Reseipt
+									</h3>
+								</label>						
 							</div>
 						</div>
 						<div class="ui_kit_button payment_widget_btn">
