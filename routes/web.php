@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\MarketingController;
 use App\Http\Controllers\Admin\QuizzeController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\LiveController;
+use App\Http\Controllers\Admin\PaymentRequestController;
 
 use App\Http\Controllers\Student\Stu_DashboardController;
 use App\Http\Controllers\Student\Stu_ProfileController;
@@ -87,6 +88,14 @@ Route::get('/Payment', [PaymentController::class, 'payment'])->name('payment');
 Route::post('/Payment/Add', [PaymentController::class, 'payment_add'])->name('payment_add');
 Route::post('/Payment/Edit', [PaymentController::class, 'payment_edit'])->name('payment_edit');
 Route::get('/Payment/Del', [PaymentController::class, 'del_payment'])->name('del_payment');
+
+// Payment Request
+Route::controller(PaymentRequestController::class)->group(function(){
+    Route::get('/PenddingPayment','pendding_payment')->name('pendding_payment');
+    Route::get('/PaymentRequest','payment_request')->name('payment_request');
+    Route::get('/ApprovePayment/{id}','approve_payment')->name('approve_payment');
+    Route::get('/RejectedPayment/{id}','rejected_payment')->name('rejected_payment');
+});
 
 // Marketing
 

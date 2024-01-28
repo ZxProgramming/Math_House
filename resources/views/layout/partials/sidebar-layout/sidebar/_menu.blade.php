@@ -250,6 +250,20 @@
 							</span>
 							<span class="menu-title">Payment</span>
 						</a>
+						<!--begin:Menu link-->
+						<a class="menu-link " href="{{ route('pendding_payment') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Pendding Payment</span>
+						</a>
+						<!--begin:Menu link-->
+						<a class="menu-link " href="{{ route('payment_request') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Payment Request</span>
+						</a>
 				</div></div></div>
 						<!--end:Menu link-->
 

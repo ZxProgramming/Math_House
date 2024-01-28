@@ -12,6 +12,7 @@ use App\Models\Course;
 use App\Models\Chapter;
 use App\Models\UsagePromo;
 use App\Models\PromoCode;
+use App\Models\PaymentMethod;
 use Cart;
 
 class CoursesController extends Controller
@@ -103,8 +104,11 @@ class CoursesController extends Controller
     }
 
     public function check_out(){
+        $chapters = json_decode(Cache::get('marketing'));
         $price = json_decode(Cache::get('chapters_price'));
-        return view('Visitor.Checkout.Checkout', compact('price'));
+        $payment_methods = PaymentMethod::all();
+
+        return view('Visitor.Checkout.Checkout', compact('price', 'chapters', 'payment_methods'));
     }
 
     public function new_payment(){
