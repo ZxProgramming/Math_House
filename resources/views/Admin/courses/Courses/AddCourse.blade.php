@@ -67,17 +67,25 @@
     </div>
 
     <div class="priceing_section d-none">
-        <div class='my-3'>
-            <label>Duration</label>
-            <input class='form-control' name="duration" placeholder="Duration" />
+        <div class="pricing_data">
+            <div class='my-3'>
+                <label>Duration</label>
+                <input class='form-control' name="duration[]" placeholder="Duration" />
+            </div>
+            <div class='my-3'>
+                <label>Price</label>
+                <input class='form-control' name="course_price[]" placeholder="Price" />
+            </div>
+            <div class='my-3'>
+                <label>Discount</label>
+                <input class='form-control' name="discount[]" placeholder="Discount" />
+            </div>
+            <hr />
         </div>
-        <div class='my-3'>
-            <label>Price</label>
-            <input class='form-control' name="course_price" placeholder="Price" />
-        </div>
-        <div class='my-3'>
-            <label>Discount</label>
-            <input class='form-control' name="discount" placeholder="Discount" />
+        <div class="mt-3">
+            <button type="button" class='btn btn-success pricing_button'>
+                Add New Pricing
+            </button>
         </div>
         <div class="mt-3">
             <button class='btn btn-primary'>
@@ -87,6 +95,14 @@
     </div>
 </form>
 
+        <script>
+            let pricing_data = document.querySelector('.pricing_data');
+            let pricing_button = document.querySelector('.pricing_button');
+            let data_add = pricing_data.innerHTML;
+            pricing_button.addEventListener('click', () => {
+                pricing_data.innerHTML += data_add;
+            })
+        </script>
 <script>
     let info_section = document.querySelector('.info_section');
     let details_section = document.querySelector('.details_section');

@@ -24,7 +24,7 @@ class CoursesController extends Controller
     public function course_edit( Request $req ){
         $arr = $req->only('course_name', 'teacher_id', 'course_des', 
         'category_id', 'gain', 'pre_requisition');
-        
+
         extract($_FILES['course_url']);
         $img_name = null;
         if ( !empty($name) ) {
@@ -72,8 +72,9 @@ class CoursesController extends Controller
     }
 
     public function course_add( Request $req ){
+        
         $arr = $req->only('course_name', 'category_id', 'course_des', 'teacher_id', 
-        'pre_requisition', 'gain', 'duration', 'course_price', 'discount');
+        'pre_requisition', 'gain');
 
         extract($_FILES['course_url']);
         $img_name = null;
@@ -90,7 +91,15 @@ class CoursesController extends Controller
         }
 
         move_uploaded_file($tmp_name, 'images/courses/' . $img_name);
-        Course::create($arr);
+        $course_data = Course::create($arr);
+        
+        for ($i=0, $end = count($req->duration); $i < $end; $i++) { 
+            CoursePrice::
+            create(['course_id' => $course_data->id, 
+            'duration' => $req->duration[$i],
+            'price' => $req->course_price[$i],
+            'discount' => $req->discount[$i]]);
+            }
         return redirect()->back();
     }
 
