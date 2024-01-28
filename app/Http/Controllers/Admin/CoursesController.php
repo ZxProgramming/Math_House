@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Course;
+use App\Models\CoursePrice;
 use App\Models\Category;
 use App\Models\User;
 
@@ -21,8 +22,19 @@ class CoursesController extends Controller
     }
 
     public function course_edit( Request $req ){
+        //"":["3 days","5 dayes"],"":["600","600"],"":["5","5"]}
         Course::where('id', $req->course_id)
-        ->update($req->only('course_name', 'course_des', 'course_price', 'category_id', 'duration'));
+        ->update($req->only('course_name', 'teacher_id', 'course_des', 
+         'category_id', 'gain', 'pre_requisition'));
+        CoursePrice::where('course_id', $req->course_id)
+        ->delete();
+        for ($i=0, $end = count($req->duration); $i < $end; $i++) { 
+        CoursePrice::
+        create(['course_id' => $req->course_id, 
+        'duration' => $req->duration[$i],
+        'price' => $req->course_price[$i],
+        'discount' => $req->discount[$i]]);
+        }
 
         return redirect()->back();
     } 

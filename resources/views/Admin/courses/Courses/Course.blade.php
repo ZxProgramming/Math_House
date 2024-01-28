@@ -44,7 +44,7 @@
                         </button>
 
                         <!-- Modal -->
-                        <form method="POST" action="{{route('course_edit')}}">
+                        <form method="POST" action="{{route('course_edit')}}" enctype="multipart/form-data">
                           @csrf
                         <div class="modal fade" id="modalCenter{{$item->id}}" tabindex="-1" aria-hidden="true" style="display: none;">
                           <div class="modal-dialog modal-dialog-centered" role="document">
@@ -57,18 +57,16 @@
                               </div>
 
 
-                            <form class="px-3 form-edit"  id="form-edit{{$item->id}}" action="{{route('course_add')}}" method="POST" enctype="multipart/form-data">
-                                @csrf
                                 <div class="info_section" id="info_section{{$item->id}}">
                                     <div class='my-3'>
                                         <label>Course Name</label>
-                                        <input class='form-control' name="course_name" placeholder="Course Name" />
+                                        <input class='form-control' value="{{$item->course_name}}" name="course_name" placeholder="Course Name" />
                                     </div>
                                     <div class='my-3'>
                                         <label>Category</label>
                                         <select name="category_id" class="form-control">
-                                            <option disabled selected>
-                                                Select Category
+                                            <option value="{{$item->category->id}}" selected>
+                                                {{$item->category->cate_name}}
                                             </option>
                                             @foreach($categories as $category)
                                             <option value="{{$category->id}}">
@@ -79,7 +77,7 @@
                                     </div> 
                                     <div class='my-3'>
                                         <label>Description</label>
-                                        <textarea class='form-control' name="course_des" placeholder="Description" ></textarea>
+                                        <textarea class='form-control' name="course_des" placeholder="Description" >{{$item->course_des}}</textarea>
                                     </div>
                                     
                                     <div class='my-3'>
@@ -95,6 +93,9 @@
                                     <div class='my-3'>
                                         <label>Teachers</label>
                                         <select name="teacher_id" class="form-control">
+                                            <option value="{{$item->teacher->id}}">
+                                                {{$item->teacher->name}}
+                                            </option>
                                             @foreach($teachers as $teacher)
                                             <option value="{{$teacher->id}}">
                                                 {{$teacher->name}}
@@ -104,11 +105,11 @@
                                     </div>
                                     <div class='my-3'>
                                         <label>Pre requisition</label>
-                                        <textarea class='form-control' name="pre_requisition" placeholder="Pre requisition" ></textarea>
+                                        <textarea class='form-control' name="pre_requisition" placeholder="Pre requisition" >{{$item->pre_requisition}}</textarea>
                                     </div>
                                     <div class='my-3'>
                                         <label>What you gain</label>
-                                        <textarea class='form-control' name="gain" placeholder="What you gain" ></textarea>
+                                        <textarea class='form-control' name="gain" placeholder="What you gain" >{{$item->gain}}</textarea>
                                     </div>
                                     <button type="button" class="btn btn-secondary prev_info">
                                         Back
@@ -119,28 +120,27 @@
                                 </div>
 
                                 <div class="priceing_section d-none" id="priceing_section{{$item->id}}">
+                                  @foreach ( $item->prices as $price )
                                     <div class='my-3'>
                                         <label>Duration</label>
-                                        <input class='form-control' name="duration" placeholder="Duration" />
+                                        <input value="{{$price->duration}}" class='form-control' name="duration[]" placeholder="Duration" />
                                     </div>
                                     <div class='my-3'>
                                         <label>Price</label>
-                                        <input class='form-control' name="course_price" placeholder="Price" />
+                                        <input value="{{$price->price}}" class='form-control' name="course_price[]" placeholder="Price" />
                                     </div>
                                     <div class='my-3'>
                                         <label>Discount</label>
-                                        <input class='form-control' name="discount" placeholder="Discount" />
+                                        <input value="{{$price->discount}}" class='form-control' name="discount[]" placeholder="Discount" />
                                     </div>
+                                    <hr />
+                                    @endforeach
                                     <div class="mt-3">
                                         <span class='btn btn-secondary prev_details'>
                                             Back
                                         </span>
-                                        <button class='btn btn-primary'>
-                                            Submit
-                                        </button>
                                     </div>
                                 </div>
-                            </form>
 
 
                               <div class="modal-footer">

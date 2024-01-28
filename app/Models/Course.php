@@ -8,6 +8,8 @@ use App\Models\Chapter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\CoursePrice;
+
 class Course extends Model
 {
     use HasFactory;  
@@ -37,5 +39,8 @@ class Course extends Model
     public function chapter()
     {
         return $this->hasMany(Chapter::class);
+    }
+    public function prices(){
+        return $this->hasMany(CoursePrice::class, 'course_id');
     }
 }
