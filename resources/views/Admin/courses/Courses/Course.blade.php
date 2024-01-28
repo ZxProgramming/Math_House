@@ -7,27 +7,9 @@
 <x-default-layout>
 @include('Admin.courses.Courses.course_header')
     @section('title','Course')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<div class='my-3'>
-  <form class='d-flex' action="{{route('course_filter')}}" method='POST'>
-    @csrf
-    <select name='category_id' class='form-control mx-2'>
-      <option selected value="all">
-        Select Category
-      </option>
-      @foreach( $categories as $category )
-        <option value='{{$category->id}}'>
-            {{$category->cate_name}}
-        </option>
-      @endforeach
-    </select>
 
-    <button class='btn btn-primary'>
-      Search
-    </button>
-  </form>
-
-</div>
 <table id="kt_profile_overview_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable no-footer">
     <thead class="fs-7 text-gray-500 text-uppercase">
         <tr>
@@ -54,10 +36,10 @@
             <td>
             <div class="mt-3">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter{{$item->id}}">
+                        <button type="button" id="{{$item->id}}" class="btn btn-primary btn-edit" data-bs-toggle="modal" data-bs-target="#modalCenter{{$item->id}}">
                           Edit
                         </button>
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{$item->id}}">
+                        <button type="button"id="{{$item->id}}"  class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{$item->id}}">
                           Delete
                         </button>
 
@@ -67,53 +49,100 @@
                         <div class="modal fade" id="modalCenter{{$item->id}}" tabindex="-1" aria-hidden="true" style="display: none;">
                           <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content px-2">
+                              <input type="hidden" value="{{$item->id}}" name="course_id" />
+                              
                               <div class="modal-header">
-                                
                                 <h5 class="modal-title" id="modalCenterTitle">Edit Course</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
 
-                              <div class="my-2">
-                                <label>
-                                    Course Name
-                                </label>
-                                <input name="course_name" class="form-control" value="{{$item->course_name}}" placeholder="Course Name"/>
-                            </div>
-                            <div class="my-2">
-                                <label>
-                                    Course Description
-                                </label>
-                                <input name="course_des" class="form-control" value="{{$item->course_des}}" placeholder="Course Description"/>
-                            </div>
-                            <div class="my-2">
-                                <label>
-                                    Duration
-                                </label>
-                                <input name="duration" class="form-control" value="{{$item->duration}}" placeholder="Duration"/>
-                            </div>
-                            <div class="my-2">
-                                <label>
-                                    Course Price
-                                </label>
-                                <input name="course_price" class="form-control" value="{{$item->course_price}}" placeholder="Course Price"/>
-                            </div>
-                            <div class="my-2">
-                                <label>
-                                    Category
-                                </label>
-                                <select name="category_id" class="form-control">
-                                    <option value="{{$item->category->id}}">
-                                        {{$item->category->cate_name}}
-                                    </option>
-                                    @foreach( $categories as $cate )
-                                    <option value="{{$cate->id}}">
-                                        {{$cate->cate_name}}
-                                    </option>
-                                    @endforeach
-                                </select>
-                            </div>
 
-                              <input type="hidden" value="{{$item->id}}" name="course_id" />
+                            <form class="px-3 form-edit"  id="form-edit{{$item->id}}" action="{{route('course_add')}}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="info_section" id="info_section{{$item->id}}">
+                                    <div class='my-3'>
+                                        <label>Course Name</label>
+                                        <input class='form-control' name="course_name" placeholder="Course Name" />
+                                    </div>
+                                    <div class='my-3'>
+                                        <label>Category</label>
+                                        <select name="category_id" class="form-control">
+                                            <option disabled selected>
+                                                Select Category
+                                            </option>
+                                            @foreach($categories as $category)
+                                            <option value="{{$category->id}}">
+                                                {{$category->cate_name}}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div> 
+                                    <div class='my-3'>
+                                        <label>Description</label>
+                                        <textarea class='form-control' name="course_des" placeholder="Description" ></textarea>
+                                    </div>
+                                    
+                                    <div class='my-3'>
+                                        <label>Image</label>
+                                        <input class='form-control' type="file" name="course_url" placeholder="Image" />
+                                    </div>
+                                    <button type="button" class="btn btn-success details_btn" id="details_btn{{$item->id}}">
+                                        Next
+                                    </button>
+                                </div>
+
+                                <div class="details_section d-none" id="details_section{{$item->id}}">
+                                    <div class='my-3'>
+                                        <label>Teachers</label>
+                                        <select name="teacher_id" class="form-control">
+                                            @foreach($teachers as $teacher)
+                                            <option value="{{$teacher->id}}">
+                                                {{$teacher->name}}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class='my-3'>
+                                        <label>Pre requisition</label>
+                                        <textarea class='form-control' name="pre_requisition" placeholder="Pre requisition" ></textarea>
+                                    </div>
+                                    <div class='my-3'>
+                                        <label>What you gain</label>
+                                        <textarea class='form-control' name="gain" placeholder="What you gain" ></textarea>
+                                    </div>
+                                    <button type="button" class="btn btn-secondary prev_info">
+                                        Back
+                                    </button>
+                                    <button type="button" class="btn btn-success pricing_btn">
+                                        Next
+                                    </button>
+                                </div>
+
+                                <div class="priceing_section d-none" id="priceing_section{{$item->id}}">
+                                    <div class='my-3'>
+                                        <label>Duration</label>
+                                        <input class='form-control' name="duration" placeholder="Duration" />
+                                    </div>
+                                    <div class='my-3'>
+                                        <label>Price</label>
+                                        <input class='form-control' name="course_price" placeholder="Price" />
+                                    </div>
+                                    <div class='my-3'>
+                                        <label>Discount</label>
+                                        <input class='form-control' name="discount" placeholder="Discount" />
+                                    </div>
+                                    <div class="mt-3">
+                                        <span class='btn btn-secondary prev_details'>
+                                            Back
+                                        </span>
+                                        <button class='btn btn-primary'>
+                                            Submit
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+
+
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
                                   Close
@@ -158,4 +187,45 @@
     
     </tbody>
 </table>
+
+
+<script>
+  $(document).ready(()=>{
+    $(".details_btn").click(function(){
+        var info_id = `#${$(this).parent().attr("id")}`;
+        var details_id = `#${$(this).parent().next().attr("id")}`;
+        
+        
+        $(info_id).addClass("d-none");
+        $(details_id).removeClass("d-none");
+        
+      });
+      $(".pricing_btn").click(function(){
+        var details_id = `#${$(this).parent().attr("id")}`;
+        var priceing_id = `#${$(this).parent().next().attr("id")}`;
+       
+        $(details_id).addClass("d-none");
+        $(priceing_id).removeClass("d-none");
+      })
+
+      $(".prev_info").click(function(){
+        var details_id = `#${$(this).parent().attr("id")}`;
+        var info_id = `#${$(this).parent().prev().attr("id")}`;
+       
+        $(details_id).addClass("d-none");
+        $(info_id).removeClass("d-none");
+      })
+
+      $(".prev_details").click(function(){
+        var priceing_id = `#${$(this).parent().parent().attr("id")}`;
+        var details_id = `#${$(this).parent().parent().prev().attr("id")}`;
+       
+        $(priceing_id).addClass("d-none");
+        $(details_id).removeClass("d-none");
+      })
+
+
+
+  })
+</script>
 </x-default-layout>
