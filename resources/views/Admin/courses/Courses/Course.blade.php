@@ -63,6 +63,10 @@
                                         <input class='form-control' value="{{$item->course_name}}" name="course_name" placeholder="Course Name" />
                                     </div>
                                     <div class='my-3'>
+                                        <label>Course Price</label>
+                                        <input class='form-control' name="course_price" value="{{$item->course_price}}" placeholder="Course Price" />
+                                    </div>
+                                    <div class='my-3'>
                                         <label>Category</label>
                                         <select name="category_id" class="form-control">
                                             <option value="{{$item->category->id}}" selected>
@@ -127,7 +131,7 @@
                                     </div>
                                     <div class='my-3'>
                                         <label>Price</label>
-                                        <input value="{{$price->price}}" class='form-control' name="course_price[]" placeholder="Price" />
+                                        <input value="{{$price->price}}" class='form-control' name="price[]" placeholder="Price" />
                                     </div>
                                     <div class='my-3'>
                                         <label>Discount</label>

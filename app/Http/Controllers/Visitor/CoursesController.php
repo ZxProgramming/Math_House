@@ -106,7 +106,9 @@ class CoursesController extends Controller
     public function check_out(){
         $chapters = json_decode(Cache::get('marketing'));
         $price = json_decode(Cache::get('chapters_price'));
-        $payment_methods = PaymentMethod::all();
+        $payment_methods = PaymentMethod::
+        where('statue', 1)
+        ->get();
 
         return view('Visitor.Checkout.Checkout', compact('price', 'chapters', 'payment_methods'));
     }

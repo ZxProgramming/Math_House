@@ -23,7 +23,7 @@ class CoursesController extends Controller
 
     public function course_edit( Request $req ){
         $arr = $req->only('course_name', 'teacher_id', 'course_des', 
-        'category_id', 'gain', 'pre_requisition');
+        'category_id', 'gain', 'pre_requisition', 'course_price');
 
         extract($_FILES['course_url']);
         $img_name = null;
@@ -49,7 +49,7 @@ class CoursesController extends Controller
         CoursePrice::
         create(['course_id' => $req->course_id, 
         'duration' => $req->duration[$i],
-        'price' => $req->course_price[$i],
+        'price' => $req->price[$i],
         'discount' => $req->discount[$i]]);
         }
 
@@ -74,7 +74,7 @@ class CoursesController extends Controller
     public function course_add( Request $req ){
         
         $arr = $req->only('course_name', 'category_id', 'course_des', 'teacher_id', 
-        'pre_requisition', 'gain');
+        'pre_requisition', 'gain', 'course_price');
 
         extract($_FILES['course_url']);
         $img_name = null;
@@ -97,7 +97,7 @@ class CoursesController extends Controller
             CoursePrice::
             create(['course_id' => $course_data->id, 
             'duration' => $req->duration[$i],
-            'price' => $req->course_price[$i],
+            'price' => $req->price[$i],
             'discount' => $req->discount[$i]]);
             }
         return redirect()->back();
