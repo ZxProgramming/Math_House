@@ -30,9 +30,39 @@ class QuestionController extends Controller
         compact('categories', 'courses', 'chapters', 'lessons', 'questions', 'exams'));
     }
 
-    public function q_edit( Request $req ){
-        $arr = $req->only('question', 'q_type', 'year', 'month', 'q_code', 'section', 'q_num', 'difficulty');
-        Question::where('id', $req->id)
+    public function q_edit( $id, Request $req ){
+      // , grid_ans => [null], 
+        $arr = $req->only('question', 'lesson_id', 'q_type', 'year', 'month',
+        'q_code', 'section', 'q_num', 'difficulty', 'ans_type');
+        
+       
+       extract($_FILES['q_url']);
+       $img_name = null;
+       if ( !empty($name) ) {
+           $img_name = now() . rand(1, 10000) . $name;
+           $img_name = str_replace([' ', ':', '-'], 'X', $img_name);
+           $arr['q_url'] = $img_name;
+       }
+
+       $ans_pdf_file = $_FILES['ans_pdf'];
+       $ans_video_file = $_FILES['ans_video'];
+       if ( !empty($req->ans_pdf) ) {
+           for ($i=0, $end = count($req->ans_pdf); $i < $end; $i++) { 
+               $pdf_name = now() . $ans_pdf_file['name'][$i];
+               $v_name   = now() . $ans_video_file['name'][$i];
+               $pdf_name = str_replace([':', ' ', '-'], 'X', $pdf_name);
+               $v_name   = str_replace([':', ' ', '-'], 'X', $v_name);
+               Q_ans::create([
+                   'ans_pdf'   => $pdf_name,
+                   'ans_video' => $v_name,
+                   'Q_id'      => $id,
+               ]);
+               move_uploaded_file($ans_pdf_file['tmp_name'][$i], 'files/q_answers/' . $pdf_name);
+               move_uploaded_file($ans_video_file['tmp_name'][$i], 'files/q_answers/' . $v_name);
+           }
+       }
+       move_uploaded_file($tmp_name, 'images/questions/' . $img_name);
+        Question::where('id', $id)
         ->update($arr);
 
         return redirect()->back();

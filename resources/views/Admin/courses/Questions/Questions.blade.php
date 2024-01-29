@@ -37,7 +37,7 @@
                         <label class="required form-label mb-3">Category Name</label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <select name="category_id" class="form-control sel_cate">
+                        <select name="category_id" class="form-control">
                             <option disabled selected>
                                 Select Category
                             </option>
@@ -373,7 +373,7 @@
                         </div>
                         <!--end::Nav-->
                         <!--begin::Form-->
-                        <form action="{{route('add_q')}}" method="POST" enctype="multipart/form-data" class="mx-auto w-100 mw-600px pt-15 pb-10" novalidate="novalidate" id="kt_modal_create_campaign_stepper_form">
+                        <form action="{{route('q_edit', ['id' => $question->id])}}" method="POST" enctype="multipart/form-data" class="mx-auto w-100 mw-600px pt-15 pb-10" novalidate="novalidate" id="kt_modal_create_campaign_stepper_form">
                             <!--begin::Step 1-->
                             <div class="current" data-kt-stepper-element="content">
                                 <!--begin::Wrapper-->
@@ -387,7 +387,7 @@
                                         <!--end::Label-->
  
                                     <!--begin::Input-->
-                                    <textarea id="editor" name="question" class="form-control">{{$question->question}}</textarea>
+                                    <textarea name="question" class="form-control">{{$question->question}}</textarea>
                                     <!--end::Input-->
         
                                     </div>
@@ -491,30 +491,7 @@
                                         </select>
                                         <!--end::Input-->
                                     </div>
-                                    <div class="mb-10 fv-row">
-                                        <!--begin::Label-->
-                                        <label class="required form-label mb-3">Question Type</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
-                                        <select class="form-control q_type" name="q_type">
-                                            <option value="{{$question->q_type}}" selected>
-                                                {{$question->q_type}}
-                                            </option>
-                                            <option disabled >
-                                                Select Question Type
-                                            </option>
-                                            <option value="Trail">
-                                                Trail
-                                            </option>
-                                            <option value="Parallel">
-                                                Parallel
-                                            </option>
-                                            <option value="Extra">
-                                                Extra
-                                            </option>
-                                        </select>
-                                        <!--end::Input-->
-                                    </div>
+                                    
                                     <!--end::Input group-->
                                 </div>
 
@@ -554,7 +531,7 @@
                                         <!--End::Label-->
                                             
                                         <!--begin::Input-->
-                                        <select class="form-control sel_course2" name="course_id">
+                                        <select class="form-control" name="course_id">
                                             <option disabled selected>
                                                 Select Course
                                             </option>
@@ -569,7 +546,7 @@
                                         <!--End::Label-->
                                             
                                         <!--begin::Input-->
-                                        <select class="form-control sel_chapter2" name="chapter_id">
+                                        <select class="form-control" name="chapter_id">
                                             <option disabled selected>
                                                 Select Chapter
                                             </option>
@@ -583,7 +560,7 @@
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold mb-2">Lesson</label>
                                         <!--begin::Input-->
-                                        <select class="form-control sel_lesson2" name="lesson_id">
+                                        <select class="form-control" name="lesson_id">
                                             <option value="{{$question->lesson_id}}" selected>
                                             {{$question->lessons->lesson_name}}
                                             </option>
@@ -601,7 +578,7 @@
                                         <!--End::Label-->
                                             
                                         <!--begin::Input-->
-                                        <select class="form-control year" name="year">
+                                        <select class="form-control" name="year">
                                             <option value="{{$question->year}}" selected>
                                                 {{$question->year}}
                                             </option>
@@ -624,7 +601,7 @@
                                         <!--End::Label-->
                                             
                                         <!--begin::Input-->
-                                        <select class="form-control month" name="month">
+                                        <select class="form-control" name="month">
                                             <option value="{{$question->month}}">{{$question->month}}</div>
                                             <option value="Jan">Jan</div>
                                             <option value="Fab">Fab</div>
@@ -664,7 +641,7 @@
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold mb-2">Section</label>
                                         <!--begin::Input-->
-                                        <select class="form-control section" name="section">
+                                        <select class="form-control" name="section">
                                             <option value="{{$question->section}}" selected>
                                                 {{$question->section}}
                                             </option>
@@ -694,7 +671,7 @@
                                         <!--End::Label-->
                                             
                                         <!--begin::Input-->
-                                        <input value="{{$question->q_num}}" type="number" min="0" max="80" class="form-control q_num" name="q_num" placeholde="Question Num" required />
+                                        <input value="{{$question->q_num}}" type="number" min="0" max="80" class="form-control" name="q_num" placeholde="Question Num" required />
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Input group-->
@@ -784,7 +761,7 @@
                                     <button class="btn btn-lg btn-primary" >
                                         Submit 
                                     </button>
-                                    <button type="button" class="btn btn-lg btn-primary continue_btn" data-kt-stepper-action="next">Continue 
+                                    <button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Continue 
                                     <i class="ki-duotone ki-arrow-right fs-3 ms-1 me-0">
                                         <span class="path1"></span>
                                         <span class="path2"></span>

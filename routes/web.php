@@ -194,7 +194,7 @@ Route::controller(ChaptersController::class)->group(function(){
 // Questions 
 Route::controller(QuestionController::class)->group(function(){
     Route::get('/Question','question')->name('question');
-    Route::post('/Question/Edit','q_edit')->name('q_edit');
+    Route::post('/Question/Edit/{id}','q_edit')->name('q_edit');
     Route::post('/Question/Add','add_q')->name('add_q');
     Route::post('/Question/Filter','filter_question')->name('filter_question');
     Route::get('/Question/Filter','filter_question')->name('filter_question');
