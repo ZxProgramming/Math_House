@@ -477,11 +477,11 @@
 								</li>
 								<li class="list-inline-item">
 									<h4>Date</h4>
-									<p>December 21, 2019</p>
+									<p>{{date('M d, Y')}}</p>
 								</li>
 								<li class="list-inline-item">
 									<h4>Total</h4>
-									<p>$76.70</p>
+									<p>${{$price}}</p>
 								</li>
 								<li class="list-inline-item">
 									<h4>Payment Method</h4>
@@ -493,14 +493,12 @@
 							<h4 class="title text-center mb40">Order Details</h4>
 							<div class="od_content">
 								<ul>
-									<li>Premium  × 1 <span class="float-right">$29.90</span></li>
-									<li>Promotion Package One  x1 <span class="float-right">$29.90</span></li>
-									<li>Basic  × 1 <span class="float-right">$29.90</span></li>
-									<li>Advanced  × 1 <span class="float-right">$29.90</span></li>
-									<li>Subtotal <span class="float-right tamount">$29.90</span></li>
-									<li>Total <span class="float-right tamount">$29.90</span></li>
-									<li>Payment method:	<span class="float-right">Direct bank transfer</span></li>
-									<li>Note <span class="float-right">Lorem Ipsum Dolar Site Amet</span></li>
+                                    @foreach ( $chapters as $chapter )
+									<li>
+                                        {{$chapter->chapter_name}}
+                                         <span class="float-right">${{$chapter->ch_price}}</span>
+                                    </li>
+                                    @endforeach
 								</ul>
 							</div>
 							<div class="od_details_contact text-center">

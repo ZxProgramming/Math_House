@@ -157,7 +157,10 @@ class CoursesController extends Controller
         }
         PaymentRequest::create($arr);
         
-        return view('Visitor.Order.Order');
+        $chapters = json_decode(Cache::get('marketing'));
+        $price = json_decode(Cache::get('chapters_price'));
+        $p_method = $arr['payment_method_id'];
+        return view('Visitor.Order.Order', compact('chapters', 'price'));
     }
 
     public function remove_course_package( $id ){
