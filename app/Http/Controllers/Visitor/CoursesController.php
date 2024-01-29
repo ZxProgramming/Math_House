@@ -155,12 +155,11 @@ class CoursesController extends Controller
                 move_uploaded_file($tmp_name[$i], 'images/payment_reset/' . $img_name);
             }
         }
-        PaymentRequest::create($arr);
-        
+        $p_request = PaymentRequest::create($arr);
         $chapters = json_decode(Cache::get('marketing'));
         $price = json_decode(Cache::get('chapters_price'));
-        $p_method = $arr['payment_method_id'];
-        return view('Visitor.Order.Order', compact('chapters', 'price'));
+        $p_method = $p_request->method->payment;
+        return view('Visitor.Order.Order', compact('chapters', 'price', 'p_method'));
     }
 
     public function remove_course_package( $id ){
