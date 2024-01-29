@@ -286,7 +286,7 @@
 									<div class="overlay">
 										<div class="tag">Best Seller</div>
 										<div class="icon"><span class="flaticon-like"></span></div>
-										<a class="tc_preview_course" href="#">Preview Course</a>
+										<a class="tc_preview_course" href="{{route('v_courses', ['id' => $category->id])}}">Preview Course</a>
 									</div>
 								</div>
 								<div class="details">

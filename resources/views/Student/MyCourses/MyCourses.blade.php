@@ -4,38 +4,63 @@
     return 'student';
   }
 @endphp
+@include('Visitor.inc.header')
 <x-default-layout>
-<a href="{{route('stu_courses')}}">
-    <div class="card-body text-center mb-2" style="border:1px solid #ddd;">
-        <!--begin::Food img-->
-        <img src="{{asset('images/inc/1.jfif')}}" class="rounded-3 mb-4 w-150px h-150px w-xxl-200px h-xxl-200px" alt="">
-        <!--end::Food img-->
-        <!--begin::Info-->
-        <div class="mb-2">
-            <!--begin::Title-->
-            <div class="text-center">
-                <span class="fw-bold text-gray-800 cursor-pointer text-hover-primary fs-3 fs-xl-1">Courses</span>
-            </div>
-            <!--end::Title-->
-        </div>
-        <!--end::Info-->
-    </div>
-</a> 
+    @section('title','Courses')
 
-<a href="{{route('stu_chapters')}}">
-    <div class="card-body text-center" style="border:1px solid #ddd;">
-        <!--begin::Food img-->
-        <img src="{{asset('images/inc/2.png')}}" class="rounded-3 mb-4 w-150px h-150px w-xxl-200px h-xxl-200px" alt="">
-        <!--end::Food img-->
-        <!--begin::Info-->
-        <div class="mb-2">
-            <!--begin::Title-->
-            <div class="text-center">
-                <span class="fw-bold text-gray-800 cursor-pointer text-hover-primary fs-3 fs-xl-1">Chapters</span>
+
+
+    
+	<!-- Our Courses List -->
+	<section class="features-course pb20">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="shop_product_slider">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 offset-lg-3">
+					<div class="main-title text-center">
+						<h3 class="mb0 mt0">Featured Courses</h3>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="shop_product_slider">
+    @foreach( $courses as $key => $item )
+    
+    <div class="item">
+        <a href="{{route('stu_chapters', ['id' => $item->id])}}">
+        <div class="top_courses">
+            <div class="thumb">
+                <img class="img-whp" src="{{asset('images/courses/' . $item->course_url)}}" alt="t1.jpg">
+                <div class="overlay">
+                    <div class="tag">Best Seller</div>
+                    <div class="icon"><span class="flaticon-like"></span></div>
+                    <a class="tc_preview_course" href="{{route('stu_chapters', ['id' => $item->id])}}">Preview Course</a>
+                </div>
             </div>
-            <!--end::Title-->
+            <div class="details">
+                <div class="tc_content">
+                    <p>
+                        Mr. {{$item->teacher->name}}
+                    </p>
+                    <h5>
+                        {{$item->course_name}}
+                    </h5>
+                    <p>
+                        {{$item->course_des}}
+                    </p>
+                </div>
+            </div>
         </div>
-        <!--end::Info-->
-    </div>
-</a>
+        </a>
+        </div>
+    @endforeach
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 </x-default-layout>

@@ -6,6 +6,7 @@
   @endphp
 <x-default-layout>
 
+@section('title','Profile')
 
 <div class="card mb-4">
       

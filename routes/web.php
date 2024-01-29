@@ -257,6 +257,7 @@ Route::middleware(['auth','auth.student'])->group(function(){
         Route::get('/Student/MyCourses','index')->name('stu_my_courses');
         Route::get('/Student/MyCourses/Courses','courses')->name('stu_courses');
         Route::get('/Student/MyCourses/Chapters','chapters')->name('stu_chapters');
+        Route::get('/Student/MyCourses/Chapters/{id}','stu_chapters')->name('stu_chapters');
     });
 });
 
