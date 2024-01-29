@@ -34,7 +34,17 @@ class QuestionController extends Controller
       // , grid_ans => [null], 
         $arr = $req->only('question', 'lesson_id', 'q_type', 'year', 'month',
         'q_code', 'section', 'q_num', 'difficulty', 'ans_type');
-        
+        if ( isset($req->mcq_ans) && $req->mcq_answers != null ) {
+            Mcq_ans::where('q_id', $id)
+            ->delete();
+            foreach ( $req->mcq_ans as $item ) {
+                Mcq_ans::create([
+                    'mcq_ans' => $item,
+                    'mcq_answers' => $req->mcq_answers, 
+                    'q_id' => $id,
+                ]);
+            }
+        }
        
        extract($_FILES['q_url']);
        $img_name = null;
