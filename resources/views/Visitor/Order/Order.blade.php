@@ -1,6 +1,8 @@
 
 @include('Visitor.inc.header')
 @include('Visitor.inc.menu')
+
+
 <div class="wrapper">
 	<div class="preloader"></div>
 
@@ -448,10 +450,10 @@
 			<div class="row">
 				<div class="col-xl-6 offset-xl-3 text-center">
 					<div class="breadcrumb_content">
-						<h4 class="breadcrumb_title">Checkout</h4>
+						<h4 class="breadcrumb_title">ORDER</h4>
 						<ol class="breadcrumb">
 						    <li class="breadcrumb-item"><a href="#">Home</a></li>
-						    <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+						    <li class="breadcrumb-item active" aria-current="page">ORDER</li>
 						</ol>
 					</div>
 				</div>
@@ -459,73 +461,57 @@
 		</div>
 	</section>
 
-	<!-- Shop Checkouts Content -->
-	<section class="shop-checkouts">
+	<!-- Shop Order Content -->
+	<section class="shop-order">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12 col-lg-8 col-xl-8"> 
-				</div>
-				<div class="col-lg-4 col-xl-4">
-					<div class="order_sidebar_widget mb30">
-						<h4 class="title">Your Order</h4>
-						<ul>
-							<li class="subtitle"><p>Product <span class="float-right">Total</span></p></li>
-							@foreach( $chapters as $chapter )
-							<li><p>{{$chapter->chapter_name}} <span class="float-right">{{$chapter->ch_price}}</span></p></li> 
-							@endforeach
-							<li class="subtitle"><p>Subtotal <span class="float-right">Subtotal</span></p></li>
-							<li class="subtitle"><p>Total <span class="float-right totals color-orose">${{$price}}</span></p></li>
-						</ul>
-					</div>
-					<form action="{{route('payment_money')}}" method="POST" enctype="multipart/form-data">
-						@csrf
-						<div class="payment_widget">
-							<div class="ui_kit_checkbox style2">
-								@foreach( $payment_methods as $item )
-								<div class="custom-control custom-checkbox">
-									<input type="radio" name="payment_method_id" value="{{$item->id}}" class="custom-control-input payment_method_radio" id="customCheck80{{$item->id}}" checked />
-									<label class="custom-control-label" for="customCheck80{{$item->id}}">{{$item->payment}}
-										<img style="height:50px; width:70px;" src="{{asset('images/payment/' . $item->logo)}}" class="pr15" />
-									</label>
-									
-								</div>
-								<div class="bt_details">
-									<p>
-										{{$item->description}}
-									</p>
-								</div>
-
-								<input type="file" id="reset_img" name="image[]" class="form-control d-none" />	
-								<label class="upload_img d-none" style="cursor: pointer;" for="reset_img">
-									<h3>
-										Upload Reseipt
-									</h3>
-								</label>
-								@endforeach
-						<script>
-											
-							let payment_method_radio = document.querySelectorAll('.payment_method_radio');
-							let upload_img = document.querySelectorAll('.upload_img');
-							upload_img[upload_img.length - 1].classList.remove('d-none');
-							for (let i = 0, end = payment_method_radio.length; i < end; i++) {
-								payment_method_radio[i].addEventListener('change', ( e ) => {
-										for (let j = 0; j < end; j++) {
-											if ( e.target == payment_method_radio[j] ) {
-												upload_img[j].classList.remove('d-none');
-											}
-											else{
-												upload_img[j].classList.add('d-none');
-											}
-									}
-								})
-							}
-						</script>
+				<div class="col-xl-8 offset-xl-2">
+					<div class="shop_order_box">
+						<h4 class="main_title">Order</h4>
+						<p class="text-center">Thank you. Your order has been received.</p>
+						<div class="order_list_raw">
+							<ul>
+								<li class="list-inline-item">
+									<h4>Order Number</h4>
+									<p>3743</p>
+								</li>
+								<li class="list-inline-item">
+									<h4>Date</h4>
+									<p>December 21, 2019</p>
+								</li>
+								<li class="list-inline-item">
+									<h4>Total</h4>
+									<p>$76.70</p>
+								</li>
+								<li class="list-inline-item">
+									<h4>Payment Method</h4>
+									<p>Direct bank transfer</p>
+								</li>
+							</ul>
+						</div>
+						<div class="order_details">
+							<h4 class="title text-center mb40">Order Details</h4>
+							<div class="od_content">
+								<ul>
+									<li>Premium  × 1 <span class="float-right">$29.90</span></li>
+									<li>Promotion Package One  x1 <span class="float-right">$29.90</span></li>
+									<li>Basic  × 1 <span class="float-right">$29.90</span></li>
+									<li>Advanced  × 1 <span class="float-right">$29.90</span></li>
+									<li>Subtotal <span class="float-right tamount">$29.90</span></li>
+									<li>Total <span class="float-right tamount">$29.90</span></li>
+									<li>Payment method:	<span class="float-right">Direct bank transfer</span></li>
+									<li>Note <span class="float-right">Lorem Ipsum Dolar Site Amet</span></li>
+								</ul>
+							</div>
+							<div class="od_details_contact text-center">
+								<h4 class="title2">Billing Address</h4>
+								<p class="mb0">Collins Street West, Victoria 8007, Australia.</p>
+								<p class="mb0">London/England</p>
+								<p class="mb0">1245 658 965</p>
+								<p>info@example.com</p>
 							</div>
 						</div>
-						<div class="ui_kit_button payment_widget_btn">
-							<button class="btn dbxshad btn-lg btn-thm3 circle btn-block">Place Order</button>
-						</div>
-					</form>
+					</div>
 				</div>
 			</div>
 		</div>

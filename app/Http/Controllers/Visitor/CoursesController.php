@@ -137,22 +137,27 @@ class CoursesController extends Controller
         
         extract($_FILES['image']);
         $img_name = null;
-        if ( !empty($name) ) {
-            $extention_arr = ['jpg', 'jpeg', 'png', 'svg'];
-            $extention = explode('.', $name);
-            $extention = end($extention);
-            $extention = strtolower($extention);
-            if ( in_array($extention, $extention_arr)) {
-                $img_name = now() . rand(1, 10000) . $name;
-                $img_name = str_replace([' ', ':', '-'], 'X', $img_name);
-                $arr['image'] = $img_name;
+        for ($i=0, $end = count($name); $i < $end; $i++) { 
+            if ( !empty($name[$i]) ) {
+                        
+                if ( !empty($name) ) {
+                    $extention_arr = ['jpg', 'jpeg', 'png', 'svg'];
+                    $extention = explode('.', $name[$i]);
+                    $extention = end($extention);
+                    $extention = strtolower($extention);
+                    if ( in_array($extention, $extention_arr)) {
+                        $img_name = now() . rand(1, 10000) . $name[$i];
+                        $img_name = str_replace([' ', ':', '-'], 'X', $img_name);
+                        $arr['image'] = $img_name;
+                    }
+                }
+
+                move_uploaded_file($tmp_name[$i], 'images/payment_reset/' . $img_name);
             }
         }
-
-        move_uploaded_file($tmp_name, 'images/payment_reset/' . $img_name);
         PaymentRequest::create($arr);
         
-        return redirect()->route('home');
+        return view('Visitor.Order.Order');
     }
 
     public function remove_course_package( $id ){
