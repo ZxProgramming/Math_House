@@ -45,6 +45,17 @@ class QuestionController extends Controller
                 ]);
             }
         }
+        
+        if( isset($req->grid_ans) && $req->grid_ans[0] != null ){
+            Grid_ans::where('q_id', $id)
+            ->delete();
+            foreach ($req->grid_ans as $key => $item) {
+                Grid_ans::create([
+                    'grid_ans' => $item,
+                    'q_id' => $id,
+                ]);
+            }
+        }
        
        extract($_FILES['q_url']);
        $img_name = null;
