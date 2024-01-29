@@ -472,6 +472,7 @@
 								    <tr class="carttable_row">
 								    	<th class="cartm_title">Chapters</th>
 								    	<th class="cartm_title">Price</th>
+								    	<th class="cartm_title">Action</th>
 								    </tr>
 							  	</thead>
 							  	<tbody class="table_body">
@@ -489,6 +490,11 @@
 								    	</th>
 								    	<td>
                                             {{$chapter->ch_price}}$
+                                        </td>
+								    	<td>
+                                            <a href="{{route('remove_course_package', ['id' => $chapter->id])}}" class="btn btn-danger">
+												Remove
+											</a>
                                         </td>
 								    </tr>
                                     @endforeach

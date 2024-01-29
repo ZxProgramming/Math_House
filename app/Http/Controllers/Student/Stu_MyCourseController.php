@@ -12,6 +12,7 @@ class Stu_MyCourseController extends Controller
     public function index(){
         $payment_request = PaymentRequest::
         where('user_id', auth()->user()->id)
+        ->where('state', 'Approve')
         ->get();
         $courses = [];
         foreach( $payment_request as $item ){
@@ -41,6 +42,7 @@ class Stu_MyCourseController extends Controller
     public function stu_chapters( $id ){
         $payment_request = PaymentRequest::
         where('user_id', auth()->user()->id)
+        ->where('state', 'Approve')
         ->get();
         $course_id = $id;
 

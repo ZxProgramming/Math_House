@@ -53,6 +53,10 @@ class CoursesController extends Controller
     public function buy_course( Request $req ){
         $data = $req->chapters_data;
         $chapters_price = $req->chapters_price;
+        if ( empty($req->chapters_data) ) {
+            $data = Cache::get('marketing');
+            $chapters_price = Cache::get('chapters_price');
+        }
         Cache::store('file')->put('marketing', $data, 10000);
         Cache::store('file')->put('chapters_price', $chapters_price, 10000);
          
@@ -61,13 +65,12 @@ class CoursesController extends Controller
         }
         else{
             $chapters = json_decode(Cache::get('marketing'));
-            $chapters = empty($chapters) ? [] : $chapters;
             return view('Visitor.Cart', compact('chapters', 'chapters_price'));
         }
     }
 
     public function course_payment( Request $req ){
-        $chapters = json_decode(Cache::get('marketing'));
+        $chapters = Cache::get('marketing');
         $chapters = empty($chapters) ? [] : $chapters;
         $chapters_price = Cache::get('chapters_price');
         
@@ -86,7 +89,7 @@ class CoursesController extends Controller
             ->where('name', $req->promo_code)
             ->first();
             if ( !empty($promo) ) {
-                $price = json_decode(Cache::get('chapters_price'));
+                $price = Cache::get('chapters_price');
                 $price = $price - $price * $promo->discount	/ 100;
                 Cache::store('file')->put('chapters_price', $price, 10000);
                 PromoCode::where('id', $promo->id)
@@ -120,8 +123,8 @@ class CoursesController extends Controller
             return view('Visitor.Login.login');
         }
         else{
-            $chapters = json_decode(Cache::get('marketing'));
-            $chapters_price = json_decode(Cache::get('chapters_price'));
+            $chapters = Cache::get('marketing');
+            $chapters_price = Cache::get('chapters_price');
             $chapters = empty($chapters) ? [] : $chapters;
             return view('Visitor.Cart', compact('chapters', 'chapters_price'));
         }
@@ -129,7 +132,7 @@ class CoursesController extends Controller
 
     public function payment_money( Request $req ){
         $arr = $req->only('payment_method_id');
-        $arr['price'] = json_decode(Cache::get('chapters_price'));
+        $arr['price'] = Cache::get('chapters_price');
         $arr['user_id'] = auth()->user()->id;
         
         extract($_FILES['image']);
@@ -152,4 +155,20 @@ class CoursesController extends Controller
         return redirect()->route('home');
     }
 
+    public function remove_course_package( $id ){
+        $chapters = json_decode(Cache::get('marketing'));
+        $price = json_decode(Cache::get('chapters_price'));
+        $arr = [];
+        $price = 0;
+        foreach ($chapters as $item) {
+            if ( $item->id != $id ) {
+                $arr[] = $item;
+                $price += $item->ch_price;
+            }
+        }
+        $arr = json_encode($arr);
+        Cache::store('file')->put('marketing', $arr, 10000);
+        Cache::store('file')->put('chapters_price', $price, 10000);
+        return redirect()->back();
+    }
 }

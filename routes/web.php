@@ -69,6 +69,7 @@ use Illuminate\Support\Facades\Route;
     Route::get('/Home/Course_Payment', [V_CoursesController::class, 'course_payment'])->name('course_payment');
     Route::get('/Home/Courses/{id}', [V_CoursesController::class, 'courses'])->name('v_courses');
     Route::get('/Home/Course/{id}', [V_CoursesController::class, 'course'])->name('v_course');
+    Route::get('/Home/Course/Remove/{id}', [V_CoursesController::class, 'remove_course_package'])->name('remove_course_package');
     
     Route::get('/Home/About', [AboutController::class, 'index'])->name('about');
     Route::get('/Home/Contact', [ContactController::class, 'index'])->name('contact_us');
