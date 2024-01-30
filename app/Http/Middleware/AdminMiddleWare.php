@@ -17,7 +17,6 @@ class AdminMiddleWare
     {
         if( auth()->user()->position == 'admin'){
             return $next($request);
-
         }
     }
 }

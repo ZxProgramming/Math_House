@@ -272,5 +272,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 });
 
-
+Route::fallback(function () {
+    return view('errors.404');
+});
 
