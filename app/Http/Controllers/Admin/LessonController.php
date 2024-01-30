@@ -70,7 +70,7 @@ class LessonController extends Controller
             if ( in_array($extension, $extension_arr) ) {
                 $img_name = rand(0, 1000) . now() . $name;
                 $img_name = str_replace([' ', ':', '-'], 'X', $img_name);
-                $arr['lesson_url'] = $img_name;
+                $data['lesson_url'] = $img_name;
             }
             
         }

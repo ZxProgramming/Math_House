@@ -437,7 +437,7 @@
 								<div class="col-md-6 fv-row">
 									<label class="required fs-6 fw-semibold mb-2">Chapter</label>
 									<select class="form-select sel_chapter form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Chapter" name="chapter_id">
-										<option disable selected>Select Chapter...</option>
+                                    <option disable selected>Select Chapter...</option>
 									</select>
 								</div>
 								<!--end::Col-->
