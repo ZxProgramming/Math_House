@@ -257,7 +257,7 @@
             </div>
         </div>
     </div>
-    <script>
+<script>
     let add_new_idea = document.querySelector('#add_new_idea');
     let ideas = document.querySelector('.ideas');
     add_new_idea.addEventListener('click', () => {
@@ -279,16 +279,17 @@
             </div>
             <button type="button" class="btn btn-danger btn_remove_idea">Remove</button>
         </div>`;
-    let btn_remove_idea = document.querySelectorAll('.btn_remove_idea');
-    for (let i = 0, end = btn_remove_idea.length; i < end; i++) {
-        btn_remove_idea[i].addEventListener('click', ( e ) => {
-            for (let j = 0; j < end; j++) {
-                if ( e.target == btn_remove_idea[j] ) {
-                    btn_remove_idea[j].parentElement.remove()
+        
+        let btn_remove_idea = document.querySelectorAll('.btn_remove_idea');
+        for (let i = 0, end = btn_remove_idea.length; i < end; i++) {
+            btn_remove_idea[i].addEventListener('click', ( e ) => {
+                for (let j = 0; j < end; j++) {
+                    if ( e.target == btn_remove_idea[j] ) {
+                        btn_remove_idea[j].parentElement.remove()
+                    }
                 }
-            }
-        });
-    }
+            });
+        }
     }); 
         let sel_cate = document.querySelector('.sel_cate');
         let sel_course = document.querySelector('.sel_course');
@@ -310,7 +311,7 @@
                 }
             });
         })
-    </script>
+</script>
        @section('script')
        <script>
         <!--begin::Javascript-->

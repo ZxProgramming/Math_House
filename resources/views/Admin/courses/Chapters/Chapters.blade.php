@@ -8,6 +8,8 @@
   @include('Admin.courses.Chapters.AddChapter')
     @section('title','Chapters')
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <button type="button" class='btn btn-primary mx-3' data-bs-toggle="modal" data-bs-target="#filter_modal">
       Filter
     </button>
@@ -127,54 +129,120 @@
                         <div class="modal fade" id="modalCenter{{$item->id}}" tabindex="-1" aria-hidden="true" style="display: none;">
                           <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content px-2">
+                              <input type="hidden" value="{{$item->id}}" name="chapter_id" />
+
                               <div class="modal-header">
-                                
                                 <h5 class="modal-title" id="modalCenterTitle">Edit Chapter</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div>
+                              </div> 
 
-                              <div class="my-2">
-                                <label>
-                                    Chapter Name
-                                </label>
-                                <input name="chapter_name" class="form-control" value="{{$item->chapter_name}}" placeholder="Course Name"/>
-                            </div>
-                            <div class="my-2">
-                                <label>
-                                    Chapter Description
-                                </label>
-                                <input name="ch_des" class="form-control" value="{{$item->ch_des}}" placeholder="Course Description"/>
-                            </div>
-                            <div class="my-2">
-                                <label>
-                                    Chapter Price
-                                </label>
-                                <input name="ch_price" class="form-control" value="{{$item->ch_price}}" placeholder="Course Price"/>
-                            </div>
+                                <div class="info_section" id="info_section{{$item->id}}">
+                                    <div class='my-3'>
+                                        <label>Chapter Name</label>
+                                        <input class='form-control' value="{{$item->chapter_name}}" name="chapter_name" placeholder="Chapter Name" />
+                                    </div>
+                                    <div class='my-3'>
+                                        <label>Category</label>
+                                        <select name="category_id" class="form-control"> 
+                                            <option value="{{$item->course->category->id}}" selected>
+                                                {{$item->course->category->cate_name}}
+                                            </option>
+                                            @foreach($categories as $category)
+                                            <option value="{{$category->id}}">
+                                                {{$category->cate_name}}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div> 
+                                    <div class='my-3'>
+                                        <label>Course</label>
+                                        <select name="course_id" class="form-control">
+                                            <option value="{{$item->course->id}}" selected>
+                                                {{$item->course->course_name}}
+                                            </option>
+                                            @foreach($courses as $course)
+                                            <option value="{{$course->id}}">
+                                                {{$course->course_name}}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div> 
+                                    <div class='my-3'>
+                                        <label>Description</label>
+                                        <textarea class='form-control' name="ch_des" placeholder="Description" >{{$item->ch_des}}</textarea>
+                                    </div>
+                                    
+                                    <div class='my-3'>
+                                        <label>Image</label>
+                                        <input class='form-control' type="file" name="course_url" placeholder="Image" />
+                                    </div>
+                                    <button type="button" class="btn btn-success details_btn" id="details_btn{{$item->id}}">
+                                        Next
+                                    </button>
+                                </div>
 
-                            <div class="my-2">
-                                <label>
-                                    Course
-                                </label>
-                                <select name="course_id" class="form-control">
-                                    <option value="{{$item->course_id}}">
-                                        {{$item->course->course_name}}
-                                    </option>
-                                    @foreach( $courses as $course )
-                                    <option value="{{$course->id}}">
-                                        {{$course->course_name}}
-                                    </option>
+                                <div class="details_section d-none" id="details_section{{$item->id}}">
+                                    <div class='my-3'>
+                                        <label>Teachers</label>
+                                        <select name="teacher_id" class="form-control">
+                                            <option value="{{@$item->teacher->id}}">
+                                                {{@$item->teacher->name}}
+                                            </option>
+                                            @foreach($teachers as $teacher)
+                                            <option value="{{$teacher->id}}">
+                                                {{$teacher->name}}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class='my-3'>
+                                        <label>Pre requisition</label>
+                                        <textarea class='form-control' name="pre_requisition" placeholder="Pre requisition" >{{$item->pre_requisition}}</textarea>
+                                    </div>
+                                    <div class='my-3'>
+                                        <label>What you gain</label>
+                                        <textarea class='form-control' name="gain" placeholder="What you gain" >{{$item->gain}}</textarea>
+                                    </div>
+                                    <button type="button" class="btn btn-secondary prev_info">
+                                        Back
+                                    </button>
+                                    <button type="button" class="btn btn-success pricing_btn">
+                                        Next
+                                    </button>
+                                </div>
+
+                                <div class="priceing_section d-none" id="priceing_section{{$item->id}}">
+                                   
+                                  
+                                  
+                                  @foreach( $item->price as $price )
+                                  <div class='my-3'>
+                                        <label>Duration</label>
+                                        <input class='form-control' value="{{$price->duration}}" name="duration[]" placeholder="Duration" />
+                                    </div>
+                                    <div class='my-3'>
+                                        <label>Price</label>
+                                        <input class='form-control' value="{{$price->price}}" name="price[]" placeholder="Price" />
+                                    </div>
+                                    <div class='my-3'>
+                                        <label>Discount</label>
+                                        <input class='form-control' value="{{$price->discount}}" name="discount[]" placeholder="Discount" />
+                                    </div>
+                                    <hr />
                                     @endforeach
-                                </select>
-                            </div>
+                                    <div class="mt-3 Prices" id="Prices{{$item->id}}"></div>
 
-                              <input type="hidden" value="{{$item->id}}" name="chapter_id" />
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
-                                  Close
-                                </button>
-                                <button class="btn btn-primary">Submit</button>
-                              </div>
+                                    <div class="modal-footer">
+                                        <span class='btn btn-secondary prev_details'>
+                                            Back
+                                        </span>
+                                        <button class='btn btn-primary'>
+                                            Submit
+                                        </button>
+                                    </div>
+                                </div>
+                          
+
                             </div>
                           </div>
                         </div>
@@ -213,5 +281,91 @@
     
     </tbody>
 </table>
+<script>
+  $(document).ready(()=>{
+    $(".details_btn").click(function(){
+        var info_id = `#${$(this).parent().attr("id")}`;
+        var details_id = `#${$(this).parent().next().attr("id")}`;
+        
+        
+        $(info_id).addClass("d-none");
+        $(details_id).removeClass("d-none");
+        
+      });
+      $(".pricing_btn").click(function(){
+        var details_id = `#${$(this).parent().attr("id")}`;
+        var priceing_id = `#${$(this).parent().next().attr("id")}`;
+       
+        $(details_id).addClass("d-none");
+        $(priceing_id).removeClass("d-none");
+      });
 
+      $(".prev_info").click(function(){
+        var details_id = `#${$(this).parent().attr("id")}`;
+        var info_id = `#${$(this).parent().prev().attr("id")}`;
+       
+        $(details_id).addClass("d-none");
+        $(info_id).removeClass("d-none");
+      });
+
+      $(".prev_details").click(function(){
+        var priceing_id = `#${$(this).parent().parent().attr("id")}`;
+        var details_id = `#${$(this).parent().parent().prev().attr("id")}`;
+       
+        $(priceing_id).addClass("d-none");
+        $(details_id).removeClass("d-none");
+      });
+
+  })
+</script>
+<script>
+    let add_new_Pricing = document.querySelectorAll('.add_new_Pricing');
+    let Prices = document.querySelector('.Prices');
+    add_new_Pricing.forEach(element => {
+
+      element.addEventListener("click",()=>{
+        let btn_price_id = element.getAttribute("id"); 
+        let ele_price_id = document.getElementById(btn_price_id); 
+        console.log(ele_price_id);
+        
+        ele_price_id.addEventListener("click",()=>{
+          console.log('gggggg');
+          console.log($(this));
+
+          Prices.innerHTML += `
+          <div class="Price">
+          <hr />
+              <div class="section_idea my-2 d-flex align-items-center">
+                  <span>Duration</span>
+                  <input type="number" name="duration[]" class="form-control mx-2 form-control-lg" placeholder="Duration">
+                  <span>Dayes</span>
+              </div>
+              <div class="section_idea my-2">
+                  <span>Price</span>
+                  <input name="price[]" class="form-control form-control-lg" placeholder="Price">
+              </div>
+              <div class="section_idea my-2">
+                  <span>Discount</span>
+                  <input name="discount[]" class="form-control form-control-lg" placeholder="Discount">
+              </div>
+              <button type="button" class="btn btn-danger btn_remove_idea">Remove</button>
+          </div>`;
+        })
+
+          
+          let btn_remove_idea = document.querySelectorAll('.btn_remove_idea');
+          for (let i = 0, end = btn_remove_idea.length; i < end; i++) {
+              btn_remove_idea[i].addEventListener('click', ( e ) => {
+                  for (let j = 0; j < end; j++) {
+                      if ( e.target == btn_remove_idea[j] ) {
+                          btn_remove_idea[j].parentElement.remove()
+                      }
+                  }
+              });
+          }
+  
+          
+      }); 
+    });
+</script>
 </x-default-layout>
