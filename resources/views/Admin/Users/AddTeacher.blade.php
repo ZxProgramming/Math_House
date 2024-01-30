@@ -8,6 +8,26 @@
 @include('Admin.Users.teacher_header')
     @section('title','Add Teacher')
 
+    @error('name')
+      <div class="alert alert-danger">
+      {{$message}}
+      </div>
+    @enderror
+    @error('email')
+      <div class="alert alert-danger">
+      {{$message}}
+      </div>
+    @enderror 
+    @error('phone')
+      <div class="alert alert-danger">
+      {{$message}}
+      </div>
+    @enderror
+    @error('course_id')
+      <div class="alert alert-danger">
+      {{$message}}
+      </div>
+    @enderror
 <form class="px-3" action="{{route('add_teacher')}}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class='my-3'>

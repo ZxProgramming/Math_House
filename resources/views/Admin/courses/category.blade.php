@@ -9,6 +9,11 @@
     @section('title','category')
        @include('success')
 
+       @error('cate_name')
+       <div class="alert alert-danger">
+        {{$message}}
+       </div>
+       @enderror
         @section('style')
         <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
 		<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />

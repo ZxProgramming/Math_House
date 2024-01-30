@@ -7,6 +7,12 @@
 <x-default-layout>
 @include('success')
     @section('title','Payment')
+    @error('payment')
+    <div class="alert alert-danger">
+    {{$message}}
+    </div>
+    @enderror
+
 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddCenter">
     Add New Payout
 </button>

@@ -46,6 +46,12 @@ class MarketingController extends Controller
 
     public function affilate_add( Request $req ){
         $arr = $req->only('name', 'email', 'phone', 'organization');
+        $req->validate([
+            'name'  => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'organization' => 'required',
+        ]);
         Affilate::create($arr);
 
         return redirect()->back();
@@ -61,6 +67,14 @@ class MarketingController extends Controller
 
     public function add_promo( Request $req ){
         $arr = $req->only('name', 'starts', 'ends', 'num_usage', 'discount', 'code');
+        $req->validate([
+            'name'  => 'required',
+            'starts' => 'required|email',
+            'ends' => 'required',
+            'num_usage' => 'required|numeric',
+            'discount' => 'required|numeric',
+            'code' => 'required',
+        ]);
         $promo = PromoCode::create($arr);
         foreach ($req->courses as $course) {
             PromoCourse::create([
@@ -81,6 +95,14 @@ class MarketingController extends Controller
 
     public function edit_promo( $id, Request $req ){
         $arr = $req->only('name', 'starts', 'ends', 'num_usage', 'discount', 'code');
+        $req->validate([
+            'name'  => 'required',
+            'starts' => 'required|email',
+            'ends' => 'required',
+            'num_usage' => 'required|numeric',
+            'discount' => 'required|numeric',
+            'code' => 'required',
+        ]);
         PromoCode::where('id', $id)
         ->update($arr);
         PromoCourse::where('promo_id', $id)

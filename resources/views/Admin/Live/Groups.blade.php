@@ -5,6 +5,16 @@
   }
 @endphp
 <x-default-layout>
+@error('name')
+    <div class="alert alert-danger">
+    {{$message}}
+    </div>
+@enderror
+@error('teacher_id')
+    <div class="alert alert-danger">
+    {{$message}}
+    </div>
+@enderror
     @section('title','Groups')
     @include('success')
 <!-- Button trigger modal -->

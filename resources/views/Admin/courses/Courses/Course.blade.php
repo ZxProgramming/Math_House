@@ -9,6 +9,27 @@
     @section('title','Course')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+@error('course_name')
+<div class="alert alert-danger">
+  {{$message}}
+  </div>
+@enderror
+@error('teacher_id')
+  <div class="alert alert-danger">
+    {{$message}}
+  </div>
+@enderror
+@error('course_price')
+  <div class="alert alert-danger">
+    {{$message}}
+  </div>
+@enderror
+@error('category_id')
+  <div class="alert alert-danger">
+    {{$message}}
+  </div>
+@enderror
+
 
 <table id="kt_profile_overview_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable no-footer">
     <thead class="fs-7 text-gray-500 text-uppercase">

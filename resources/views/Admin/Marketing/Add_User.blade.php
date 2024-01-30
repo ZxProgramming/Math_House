@@ -7,6 +7,26 @@
 <x-default-layout>
     @section('title','Add User')
 
+    @error('name')
+    <div class="alert alert-danger">
+    {{$message}}
+    </div>
+    @enderror
+    @error('email')
+    <div class="alert alert-danger">
+    {{$message}}
+    </div>
+    @enderror
+    @error('phone')
+    <div class="alert alert-danger">
+    {{$message}}
+    </div>
+    @enderror
+    @error('organization')
+    <div class="alert alert-danger">
+    {{$message}}
+    </div>
+    @enderror
 <a href="{{route('m_users')}}" class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-150px h-35px">
     User List
 </a> 

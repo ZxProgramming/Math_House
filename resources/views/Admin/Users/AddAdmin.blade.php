@@ -8,6 +8,21 @@
 @include('Admin.Users.admin_header')
     @section('title','Add Admin')
 
+    @error('name')
+      <div class="alert alert-danger">
+      {{$message}}
+      </div>
+    @enderror
+    @error('email')
+      <div class="alert alert-danger">
+      {{$message}}
+      </div>
+    @enderror
+    @error('phone')
+      <div class="alert alert-danger">
+      {{$message}}
+      </div>
+    @enderror
 <form class="px-3" method="POST" action="{{route('add_admin')}}">
     @csrf
     <div class='my-3'>

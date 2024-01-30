@@ -28,6 +28,12 @@ class ChaptersController extends Controller
         $arr = $req->only('chapter_name', 'ch_des', 'ch_price', 
         'course_id', 'pre_requisition', 'gain', 'teacher_id');
         
+        $req->validate([
+            'chapter_name' => 'required',
+            'teacher_id'   => 'required|numeric',
+            'ch_price'     => 'required|numeric',
+            'course_id'    => 'required|numeric',
+           ]);
         $img_name = null;
         extract($_FILES['ch_url']);
         if( !empty($name) ){
@@ -97,6 +103,12 @@ class ChaptersController extends Controller
         $arr = $req->only('chapter_name', 'ch_des', 'ch_price', 'pre_requisition', 
         'gain', 'course_id', 'teacher_id');
         
+        $req->validate([
+            'chapter_name' => 'required',
+            'teacher_id'   => 'required|numeric',
+            'ch_price'     => 'required|numeric',
+            'course_id'    => 'required|numeric',
+           ]);
         $img_name = null;
         extract($_FILES['ch_url']);
         if( !empty($name) ){

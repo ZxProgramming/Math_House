@@ -45,6 +45,56 @@
             }
     </style>
 
+@error('link')
+    <div class="alert alert-danger">
+    {{$message}}
+    </div>
+@enderror
+@error('date')
+    <div class="alert alert-danger">
+    {{$message}}
+    </div>
+@enderror 
+@error('from')
+    <div class="alert alert-danger">
+    {{$message}}
+    </div>
+@enderror
+@error('to')
+    <div class="alert alert-danger">
+    {{$message}}
+    </div>
+@enderror
+@error('lesson_id')
+    <div class="alert alert-danger">
+    {{$message}}
+    </div>
+@enderror
+@error('type')
+    <div class="alert alert-danger">
+    {{$message}}
+    </div>
+@enderror
+@error('access_dayes')
+    <div class="alert alert-danger">
+    {{$message}}
+    </div>
+@enderror
+@error('price')
+    <div class="alert alert-danger">
+    {{$message}}
+    </div>
+@enderror
+@error('teacher_id')
+    <div class="alert alert-danger">
+    {{$message}}
+    </div>
+@enderror
+@error('repeat')
+    <div class="alert alert-danger">
+    {{$message}}
+    </div>
+@enderror
     
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddmodalCenter">

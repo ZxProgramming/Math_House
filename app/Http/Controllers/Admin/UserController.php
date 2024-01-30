@@ -59,6 +59,11 @@ class UserController extends Controller
     }
 
     public function admin_edit( Request $req ){
+        $req->validate([
+        'name'=>'required',
+        'email'=>'required',
+        'phone'=>'required',
+        ]);
         User::where('id', $req->user_id)
         ->where('position', '!=', 'super_admin')
         ->update($req->only('name', 'email', 'phone'));
@@ -72,6 +77,11 @@ class UserController extends Controller
 
     public function add_admin( Request $req ){
         $arr = $req->only('name', 'email', 'phone');
+        $req->validate([
+        'name'=>'required',
+        'email'=>'required|email',
+        'phone'=>'required',
+        ]);
         $arr['password'] = bcrypt($req->password);
         $arr['position'] = 'admin';
         $arr['state'] = 'Show';
@@ -125,6 +135,13 @@ class UserController extends Controller
 
     public function student_add( Request $req ){
         $arr = $req->only('name', 'email', 'phone', 'parent_email', 'parent_phone');
+        $req->validate([
+        'name'         => 'required',
+        'email'        => 'required|email',
+        'phone'        => 'required',
+        'parent_email' => 'required|email',
+        'parent_phone' => 'required',
+        ]);
         $arr['password'] = bcrypt($req->password);
         $arr['position'] = 'student';
         $arr['state'] = 'Show';
@@ -135,6 +152,13 @@ class UserController extends Controller
 
     public function stu_edit( Request $req ){
         $arr = $req->only('name', 'email', 'phone', 'parent_email', 'parent_phone');
+        $req->validate([
+        'name'         => 'required',
+        'email'        => 'required|email',
+        'phone'        => 'required',
+        'parent_email' => 'required|email',
+        'parent_phone' => 'required',
+        ]);
         $arr['password'] = bcrypt($req->password);
         User::
         where('id', $req->user_id)
@@ -187,6 +211,12 @@ class UserController extends Controller
 
     public function teacher_edit( Request $req ){
         $arr = $req->only('name', 'email', 'phone', 'category_id', 'course_id');
+        
+        $req->validate([
+            'name'         => 'required',
+            'email'        => 'required|email',
+            'phone'        => 'required',
+            ]);
         if ( !empty($req->image) ) {
             $img_name = null;
             extract($_FILES['image']);
@@ -224,6 +254,12 @@ class UserController extends Controller
 
     public function add_teacher( Request $req ){
         $arr = $req->only('name', 'email', 'phone', 'category_id', 'course_id');
+        $req->validate([
+            'name'  => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'course_id' => 'required',
+            ]);
         $arr['password'] = bcrypt($req->password);
         $arr['position'] = 'teacher';
         $arr['state'] = 'Show';

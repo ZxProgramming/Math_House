@@ -15,6 +15,9 @@ class CourseSettingController extends Controller
     }
 
     public function code_exam_add( Request $req ){
+        $req->validate([
+            'exam_code' => 'required',
+        ]);
         ExamCodes::create($req->only('exam_code'));
         return redirect()->back();
     }

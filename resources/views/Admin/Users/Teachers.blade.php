@@ -8,6 +8,21 @@
 @include('Admin.Users.teacher_header')
     @section('title','Teachers')
 
+    @error('name')
+      <div class="alert alert-danger">
+      {{$message}}
+      </div>
+    @enderror
+    @error('email')
+      <div class="alert alert-danger">
+      {{$message}}
+      </div>
+    @enderror
+    @error('phone')
+      <div class="alert alert-danger">
+      {{$message}}
+      </div>
+    @enderror
 <div class='my-3'>
   <form class='d-flex' action="{{route('teacher_filter')}}" method='POST'>
     @csrf

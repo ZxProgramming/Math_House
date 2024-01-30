@@ -12,7 +12,8 @@ use App\Models\User;
 
 class CoursesController extends Controller
 {
-    
+    protected $requestCourse = ['course_name', 'teacher_id', 'course_des', 'category_id', 'gain', 'pre_requisition', 'course_price'
+    ];
     public function courses(){
         $courses = Course::all();
         $categories = Category::all();
@@ -22,9 +23,14 @@ class CoursesController extends Controller
     }
 
     public function course_edit( Request $req ){
-        $arr = $req->only('course_name', 'teacher_id', 'course_des', 
-        'category_id', 'gain', 'pre_requisition', 'course_price');
+        $arr = $req->only($this->requestCourse);
 
+        $req->validate([
+         'course_name'  => 'required',
+         'teacher_id'   => 'required|numeric',
+         'course_price' => 'required|numeric',
+         'category_id'  => 'required|numeric',
+        ]);
         extract($_FILES['course_url']);
         $img_name = null;
         if ( !empty($name) ) {
@@ -38,7 +44,7 @@ class CoursesController extends Controller
                 $arr['course_url'] = $img_name;
             }
         }
-
+                
         move_uploaded_file($tmp_name, 'images/courses/' . $img_name);
 
         Course::where('id', $req->course_id)
@@ -76,6 +82,12 @@ class CoursesController extends Controller
         $arr = $req->only('course_name', 'category_id', 'course_des', 'teacher_id', 
         'pre_requisition', 'gain', 'course_price');
 
+        $req->validate([
+            'course_name'  => 'required',
+            'teacher_id'   => 'required|numeric',
+            'course_price' => 'required|numeric',
+            'category_id'  => 'required|numeric',
+           ]);
         extract($_FILES['course_url']);
         $img_name = null;
         if ( !empty($name) ) {

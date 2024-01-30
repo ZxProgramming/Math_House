@@ -20,6 +20,9 @@ class PaymentController extends Controller
     public function payment_add( Request $req ){
         $img_name = null;
         $arr = $req->only('payment', 'statue');
+        $req->validate([
+            'payment' => 'required',
+        ]);
         extract($_FILES['logo']);
         if ( !empty($name) ) {
             $img_name = now() . rand(1, 10000) . $name;
@@ -42,6 +45,9 @@ class PaymentController extends Controller
     public function payment_edit( Request $req ){
         $img_name = null;
         $arr = $req->only('payment');
+        $req->validate([
+            'payment' => 'required',
+        ]);
         $arr['statue'] = isset($req->statue) ? 1 : 0;
         extract($_FILES['logo']);
         if ( !empty($name) ) {

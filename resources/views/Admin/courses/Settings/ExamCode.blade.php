@@ -6,6 +6,11 @@
 @endphp
 <x-default-layout>
     @section('title','Exam Code')
+    @error('exam_code')
+    <div class="alert alert-danger">
+    {{$message}}
+    </div>
+    @enderror
 <div class="my-2">
     <select class="form-control">
         <option disabled selected>

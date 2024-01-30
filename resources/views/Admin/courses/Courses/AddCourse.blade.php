@@ -8,6 +8,26 @@
 @include('Admin.courses.Courses.course_header')
     @section('title','Add Course')
 
+@error('course_name')
+  <div class="alert alert-danger">
+    {{$message}}
+  </div>
+@enderror
+@error('teacher_id')
+  <div class="alert alert-danger">
+    {{$message}}
+  </div>
+@enderror
+@error('course_price')
+  <div class="alert alert-danger">
+    {{$message}}
+  </div>
+@enderror
+@error('category_id')
+  <div class="alert alert-danger">
+    {{$message}}
+  </div>
+@enderror
 <form class="px-3" action="{{route('course_add')}}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="info_section">

@@ -38,6 +38,18 @@ class LiveController extends Controller
     public function session_edit( Request $req ){
         $arr = $req->only('link', 'date', 'from', 'to', 'lesson_id', 
         'type', 'access_dayes', 'price', 'teacher_id', 'repeat');
+        $req->validate([
+            'link' => 'required',
+            'date' => 'required',
+            'from' => 'required',
+            'to' => 'required',
+            'lesson_id' => 'required',
+            'type' => 'required',
+            'access_dayes' => 'required',
+            'price' => 'required|numeric',
+            'teacher_id' => 'required',
+            'repeat' => 'required',
+        ]);
         $sessions = Session::
         where('id', $req->id)
         ->update($arr);
@@ -57,6 +69,18 @@ class LiveController extends Controller
         $arr = $req->only('link', 'date', 'from', 'to', 'lesson_id', 
         'type', 'teacher_id', 'price', 'access_dayes', 'repeat');
         
+        $req->validate([
+            'link' => 'required',
+            'date' => 'required',
+            'from' => 'required',
+            'to' => 'required',
+            'lesson_id' => 'required',
+            'type' => 'required',
+            'access_dayes' => 'required',
+            'price' => 'required|numeric',
+            'teacher_id' => 'required',
+            'repeat' => 'required',
+        ]);
         $session = Session::create($arr);
         if ( !empty($req->r_day) ) {
             for ($i=0, $end = count($req->r_day); $i < $end; $i++) { 
@@ -83,6 +107,10 @@ class LiveController extends Controller
 
     public function g_session_add( Request $req ){
         $arr = $req->only('name', 'teacher_id', 'state');
+        $req->validate([
+            'name' => 'required',
+            'teacher_id' => 'required'
+        ]);
         $session_g = SessionGroup::create($arr);
         for ($i=0, $end = count($req->day); $i < $end; $i++) {
             GroupDay::create([
@@ -98,6 +126,10 @@ class LiveController extends Controller
 
     public function g_session_edit( Request $req ){ 
         $arr = $req->only('name', 'teacher_id');
+        $req->validate([
+            'name' => 'required',
+            'teacher_id' => 'required'
+        ]);
         SessionGroup::where('id', $req->id)
         ->update($arr);
         GroupDay::where('group_id', $req->id)

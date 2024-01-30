@@ -8,6 +8,31 @@
 @include('Admin.Users.stu_header')
     @section('title','Students Info')
 
+    @error('name')
+      <div class="alert alert-danger">
+      {{$message}}
+      </div>
+    @enderror
+    @error('email')
+      <div class="alert alert-danger">
+      {{$message}}
+      </div>
+    @enderror
+    @error('phone')
+      <div class="alert alert-danger">
+      {{$message}}
+      </div>
+    @enderror
+    @error('parent_email')
+       <div class="alert alert-danger">
+        {{$message}}
+       </div>
+       @enderror
+    @error('parent_phone')
+       <div class="alert alert-danger">
+        {{$message}}
+       </div>
+       @enderror
 <div class='my-3'>
   <form class='d-flex' action="{{route('admin_filter')}}" method='POST'>
     @csrf

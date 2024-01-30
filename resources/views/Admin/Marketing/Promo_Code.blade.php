@@ -5,6 +5,36 @@
   }
 @endphp
 <x-default-layout>
+    @error('name')
+      <div class="alert alert-danger">
+      {{$message}}
+      </div>
+    @enderror
+    @error('starts')
+      <div class="alert alert-danger">
+      {{$message}}
+      </div>
+    @enderror
+    @error('ends')
+      <div class="alert alert-danger">
+      {{$message}}
+      </div>
+    @enderror
+    @error('num_usage')
+      <div class="alert alert-danger">
+      {{$message}}
+      </div>
+    @enderror
+    @error('discount')
+      <div class="alert alert-danger">
+      {{$message}}
+      </div>
+    @enderror
+    @error('code')
+      <div class="alert alert-danger">
+      {{$message}}
+      </div>
+    @enderror
     @section('title','Promo Code')
 
                         <!-- Button trigger modal -->
