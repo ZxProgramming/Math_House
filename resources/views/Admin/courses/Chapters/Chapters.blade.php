@@ -180,7 +180,7 @@
                                         <label>Image</label>
                                         <input class='form-control' type="file" name="ch_url" placeholder="Image" />
                                     </div>
-                                    <button type="button" class="btn btn-success details_btn" id="details_btn{{$item->id}}">
+                                    <button type="button" class="btn btn-success details_btn my-3" id="details_btn{{$item->id}}">
                                         Next
                                     </button>
                                 </div>
@@ -207,10 +207,10 @@
                                         <label>What you gain</label>
                                         <textarea class='form-control' name="gain" placeholder="What you gain" >{{$item->gain}}</textarea>
                                     </div>
-                                    <button type="button" class="btn btn-secondary prev_info">
+                                    <button type="button" class="btn btn-secondary prev_info my-3">
                                         Back
                                     </button>
-                                    <button type="button" class="btn btn-success pricing_btn">
+                                    <button type="button" class="btn btn-success pricing_btn my-3">
                                         Next
                                     </button>
                                 </div>
