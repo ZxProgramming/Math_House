@@ -58,7 +58,24 @@ class LessonController extends Controller
 
     public function addLesson(request $req){
         $data = $req->only('lesson_name', 'chapter_id', 'teacher_id', 'lesson_des',
-        'lesson_url', 'pre_requisition', 'gain');
+        'pre_requisition', 'gain');
+        
+        $img_name = null;
+        extract($_FILES['lesson_url']);
+        if( !empty($name) ){
+            $extension_arr = ['png', 'jpg', 'jpeg', 'svg', 'webp'];
+            $extension = explode('.', $name);
+            $extension = end($extension);
+            $extension = strtolower($extension);
+            if ( in_array($extension, $extension_arr) ) {
+                $img_name = rand(0, 1000) . now() . $name;
+                $img_name = str_replace([' ', ':', '-'], 'X', $img_name);
+                $arr['lesson_url'] = $img_name;
+            }
+            
+        }
+        move_uploaded_file($tmp_name, 'images/lesson/' . $img_name);
+
         $arr = Lesson::create($data);
         for ($i=0, $end = count($req->idea); $i < $end; $i++) { 
             extract($_FILES['pdf']);

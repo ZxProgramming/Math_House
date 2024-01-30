@@ -63,8 +63,14 @@ class ChaptersController extends Controller
     }
     
     public function ch_filter( Request $req ){
-        if ( empty( $req->course_id ) ) {
+        if ( empty( $req->course_id ) && empty( $req->category_id ) ) {
             $chapters = Chapter::get(); 
+        }
+        elseif ( empty( $req->course_id ) ) {
+            $chapters = Chapter::
+            leftJoin('courses', 'chapters.course_id', '=', 'courses.id')
+            ->where('category_id', $req->category_id)
+            ->get(); 
         }
         else{
             $chapters = Chapter::

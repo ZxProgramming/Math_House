@@ -37,7 +37,7 @@
                 <form action="{{route('ch_filter')}}" method="POST">
                 <div class="p-5 d-flex">
                         @csrf
-                        <select class="form-control sel_category mx-2">
+                        <select name="category_id" class="form-control sel_category mx-2">
                             <option disabled selected>
                                 Select Category ...
                             </option>
