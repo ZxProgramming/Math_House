@@ -14,7 +14,7 @@ class ChapterPrice extends Model
         'duration',
         'price',
         'discount',
-        'chapter_id '
+        'chapter_id'
     ];
     
     public function chapter()

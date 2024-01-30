@@ -48,7 +48,7 @@
                         </div>
                         <!--end::Nav-->
                         <!--begin::Form-->
-                        <form method="POST" action="{{route('add_chapter')}}" class="mx-auto w-100 mw-600px pt-15 pb-10" novalidate="novalidate" id="kt_modal_create_campaign_stepper_form">
+                        <form method="POST" action="{{route('add_chapter')}}" class="mx-auto w-100 mw-600px pt-15 pb-10" novalidate="novalidate" id="kt_modal_create_campaign_stepper_form" enctype="multipart/form-data">
                             
                             <!--begin::Step 1-->
                             <div class="current" data-kt-stepper-element="content">
@@ -111,6 +111,10 @@
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Input group-->
+                                    <div class='my-3'>
+                                        <label>Price</label>
+                                        <input class='form-control' name="ch_price" placeholder="Chapter Price" />
+                                    </div>
                                     <!--begin::Input group-->
                                     <div class="mb-10 fv-row">
                                         <!--begin::Label-->

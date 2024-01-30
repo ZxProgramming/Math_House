@@ -124,7 +124,7 @@
                         </button>
 
                         <!-- Modal -->
-                        <form method="POST" action="{{route('chapter_edit')}}">
+                        <form method="POST" action="{{route('chapter_edit')}}" enctype="multipart/form-data">
                           @csrf
                         <div class="modal fade" id="modalCenter{{$item->id}}" tabindex="-1" aria-hidden="true" style="display: none;">
                           <div class="modal-dialog modal-dialog-centered" role="document">
@@ -143,7 +143,7 @@
                                     </div>
                                     <div class='my-3'>
                                         <label>Category</label>
-                                        <select name="category_id" class="form-control"> 
+                                        <select name="category_id" class="form-control sel_new_cate"> 
                                             <option value="{{$item->course->category->id}}" selected>
                                                 {{$item->course->category->cate_name}}
                                             </option>
@@ -156,7 +156,7 @@
                                     </div> 
                                     <div class='my-3'>
                                         <label>Course</label>
-                                        <select name="course_id" class="form-control">
+                                        <select name="course_id" class="form-control sel_new_course">
                                             <option value="{{$item->course->id}}" selected>
                                                 {{$item->course->course_name}}
                                             </option>
@@ -168,13 +168,17 @@
                                         </select>
                                     </div> 
                                     <div class='my-3'>
+                                        <label>Price</label>
+                                        <input class='form-control' value="{{$item->ch_price}}" name="ch_price" placeholder="Chapter Price" />
+                                    </div>
+                                    <div class='my-3'>
                                         <label>Description</label>
                                         <textarea class='form-control' name="ch_des" placeholder="Description" >{{$item->ch_des}}</textarea>
                                     </div>
                                     
                                     <div class='my-3'>
                                         <label>Image</label>
-                                        <input class='form-control' type="file" name="course_url" placeholder="Image" />
+                                        <input class='form-control' type="file" name="ch_url" placeholder="Image" />
                                     </div>
                                     <button type="button" class="btn btn-success details_btn" id="details_btn{{$item->id}}">
                                         Next
@@ -281,6 +285,33 @@
     
     </tbody>
 </table>
+<input class="new_courses" type="hidden" value="{{$courses}}" />
+<script>
+  let sel_new_cate = document.querySelectorAll('.sel_new_cate');
+  let sel_new_course = document.querySelectorAll('.sel_new_course');
+  let new_courses = document.querySelector('.new_courses');
+  new_courses = new_courses.value;
+  new_courses = JSON.parse(new_courses);
+  
+  for (let i = 0, end = sel_new_cate.length; i < end; i++) {
+    sel_new_cate[i].addEventListener('change', ( e ) => {
+      for (let j = 0; j < end; j++) {
+        if ( e.target == sel_new_cate[j] ) {
+          sel_new_course[j].innerHTML = '';
+          console.log(new_courses);
+          new_courses.forEach(element => {
+            if ( sel_new_cate[j].value == element.category_id ) {
+              sel_new_course[j].innerHTML += `
+              <option value="${element.id}">
+                  ${element.course_name}
+              </option>`;
+            }
+          });
+        }
+      }
+    })
+  }
+</script>
 <script>
   $(document).ready(()=>{
     $(".details_btn").click(function(){
