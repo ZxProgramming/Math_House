@@ -237,59 +237,147 @@
                         </button>
 
                         <!-- Modal -->
-                        <form method="POST" action="{{route('lesson_edit')}}">
-                          @csrf
-                        <div class="modal fade" id="modalCenter{{$lesson->id}}" tabindex="-1" aria-hidden="true" style="display: none;">
-                          <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                
-                                <h5 class="modal-title" id="modalCenterTitle">Edit Question</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div> 
 
-                            <div class="my-2 px-3">
-                              <label>
-                                Lesson Name
-                              </label>
-                              <input class='form-control' name="lesson_name" value="{{$lesson->lesson_name}}" placeholder="Lesson Name" />
-                            </div>
+                        
+                        <form method="POST" id="form-edit{{$lesson->id}}" action="{{route('lesson_edit')}}" class="mx-auto w-100 mw-600px pt-15 pb-10" novalidate="novalidate" enctype="multipart/form-data">
+                              @csrf
+                              <div class="modal fade" id="modalCenter{{$lesson->id}}" tabindex="-1" aria-hidden="true" style="display: none;">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                  <div class="modal-content px-2">
+                                    <input type="hidden" value="{{$lesson->id}}" name="chapter_id" />
 
-                            <div class="my-2 px-3">
-                            <label>
-                                Lesson Description
-                            </label>
-                            <input class='form-control' name="lesson_des" value="{{$lesson->lesson_des}}" placeholder="Lesson Description" />
-                            </div>
-
-                            <div class="my-2 px-3">
-                            <label>
-                                Chapter
-                            </label>
-                            <select class="form-control" name="chapter_id">
-                                <option value="{{$lesson->chapter->id}}">
-                                    {{$lesson->chapter->chapter_name}}
-                                </option>
-                                @foreach($chapters as $chapter)
-                                <option value="{{$chapter->id}}">
-                                    {{$chapter->chapter_name}}
-                                </option>
-                                @endforeach
-                            </select>   
-                            </div>
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="modalCenterTitle">Edit Chapter</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
 
 
-                              <input type="hidden" value="{{$lesson->id}}" name="id" />
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
-                                  Close
-                                </button>
-                                <button class="btn btn-primary">Submit</button>
+                                        <div class="info_section" id="info_section{{$lesson->id}}">
+                                            <div class='my-3'>
+                                                <label>Lesson Name</label>
+                                                <input class='form-control' value="{{$lesson->lesson_name}}" name="lesson_name" placeholder="Lesson Name" />
+                                            </div>
+                                            <div class='my-3'>
+                                                <label>Category</label>
+                                                <select name="category_id" class="form-control">
+                                                    <option value="{{$lesson->chapter->course->category->id}}">
+                                                    {{$lesson->chapter->course->category->cate_name}}
+                                                    </option>
+                                                    @foreach($categories as $category)
+                                                    <option value="{{$category->id}}">
+                                                        {{$category->cate_name}}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                            </div> 
+                                            <div class='my-3'>
+                                                <label>Course</label>
+                                                <select name="Course_id" class="form-control">
+                                                    <option value="{{$lesson->chapter->course->id}}">
+                                                    {{$lesson->chapter->course->course_name}}
+                                                    </option>
+                                                </select>
+                                            </div> 
+                                            <div class='my-3'>
+                                                <label>Chapter</label>
+                                                <select name="chapter_id" class="form-control">
+                                                    <option value="{{$lesson->chapter->id}}">
+                                                    {{$lesson->chapter->chapter_name}}
+                                                    </option>
+                                                </select>
+                                            </div> 
+                                            <div class='my-3'>
+                                                <label>Description</label>
+                                                <textarea class='form-control' name="lesson_des" placeholder="Description" >{{$lesson->lesson_des}}</textarea>
+                                            </div>
+                                                <input value="{{$lesson->id}}" type="hidden" name="lesson_id" />
+                                            
+                                            <div class='my-3'>
+                                                <label>Image</label>
+                                                <input class='form-control' type="file" name="lesson_url" placeholder="Image" />
+                                            </div>
+                                            <button type="button" class="btn btn-success details_btn" id="details_btn{{$lesson->id}}">
+                                                Next
+                                            </button>
+                                        </div>
+
+                                        <div class="details_section d-none" id="details_section{{$lesson->id}}">
+                                            <div class='my-3'>
+                                                <label>Teacher</label>
+                                                <select name="teacher_id" class="form-control">
+                                                    <option value="{{$lesson->teacher->id}}">
+                                                        {{$lesson->teacher->name}}
+                                                    </option>
+                                                    @foreach($teachers as $teacher)
+                                                    <option value="{{$teacher->id}}">
+                                                        {{$teacher->name}}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class='my-3'>
+                                                <label>Pre requisition</label>
+                                                <textarea class='form-control' name="pre_requisition" placeholder="Pre requisition" >{{$lesson->pre_requisition}}</textarea>
+                                            </div>
+                                            <div class='my-3'>
+                                                <label>What you gain</label>
+                                                <textarea class='form-control' name="gain" placeholder="What you gain" >{{$lesson->gain}}</textarea>
+                                            </div>
+                                            <button type="button" class="btn btn-secondary prev_info">
+                                                Back
+                                            </button>
+                                            <button type="button" class="btn btn-success pricing_btn">
+                                                Next
+                                            </button>
+                                        </div>
+
+                                        <div class="priceing_section d-none" id="priceing_section{{$lesson->id}}">
+                                        
+                                        
+                                            <div class="text-muted fw-semibold fs-2 d-flex align-lessons-center"> 
+                                                    <div class="section_add_idea" style="margin-left:15px ">
+                                                        <button id="add_new_Pricing{{$lesson->id}}" type="button" class="my-3 btn_add btn btn-lg btn-primary d-inline-block add_new_Pricing">Add New Pricing</button>
+                                                    </div>
+                                            </div> 
+                                            
+                                            @foreach ( $lesson->ideas as $idea )
+                                                <div class='my-3'>
+                                                    <label>Idea</label>
+                                                    <input class='form-control' value="{{$idea->idea}}" name="idea[]" placeholder="Idea" />
+                                                </div>
+                                                <div class='my-3'>
+                                                    <label>Syllabus</label>
+                                                    <input class='form-control' value="{{$idea->syllabus}}" name="syllabus[]" placeholder="Syllabus" />
+                                                </div>
+                                                <div class='my-3'>
+                                                    <label>Idea Order</label>
+                                                    <input class='form-control' value="{{$idea->idea_order}}" name="idea_order[]" placeholder="Idea Order" />
+                                                </div>
+                                                <div class='my-3'>
+                                                    <label>Video Link</label>
+                                                    <input class='form-control' name="v_link[]" value="{{$idea->v_link}}" placeholder="Video Link" />
+                                                </div>
+                                                <div class='my-3'>
+                                                    <label>Pdf</label>
+                                                    <input type="file" class='form-control' value="{{$idea->pdf}}" name="pdf[]" />
+                                                </div>
+
+                                                <div class="mt-3 Prices" id="Prices{{$lesson->id}}"></div>
+                                                @endforeach
+                                        </div>
+
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
+                                          Close
+                                        </button>
+                                        <button class="btn btn-primary">Submit</button>
+                                      </div>
+
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </div>
                         </form>
+
 
                         <!-- Modal -->
                         <div class="modal fade" id="modalDelete{{$lesson->id}}" tabindex="-1" aria-hidden="true" style="display: none;">
@@ -427,7 +515,7 @@
 								<!--begin::Col-->
 								<div class="col-md-6 fv-row">
 									<label class="required fs-6 fw-semibold mb-2">Courses</label>
-									<select class="form-select sel_course form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Courses" name="course_id">
+									<select class="form-select sel_course_add form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Courses" name="course_id">
 										<option disable selected>Select Course...</option>
 									</select>
 								</div>
@@ -436,8 +524,8 @@
 								<!--begin::Col-->
 								<div class="col-md-6 fv-row">
 									<label class="required fs-6 fw-semibold mb-2">Chapter</label>
-									<select class="form-select sel_chapter form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Chapter" name="chapter_id">
-                                    <option disable selected>Select Chapter...</option>
+									<select class="form-select sel_chapter_add form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Chapter" name="chapter_id">
+										<option disable selected>Select Chapter...</option>
 									</select>
 								</div>
 								<!--end::Col-->
@@ -740,50 +828,47 @@
             </div>
         </div>
     </div>
-                                <script>
-                                    let categories = document.querySelector('.categories');
-                                    let courses = document.querySelector('.courses');
-                                    let chapters = document.querySelector('.chapters');
-                                    let sel_cate = document.querySelector('.sel_cate');
-                                    let sel_course = document.querySelector('.sel_course');
-                                    let sel_chapter = document.querySelector('.sel_chapter');
-                                    courses = courses.value;
-                                    courses = JSON.parse(courses);
-                                    chapters = chapters.value;
-                                    chapters = JSON.parse(chapters); 
-                                    
-                                    sel_cate.onchange = ()=>{
-                                        sel_course.innerHTML=`<option disable selected>Select Course...</option>`;
-                                        courses.forEach(element => {
-                                            if ( sel_cate.value == element.category_id  ) {
-                                                sel_course.innerHTML +=`
-                                                <option value="${element.id}">
-                                                    ${element.course_name}
-                                                <option>`;
-                                        
-                                            }
-                                        });}
-                                    sel_course.onchange = () => {
-                                        console.log(65);
-                                        sel_chapter.innerHTML=`<option disable selected>Select Chapter...</option>`;
-                                        chapters.forEach(element => {
-                                            if ( sel_course.value == element.course_id   ) {
-                                                sel_chapter.innerHTML +=`
-                                                <option value="${element.id}">
-                                                    ${element.chapter_name}
-                                                <option>`;
-                                        
-                                            }
-                                        });
-                                    }
-                                </script>
+
+        <script> 
+            let courses_add = document.querySelector('.courses');
+            let chapters_add = document.querySelector('.chapters');
+            let sel_cate = document.querySelector('.sel_cate');
+            let sel_course_add = document.querySelector('.sel_course_add');
+            let sel_chapter_add = document.querySelector('.sel_chapter_add');
+            courses_add = courses_add.value;
+            courses_add = JSON.parse(courses_add);
+            chapters_add = chapters_add.value;
+            chapters_add = JSON.parse(chapters_add); 
+            
+            sel_cate.onchange = ()=>{
+                sel_course_add.innerHTML=`<option disable selected>Select Course...</option>`;
+                courses_add.forEach(element => {
+                    if ( sel_cate.value == element.category_id  ) {
+                        sel_course_add.innerHTML +=`
+                        <option value="${element.id}">
+                            ${element.course_name}
+                        <option>`;
+                
+                    }
+                });}
+            sel_course_add.onchange = () => {
+                console.log(65);
+                sel_chapter_add.innerHTML=`<option disable selected>Select Chapter...</option>`;
+                chapters_add.forEach(element => {
+                    if ( sel_course_add.value == element.course_id   ) {
+                        sel_chapter_add.innerHTML +=`
+                        <option value="${element.id}">
+                            ${element.chapter_name}
+                        <option>`;
+                
+                    }
+                });
+            }
+        </script>
        @section('script')
-       <script>
-        <!--begin::Javascript-->
-		<script>var hostUrl = "assets/";</script>
 		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
 		<script src="assets/plugins/global/plugins.bundle.js"></script>
-		<script src="assets/plugins/global/lessonSc.js"></script>
+		{{-- <script src="assets/plugins/global/lessonSc.js"></script> --}}
 		<script src="assets/js/scripts.bundle.js"></script>
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Vendors Javascript(used for this page only)-->
@@ -795,7 +880,99 @@
 		<script src="{{ asset('assets/js/custom/utilities/modals/lessonSc.js') }}"></script>
 
        </script>
-       @endsection      
+<script>
+  $(document).ready(()=>{
+    $(".details_btn").click(function(){
+        var info_id = `#${$(this).parent().attr("id")}`;
+        var details_id = `#${$(this).parent().next().attr("id")}`;
+        
+        
+        $(info_id).addClass("d-none");
+        $(details_id).removeClass("d-none");
+        
+      });
+      $(".pricing_btn").click(function(){
+        var details_id = `#${$(this).parent().attr("id")}`;
+        var priceing_id = `#${$(this).parent().next().attr("id")}`;
+       
+        $(details_id).addClass("d-none");
+        $(priceing_id).removeClass("d-none");
+      });
+
+      $(".prev_info").click(function(){
+        var details_id = `#${$(this).parent().attr("id")}`;
+        var info_id = `#${$(this).parent().prev().attr("id")}`;
+       
+        $(details_id).addClass("d-none");
+        $(info_id).removeClass("d-none");
+      });
+
+      $(".prev_details").click(function(){
+        var priceing_id = `#${$(this).parent().parent().attr("id")}`;
+        var details_id = `#${$(this).parent().parent().prev().attr("id")}`;
+       
+        $(priceing_id).addClass("d-none");
+        $(details_id).removeClass("d-none");
+      });
+
+  })
+</script>
+
+<script>
+  $(document).ready(()=>{ 
+
+    $(".add_new_Pricing").each((ele,val)=>{
+
+        var poi_id = `#${$(val).attr("id")}`
+        
+        $(poi_id).click(()=>{
+          console.log(ele);
+          var ele_count = ++ele;
+          console.log(ele_count);
+
+            var sec_id = `#${$(poi_id).parent().parent().parent().find(".Prices").attr("id")}`;
+
+                Prices = ` <div class="Price">
+                  <hr />
+                    <div class="section_idea my-2">
+                        <span>Idea</span>
+                        <input type="text" name="idea[]" class="form-control form-control-lg" placeholder="Idea">
+                    </div>
+                    <div class="section_idea my-2">
+                        <span>Syllabus</span>
+                        <input name="syllabus[]" class="form-control form-control-lg" placeholder="Syllabus">
+                    </div>
+                    <div class="section_idea my-2">
+                      <span>Idea Order</span>
+                      <input name="ideaOrder[]" class="form-control form-control-lg" placeholder="Idea Order">
+                    </div>
+                    <div class="section_idea my-2">
+                      <span>Video Link</span>
+                      <input name="videoLink[]" class="form-control form-control-lg" placeholder="Video Link">
+                    </div>
+                    <div class="section_idea my-2">
+                      <span>Pdf</span>
+                      <input type="file" name="Pdf[]" class="form-control form-control-lg">
+                    </div>
+                    <button type="button" class="col-md-12 btn btn-danger btn_remove_idea" id="btn${ele_count}">Remove</button>
+                    </div>`;
+                          
+              $(sec_id).append(Prices);
+
+              $(".btn_remove_idea").each((elebt,valbt) => {
+            var btnId =`#${$(valbt).attr("id")}`
+
+            $(btnId).click(()=>{
+                $(btnId).parent().remove();
+            })
+          })
+            });
+            
+    });
+
+  })
+</script>
+@endsection      
 </x-default-layout>
 
 

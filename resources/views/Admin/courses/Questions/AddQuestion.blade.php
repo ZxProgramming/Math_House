@@ -83,7 +83,7 @@
                 <!--begin::Modal header-->
                 <div class="modal-header py-7 d-flex justify-content-between">
                     <!--begin::Modal title-->
-                    <h2>Question</h2>
+                    <h2>Add Question</h2>
                     <!--end::Modal title-->
                     <!--begin::Close-->
                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
@@ -328,18 +328,18 @@
                                             
                                         <!--begin::Input-->
                                         <select class="form-control month" name="month">
-                                            <option value="Jan">Jan</div>
-                                            <option value="Fab">Fab</div>
-                                            <option value="Mar">Mar</div>
-                                            <option value="April">April</div>
-                                            <option value="May">May</div>
-                                            <option value="June">June</div>
-                                            <option value="July">July</div>
-                                            <option value="Aug">Aug</div>
-                                            <option value="Sept">Sept</div>
-                                            <option value="Oct">Oct</div>
-                                            <option value="Nov">Nov</div>
-                                            <option value="Dec">Dec</div>
+                                            <option value="Jan">Jan</option>
+                                            <option value="Fab">Fab</option>
+                                            <option value="Mar">Mar</option>
+                                            <option value="April">April</option>
+                                            <option value="May">May</option>
+                                            <option value="June">June</option>
+                                            <option value="July">July</option>
+                                            <option value="Aug">Aug</option>
+                                            <option value="Sept">Sept</option>
+                                            <option value="Oct">Oct</option>
+                                            <option value="Nov">Nov</option>
+                                            <option value="Dec">Dec</option>
                                         </select>
                                         <!--end::Input-->
                                     </div>
@@ -735,95 +735,95 @@
             add_ans.classList.remove('d-none');
         }
     })
-let sel_cate2 = document.querySelector('.sel_cate2');
-let sel_course2 = document.querySelector('.sel_course2');
-let sel_chapter2 = document.querySelector('.sel_chapter2');
-let sel_lesson2 = document.querySelector('.sel_lesson2');
-sel_cate2.addEventListener('change', ( e ) => {
-    sel_course2.innerHTML = `                            
-    <option disabled selected>
-        Select Course
-    </option>`;
-    courses.forEach(element => {
-        if ( e.target.value == element.category_id ) {
-        sel_course2.innerHTML += `                            
-        <option value="${element.id}">
-            ${element.course_name}
+    let sel_cate2 = document.querySelector('.sel_cate2');
+    let sel_course2 = document.querySelector('.sel_course2');
+    let sel_chapter2 = document.querySelector('.sel_chapter2');
+    let sel_lesson2 = document.querySelector('.sel_lesson2');
+    sel_cate2.addEventListener('change', ( e ) => {
+        sel_course2.innerHTML = `                            
+        <option disabled selected>
+            Select Course
         </option>`;
-            
-        }
-    });
-});
-sel_course2.addEventListener('change', ( e ) => {
-    sel_chapter2.innerHTML = `                            
-    <option disabled selected>
-        Select Chapter
-    </option>`;
-    chapters.forEach(element => {
-        if ( e.target.value == element.course_id ) {
-        sel_chapter2.innerHTML += `                            
-        <option value="${element.id}">
-            ${element.chapter_name}
-        </option>`;
-            
-        }
-    });
-});
-sel_chapter2.addEventListener('change', ( e ) => {
-    sel_lesson2.innerHTML = `                            
-    <option disabled selected>
-        Select Lesson
-    </option>`;
-    lessons.forEach(element => {
-        if ( e.target.value == element.chapter_id ) {
-        sel_lesson2.innerHTML += `                            
-        <option value="${element.id}">
-            ${element.lesson_name}
-        </option>`;
-            
-        }
-    });
-});
-
-let continue_btn = document.querySelector('.continue_btn');
-let q_num = document.querySelector('.q_num');
-let year = document.querySelector('.year');
-let month = document.querySelector('.month');
-let section = document.querySelector('.section');
-let q_type = document.querySelector('.q_type');
-let close_btn = document.querySelector('.close_btn');
-let screen = document.querySelector('.screen');
-let screen_text = document.querySelector('.screen_text');
-    
-close_btn.addEventListener('click', () => {
-    screen.classList.add('d-none');
-});
-
-continue_btn.addEventListener('click', () => {
-    if ($('.q_num').val() != "") {
-        let obj = {
-            'year': year.value,
-            'month': month.value,
-            'section': section.value,
-            'q_num': q_num.value,
-            'q_type' : q_type.value,
-            '_token': "{{ csrf_token() }}"
-            };
-            
-        $.ajax({
-            url: "{{route('question_type')}}",
-            type: 'POST',
-            data: obj,
-            success:function(data){
-                console.log(data);
-                if ( data != 1 ) {
-                screen.classList.remove('d-none');
-                screen_text.innerHTML = data;
-                }
+        courses.forEach(element => {
+            if ( e.target.value == element.category_id ) {
+            sel_course2.innerHTML += `                            
+            <option value="${element.id}">
+                ${element.course_name}
+            </option>`;
+                
             }
-        })
-    }
-});
+        });
+    });
+    sel_course2.addEventListener('change', ( e ) => {
+        sel_chapter2.innerHTML = `                            
+        <option disabled selected>
+            Select Chapter
+        </option>`;
+        chapters.forEach(element => {
+            if ( e.target.value == element.course_id ) {
+            sel_chapter2.innerHTML += `                            
+            <option value="${element.id}">
+                ${element.chapter_name}
+            </option>`;
+                
+            }
+        });
+    });
+    sel_chapter2.addEventListener('change', ( e ) => {
+        sel_lesson2.innerHTML = `                            
+        <option disabled selected>
+            Select Lesson
+        </option>`;
+        lessons.forEach(element => {
+            if ( e.target.value == element.chapter_id ) {
+            sel_lesson2.innerHTML += `                            
+            <option value="${element.id}">
+                ${element.lesson_name}
+            </option>`;
+                
+            }
+        });
+    });
+
+    let continue_btn = document.querySelector('.continue_btn');
+    let q_num = document.querySelector('.q_num');
+    let year = document.querySelector('.year');
+    let month = document.querySelector('.month');
+    let section = document.querySelector('.section');
+    let q_type = document.querySelector('.q_type');
+    let close_btn = document.querySelector('.close_btn');
+    let screen = document.querySelector('.screen');
+    let screen_text = document.querySelector('.screen_text');
+        
+    close_btn.addEventListener('click', () => {
+        screen.classList.add('d-none');
+    });
+
+    continue_btn.addEventListener('click', () => {
+        if ($('.q_num').val() != "") {
+            let obj = {
+                'year': year.value,
+                'month': month.value,
+                'section': section.value,
+                'q_num': q_num.value,
+                'q_type' : q_type.value,
+                '_token': "{{ csrf_token() }}"
+                };
+                
+            $.ajax({
+                url: "{{route('question_type')}}",
+                type: 'POST',
+                data: obj,
+                success:function(data){
+                    console.log(data);
+                    if ( data != 1 ) {
+                    screen.classList.remove('d-none');
+                    screen_text.innerHTML = data;
+                    }
+                }
+            })
+        }
+    });
 </script>
        
        @endsection 

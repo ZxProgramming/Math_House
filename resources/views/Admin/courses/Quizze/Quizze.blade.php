@@ -503,8 +503,7 @@
                   <div class="modal-dialog modal-dialog-centered" style="max-width: 1300px !important; display: flex;align-items: center;justify-content: center;" role="document">
                     <div class="modal-content" style="border-radius: 15px;">
                       <form action="{{route('edit_quizze', ['id' => $item->id])}}" method="POST">
-                      @csrf
-                      <input type="hidden" class="questions_data" name="ques_id" />
+                      @csrf 
                         <div class="modal-header" style="border-bottom: 0 !important;">
                           <h2 class="modal-title" id="exampleModalLongTitle">Edit Quizze</h2>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -674,7 +673,7 @@
                                           @foreach( $questions as $question )
                                             @if( $question->lesson_id == $item->lesson_id )
                                               <input type="hidden" value="{{$question->id}}" class="question_id" />
-                                              <input type="hidden" value="{{$item->id}}" class="quizze_id" />
+                                              <input type="hidden" value="{{$item->id}}" name="quizze_id" class="quizze_id" />
                                               <tr>
                                                 <th scope="row" class="idd d-none">{{$question->id}}</th>
                                                 <th>{{$loop->iteration}}</th>
@@ -720,11 +719,14 @@
                                         <tbody class="sel_quz sel_quz_edit">
                                         @foreach( $item->question as $question )
                                         <input type="hidden" class="e_questions" value="{{$question}}" />
+                                        <input type="hidden" value="{{$question->ques_id}}" name="questions_id[]" class="question_id" />
                                           <tr>
                                             <td style="font-weight: 500; font-size: 1.1rem">
                                               {{$loop->iteration}}
                                             </td>
-                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->q_type}}</td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">
+                                              <input type="hidden" value="{{$question->ques_id}}" name="ques_id[]" class="question_id" />
+                                            {{$question->question->q_type}}</td>
                                             <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->year	}}</td>
                                             <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->month}}</td>
                                             <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->q_code}}</td>
@@ -861,52 +863,7 @@
 </script>
 
 <script>
-  let add_question = document.querySelectorAll('.add_question');
-  let question_id = document.querySelectorAll('.question_id');
-  let quizze_id = document.querySelectorAll('.quizze_id');
-
-  for (let i = 0, end = add_question.length; i < end; i++) {
-    add_question[i].addEventListener('click', ( e ) => {
-      for (let j = 0; j < end; j++) {
-        if ( e.target == add_question[j] ) {
-          let obj = {
-            quizze_id : quizze_id[j].value,
-            ques_id : question_id[j].value,
-          }
-          $.ajax("{{route('quize_add_q')}}", {
-          type: 'GET',
-          data: obj,
-          success: function ( res ) {
-            console.log(res);
-          },
-      });
-
-        }
-      }
-    })
-  }
   
-  let remove_qz_edit = document.querySelectorAll('.remove_qz_edit');
-  let e_questions = document.querySelectorAll('.e_questions');
-
-  for (let i = 0, end = remove_qz_edit.length; i < end; i++) {
-    remove_qz_edit[i].addEventListener('click', ( e ) => {
-      for (let j = 0; j < end; j++) {
-        if ( e.target == remove_qz_edit[j] ) {
-          let obj = e_questions[j].value;
-          obj = JSON.parse(obj); 
-          $.ajax("{{route('quize_del_q')}}", {
-          type: 'GET',
-          data: obj,
-          success: function ( res ) {
-            console.log(res);
-          },
-      });
-
-        }
-      }
-    })
-  }
 </script>
 
 <script>

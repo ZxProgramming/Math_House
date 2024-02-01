@@ -25,9 +25,36 @@ class LessonController extends Controller
     }
 
     public function lesson_edit( Request $req ){
-        $arr = $req->only('lesson_name', 'lesson_des', 'chapter_id');
-        Lesson::where('id', $req->id)
+       //  "":["nm"],"":["ljk"],"":["1"],"":["h"],"":["4.png"]}
+        $arr = $req->only('lesson_name', 'lesson_des', 'chapter_id', 'teacher_id', 
+        'pre_requisition', 'gain', 'chapter_id');
+        $img_name = null;
+        extract($_FILES['lesson_url']);
+        if( !empty($name) ){
+            $img_name = rand(0, 1000) . now() . $name;
+            $img_name = str_replace([' ', ':', '-'], 'X', $img_name);
+            $arr['lesson_url'] = $img_name;   
+        }
+        move_uploaded_file($tmp_name, 'images/lesson/' . $img_name);
+        
+        Lesson::where('id', $req->lesson_id)
         ->update($arr);
+        IdeaLesson::where('lesson_id', $req->lesson_id)
+        ->delete();
+        for ($i=0, $end = count($req->idea); $i < $end; $i++) { 
+            extract($_FILES['pdf']);
+            $pdf_name = now() . $name[$i];
+            $pdf_name = str_replace([':', '-', ' '], 'V', $pdf_name);
+            IdeaLesson::create([
+                'idea' => $req->idea[$i],
+                'syllabus' => $req->syllabus[$i],
+                'idea_order' => $req->idea_order[$i],
+                'v_link' => $req->v_link[$i],
+                'pdf' => $pdf_name,
+                'lesson_id' => $req->lesson_id
+            ]);
+            move_uploaded_file($tmp_name[$i], 'files/lessons_pdf/' . $pdf_name);
+        }
 
         return redirect()->back();
     }
@@ -87,7 +114,7 @@ class LessonController extends Controller
                 'idea_order' => $req->idea_order[$i],
                 'v_link' => $req->v_link[$i],
                 'pdf' => $pdf_name,
-                'pdf' => $pdf_name,
+                'lesson_id' => $arr->id,
             ]);
             move_uploaded_file($tmp_name[$i], 'files/lessons_pdf/' . $pdf_name);
         }

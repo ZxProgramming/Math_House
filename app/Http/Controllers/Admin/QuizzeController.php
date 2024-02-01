@@ -67,20 +67,27 @@ class QuizzeController extends Controller
     }
 
     public function edit_quizze( $id, Request $req ){
-        return $req->all();
-        $ques_id = json_encode($req->ques_id);
-        $ques_id = json_decode($req->ques_id); 
-        
         $arr = $req->only('title', 'description', 'time', 'score', 'pass_score', 'state', 'lesson_id');
         $quizze = quizze::where('id', $id)
         ->update($arr);
-        for ( $i=0, $end = count($ques_id); $i < $end; $i++ ) { 
-            QQuize::create([
-                'quizze_id' => $id,
-                'ques_id' => $ques_id[$i]->id,
-            ]);
+        
+        if ( is_array($req->questions_id) ) {
+            for ( $i=0, $end = count($req->questions_id); $i < $end; $i++ ) { 
+                QQuize::
+                where('quizze_id', $id)
+                ->where('ques_id', $req->questions_id[$i])
+                ->delete();
+            }
         }
-
+        if ( is_array($req->ques_id) ) {
+            for ( $i=0, $end = count($req->ques_id); $i < $end; $i++ ) { 
+                QQuize::create([
+                    'quizze_id' => $id,
+                    'ques_id' => $req->ques_id[$i],
+                ]);
+            }
+    
+        }
         return redirect()->back();
     }
 
