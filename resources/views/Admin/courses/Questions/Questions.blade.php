@@ -1063,18 +1063,6 @@
                                                     </div>
                                             </div> 
                                             
-                                            @foreach( $question->q_ans as $q_ans )
-                                                <div class="idea">
-                                                    <div class="section_idea">
-                                                        <span>Answer PDF</span>
-                                                        <input type="file" name="ans_pdf[]" class="form-control form-control-lg form-control-solid">
-                                                    </div>
-                                                    <div class="section_syllabus">
-                                                        <span>Answer Video</span>
-                                                        <input type="file" name="ans_video[]" class="form-control form-control-lg form-control-solid">
-                                                    </div>
-                                                </div>
-                                            @endforeach
 
                                                 <div class="mt-3 Prices" id="Prices{{$question->id}}"></div>
 
