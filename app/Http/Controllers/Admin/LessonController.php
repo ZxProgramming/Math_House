@@ -25,7 +25,6 @@ class LessonController extends Controller
     }
 
     public function lesson_edit( Request $req ){
-       //  "":["nm"],"":["ljk"],"":["1"],"":["h"],"":["4.png"]}
         $arr = $req->only('lesson_name', 'lesson_des', 'chapter_id', 'teacher_id', 
         'pre_requisition', 'gain', 'chapter_id');
         $img_name = null;

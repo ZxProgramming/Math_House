@@ -640,7 +640,7 @@
                         Delete
                     </button>
         
-                     <form method="POST"  action="{{route('add_q')}}" class="mx-auto w-100 mw-600px pt-15 pb-10" novalidate="novalidate">
+                     <form method="POST"  action="{{route('q_edit', ['id' => $question->id])}}" class="mx-auto w-100 mw-600px pt-15 pb-10" novalidate="novalidate">
                               @csrf
                               <div class="modal fade" id="kt_modal_edit{{$question->id}}"  tabindex="-1" aria-hidden="true" style="display: none;">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -648,12 +648,9 @@
                                     <input type="hidden" value="{{$question->id}}" name="chapter_id" />
 
                                     <div class="modal-header">
-                                      <h5 class="modal-title" id="modalCenterTitle">Edit Chapter</h5>
+                                      <h5 class="modal-title" id="modalCenterTitle">Edit Question</h5>
                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-
-                                    <form class="px-3"  id="form-edit{{$question->id}}" action="{{route('add_q')}}" method="POST" enctype="multipart/form-data" novalidate="novalidate">
-                                        @csrf
 
                                         <div class="info_section" id="info_section{{$question->id}}">
                                              <div class="mb-10 fv-row">
@@ -662,7 +659,7 @@
                                                     <!--end::Label-->
             
                                                 <!--begin::Input-->
-                                                <textarea id="editor" name="question" class="form-control"></textarea>
+                                                <textarea id="editor" name="question" class="form-control">{{$question->question}}</textarea>
                                                 <!--end::Input-->
         
                                             </div>
@@ -680,8 +677,8 @@
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
                                                 <select class="form-control ans_type" id="ans_type{{$question->id}}" name="ans_type">
-                                                    <option disabled selected>
-                                                        Select Answer Type
+                                                    <option value="{{$question->ans_type}}" selected>
+                                                        {{$question->ans_type}}
                                                     </option>
                                                     <option value="MCQ">
                                                         MCQ
@@ -704,8 +701,8 @@
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
                                                 <select class="form-control" name="difficulty">
-                                                    <option disabled selected>
-                                                        Select Difficulty
+                                                    <option value="{{$question->difficulty}}" selected>
+                                                        {{$question->difficulty}}
                                                     </option>
                                                     <option value="A">
                                                         A
@@ -732,8 +729,8 @@
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
                                                 <select class="form-control q_type" name="q_type">
-                                                    <option disabled selected>
-                                                        Select Question Type
+                                                    <option value="{{$question->q_type}}" selected>
+                                                        {{$question->q_type}}
                                                     </option>
                                                     <option value="Trail">
                                                         Trail
@@ -747,7 +744,7 @@
                                                 </select>
                                                 <!--end::Input-->
                                             </div>
-                                            <button type="button" class="btn btn-success details_btn" id="details_btn{{$lesson->id}}">
+                                            <button type="button" class="btn btn-success details_btn my-3" id="details_btn{{$lesson->id}}">
                                                 Next
                                             </button>
                                         </div>
@@ -765,16 +762,16 @@
                                             </div>
                                             <div class='my-3'>
                                                 <label>Pre requisition</label>
-                                                <textarea class='form-control' name="pre_requisition" placeholder="Pre requisition" ></textarea>
+                                                <textarea class='form-control' name="pre_requisition" placeholder="Pre requisition" >{{$question->pre_requisition}}</textarea>
                                             </div>
                                             <div class='my-3'>
                                                 <label>What you gain</label>
-                                                <textarea class='form-control' name="gain" placeholder="What you gain" ></textarea>
+                                                <textarea class='form-control' name="gain" placeholder="What you gain" >{{$question->gain}}</textarea>
                                             </div>
-                                            <button type="button" class="btn btn-secondary prev_info">
+                                            <button type="button" class="btn btn-secondary prev_info my-3">
                                                 Back
                                             </button>
-                                            <button type="button" class="btn btn-success pricing_btn">
+                                            <button type="button" class="btn btn-success pricing_btn my-3">
                                                 Next
                                             </button>
                                         </div>
@@ -783,9 +780,9 @@
                                         
                                         
                                             <div class="text-muted fw-semibold fs-2 d-flex align-lessons-center"> 
-                                                    <div class="section_add_idea" style="margin-left:15px ">
-                                                        <button id="add_new_Pricing{{$question->id}}" type="button" class="my-3 btn_add btn btn-lg btn-primary d-inline-block add_new_Pricing">Add New Pricing</button>
-                                                    </div>
+                                                <div class="section_add_idea" style="margin-left:15px ">
+                                                    <button id="add_new_Pricing{{$question->id}}" type="button" class="my-3 btn_add btn btn-lg btn-primary d-inline-block add_new_Pricing">Add New Pricing</button>
+                                                </div>
                                             </div> 
                                             
                                             
@@ -812,7 +809,7 @@
 
                                                 <div class="mt-3 Prices" id="Prices{{$question->id}}"></div>
 
-                                                <div class="mt-3">
+                                                <div class="my-3">
                                                     <span class='btn btn-secondary prev_details'>
                                                         Back
                                                     </span>
@@ -820,15 +817,7 @@
                                                         Submit
                                                     </button>
                                                 </div>
-                                        </div>
-                                    </form>
-
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
-                                          Close
-                                        </button>
-                                        <button class="btn btn-primary">Submit</button>
-                                      </div>
+                                        </div> 
 
                                 </div>
                               </div>
