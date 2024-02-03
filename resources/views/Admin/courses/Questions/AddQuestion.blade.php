@@ -735,6 +735,7 @@
             add_ans.classList.remove('d-none');
         }
     })
+    
     let sel_cate2 = document.querySelector('.sel_cate2');
     let sel_course2 = document.querySelector('.sel_course2');
     let sel_chapter2 = document.querySelector('.sel_chapter2');

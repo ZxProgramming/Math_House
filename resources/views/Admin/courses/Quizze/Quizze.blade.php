@@ -672,7 +672,7 @@
                                         <tbody class="quizze_item lesson_quizze">
                                           @foreach( $questions as $question )
                                             @if( $question->lesson_id == $item->lesson_id )
-                                              <input type="hidden" value="{{$question->id}}" class="question_id" />
+                                              <input type="hidden" value="{{$question->id}}" class="question_id ques_id" />
                                               <input type="hidden" value="{{$item->id}}" name="quizze_id" class="quizze_id" />
                                               <tr>
                                                 <th scope="row" class="idd d-none">{{$question->id}}</th>
@@ -691,7 +691,6 @@
                                             @endif
                                           @endforeach
                                         </tbody>
-                                    
                                     </table>
                                   </div>
 
@@ -938,6 +937,23 @@ sel_chapter.addEventListener('change', () => {
 });
 
 let quizze_item = document.querySelector('.quizze_item');
+
+let add_question_btn = document.querySelectorAll('.add_question');
+let ques_id = document.querySelectorAll('.ques_id');
+let quizze_id = document.querySelectorAll('.quizze_id');
+let arr = [];
+for ( let i = 0, end = add_question_btn.length; i < end; i++ ) {
+  add_question_btn[i].addEventListener('click', ( e ) => {
+    for (let j = 0; j < end; j++) {
+      if ( e.target == add_question_btn[j] ) {
+        let ques = ques_id[j].value;
+        let quizze = quizze_id[j].value;
+        let obj = {'ques_id': ques, 'quizze_id': quizze}
+        arr = [...arr, obj];
+      }
+    }
+  })
+}
 
 sel_lesson.addEventListener('change', () => {
   

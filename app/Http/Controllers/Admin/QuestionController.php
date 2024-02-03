@@ -31,8 +31,8 @@ class QuestionController extends Controller
     }
 
     public function q_edit( $id, Request $req ){
-      // , grid_ans => [null], 
-        $arr = $req->only('question', 'lesson_id', 'q_type', 'year', 'month',
+        
+        $arr = $req->only('question', 'lesson_id', 'year', 'month',
         'q_code', 'section', 'q_num', 'difficulty', 'ans_type');
         if ( isset($req->mcq_ans) && $req->mcq_answers != null ) {
             Mcq_ans::where('q_id', $id)
@@ -78,8 +78,8 @@ class QuestionController extends Controller
                    'ans_video' => $v_name,
                    'Q_id'      => $id,
                ]);
-               move_uploaded_file($ans_pdf_file['tmp_name'][$i], 'files/q_answers/' . $pdf_name);
-               move_uploaded_file($ans_video_file['tmp_name'][$i], 'files/q_answers/' . $v_name);
+               move_uploaded_file($ans_pdf_file['tmp_name'][$i], 'files/q_pdf/' . $pdf_name);
+               move_uploaded_file($ans_video_file['tmp_name'][$i], 'files/q_video/' . $v_name);
            }
        }
        move_uploaded_file($tmp_name, 'images/questions/' . $img_name);
