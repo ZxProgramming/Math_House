@@ -105,7 +105,7 @@
     </button>
 
     <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal"
-        data-bs-target="#kt_modal_create_question">Add Question</a>
+        data-bs-target="#kt_modal_create_question">Add Session</a>
     <!--end::Action-->
 
     <div class="modal fade" id="kt_modal_create_question" tabindex="-1" aria-hidden="true">
@@ -116,7 +116,7 @@
                 <!--begin::Modal header-->
                 <div class="modal-header py-7 d-flex justify-content-between">
                     <!--begin::Modal title-->
-                    <h2>Add Session</h2>
+                    <h2>Create Chapter</h2>
                     <!--end::Modal title-->
                     <!--begin::Close-->
                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
@@ -141,383 +141,363 @@
                             <!--end::Step 1-->
                             <!--begin::Step 2-->
                             <div class="stepper-item me-5 me-md-15" data-kt-stepper-element="nav">
-                                <h3 class="stepper-title">Academic</h3>
+                                <h3 class="stepper-title">Details</h3>
                             </div>
                             <!--end::Step 2-->
                             <!--begin::Step 3-->
                             <div class="stepper-item me-5 me-md-15" data-kt-stepper-element="nav">
-                                <h3 class="stepper-title">Data</h3>
+                                <h3 class="stepper-title">Pricing</h3>
                             </div>
-                            <!--end::Step 3-->
+                            <!--end::Step 3--> 
                         </div>
                         <!--end::Nav-->
                         <!--begin::Form-->
                         <form action="{{ route('add_session') }}" method="POST" enctype="multipart/form-data"
-                            class="mx-auto w-100 mw-600px pt-15 pb-10" novalidate="novalidate"
-                            id="kt_modal_create_campaign_stepper_form">
+                        class="mx-auto w-100 mw-600px pt-15 pb-10" novalidate="novalidate"
+                        id="kt_modal_create_campaign_stepper_form">
                             <!--begin::Step 1-->
                             <div class="current" data-kt-stepper-element="content">
                                 <!--begin::Wrapper-->
                                 <div class="w-100">
                                     @csrf
-                                    <div>
-                                        <!--begin::Input group-->
-                                        <div class="mb-10 fv-row">
-                                            <!--begin::Label-->
-                                            <label>
-                                                Session Name
-                                            </label>
-                                            <input class='form-control' name="name" placeholder="Session Name" />
-                                        </div>
-                                        <!--end::Input group-->
-                                        <!--begin::Input group-->
-                                        <div class="mb-10 fv-row">
-                                            <label>
-                                                Session Date
-                                            </label>
-                                            <input class='form-control' name="date" type="date"
-                                                placeholder="Session Date" />
-                                        </div>
+                                <div>
+                                    <!--begin::Input group-->
+                                    <div class="mb-10 fv-row">
+                                        <!--begin::Label-->
+                                        <label>
+                                            Session Name
+                                        </label>
+                                        <input class='form-control' name="name" placeholder="Session Name" />
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="mb-10 fv-row">
+                                        <label>
+                                            Session Date
+                                        </label>
+                                        <input class='form-control' name="date" type="date"
+                                            placeholder="Session Date" />
+                                    </div>
 
-                                        <div class="mb-10 fv-row">
-                                            <label>
-                                                From
-                                            </label>
-                                            <input class='form-control' name="from" type="time"
-                                                placeholder="Session From" />
-                                        </div>
+                                    <div class="mb-10 fv-row">
+                                        <label>
+                                            From
+                                        </label>
+                                        <input class='form-control' name="from" type="time"
+                                            placeholder="Session From" />
+                                    </div>
 
-                                        <div class="mb-10 fv-row">
-                                            <label>
-                                                To
-                                            </label>
-                                            <input class='form-control' name="to" type="time"
-                                                placeholder="Session To" />
-                                        </div>
-                                        <div class="mb-10 fv-row">
-                                            <label>
-                                                Teacher
-                                            </label>
-                                            <select class="form-control" name="teacher_id">
-                                                <option disabled selected>
-                                                    Select Teacher ...
+                                    <div class="mb-10 fv-row">
+                                        <label>
+                                            To
+                                        </label>
+                                        <input class='form-control' name="to" type="time"
+                                            placeholder="Session To" />
+                                    </div>
+                                    <div class="mb-10 fv-row">
+                                        <label>
+                                            Teacher
+                                        </label>
+                                        <select class="form-control" name="teacher_id">
+                                            <option disabled selected>
+                                                Select Teacher ...
+                                            </option>
+                                            @foreach ($teachers as $teacher)
+                                                <option value="{{ $teacher->id }}">
+                                                    {{ $teacher->name }}
                                                 </option>
-                                                @foreach ($teachers as $teacher)
-                                                    <option value="{{ $teacher->id }}">
-                                                        {{ $teacher->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="mb-10 fv-row">
-                                            <label>
-                                                Type
-                                            </label>
-                                            <select class="form-control" name="type">
-                                                <option disabled selected>
-                                                    Select Type ...
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="mb-10 fv-row">
+                                        <label>
+                                            Type
+                                        </label>
+                                        <select class="form-control" name="type">
+                                            <option disabled selected>
+                                                Select Type ...
+                                            </option>
+                                            <option value="group">
+                                                group
+                                            </option>
+                                            <option value="private">
+                                                private
+                                            </option>
+                                            <option value="session">
+                                                session
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-10 fv-row">
+                                        <label>
+                                            Group
+                                        </label>
+                                        <select class="form-control" name="group_id">
+                                            <option disabled selected>
+                                                Select Group ...
+                                            </option>
+                                            @foreach ($groups as $group)
+                                                <option value="{{ $group->id }}">
+                                                    {{ $group->name }}
                                                 </option>
-                                                <option value="group">
-                                                    group
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="mb-10 fv-row">
+                                        <label>
+                                            Users
+                                        </label>
+                                        <select class="form-control" name="user_id">
+                                            <option disabled selected>
+                                                Select User ...
+                                            </option>
+                                            @foreach ($users as $user)
+                                                <option value="{{ $user->id }}">
+                                                    {{ $user->name }}
                                                 </option>
-                                                <option value="private">
-                                                    private
-                                                </option>
-                                                <option value="session">
-                                                    session
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div class="mb-10 fv-row">
-                                            <label>
-                                                Group
-                                            </label>
-                                            <select class="form-control" name="group_id">
-                                                <option disabled selected>
-                                                    Select Group ...
-                                                </option>
-                                                @foreach ($groups as $group)
-                                                    <option value="{{ $group->id }}">
-                                                        {{ $group->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="mb-10 fv-row">
-                                            <label>
-                                                Users
-                                            </label>
-                                            <select name="user_id[]" id="select2Primary"
-                                                class="select2 form-select select2-hidden-accessible" multiple=""
-                                                data-select2-id="select2Primary" tabindex="-1" aria-hidden="true">
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">
-                                                        {{ $user->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                            @endforeach
+                                        </select>
+                                    </div>
 
 
 
-                                        <div class="mb-10 fv-row">
-                                            <label>
+                                    <div class="mb-10 fv-row">
+                                        <label>
+                                            Repeat
+                                        </label>
+                                        <select class="form-control s_repeat" name="repeat">
+                                            <option disabled selected>
+                                                Select ...
+                                            </option>
+                                            <option value="Once">
+                                                Once
+                                            </option>
+                                            <option value="Repeat">
                                                 Repeat
-                                            </label>
-                                            <select class="form-control s_repeat" name="repeat">
-                                                <option disabled selected>
-                                                    Select ...
-                                                </option>
-                                                <option value="Once">
-                                                    Once
-                                                </option>
-                                                <option value="Repeat">
-                                                    Repeat
-                                                </option>
-                                            </select>
-                                        </div>
-
-                                        <div class="screen d-none">
-                                            <div class="screen_popup">
-                                                <div class="btn btn-sm btn-icon btn-active-color-primary"
-                                                    data-bs-dismiss="modal">
-                                                    <i class="ki-duotone close_btn ki-cross fs-1">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                    </i>
-                                                </div>
-                                                <div class="screen_text">
-                                                    <div class="my-2">
-                                                        <label>
-                                                            Repeat
-                                                        </label>
-                                                        <div class="d-flex">
-                                                            <input type="number" class="form-control"
-                                                                name="repeat_num" />
-                                                            <label>
-                                                                Times
-                                                            </label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="my-2">
-                                                        <label>
-                                                            Repeat every
-                                                        </label>
-                                                        <div>
-                                                            <input id="SaturDay" type="checkbox" name="r_day[]"
-                                                                value="SaturDay" />
-                                                            <label for="SaturDay">
-                                                                SaturDay
-                                                            </label>
-                                                        </div>
-                                                        <div>
-                                                            <input id="SunDay" type="checkbox" name="r_day[]"
-                                                                value="SunDay" />
-                                                            <label for="SunDay">
-                                                                SunDay
-                                                            </label>
-                                                        </div>
-                                                        <div>
-                                                            <input id="MonDay" type="checkbox" name="r_day[]"
-                                                                value="MonDay" />
-                                                            <label for="MonDay">
-                                                                MonDay
-                                                            </label>
-                                                        </div>
-                                                        <div>
-                                                            <input id="TuesDay" type="checkbox" name="r_day[]"
-                                                                value="TuesDay" />
-                                                            <label for="TuesDay">
-                                                                TuesDay
-                                                            </label>
-                                                        </div>
-                                                        <div>
-                                                            <input id="WednesDay" type="checkbox" name="r_day[]"
-                                                                value="WednesDay" />
-                                                            <label for="WednesDay">
-                                                                WednesDay
-                                                            </label>
-                                                        </div>
-                                                        <div>
-                                                            <input id="ThursDay" type="checkbox" name="r_day[]"
-                                                                value="ThursDay" />
-                                                            <label for="ThursDay">
-                                                                ThursDay
-                                                            </label>
-                                                        </div>
-                                                        <div>
-                                                            <input id="FriDay" type="checkbox" name="r_day[]"
-                                                                value="FriDay" />
-                                                            <label for="FriDay">
-                                                                FriDay
-                                                            </label>
-                                                        </div>
-                                                        <div class="mb-10 fv-row">
-                                                            <label>
-                                                                Price
-                                                            </label>
-                                                            <input class='form-control' name="price"
-                                                                placeholder="Price" />
-                                                        </div>
-                                                        <!--end::Input group-->
-                                                    </div>
-
-                                                </div>
-                                                <!--end::Wrapper-->
-                                            </div>
-                                        </div>
-                                        <!--end::Step 1-->
+                                            </option>
+                                        </select>
                                     </div>
-                                    <!--begin::Step 2-->
-                                    <div data-kt-stepper-element="content">
-                                        <!--begin::Wrapper-->
-                                        <div class="w-100">
 
-                                            <!--begin::Input group-->
-                                            <div class="mb-10">
-                                                <!--begin::Label-->
-                                                <label class="fs-6 fw-semibold mb-2">Category</label>
-                                                <!--End::Label-->
-
-                                                <!--begin::Input-->
-                                                <select class="form-control sel_cate2" name="category_id">
-                                                    <option disabled selected>
-                                                        Select Category
-                                                    </option>
-                                                    @foreach ($categories as $category)
-                                                        <option value="{{ $category->id }}">
-                                                            {{ $category->cate_name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                                <!--end::Input-->
-                                            </div>
-                                            <!--end::Input group-->
-                                            <!--begin::Input group-->
-                                            <div class="mb-10">
-                                                <!--begin::Label-->
-                                                <label class="fs-6 fw-semibold mb-2">Course</label>
-                                                <!--End::Label-->
-
-                                                <!--begin::Input-->
-                                                <select class="form-control sel_course2" name="course_id">
-                                                    <option disabled selected>
-                                                        Select Course
-                                                    </option>
-                                                </select>
-                                                <!--end::Input-->
-                                            </div>
-                                            <!--end::Input group-->
-                                            <!--begin::Input group-->
-
-                                            <!--begin::Input group-->
-                                            <div class="mb-10">
-                                                <!--begin::Label-->
-                                                <label class="fs-6 fw-semibold mb-2">Lesson</label>
-                                                <!--begin::Input-->
-                                                <select class="form-control sel_lesson2" name="lesson_id">
-                                                    <option disabled selected>
-                                                        Select Lesson
-                                                    </option>
-                                                </select>
-                                                <!--end::Input-->
-                                            </div>
-                                            <!--end::Input group-->
-
-                                        </div>
-                                        <!--end::Wrapper-->
-                                    </div>
-                                    <!--end::Step 2-->
-                                    <!--begin::Step 5-->
-                                    <div data-kt-stepper-element="content">
-                                        <!--begin::Wrapper-->
-                                        <div class="w-100">
-                                            <!--begin::Heading-->
-                                            <div class="pb-10 pb-lg-12">
-                                                <!--begin::Title-->
-                                                <h1 class="fw-bold text-gray-900">Answers</h1>
-                                                <!--end::Title-->
-                                            </div>
-                                            <!--end::Heading-->
-                                            <!--begin::Input group-->
-                                            <div class="ideas" id="ideas">
-
-                                                <div class="idea">
-                                                    <div class="section_idea">
-                                                        <span>Session Link</span>
-                                                        <input name="link"
-                                                            class="form-control form-control-lg form-control-solid">
-                                                    </div>
-                                                    <div class="section_syllabus">
-                                                        <span>Material Link</span>
-                                                        <input name="material_link"
-                                                            class="form-control form-control-lg form-control-solid">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--end::Wrapper-->
-                                    </div>
-                                    <script>
-                                        let add_new_idea = document.querySelector('#add_new_idea');
-                                        let ideas = document.querySelector('.ideas');
-                                        add_new_idea.addEventListener('click', () => {
-                                            ideas.innerHTML += `
-                                            <div class="idea">
-                                            <hr />
-                                                <div class="section_idea">
-                                                    <span>Answer PDF</span>
-                                                    <input type="file" name="ans_pdf[]" class="form-control form-control-lg form-control-solid">
-                                                </div>
-                                                <div class="section_syllabus">
-                                                    <span>Answer Video</span>
-                                                    <input type="file" name="ans_video[]" class="form-control form-control-lg form-control-solid">
-                                                </div>
-                                                <button type="button" class="btn btn-danger btn_remove_idea">Remove</button>
-                                            </div>`;
-                                            let btn_remove_idea = document.querySelectorAll('.btn_remove_idea');
-                                            for (let i = 0, end = btn_remove_idea.length; i < end; i++) {
-                                                btn_remove_idea[i].addEventListener('click', (e) => {
-                                                    for (let j = 0; j < end; j++) {
-                                                        if (e.target == btn_remove_idea[j]) {
-                                                            btn_remove_idea[j].parentElement.remove()
-                                                        }
-                                                    }
-                                                });
-                                            }
-                                        });
-                                    </script>
-                                    <!--end::Step 5-->
-                                    <!--begin::Actions-->
-                                    <div class="d-flex flex-stack pt-10">
-                                        <!--begin::Wrapper-->
-                                        <div class="me-2">
-                                            <button type="button" class="btn btn-lg btn-light-primary me-3"
-                                                data-kt-stepper-action="previous">
-                                                <i class="ki-duotone ki-arrow-left fs-3 me-1">
+                                    <div class="screen d-none">
+                                        <div class="screen_popup">
+                                            <div class="btn btn-sm btn-icon btn-active-color-primary"
+                                                data-bs-dismiss="modal">
+                                                <i class="ki-duotone close_btn ki-cross fs-1">
                                                     <span class="path1"></span>
                                                     <span class="path2"></span>
-                                                </i>Back</button>
+                                                </i>
+                                            </div>
+                                            <div class="screen_text">
+                                                <div class="my-2">
+                                                    <label>
+                                                        Repeat
+                                                    </label>
+                                                    <div class="d-flex">
+                                                        <input type="number" class="form-control"
+                                                            name="repeat_num" />
+                                                        <label>
+                                                            Times
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="my-2">
+                                                    <label>
+                                                        Repeat every
+                                                    </label>
+                                                    <div>
+                                                        <input id="SaturDay" type="checkbox" name="r_day[]"
+                                                            value="SaturDay" />
+                                                        <label for="SaturDay">
+                                                            SaturDay
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <input id="SunDay" type="checkbox" name="r_day[]"
+                                                            value="SunDay" />
+                                                        <label for="SunDay">
+                                                            SunDay
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <input id="MonDay" type="checkbox" name="r_day[]"
+                                                            value="MonDay" />
+                                                        <label for="MonDay">
+                                                            MonDay
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <input id="TuesDay" type="checkbox" name="r_day[]"
+                                                            value="TuesDay" />
+                                                        <label for="TuesDay">
+                                                            TuesDay
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <input id="WednesDay" type="checkbox" name="r_day[]"
+                                                            value="WednesDay" />
+                                                        <label for="WednesDay">
+                                                            WednesDay
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <input id="ThursDay" type="checkbox" name="r_day[]"
+                                                            value="ThursDay" />
+                                                        <label for="ThursDay">
+                                                            ThursDay
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <input id="FriDay" type="checkbox" name="r_day[]"
+                                                            value="FriDay" />
+                                                        <label for="FriDay">
+                                                            FriDay
+                                                        </label>
+                                                    </div>
+                                                    <div class="mb-10 fv-row">
+                                                        <label>
+                                                            Price
+                                                        </label>
+                                                        <input class='form-control' name="price"
+                                                            placeholder="Price" />
+                                                    </div>
+                                                    <!--end::Input group-->
+                                                </div>
+
+                                            </div>
+                                            <!--end::Wrapper-->
                                         </div>
-                                        <!--end::Wrapper-->
-                                        <!--begin::Wrapper-->
-                                        <div>
-                                            <button class="btn btn-lg btn-primary">
-                                                Submit
-                                            </button>
-                                            <button type="button" class="btn btn-lg btn-primary continue_btn"
-                                                data-kt-stepper-action="next">Continue
-                                                <i class="ki-duotone ki-arrow-right fs-3 ms-1 me-0">
-                                                    <span class="path1"></span>
-                                                    <span class="path2"></span>
-                                                </i></button>
-                                        </div>
-                                        <!--end::Wrapper-->
                                     </div>
-                                    <!--end::Actions-->
+                                    <!--end::Input group-->
+                                </div>
+
+                                </div>
+                                <!--end::Wrapper-->
+                            </div>
+                            <!--end::Step 1-->
+                            <!--begin::Step 2-->
+                            <div data-kt-stepper-element="content">
+                                <!--begin::Wrapper-->
+                                <div class="w-100">
+                                    
+                                    <!--begin::Input group-->   
+                                <div class="mb-10 fv-row">
+                                    <label>
+                                        Category
+                                    </label>
+                                    <select class="form-control sel_cate1">
+                                        <option disabled selected>
+                                            Select Category ...
+                                        </option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">
+                                                {{ $category->cate_name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="mb-10 fv-row">
+                                    <label>
+                                        Course
+                                    </label>
+                                    <select class="form-control sel_course1">
+                                        <option disabled selected>
+                                            Select Course ...
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-10 fv-row">
+                                    <label>
+                                        Chapter
+                                    </label>
+                                    <select class="form-control sel_chapter1">
+                                        <option disabled selected>
+                                            Select Chapter ...
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-10 fv-row">
+                                    <label>
+                                        Lesson
+                                    </label>
+                                    <select name="lesson_id" class="form-control sel_lesson1">
+                                        <option disabled selected>
+                                            Select Lesson ...
+                                        </option>
+                                    </select>
+                                </div>
+                                    <!--end::Input group-->
+                                </div>
+                                <!--end::Wrapper-->
+                            </div>
+                            <!--end::Step 2-->
+                            <!--begin::Step 5-->
+                            <div data-kt-stepper-element="content">
+                                <!--begin::Wrapper-->
+                                <div class="w-100">
+                                    
+                                    <!--begin::Heading-->
+                                    <div class="pb-10 pb-lg-12">
+                                        <!--begin::Title-->
+                                        <h1 class="fw-bold text-gray-900">Pricing</h1>
+                                        <!--end::Title-->
+                                        <!--begin::Description-->
+                                        <div class="text-muted fw-semibold fs-2 d-flex align-items-center">  
+                                    </div>
+                                        <!--end::Description-->
+                                    </div>
+                                    <!--end::Heading-->
+                                    <!--begin::Input group-->
+                                   <div class="ideas" id="ideas">
+
+                                    <div class="idea">
+                                        <div class="section_idea">
+                                            <span>Session Link</span>
+                                            <input name="link"
+                                                class="form-control form-control-lg form-control-solid">
+                                        </div>
+                                        <div class="section_syllabus">
+                                            <span>Material Link</span>
+                                            <input name="material_link"
+                                                class="form-control form-control-lg form-control-solid">
+                                        </div>
+                                    </div>
+
+                                    
+                            
+                            
+                            </div>
                                 </div>
                             </div>
+                            <!--end::Step 5-->
+                            <!--begin::Actions-->
+                            <div class="d-flex flex-stack pt-10">
+                                <!--begin::Wrapper-->
+                                <div class="me-2">
+                                    <button type="button" class="btn btn-lg btn-light-primary me-3" data-kt-stepper-action="previous">
+                                    <i class="ki-duotone ki-arrow-left fs-3 me-1">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                    </i>Back</button>
+                                </div>
+                                <!--end::Wrapper-->
+                                <!--begin::Wrapper-->
+                                <div>
+                                    <button class="btn btn-lg btn-primary" >
+                                        Submit 
+                                    </button>
+                                    <button type="button" class="btn btn-lg btn-primary continue_btn" data-kt-stepper-action="next">Continue 
+                                    <i class="ki-duotone ki-arrow-right fs-3 ms-1 me-0">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                    </i></button>
+                                </div>
+                                <!--end::Wrapper-->
+                            </div>
+                            <!--end::Actions-->
                         </form>
                         <!--end::Form-->
                     </div>
@@ -527,73 +507,9 @@
             </div>
         </div>
     </div>
+    
+ 
 
-    <!-- Modal -->
-    <form method="POST" action="{{ route('add_session') }}">
-        @csrf
-        <div class="modal fade" id="AddmodalCenter" tabindex="-1" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-
-                        <h5 class="modal-title" id="modalCenterTitle">Add Session</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        </div>
-
-        <div class="mb-10 fv-row">
-            <label>
-                Category
-            </label>
-            <select class="form-control sel_cate1">
-                <option disabled selected>
-                    Select Category ...
-                </option>
-                @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">
-                        {{ $category->cate_name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
-        <div class="mb-10 fv-row">
-            <label>
-                Course
-            </label>
-            <select class="form-control sel_course1">
-                <option disabled selected>
-                    Select Course ...
-                </option>
-            </select>
-        </div>
-
-        <div class="mb-10 fv-row">
-            <label>
-                Chapter
-            </label>
-            <select class="form-control sel_chapter1">
-                <option disabled selected>
-                    Select Chapter ...
-                </option>
-            </select>
-        </div>
-
-        <div class="mb-10 fv-row">
-            <label>
-                Lesson
-            </label>
-            <select name="lesson_id" class="form-control sel_lesson1">
-                <option disabled selected>
-                    Select Lesson ...
-                </option>
-            </select>
-        </div>
 
         <input type="hidden" class="cate" value="{{ $categories }}" />
         <input type="hidden" class="course" value="{{ $courses }}" />
@@ -658,54 +574,7 @@
                 });
             });
         </script>
-
-        <div class="mb-10 fv-row">
-            <label>
-                Type
-            </label>
-            <select name="type" class="form-control">
-                <option disabled>
-                    Select Type ...
-                </option>
-                <option value="session">
-                    session
-                </option>
-                <option value="private">
-                    private
-                </option>
-                <option value="group">
-                    group
-                </option>
-            </select>
-        </div>
-
-
-        <div class="mb-10 fv-row">
-            <label>
-                Teachers
-            </label>
-            <select name="teacher_id" class="form-control">
-                <option disabled>
-                    Select Teacher ...
-                </option>
-                @foreach ($teachers as $teacher)
-                    <option value="{{ $teacher->id }}">
-                        {{ $teacher->name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
-        <div class="modal-footer">
-            <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
-                Close
-            </button>
-            <button class="btn btn-primary">Submit</button>
-        </div>
-        </div>
-        </div>
-        </div>
-    </form>
+ 
 
     <table id="kt_profile_overview_table"
         class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable no-footer">
@@ -942,67 +811,67 @@
                                                 let sel_lesson = document.querySelector('.sel_lesson');
                                                 sel_cate.addEventListener('change', () => {
                                                     sel_course.innerHTML = `
-                                                    <option disabled selected>
-                                                        Select Course ...
-                                                    </option>`;
+                                    <option disabled selected>
+                                        Select Course ...
+                                    </option>`;
                                                     course.forEach(element => {
                                                         if (sel_cate.value == element.category_id) {
                                                             sel_course.innerHTML += `
-                                                            <option value="${element.id}">
-                                                                ${element.course_name}
-                                                            </option>`;
+                                            <option value="${element.id}">
+                                                ${element.course_name}
+                                            </option>`;
                                                         }
                                                     });
                                                 });
                                                 sel_course.addEventListener('change', () => {
                                                     sel_chapter.innerHTML = `
-                                                    <option disabled selected>
-                                                        Select Chapter ...
-                                                    </option>`;
+                                    <option disabled selected>
+                                        Select Chapter ...
+                                    </option>`;
                                                     chapter.forEach(element => {
                                                         if (sel_course.value == element.course_id) {
                                                             sel_chapter.innerHTML += `
-                                                            <option value="${element.id}">
-                                                                ${element.chapter_name}
-                                                            </option>`;
+                                            <option value="${element.id}">
+                                                ${element.chapter_name}
+                                            </option>`;
                                                         }
                                                     });
                                                 });
                                                 course.forEach(element => {
                                                     if (sel_cate.value == element.category_id) {
                                                         sel_course.innerHTML += `
-                                                        <option value="${element.id}">
-                                                            ${element.course_name}
-                                                        </option>`;
+                                            <option value="${element.id}">
+                                                ${element.course_name}
+                                            </option>`;
                                                     }
                                                 });
                                                 chapter.forEach(element => {
                                                     if (sel_course.value == element.course_id) {
                                                         sel_chapter.innerHTML += `
-                                                        <option value="${element.id}">
-                                                            ${element.chapter_name}
-                                                        </option>`;
+                                            <option value="${element.id}">
+                                                ${element.chapter_name}
+                                            </option>`;
                                                     }
                                                 });
                                                 lesson.forEach(element => {
                                                     if (sel_chapter.value == element.chapter_id) {
                                                         sel_lesson.innerHTML += `
-                                                        <option value="${element.id}">
-                                                            ${element.lesson_name}
-                                                        </option>`;
+                                            <option value="${element.id}">
+                                                ${element.lesson_name}
+                                            </option>`;
                                                     }
                                                 });
                                                 sel_chapter.addEventListener('change', () => {
                                                     sel_lesson.innerHTML = `
-                                                    <option disabled selected>
-                                                        Select Lesson ...
-                                                    </option>`;
+                                    <option disabled selected>
+                                        Select Lesson ...
+                                    </option>`;
                                                     lesson.forEach(element => {
                                                         if (sel_chapter.value == element.chapter_id) {
                                                             sel_lesson.innerHTML += `
-                                                            <option value="${element.id}">
-                                                                ${element.lesson_name}
-                                                            </option>`;
+                                            <option value="${element.id}">
+                                                ${element.lesson_name}
+                                            </option>`;
                                                         }
                                                     });
                                                 });
@@ -1126,6 +995,36 @@
         })
     </script>
     <script>
+    let add_new_idea = document.querySelector('#add_new_idea');
+    let ideas = document.querySelector('.ideas');
+    add_new_idea.addEventListener('click', () => {
+        ideas.innerHTML += `
+    <div class="idea">
+    <hr />
+    <div class="section_idea">
+        <span>Answer PDF</span>
+        <input type="file" name="ans_pdf[]" class="form-control form-control-lg form-control-solid">
+    </div>
+    <div class="section_syllabus">
+        <span>Answer Video</span>
+        <input type="file" name="ans_video[]" class="form-control form-control-lg form-control-solid">
+    </div>
+    <button type="button" class="btn btn-danger btn_remove_idea">Remove</button>
+    </div>`;
+        let btn_remove_idea = document.querySelectorAll('.btn_remove_idea');
+        for (let i = 0, end = btn_remove_idea.length; i < end; i++) {
+            btn_remove_idea[i].addEventListener('click', (e) => {
+                for (let j = 0; j < end; j++) {
+                    if (e.target == btn_remove_idea[j]) {
+                        btn_remove_idea[j].parentElement.remove()
+                    }
+                }
+            });
+        }
+    });
+    </script>
+    <!--end::Step 5-->
+    <script>
         <!--begin::Javascript
         -->
     <script>
@@ -1149,8 +1048,6 @@
     <script src="assets/plugins/global/lessonSc.js"></script>
     <script src="{{ asset('assets/js/custom/utilities/modals/lessonSc.js') }}"></script>
 
-    <script src="{{ asset('assets/js/forms-selects.js') }}"></script>
-    <script src="{{ asset('assets/js/forms-tagify.js') }}"></script>
-    <script src="{{ asset('assets/js/forms-typeahead.js') }}"></script>
+
     </script>
 </x-default-layout>
