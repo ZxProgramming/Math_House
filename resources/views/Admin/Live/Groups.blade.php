@@ -158,7 +158,7 @@
         let s_days = document.querySelector('.s_days');
         let s_days_item = document.querySelector('.s_days_item');
         add_day.addEventListener('click', () => {
-          s_days.innerHTML += s_days_item.outerHTML;
+          s_days.innerHTML += s_days_item.outerHTML;z
         });
         for (let i = 0, end = remove_day.length; i < end; i++) {
           remove_day[i].addEventListener('click', ( e ) => {
@@ -317,6 +317,13 @@
                               </option>
                               @endforeach
                             </select>
+                            </div>
+
+                            <div class="my-2">
+                              <label class="form-check form-switch form-check-custom form-check-solid">
+                                <input class="form-check-input" name="state" type="checkbox" value="1" {{ $item->state == 1 ? 'checked' : null}}>
+                                <span class="form-check-label fw-semibold text-muted">Active</span>
+                              </label>
                             </div>
 
                               <input type="hidden" value="{{$item->id}}" name="id" />

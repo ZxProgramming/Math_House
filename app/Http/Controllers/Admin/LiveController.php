@@ -72,6 +72,7 @@ class LiveController extends Controller
     }
 
     public function add_session( Request $req ){
+        return $req->all();
         $arr = $req->only('link', 'date', 'from', 'to', 'lesson_id', 'name',
         'type', 'teacher_id', 'price', 'access_dayes', 'repeat');
         
@@ -133,6 +134,7 @@ class LiveController extends Controller
 
     public function g_session_edit( Request $req ){ 
         $arr = $req->only('name', 'teacher_id');
+        $arr['state'] = isset($req->state) ? 1 : 0;
         $req->validate([
             'name' => 'required',
             'teacher_id' => 'required'
