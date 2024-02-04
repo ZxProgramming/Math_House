@@ -30,6 +30,10 @@
 		<link href="{{asset('assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<link href="{{asset('assets/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
+<button id="btn_print" class=" btn btn-success">
+    <i class="fa-solid fa-print mr-2"></i>
+    Print
+</button>
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModalCenter">
   Add New Group
 </button>
@@ -381,6 +385,13 @@
                                 }
                               </script>
 
+<script>
+  let btn  = document.getElementById("btn_print");
+
+  btn.addEventListener('click', () => {
+    window.print();
+  })
+</script>
     
     <!--end::Modal - Invite Friend-->
 		<!--end::Modals-->

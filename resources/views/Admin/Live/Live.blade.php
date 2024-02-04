@@ -96,71 +96,168 @@
     </div>
 @enderror
     
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddmodalCenter">
-                          Add Session
-                        </button>
+<button id="btn_print" class=" btn btn-success">
+    <i class="fa-solid fa-print mr-2"></i>
+    Print
+</button>
 
-                        <!-- Modal -->
-                        <form method="POST" action="{{route('add_session')}}">
-                          @csrf
-                        <div class="modal fade" id="AddmodalCenter" tabindex="-1" aria-hidden="true" style="display: none;">
-                          <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
+<a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_create_question">Add Question</a>
+    <!--end::Action-->
+    
+    <div class="modal fade" id="kt_modal_create_question" tabindex="-1" aria-hidden="true">
+        <!--begin::Modal dialog-->
+        <div class="modal-dialog modal-fullscreen p-9">
+            <!--begin::Modal content-->
+            <div class="modal-content modal-rounded">
+                <!--begin::Modal header-->
+                <div class="modal-header py-7 d-flex justify-content-between">
+                    <!--begin::Modal title-->
+                    <h2>Add Session</h2>
+                    <!--end::Modal title-->
+                    <!--begin::Close-->
+                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                        <i class="ki-duotone ki-cross fs-1">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                    </div>
+                    <!--end::Close-->
+                </div>
+                <!--begin::Modal header-->
+                <!--begin::Modal body-->
+                <div class="modal-body scroll-y m-5">
+                    <!--begin::Stepper-->
+                    <div class="stepper stepper-links d-flex flex-column" id="kt_modal_create_campaign_stepper">
+                        <!--begin::Nav-->
+                        <div class="stepper-nav justify-content-center py-2">
+                            <!--begin::Step 1-->
+                            <div class="stepper-item me-5 me-md-15 current" data-kt-stepper-element="nav">
+                                <h3 class="stepper-title">Info</h3>
+                            </div>
+                            <!--end::Step 1-->
+                            <!--begin::Step 2-->
+                            <div class="stepper-item me-5 me-md-15" data-kt-stepper-element="nav">
+                                <h3 class="stepper-title">Academic</h3>
+                            </div>
+                            <!--end::Step 2-->
+                            <!--begin::Step 3-->
+                            <div class="stepper-item me-5 me-md-15" data-kt-stepper-element="nav">
+                                <h3 class="stepper-title">Data</h3>
+                            </div>
+                            <!--end::Step 3--> 
+                        </div>
+                        <!--end::Nav-->
+                        <!--begin::Form-->
+                        <form action="{{route('add_session')}}" method="POST" enctype="multipart/form-data" class="mx-auto w-100 mw-600px pt-15 pb-10" novalidate="novalidate" id="kt_modal_create_campaign_stepper_form">
+                            <!--begin::Step 1-->
+                            <div class="current" data-kt-stepper-element="content">
+                                <!--begin::Wrapper-->
+                                <div class="w-100">
+                                    @csrf
+                                <div>
+                                    <!--begin::Input group-->
+                                    <div class="mb-10 fv-row">
+                                        <!--begin::Label-->
+                                <label>
+                                  Session Name
+                                </label>
+                                <input class='form-control' name="name" placeholder="Session Name" />
+                              </div>
+                                <!--end::Input group-->  
+                                <!--begin::Input group-->
+                                <div class="mb-10 fv-row">
+                                    <label>
+                                        Session Date
+                                    </label>
+                                    <input class='form-control' name="date" type="date" placeholder="Session Date" />
+                                </div>
+
+                                <div class="mb-10 fv-row">
+                                <label>
+                                    From
+                                </label>
+                                <input class='form-control' name="from" type="time" placeholder="Session From" />
+                                </div>
+
+                                <div class="mb-10 fv-row">
+                                <label>
+                                    To
+                                </label>
+                                <input class='form-control' name="to" type="time" placeholder="Session To" />
+                                </div>
+                                <div class="mb-10 fv-row">
+                                    <label>
+                                    Teacher
+                                    </label>
+                                    <select class="form-control" name="teacher_id">
+                                        <option disabled selected>
+                                            Select Teacher ...
+                                        </option>
+                                        @foreach( $teachers as $teacher )
+                                        <option value="{{$teacher->id}}">
+                                            {{$teacher->name}}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="mb-10 fv-row">
+                                    <label>
+                                        Type
+                                    </label>
+                                    <select class="form-control" name="type">
+                                        <option disabled selected>
+                                            Select Type ...
+                                        </option>
+                                        <option value="group">
+                                            group
+                                        </option>
+                                        <option value="private">
+                                            private
+                                        </option>
+                                        <option value="session">
+                                            session
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="mb-10 fv-row">
+                                    <label>
+                                        Group
+                                    </label>
+                                    <select class="form-control" name="group_id">
+                                        <option disabled selected>
+                                            Select Group ...
+                                        </option>
+                                        @foreach( $groups as $group )
+                                        <option value="{{$group->id}}">
+                                            {{$group->name}}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="mb-10 fv-row">
+                                    <label>
+                                        Users
+                                    </label>
+                                    <select class="form-control" name="user_id">
+                                        <option disabled selected>
+                                            Select User ...
+                                        </option>
+                                        @foreach( $users as $user )
+                                        <option value="{{$user->id}}">
+                                            {{$user->name}}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 
-                                <h5 class="modal-title" id="modalCenterTitle">Add Session</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div> 
-                              
-                            <div class="my-2 px-3">
-                              <label>
-                                Session Name
-                              </label>
-                              <input class='form-control' name="link" placeholder="Session Name" />
-                            </div>
+                        
 
-                            <div class="my-2 px-3">
-                            <label>
-                                Session Date
-                            </label>
-                            <input class='form-control' name="date" type="date" placeholder="Session Date" />
-                            </div>
-
-                            <div class="my-2 px-3">
-                            <label>
-                                From
-                            </label>
-                            <input class='form-control' name="from" type="time" placeholder="Session From" />
-                            </div>
-
-                            <div class="my-2 px-3">
-                            <label>
-                                To
-                            </label>
-                            <input class='form-control' name="to" type="time" placeholder="Session To" />
-                            </div>
-
-                            <div class="my-2 px-3">
-                            <label>
-                                Access Dayes
-                            </label>
-                            <input class='form-control' name="access_dayes" placeholder="Access Dayes" />
-                            </div>
-
-                            <div class="my-2 px-3">
-                            <label>
-                                Price
-                            </label>
-                            <input class='form-control' name="price" placeholder="Price" />
-                            </div>
-
-                            <div class="my-2 px-3">
+                                <div class="mb-10 fv-row">
                             <label>
                                 Repeat
                             </label>
                             <select class="form-control s_repeat" name="repeat">
-                                <option disabled>
+                                <option disabled selected>
                                     Select ...
                                 </option>
                                 <option value="Once">
@@ -239,15 +336,206 @@
                                                     FriDay
                                                 </label>
                                             </div>
-                                            <button type="button" class="btn btn-primary days_done_btn">
-                                                Done
-                                            </button>
+                                <div class="mb-10 fv-row">
+                                <label>
+                                    Price
+                                </label>
+                                <input class='form-control' name="price" placeholder="Price" />
+                            </div> 
+                                <!--end::Input group-->  
+                                </div>
+
+                                </div>
+                                <!--end::Wrapper-->
+                            </div>
+                            </div>
+                            <!--end::Step 1-->
+                            <!--begin::Step 2-->
+                            <div data-kt-stepper-element="content">
+                                <!--begin::Wrapper-->
+                                <div class="w-100">
+                                    
+                                    <!--begin::Input group-->
+                                    <div class="mb-10">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold mb-2">Category</label>
+                                        <!--End::Label-->
+                                            
+                                        <!--begin::Input-->
+                                        <select class="form-control sel_cate2" name="category_id">
+                                            <option disabled selected>
+                                                Select Category
+                                            </option>
+                                            @foreach($categories as $category)
+                                            <option value="{{$category->id}}">
+                                                {{$category->cate_name}}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="mb-10">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold mb-2">Course</label>
+                                        <!--End::Label-->
+                                            
+                                        <!--begin::Input-->
+                                        <select class="form-control sel_course2" name="course_id">
+                                            <option disabled selected>
+                                                Select Course
+                                            </option>
+                                        </select>
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="mb-10">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold mb-2">Chapter</label>
+                                        <!--End::Label-->
+                                            
+                                        <!--begin::Input-->
+                                        <select class="form-control sel_chapter2" name="chapter_id">
+                                            <option disabled selected>
+                                                Select Chapter
+                                            </option>
+                                        </select>
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="mb-10">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold mb-2">Lesson</label>
+                                        <!--begin::Input-->
+                                        <select class="form-control sel_lesson2" name="lesson_id">
+                                            <option disabled selected>
+                                                Select Lesson
+                                            </option>
+                                        </select>
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Input group-->
+                                    
+                                </div>
+                                <!--end::Wrapper-->
+                            </div>
+                            </div>
+                            <!--end::Step 2-->
+                            <!--begin::Step 5-->
+                            <div data-kt-stepper-element="content">
+                                <!--begin::Wrapper-->
+                                <div class="w-100">
+                                    <!--begin::Heading-->
+                                    <div class="pb-10 pb-lg-12">
+                                        <!--begin::Title-->
+                                        <h1 class="fw-bold text-gray-900">Answers</h1>
+                                        <!--end::Title-->
+                                    </div>
+                                    <!--end::Heading-->
+                                    <!--begin::Input group-->
+                                   <div class="ideas" id="ideas">
+
+                                    <div class="idea">
+                                        <div class="section_idea">
+                                            <span>Session Link</span>
+                                            <input name="link" class="form-control form-control-lg form-control-solid">
+                                        </div>
+                                        <div class="section_syllabus">
+                                            <span>Material Link</span>
+                                            <input name="material_link" class="form-control form-control-lg form-control-solid">
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <!--end::Wrapper-->
+                            </div>
+                            <script>
+                                let add_new_idea = document.querySelector('#add_new_idea');
+                                let ideas = document.querySelector('.ideas');
+                                add_new_idea.addEventListener('click', () => {
+                                    ideas.innerHTML += `
+                                    <div class="idea">
+                                    <hr />
+                                        <div class="section_idea">
+                                            <span>Answer PDF</span>
+                                            <input type="file" name="ans_pdf[]" class="form-control form-control-lg form-control-solid">
+                                        </div>
+                                        <div class="section_syllabus">
+                                            <span>Answer Video</span>
+                                            <input type="file" name="ans_video[]" class="form-control form-control-lg form-control-solid">
+                                        </div>
+                                        <button type="button" class="btn btn-danger btn_remove_idea">Remove</button>
+                                    </div>`;
+                                let btn_remove_idea = document.querySelectorAll('.btn_remove_idea');
+                                for (let i = 0, end = btn_remove_idea.length; i < end; i++) {
+                                    btn_remove_idea[i].addEventListener('click', ( e ) => {
+                                        for (let j = 0; j < end; j++) {
+                                            if ( e.target == btn_remove_idea[j] ) {
+                                                btn_remove_idea[j].parentElement.remove()
+                                            }
+                                        }
+                                    });
+                                }
+                                });
+                            </script>
+                            <!--end::Step 5-->
+                            <!--begin::Actions-->
+                            <div class="d-flex flex-stack pt-10">
+                                <!--begin::Wrapper-->
+                                <div class="me-2">
+                                    <button type="button" class="btn btn-lg btn-light-primary me-3" data-kt-stepper-action="previous">
+                                    <i class="ki-duotone ki-arrow-left fs-3 me-1">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                    </i>Back</button>
+                                </div>
+                                <!--end::Wrapper-->
+                                <!--begin::Wrapper-->
+                                <div>
+                                    <button class="btn btn-lg btn-primary" >
+                                        Submit 
+                                    </button>
+                                    <button type="button" class="btn btn-lg btn-primary continue_btn" data-kt-stepper-action="next">Continue 
+                                    <i class="ki-duotone ki-arrow-right fs-3 ms-1 me-0">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                    </i></button>
+                                </div>
+                                <!--end::Wrapper-->
+                            </div>
+                            <!--end::Actions-->
+                        </form>
+                        <!--end::Form-->
+                    </div>
+                    <!--end::Stepper-->
+                </div>
+                <!--begin::Modal body-->
+            </div>
+        </div>
+    </div>
+
+                        <!-- Modal -->
+                        <form method="POST" action="{{route('add_session')}}">
+                          @csrf
+                        <div class="modal fade" id="AddmodalCenter" tabindex="-1" aria-hidden="true" style="display: none;">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                
+                                <h5 class="modal-title" id="modalCenterTitle">Add Session</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div> 
+                              
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="my-2 px-3">
+                                <div class="mb-10 fv-row">
                             <label>
                                 Category
                             </label>
@@ -263,7 +551,7 @@
                             </select> 
                             </div>
 
-                            <div class="my-2 px-3">
+                                <div class="mb-10 fv-row">
                             <label>
                                 Course
                             </label>
@@ -274,7 +562,7 @@
                             </select> 
                             </div>
 
-                            <div class="my-2 px-3">
+                                <div class="mb-10 fv-row">
                             <label>
                                 Chapter
                             </label>
@@ -285,7 +573,7 @@
                             </select> 
                             </div>
 
-                            <div class="my-2 px-3">
+                                <div class="mb-10 fv-row">
                             <label>
                                 Lesson
                             </label>
@@ -360,7 +648,7 @@
                                 });
                             </script>
 
-                            <div class="my-2 px-3">
+                                <div class="mb-10 fv-row">
                             <label>
                                 Type
                             </label>
@@ -381,7 +669,7 @@
                             </div>
 
 
-                            <div class="my-2 px-3">
+                                <div class="mb-10 fv-row">
                             <label>
                                 Teachers
                             </label>
@@ -432,7 +720,7 @@
                 {{$session->date}}
             </td>
             <td>
-                {{$session->link}}
+                {{$session->name}}
             </td> 
             <td>
                 {{$session->from}}
@@ -478,49 +766,49 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div> 
 
-                            <div class="my-2 px-3">
+                                <div class="mb-10 fv-row">
                               <label>
                                 Session Name
                               </label>
                               <input class='form-control' name="link" value="{{$session->link}}" placeholder="Session Name" />
                             </div>
 
-                            <div class="my-2 px-3">
+                                <div class="mb-10 fv-row">
                             <label>
                                 Session Date
                             </label>
                             <input class='form-control' name="date" type="date" value="{{$session->date}}" placeholder="Session Date" />
                             </div>
 
-                            <div class="my-2 px-3">
+                                <div class="mb-10 fv-row">
                             <label>
                                 From
                             </label>
                             <input class='form-control' name="from" type="time" value="{{$session->from}}" placeholder="Session From" />
                             </div>
 
-                            <div class="my-2 px-3">
+                                <div class="mb-10 fv-row">
                             <label>
                                 To
                             </label>
                             <input class='form-control' name="to" type="time" value="{{$session->to}}" placeholder="Session To" />
                             </div>
 
-                            <div class="my-2 px-3">
+                                <div class="mb-10 fv-row">
                             <label>
                                 Access Dayes
                             </label>
                             <input class='form-control' value="{{$session->access_dayes}}" name="access_dayes" placeholder="Access Dayes" />
                             </div>
 
-                            <div class="my-2 px-3">
+                                <div class="mb-10 fv-row">
                             <label>
                                 Price
                             </label>
                             <input class='form-control' value="{{$session->price}}" name="price" placeholder="Price" />
                             </div>
 
-                            <div class="my-2 px-3">
+                                <div class="mb-10 fv-row">
                             <label>
                                 Repeat
                             </label>
@@ -540,7 +828,7 @@
                             </select> 
                             </div>
 
-                            <div class="my-2 px-3">
+                                <div class="mb-10 fv-row">
                             <label>
                                 Category
                             </label>
@@ -559,7 +847,7 @@
                             </select> 
                             </div>
 
-                            <div class="my-2 px-3">
+                                <div class="mb-10 fv-row">
                             <label>
                                 Course
                             </label>
@@ -573,7 +861,7 @@
                             </select> 
                             </div>
 
-                            <div class="my-2 px-3">
+                                <div class="mb-10 fv-row">
                             <label>
                                 Chapter
                             </label>
@@ -587,7 +875,7 @@
                             </select> 
                             </div>
 
-                            <div class="my-2 px-3">
+                                <div class="mb-10 fv-row">
                             <label>
                                 Lesson
                             </label>
@@ -674,7 +962,7 @@
                                 });
                             </script>
 
-                            <div class="my-2 px-3">
+                                <div class="mb-10 fv-row">
                             <label>
                                 Type
                             </label>
@@ -698,7 +986,7 @@
                             </div>
 
 
-                            <div class="my-2 px-3">
+                                <div class="mb-10 fv-row">
                             <label>
                                 Teachers
                             </label>
@@ -778,7 +1066,35 @@
     });
     days_done_btn.addEventListener('click', () => {
         screen.classList.add('d-none');
-    });
+    }); 
 
+  let btn  = document.getElementById("btn_print");
+
+  btn.addEventListener('click', () => {
+    window.print();
+  })
 </script>
+       <script>
+        <!--begin::Javascript-->
+		<script>var hostUrl = "assets/";</script>
+		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
+		<script src="assets/plugins/global/plugins.bundle.js"></script>
+		<script src="assets/js/scripts.bundle.js"></script>
+		<!--end::Global Javascript Bundle-->
+		<!--begin::Vendors Javascript(used for this page only)-->
+		<script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
+		<!--end::Vendors Javascript-->
+		<!--begin::Custom Javascript(used for this page only)-->
+		<script src="{{asset('assets/js/widgets.bundle.js')}}"></script>
+		<script src="{{asset('assets/js/custom/widgets.js')}}"></script>
+		<script src="{{asset('assets/js/custom/apps/chat/chat.js')}}"></script>
+		<script src="{{asset('assets/js/custom/utilities/modals/upgrade-plan.js')}}"></script>
+		<script src="{{asset('assets/js/custom/utilities/modals/create-app.js')}}"></script>
+		<script src="{{asset('assets/js/custom/utilities/modals/create-campaign.js')}}"></script>
+		<script src="{{asset('assets/js/custom/utilities/modals/users-search.js')}}"></script>
+		<script src="assets/plugins/global/lessonSc.js"></script>
+		<script src="{{ asset('assets/js/custom/utilities/modals/lessonSc.js') }}"></script>
+
+      
+       </script>
 </x-default-layout>

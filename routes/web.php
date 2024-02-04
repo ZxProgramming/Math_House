@@ -131,6 +131,8 @@ Route::get('/Live/Private_Request', [LiveController::class, 'private_request'])-
 Route::get('/Live/Private_Request/Approve/{id}', [LiveController::class, 'private_session_approve'])->name('private_session_approve');
 Route::post('/Live/Private_Request/Rejected', [LiveController::class, 'private_request_rejected'])->name('private_request_rejected');
 Route::get('/Live/Cancelation', [LiveController::class, 'cancelation'])->name('cancelation');
+Route::get('/Live/Cancelation/Approve/{id}', [LiveController::class, 'approve_cancelation'])->name('approve_cancelation');
+Route::get('/Live/Cancelation/Rejected/{id}', [LiveController::class, 'reject_cancelation'])->name('reject_cancelation');
 
 Route::post('/Users/Admin/Edit', [UserController::class, 'admin_edit'])->name('admin_edit');
 Route::get('/Users/Admin/Del/{id}', [UserController::class, 'del_admin'])->name('del_admin');

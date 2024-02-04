@@ -14,11 +14,14 @@ class Session extends Model
     
     protected $fillable = [
         'date', 
+        'name',
         'link', 
+        'material_link',
         'from', 
         'to', 
         'lesson_id', 
         'teacher_id', 
+        'group_id',
         'type', 
         'price',
         'access_dayes',

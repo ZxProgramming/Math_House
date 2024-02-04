@@ -1070,9 +1070,6 @@
                                                     <span class='btn btn-secondary prev_details'>
                                                         Back
                                                     </span>
-                                                    <button class='btn btn-primary'>
-                                                        Submit
-                                                    </button>
                                                 </div>
                                         </div>
                                     </form>
@@ -1095,7 +1092,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                             
-                            <h5 class="modal-title" id="modalCenterTitle">Edit Role</h5>
+                            <h5 class="modal-title" id="modalCenterTitle">Delete Question</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div> 
                             

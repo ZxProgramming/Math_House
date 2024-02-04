@@ -15,6 +15,7 @@ use App\Models\SessionGroup;
 use App\Models\GroupDay;
 use App\Models\SessionDay;
 use App\Models\PrivateRequest;
+use App\Models\CancelSession;
 
 class LiveController extends Controller
 {
@@ -30,9 +31,14 @@ class LiveController extends Controller
         $teachers = User::
         where('position', 'teacher')
         ->get();
+        $users = User::
+        where('position', 'student')
+        ->get();
+        $groups = SessionGroup::get();
 
         return view('Admin.Live.Live', 
-        compact('sessions', 'categories', 'courses', 'chapters', 'lessons', 'teachers'));
+        compact('sessions', 'groups', 'users', 'categories', 
+        'courses', 'chapters', 'lessons', 'teachers'));
     }
 
     public function session_edit( Request $req ){
@@ -66,11 +72,12 @@ class LiveController extends Controller
     }
 
     public function add_session( Request $req ){
-        $arr = $req->only('link', 'date', 'from', 'to', 'lesson_id', 
+        $arr = $req->only('link', 'date', 'from', 'to', 'lesson_id', 'name',
         'type', 'teacher_id', 'price', 'access_dayes', 'repeat');
         
         $req->validate([
             'link' => 'required',
+            'name' => 'required',
             'date' => 'required',
             'from' => 'required',
             'to' => 'required',
@@ -155,7 +162,32 @@ class LiveController extends Controller
     }
 
     public function cancelation(){
-        return view('Admin.Live.Cancelation');
+        $cancelations = CancelSession::
+        orderByDesc('id')
+        ->where('statue', '!=', 'Approve')
+        ->get();
+
+        return view('Admin.Live.Cancelation', compact('cancelations'));
+    }
+
+    public function approve_cancelation( $id ){
+        CancelSession::
+        where('id', $id)
+        ->update([
+            'statue' => 'Approve'
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function reject_cancelation( $id ){
+        CancelSession::
+        where('id', $id)
+        ->update([
+            'statue' => 'Rejected'
+        ]);
+
+        return redirect()->back();
     }
 
     public function private_request( ){
