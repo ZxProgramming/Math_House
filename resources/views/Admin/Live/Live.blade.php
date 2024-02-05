@@ -809,18 +809,18 @@
                                                                         <label>
                                                                             Users
                                                                         </label>
-                                                                    <div class="select2-danger" data-select2-id="33">
-                                                                        <div class="position-relative" data-select2-id="443">
-                                                                            <select id="select2Danger" name="user_id[]" class="select2 form-select select2-hidden-accessible" multiple="" data-select2-id="select2Danger{{$session->id}}" tabindex="-1" aria-hidden="true">
-                                                                                @foreach ( $session->users as $user )
-                                                                                    <option value="{{$user->id}}" selected data-select2-id="{{$user->id}}">{{$user->name}}</option>
-                                                                                @endforeach
-                                                                                @foreach ($users as $user)
-                                                                                    <option value="{{$user->id}}" data-select2-id="{{$user->id}}">{{$user->name}}</option>
-                                                                                @endforeach
-                                                                            </select>
+                                                                        <div class="select2-danger" data-select2-id="33">
+                                                                            <div class="position-relative" data-select2-id="443">
+                                                                                <select id="select2Danger" name="user_id[]" class="select2 form-select select2-hidden-accessible" multiple="" data-select2-id="select2Danger{{$session->id}}" tabindex="-1" aria-hidden="true">
+                                                                                    @foreach ( $session->users as $user )
+                                                                                        <option value="{{$user->id}}" selected data-select2-id="{{$user->id}}">{{$user->name}}</option>
+                                                                                    @endforeach
+                                                                                    @foreach ($users as $user)
+                                                                                        <option value="{{$user->id}}" data-select2-id="{{$user->id}}">{{$user->name}}</option>
+                                                                                    @endforeach
+                                                                                </select>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
                                                                     </div>
 
 
@@ -830,8 +830,8 @@
                                                                         </label>
                                                                         <select class="form-control s_repeat"
                                                                             name="repeat">
-                                                                            <option disabled selected>
-                                                                                Select ...
+                                                                            <option value="{{$session->repeat}}" selected>
+                                                                                {{$session->repeat}}
                                                                             </option>
                                                                             <option value="Once">
                                                                                 Once
@@ -971,8 +971,8 @@
                                                                         Category
                                                                     </label>
                                                                     <select class="form-control sel_cate1">
-                                                                        <option disabled selected>
-                                                                            Select Category ...
+                                                                        <option value="{{$session->lesson->chapter->course->category->id}}" selected>
+                                                                            {{$session->lesson->chapter->course->category->cate_name}}
                                                                         </option>
                                                                         @foreach ($categories as $category)
                                                                             <option value="{{ $category->id }}">
@@ -987,8 +987,8 @@
                                                                         Course
                                                                     </label>
                                                                     <select class="form-control sel_course1">
-                                                                        <option disabled selected>
-                                                                            Select Course ...
+                                                                        <option value="{{$session->lesson->chapter->course->id}}" selected>
+                                                                            {{$session->lesson->chapter->course->course_name}}
                                                                         </option>
                                                                     </select>
                                                                 </div>
@@ -998,8 +998,8 @@
                                                                         Chapter
                                                                     </label>
                                                                     <select class="form-control sel_chapter1">
-                                                                        <option disabled selected>
-                                                                            Select Chapter ...
+                                                                        <option value="{{$session->lesson->chapter->id}}" selected>
+                                                                            {{$session->lesson->chapter->chapter_name}}
                                                                         </option>
                                                                     </select>
                                                                 </div>
@@ -1010,8 +1010,8 @@
                                                                     </label>
                                                                     <select name="lesson_id"
                                                                         class="form-control sel_lesson1">
-                                                                        <option disabled selected>
-                                                                            Select Lesson ...
+                                                                        <option value="{{$session->lesson_id}}" selected>
+                                                                            {{$session->lesson->lesson_name}}
                                                                         </option>
                                                                     </select>
                                                                 </div>
@@ -1043,12 +1043,12 @@
                                                                     <div class="idea">
                                                                         <div class="section_idea">
                                                                             <span>Session Link</span>
-                                                                            <input name="link"
+                                                                            <input name="link" value="{{$session->link}}"
                                                                                 class="form-control form-control-lg form-control-solid">
                                                                         </div>
                                                                         <div class="section_syllabus">
                                                                             <span>Material Link</span>
-                                                                            <input name="material_link"
+                                                                            <input name="material_link" value="{{$session->material_link}}"
                                                                                 class="form-control form-control-lg form-control-solid">
                                                                         </div>
                                                                     </div>
