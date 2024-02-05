@@ -16,6 +16,7 @@ use App\Models\GroupDay;
 use App\Models\SessionDay;
 use App\Models\PrivateRequest;
 use App\Models\CancelSession;
+use App\Models\SessionStudent;
 
 class LiveController extends Controller
 {
@@ -72,9 +73,9 @@ class LiveController extends Controller
     }
 
     public function add_session( Request $req ){
-        return $req->all();
-        $arr = $req->only('link', 'date', 'from', 'to', 'lesson_id', 'name',
-        'type', 'teacher_id', 'price', 'access_dayes', 'repeat');
+         
+        $arr = $req->only('link', 'date', 'from', 'to', 'lesson_id', 'name', 'material_link',
+        'type', 'teacher_id', 'price', 'access_dayes', 'repeat', 'group_id');
         
         $req->validate([
             'link' => 'required',
@@ -84,12 +85,18 @@ class LiveController extends Controller
             'to' => 'required',
             'lesson_id' => 'required',
             'type' => 'required',
-            'access_dayes' => 'required',
-            'price' => 'required|numeric',
             'teacher_id' => 'required',
             'repeat' => 'required',
         ]);
         $session = Session::create($arr);
+        if ( !empty($req->user_id) ) {
+            for ($i=0, $end = count($req->user_id); $i < $end; $i++) { 
+                SessionStudent::create([
+                    'session_id' => $session->id,
+                    'stu_id' => $req->user_id[$i],
+                ]);
+            }
+        }
         if ( !empty($req->r_day) ) {
             for ($i=0, $end = count($req->r_day); $i < $end; $i++) { 
                 SessionDay::create([

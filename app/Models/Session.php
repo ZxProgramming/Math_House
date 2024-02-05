@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\User;
 use App\Models\Lesson;
+use App\Models\SessionStudent;
+use App\Models\SessionGroup;
 
 class Session extends Model
 {
@@ -36,5 +38,15 @@ class Session extends Model
     public function teacher()
     {
         return $this->belongsTo(User::class, 'teacher_id');
+    }
+ 
+    public function group()
+    {
+        return $this->belongsTo(SessionGroup::class, 'group_id');
+    }
+ 
+    public function users()
+    {
+        return $this->hasMany(SessionStudent::class, 'group_id');
     }
 }
