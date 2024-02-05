@@ -93,7 +93,7 @@ class LiveController extends Controller
             for ($i=0, $end = count($req->user_id); $i < $end; $i++) { 
                 SessionStudent::create([
                     'session_id' => $session->id,
-                    'stu_id' => $req->user_id[$i],
+                    'user_id' => $req->user_id[$i],
                 ]);
             }
         }
