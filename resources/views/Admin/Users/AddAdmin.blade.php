@@ -25,7 +25,7 @@
     @enderror
     @include('success')
 <form class="px-3" method="POST" action="{{route('add_admin')}}">
-    @csrf
+    @csrf 
     <div class='my-3'>
         <label>Name</label>
         <input class='form-control' name="name" placeholder="Name" />
