@@ -91,6 +91,13 @@ class UserController extends Controller
         'email'=>'required|email',
         'phone'=>'required',
         ]);
+        $emails = User::where('email' , $req->email)
+        ->first();
+
+        if ( !empty($emails) ) {
+            session()->flash('faild','Email is Duplicated');
+            return redirect()->back();
+        }
         $arr['password'] = bcrypt($req->password);
         $arr['position'] = 'admin';
         $arr['state'] = 'Show';

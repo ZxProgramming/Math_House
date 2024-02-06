@@ -23,6 +23,7 @@
       {{$message}}
       </div>
     @enderror
+    @include('success')
 <form class="px-3" method="POST" action="{{route('add_admin')}}">
     @csrf
     <div class='my-3'>
