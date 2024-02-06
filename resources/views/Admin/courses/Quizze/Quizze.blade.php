@@ -536,7 +536,7 @@
 
                                   <div class="col-md-12 d-flex align-items-center justify-content-around">
                                     <span class="col-md-2" style="font-size: 1.2rem;">Description: </span>
-                                    <textarea class="col-md-9 form-control" value="{{ $item->description }}" name="description" id="dec_quizze" cols="30" rows="3"></textarea>
+                                    <textarea class="col-md-9 form-control" name="description" id="dec_quizze" cols="30" rows="3">{{ $item->description }}</textarea>
                                   </div>
 
                                   <div class="col-md-12 d-flex align-items-center justify-content-around">

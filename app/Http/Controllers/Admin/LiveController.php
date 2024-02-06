@@ -42,9 +42,9 @@ class LiveController extends Controller
         'courses', 'chapters', 'lessons', 'teachers'));
     }
 
-    public function session_edit( Request $req ){
-        $arr = $req->only('link', 'date', 'from', 'to', 'lesson_id', 
-        'type', 'access_dayes', 'price', 'teacher_id', 'repeat');
+    public function session_edit( $id, Request $req ){
+        $arr = $req->only('link', 'name', 'date', 'from', 'to', 'lesson_id', 
+        'type', 'access_dayes', 'price', 'teacher_id', 'repeat', 'group_id', 'material_link');
         $req->validate([
             'link' => 'required',
             'date' => 'required',
@@ -52,14 +52,23 @@ class LiveController extends Controller
             'to' => 'required',
             'lesson_id' => 'required',
             'type' => 'required',
-            'access_dayes' => 'required',
-            'price' => 'required|numeric',
             'teacher_id' => 'required',
             'repeat' => 'required',
         ]);
         $sessions = Session::
-        where('id', $req->id)
+        where('id', $id)
         ->update($arr);
+        if ( !empty($req->user_id) ) {
+            SessionStudent::where('session_id', $id)
+            ->delete();
+
+            for ($i=0, $end = count($req->user_id); $i < $end; $i++) { 
+                SessionStudent::create([
+                    'session_id' => $id,
+                    'user_id' => $req->user_id[$i],
+                ]);
+            }
+        }
         
         return redirect()->back();
     }

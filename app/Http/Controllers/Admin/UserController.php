@@ -61,9 +61,18 @@ class UserController extends Controller
     public function admin_edit( Request $req ){
         $req->validate([
         'name'=>'required',
-        'email'=>'required',
+        'email'=>'required|email',
         'phone'=>'required',
         ]);
+        $emails = User::where('id', '!=', $req->user_id)
+        ->where('email' , $req->email)
+        ->first();
+
+        if ( !empty($emails) ) {
+            session()->flash('faild','Email is Duplicated');
+            return redirect()->back();
+        }
+
         User::where('id', $req->user_id)
         ->where('position', '!=', 'super_admin')
         ->update($req->only('name', 'email', 'phone'));

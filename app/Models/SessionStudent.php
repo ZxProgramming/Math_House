@@ -11,6 +11,6 @@ class SessionStudent extends Model
     
     protected $fillable = [
         'session_id', 
-        'stu_id',
+        'user_id',
     ];
 }

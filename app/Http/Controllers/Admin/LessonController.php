@@ -27,6 +27,11 @@ class LessonController extends Controller
     public function lesson_edit( Request $req ){
         $arr = $req->only('lesson_name', 'lesson_des', 'chapter_id', 'teacher_id', 
         'pre_requisition', 'gain', 'chapter_id');
+        $req->validate([
+            'lesson_name'=>'required',
+            'chapter_id'=>'required|numeric', 
+            'idea_order'=>'required|numeric',
+            ]);
         $img_name = null;
         extract($_FILES['lesson_url']);
         if( !empty($name) ){
@@ -85,7 +90,11 @@ class LessonController extends Controller
     public function addLesson(request $req){
         $data = $req->only('lesson_name', 'chapter_id', 'teacher_id', 'lesson_des',
         'pre_requisition', 'gain');
-        
+        $req->validate([
+            'lesson_name'=>'required',
+            'chapter_id'=>'required|numeric', 
+            'idea_order'=>'required|numeric',
+            ]);
         $img_name = null;
         extract($_FILES['lesson_url']);
         if( !empty($name) ){

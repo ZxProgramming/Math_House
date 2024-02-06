@@ -67,7 +67,8 @@ class QuizzeController extends Controller
     }
 
     public function edit_quizze( $id, Request $req ){
-        $arr = $req->only('title', 'description', 'time', 'score', 'pass_score', 'state', 'lesson_id');
+        $arr = $req->only('title', 'description', 'time', 'score', 'pass_score', 'lesson_id');
+        $arr['state'] = $req->state == 1 ? 1 : 0;
         $quizze = quizze::where('id', $id)
         ->update($arr);
         

@@ -33,25 +33,7 @@
         {{$message}}
        </div>
        @enderror
-<div class='my-3'>
-  <form class='d-flex' action="{{route('admin_filter')}}" method='POST'>
-    @csrf
-    <select name='admin_role' class='form-control mx-2'>
-      <option disabled>
-        Select Role
-      </option>
-      <option value='Marketing'>Marketing</option>
-      <option value='Questions'>Questions</option>
-      <option value='Teacher'>Teacher</option>
-      <option value='Student'>Student</option>
-      <option value='Lesson'>Lesson</option>
-    </select>
-
-    <button class='btn btn-primary'>
-      Search
-    </button>
-  </form>
-</div>
+       
 <table id="kt_profile_overview_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable no-footer">
     <thead class="fs-7 text-gray-500 text-uppercase">
         <tr>

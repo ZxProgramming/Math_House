@@ -65,9 +65,9 @@ class QuestionController extends Controller
            $arr['q_url'] = $img_name;
        }
 
-       $ans_pdf_file = $_FILES['ans_pdf'];
-       $ans_video_file = $_FILES['ans_video'];
        if ( !empty($req->ans_pdf) ) {
+            $ans_pdf_file = $_FILES['ans_pdf'];
+            $ans_video_file = $_FILES['ans_video'];
            for ($i=0, $end = count($req->ans_pdf); $i < $end; $i++) { 
                $pdf_name = now() . $ans_pdf_file['name'][$i];
                $v_name   = now() . $ans_video_file['name'][$i];

@@ -663,7 +663,7 @@
                             </button>
 
                             <!-- Modal -->
-                            <form method="POST" action="{{ route('session_edit') }}">
+                            <form method="POST" action="{{ route('session_edit', ['id' => $session->id]) }}">
                                 @csrf
                                 <div class="modal fade" id="modalCenter{{ $session->id }}" tabindex="-1"
                                     aria-hidden="true">

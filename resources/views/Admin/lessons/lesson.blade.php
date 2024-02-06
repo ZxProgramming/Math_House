@@ -88,6 +88,21 @@
     </style>
 
 
+@error('lesson_name')
+<div class="alert alert-danger">
+{{$message}}
+</div>
+@enderror
+@error('chapter_id')
+  <div class="alert alert-danger">
+  {{$message}}
+  </div>
+@enderror
+@error('idea_order')
+  <div class="alert alert-danger">
+  {{$message}}
+  </div>
+@enderror 
 </div>
     <button type="button" class='btn btn-primary mx-3' data-bs-toggle="modal" data-bs-target="#filter_modal">
       Filter
