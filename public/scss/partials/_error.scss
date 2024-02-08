@@ -1,0 +1,265 @@
+/*------------------------------
+Error
+-------------------------------*/
+
+.errorarea__inner {
+    text-align: center;
+    .error__img {
+        margin-bottom: 60px;
+        img {
+            width: 100%;
+        }
+    }
+    .error__text {
+        h3 {
+            font-weight: 700;
+            font-size: 50px;
+            line-height: 80px;
+            margin: 0;
+            @media #{$device-md} {
+                font-size: 40px;
+                line-height: 58px;
+            }
+            @media #{$device-sm} {
+                font-size: 35px;
+                line-height: 40px;
+            }
+        }
+        p {
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 22px;
+        }
+    }
+    .error__button {
+        margin-top: 50px;
+        a {
+            padding: 16px 43px;
+        }
+    }
+}
+
+.loginarea {
+    .tab__button__wrap {
+        li {
+            &.nav-item {
+                width: 50%;
+            }
+        }
+    }
+}
+
+.loginarea__wraper {
+    padding: 31px 50px 50px;
+    border-radius: 5px;
+    box-shadow: 0 0 50px 10px rgba(95, 45, 237, 0.1);
+    @media #{$device-sm} {
+        padding: 10px 20px 40px;
+    }
+    .login__heading {
+        text-align: center;
+        .login__title {
+            font-size: 32px;
+            line-height: 1.5;
+            margin: 0 0 8px;
+        }
+        .login__description {
+            a {
+                position: relative;
+                &:after {
+                    content: "";
+                    position: absolute;
+                    width: 0%;
+                    height: 2px;
+                    background: var(--primaryColor);
+                    bottom: 0;
+                    left: 0;
+                    transition: var(--transition);
+                }
+                &:hover {
+                    color: var(--primaryColor);
+                    &:after {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+    form {
+        .login__form {
+            margin-top: 25px;
+            label {
+                display: block;
+                margin-bottom: 10px;
+                color: var(--contentColor);
+            }
+            .common__login__input {
+                background-color: transparent;
+                border: 1px solid var(--borderColor);
+                font-size: 14px;
+                font-weight: 400;
+                height: 52px;
+                padding: 3px 20px;
+                width: 100%;
+                border-radius: 5px;
+                color: var(--contentColor);
+            }
+            .form__check {
+                display: flex;
+                input {
+                    width: 18px;
+                    margin-right: 8px;
+                }
+                label {
+                    margin-bottom: 0;
+                }
+            }
+            .login__form__link {
+                a {
+                    position: relative;
+                    &:after {
+                        content: "";
+                        position: absolute;
+                        width: 0%;
+                        height: 2px;
+                        background: var(--primaryColor);
+                        bottom: 0;
+                        left: 0;
+                        transition: var(--transition);
+                    }
+                    &:hover {
+                        color: var(--primaryColor);
+                        &:after {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+        .login__button {
+            margin-top: 25px;
+            a {
+                width: 100%;
+            }
+        }
+    }
+    .login__social__option {
+        margin-top: 25px;
+        text-align: center;
+        p {
+            position: relative;
+            &::before {
+                content: "";
+                position: absolute;
+                height: 1px;
+                background: var(--borderColor4);
+                width: 40%;
+                left: 0;
+                top: 16px;
+                @media #{$device-md} {
+                    width: 30%;
+                }
+                @media #{$device-sm} {
+                    width: 30%;
+                }
+            }
+            &::after {
+                content: "";
+                position: absolute;
+                height: 1px;
+                background: var(--borderColor4);
+                width: 40%;
+                right: 0;
+                top: 16px;
+                @media #{$device-md} {
+                    width: 30%;
+                }
+                @media #{$device-sm} {
+                    width: 30%;
+                }
+            }
+        }
+        .login__social__btn {
+            li {
+                a {
+                    padding: 10px 44px;
+                }
+                .login__button__1 {
+                    margin-right: 20px;
+                    @media #{$device-md} {
+                        margin-right: 10px;
+                        margin-bottom: 0
+                    }
+                    @media #{$device-sm} {
+                        margin-right: 0;
+                        margin-bottom: 20px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.loginarea {
+    position: relative;
+}
+
+.login__shape__img {
+    .hero__shape {
+        position: absolute;
+        &.hero__shape__1 {
+            right: 14%;
+            top: 30%;
+            animation: 3s linear 0s infinite alternate none running dot-anim;
+        }
+        &.hero__shape__2 {
+            top: 50%;
+            left: 5%;
+            animation: 3s linear 0s infinite alternate none running dot-anim-2;
+        }
+        &.hero__shape__3 {
+            left: 50%;
+            bottom: 60px;
+            animation: cir-anim 6s linear 0s infinite alternate;
+        }
+        &.hero__shape__4 {
+            left: 50%;
+            top: 40px;
+            animation: cir-anim 6s linear 0s infinite alternate;
+        }
+    }
+}
+
+
+
+
+.maintaince{
+    .row{
+        height: 100vh;
+    }
+    h1{
+        @media #{$device-xxl} {
+            font-size: 100px;
+        }
+    }
+    .featurearea__countdown {
+        margin: 50px 0 0 0;
+        .count{
+            @media #{$device-xxl} {
+                height: 120px;
+                width: 120px;
+            }
+            margin: 0 20px;
+            p{
+                margin-bottom: 10px;
+                @media #{$device-xxl} {
+                    font-size: 40px;
+                }
+            }
+            span{
+                font-size: 20px;
+            }
+        }
+    }
+}
+

@@ -1,0 +1,51 @@
+/* Normal desktop :1200px. */
+@media (min-width: 1500px) and (max-width: 1920px) {
+
+
+}
+
+
+/* Normal desktop :1200px. */
+@media (min-width: 1366px) and (max-width: 1499px) {
+
+
+}
+
+
+
+/* Normal desktop :992px. */
+@media (min-width: 992px) and (max-width: 1365px) {
+
+
+
+}
+
+ 
+/* Tablet desktop :768px. */
+@media (min-width: 768px) and (max-width: 991px) {
+
+    .header__area .desktop__menu__wrapper{
+        display: none;
+    }
+
+    .header__area .mob__menu__wrapper {
+        display: block;
+    }
+
+}
+
+
+
+ 
+/* small mobile :320px. */
+@media (max-width: 767px) {
+
+ 
+}
+ 
+/* Large Mobile :576px. */
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+
+ 
+}
+

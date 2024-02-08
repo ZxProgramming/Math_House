@@ -1,0 +1,45 @@
+/*------------------------------
+Counter Area
+-------------------------------*/
+
+.counterarea {
+    @media #{$device-lg} {
+        padding-bottom: 80px;
+    }
+    @media #{$device-md} {
+        padding-bottom: 70px;
+    }
+    @media #{$device-sm} {
+        padding-bottom: 50px;
+    }
+}
+
+.counterarea__text__wraper {
+    display: flex;
+    align-items: center;
+    @media #{$device-md} {
+        margin-bottom: 30px;
+    }
+    @media #{$device-sm} {
+        margin-bottom: 30px;
+    }
+    .counter__img {
+        margin-right: 16px;
+    }
+    .counter__content__wraper {
+        .counter__number {
+            font-weight: 700;
+            font-size: 34px;
+            line-height: 1.1;
+            font-family: 'Hind';
+            color: var(--blackColor);
+        }
+        p {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 18px;
+            color: var(--blackColor);
+            margin: 0;
+        }
+    }
+}

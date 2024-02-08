@@ -1,0 +1,402 @@
+/*------------------------------
+Dark Mode
+-------------------------------*/
+
+.is_dark {
+    .mode_switcher.my_switcher button {
+        color: var(--blackColor);
+        background: var(--whiteColor);
+        border-color: var(--blackColor);
+    }
+    .headerarea__main__menu nav ul>li .headerarea__submenu>li:hover>a {
+        color: var(--blackColor);
+    }
+    .headerarea__button a {
+        color: var(--blackColor);
+    }
+    .headerarea__login a:hover {
+        color: var(--blackColor);
+    }
+    .herobannerarea__title .herobannerarea__title__heading__2 h2 {
+        color: var(--blackColor);
+    }
+    .herobannerarea__text p {
+        color: var(--blackColor);
+    }
+    .default__button {
+        color: var(--blackColor);
+    }
+    .single__service:hover .service__content h3 a {
+        color: var(--blackColor);
+    }
+    .single__service:hover .service__content h3 a:hover {
+        color: var(--secondaryColor);
+    }
+    .single__service:hover .service__content p {
+        color: var(--blackColor);
+    }
+    .gridarea__wraper .gridarea__img .gridarea__small__button .grid__badge {
+        color: var(--blackColor);
+    }
+    .gridarea__wraper .gridarea__img .gridarea__small__icon i {
+        color: var(--blackColor);
+    }
+    .gridarea__wraper {
+        background: var(--naveBlue);
+    }
+    .single__service:hover .service__img .service__icon__bg path {
+        fill: var(--blackColor);
+    }
+    .gridarea__wraper {
+        box-shadow: 0 0 20px 10px rgba(95, 45, 237, 0.1);
+    }
+    .registerarea__section__title .section__title__heading h2 {
+        color: var(--blackColor);
+    }
+    .registerarea__content .registerarea__video p {
+        color: var(--blackColor);
+    }
+    .registerarea__form {
+        box-shadow: 0 0 20px 10px rgba(95, 45, 237, 0.1);
+        background: var(--naveBlue);
+    }
+    .single__event__wraper:hover {
+        background: var(--blackColor);
+    }
+    .default__arrow .slick-arrow {
+        color: var(--blackColor);
+    }
+    .default__arrow .slick-arrow:hover {
+        color: var(--secondaryColor);
+    }
+    .footerarea {
+        background: var(--lightGrey);
+    }
+    .footerarea__newsletter__button a {
+        color: var(--blackColor);
+    }
+    .footerarea__newsletter__button a:hover {
+        color: var(--primaryColor);
+    }
+    .footerarea__wrapper .footerarea__inner .footerarea__heading h3 {
+        color: var(--blackColor);
+    }
+    .footerarea__right__wraper .footerarea__right__list ul li a .footerarea__right__content h6 {
+        color: var(--blackColor);
+    }
+    .footerarea__right__wraper .footerarea__right__list ul li a:hover .footerarea__right__content h6 {
+        color: var(--primaryColor);
+    }
+    .footerarea__wrapper .footerarea__inner .footerarea__icon ul li a {
+        color: var(--whiteColor);
+    }
+    .footerarea__wrapper .footerarea__inner .footerarea__icon ul li a:hover {
+        color: var(--blackColor);
+        background: var(--secondaryColor);
+    }
+    .mobile-off-canvas .mobile-aside-button {
+        color: var(--blackColor);
+    }
+    .mobile-off-canvas-active .mobile-aside-close {
+        background: var(--darkdeep1);
+        color: var(--blackColor);
+    }
+    .mobile-off-canvas-active .header-mobile-aside-wrap .mobile-search form input {
+        color: var(--blackColor);
+    }
+    .mobile-off-canvas-active .header-mobile-aside-wrap .mobile-menu-wrap .mobile-navigation nav .mobile-menu li a {
+        color: var(--blackColor);
+    }
+    .mobile-off-canvas-active .header-mobile-aside-wrap .mobile-menu-wrap .mobile-navigation nav .mobile-menu li.menu-item-has-children .menu-expand i {
+        border-bottom: 1px solid var(--blackColor);
+    }
+    .mobile-off-canvas-active .mobile-aside-close:hover {
+        background: var(--secondaryColor);
+    }
+    .mobile-off-canvas-active .mobile-aside-close:hover i {
+        color: var(--blackColor);
+    }
+    .mobile-off-canvas-active .header-mobile-aside-wrap .mobile-menu-wrap .mobile-navigation nav .mobile-menu li.menu-item-has-children .menu-expand i::before {
+        border-bottom: 1px solid var(--blackColor);
+    }
+    .mobile-off-canvas-active .header-mobile-aside-wrap .mobile-curr-lang-wrap .single-mobile-curr-lang a {
+        color: var(--blackColor);
+    }
+    .mobile-off-canvas-active .header-mobile-aside-wrap .mobile-menu-wrap .mobile-navigation nav .mobile-menu li a:hover {
+        color: var(--secondaryColor);
+    }
+    .mobile-off-canvas-active .header-mobile-aside-wrap .mobile-curr-lang-wrap .single-mobile-curr-lang:hover>a {
+        color: var(--secondaryColor);
+    }
+    .mobile-off-canvas-active .header-mobile-aside-wrap .mobile-social-wrap a {
+        color: var(--blackColor);
+    }
+    .mobile-off-canvas-active .header-mobile-aside-wrap .mobile-social-wrap a:hover {
+        color: var(--secondaryColor);
+    }
+    .mobile-off-canvas-active .header-mobile-aside-wrap .mobile-search form button {
+        color: var(--blackColor);
+    }
+    .mobile-off-canvas-active .header-mobile-aside-wrap .mobile-search form button:hover {
+        color: var(--secondaryColor);
+    }
+    .populerarea__content__wraper__2 .populerarea__button__2 .default__button {
+        color: var(--blackColor);
+    }
+    .aboutarea__para__3 .aboutarea__icon__3 i {
+        color: var(--blackColor);
+    }
+    .blogarea__content__wraper .blogarea__img .blogarea__date {
+        color: var(--blackColor);
+    }
+    .footerarea__text h3 {
+        color: var(--blackColor);
+    }
+    .foter__bottom__text .footer__bottom__content h6 {
+        color: var(--blackColor);
+    }
+    .foter__bottom__text .footer__bottom__icon i {
+        color: var(--blackColor);
+    }
+    .footerarea__copyright__wrapper .footerarea__copyright__content.footerarea__copyright__content__2 p {
+        color: var(--blackColor);
+    }
+    .footerarea__icon__2 ul li a {
+        color: var(--blackColor);
+    }
+    .single__team .teamarea__img .teamarea__icon ul li i:hover {
+        color: var(--blackColor);
+    }
+    .testimonialarea__paragraph__3 p {
+        color: var(--blackColor);
+    }
+    .testimonial__slider__active__3 .slick-arrow {
+        background: var(--blackColor);
+    }
+    .testimonial__slider__active__3 .slick-arrow:hover {
+        background: var(--secondaryColor);
+        color: var(--blackColor);
+    }
+    #scrollUp {
+        background: var(--primaryColor);
+        color: var(--blackColor);
+        box-shadow: 0 0 20px 10px rgba(95, 45, 237, 0.1);
+    }
+    .blogarae__img__2 .blogarea__date__2 {
+        color: var(--blackColor);
+    }
+    .blog__content__wraper__2 {
+        box-shadow: 0 0 50px 10px rgba(95, 45, 237, 0.15);
+    }
+    .main__pagination__wrapper ul li a.active {
+        color: var(--secondaryColor);
+    }
+    .blogsidebar__content__wraper__2 .populer__tag__list ul li a:hover {
+        color: var(--blackColor);
+        border-color: var(--primaryColor);
+    }
+    .blogsidebar__content__wraper__2 .follow__icon ul li a:hover {
+        color: var(--blackColor);
+    }
+    .blogsidebar__content__wraper__2 .categorie__list li:hover {
+        border: var(--primaryColor);
+    }
+    .blogsidebar__content__wraper__2 .categorie__list li:hover a {
+        color: var(--blackColor);
+    }
+    .blogsidebar__content__wraper__2 .photo__gallery__img .single__gallery__img .gallery__icon a {
+        color: var(--blackColor);
+    }
+    .is_dark .topbararea {
+        background: var(--lightGrey10);
+        box-shadow: 0 0 50px 10px rgba(95, 45, 237, 0.1);
+    }
+    .topbar__left ul li {
+        color: var(--blackColor);
+    }
+    .topbar__right .topbar__text p {
+        color: var(--blackColor);
+    }
+    .topbar__right .topbar__list ul li a {
+        color: var(--blackColor);
+    }
+    .contact__form__inner {
+        border: none;
+        box-shadow: 0 0 50px 10px rgba(95, 45, 237, 0.1);
+    }
+    .course__categories__list ul li a:hover {
+        color: var(--blackColor);
+    }
+    .course__input input {
+        border: 1px solid var(--blackColor);
+        background: none;
+        color: var(--blackColor);
+    }
+    .course__input .search__button button {
+        color: var(--blackColor);
+    }
+    .course__button a {
+        color: var(--blackColor);
+    }
+    .course__tap__wrap li button.active {
+        background: var(--primaryColor);
+        color: var(--blackColor);
+    }
+    .course__tap__wrap li:hover button {
+        color: var(--blackColor);
+    }
+    .content__cirriculum__wrap .accordion-body {
+        background: var(--whiteColor);
+    }
+    .scc__info i {
+        color: var(--blackColor);
+    }
+    .scc__meta {
+        color: var(--blackColor);
+    }
+    .scc__wrap .question {
+        color: var(--blackColor);
+    }
+    .add__a__review__wrapper {
+        background-color: transparent;
+        box-shadow: 0 0 20px 10px rgba(95, 45, 237, 0.1);
+    }
+    .add__a__review__wrapper .add__a__review__input input {
+        border: 1px solid var(--blackColor);
+        background: none;
+        color: var(--blackColor);
+    }
+    .add__a__review__wrapper .add__a__review__input textarea {
+        border: 1px solid var(--blackColor);
+        background: none;
+        color: var(--blackColor);
+    }
+    .add__a__review__wrapper .mb-0 {
+        color: var(--blackColor);
+    }
+    .blog__details__comment .author__icon button path {
+        fill: var(--blackColor);
+    }
+    .property__comment .property__comment__list .property__comment__comment span {
+        color: var(--blackColor);
+    }
+    .headerarea__right .header__cart::before {
+        color: var(--blackColor);
+    }
+    .eventarea__details__small__button a {
+        color: var(--blackColor);
+    }
+    .single__expart__teacher .teacher__icon ul li a:hover {
+        color: var(--blackColor);
+    }
+    .topbararea {
+        background: var(--lightGrey10);
+    }
+    .headerarea__right .header__cart .header__right__dropdown__wrapper {
+        background-color: var(--darkdeep3);
+    }
+    .headerarea__right .header__cart .header__right__dropdown__wrapper .header__right__dropdown__button a.white__color:hover {
+        color: var(--blackColor);
+    }
+    .blog__details__tag ul li a:hover {
+        color: var(--blackColor);
+    }
+    .aboutarea__list__2 ul li:hover i {
+        color: var(--blackColor);
+    }
+    .content__cirriculum__wrap .accordion-button {
+        background-color: var(--bodyBg);
+    }
+    .blogarea__content__wraper {
+        box-shadow: 0 0 50px 10px rgba(95, 45, 237, 0.1);
+    }
+    .blogsidebar__content__wraper__2 .recent__list li .recent__img .recent__number span {
+        color: var(--blackColor);
+    }
+    .keyfeatures li {
+        color: var(--blackColor);
+    }
+    .herobannerarea.herobannerarea__university .herobannerarea__single__slider .herobannerarea__title h2 {
+        color: var(--blackColor);
+    }
+    .herobannerarea.herobannerarea__university .footerarea__icon__2 p {
+        color: var(--blackColor);
+    }
+    .herobannerarea.herobannerarea__machine__learning .herobannerarea__text__2 p {
+        color: var(--blackColor);
+    }
+    .herobannerarea__machine__learning .slider__controls__wrap.slider__controls__pagination .swiper-pagination-bullet {
+        outline: 2px solid var(--blackColor);
+    }
+    .herobannerarea__machine__learning .slider__controls__wrap.slider__controls__pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
+        background: var(--blackColor);
+    }
+    .search__form .search__form__categories svg {
+        color: var(--whiteColor);
+    }
+    .featurearea__price span.featurearea__price__button {
+        color: var(--blackColor);
+    }
+    .featurearea__price span.featurearea__price__button.black__color {
+        color: var(--whiteColor);
+    }
+    .featurearea__countdown .count p {
+        color: var(--blackColor);
+    }
+    .featurearea__countdown .count span {
+        color: var(--blackColor);
+    }
+    .faqarea__heading h3 {
+        color: var(--blackColor);
+    }
+    .faqarea__wrapper .accordion-body {
+        background: var(--whiteColor);
+    }
+    .tab__button__wrap li button {
+        box-shadow: 0px 0 20px 5px rgba(255, 255, 255, 0.1);
+    }
+    .headerarea .mega__menu__thumb {
+        box-shadow: 0px 0 20px 5px rgba(255, 255, 255, 0.2);
+    }
+    .headerarea .mega__menu__thumb__title {
+        color: var(--blackColor);
+    }
+    .headerarea .mega__menu__thumb__label {
+        color: var(--blackColor);
+    }
+    .dashboard__table__row {
+        background: var(--whiteColor);
+    }
+    .dashboard__nav__title h6 {
+        background: var(--whiteColor);
+    }
+    .dashboard__single__counter {
+        background: var(--whiteColor);
+    }
+    .dashboardarea__star span {
+        color: var(--blackColor);
+    }
+    .dashboardarea__left__content h5 {
+        color: var(--blackColor);
+    }
+    .dashboardarea__left__content h4 {
+        color: var(--blackColor);
+    }
+    .dashboard__content__wraper,
+    .dashboard__admin__report__wrap,
+    .dashboard__inner {
+        box-shadow: 0 0 1px 1px rgba(95, 45, 237, 0.2);
+    }
+    .modal__wraper .btn-close {
+        background-color: var(--blackColor);
+    }
+    .create__course__accordion__wraper .accordion-item {
+        box-shadow: 0 0 1px 1px rgba(95, 45, 237, 0.2);
+    }
+    .shopsidebar__widget {
+        box-shadow: 0 0 1px 1px rgba(95, 45, 237, 0.2);
+    }
+    .dashboard__table table thead {
+        background: var(--whiteColor);
+    }
+}

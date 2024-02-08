@@ -1,0 +1,95 @@
+/*********************************************************************************
+
+	Template Name: Edurock - Education LMS Template
+    Author: Techboot
+    Support: techbootmail@gmail.com
+    Description: Edurock -  Education, online course, bootstrap 5.0 LMS Template.
+    Version: 1.0.0
+
+**********************************************************************************/
+
+
+/**************************************************************
+
+	Start Style sheet Indexing
+	|
+	|___ Default Styles
+	|	|
+	|	|___ Variables
+	|	|___ Mixins
+	|	|___ Reset
+	|	|___ Typography
+	|	|___ Extend
+	|	|___ Animations
+	|	|___ Short Code
+	|	|___ Spacing
+	|
+	|
+	|___Header Styles
+	|	|___ header
+	|	|___ main_menu
+    |	|___ mobile_menu
+	|
+	|
+	|___Section Styles
+	|	|___ Hero Banner 
+	|	|___ Education 
+	|	|___ Training
+	|	|___ About
+	|	|___ Popular
+	|	|___ Grid
+	|	|___ Event
+	|	|___ Register
+	|	|___ testimonial
+	|	|___ Counter
+	|	|___ Team
+	|
+	|___Page Styles
+	|	|___ Instructor 
+	|	|___ Blog 
+	|	|___ Course 
+	|	|___ Contact 
+	|	|___ Error 
+	|	|___ Breadcrumb 
+	|
+	|___Footer Styles
+	|	|___ Footer 
+	|	|___ Copyright
+	|
+	|___Light/Dark Styles
+	|	|___ Light/Dark 
+	|
+	|___ End Style Sheet Indexing
+
+***************************************************************/
+
+@import "partials/root";
+@import "partials/default";
+@import "partials/header";
+@import "partials/mobile-menu";
+@import "partials/herobanner";
+@import "partials/education";
+@import "partials/training";
+@import "partials/about";
+@import "partials/populer";
+@import "partials/grid";
+@import "partials/event";
+@import "partials/register";
+@import "partials/testimonial";
+@import "partials/counter";
+@import "partials/team";
+@import "partials/instructor";
+@import "partials/blog";
+@import "partials/course";
+@import "partials/contact";
+@import "partials/error";
+@import "partials/breadcrumb";
+@import "partials/animate";
+@import "partials/product_details";
+@import "partials/faq";
+@import "partials/cart";
+@import "partials/checkout";
+@import "partials/shop";
+@import "partials/dashboard";
+@import "partials/footer";
+@import "partials/is-dark";

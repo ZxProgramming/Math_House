@@ -1,0 +1,61 @@
+.faqarea{
+    &__heading{
+        position: relative;
+        transform: rotate(-90deg) translatex(-50%);
+        @media #{$device-md} {
+            transform: none;
+        }
+        @media #{$device-sm} {
+            transform: none;
+        }
+     
+        h3{
+            color: var(--lightGrey);
+            font-size: 200px;
+            font-weight: 700;
+            text-transform: uppercase;
+            opacity: 0.5;
+            @media #{$device-xl} {
+                font-size: 140px;
+            }
+            @media #{$device-lg} {
+                font-size: 140px;
+            }
+            @media #{$device-md} {
+                font-size: 150px;
+            }
+            @media #{$device-sm} {
+                font-size: 150px;
+            }
+        }
+    }
+    &__wrapper{
+        .accordion-item{
+            .accordion-header{
+                button{
+                    padding: 24px 25px 25px;
+                    font-size: 20px;
+                    font-weight: 700;
+                    position: relative;
+                    transform: inherit;
+                    background-color: var(--whiteColor);
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                    border: 0;
+                    border-radius: 0;
+                    overflow-anchor: none;
+                    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, border-radius 0.15s ease;
+                    color: var(--blackColor);
+                    @media #{$device-sm} {
+                        font-size: 18px;
+                    padding: 14px 10px 15px;
+
+                    }
+
+                    
+                }
+            }
+        }
+    }
+}

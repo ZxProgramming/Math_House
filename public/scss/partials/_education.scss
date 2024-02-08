@@ -1,0 +1,279 @@
+/*------------------------------
+Education Area
+-------------------------------*/
+
+.educationarea {
+    padding-top: 240px;
+    padding-bottom: 175px;
+    position: relative;
+    @media #{$device-lg} {
+        padding-top: 200px;
+    }
+    @media #{$device-md} {
+        padding-top: 50px;
+    }
+    @media #{$device-sm} {
+        padding-top: 50px;
+    }
+    .row {
+        align-items: center;
+    }
+    &__wrapper {
+        padding-right: 160px;
+        @media #{$device-lg} {
+            padding-right: 50px;
+        }
+        @media #{$device-md} {
+            padding-right: 0px;
+            padding-bottom: 70px;
+        }
+        @media #{$device-sm} {
+            padding-right: 0px;
+            padding-bottom: 30px;
+        }
+        .educationarea__heading {
+            margin-bottom: 18px;
+            @media #{$device-lg} {
+                margin-bottom: 10px;
+            }
+            @media #{$device-md} {
+                margin-bottom: 10px;
+            }
+            @media #{$device-sm} {
+                margin-bottom: 0;
+            }
+            h2 {
+                font-size: 60px;
+                font-family: var(--headingFont);
+                line-height: 72px;
+                font-weight: 700;
+                color: var(--blackColor);
+                margin: 0;
+                @media #{$device-lg} {
+                    font-size: 50px;
+                    line-height: 62px;
+                }
+                @media #{$device-md} {
+                    font-size: 40px;
+                    line-height: 62px;
+                }
+                @media #{$device-sm} {
+                    font-size: 40px;
+                    line-height: 52px;
+                }
+            }
+        }
+    }
+    .educationarea__content {
+        margin-bottom: 30px;
+        @media #{$device-lg} {
+            margin-bottom: 20px;
+        }
+        @media #{$device-md} {
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 18px;
+            line-height: 30px;
+            color: var(--contentColor);
+            @media #{$device-lg} {
+                font-size: 16px;
+                line-height: 25px;
+            }
+            @media #{$device-md} {
+                font-size: 15px;
+                line-height: 25px;
+            }
+            @media #{$device-sm} {
+                font-size: 15px;
+                line-height: 25px;
+            }
+        }
+    }
+    .educationarea__bottom__button {
+        input {
+            height: 58px;
+            width: 311px;
+            padding-left: 13px;
+            border: 1px solid var(--lightGrey2);
+            border-radius: var(--borderRadius);
+            margin-right: 12px;
+            &::placeholder {
+                color: var(--lightGrey);
+            }
+            @media #{$device-sm} {
+                margin-bottom: 20px;
+                margin-right: 0;
+            }
+        }
+        a {
+            padding: 14px 39px;
+        }
+    }
+    .hero__shape {
+        position: absolute;
+        &__1 {
+            right: 16%;
+            top: 60%;
+            animation: 3s linear 0s infinite alternate none running dot-anim;
+            @media #{$device-md} {
+                right: 31px;
+                top: 70%;
+            }
+        }
+        &__2 {
+            right: 9%;
+            top: 58%;
+            animation: 3s linear 0s infinite alternate none running dot-anim-2;
+            @media #{$device-md} {
+                right: 12%;
+            }
+        }
+        &__3 {
+            left: 50%;
+            bottom: 15%;
+            animation: cir-anim 6s linear 0s infinite alternate;
+            @media #{$device-md} {
+                left: 4%;
+            }
+        }
+        &__4 {
+            left: 53%;
+            top: 43%;
+            animation: cir-anim 6s linear 0s infinite alternate;
+            @media #{$device-md} {
+                left: 9%;
+            }
+            @media #{$device-sm} {
+                top: 41%;
+            }
+        }
+    }
+}
+
+.educationarea__right__wraper {
+    position: relative;
+    height: 100%;
+    .educationarea__img {
+        text-align: right;
+        @media #{$device-md} {
+            text-align: center;
+        }
+        .education__img__2 {
+            position: absolute;
+            bottom: -93px;
+            left: 0;
+            @media #{$device-md} {
+                left: 30px;
+            }
+        }
+        .education__img__3 {
+            position: absolute;
+            z-index: -9;
+            left: 20px;
+            top: 40px;
+            @media #{$device-md} {
+                left: 30px;
+            }
+        }
+        .education__img__4 {
+            position: absolute;
+            top: -22px;
+            z-index: -1;
+            right: -16px;
+            animation: dot-anim-2 3s linear 0s infinite alternate;
+            @media #{$device-md} {
+                right: 155px;
+            }
+        }
+    }
+    .educationarea__small__img {
+        position: absolute;
+        right: 40px;
+        bottom: -105px;
+        @media #{$device-lg} {
+            right: -50px;
+            bottom: -125px;
+            max-width: 160px;
+        }
+        @media #{$device-md} {
+            right: 219px;
+        }
+        @media #{$device-sm} {
+            bottom: -136px;
+        }
+        a {
+            img+img {
+                margin-left: -35px;
+            }
+            &:hover {
+                img+img {
+                    margin-left: -30px;
+                }
+            }
+        }
+        .educationarea__small__para {
+            p {
+                font-size: 14px;
+                color: var(--lightGrey3);
+                span {
+                    color: var(--blackColor);
+                }
+            }
+        }
+    }
+    .educationarea__small__img__2 {
+        position: absolute;
+        background: var(--whiteColor);
+        width: 342px;
+        height: 75px;
+        top: 41px;
+        right: -166px;
+        padding: 10px;
+        box-shadow: 0px 10px 20px 0px rgb(0 5 52 / 10%);
+        animation: move5 3s infinite linear;
+        display: flex;
+        @media #{$device-xl} {
+            right: -86px;
+        }
+        @media #{$device-lg} {
+            right: -26px;
+        }
+        @media #{$device-md} {
+            right: 9px;
+        }
+        @media #{$device-sm} {
+            right: 0;
+            top: 24px;
+            width: 300px;
+        }
+        img {
+            margin-right: 20px;
+        }
+        .educationarea__small__content {
+            span {
+                font-weight: 600;
+                font-size: 15px;
+                line-height: 18px;
+                color: var(--greencolor3);
+            }
+            p {
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 17px;
+                margin: 0;
+            }
+        }
+    }
+}
+
+.educationarea__img {
+    .aboutimg__4__img__1 {
+        width: 100%;
+    }
+    .aboutimg__4__img__2 {
+        @media #{$device-sm} {
+            width: 100%;
+        }
+    }
+}

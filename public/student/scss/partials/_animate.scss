@@ -1,0 +1,54 @@
+.animate__content {
+    background-color: var(--borderColor);
+    overflow: hidden;
+    &__wrap {
+        display: flex;
+        width: fit-content;
+        white-space: nowrap;
+        position: relative;
+        will-change: transform;
+        animation: marquee 50s linear 0s infinite normal;
+        animation-play-state: running;
+        &:hover {
+            animation-play-state: paused;
+        }
+    }
+    &__single {
+        display: block;
+        width: 100%;
+        min-width: max-content;
+        padding-inline: 16px;
+        span {
+            font-size: 30px;
+            line-height: 1;
+            font-weight: 500;
+            color: var(--darkdeep2);
+            a{
+             color: var(--darkdeep2);
+             &:hover{
+                color: var(--primaryColor);  
+             } 
+            }
+        }
+        &--2 {
+            span {
+                color: var(--primaryColor);
+                a{
+                    color: var(--primaryColor);
+                    &:hover{
+                        color: var(--secondaryColor);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}

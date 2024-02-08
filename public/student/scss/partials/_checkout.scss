@@ -1,0 +1,95 @@
+.checkoutarea{
+    @media #{$device-xl} {
+        padding-top:80px;
+        padding-bottom: 80px;
+      }
+    @media #{$device-lg} {
+        padding-top:60px;
+        padding-bottom: 60px;
+      }
+      @media #{$device-md} {
+        padding-top: 50px;
+        padding-bottom: 50px;
+      }
+      
+      @media #{$device-sm} {
+        padding-top: 50px;
+        padding-bottom: 50px;
+      }
+   &__billing__heading{
+    h2{
+        border-bottom: 1px solid var( --borderColor);
+        color: var(--blackColor);
+        font-size: 20px;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+    }
+   } 
+   &__inputbox{
+    label{
+      font-weight: 500;
+      color: var(--blackColor);
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+    input{
+        background: transparent;
+        border: 1px solid var(--borderColor);
+        color: var(--blackColor);
+        font-size: 14px;
+        height: 50px;
+        line-height: 50px;
+        vertical-align: middle;
+        width: 100%;
+        padding: 0 20px;
+        margin-bottom: 20px;
+    }
+   }
+   &__payment__wraper{
+    background: var(--greyColor2);
+    padding: 35px;
+    @media #{$device-md} {
+        padding: 10px;
+      }
+    @media #{$device-sm} {
+        padding: 10px;
+      }
+   }
+   &__total{
+    h3{
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 15px;
+        text-transform: capitalize;
+    }
+   }
+   &__table{
+    width: 100%;
+   }
+   &__item{
+    border-top: 1px solid var(--borderColor2);
+    td{
+        border-style: solid none none;
+        border-width: 1px medium medium;
+        font-weight: 500;
+        padding: 15px;
+        color: var(--blackColor);
+        @media #{$device-sm} {
+          padding: 10px;
+        }
+    }
+
+   }
+   &__payment__input__box{
+    margin-top: 30px;
+    a{
+        padding: 10px 40px;
+    }
+   }
+}
+
+.checkoutarea__payment__type label {
+	color: var(--blackColor);
+	padding-left: 5px;
+	padding-bottom: 10px;
+}

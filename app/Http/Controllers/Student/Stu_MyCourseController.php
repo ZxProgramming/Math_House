@@ -48,4 +48,13 @@ class Stu_MyCourseController extends Controller
 
         return view('Student.MyCourses.Chapters_Working', compact('payment_request', 'course_id'));
     }
+
+    public function stu_lessons ( $id ){
+        $payment_request = PaymentRequest::
+        where('user_id', auth()->user()->id)
+        ->where('state', 'Approve')
+        ->get();
+        $chapter_id = $id;
+        return view('Student.MyCourses.Lessons', compact('payment_request', 'chapter_id'));
+    }
 }
