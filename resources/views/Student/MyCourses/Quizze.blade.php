@@ -1,6 +1,10 @@
 
-@include('Student.inc.header')
+@php
+    $page_name = 'Quizze';
+@endphp
 @section('title', 'Quizze')
+@include('Student.inc.header')
+@include('Student.inc.nav')
 
 
 

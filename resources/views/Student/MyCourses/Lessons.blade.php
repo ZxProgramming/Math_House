@@ -1,6 +1,11 @@
 
-@include('Student.inc.header')
+@php
+    $page_name = 'Lesson';
+@endphp
 @section('title', 'Lessons')
+@include('Student.inc.header')
+@include('Student.inc.nav')
+
 <!-- pre loader area start -->
 <div id="back__preloader">
     <div id="back__circle_loader"></div>

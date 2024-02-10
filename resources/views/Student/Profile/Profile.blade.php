@@ -1,11 +1,9 @@
 
 @php
-  function fun_admin(){
-    return 'student';
-  }
-  @endphp
-<x-default-layout>
-
+    $page_name = 'Profile';
+@endphp
+@include('Student.inc.header')
+@include('Student.inc.nav')
 @section('title','Profile')
 
 <div class="card mb-4">
@@ -155,4 +153,4 @@
     <!-- /Account -->
   </div>
 
-</x-default-layout>
+  @include('Student.inc.footer')

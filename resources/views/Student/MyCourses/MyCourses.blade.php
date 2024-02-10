@@ -1,7 +1,10 @@
 
-@include('Student.inc.header')
+@php
+    $page_name = 'Courses';
+@endphp
 @section('title', 'My Courses')
-
+@include('Student.inc.header')
+@include('Student.inc.nav')
 
 <main class="main_wrapper overflow-hidden">
 

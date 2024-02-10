@@ -1,5 +1,10 @@
+
+@php
+    $page_name = 'Chapter';
+@endphp
 @section('title','Chapters')
 @include('Student.inc.header')
+@include('Student.inc.nav')
 
 <main class="main_wrapper overflow-hidden">
     <!-- dashboardarea__area__start  -->
