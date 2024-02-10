@@ -542,6 +542,17 @@ function fun_admin(){
                                                 </div> 
                                             </a>
                                             @endforeach
+
+                                            @foreach( $lesson->quizze as $quizze )
+                                            <a href="{{route('stu_quizze', ['id' =>$quizze->id])}}" class="scc__wrap">
+                                                <div class="scc__info">
+                                                    <i class="fa-solid fa-paperclip"></i>
+                                                    <h5>  <span>
+                                                        {{$quizze->title}}
+                                                    </span> </h5>
+                                                </div> 
+                                            </a>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>

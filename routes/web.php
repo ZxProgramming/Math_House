@@ -261,6 +261,8 @@ Route::middleware(['auth','auth.student'])->group(function(){
         Route::get('/Student/MyCourses/Courses','courses')->name('stu_courses');
         Route::get('/Student/MyCourses/Chapters/{id}','stu_chapters')->name('stu_chapters');
         Route::get('/Student/MyCourses/Lesson/{id}/{L_id}/{idea}','stu_lessons')->name('stu_lessons');
+        Route::get('/Student/MyCourses/Quizze/{id}','stu_quizze')->name('stu_quizze');
+        Route::post('/Student/MyCourses/Quizze/Answer','quizze_ans')->name('quizze_ans');
     });
 });
 

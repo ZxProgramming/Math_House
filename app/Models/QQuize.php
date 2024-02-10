@@ -13,7 +13,7 @@ class QQuize extends Model
     
     protected $fillable = [
         'quizze_id', 
-        'ques_id', 
+        'question_id', 
     ];
     public function quizze()
     {

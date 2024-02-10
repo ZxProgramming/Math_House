@@ -4,8 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Lesson;
-use App\Models\QQuize;
+use App\Models\Lesson; 
 use App\Models\Question;
 
 class quizze extends Model
@@ -29,6 +28,6 @@ class quizze extends Model
 
     public function question()
     {
-        return $this->hasMany(QQuize::class, 'quizze_id');
+        return $this->belongsToMany(Question::class, 'q_quizes');
     }
 }

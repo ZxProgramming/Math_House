@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Marketing;
 use App\Models\PaymentRequest;
+use App\Models\quizze;
+use App\Models\QuizzeStuAns;
 
 class Stu_MyCourseController extends Controller
 {
@@ -56,5 +58,26 @@ class Stu_MyCourseController extends Controller
         ->get();
         $chapter_id = $id;
         return view('Student.MyCourses.Lessons', compact('payment_request', 'chapter_id', 'L_id', 'idea_num'));
+    }
+
+    public function stu_quizze( $id ){
+        $quizze = quizze::where('id', $id)
+        ->first();
+
+        return view('Student.MyCourses.Quizze', compact('quizze'));
+    }
+
+    public function quizze_ans( Request $req ){
+        $quizze = quizze::where('id', $req->quizze_id)
+        ->first();
+        foreach ($quizze->question as $question) {
+            QuizzeStuAns::create([
+                'question_id' => $question->id ,
+                'stu_id' => auth()->user()->id ,
+                'answer' => $req['ans' . $question->id] ,
+                'quizze_id' => $req->quizze_id,
+            ]);
+        }
+        return $req->all();
     }
 }
