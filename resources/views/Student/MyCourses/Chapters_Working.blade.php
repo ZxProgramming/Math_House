@@ -79,7 +79,7 @@
                                                     <div class="col-xl-4 col-lg-6 col-md-6 col-12">
                                                         <div class="gridarea__wraper">
                                                             <div class="gridarea__img">
-                                                                <a href="{{route('stu_lessons', ['id' => $chapter->id])}}"><img loading="lazy"
+                                                                <a href="{{route('stu_lessons', ['id' => $chapter->id, 'L_id' =>  $chapter->lessons[0]->id, 'idea' => $chapter->lessons[0]->ideas[0]->id])}}"><img loading="lazy"
                                                                         src="{{asset('images/Chapters/' . $chapter->ch_url)}}"
                                                                         alt="grid"></a>
                                                                 <div class="gridarea__small__button">
@@ -102,7 +102,7 @@
                                                                     </ul>
                                                                 </div>
                                                                 <div class="gridarea__heading">
-                                                                    <h3><a href="{{route('stu_lessons', ['id'=> $chapter->id])}}">
+                                                                    <h3><a href="{{route('stu_lessons', ['id'=> $chapter->id, 'L_id' => $chapter->lessons[0]->id, 'idea' =>$chapter->lessons[0]->ideas[0]->id])}}">
                                                                             {{$chapter->chapter_name}}
                                                                     </a></h3>
                                                                 </div> 

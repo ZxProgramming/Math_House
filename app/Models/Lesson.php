@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\User;
 use App\Models\Chapter;
 use App\Models\IdeaLesson;
+use App\Models\Question;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,6 +30,10 @@ class Lesson extends Model
     public function chapter()
     {
         return $this->belongsTo(Chapter::class, 'chapter_id');
+    }
+    public function questions()
+    {
+        return $this->hasMany(Question::class, 'lesson_id');
     }
     public function quizze()
     {

@@ -1,8 +1,8 @@
+ 
 @php
-    function fun_admin()
-    {
-        return 'student';
-    }
+function fun_admin(){
+  return 'student';
+}
 @endphp
 @include('Visitor.inc.header')
 <x-default-layout>
@@ -532,63 +532,16 @@
                                         aria-labelledby="headingFour" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
 
-                                            <div class="scc__wrap">
+                                            @foreach( $lesson->ideas as $idea )
+                                            <a href="{{route('stu_lessons', ['id' =>$chapter_id, 'L_id' => $L_id, 'idea' => $idea->id])}}" class="scc__wrap">
                                                 <div class="scc__info">
                                                     <i class="icofont-video-alt"></i>
-                                                    <h5> <a href="lesson.html"><span>Course Intro</span></a></h5>
-                                                </div>
-                                                <div class="scc__meta">
-                                                    <strong>3.27</strong>
-                                                    <a href="lesson.html"><span class="question"><i
-                                                                class="icofont-eye"></i> Preview</span></a>
-
-                                                </div>
-                                            </div>
-                                            <div class="scc__wrap">
-                                                <div class="scc__info">
-                                                    <i class="icofont-video-alt"></i>
-                                                    <h5> <a href="lesson-2.html"><span>Course Outline</span></a></h5>
-                                                </div>
-                                                <div class="scc__meta">
-                                                    <strong>5.00</strong>
-                                                    <a href="lesson-2.html"><span class="question"><i
-                                                                class="icofont-eye"></i> Preview</span></a>
-
-                                                </div>
-                                            </div>
-                                            <div class="scc__wrap">
-                                                <div class="scc__info">
-                                                    <i class="icofont-video-alt"></i>
-                                                    <h5> <a href="lesson-2.html"><span>Course Outline</span></a></h5>
-                                                </div>
-                                                <div class="scc__meta">
-                                                    <strong>7.00</strong>
-                                                    <a href="lesson-3.html"><span class="question"><i
-                                                                class="icofont-eye"></i> Preview</span></a>
-
-                                                </div>
-                                            </div>
-                                            <div class="scc__wrap">
-                                                <div class="scc__info">
-                                                    <i class="icofont-file-text"></i>
-                                                    <h5> <a href="lesson-course-materials.html"><span>Course
-                                                                Materials</span></a></h5>
-                                                </div>
-                                            </div>
-                                            <div class="scc__wrap">
-                                                <div class="scc__info">
-                                                    <i class="icofont-audio"></i>
-                                                    <h5> <a href="lesson-quiz.html"><span>Summer Quiz</span></a></h5>
-                                                </div>
-                                            </div>
-
-                                            <div class="scc__wrap">
-                                                <div class="scc__info">
-                                                    <i class="icofont-file-text"></i>
-                                                    <h5><a href="lesson-assignment.html"><span>Assignment</span></a>
-                                                    </h5>
-                                                </div>
-                                            </div>
+                                                    <h5>  <span>
+                                                        {{$idea->idea}}
+                                                    </span> </h5>
+                                                </div> 
+                                            </a>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -600,19 +553,31 @@
 
                             </div>
                         </div>
+                        @foreach( $payment_request as $order )
+                        @foreach( $order->order as $chapter )
+                        @if( $chapter_id == $chapter->id )
+                        @foreach( $chapter->lessons as $lesson )
+                        @if ( $lesson->id == $L_id )
+                        @foreach( $lesson->ideas as $ideas )
+                        @if ( $ideas->id == $idea_num )
                         <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12" data-aos="fade-up">
                             <div class="lesson__content__main">
                                 <div class="lesson__content__wrap">
-                                    <h3>Video Content lesson 01</h3>
-                                    <span><a href="course-details.html">Close</a></span>
+                                    <h3>{{$ideas->idea}}</h3> 
                                 </div>
 
-                                <div class="plyr__video-embed rbtplayer">
-                                    <iframe src="https://www.youtube.com/embed/vHdclsdkp28" allowfullscreen
-                                        allow="autoplay"></iframe>
+                                <div class="plyr__video-embed rbtplayer"> 
+                                    <iframe style="width: 100%; margin-top: 45px;" src="{{$ideas->v_link}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                                 </div>
                             </div>
                         </div>
+                        @endif
+                        @endforeach
+                        @endif
+                        @endforeach
+                        @endif
+                        @endforeach
+                        @endforeach
                     </div>
 
                 </div>
