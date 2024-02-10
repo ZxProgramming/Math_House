@@ -78,6 +78,6 @@ class Stu_MyCourseController extends Controller
                 'quizze_id' => $req->quizze_id,
             ]);
         }
-        return $req->all();
+        return redirect()->route('stu_my_courses');
     }
 }
