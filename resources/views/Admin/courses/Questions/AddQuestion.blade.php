@@ -548,14 +548,14 @@
 
 
      <!--
-                The "super-build" of CKEditor&nbsp;5 served via CDN contains a large set of plugins and multiple editor types.
-                See https://ckeditor.com/docs/ckeditor5/latest/installation/getting-started/quick-start.html#running-a-full-featured-editor-from-cdn
-            -->
+                        The "super-build" of CKEditor&nbsp;5 served via CDN contains a large set of plugins and multiple editor types.
+                        See https://ckeditor.com/docs/ckeditor5/latest/installation/getting-started/quick-start.html#running-a-full-featured-editor-from-cdn
+                    -->
      <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/super-build/ckeditor.js"></script>
      <!--
-                Uncomment to load the Spanish translation
-                <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/super-build/translations/es.js"></script>
-            -->
+                        Uncomment to load the Spanish translation
+                        <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/super-build/translations/es.js"></script>
+                    -->
      <script>
          // This sample still does not showcase all CKEditor&nbsp;5 features (!)
          // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
@@ -789,6 +789,8 @@
              }
          })
 
+         /* select category, courses, chapter, lesson */
+
          let sel_cate2 = document.querySelector('.sel_cate2');
          let sel_course2 = document.querySelector('.sel_course2');
          let sel_chapter2 = document.querySelector('.sel_chapter2');
@@ -838,6 +840,8 @@
                  }
              });
          });
+
+         /* Select year, Month, section, Question Num*/
 
          let continue_btn = document.querySelector('.continue_btn');
          let q_num = document.querySelector('.q_num');

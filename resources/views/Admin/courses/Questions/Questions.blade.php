@@ -194,80 +194,80 @@
             })
         })
         /*  let sel_cate2 = document.querySelector('.sel_cate2');
-            let sel_course2 = document.querySelector('.sel_course2');
-            let sel_chapter2 = document.querySelector('.sel_chapter2');
-            let sel_lesson2 = document.querySelector('.sel_lesson2');
-          
-            sel_cate2.addEventListener('change', ( e ) => {
-                sel_course2.innerHTML = `                            
-            <option disabled selected>
-                Select Course
-            </option>`;
-                courses.forEach(element => {
-                    if ( e.target.value == element.category_id ) {
-                    sel_course2.innerHTML += `                            
-                <option value="${element.id}">
-                    ${element.course_name}
-                </option>`;
-                        
-                    }
-                });
-            });
-            sel_chapter2.addEventListener('change', ( e ) => {
-                sel_lesson2.innerHTML = `                            
-            <option disabled selected>
-                Select Lesson
-            </option>`;
-                lessons.forEach(element => {
-                    if ( e.target.value == element.chapter_id ) {
-                    sel_lesson2.innerHTML += `                            
-                <option value="${element.id}">
-                    ${element.lesson_name}
-                </option>`;
-                        
-                    }
-                });
-            });
-
-            let continue_btn = document.querySelector('.continue_btn');
-            let q_num = document.querySelector('.q_num');
-            let year = document.querySelector('.year');
-            let month = document.querySelector('.month');
-            let section = document.querySelector('.section');
-            let q_type = document.querySelector('.q_type');
-            let close_btn = document.querySelector('.close_btn');
-            let screen = document.querySelector('.screen');
-            let screen_text = document.querySelector('.screen_text');
-                
-            close_btn.addEventListener('click', () => {
-                screen.classList.add('d-none');
-            });
-
-            continue_btn.addEventListener('click', () => {
-                if ($('.q_num').val() != "") {
-                    let obj = {
-                        'year': year.value,
-                        'month': month.value,
-                        'section': section.value,
-                        'q_num': q_num.value,
-                        'q_type' : q_type.value,
-                        '_token': "{{ csrf_token() }}"
-                        };
-                        
-                    $.ajax({
-                        url: "{{ route('question_type') }}",
-                        type: 'POST',
-                        data: obj,
-                        success:function(data){
-                            console.log(data);
-                            if ( data != 1 ) {
-                            screen.classList.remove('d-none');
-                            screen_text.innerHTML = data;
-                            }
+                let sel_course2 = document.querySelector('.sel_course2');
+                let sel_chapter2 = document.querySelector('.sel_chapter2');
+                let sel_lesson2 = document.querySelector('.sel_lesson2');
+              
+                sel_cate2.addEventListener('change', ( e ) => {
+                    sel_course2.innerHTML = `                            
+    <option disabled selected>
+        Select Course
+    </option>`;
+                    courses.forEach(element => {
+                        if ( e.target.value == element.category_id ) {
+                        sel_course2.innerHTML += `                            
+        <option value="${element.id}">
+            ${element.course_name}
+        </option>`;
+                            
                         }
-                    })
-                }
-            }); */
+                    });
+                });
+                sel_chapter2.addEventListener('change', ( e ) => {
+                    sel_lesson2.innerHTML = `                            
+    <option disabled selected>
+        Select Lesson
+    </option>`;
+                    lessons.forEach(element => {
+                        if ( e.target.value == element.chapter_id ) {
+                        sel_lesson2.innerHTML += `                            
+        <option value="${element.id}">
+            ${element.lesson_name}
+        </option>`;
+                            
+                        }
+                    });
+                });
+
+                let continue_btn = document.querySelector('.continue_btn');
+                let q_num = document.querySelector('.q_num');
+                let year = document.querySelector('.year');
+                let month = document.querySelector('.month');
+                let section = document.querySelector('.section');
+                let q_type = document.querySelector('.q_type');
+                let close_btn = document.querySelector('.close_btn');
+                let screen = document.querySelector('.screen');
+                let screen_text = document.querySelector('.screen_text');
+                    
+                close_btn.addEventListener('click', () => {
+                    screen.classList.add('d-none');
+                });
+
+                continue_btn.addEventListener('click', () => {
+                    if ($('.q_num').val() != "") {
+                        let obj = {
+                            'year': year.value,
+                            'month': month.value,
+                            'section': section.value,
+                            'q_num': q_num.value,
+                            'q_type' : q_type.value,
+                            '_token': "{{ csrf_token() }}"
+                            };
+                            
+                        $.ajax({
+                            url: "{{ route('question_type') }}",
+                            type: 'POST',
+                            data: obj,
+                            success:function(data){
+                                console.log(data);
+                                if ( data != 1 ) {
+                                screen.classList.remove('d-none');
+                                screen_text.innerHTML = data;
+                                }
+                            }
+                        })
+                    }
+                }); */
     </script>
     @section('title', 'Questions')
     <form action="{{ route('filter_question') }}" method="POST">
@@ -280,7 +280,7 @@
                     <label class="required form-label mb-3">Category Name</label>
                     <!--end::Label-->
                     <!--begin::Input-->
-                    <select name="category_id" class="form-control">
+                    <select name="category_id" id="sel_Category" class="form-control">
                         <option disabled selected>
                             Select Category
                         </option>
@@ -303,15 +303,15 @@
                     <label class="required form-label mb-3">Course Name</label>
                     <!--end::Label-->
                     <!--begin::Input-->
-                    <select name="course_id" class="form-control sel_course">
+                    <select name="course_id" id="sel_course" class="form-control sel_course">
                         <option disabled selected>
                             Select Course
                         </option>
-                        @foreach ($courses as $course)
+                        {{-- @foreach ($courses as $course)
                             <option value="{{ $course->id }}">
                                 {{ $course->course_name }}
                             </option>
-                        @endforeach
+                        @endforeach --}}
                     </select>
                     <!--end::Input-->
                 </div>
@@ -323,15 +323,15 @@
                     <label class="required form-label mb-3">Chapter Name</label>
                     <!--end::Label-->
                     <!--begin::Input-->
-                    <select name="chapter_id" class="form-control sel_chapter">
+                    <select name="chapter_id" id="sel_chapter" class="form-control sel_chapter">
                         <option disabled selected>
                             Select Chapter
                         </option>
-                        @foreach ($chapters as $chapter)
+                        {{-- @foreach ($chapters as $chapter)
                             <option value="{{ $chapter->id }}">
                                 {{ $chapter->chapter_name }}
                             </option>
-                        @endforeach
+                        @endforeach --}}
                     </select>
                     <!--end::Input-->
                 </div>
@@ -343,15 +343,15 @@
                     <label class="required form-label mb-3">Lesson Name</label>
                     <!--end::Label-->
                     <!--begin::Input-->
-                    <select name="lesson_id" class="form-control sel_lesson">
+                    <select name="lesson_id" id="sel_lesson" class="form-control sel_lesson">
                         <option disabled selected>
                             Select Lesson
                         </option>
-                        @foreach ($lessons as $lesson)
+                        {{-- @foreach ($lessons as $lesson)
                             <option value="{{ $lesson->id }}">
                                 {{ $lesson->lesson_name }}
                             </option>
-                        @endforeach
+                        @endforeach --}}
                     </select>
                     <!--end::Input-->
                 </div>
@@ -486,6 +486,60 @@
 
         </div>
     </form>
+    
+    <script>
+        /* select category, courses, chapter, lesson */
+
+        let sel_cate2 = document.querySelector('#sel_Category');
+        let sel_course2 = document.querySelector('#sel_course');
+        let sel_chapter2 = document.querySelector('#sel_chapter');
+        let sel_lesson2 = document.querySelector('#sel_lesson');
+        sel_cate2.addEventListener('change', (e) => {
+            sel_course2.innerHTML = `                            
+        <option disabled selected>
+            Select Course
+        </option>`;
+            courses.forEach(element => {
+                if (e.target.value == element.category_id) {
+                    sel_course2.innerHTML += `                            
+            <option value="${element.id}">
+                ${element.course_name}
+            </option>`;
+
+                }
+            });
+        });
+        sel_course2.addEventListener('change', (e) => {
+            sel_chapter2.innerHTML = `                            
+        <option disabled selected>
+            Select Chapter
+        </option>`;
+            chapters.forEach(element => {
+                if (e.target.value == element.course_id) {
+                    sel_chapter2.innerHTML += `                            
+            <option value="${element.id}">
+                ${element.chapter_name}
+            </option>`;
+
+                }
+            });
+        });
+        sel_chapter2.addEventListener('change', (e) => {
+            sel_lesson2.innerHTML = `                            
+        <option disabled selected>
+            Select Lesson
+        </option>`;
+            lessons.forEach(element => {
+                if (e.target.value == element.chapter_id) {
+                    sel_lesson2.innerHTML += `                            
+            <option value="${element.id}">
+                ${element.lesson_name}
+            </option>`;
+
+                }
+            });
+        });
+    </script>
 
     <!--begin::Action-->
     {{-- <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_create_campaign">Questions Filter</a> --}}
@@ -934,7 +988,7 @@
                                                 </div>
 
                                                 <button type="button" class="btn btn-success details_btn"
-                                                    id="details_btn{{ $lesson->id }}">
+                                                    id="details_btn{{ $question->id }}">
                                                     Next
                                                 </button>
                                             </div>
@@ -947,7 +1001,7 @@
                                                     <!--End::Label-->
 
                                                     <!--begin::Input-->
-                                                    <select class="form-control sel_cate"
+                                                    <select class="form-control sel_cate sel_cate3"
                                                         id="sel_cate{{ $question->id }}" name="category_id">
                                                         <option selected>
                                                             {{ $question->lessons->chapter->course->category->cate_name }}
@@ -966,7 +1020,7 @@
                                                     <!--End::Label-->
 
                                                     <!--begin::Input-->
-                                                    <select class="form-control sel_course"
+                                                    <select class="form-control sel_course sel_course3"
                                                         id="sel_course{{ $question->id }}" name="course_id">
                                                         <option selected>
                                                             {{ $question->lessons->chapter->course->course_name }}
@@ -980,7 +1034,7 @@
                                                     <!--End::Label-->
 
                                                     <!--begin::Input-->
-                                                    <select class="form-control sel_chapter"
+                                                    <select class="form-control sel_chapter sel_chapter3"
                                                         id="sel_chapter{{ $question->id }}" name="chapter_id">
                                                         <option selected>
                                                             {{ $question->lessons->chapter->chapter_name }}
@@ -992,7 +1046,7 @@
                                                     <!--begin::Label-->
                                                     <label class="fs-6 fw-semibold mb-2">Lesson</label>
                                                     <!--begin::Input-->
-                                                    <select class="form-control sel_lesson"
+                                                    <select class="form-control sel_lesson sel_lesson3"
                                                         id="sel_lesson{{ $question->id }}" name="lesson_id">
                                                         <option value="{{ $question->lesson_id }}" selected>
                                                             {{ $question->lessons->lesson_name }}
@@ -1109,7 +1163,7 @@
                                                 id="priceing_section{{ $question->id }}">
 
 
-                                                <div class="text-muted fw-semibold fs-2 d-flex align-lessons-center">
+                                                <div class="text-muted fw-semibold fs-2 d-flex align-items-center">
                                                     <div class="section_add_idea" style="margin-left:15px ">
                                                         <button id="add_new_Pricing{{ $question->id }}"
                                                             type="button"
@@ -1242,6 +1296,77 @@
                 }
             });
         });
+        
+        let sel_cate3 = document.querySelectorAll('.sel_cate3');
+        let sel_course3 = document.querySelectorAll('.sel_course3');
+        let sel_chapter3 = document.querySelectorAll('.sel_chapter3');
+        let sel_lesson3 = document.querySelectorAll('.sel_lesson3');
+
+        for (let i = 0, end = sel_cate3.length; i < end; i++) {
+            sel_cate3[i].addEventListener('change', ( e ) => {
+                for (let j = 0; j < end; j++) {
+                    if ( sel_cate3[j] == e.target ) {
+                        sel_course3[j].innerHTML = `                            
+                        <option disabled selected>
+                            Select Course
+                        </option>`;
+                        courses.forEach(element => {
+                            if (e.target.value == element.category_id) {
+                                sel_course3[j].innerHTML += `                            
+                                <option value="${element.id}">
+                                    ${element.course_name}
+                                </option>`;
+
+                            }
+            });
+                    }
+                }
+            })
+        }
+
+        for (let i = 0, end = sel_course3.length; i < end; i++) {
+            sel_course3[i].addEventListener('change', ( e ) => {
+                for (let j = 0; j < end; j++) {
+                    if ( sel_course3[j] == e.target ) {
+                        sel_chapter3[j].innerHTML = `                            
+                        <option disabled selected>
+                            Select Chapter
+                        </option>`;
+                        chapters.forEach(element => {
+                            if (e.target.value == element.course_id) {
+                                sel_chapter3[j].innerHTML += `                            
+                                <option value="${element.id}">
+                                    ${element.chapter_name}
+                                </option>`;
+
+                            }
+            });
+                    }
+                }
+            })
+        }
+
+        for (let i = 0, end = sel_chapter3.length; i < end; i++) {
+            sel_chapter3[i].addEventListener('change', ( e ) => {
+                for (let j = 0; j < end; j++) {
+                    if ( sel_chapter3[j] == e.target ) {
+                        sel_lesson3[j].innerHTML = `                            
+                        <option disabled selected>
+                            Select Lesson
+                        </option>`;
+                        lessons.forEach(element => {
+                            if (e.target.value == element.chapter_id) {
+                                sel_lesson3[j].innerHTML += `                            
+                                <option value="${element.id}">
+                                    ${element.lesson_name}
+                                </option>`;
+
+                            }
+            });
+                    }
+                }
+            })
+        }
     </script>
     @section('script')
         <!--begin::Global Javascript Bundle(mandatory for all pages)-->
