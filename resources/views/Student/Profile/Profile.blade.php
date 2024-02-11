@@ -3,10 +3,11 @@
     $page_name = 'Profile';
 @endphp
 @include('Student.inc.header')
-@include('Student.inc.nav')
+@extends('Student.inc.nav')
 @section('title','Profile')
 
-<div class="card mb-4">
+@section('page_content')
+<div class="card mb-4 col-xl-9 col-lg-9 col-md-12">
       
     <h5 class="card-header">Profile : {{  auth()->user()->name }}</h5>
     <!-- Account -->
@@ -151,6 +152,7 @@
       </form>
     </div>
     <!-- /Account -->
-  </div>
+</div>
 
-  @include('Student.inc.footer')
+@endsection
+@include('Student.inc.footer')

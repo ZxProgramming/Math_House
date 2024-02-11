@@ -4,9 +4,10 @@
 @endphp
 @section('title','Chapters')
 @include('Student.inc.header')
-@include('Student.inc.nav')
+@extends('Student.inc.nav')
 
-<main class="main_wrapper overflow-hidden">
+@section('page_content')
+<main class="main_wrapper overflow-hidden col-xl-9 col-lg-9 col-md-12">
     <!-- dashboardarea__area__start  -->
     <div class="dashboardarea sp_bottom_100"> 
 
@@ -102,5 +103,7 @@
 
 
 </main>
+
+@endsection
 
 @include('Student.inc.footer')
