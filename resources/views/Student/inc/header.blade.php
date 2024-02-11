@@ -5,11 +5,11 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Lesson | Edurock - Education LMS Template</title>
+        <title>{{$page_name}}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets\media\logos\Maths_house')}}">
         <!-- Place favicon.ico in the root directory -->
 
         <!-- CSS here -->
