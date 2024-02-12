@@ -134,13 +134,13 @@ class CoursesController extends Controller
         $arr = $req->only('payment_method_id');
         $arr['price'] = Cache::get('chapters_price');
         $arr['user_id'] = auth()->user()->id;
-        
+        $img_state = true;
+
         extract($_FILES['image']);
         $img_name = null;
         for ($i=0, $end = count($name); $i < $end; $i++) { 
             if ( !empty($name[$i]) ) {
-                        
-                if ( !empty($name) ) {
+                    $img_state = false;
                     $extention_arr = ['jpg', 'jpeg', 'png', 'svg'];
                     $extention = explode('.', $name[$i]);
                     $extention = end($extention);
@@ -150,10 +150,14 @@ class CoursesController extends Controller
                         $img_name = str_replace([' ', ':', '-'], 'X', $img_name);
                         $arr['image'] = $img_name;
                     }
-                }
 
                 move_uploaded_file($tmp_name[$i], 'images/payment_reset/' . $img_name);
             }
+        }
+        if ( $img_state ) { 
+            session()->flash('faild', 'You Must Enter Receipt');
+            return redirect()->back();
+        
         }
         $p_request = PaymentRequest::create($arr);
         $chapters = json_decode(Cache::get('marketing'));
