@@ -725,13 +725,13 @@
                                             </td>
                                             <td style="font-weight: 500; font-size: 1.1rem">
                                               <input type="hidden" value="{{$question->ques_id}}" name="ques_id[]" class="question_id" />
-                                            {{$question->question->q_type}}</td>
-                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->year	}}</td>
-                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->month}}</td>
-                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->q_code}}</td>
-                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->section}}</td>
-                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->q_num}}</td>
-                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->difficulty}}</td>
+                                            {{$question->q_type}}</td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->year	}}</td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->month}}</td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->q_code}}</td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->section}}</td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->q_num}}</td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->difficulty}}</td>
                                             <td style='width: 150px !important; padding: 0 !important;'>
                                               <button type='button' class='remove_qz_edit'>Remove</button>
                                             </td>

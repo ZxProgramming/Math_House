@@ -1,5 +1,15 @@
 
-@section('title','Dashboard')
-<x-default-layout>
+@php
+    $page_name = 'Chapter';
+@endphp
+@section('title','Chapters')
+@include('Student.inc.header')
+@extends('Student.inc.nav')
 
-</x-default-layout>
+@section('page_content')
+
+
+@endsection
+
+@include('Student.inc.footer')
+

@@ -37,21 +37,24 @@
                                     </h3>
                                     <div class="row">
                                         @if ($question->ans_type == 'MCQ')
+                                        @php
+                                            $arr = ['A', 'B', 'C', 'D'];
+                                        @endphp
                                             @foreach ($question->mcq as $mcq)
                                                 <div class="form-check mx-3">
                                                     <input class="form-check-input" type="radio"
-                                                        value="{{ $mcq->mcq_ans }}"
+                                                        value="{{@$arr[$loop->iteration - 1]}}"
                                                         id="flexCheckChecked{{ $mcq->id }}"
                                                         name="ans{{ $question->id }}" />
                                                     <label class="form-check-label"
                                                         for="flexCheckChecked{{ $mcq->id }}">
-                                                        {{ $mcq->mcq_ans }}
+                                                        {{ @$arr[$loop->iteration - 1] . ' . ' . $mcq->mcq_ans }}
                                                     </label>
                                                 </div>
                                             @endforeach
                                         @else
                                             <div class="form-check px-3">
-                                                <input type="number" name="ans{{ $question->id }}"
+                                                <input name="ans{{ $question->id }}"
                                                     class="form-control" />
                                             </div>
                                         @endif

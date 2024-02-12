@@ -65,40 +65,43 @@
         </div>
 
             <div class="col-xl-9 col-lg-9 col-md-12">
-                <!-- breadcrumbarea__section__start -->
-                <div class="breadcrumbarea" data-aos="fade-up">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <div class="breadcrumb__content__wraper">
-                                    <div class="breadcrumb__title">
-                                        <h2 class="heading">{{$page_name}}</h2>
-                                    </div>
-                                    <div class="breadcrumb__inner">
-                                        <ul>
-                                            <li><a href="index.html">Home</a></li>
-                                            <li> {{$page_name}}</li>
-                                        </ul>
+                <div class="-fluid full__width__padding">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="dashboardarea__wraper">
+                                <div class="dashboardarea__img">
+                                    <div class="dashboardarea__inner student__dashboard__inner">
+                                        <div class="dashboardarea__left">
+                                            <div class="dashboardarea__left__img">
+                                                <img loading="lazy"  src="{{asset('images/users/' . auth()->user()->image)}}" alt="">
+                                            </div>
+                                            <div class="dashboardarea__left__content">
+                                                <h4>{{auth()->user()->name}}</h4>
+                                                <ul>
+                                                    <li>                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book-open"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                                                    {{auth()->user()->email}}
+                                                    </li>
+                                                </ul>
+    
+                                            </div>
+                                        </div>
+                                        <div class="dashboardarea__right">
+                                            <div class="dashboardarea__right__button">
+                                                <a class="default__button" href="{{route('categories')}}">Enroll A New Course
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                                            </div>
+                                        </div>
+    
                                     </div>
                                 </div>
-        
-        
-        
                             </div>
                         </div>
-                    </div>
-        
-                    <div class="shape__icon__2">
-                        <img loading="lazy"  class=" shape__icon__img shape__icon__img__1" src="{{asset('student/img/herobanner/herobanner__1.png')}}" alt="photo">
-                        <img loading="lazy"  class=" shape__icon__img shape__icon__img__2" src="{{asset('student/img/herobanner/herobanner__2.png')}}" alt="photo">
-                        <img loading="lazy"  class=" shape__icon__img shape__icon__img__3" src="{{asset('student/img/herobanner/herobanner__3.png')}}" alt="photo">
-                        <img loading="lazy"  class=" shape__icon__img shape__icon__img__4" src="{{asset('student/img/herobanner/herobanner__5.png')}}" alt="photo">
                     </div>
                 </div>
                 
                 <!-- breadcrumbarea__section__end-->
 
-                    @yield('page_content')
+                @yield('page_content')
             </div>
         </div>
 </div>

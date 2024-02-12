@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Lesson;
 use App\Models\Mcq_ans;
 use App\Models\Q_ans;
+use App\Models\Grid_ans;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -38,5 +39,9 @@ class Question extends Model
 
     public function q_ans(){
         return $this->hasMany(Q_ans::class, 'Q_id');
+    }
+
+    public function g_ans(){
+        return $this->hasMany(Grid_ans::class, 'q_id');
     }
 }

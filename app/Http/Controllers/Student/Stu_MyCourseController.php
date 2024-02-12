@@ -70,14 +70,27 @@ class Stu_MyCourseController extends Controller
     public function quizze_ans( Request $req ){
         $quizze = quizze::where('id', $req->quizze_id)
         ->first();
+        $deg = 0;
         foreach ($quizze->question as $question) {
-            QuizzeStuAns::create([
-                'question_id' => $question->id ,
-                'stu_id' => auth()->user()->id ,
-                'answer' => $req['ans' . $question->id] ,
-                'quizze_id' => $req->quizze_id,
-            ]);
+            $answer = $req['ans' . $question->id];
+            $arr = ['A', 'B', 'C', 'D'];
+            if ( in_array($answer, $arr) ) {
+                $mcq_ans = $question->mcq[0]->mcq_answers;
+                if ( $mcq_ans == $answer ) {
+                    $deg++;
+                }
+            }
+            else {
+                $grid_ans = @$question->g_ans[0]->grid_ans;
+                if ( $grid_ans == $answer ) {
+                    $deg++;
+                }
+            }
         }
-        return redirect()->route('stu_my_courses');
+
+        $deg =  $deg / count($quizze->question) * 100;
+        $deg = $deg . '%';
+
+        return view('Student.MyCourses.Grade', compact('deg'));
     }
 }
