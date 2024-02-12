@@ -877,6 +877,7 @@
 				<div class="col-lg-4 col-xl-3">
 					<div class="instructor_pricing_widget">
 						<div class="price">Price $<label class="t_price price">{{$course_price->course_price}}</label></div>
+						<input class="course_price" type="hidden" value="{{$course_price->course_price}}" />
 						<form method="POST" action="{{route('buy_course')}}">
 							@csrf
 							<input type="hidden" class="chapters_data" name="chapters_data" value="{{$chapters}}" />
@@ -950,10 +951,15 @@
     let t_price = document.querySelector('.t_price');
 	let chapters_data = document.querySelector('.chapters_data');
 	let chapters_price = document.querySelector('.chapters_price');
+	let course_price = document.querySelector('.course_price');
 	let price = 0;
 	let arr;
 	let arr_data;
 	let chapter;
+	let checked = true;
+	course_price = course_price.value;
+	course_price = parseFloat(course_price);
+	console.log(course_price);
     for (let i = 0, end = chapter_item_check.length; i < end; i++) {
         chapter_item_check[i].addEventListener('change', ( e ) => {
 			arr = [];
@@ -975,12 +981,19 @@
 								console.log( data );
 							},
 						});
-						} 
+						}
+						else{
+							checked = false;
+						}
+					}
+					if ( checked ) {
+						price = course_price;
 					}
 					chapters_data.value = JSON.stringify(arr_data);
 					chapters_price.value = price;
 					t_price.innerHTML = price;
 					price = 0;
+					checked = true;
                 }
             }
         })
