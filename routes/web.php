@@ -282,7 +282,6 @@ Route::middleware(['auth','auth.student'])->prefix('student')->group(function(){
     
 });
 
-
 Route::get('/logout',  [LoginController::class, 'destroy'])->name('logout');
 
 Route::middleware(['auth', 'verified'])->group(function () {

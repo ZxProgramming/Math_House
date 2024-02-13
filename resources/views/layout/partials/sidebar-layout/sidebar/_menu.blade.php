@@ -414,6 +414,14 @@
 				</a>
 				<!--end:Menu link-->
 			</div>
+			<div class="menu-item">
+				<!--begin:Menu link-->
+				<a class="menu-link {{ request()->routeIs('user-management.users.*') ? 'active' : '' }}" href="{{ route('logout') }}">
+					<span class="menu-icon">{!! getIcon('abstract-28', 'fs-2') !!}</span>
+					<span class="menu-title">Logout</span>
+				</a>
+				<!--end:Menu link-->
+			</div>
 			<!--end:Menu item-->
 		</div>
 		<!--end::Menu-->
