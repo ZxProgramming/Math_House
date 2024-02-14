@@ -26,6 +26,7 @@ class Question extends Model
         'q_url',
         'q_num',
         'ans_type',
+        'state',
     ];
 
     public function lessons()

@@ -19,6 +19,7 @@ class quizze extends Model
         'description',
         'lesson_id',
         'state',
+        'quizze_order',
     ];
 
     public function lesson()

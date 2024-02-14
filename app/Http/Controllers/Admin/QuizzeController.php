@@ -36,7 +36,7 @@ class QuizzeController extends Controller
     public function quize_add_q( Request $req ){
         QQuize::create([
             'quizze_id' => $req->quizze_id,
-            'ques_id' => $req->ques_id,
+            'question_id' => $req->question_id,
         ]);
 
         return $req->all();
@@ -50,16 +50,15 @@ class QuizzeController extends Controller
     }
 
     public function add_quizze( Request $req ){
-        $ques_id = json_encode($req->ques_id);
         $ques_id = json_decode($req->ques_id); 
         
-        $arr = $req->only('title', 'description', 'score', 'pass_score', 'state', 'lesson_id');
+        $arr = $req->only('title', 'description', 'score', 'pass_score', 'state', 'lesson_id', 'quizze_order');
         $arr['time'] = $req->time_h . 'hours' . $req->time_m . 'M';
         $quizze = quizze::create($arr);
         for ( $i=0, $end = count($ques_id); $i < $end; $i++ ) { 
             QQuize::create([
                 'quizze_id' => $quizze->id,
-                'ques_id' => $ques_id[$i]->id,
+                'question_id' => $ques_id[$i]->id,
             ]);
         }
 
@@ -67,7 +66,7 @@ class QuizzeController extends Controller
     }
 
     public function edit_quizze( $id, Request $req ){
-        $arr = $req->only('title', 'description', 'time', 'score', 'pass_score', 'lesson_id');
+        $arr = $req->only('title', 'description', 'time', 'score', 'pass_score', 'lesson_id', 'quizze_order');
         $arr['state'] = $req->state == 1 ? 1 : 0;
         $quizze = quizze::where('id', $id)
         ->update($arr);
@@ -76,7 +75,7 @@ class QuizzeController extends Controller
             for ( $i=0, $end = count($req->questions_id); $i < $end; $i++ ) { 
                 QQuize::
                 where('quizze_id', $id)
-                ->where('ques_id', $req->questions_id[$i])
+                ->where('question_id', $req->questions_id[$i])
                 ->delete();
             }
         }
@@ -84,7 +83,7 @@ class QuizzeController extends Controller
             for ( $i=0, $end = count($req->ques_id); $i < $end; $i++ ) { 
                 QQuize::create([
                     'quizze_id' => $id,
-                    'ques_id' => $req->ques_id[$i],
+                    'question_id' => $req->ques_id[$i],
                 ]);
             }
     

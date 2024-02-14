@@ -197,6 +197,15 @@ class QuestionController extends Controller
         ->first();
 
         extract($_FILES['q_url']);
+        if ( !empty($name) && !empty($req->question) ) {
+            $arr['state'] = '2';
+        }
+        elseif ( !empty($name) ) {
+            $arr['state'] = '1';
+        }
+        else {
+            $arr['state'] = '0';
+        }
         $img_name = null;
         if ( !empty($name) ) {
             $img_name = now() . rand(1, 10000) . $name;
