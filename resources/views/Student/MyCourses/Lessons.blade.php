@@ -9,6 +9,7 @@
 @section('page_content') 
  
 
+@include('success')
 
 <main class="main_wrapper overflow-hidden">
 
@@ -467,6 +468,8 @@
                                                         </a>
                                                     @endforeach
 
+                                                    <hr />
+                                                    
                                                     @foreach ($lesson->quizze as $quizze)
                                                         <a href="{{ route('stu_quizze', ['id' => $quizze->id]) }}"
                                                             class="scc__wrap">
