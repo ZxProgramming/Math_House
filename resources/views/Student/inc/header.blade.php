@@ -24,6 +24,17 @@
         <link rel="stylesheet" href="{{ asset('student/css/plugins_plyr.css') }}">
         <link rel="stylesheet" href="{{ asset('student/css/style.css') }}">
 
+        
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet" />
+
+
+
 
         <script>
             // On page load or when changing themes, best to add inline in `head` to avoid FOUC

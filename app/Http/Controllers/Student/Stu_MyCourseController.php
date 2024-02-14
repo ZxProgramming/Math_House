@@ -100,10 +100,10 @@ class Stu_MyCourseController extends Controller
                 }
             }
         }
+        $right_question = $deg;
+        $total_question = count($quizze->question);
+        $deg =  $deg / $total_question * 100;
 
-        $deg =  $deg / count($quizze->question) * 100;
-        $deg = $deg . '%';
-
-        return view('Student.MyCourses.Grade', compact('deg'));
+        return view('Student.MyCourses.Grade', compact('deg', 'quizze', 'right_question', 'total_question'));
     }
 }
