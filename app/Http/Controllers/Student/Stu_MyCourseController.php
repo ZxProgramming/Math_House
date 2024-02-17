@@ -8,6 +8,7 @@ use App\Models\Marketing;
 use App\Models\PaymentRequest;
 use App\Models\quizze;
 use App\Models\QuizzeStuAns;
+use App\Models\StudentQuizze;
 
 class Stu_MyCourseController extends Controller
 {
@@ -64,6 +65,18 @@ class Stu_MyCourseController extends Controller
         $quizze = quizze::where('id', $id)
         ->first();
 
+        $stu_quizze = StudentQuizze::
+        where('student_id', auth()->user()->id)
+        ->with('quizze')
+        ->get();
+
+        foreach ($stu_quizze as $item) {
+            if ( $item->quizze->quizze_order < $quizze->quizze_order ) {
+                session()->flash('faild', 'You Must Pass Last Quizze First');
+                return redirect()->back();
+            }
+        }
+        
         return view('Student.MyCourses.Quizze', compact('quizze'));
     }
 
@@ -87,10 +100,10 @@ class Stu_MyCourseController extends Controller
                 }
             }
         }
+        $right_question = $deg;
+        $total_question = count($quizze->question);
+        $deg =  $deg / $total_question * 100;
 
-        $deg =  $deg / count($quizze->question) * 100;
-        $deg = $deg . '%';
-
-        return view('Student.MyCourses.Grade', compact('deg'));
+        return view('Student.MyCourses.Grade', compact('deg', 'quizze', 'right_question', 'total_question'));
     }
 }

@@ -15,10 +15,9 @@ use App\Models\City;
 
 class Logincontroller extends Controller
 {
-    //
+
         public function index(){
-                return view('pages.authanticated.login');                
-                            
+                return view('pages.authanticated.login');            
         }
 
         public function store(Request $request){

@@ -37,7 +37,7 @@ class Lesson extends Model
     }
     public function quizze()
     {
-        return $this->hasMany(quizze::class);
+        return $this->hasMany(quizze::class)->orderBy('quizze_order');
     }
     public function ideas()
     {

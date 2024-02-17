@@ -9,7 +9,6 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ChaptersController;
 use App\Http\Controllers\Admin\CoursesController;
-use App\Http\Controllers\login\LoginController;
 use App\Http\Controllers\Admin\LessonController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\ExamController;
@@ -29,6 +28,8 @@ use App\Http\Controllers\Visitor\HomeController;
 use App\Http\Controllers\Visitor\ContactController;
 use App\Http\Controllers\Visitor\AboutController;
 use App\Http\Controllers\Visitor\CoursesController as V_CoursesController;
+
+use App\Http\Controllers\login\LoginController;
 
 use Illuminate\Support\Facades\Route;
 /*
@@ -278,8 +279,10 @@ Route::middleware(['auth','auth.student'])->prefix('student')->group(function(){
         Route::get('/Quizze/{id}','stu_quizze')->name('stu_quizze');
         Route::post('/Quizze/Answer','quizze_ans')->name('quizze_ans');
     });
+    
 });
 
+Route::get('/logout',  [LoginController::class, 'destroy'])->name('logout');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::name('user-management.')->group(function () {

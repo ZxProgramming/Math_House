@@ -959,15 +959,15 @@
                     </div>
                     <div class="section_idea my-2">
                       <span>Idea Order</span>
-                      <input name="ideaOrder[]" class="form-control form-control-lg" placeholder="Idea Order">
+                      <input name="idea_order[]" class="form-control form-control-lg" placeholder="Idea Order">
                     </div>
                     <div class="section_idea my-2">
                       <span>Video Link</span>
-                      <input name="videoLink[]" class="form-control form-control-lg" placeholder="Video Link">
+                      <input name="v_link[]" class="form-control form-control-lg" placeholder="Video Link">
                     </div>
                     <div class="section_idea my-2">
                       <span>Pdf</span>
-                      <input type="file" name="Pdf[]" class="form-control form-control-lg">
+                      <input type="file" name="pdf[]" class="form-control form-control-lg">
                     </div>
                     <button type="button" class="col-md-12 btn btn-danger btn_remove_idea" id="btn${ele_count}">Remove</button>
                     </div>`;

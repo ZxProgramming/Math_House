@@ -260,6 +260,11 @@
                   </div>
 
                   <div class="col-md-12 d-flex align-items-center justify-content-around">
+                    <span class="col-md-2" style="font-size: 1.2rem;">Quizze Order </span>
+                    <input type="number" min="0" name="quizze_order" class="col-md-9 form-control">
+                  </div>
+
+                  <div class="col-md-12 d-flex align-items-center justify-content-around">
                     <span class="col-md-2" style="font-size: 1.2rem;">Active: </span>
                     <div class="col-md-9 p-0">
                       <label class="btn-container">
@@ -557,6 +562,11 @@
                                   </div>
 
                                   <div class="col-md-12 d-flex align-items-center justify-content-around">
+                                    <span class="col-md-2" style="font-size: 1.2rem;">Quizze Order </span>
+                                    <input type="number" min="0" name="quizze_order" value="{{$item->quizze_order}}" class="col-md-9 form-control">
+                                  </div>
+
+                                  <div class="col-md-12 d-flex align-items-center justify-content-around">
                                     <span class="col-md-2" style="font-size: 1.2rem;">Active: </span>
                                     <div class="col-md-9 p-0">
                                       <label class="btn-container">
@@ -718,13 +728,13 @@
                                         <tbody class="sel_quz sel_quz_edit">
                                         @foreach( $item->question as $question )
                                         <input type="hidden" class="e_questions" value="{{$question}}" />
-                                        <input type="hidden" value="{{$question->ques_id}}" name="questions_id[]" class="question_id" />
+                                        <input type="hidden" value="{{$question->question_id}}" name="questions_id[]" class="question_id" />
                                           <tr>
                                             <td style="font-weight: 500; font-size: 1.1rem">
                                               {{$loop->iteration}}
                                             </td>
                                             <td style="font-weight: 500; font-size: 1.1rem">
-                                              <input type="hidden" value="{{$question->ques_id}}" name="ques_id[]" class="question_id" />
+                                              <input type="hidden" value="{{$question->question_id}}" name="question_id[]" class="question_id" />
                                             {{$question->q_type}}</td>
                                             <td style="font-weight: 500; font-size: 1.1rem">{{$question->year	}}</td>
                                             <td style="font-weight: 500; font-size: 1.1rem">{{$question->month}}</td>
