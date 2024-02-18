@@ -180,7 +180,7 @@ INSERT INTO `chapters` (`id`, `chapter_name`, `course_id`, `ch_des`, `ch_price`,
 --
 -- Table structure for table `chapter_prices`
 --
-
+ 
 CREATE TABLE `chapter_prices` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `duration` varchar(20) NOT NULL,
