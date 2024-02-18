@@ -26,7 +26,7 @@ class ExamController extends Controller
     }
 
     public function addScore( Request $req ){
-       // "":null,"q_num":"1","question_num":["1"],"":[null]}
+        
        $score_sheet = ScoreSheet::create(
         $req->only('name', 'course_id', 'score')
        );

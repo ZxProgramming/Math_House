@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 15, 2024 at 01:57 PM
+-- Generation Time: Feb 18, 2024 at 01:18 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -180,7 +180,7 @@ INSERT INTO `chapters` (`id`, `chapter_name`, `course_id`, `ch_des`, `ch_price`,
 --
 -- Table structure for table `chapter_prices`
 --
- 
+
 CREATE TABLE `chapter_prices` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `duration` varchar(20) NOT NULL,
@@ -1320,7 +1320,9 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (175, 'App\\Models\\User', 8, 'user', '841305d9aa52b24426606e7273395fb756acc3b9b6db4646dc5ec0b48394a1f9', '[\"*\"]', NULL, NULL, '2024-02-14 07:29:01', '2024-02-14 07:29:01'),
 (176, 'App\\Models\\User', 8, 'user', '7158b14d642d120ddd4af8417ad6cf183e411d97dd1321ebf6071c00a991a1e6', '[\"*\"]', NULL, NULL, '2024-02-15 07:08:33', '2024-02-15 07:08:33'),
 (177, 'App\\Models\\User', 8, 'user', '8152b4db5162c181aa8d8a837122fac9fef97c2ce44802d70b339117ceae283e', '[\"*\"]', NULL, NULL, '2024-02-15 10:16:49', '2024-02-15 10:16:49'),
-(178, 'App\\Models\\User', 8, 'user', '1eb894f58462f7373794826535483ca98cf0ec1ee03f5312ca162a0dd12639b6', '[\"*\"]', NULL, NULL, '2024-02-15 10:19:51', '2024-02-15 10:19:51');
+(178, 'App\\Models\\User', 8, 'user', '1eb894f58462f7373794826535483ca98cf0ec1ee03f5312ca162a0dd12639b6', '[\"*\"]', NULL, NULL, '2024-02-15 10:19:51', '2024-02-15 10:19:51'),
+(179, 'App\\Models\\User', 8, 'user', 'fa1f42f57cec34528640a410a5940869e3beede1d112b0e0a83e29398c3f9e60', '[\"*\"]', NULL, NULL, '2024-02-18 05:50:56', '2024-02-18 05:50:56'),
+(180, 'App\\Models\\User', 8, 'user', '4897e3423b2f601171b8bdeaf416b57416b51a9dbd418b97f1271ab4fb9ec237', '[\"*\"]', NULL, NULL, '2024-02-18 06:49:26', '2024-02-18 06:49:26');
 
 -- --------------------------------------------------------
 
@@ -1615,6 +1617,97 @@ CREATE TABLE `role_has_permissions` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `score_list`
+--
+
+CREATE TABLE `score_list` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `score_id` bigint(20) UNSIGNED NOT NULL,
+  `question_num` int(11) NOT NULL,
+  `score` float NOT NULL,
+  `updated_at` date DEFAULT NULL,
+  `created_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `score_list`
+--
+
+INSERT INTO `score_list` (`id`, `score_id`, `question_num`, `score`, `updated_at`, `created_at`) VALUES
+(2, 4, 1, 2, '2024-02-18', '2024-02-18'),
+(3, 4, 2, 3, '2024-02-18', '2024-02-18'),
+(4, 4, 3, 4, '2024-02-18', '2024-02-18'),
+(5, 4, 4, 5, '2024-02-18', '2024-02-18'),
+(6, 4, 5, 5, '2024-02-18', '2024-02-18'),
+(7, 4, 6, 6, '2024-02-18', '2024-02-18'),
+(8, 4, 7, 8, '2024-02-18', '2024-02-18'),
+(9, 4, 8, 8, '2024-02-18', '2024-02-18'),
+(10, 4, 9, 8, '2024-02-18', '2024-02-18'),
+(11, 4, 10, 9, '2024-02-18', '2024-02-18'),
+(12, 4, 11, 11, '2024-02-18', '2024-02-18'),
+(13, 4, 12, 21, '2024-02-18', '2024-02-18'),
+(14, 4, 13, 21, '2024-02-18', '2024-02-18'),
+(15, 4, 14, 21, '2024-02-18', '2024-02-18'),
+(16, 4, 15, 12, '2024-02-18', '2024-02-18'),
+(17, 4, 16, 12, '2024-02-18', '2024-02-18'),
+(18, 4, 17, 32, '2024-02-18', '2024-02-18'),
+(19, 4, 18, 32, '2024-02-18', '2024-02-18'),
+(20, 4, 19, 32, '2024-02-18', '2024-02-18'),
+(21, 4, 20, 23, '2024-02-18', '2024-02-18'),
+(22, 4, 21, 32, '2024-02-18', '2024-02-18'),
+(23, 4, 22, 23, '2024-02-18', '2024-02-18'),
+(24, 4, 23, 23, '2024-02-18', '2024-02-18'),
+(25, 4, 24, 43, '2024-02-18', '2024-02-18'),
+(26, 4, 25, 34, '2024-02-18', '2024-02-18'),
+(27, 4, 26, 45, '2024-02-18', '2024-02-18'),
+(28, 4, 27, 45, '2024-02-18', '2024-02-18'),
+(29, 4, 28, 45, '2024-02-18', '2024-02-18'),
+(30, 4, 29, 45, '2024-02-18', '2024-02-18'),
+(31, 4, 30, 45, '2024-02-18', '2024-02-18'),
+(32, 4, 31, 45, '2024-02-18', '2024-02-18'),
+(33, 4, 32, 54, '2024-02-18', '2024-02-18'),
+(34, 4, 33, 45, '2024-02-18', '2024-02-18'),
+(35, 4, 34, 45, '2024-02-18', '2024-02-18'),
+(36, 4, 35, 54, '2024-02-18', '2024-02-18'),
+(37, 4, 36, 56, '2024-02-18', '2024-02-18'),
+(38, 4, 37, 56, '2024-02-18', '2024-02-18'),
+(39, 4, 38, 65, '2024-02-18', '2024-02-18'),
+(40, 4, 39, 76, '2024-02-18', '2024-02-18'),
+(41, 4, 40, 76, '2024-02-18', '2024-02-18'),
+(42, 4, 41, 76, '2024-02-18', '2024-02-18'),
+(43, 4, 42, 76, '2024-02-18', '2024-02-18'),
+(44, 4, 43, 78, '2024-02-18', '2024-02-18'),
+(45, 4, 44, 78, '2024-02-18', '2024-02-18'),
+(46, 4, 45, 100, '2024-02-18', '2024-02-18');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `score_sheet`
+--
+
+CREATE TABLE `score_sheet` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `course_id` bigint(20) UNSIGNED NOT NULL,
+  `score` int(11) NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `score_sheet`
+--
+
+INSERT INTO `score_sheet` (`id`, `name`, `course_id`, `score`, `created_at`, `updated_at`) VALUES
+(1, 'as', 1, 50, '0000-00-00', '0000-00-00'),
+(2, 'vd1', 2, 100, '2024-02-18', '2024-02-18'),
+(3, 'vd1', 2, 100, '2024-02-18', '2024-02-18'),
+(4, 'vd1', 2, 100, '2024-02-18', '2024-02-18');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sessions`
 --
 
@@ -1901,7 +1994,7 @@ INSERT INTO `users` (`id`, `f_name`, `l_name`, `name`, `email`, `profile_photo_p
 (1, NULL, NULL, 'Ahmed', 'Ahmed@gmail.com', NULL, NULL, '0113443534', '012345346', 'Ali@gmail.com', '1972024X01X27X10X03X326.jpg', NULL, 'teacher', NULL, 2, 1, '$2y$10$O4pDFFvEQGAkfZ.mcGIhaOb0MQCocleYwEySm4OYgq9./pKT021de', 'Show', NULL, NULL, NULL, NULL, '2024-01-27 08:03:32', NULL, NULL),
 (5, NULL, NULL, 'Teacher 1', 'admin3@gmail.com', NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X42X459672202304300850download.png', NULL, 'super_admin', NULL, NULL, NULL, '$2y$10$abRantqLN7R8dKUzWPGSLebir7D.GcznzfflGYjquM59GZo9f5y3a', 'Show', NULL, NULL, NULL, '2023-12-18 09:42:45', '2023-12-18 09:42:45', NULL, NULL),
 (7, NULL, NULL, 'Teacher 1', 'admin4@gmail.com', NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X43X297615202304300850download.png', NULL, 'super_admin', NULL, NULL, NULL, '$2y$10$CWyZzMn0kdjZKf1f5z0ey.xXzyHVVwkvCFGwakJchI9dwNSyOEyQa', 'Show', NULL, NULL, NULL, '2023-12-18 09:43:29', '2023-12-18 09:43:29', NULL, NULL),
-(8, NULL, NULL, 'Teacher 1', 'admin@gmail.com', NULL, NULL, '01099475851111111114', NULL, NULL, '1.png', NULL, 'student', NULL, NULL, NULL, '$2y$10$3cpQN4tIOFxAS2hQ6vKbl.ho1zHxGGWGziGNHR3.JZsjUYJRADNXq', 'Show', NULL, NULL, NULL, '2023-12-18 09:44:14', '2024-01-04 06:15:04', NULL, NULL),
+(8, NULL, NULL, 'Teacher 1', 'admin@gmail.com', NULL, NULL, '01099475851111111114', NULL, NULL, '1.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$3cpQN4tIOFxAS2hQ6vKbl.ho1zHxGGWGziGNHR3.JZsjUYJRADNXq', 'Show', NULL, NULL, NULL, '2023-12-18 09:44:14', '2024-01-04 06:15:04', NULL, NULL),
 (10, NULL, NULL, 'Teacher', 'teacher@gmail.com', NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X50X119775202304090932egyptXflagXwaveXiconX32.png', NULL, 'teacher', NULL, NULL, NULL, '$2y$10$EFSKaqvOqy3o.ihNqVWi7uCPCrFtflwUJGqEBFP1woOuxlRaIqN5u', 'Show', NULL, NULL, NULL, '2023-12-18 09:50:11', '2024-01-27 08:02:15', NULL, NULL),
 (11, NULL, NULL, 'Teacher12', 'teacher2@gmail.com', NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X52X277966202304090932egyptXflagXwaveXiconX32.png', NULL, 'teacher', NULL, 1, 1, '$2y$10$Y4fg1B5EpujC8OVSCO6fNOyxdAj2lPJDZWibbtD8j55Jik6fU4Uq6', 'Show', NULL, NULL, NULL, '2023-12-18 09:52:27', '2024-02-05 10:45:46', NULL, NULL),
 (44, NULL, NULL, 'admin@gmail.com', 'sad@gmail.com', NULL, NULL, '123', '123', NULL, 'default.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$RkeDuqhtAqMTRC7gfMFxG.Vl8pLtWGgj1jisi0ZkphX9LDVUQaZpO', 'Show', NULL, NULL, NULL, '2023-12-31 06:31:28', '2024-02-05 10:15:37', NULL, NULL),
@@ -2281,6 +2374,20 @@ ALTER TABLE `role_has_permissions`
   ADD KEY `role_has_permissions_role_id_foreign` (`role_id`);
 
 --
+-- Indexes for table `score_list`
+--
+ALTER TABLE `score_list`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_ScoreList_Score` (`score_id`);
+
+--
+-- Indexes for table `score_sheet`
+--
+ALTER TABLE `score_sheet`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_Score_Course` (`course_id`);
+
+--
 -- Indexes for table `sessions`
 --
 ALTER TABLE `sessions`
@@ -2557,7 +2664,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=179;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=181;
 
 --
 -- AUTO_INCREMENT for table `private_request`
@@ -2618,6 +2725,18 @@ ALTER TABLE `q_quizes`
 --
 ALTER TABLE `roles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `score_list`
+--
+ALTER TABLE `score_list`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+
+--
+-- AUTO_INCREMENT for table `score_sheet`
+--
+ALTER TABLE `score_sheet`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `sessions`
@@ -2879,6 +2998,18 @@ ALTER TABLE `q_quizes`
 ALTER TABLE `role_has_permissions`
   ADD CONSTRAINT `role_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `score_list`
+--
+ALTER TABLE `score_list`
+  ADD CONSTRAINT `FK_ScoreList_Score` FOREIGN KEY (`score_id`) REFERENCES `score_sheet` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `score_sheet`
+--
+ALTER TABLE `score_sheet`
+  ADD CONSTRAINT `FK_Score_Course` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `sessions`
