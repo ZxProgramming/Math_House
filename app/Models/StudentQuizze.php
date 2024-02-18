@@ -21,7 +21,7 @@ class StudentQuizze extends Model
         'quizze_id', 
         'score', 
         'time', 
-        'questions_num', 
+        'r_questions', 
     ];
 
     public function lesson()
