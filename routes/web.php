@@ -235,6 +235,8 @@ Route::controller(ExamController::class)->group(function(){
     Route::get('/Exam','index')->name('exam'); 
     Route::get('/ScoreSheet','score_sheet')->name('score_sheet'); 
     Route::post('/ScoreSheet/Add','addScore')->name('addScore'); 
+    Route::get('/ScoreSheet/Del/{id}','scoreDelete')->name('scoreDelete'); 
+    Route::post('/ScoreSheet/Edit/{id}','scoreEdit')->name('scoreEdit'); 
 });
 
 // Category

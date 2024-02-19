@@ -42,4 +42,11 @@ class ExamController extends Controller
        return redirect()->back();
     }
 
+    public function scoreDelete( $id ){
+        ScoreSheet::where('id', $id )
+        ->delete();
+
+        return redirect()->back();
+    }
+
 }

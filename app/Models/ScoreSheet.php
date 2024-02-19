@@ -25,9 +25,9 @@ class ScoreSheet extends Model
         return $this->belongsTo(Course::class, 'course_id');
     }
 
-    public function lesson()
+    public function score_list()
     {
-        return $this->hasMany(ScoreList::class, 'course_id');
+        return $this->hasMany(ScoreList::class, 'score_id');
     }
 
 }
