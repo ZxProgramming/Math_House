@@ -2532,11 +2532,15 @@
 
         $.ajax({
             type: "GET",
-            url: "",
-            data: myquestion,
+            url: "{{ route('api_quizze') }}",
+            data: {
+                'id': {{ $quizze_id }},
+                // '_token': {{ csrf_token() }},
+            },
+
             cache: false,
             success: function(data) {
-                console.log("Done fetch question")
+                console.log(quizze.id)
             }
         });
 
