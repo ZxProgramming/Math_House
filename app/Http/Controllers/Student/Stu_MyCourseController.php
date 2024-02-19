@@ -86,7 +86,7 @@ class Stu_MyCourseController extends Controller
         $quizze = quizze::where('id', $req->id)
         ->first();
 
-        response()->json(['quizze' => $quizze]);
+        return response()->json(['quizze' => $quizze]);
     }
 
     public function quizze_ans( Request $req ){
