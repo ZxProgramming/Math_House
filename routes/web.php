@@ -233,6 +233,10 @@ Route::controller(DiagnosticExamController::class)->group(function(){
 // Exam 
 Route::controller(ExamController::class)->group(function(){
     Route::get('/Exam','index')->name('exam'); 
+    Route::get('/ScoreSheet','score_sheet')->name('score_sheet'); 
+    Route::post('/ScoreSheet/Add','addScore')->name('addScore'); 
+    Route::get('/ScoreSheet/Del/{id}','scoreDelete')->name('scoreDelete'); 
+    Route::post('/ScoreSheet/Edit/{id}','scoreEdit')->name('scoreEdit'); 
 });
 
 // Category
@@ -278,6 +282,9 @@ Route::middleware(['auth','auth.student'])->prefix('student')->group(function(){
         Route::get('/Lesson/{id}/{L_id}/{idea}','stu_lessons')->name('stu_lessons');
         Route::get('/Quizze/{id}','stu_quizze')->name('stu_quizze');
         Route::post('/Quizze/Answer','quizze_ans')->name('quizze_ans');
+        Route::get('/Quizze/Parallel/{id}','question_parallel')->name('question_parallel');
+        Route::post('/Quizze/Solve_Parallel/{id}','solve_parallel')->name('solve_parallel');
+        Route::get('/HistoryQuizze','quizze_history')->name('quizze_history');
     });
     
 });

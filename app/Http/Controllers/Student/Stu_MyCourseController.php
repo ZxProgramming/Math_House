@@ -9,6 +9,8 @@ use App\Models\PaymentRequest;
 use App\Models\quizze;
 use App\Models\QuizzeStuAns;
 use App\Models\StudentQuizze;
+use App\Models\StudentQuizzeMistake;
+use App\Models\Question;
 
 class Stu_MyCourseController extends Controller
 {
@@ -84,6 +86,7 @@ class Stu_MyCourseController extends Controller
         $quizze = quizze::where('id', $req->quizze_id)
         ->first();
         $deg = 0;
+        $mistakes = [];
         foreach ($quizze->question as $question) {
             $answer = $req['ans' . $question->id];
             $arr = ['A', 'B', 'C', 'D'];
@@ -92,18 +95,89 @@ class Stu_MyCourseController extends Controller
                 if ( $mcq_ans == $answer ) {
                     $deg++;
                 }
+                else{
+                    $mistakes[] = $question;
+                }
             }
             else {
                 $grid_ans = @$question->g_ans[0]->grid_ans;
                 if ( $grid_ans == $answer ) {
                     $deg++;
                 }
+                else{
+                    $mistakes[] = $question;
+                }
             }
         }
+
         $right_question = $deg;
         $total_question = count($quizze->question);
         $deg =  $deg / $total_question * 100;
+        $score = ($quizze->score / $total_question) * $right_question;
+        
+        $stu_q = StudentQuizze::where('student_id', auth()->user()->id)
+        ->where('quizze_id', $req->quizze_id)
+        ->first();
 
-        return view('Student.MyCourses.Grade', compact('deg', 'quizze', 'right_question', 'total_question'));
+        if ( empty($stu_q) ) {
+            $stu_quizze = StudentQuizze::create([
+                'date' => now(),
+                'lesson_id' => $quizze->lesson_id,
+                'quizze_id' => $quizze->id,
+                'student_id' => auth()->user()->id,
+                'score' => $score,
+                'time' => '$req->time',
+                'r_questions' => $right_question,
+            ]);
+            
+            foreach ( $mistakes as $item ) {
+                StudentQuizzeMistake::create([
+                    'student_quizze_id' => $stu_quizze->id,
+                    'question_id' => $item->id
+                ]);
+            }
+        }
+
+        return view('Student.MyCourses.Grade', compact('deg', 'quizze', 'right_question', 'total_question', 'mistakes'));
     }
+
+    public function question_parallel( $id ){
+        $question = Question::where('id', $id)
+        ->first();
+        $q_parallel = Question::
+        where('month', $question->month)
+        ->where('year', $question->year)
+        ->where('section', $question->section)
+        ->where('q_num', $question->q_num)
+        ->where('id', '!=', $id)
+        ->get();
+
+        return view('Student.MyCourses.Parallel_Question', compact('q_parallel'));
+    }
+
+    public function solve_parallel( $id, Request $req ){
+        $question = Question::where('id', $id)
+        ->first();
+        $grade = false;
+        if ( $question->ans_type == 'MCQ' ) {
+            if ( $question->mcq[0]->mcq_answers == $req['ans' . $question->id] ) {
+                $grade = true;
+            }
+        }
+        else { 
+            if ( $question->g_ans[0]->grid_ans == $req['ans' . $question->id] ) {
+                $grade = true;
+            }
+        }
+        return view('Student.MyCourses.Solve_Parallel', compact('grade', 'question'));
+    }
+
+    public function quizze_history(){
+        $history = StudentQuizze::
+        where('student_id', auth()->user()->id)
+        ->get();
+
+        return view('Student.MyCourses.History', compact('history'));
+    }
+    
 }

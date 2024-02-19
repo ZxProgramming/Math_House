@@ -24,13 +24,13 @@
                                     data-target="#app-email-sidebar" data-overlay=""></i>
                                 <div class="mb-0 mb-lg-2 w-100">
                                     <div class="d-flex justify-content-center">
-                                        @if ($deg >= ($quizze->pass_score / $quizze->score) * 100)
+                                        @if ($grade)
                                             <button class="btn btn-success">
-                                                Success
+                                                Excellent
                                             </button>
                                         @else
                                             <button class="btn btn-danger">
-                                                Faild
+                                                Wrong
                                             </button>
                                         @endif
                                     </div>
@@ -44,35 +44,6 @@
                         <!-- Email View -->
                         <div class="col app-email-view flex-grow-0 bg-body" id="app-email-view">
 
-                            <table class="table">
-                                <tr>
-                                    <td>Quizze : </td>
-                                    <td>{{ $quizze->title }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Score : </td>
-                                    <td>{{ $deg }} %</td>
-                                </tr>
-                                <tr>
-                                    <td>Total Question : </td>
-                                    <td>{{ $total_question }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Right Question : </td>
-                                    <td>{{ $right_question }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Wrong Question : </td>
-                                    <td>{{ $total_question - $right_question }}</td>
-                                </tr>
-                                <tr colspan="2">
-                                    <td class="d-flex justify-content-center">
-                                        <button class="btn btn-primary mistake_btn">
-                                            View Mistakes
-                                        </button>
-                                    </td>
-                                </tr>
-                            </table>
                         </div>
 
                     </div>
@@ -87,46 +58,42 @@
 <div class="app-email card my-3 mistakes_questions">
     <div class="border-0">
         <div class="row g-0  p-3">
-            @foreach ( $mistakes as $item )
-                @if ( !empty($item->question) )
-                {{$item->question}}
+                @if ( !empty($question->question) )
+                {{$question->question}}
                 @endif
-                @if ( !empty($item->q_url) )
+                @if ( !empty($question->q_url) )
                 <img style="width: 200px; height: 200px;"
-                    src="{{ asset('images/questions/' . $item->q_url) }}" />
+                    src="{{ asset('images/questions/' . $question->q_url) }}" />
                 @endif
                 <button class="btn btn-primary ans_item_btn my-2">View Answer</button>
                 <div class="ans_item d-none">
                     <b> Answer :
-                    @if ( $item->ans_type == 'MCQ' )
-                        {{$item->mcq[0]->mcq_answers}}
+                    @if ( $question->ans_type == 'MCQ' )
+                        {{$question->mcq[0]->mcq_answers}}
                     @else 
-                    {{$item->g_ans[0]->grid_ans}}
+                    {{$question->g_ans[0]->grid_ans}}
                     @endif
                     </b>
                     <br />
-                    @foreach ( $item->q_ans as $q_ans )
+                    @foreach ( $question->q_ans as $q_ans )
                     @if ( !empty($q_ans->ans_video) )
                     <iframe width="560" height="315" src="{{$q_ans->ans_video}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 
                     @endif
                     @endforeach
                   </div>
-                @foreach ( $item->q_ans as $q_ans)
+                @foreach ( $question->q_ans as $q_ans)
                 <a href="{{asset('files/q_pdf/' . $q_ans->ans_pdf)}}" class="btn btn-success my-2" download>Download Pdf {{$loop->iteration}}</a>
                 @endforeach
 
-                <a href="{{route('question_parallel', ['id' => $item->id])}}" class="btn btn-info my-2" >Solve Parallel</a>
+                <a href="{{route('question_parallel', ['id' => $question->id])}}" class="btn btn-info my-2" >Solve Parallel</a>
 
                 <hr />
-            @endforeach
         </div>
     </div>
 </div>
 
-<script>
-    let mistakes_questions = document.querySelector('.mistakes_questions');
-    let mistake_btn = document.querySelector('.mistake_btn');
+<script> 
     let ans_item_btn = document.querySelectorAll('.ans_item_btn');
     let ans_item = document.querySelectorAll('.ans_item');
     
@@ -138,10 +105,7 @@
                 }
             }
         })
-    }
-    mistake_btn.addEventListener('click', () => {
-        mistakes_questions.classList.toggle('d-none');
-    })
+    } 
 </script>
 
 @endsection

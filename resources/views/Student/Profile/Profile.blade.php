@@ -3,6 +3,7 @@
     $page_name = 'Profile';
 @endphp
 @include('Student.inc.header')
+@include('Student.inc.menu')
 @extends('Student.inc.nav')
 @section('title','Profile')
 
@@ -88,7 +89,7 @@
                 type="password"
                 id="Password"
                 name="password"
-                value=""
+                autocomplete="new-password"
                 class="form-control"
                 placeholder="Enter Your New Password" />
             </div>

@@ -30,6 +30,52 @@
   </div>
 @enderror
 
+<button type="button" class='btn btn-primary mx-3' data-bs-toggle="modal" data-bs-target="#filter_modal">
+  Filter
+</button>
+
+<div class="modal fade" id="filter_modal" tabindex="-1" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-fullscreen p-9">
+        <!--begin::Modal content-->
+        <div class="modal-content modal-rounded">
+            <!--begin::Modal header-->
+            <div class="modal-header py-7 d-flex justify-content-between">
+                <!--begin::Modal title-->
+                <h2>Filter Lesson</h2>
+                <!--end::Modal title-->
+                <!--begin::Close-->
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <i class="ki-duotone ki-cross fs-1">
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                    </i>
+                </div>
+                <!--end::Close-->
+            </div>
+            <!--begin::Modal header-->
+            <form action="{{route('course_filter')}}" method="POST">
+            <div class="p-5 d-flex">
+                    @csrf
+                    <select name="category_id" class="form-control sel_category mx-2">
+                        <option disabled selected>
+                            Select Category ...
+                        </option>
+                        @foreach( $categories as $category )
+                            <option value="{{$category->id}}">
+                                {{$category->cate_name}}
+                            </option>
+                        @endforeach
+                    </select>
+                    
+                    <button class="btn btn-primary mx-2">
+                        Submit
+                    </button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
 
 <table id="kt_profile_overview_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable no-footer">
     <thead class="fs-7 text-gray-500 text-uppercase">

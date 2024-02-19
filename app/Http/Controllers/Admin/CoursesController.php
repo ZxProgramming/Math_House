@@ -124,8 +124,10 @@ class CoursesController extends Controller
             where('category_id', $req->category_id)
             ->get();
         }
+        $teachers = User::where('position', 'teacher')
+        ->get();
         $categories = Category::all();
-        return view('Admin.courses.Courses.Course', compact('courses', 'categories'));
+        return view('Admin.courses.Courses.Course', compact('courses', 'categories', 'teachers'));
     }
 
 }
