@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 19, 2024 at 12:28 PM
+-- Generation Time: Feb 19, 2024 at 12:51 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -1319,7 +1319,8 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (181, 'App\\Models\\User', 8, 'user', '0f34bf40bddd00e1cf3a559fe7f47202ead23a36dbe6f581219aa1e4d629f5e5', '[\"*\"]', NULL, NULL, '2024-02-19 05:34:07', '2024-02-19 05:34:07'),
 (182, 'App\\Models\\User', 8, 'user', '1543a221847c1e8b0231f4ca87cd3255e570d81ed961abe520550822f85e7d7e', '[\"*\"]', NULL, NULL, '2024-02-19 06:18:09', '2024-02-19 06:18:09'),
 (183, 'App\\Models\\User', 8, 'user', '8c509f49a3d8184b9d6d2cb5f9b33b0472937278177f628741f7970e40b07524', '[\"*\"]', NULL, NULL, '2024-02-19 07:28:02', '2024-02-19 07:28:02'),
-(184, 'App\\Models\\User', 8, 'user', 'fd33ef4619478ab90c8b2246a313d65565e3ee1b910ff8e5d15165ecfe1346bc', '[\"*\"]', NULL, NULL, '2024-02-19 07:28:21', '2024-02-19 07:28:21');
+(184, 'App\\Models\\User', 8, 'user', 'fd33ef4619478ab90c8b2246a313d65565e3ee1b910ff8e5d15165ecfe1346bc', '[\"*\"]', NULL, NULL, '2024-02-19 07:28:21', '2024-02-19 07:28:21'),
+(185, 'App\\Models\\User', 8, 'user', '16f40854d6ae44c25de097839343c29e0426c6de3a3f76dfb92a5034ae83019b', '[\"*\"]', NULL, NULL, '2024-02-19 09:38:16', '2024-02-19 09:38:16');
 
 -- --------------------------------------------------------
 
@@ -1439,8 +1440,8 @@ CREATE TABLE `questions` (
 
 INSERT INTO `questions` (`id`, `lesson_id`, `question`, `state`, `q_url`, `q_code`, `q_type`, `month`, `q_num`, `year`, `section`, `difficulty`, `ans_type`, `updated_at`, `created_at`) VALUES
 (1, 16, 'question 2', '0', NULL, '1234', 'Parallel', '3', '2', '2022', '2', 'A', 'Grid_in', '2024-02-13', '2024-01-29'),
-(18, 4, NULL, '0', '2.png', '2', 'Parallel', '3', '21', '2022', '1', 'B', 'MCQ', '2024-02-05', NULL),
-(19, 4, 'Question 2', '0', NULL, 'sad', 'Trail', '3', '4', '2022', '1', 'A', 'MCQ', '2024-01-29', NULL),
+(18, 4, NULL, '1', '2.png', '2', 'Parallel', '3', '21', '2022', '1', 'B', 'MCQ', '2024-02-05', NULL),
+(19, 4, 'Question 2', '2', '2.png', 'sad', 'Trail', '3', '4', '2022', '1', 'A', 'MCQ', '2024-01-29', NULL),
 (20, 4, 'question 2', '0', NULL, '1234', 'Parallel', '3', '2', '2022', '2', 'A', 'Grid_in', '2024-01-29', '2024-01-29'),
 (21, 4, 'question 2', '0', NULL, '1234', 'Parallel', '3', '2', '2022', '2', 'A', 'Grid_in', '2024-01-29', '2024-01-29');
 
@@ -1990,7 +1991,7 @@ INSERT INTO `users` (`id`, `f_name`, `l_name`, `name`, `email`, `profile_photo_p
 (1, NULL, NULL, 'Ahmed', 'Ahmed@gmail.com', NULL, NULL, '0113443534', '012345346', 'Ali@gmail.com', '1972024X01X27X10X03X326.jpg', NULL, 'teacher', NULL, 2, 1, '$2y$10$O4pDFFvEQGAkfZ.mcGIhaOb0MQCocleYwEySm4OYgq9./pKT021de', 'Show', NULL, NULL, NULL, NULL, '2024-01-27 08:03:32', NULL, NULL),
 (5, NULL, NULL, 'Teacher 1', 'admin3@gmail.com', NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X42X459672202304300850download.png', NULL, 'super_admin', NULL, NULL, NULL, '$2y$10$abRantqLN7R8dKUzWPGSLebir7D.GcznzfflGYjquM59GZo9f5y3a', 'Show', NULL, NULL, NULL, '2023-12-18 09:42:45', '2023-12-18 09:42:45', NULL, NULL),
 (7, NULL, NULL, 'Teacher 1', 'admin4@gmail.com', NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X43X297615202304300850download.png', NULL, 'super_admin', NULL, NULL, NULL, '$2y$10$CWyZzMn0kdjZKf1f5z0ey.xXzyHVVwkvCFGwakJchI9dwNSyOEyQa', 'Show', NULL, NULL, NULL, '2023-12-18 09:43:29', '2023-12-18 09:43:29', NULL, NULL),
-(8, NULL, NULL, 'Teacher 1', 'admin@gmail.com', NULL, NULL, '01099475851111111114', NULL, NULL, '7452024X02X19X09X11X19202301101725mvf_dark_logo.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$/A0p4679DcC9h6YOqFa1s.zqr9yJbBWVDqTZ.HmKw8afdDXhrhsbS', 'Show', NULL, NULL, NULL, '2023-12-18 09:44:14', '2024-02-19 07:11:19', NULL, NULL),
+(8, NULL, NULL, 'Teacher 1', 'admin@gmail.com', NULL, NULL, '01099475851111111114', NULL, NULL, '7452024X02X19X09X11X19202301101725mvf_dark_logo.png', NULL, 'student', NULL, NULL, NULL, '$2y$10$/A0p4679DcC9h6YOqFa1s.zqr9yJbBWVDqTZ.HmKw8afdDXhrhsbS', 'Show', NULL, NULL, NULL, '2023-12-18 09:44:14', '2024-02-19 07:11:19', NULL, NULL),
 (10, NULL, NULL, 'Teacher', 'teacher@gmail.com', NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X50X119775202304090932egyptXflagXwaveXiconX32.png', NULL, 'teacher', NULL, NULL, NULL, '$2y$10$EFSKaqvOqy3o.ihNqVWi7uCPCrFtflwUJGqEBFP1woOuxlRaIqN5u', 'Show', NULL, NULL, NULL, '2023-12-18 09:50:11', '2024-01-27 08:02:15', NULL, NULL),
 (11, NULL, NULL, 'Teacher12', 'teacher2@gmail.com', NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X52X277966202304090932egyptXflagXwaveXiconX32.png', NULL, 'teacher', NULL, 1, 1, '$2y$10$Y4fg1B5EpujC8OVSCO6fNOyxdAj2lPJDZWibbtD8j55Jik6fU4Uq6', 'Show', NULL, NULL, NULL, '2023-12-18 09:52:27', '2024-02-05 10:45:46', NULL, NULL),
 (44, NULL, NULL, 'admin@gmail.com', 'sad@gmail.com', NULL, NULL, '123', '123', NULL, 'default.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$RkeDuqhtAqMTRC7gfMFxG.Vl8pLtWGgj1jisi0ZkphX9LDVUQaZpO', 'Show', NULL, NULL, NULL, '2023-12-31 06:31:28', '2024-02-05 10:15:37', NULL, NULL),
@@ -2660,7 +2661,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=185;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=186;
 
 --
 -- AUTO_INCREMENT for table `private_request`

@@ -1,5 +1,8 @@
 @php
     $page_name = 'Quizze';
+    // $quizze->question;
+    // "Mcq" => $item->mcq
+    // "Grid" => $item->g_ans
 @endphp
 @section('title', 'Quizze')
 <style>
