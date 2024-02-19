@@ -4,6 +4,7 @@
 @endphp
 @section('title', 'Lessons')
 @include('Student.inc.header')
+@include('Student.inc.menu')
 @extends('Student.inc.nav')
 
 @section('page_content') 

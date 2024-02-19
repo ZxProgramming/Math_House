@@ -3,6 +3,7 @@
     $page_name = 'Profile';
 @endphp
 @include('Student.inc.header')
+@include('Student.inc.menu')
 @extends('Student.inc.nav')
 @section('title','Profile')
 
