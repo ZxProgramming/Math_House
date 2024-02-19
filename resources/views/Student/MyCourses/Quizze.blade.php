@@ -62,6 +62,7 @@
         font-size: 1.1rem;
         padding: 10px;
         border-radius: 10px;
+        z-index: 100;
     }
 
     .quizzes-page .timer-quizzes {
@@ -127,7 +128,7 @@
     .options-list {
         position: absolute;
         top: 100%;
-        left: 15%;
+        left: -5%;
         width: 80%;
         margin: 0;
         padding: 10px;
@@ -138,6 +139,7 @@
         list-style-type: none;
         background: #dedede;
         border: 1px solid #ccc;
+        z-index: 100;
     }
 
     .options-list .options-tx {
@@ -221,6 +223,13 @@
         border-radius: 10px;
     }
 
+    main .main-wrapper .question .question-side .text-question {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        column-gap: 10px;
+    }
+
     main .main-wrapper .question .question-side .text-question p {
         font-size: 1.2rem;
         font-weight: 500;
@@ -288,7 +297,7 @@
         column-gap: 10px;
     }
 
-    main .main-wrapper .question .answer-side .sup-question .question-num {
+    .question-num {
         font-size: 1.3rem;
         font-weight: 600;
         background: #000;
@@ -536,20 +545,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">1</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -597,20 +607,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">2</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -658,20 +669,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">3</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -719,20 +731,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">4</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -780,20 +793,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">5</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -841,20 +855,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">6</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -902,20 +917,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">7</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -963,20 +979,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">8</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -1024,20 +1041,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">9</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -1085,20 +1103,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">10</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -1146,20 +1165,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">11</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -1207,20 +1227,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">12</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -1268,20 +1289,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">13</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -1329,20 +1351,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">14</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -1390,20 +1413,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">15</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -1451,20 +1475,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">16</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -1512,20 +1537,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">17</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -1573,20 +1599,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">18</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -1634,20 +1661,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">19</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -1695,20 +1723,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">20</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -1756,20 +1785,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">21</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -1817,20 +1847,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">22</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -1878,20 +1909,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">23</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -1939,20 +1971,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">24</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -2000,20 +2033,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">25</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -2061,20 +2095,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">26</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -2122,20 +2157,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">27</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -2183,20 +2219,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">28</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -2244,20 +2281,21 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
                         <span class="question-num">29</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
+                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                    </div>
+                    <div class="img-question">
+                        <span>Examples</span>
+                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                    </div>
+                </div>
+                <div class="answer-side">
+
+                    {{-- Supp Question --}}
+                    <div class="sup-question">
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -2305,6 +2343,7 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
+                        <span class="question-num">30</span>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
                             rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
                             officiis atque commodi praesentium. Accusantium, suscipit.</p>
@@ -2318,7 +2357,7 @@
 
                     {{-- Supp Question --}}
                     <div class="sup-question">
-                        <span class="question-num">30</span>
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -2366,6 +2405,7 @@
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
+                        <span class="question-num">31</span>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
                             rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
                             officiis atque commodi praesentium. Accusantium, suscipit.</p>
@@ -2379,7 +2419,7 @@
 
                     {{-- Supp Question --}}
                     <div class="sup-question">
-                        <span class="question-num">31</span>
+
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
                             aspernatur, quasi quaerat illo?</p>
                     </div>
@@ -2460,7 +2500,6 @@
 @include('Student.inc.footer')
 <script>
     $(document).ready(function() {
-        console.log($(".question").length)
         /* Show Discraption */
         $(".angle-show-disc").click(function() {
             $('.disc-ruels-quizzes').toggleClass("d-none");
@@ -2484,6 +2523,23 @@
         $(".options-list li").click(function() {
             $(".options-list").toggleClass("d-none");
         });
+
+        /* /////////////// */
+        /* Handel Data question */
+        /* /////////////// */
+
+        $.ajax({
+            type: "GET",
+            url: "",
+            data: myquestion,
+            cache: false,
+            success: function(data) {
+                console.log("Done fetch question")
+            }
+        });
+
+
+
 
         /* /////////////// */
         /* Handel pagination question */
@@ -2554,8 +2610,10 @@
                             "page-link").attr({
                             href: "javascript:void(0)"
                         }).text(item || "...")).insertBefore(".nextt-page");
-                    $(".currentt-page").css("background", "red")
-                    console.log($(".value-question").val())
+                    // $(".currentt-page").css("background", "red")
+                    // console.log($(".value-question").val())
+                    // $(".currentt-page").css("background", "red")
+                    // console.log($(".value-question").val())
                 });
 
                 $(".previouss-page").toggleClass("disablee", currentPage === 1);
