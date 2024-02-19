@@ -63,8 +63,8 @@ class Stu_MyCourseController extends Controller
         return view('Student.MyCourses.Lessons', compact('payment_request', 'chapter_id', 'L_id', 'idea_num'));
     }
 
-    public function stu_quizze( $id ){
-        $quizze = quizze::where('id', $id)
+    public function stu_quizze( $quizze_id ){
+        $quizze = quizze::where('id', $quizze_id )
         ->first();
 
         $stu_quizze = StudentQuizze::
@@ -79,7 +79,14 @@ class Stu_MyCourseController extends Controller
             }
         }
         
-        return view('Student.MyCourses.Quizze', compact('quizze'));
+        return view('Student.MyCourses.Quizze', compact('quizze_id'));
+    }
+
+    public function api_quizze( Request $req ){
+        $quizze = quizze::where('id', $req->id)
+        ->first();
+
+        return $quizze;
     }
 
     public function quizze_ans( Request $req ){

@@ -3,8 +3,10 @@
     // $quizze->question;
     // "Mcq" => $item->mcq
     // "Grid" => $item->g_ans
+    // api_quizze
 @endphp
 @section('title', 'Quizze')
+@include('success')
 <style>
     body {
         background: #fff !important;
