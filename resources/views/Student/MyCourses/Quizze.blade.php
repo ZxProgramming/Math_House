@@ -546,16 +546,16 @@
         <div class="main-wrapper">
             <div class="question">
                 <div class="question-side">
-                    <div class="text-question">
+                    <divxt-question">
                         <span class="question-num">1</span>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
                             rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
                             officiis atque commodi praesentium. Accusantium, suscipit.</p>
                     </div>
-                    <div class="img-question">
+                    <div class="img- class="tequestion">
                         <span>Examples</span>
                         <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
+                    </divxt-question>
                 </div>
                 <div class="answer-side">
 
@@ -2530,19 +2530,20 @@
         /* Handel Data question */
         /* /////////////// */
 
-        $.ajax({
-            type: "GET",
-            url: "{{ route('api_quizze') }}",
-            data: {
-                'id': {{ $quizze_id }},
-                // '_token': {{ csrf_token() }},
-            },
+        // $.ajax({
+        //     type: "GET",
+        //     url: "{{ route('api_quizze') }}",
 
-            cache: false,
-            success: function(data) {
-                console.log(quizze.id)
-            }
-        });
+        //     data: {
+        //         quizze_id: {{ $quizze_id }},
+        //     },
+        //     success: function(response) {
+        //         console.log(response.question)
+        //     },
+        //     error: function(xhr, status, error) {
+        //         console.log(error)
+        //     }
+        // });
 
 
 
@@ -2552,7 +2553,6 @@
         /* /////////////// */
         function getPageList(totalPages, page, maxLength) {
             function range(start, end) {
-                // return Array.form(Array(end - start + 1), (_, 1) => i + start);
                 return result = $.map(Array(end - start + 1), function(_, i) {
                     return i + start;
                 });
@@ -2616,10 +2616,6 @@
                             "page-link").attr({
                             href: "javascript:void(0)"
                         }).text(item || "...")).insertBefore(".nextt-page");
-                    // $(".currentt-page").css("background", "red")
-                    // console.log($(".value-question").val())
-                    // $(".currentt-page").css("background", "red")
-                    // console.log($(".value-question").val())
                 });
 
                 $(".previouss-page").toggleClass("disablee", currentPage === 1);
