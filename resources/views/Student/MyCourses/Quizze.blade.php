@@ -544,55 +544,49 @@
     </header>
     <main>
         <div class="main-wrapper">
-            @foreach ($quizze->question as $question)
+            @foreach ( $quizze->question as $question )
+                
             <div class="question">
                 <div class="question-side">
                     <div class="text-question">
-                        <span class="question-num">1</span>
+                        <span class="question-num">
+                            {{$loop->iteration}}
+                        </span>
                         <p>
-                            {{$question->}}
+                            {{$question->question}}
                         </p>
                     </div>
                     <div class="img-question">
                         <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        @if ( !empty($question->q_url) )
+                        <img src="{{asset('images/questions/' . $question->q_url)}}" alt="question">
+                        @endif
                     </div>
                 </div>
                 <div class="answer-side">
 
                     {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
 
                     {{-- Input to set and send value about answer question to array --}}
                     <input type="hidden" value="">
 
                     {{-- Answer chosen --}}
 
+                    @php
+                        $arr = ['A', 'B', 'C', 'D'];
+                    @endphp
+                    @if ( $question->ans_type == 'MCQ' )
                     <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
+                        @foreach ( $question->mcq as $mcq )
+                            <div class="chosen">
+                                <button>{{@$arr[$loop->iteration - 1]}}</button>
+                                <input type="text" value="{{$mcq->mcq_ans}}" readonly>
+                            </div>
+                        @endforeach
                     </div>
-
+                    @else
                     {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
+                    <div class="answer-setValue">
                         <div class="section-setValue">
                             <span>Answer:</span>
                             <div class="input_val">
@@ -605,9 +599,11 @@
                             <input type="number" value="00000" readonly>
                         </div>
                     </div>
+                    @endif
+
                 </div>
             </div>
-            @endforeach
+            @endforeach       
         </div>
         {{-- end Section Question --}}
         <ul class="paginationn">
@@ -672,19 +668,7 @@
         /* Handel Data question */
         /* /////////////// */
 
-        $.ajax({
-            type: "GET",
-            url: "{{ route('api_quizze') }}",
-            data: {
-                'id': {{ $quizze_id }},
-                // '_token': {{ csrf_token() }},
-            },
 
-            cache: false,
-            success: function(data) {
-                console.log(quizze.id)
-            }
-        });
 
 
 

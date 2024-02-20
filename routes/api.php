@@ -12,7 +12,7 @@ use App\Http\Controllers\Admin\QuizzeController;
 use App\Http\Controllers\Admin\DiagnosticExamController;
 
 use App\Http\Controllers\Visitor\CoursesController;
-use App\Http\Controllers\Visitor\Stu_MyCourseController;
+use App\Http\Controllers\Student\Stu_MyCourseController;
 
 /*
 |--------------------------------------------------------------------------
