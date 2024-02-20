@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\QuizzeController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\LiveController;
 use App\Http\Controllers\Admin\PaymentRequestController;
+use App\Http\Controllers\Admin\PackagesController as Ad_PackagesController;
 
 use App\Http\Controllers\Student\Stu_DashboardController;
 use App\Http\Controllers\Student\Stu_ProfileController;
@@ -256,6 +257,13 @@ Route::controller(LessonController::class)->group(function(){
         Route::post('Lesson/Filter','filter_lesson')->name('filter_lesson');
         Route::get('Lesson/Filter','filter_lesson')->name('filter_lesson');
 });
+
+// Packages 
+Route::controller(Ad_PackagesController::class)->group(function(){
+    Route::get('Packages','index')->name('admin_packages');
+});
+
+ 
    
 
 });
@@ -275,7 +283,6 @@ Route::middleware(['auth','auth.student'])->prefix('student')->group(function(){
     });
 
     Route::controller(Stu_MyCourseController::class)->prefix('MyCourses')->group(function(){
-
         Route::get('/','index')->name('stu_my_courses');
         Route::get('/Courses','courses')->name('stu_courses');
         Route::get('/Chapters/{id}','stu_chapters')->name('stu_chapters');
