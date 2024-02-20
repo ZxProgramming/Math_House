@@ -79,15 +79,9 @@ class Stu_MyCourseController extends Controller
             }
         }
         
-        return view('Student.MyCourses.Quizze', compact('quizze_id'));
+        return view('Student.MyCourses.Quizze', compact('quizze'));
     }
 
-    public function api_quizze( Request $req ){
-        $quizze = quizze::where('id', $req->id)
-        ->first();
-
-        return response()->json(['quizze' => $quizze]);
-    }
 
     public function quizze_ans( Request $req ){
         $quizze = quizze::where('id', $req->quizze_id)

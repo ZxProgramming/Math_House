@@ -33,7 +33,6 @@ Route::get('/exam_add_q', [DiagnosticExamController::class, 'exam_add_q'])->name
 Route::get('/quize_del_q', [QuizzeController::class, 'quize_del_q'])->name('quize_del_q')->middleware('auth:sanctum');
 Route::get('/quize_add_q', [QuizzeController::class, 'quize_add_q'])->name('quize_add_q')->middleware('auth:sanctum');
 Route::get('/buy_chapters', [CoursesController::class, 'buy_chapters'])->name('buy_chapters')->middleware('auth:sanctum');
-Route::post('/quizze_data', [Stu_MyCourseController::class, 'api_quizze'])->name('api_quizze')->middleware('auth:sanctum');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
