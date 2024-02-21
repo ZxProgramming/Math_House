@@ -9,6 +9,8 @@ use App\Models\Exam;
 use App\Models\ExamCodes;
 use App\Models\Course;
 use App\Models\Category;
+use App\Models\Package;
+use App\Models\User;
 
 class V_ExamController extends Controller
 {
@@ -80,7 +82,25 @@ class V_ExamController extends Controller
         }
         else{
             session()->forget('previous_page');
-            return 564;
+            $user_package = User::with('package')
+            ->where('id', auth()->user()->id)
+            ->where('exam_number', '>', 0)
+            ->first();
+            
+            if ( !isset($user_package->package) || count($user_package->package) == 0 ) {
+                $package = Package::
+                where('module', 'Exam')
+                ->get();
+                return view('Student.Exam.Exam_Package', compact('package'));
+            }
+            else{
+                User::with('package')
+                ->where('id', auth()->user()->id)
+                ->update([
+                    'exam_number' => $user_package->exam_number - 1
+                ]);
+                return $user_package;
+            }
         }
     }
 

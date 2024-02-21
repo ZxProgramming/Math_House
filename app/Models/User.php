@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use App\Models\Course;
 use App\Models\Category;
+use App\Models\Package;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -41,6 +42,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'course_id',
         'category_id',
         'extra_email',
+        'exam_number'
     ];
 
     /**
@@ -70,6 +72,11 @@ class User extends Authenticatable implements MustVerifyEmail
         }
 
         return $this->profile_photo_path;
+    }
+    
+    public function package()
+    {
+        return $this->belongsToMany(Package::class, 'user_packages');
     }
 
     public function addresses()

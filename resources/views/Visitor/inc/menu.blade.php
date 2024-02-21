@@ -30,7 +30,7 @@
 		                <a href="{{route('v_exams')}}"><span class="title">Exams</span></a>
 		            </li>
 		            <li>
-		                <a href="#"><span class="title">Question</span></a>
+		                <a href="{{route('v_question')}}"><span class="title">Question</span></a>
 		            </li>
 		            <li>
 		                <a href="#"><span class="title">Live</span></a>
