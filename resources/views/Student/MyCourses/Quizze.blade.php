@@ -175,6 +175,12 @@
         justify-content: flex-start;
     }
 
+    main>form {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
     main .main-wrapper {
         width: 100%;
         padding: 0 10px;
@@ -436,6 +442,7 @@
 
     /* Section Pagination  */
     main .paginationn {
+        position: relative;
         display: flex;
         text-align: center;
         margin-top: 15px;
@@ -469,7 +476,7 @@
         width: 80px;
         border-radius: 45px;
         cursor: pointer;
-        transition: 0.3s ease
+        transition: 0.3s ease;
     }
 
     main .previouss-page:hover {
@@ -496,6 +503,26 @@
         background: #ccc;
     }
 
+    .btn-sendQuizz {
+        position: absolute;
+        right: -45%;
+        top: 9%;
+        border: none;
+        cursor: pointer;
+        font-weight: 500;
+        padding: 5px 30px;
+        font-size: 1.2rem;
+        border-radius: 45px;
+        transition: 0.3s ease;
+        background: #0ab1ce;
+        color: #fff !important;
+        transition: all 0.3s ease;
+    }
+
+    .btn-sendQuizz:hover {
+        background: cadetblue;
+    }
+
     /* ///Section Pagination  */
 </style>
 @include('Student.inc.header')
@@ -517,7 +544,13 @@
         <div class="timer-quizzes">
             {{-- show section --}}
             <div class="show-timer">
-                <div class="timer">02:50</div>
+                <div class="timer">
+                    <span class="hr" id="hour">00</span>
+                    <span>:</span>
+                    <span class="min" id="minutes">00</span>
+                    <span>:</span>
+                    <span class="sec" id="seconds">00</span>
+                </div>
                 <button class="hide-btn">Hide</button>
             </div>
             {{-- hide section --}}
@@ -543,1933 +576,1932 @@
         </div>
     </header>
     <main>
-        <div class="main-wrapper">
-            <div class="question">
-                <div class="question-side">
-                    <divxt-question">
-                        <span class="question-num">1</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img- class="tequestion">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </divxt-question>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
+        <form action="">
+            <div class="main-wrapper">
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">2</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
                         </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
                         </div>
                     </div>
+                    <div class="answer-side">
 
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
 
-                                <input type="number" value="0">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
                             </div>
                         </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">3</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">4</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">5</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">6</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">7</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">8</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">9</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">10</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">11</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">12</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">13</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">14</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">15</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">16</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">17</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">18</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">19</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">20</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">21</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">22</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">23</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">24</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">25</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">26</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">27</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">28</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">29</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">30</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="30" class="value-question">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue d-none">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" value="0">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" value="00000" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-side">
+                        <div class="text-question">
+                            <span class="question-num">31</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
+                                rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti
+                                error
+                                officiis atque commodi praesentium. Accusantium, suscipit.</p>
+                        </div>
+                        <div class="img-question">
+                            <span>Examples</span>
+                            <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
+                        </div>
+                    </div>
+                    <div class="answer-side">
+
+                        {{-- Supp Question --}}
+                        <div class="sup-question">
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis
+                                labore
+                                aspernatur, quasi quaerat illo?</p>
+                        </div>
+
+                        {{-- Input to set and send value about answer question to array --}}
+                        <input type="hidden" value="22" class="value-question">
+
+                        {{-- Answer chosen --}}
+
+                        <div class="answer-chosen d-none">
+                            <div class="chosen">
+                                <button>A</button>
+                                <input type="text" value="Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>B</button>
+                                <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>C</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                            <div class="chosen">
+                                <button>D</button>
+                                <input type="text" value="Aasaasa Aasaasa" readonly>
+                            </div>
+                        </div>
+
+                        {{-- Answer Set Value --}}
+                        <div class="answer-setValue ">
+                            <div class="section-setValue">
+                                <span>Answer:</span>
+                                <div class="input_val">
+
+                                    <input type="number" id="input_val30" value="">
+                                </div>
+                            </div>
+                            <div class="section-value">
+                                <span>Answer Preview:</span>
+                                <input type="number" id="section-value30" value="" readonly>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">2</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">3</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">4</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">5</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">6</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">7</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">8</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">9</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">10</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">11</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">12</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">13</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">14</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">15</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">16</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">17</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">18</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">19</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">20</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">21</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">22</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">23</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">24</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">25</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">26</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">27</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">28</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">29</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">30</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="30" class="value-question">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue d-none">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question">
-                <div class="question-side">
-                    <div class="text-question">
-                        <span class="question-num">31</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat voluptates id nesciunt
-                            rerum commodi mollitia impedit culpa assumenda in numquam! Provident laborum, deleniti error
-                            officiis atque commodi praesentium. Accusantium, suscipit.</p>
-                    </div>
-                    <div class="img-question">
-                        <span>Examples</span>
-                        <img src="https://i.ytimg.com/vi/eVB1T7PamoY/maxresdefault.jpg" alt="question">
-                    </div>
-                </div>
-                <div class="answer-side">
-
-                    {{-- Supp Question --}}
-                    <div class="sup-question">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut, fuga a perspiciatis labore
-                            aspernatur, quasi quaerat illo?</p>
-                    </div>
-
-                    {{-- Input to set and send value about answer question to array --}}
-                    <input type="hidden" value="22" class="value-question">
-
-                    {{-- Answer chosen --}}
-
-                    <div class="answer-chosen d-none">
-                        <div class="chosen">
-                            <button>A</button>
-                            <input type="text" value="Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>B</button>
-                            <input type="text" value="Aasaasa AasaasaAasaasa AasaasaAasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>C</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                        <div class="chosen">
-                            <button>D</button>
-                            <input type="text" value="Aasaasa Aasaasa" readonly>
-                        </div>
-                    </div>
-
-                    {{-- Answer Set Value --}}
-                    <div class="answer-setValue ">
-                        <div class="section-setValue">
-                            <span>Answer:</span>
-                            <div class="input_val">
-
-                                <input type="number" value="0">
-                            </div>
-                        </div>
-                        <div class="section-value">
-                            <span>Answer Preview:</span>
-                            <input type="number" value="00000" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{-- end Section Question --}}
-        <ul class="paginationn">
-            {{--             <li class="page-item previouss-page disablee">
+            {{-- end Section Question --}}
+            <ul class="paginationn">
+                {{--             <li class="page-item previouss-page disablee">
                 <a href="#" class="page-link">prev</a>
             </li>
             <li class="page-item currentt-page activee">
@@ -2493,7 +2525,9 @@
             <li class="page-item nextt-page">
                 <a href="#" class="page-link">Next</a>
             </li> --}}
-        </ul>
+                <button class="btn-sendQuizz d-none" type="Submit">Submit</button>
+            </ul>
+        </form>
     </main>
 </div>
 
@@ -2502,6 +2536,52 @@
 @include('Student.inc.footer')
 <script>
     $(document).ready(function() {
+        /* Timer question */
+        var hoursLabel = $("#hour");
+        var minutesLabel = $("#minutes");
+        var secondsLabel = $("#seconds");
+        var totalHours = 0;
+        var totalMinutes = 0;
+        var totalSeconds = 0;
+
+        setInterval(setTime, 1000);
+
+        function setTime() {
+            ++totalSeconds;
+            secondsLabel.html(pad(totalSeconds % 60));
+            secondsLabel.html(pad(parseInt(totalSeconds)));
+
+            if (totalSeconds <= 59) {
+                console.log("sec < 59")
+            } else {
+                secondsLabel.html(pad(parseInt(0)));
+                totalSeconds = 0;
+                totalMinutes++;
+                minutesLabel.html(pad(parseInt(totalMinutes)));
+                console.log("5555")
+
+                if (totalMinutes <= 59) {
+                    console.log("min < 59")
+                } else {
+                    minutesLabel.html(pad(parseInt(0)));
+                    totalMinutes = 0;
+                    totalHours++;
+                    hoursLabel.html(pad(parseInt(totalHours)));
+                    console.log("6666")
+                }
+            }
+        }
+
+        function pad(val) {
+            var valString = val + "";
+            if (valString.length < 2) {
+                return "0" + valString;
+            } else {
+                return valString;
+            }
+        }
+
+
         /* Show Discraption */
         $(".angle-show-disc").click(function() {
             $('.disc-ruels-quizzes').toggleClass("d-none");
@@ -2547,6 +2627,24 @@
 
 
 
+        /* /////////////// */
+        /* Rewrite value in inpit */
+        /* /////////////// */
+        $("#input_val30").keyup(() => {
+            var answerValue = $("#input_val30").val()
+            $("#section-value30").val(answerValue)
+        })
+
+        /* /////////////// */
+        /* But border out side the answer  */
+        /* /////////////// */
+        $(".chosen").on("click", () => {
+            // console.log($(this).attr("class"))
+            // $(this).css("background", "red")
+            $(".chosen").each((ele, val) => {
+
+            });
+        })
 
         /* /////////////// */
         /* Handel pagination question */
@@ -2570,6 +2668,7 @@
             console.log("leftWidth", leftWidth);
             console.log("totalpages", totalPages);
             console.log("page", page);
+            console.log("#".repeat(15));
 
             if (totalPages <= maxLength) {
                 return range(1, totalPages)
@@ -2581,7 +2680,8 @@
             }
             /* Customize list question tap and bots between list   */
             if (page >= totalPages - sideWidth - 1 - rightWidth) {
-                return range(1, sideWidth).concat(0, range(totalPages - sideWidth - 1 - rightWidth - leftWidth,
+                return range(1, sideWidth).concat(0, range(totalPages - sideWidth - 1 - rightWidth -
+                    leftWidth,
                     totalPages));
             }
 
@@ -2603,6 +2703,15 @@
                 if (whichPage < 1 || whichPage > totalPages) return false;
                 console.log("totalPages", totalPages)
                 console.log("whichPage", whichPage)
+                console.log("#".repeat(20))
+                console.log("currentPage", currentPage)
+
+                if (whichPage == totalPages) {
+                    $(".btn-sendQuizz").removeClass("d-none");
+                } else {
+                    $(".btn-sendQuizz").addClass("d-none");
+
+                }
 
                 currentPage = whichPage;
 
@@ -2612,10 +2721,11 @@
 
                 getPageList(totalPages, currentPage, paginationSize).forEach(item => {
                     $("<li>").addClass("page-item").addClass("currentt-page")
-                        .toggleClass("activee", item === currentPage).append($("<a>").addClass(
-                            "page-link").attr({
-                            href: "javascript:void(0)"
-                        }).text(item || "...")).insertBefore(".nextt-page");
+                        .toggleClass("activee", item === currentPage).append($("<a>")
+                            .addClass(
+                                "page-link").attr({
+                                href: "javascript:void(0)"
+                            }).text(item || "...")).insertBefore(".nextt-page");
                 });
 
                 $(".previouss-page").toggleClass("disablee", currentPage === 1);
@@ -2625,10 +2735,11 @@
 
             $(".paginationn").append(
 
-                $("<li>").addClass("page-item").addClass("previouss-page").append($("<a>").addClass(
-                    "page-link").attr({
-                    href: "javascript:void(0)"
-                }).text("Prev")),
+                $("<li>").addClass("page-item").addClass("previouss-page").append($("<a>")
+                    .addClass(
+                        "page-link").attr({
+                        href: "javascript:void(0)"
+                    }).text("Prev")),
                 $("<li>").addClass("page-item").addClass("nextt-page").append($("<a>").addClass(
                     "page-link").attr({
                     href: "javascript:void(0)"
