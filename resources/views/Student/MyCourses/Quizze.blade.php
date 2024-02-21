@@ -2651,6 +2651,7 @@
         /* /////////////// */
         function getPageList(totalPages, page, maxLength) {
             function range(start, end) {
+                // return Array.form(Array(end - start + 1), (_, 1) => i + start);
                 return result = $.map(Array(end - start + 1), function(_, i) {
                     return i + start;
                 });

@@ -81,30 +81,10 @@ class Stu_MyCourseController extends Controller
                 return redirect()->back();
             }
         }
-
-        return view('Student.MyCourses.Quizze', compact('quizze_id'));
+        
+        return view('Student.MyCourses.Quizze', compact('quizze'));
     }
 
-    public function api_quizze(Request $req)
-    {
-        $quizze = quizze::where('id', $req->quizze_id)
-            ->first();
-        $answers = [];
-        foreach ($quizze->question as $quizze) {
-            $answers[] = Mcq_ans::where('id',  $quizze->id)
-                ->get();
-        }
-
-
-
-
-        return response()->json(['quizze' => $quizze, 'question' => $answers]);
-
-        // return response()->json(5);
-        // $id = $req->id;
-        // $age = $req->age;
-        // return response()->json("22221id");
-    }
 
     public function quizze_ans(Request $req)
     {
