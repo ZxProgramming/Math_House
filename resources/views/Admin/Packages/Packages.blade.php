@@ -7,6 +7,90 @@
 <x-default-layout>
 @section('title','Package')
     
+@error('name')
+<div class="alert alert-danger">
+{{$message}}
+</div>
+@enderror
+@error('module')
+  <div class="alert alert-danger">
+  {{$message}}
+  </div>
+@enderror
+@error('number')
+  <div class="alert alert-danger">
+  {{$message}}
+  </div>
+@enderror
+@error('price')
+  <div class="alert alert-danger">
+  {{$message}}
+  </div>
+@enderror
+@error('duration')
+  <div class="alert alert-danger">
+  {{$message}}
+  </div>
+@enderror
+<button type="button" class="btn btn-primary btn-edit" data-bs-toggle="modal" data-bs-target="#addModalCenter">
+  Add New Package
+</button>
+
+<form method="POST" action="{{route('add_package')}}" enctype="multipart/form-data">
+    @csrf
+    <div class="modal fade" id="addModalCenter" tabindex="-1" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content px-2">
+          
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalCenterTitle">Add New Package</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+
+            <div class="info_section" id="info_section">
+                <div class='my-3'>
+                    <label>Package Name</label>
+                    <input class='form-control' name="name" placeholder="Package Name" />
+                </div>
+                <div class='my-3'>
+                    <label>Module</label>
+                    <select class="form-control" name="module">
+                      <option disabled selected>
+                        Select Module ...  
+                      </option>
+                      <option value="Exam">Exam</option>
+                      <option value="Question">Question</option>
+                      <option value="Live">Live</option>
+                    </select>
+                </div>
+                <div class='my-3'>
+                    <label>Number</label>
+                    <input class='form-control' name="number" placeholder="Number" />
+                </div>
+                <div class='my-3'>
+                    <label>Price</label>
+                    <input class='form-control' name="price" placeholder="Price" />
+                </div>
+                <div class='my-3'>
+                    <label>Duration</label>
+                    <input class='form-control' name="duration" placeholder="Duration" />
+                </div>
+                
+            </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
+              Close
+            </button>
+            <button class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</form>
+
+
 <table id="kt_profile_overview_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable no-footer">
     <thead class="fs-7 text-gray-500 text-uppercase">
         <tr>
@@ -50,52 +134,56 @@
                         </button>
 
                         <!-- Modal -->
-                        <form method="POST" action="{{route('course_edit')}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('edit_package', ['id' => $item->id])}}" enctype="multipart/form-data">
                           @csrf
-                        <div class="modal fade" id="modalCenter{{$item->id}}" tabindex="-1" aria-hidden="true" style="display: none;">
-                          <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content px-2">
-                              <input type="hidden" value="{{$item->id}}" name="course_id" />
-                              
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="modalCenterTitle">Edit Course</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div>
-
-
-                                <div class="info_section" id="info_section{{$item->id}}">
-                                    <div class='my-3'>
-                                        <label>Package Name</label>
-                                        <input class='form-control' value="{{$item->name}}" name="name" placeholder="Package Name" />
-                                    </div>
-                                    <div class='my-3'>
-                                        <label>Module</label>
-                                        <input class='form-control' name="module" value="{{$item->module}}" placeholder="Module" />
-                                    </div>
-                                    <div class='my-3'>
-                                        <label>Number</label>
-                                        <input class='form-control' name="number" value="{{$item->number}}" placeholder="Number" />
-                                    </div>
-                                    <div class='my-3'>
-                                        <label>Price</label>
-                                        <input class='form-control' name="price" value="{{$item->price}}" placeholder="Price" />
-                                    </div>
-                                    <div class='my-3'>
-                                        <label>Duration</label>
-                                        <input class='form-control' name="duration" value="{{$item->duration}}" placeholder="Duration" />
-                                    </div>
-                                    
+                          <div class="modal fade" id="modalCenter{{$item->id}}" tabindex="-1" aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                              <div class="modal-content px-2">
+                                
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="modalCenterTitle">Edit Package</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
 
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
-                                  Close
-                                </button>
-                                <button class="btn btn-primary">Submit</button>
+
+                                  <div class="info_section" id="info_section{{$item->id}}">
+                                      <div class='my-3'>
+                                          <label>Package Name</label>
+                                          <input class='form-control' value="{{$item->name}}" name="name" placeholder="Package Name" />
+                                      </div>
+                                      <div class='my-3'>
+                                          <label>Module</label>
+                                          <select class="form-control" name="module">
+                                            <option value="{{$item->module}}" selected>{{$item->module}}</option>
+                                            <option value="Exam">Exam</option>
+                                            <option value="Question">Question</option>
+                                            <option value="Live">Live</option>
+                                          </select>
+                                      </div>
+                                      <div class='my-3'>
+                                          <label>Number</label>
+                                          <input class='form-control' name="number" value="{{$item->number}}" placeholder="Number" />
+                                      </div>
+                                      <div class='my-3'>
+                                          <label>Price</label>
+                                          <input class='form-control' name="price" value="{{$item->price}}" placeholder="Price" />
+                                      </div>
+                                      <div class='my-3'>
+                                          <label>Duration</label>
+                                          <input class='form-control' name="duration" value="{{$item->duration}}" placeholder="Duration" />
+                                      </div>
+                                      
+                                  </div>
+
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
+                                    Close
+                                  </button>
+                                  <button class="btn btn-primary">Submit</button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
                         </form>
 
                         <!-- Modal -->
@@ -119,7 +207,7 @@
                                 <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
                                   Close
                                 </button>
-                                <a href="{{route('del_course', ['id'=>$item->id])}}" class="btn btn-danger">Delete</a>
+                                <a href="{{route('del_package', ['id'=>$item->id])}}" class="btn btn-danger">Delete</a>
                               </div>
                             </div>
                           </div>

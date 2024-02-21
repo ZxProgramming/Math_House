@@ -295,7 +295,9 @@
                                             Mr. {{$category->teacher->name}}
                                         </p>
 										<h5>
+											<a href="{{route('v_courses', ['id' => $category->id])}}">
                                             {{$category->cate_name}}
+											</a>
                                         </h5>
 										<p>
                                             {{$category->cate_des}}

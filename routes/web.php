@@ -28,6 +28,7 @@ use App\Http\Controllers\Student\Stu_MyCourseController;
 use App\Http\Controllers\Visitor\HomeController;
 use App\Http\Controllers\Visitor\ContactController;
 use App\Http\Controllers\Visitor\AboutController;
+use App\Http\Controllers\Visitor\V_ExamController;
 use App\Http\Controllers\Visitor\CoursesController as V_CoursesController;
 
 use App\Http\Controllers\login\LoginController;
@@ -60,7 +61,12 @@ use Illuminate\Support\Facades\Route;
     });
     
     Route::get('/', [HomeController::class, 'index'])->name('home');
-
+    
+    Route::controller(V_ExamController::class)->group(function(){
+        Route::get('/Exams', 'v_exams')->name('v_exams');
+        Route::post('/Exams', 'filter_exam')->name('filter_exam');
+        Route::get('/Exam/{id}', 'exam_page')->name('exam_page');
+    });
     Route::controller(V_CoursesController::class)->group(function(){
         Route::post('/Use_Promocode', 'use_promocode')->name('use_promocode');
         Route::get('/CheckOut', 'check_out')->name('check_out');
@@ -261,6 +267,9 @@ Route::controller(LessonController::class)->group(function(){
 // Packages 
 Route::controller(Ad_PackagesController::class)->group(function(){
     Route::get('Packages','index')->name('admin_packages');
+    Route::get('Packages/Del/{id}','del_package')->name('del_package');
+    Route::post('Packages/Edit/{id}','edit_package')->name('edit_package');
+    Route::post('Packages/Add','add_package')->name('add_package');
 });
 
  
@@ -275,6 +284,7 @@ Route::middleware(['auth','auth.student'])->prefix('student')->group(function(){
     Route::controller(Stu_DashboardController::class)->group(function(){
         Route::get('Student','index')->name('stu_dashboard');
     });
+    
 
     Route::controller(Stu_ProfileController::class)->group(function(){
 

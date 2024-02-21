@@ -27,7 +27,7 @@
 		                <a href="#"><span class="title">Diagnostic Exam</span></a>
 		            </li>
 		            <li>
-		                <a href="#"><span class="title">Exams</span></a>
+		                <a href="{{route('v_exams')}}"><span class="title">Exams</span></a>
 		            </li>
 		            <li>
 		                <a href="#"><span class="title">Question</span></a>

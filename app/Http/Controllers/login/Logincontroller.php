@@ -31,7 +31,7 @@ class Logincontroller extends Controller
                 ]);
 
                         $user = User::where('email',$request->input('email'))->first();
-                                        if(!$user){
+                        if(!$user){
                                 return redirect()->route('login.index')->withErrors(['error'=>'The Email or Password Invalid']);
 
                         }
@@ -44,7 +44,7 @@ class Logincontroller extends Controller
                         }
 			Auth::loginUsingId($user->id);
 
-                                $credentials = $request->only('email','password');
+                        $credentials = $request->only('email','password');
 
                                 
                         $authantecated = Auth::attempt($credentials);
@@ -53,13 +53,17 @@ class Logincontroller extends Controller
                                 $user = User::where('email',$request->email)->first();
                                 $token = $user->createToken("user")->plainTextToken;
                                 $user->token =$token ;
+                                                        
+                                if ( session()->has('previous_page') ) {
+                                        return redirect($request->session()->get('previous_page'));
+                                }
                                 if( $user->position == 'admin'){
-                                          return redirect()->route('dashboard')->with(['success'=>'Loged In']);
+                                        return redirect()->route('dashboard')->with(['success'=>'Loged In']);
          
          
                                 }
                                 elseif( $user->position == 'teacher'){
-                                 return 'Welcome Teacher';
+                                        return 'Welcome Teacher';
                                 }
                                 elseif( $user->position == 'student'){
                                  return redirect()->route('stu_dashboard');
