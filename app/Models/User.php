@@ -42,7 +42,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'course_id',
         'category_id',
         'extra_email',
-        'exam_number'
+        'exam_number',
+        'q_number',
     ];
 
     /**

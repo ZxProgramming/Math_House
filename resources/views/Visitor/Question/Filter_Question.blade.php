@@ -40,5 +40,21 @@
     </div>
 </form>
 
+<table class="table">
+    @foreach ( $q_items as $item )
+    <tr>
+        <td class="px-5">
+            <a style="font-size: 19px; color:black;font-weight: bold;" 
+            href="{{route('q_page', ['id' => $item->id])}}">
+                {{date('M', ($item->month - 1)* 31 * 24 * 60 *60)}}
+                {{$item->year}}
+                Section : {{$item->section}}
+                Code : {{$item->q_code}}
+                QNumber : {{$item->q_num}}
+            </a>
+        </td>
+    </tr>
+    @endforeach
+</table>
 
 @include('Visitor.inc.footer')

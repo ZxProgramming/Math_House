@@ -30,6 +30,7 @@ use App\Http\Controllers\Visitor\ContactController;
 use App\Http\Controllers\Visitor\AboutController;
 use App\Http\Controllers\Visitor\V_ExamController;
 use App\Http\Controllers\Visitor\V_QuestionController;
+use App\Http\Controllers\Visitor\V_LiveController;
 use App\Http\Controllers\Visitor\CoursesController as V_CoursesController;
 
 use App\Http\Controllers\login\LoginController;
@@ -65,6 +66,8 @@ use Illuminate\Support\Facades\Route;
     
     Route::controller(V_QuestionController::class)->group(function(){
         Route::get('/Question', 'v_question')->name('v_question');
+        Route::post('/Question', 'v_filter_question')->name('v_filter_question');
+        Route::get('/Question/{id}', 'q_page')->name('q_page');
     });
     Route::controller(V_ExamController::class)->group(function(){
         Route::get('/Exams', 'v_exams')->name('v_exams');
