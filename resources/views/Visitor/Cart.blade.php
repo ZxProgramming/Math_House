@@ -500,7 +500,7 @@
                                         </td>
 										<input type="hidden" class="chapters_price" value="{{json_encode($chapter->price)}}" />
 										<input type="hidden" class="ch_price" name="ch_price[]" value="{{$chapter->ch_price}}" />
-										<input type="hidden" class="ch_price" name="chapter[]" value="{{json_encode($chapter)}}" />
+										<input type="hidden" class="chapter_data" name="chapter[]" value="{{json_encode($chapter)}}" />
 								    	<td class="tbl_chapter_price">
                                             {{$chapter->ch_price}}$
                                         </td>
@@ -553,6 +553,9 @@
 	let tbl_chapter_price = document.querySelectorAll('.tbl_chapter_price');
 	let ch_price = document.querySelectorAll('.ch_price');
 	let totals = document.querySelector('.totals')
+	let chapter_data = document.querySelectorAll('.chapter_data')
+	let arr_chapters = [];
+	let arr_prices = [];
 
 	for (let i = 0, end = chapter_duration.length; i < end; i++) {
 		chapter_duration[i].addEventListener('change', ( e ) => {
@@ -575,9 +578,20 @@
 
 			let total = 0;
 			for (let k = 0, end = ch_price.length; k < end; k++) {
-				total += parseInt(ch_price[k].value);
+				total += parseFloat(ch_price[k].value);
+				arr_chapters = [...arr_chapters, 
+				{'chapter': chapter_data[k].value, 'price': ch_price[k].value}]; 
 			}
 			totals.innerHTML = `$${total}`;
+			
+			
+            $.ajax("{{route('sel_duration_course')}}", {
+                type: 'GET', // http method
+                data: {'data': arr_chapters}, // data to submit
+                success: function(data) {
+					console.log(data);
+				}   
+            });
 		})
 	}
 </script>

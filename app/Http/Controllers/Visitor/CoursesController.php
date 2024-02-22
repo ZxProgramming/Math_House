@@ -279,4 +279,19 @@ class CoursesController extends Controller
         $chapters = json_decode(Cache::get('marketing'));
         return view('Visitor.Cart', compact('chapters', 'chapters_price'));
     }
+
+    public function sel_duration_course( Request $req ){
+        $price = 0;
+        $arr = [];
+        foreach ( $req->data as $item ) {
+            $price += floatval($item['price']);
+            $arr[] = json_decode($item['chapter']);
+        }
+        $arr = json_encode($arr);
+        Cache::store('file')->put('marketing', $arr, 10000);
+        Cache::store('file')->put('chapters_price', $price, 10000);
+        return response()->json([
+            'req' => $arr
+        ]);
+    }
 }
