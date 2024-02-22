@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 19, 2024 at 12:51 PM
+-- Generation Time: Feb 22, 2024 at 02:21 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -154,7 +154,6 @@ CREATE TABLE `chapters` (
   `chapter_name` varchar(191) NOT NULL,
   `course_id` bigint(20) UNSIGNED NOT NULL,
   `ch_des` varchar(191) NOT NULL,
-  `ch_price` float DEFAULT NULL,
   `ch_url` varchar(255) NOT NULL DEFAULT 'Default.jfif',
   `pre_requisition` text DEFAULT NULL,
   `gain` text DEFAULT NULL,
@@ -167,11 +166,11 @@ CREATE TABLE `chapters` (
 -- Dumping data for table `chapters`
 --
 
-INSERT INTO `chapters` (`id`, `chapter_name`, `course_id`, `ch_des`, `ch_price`, `ch_url`, `pre_requisition`, `gain`, `teacher_id`, `created_at`, `updated_at`) VALUES
-(4, 'Chapter 1', 1, 'Chapter One', 200, 'Default.jfif', 'to', 'what', 1, NULL, '2024-01-30 10:00:54'),
-(5, 'Chapter 22', 1, 'errw', 200, 'Default.jfif', 'hfgh', 'h', 5, '2024-01-03 00:34:57', '2024-01-03 00:34:57'),
-(6, 'Chapter 228', 1, 'errw', 200, '20230826085456153827_2318787155110616_6392255175880343552_n.jpg', 'jfdgh', 'o', 5, '2024-01-03 00:35:50', '2024-01-24 10:11:46'),
-(15, 'Chapter 99', 1, 'ghfg', 150, '', 'jhv', 'jih', 5, '2024-01-30 13:49:37', '2024-01-30 13:49:37');
+INSERT INTO `chapters` (`id`, `chapter_name`, `course_id`, `ch_des`, `ch_url`, `pre_requisition`, `gain`, `teacher_id`, `created_at`, `updated_at`) VALUES
+(4, 'Chapter 1', 1, 'Chapter One', 'Default.jfif', 'to', 'what', 1, NULL, '2024-01-30 10:00:54'),
+(5, 'Chapter 22', 1, 'errw', 'Default.jfif', 'hfgh', 'h', 5, '2024-01-03 00:34:57', '2024-01-03 00:34:57'),
+(6, 'Chapter 228', 1, 'errw', '20230826085456153827_2318787155110616_6392255175880343552_n.jpg', 'jfdgh', 'o', 5, '2024-01-03 00:35:50', '2024-01-24 10:11:46'),
+(15, 'Chapter 99', 1, 'ghfg', '', 'jhv', 'jih', 5, '2024-01-30 13:49:37', '2024-01-30 13:49:37');
 
 -- --------------------------------------------------------
 
@@ -642,6 +641,34 @@ INSERT INTO `dia_questions` (`id`, `daiExam_id`, `ques_id`, `created_at`, `updat
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `exam`
+--
+
+CREATE TABLE `exam` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `time` time NOT NULL,
+  `score` int(11) NOT NULL,
+  `pass_score` int(11) NOT NULL,
+  `year` year(4) NOT NULL,
+  `month` int(10) UNSIGNED NOT NULL,
+  `code_id` bigint(20) UNSIGNED NOT NULL,
+  `course_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `exam`
+--
+
+INSERT INTO `exam` (`id`, `title`, `time`, `score`, `pass_score`, `year`, `month`, `code_id`, `course_id`, `created_at`, `updated_at`) VALUES
+(1, 'Exam 1', '09:44:33', 100, 40, '2024', 2, 1, 2, NULL, NULL),
+(2, 'Exam 2', '11:37:12', 100, 40, '2024', 3, 2, 2, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `exam_codes`
 --
 
@@ -863,14 +890,14 @@ INSERT INTO `mcq_ans` (`id`, `mcq_ans`, `mcq_answers`, `q_id`, `created_at`, `up
 (9, '2', 'A', 19, '2023-12-26', '2023-12-26'),
 (10, '3', 'A', 19, '2023-12-26', '2023-12-26'),
 (11, '4', 'A', 19, '2023-12-26', '2023-12-26'),
-(16, NULL, 'A', 20, '2024-01-24', '2024-01-24'),
-(17, NULL, 'A', 20, '2024-01-24', '2024-01-24'),
-(18, NULL, 'A', 20, '2024-01-24', '2024-01-24'),
+(16, NULL, 'A', 19, '2024-01-24', '2024-01-24'),
+(17, NULL, 'A', 19, '2024-01-24', '2024-01-24'),
+(18, NULL, 'A', 19, '2024-01-24', '2024-01-24'),
 (19, NULL, 'A', 20, '2024-01-24', '2024-01-24'),
-(20, NULL, 'A', 21, '2024-01-24', '2024-01-24'),
-(21, NULL, 'A', 21, '2024-01-24', '2024-01-24'),
-(22, NULL, 'A', 21, '2024-01-24', '2024-01-24'),
-(23, NULL, 'A', 21, '2024-01-24', '2024-01-24'),
+(20, NULL, 'A', 19, '2024-01-24', '2024-01-24'),
+(21, NULL, 'A', 19, '2024-01-24', '2024-01-24'),
+(22, NULL, 'A', 19, '2024-01-24', '2024-01-24'),
+(23, NULL, 'A', 19, '2024-01-24', '2024-01-24'),
 (56, 'fg', 'A', 1, '2024-01-29', '2024-01-29'),
 (57, 'fg', 'A', 1, '2024-01-29', '2024-01-29'),
 (58, 'fg', 'A', 1, '2024-01-29', '2024-01-29'),
@@ -903,10 +930,10 @@ INSERT INTO `mcq_ans` (`id`, `mcq_ans`, `mcq_answers`, `q_id`, `created_at`, `up
 (85, 'cc', 'C', 19, '2024-01-29', '2024-01-29'),
 (86, 'ccc', 'C', 19, '2024-01-29', '2024-01-29'),
 (87, 'cccc', 'C', 19, '2024-01-29', '2024-01-29'),
-(92, NULL, 'A', 18, '2024-02-03', '2024-02-03'),
-(93, NULL, 'A', 18, '2024-02-03', '2024-02-03'),
-(94, NULL, 'A', 18, '2024-02-03', '2024-02-03'),
-(95, NULL, 'A', 18, '2024-02-03', '2024-02-03');
+(92, NULL, 'A', 19, '2024-02-03', '2024-02-03'),
+(93, NULL, 'A', 19, '2024-02-03', '2024-02-03'),
+(94, NULL, 'A', 19, '2024-02-03', '2024-02-03'),
+(95, NULL, 'A', 19, '2024-02-03', '2024-02-03');
 
 -- --------------------------------------------------------
 
@@ -961,6 +988,31 @@ CREATE TABLE `model_has_roles` (
   `model_type` varchar(191) NOT NULL,
   `model_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `packages`
+--
+
+CREATE TABLE `packages` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `module` enum('Exam','Question','Live') NOT NULL,
+  `number` int(11) NOT NULL,
+  `price` float NOT NULL,
+  `duration` int(11) NOT NULL,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `packages`
+--
+
+INSERT INTO `packages` (`id`, `name`, `module`, `number`, `price`, `duration`, `created_at`, `updated_at`) VALUES
+(2, 'Package 1', 'Exam', 10, 60, 30, NULL, '2024-02-20'),
+(3, 'Package 2', 'Question', 11, 111, 1111, '2024-02-20', '2024-02-20');
 
 -- --------------------------------------------------------
 
@@ -1033,6 +1085,7 @@ CREATE TABLE `payment_requests` (
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `price` float UNSIGNED NOT NULL,
   `image` varchar(255) DEFAULT NULL,
+  `module` enum('Chapters','Package') NOT NULL DEFAULT 'Chapters',
   `state` enum('Pendding','Approve','Rejected') NOT NULL DEFAULT 'Pendding',
   `created_at` date DEFAULT NULL,
   `updated_at` date DEFAULT NULL
@@ -1042,37 +1095,41 @@ CREATE TABLE `payment_requests` (
 -- Dumping data for table `payment_requests`
 --
 
-INSERT INTO `payment_requests` (`id`, `payment_method_id`, `user_id`, `price`, `image`, `state`, `created_at`, `updated_at`) VALUES
-(1, 2, 8, 800, NULL, 'Approve', NULL, '2024-01-28'),
-(2, 2, 11, 300, NULL, 'Approve', NULL, '2024-01-28'),
-(3, 4, 8, 100, '2024X01X28X12X04X3729854.jpg', 'Pendding', '2024-01-28', '2024-01-28'),
-(4, 4, 8, 100, '2024X01X28X12X05X4260874.jpg', 'Pendding', '2024-01-28', '2024-01-28'),
-(5, 4, 8, 400, '2024X01X29X09X58X1436634.png', 'Pendding', '2024-01-29', '2024-01-29'),
-(6, 4, 8, 100, NULL, 'Pendding', '2024-01-29', '2024-01-29'),
-(7, 2, 8, 300, NULL, 'Pendding', '2024-01-29', '2024-01-29'),
-(8, 2, 8, 300, '2024X01X29X12X52X3733564.png', 'Pendding', '2024-01-29', '2024-01-29'),
-(9, 2, 8, 300, '2024X01X29X12X54X484494.png', 'Pendding', '2024-01-29', '2024-01-29'),
-(10, 2, 8, 300, '2024X01X29X12X55X4948744.png', 'Pendding', '2024-01-29', '2024-01-29'),
-(11, 2, 8, 300, '2024X01X29X12X57X4189054.png', 'Pendding', '2024-01-29', '2024-01-29'),
-(12, 2, 8, 300, '2024X01X29X12X58X0850554.png', 'Pendding', '2024-01-29', '2024-01-29'),
-(13, 2, 8, 300, '2024X01X29X12X58X1712044.png', 'Pendding', '2024-01-29', '2024-01-29'),
-(14, 2, 8, 300, '2024X01X29X12X58X5794914.png', 'Pendding', '2024-01-29', '2024-01-29'),
-(15, 2, 8, 300, '2024X01X29X13X00X1860184.png', 'Pendding', '2024-01-29', '2024-01-29'),
-(16, 2, 8, 300, '2024X01X29X13X00X5675254.png', 'Pendding', '2024-01-29', '2024-01-29'),
-(17, 2, 8, 300, '2024X01X29X13X01X5242194.png', 'Pendding', '2024-01-29', '2024-01-29'),
-(18, 2, 8, 300, '2024X01X29X13X02X1810384.png', 'Pendding', '2024-01-29', '2024-01-29'),
-(19, 2, 8, 300, '2024X01X29X13X02X5990354.png', 'Pendding', '2024-01-29', '2024-01-29'),
-(20, 2, 8, 300, '2024X01X29X13X03X2076884.png', 'Pendding', '2024-01-29', '2024-01-29'),
-(21, 2, 8, 300, '2024X01X29X13X08X2777064.png', 'Pendding', '2024-01-29', '2024-01-29'),
-(22, 2, 8, 300, '2024X01X29X13X09X1285114.png', 'Pendding', '2024-01-29', '2024-01-29'),
-(23, 2, 8, 300, '2024X01X29X13X10X1715834.png', 'Pendding', '2024-01-29', '2024-01-29'),
-(24, 2, 8, 300, '2024X01X29X13X10X4853924.png', 'Pendding', '2024-01-29', '2024-01-29'),
-(25, 2, 8, 300, '2024X01X29X13X11X1448174.png', 'Pendding', '2024-01-29', '2024-01-29'),
-(26, 4, 8, 300, '2024X01X30X07X26X4649074.png', 'Rejected', '2024-01-30', '2024-02-05'),
-(27, 5, 8, 350, NULL, 'Pendding', '2024-02-12', '2024-02-12'),
-(28, 7, 8, 100, '2024X02X12X12X51X237693202301101726mvf_dark_logo.png', 'Pendding', '2024-02-12', '2024-02-12'),
-(29, 5, 8, 100, '2024X02X12X13X15X199673202301101725mvf_dark_logo.png', 'Pendding', '2024-02-12', '2024-02-12'),
-(30, 7, 8, 550, '2024X02X13X12X59X048766202301101726mvf_dark_logo.png', 'Rejected', '2024-02-13', '2024-02-13');
+INSERT INTO `payment_requests` (`id`, `payment_method_id`, `user_id`, `price`, `image`, `module`, `state`, `created_at`, `updated_at`) VALUES
+(1, 2, 8, 800, NULL, 'Chapters', 'Approve', NULL, '2024-01-28'),
+(2, 2, 11, 300, NULL, 'Chapters', 'Approve', NULL, '2024-01-28'),
+(3, 4, 8, 100, '2024X01X28X12X04X3729854.jpg', 'Chapters', 'Pendding', '2024-01-28', '2024-01-28'),
+(4, 4, 8, 100, '2024X01X28X12X05X4260874.jpg', 'Chapters', 'Pendding', '2024-01-28', '2024-01-28'),
+(5, 4, 8, 400, '2024X01X29X09X58X1436634.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
+(6, 4, 8, 100, NULL, 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
+(7, 2, 8, 300, NULL, 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
+(8, 2, 8, 300, '2024X01X29X12X52X3733564.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
+(9, 2, 8, 300, '2024X01X29X12X54X484494.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
+(10, 2, 8, 300, '2024X01X29X12X55X4948744.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
+(11, 2, 8, 300, '2024X01X29X12X57X4189054.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
+(12, 2, 8, 300, '2024X01X29X12X58X0850554.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
+(13, 2, 8, 300, '2024X01X29X12X58X1712044.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
+(14, 2, 8, 300, '2024X01X29X12X58X5794914.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
+(15, 2, 8, 300, '2024X01X29X13X00X1860184.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
+(16, 2, 8, 300, '2024X01X29X13X00X5675254.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
+(17, 2, 8, 300, '2024X01X29X13X01X5242194.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
+(18, 2, 8, 300, '2024X01X29X13X02X1810384.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
+(19, 2, 8, 300, '2024X01X29X13X02X5990354.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
+(20, 2, 8, 300, '2024X01X29X13X03X2076884.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
+(21, 2, 8, 300, '2024X01X29X13X08X2777064.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
+(22, 2, 8, 300, '2024X01X29X13X09X1285114.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
+(23, 2, 8, 300, '2024X01X29X13X10X1715834.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
+(24, 2, 8, 300, '2024X01X29X13X10X4853924.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
+(25, 2, 8, 300, '2024X01X29X13X11X1448174.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
+(26, 4, 8, 300, '2024X01X30X07X26X4649074.png', 'Chapters', 'Rejected', '2024-01-30', '2024-02-05'),
+(27, 5, 8, 350, NULL, 'Chapters', 'Pendding', '2024-02-12', '2024-02-12'),
+(28, 7, 8, 100, '2024X02X12X12X51X237693202301101726mvf_dark_logo.png', 'Chapters', 'Pendding', '2024-02-12', '2024-02-12'),
+(29, 5, 8, 100, '2024X02X12X13X15X199673202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', '2024-02-12', '2024-02-12'),
+(30, 7, 8, 550, '2024X02X13X12X59X048766202301101726mvf_dark_logo.png', 'Chapters', 'Rejected', '2024-02-13', '2024-02-13'),
+(31, 7, 8, 60, '2024X02X22X12X38X4710000202301111020C5631746XA3DDX43F6XA634X158716ABFA8B.jpeg', 'Package', 'Pendding', '2024-02-22', '2024-02-22'),
+(32, 7, 8, 60, '2024X02X22X12X39X331211202304300850download.png', 'Package', 'Pendding', '2024-02-22', '2024-02-22'),
+(33, 2, 8, 60, '2024X02X22X12X41X22581202301101725mvf_dark_logo.png', 'Package', 'Pendding', '2024-02-22', '2024-02-22'),
+(34, 7, 8, 400, '2024X02X22X13X19X297222202301111020C5631746XA3DDX43F6XA634X158716ABFA8B.jpeg', 'Chapters', 'Pendding', '2024-02-22', '2024-02-22');
 
 -- --------------------------------------------------------
 
@@ -1320,7 +1377,30 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (182, 'App\\Models\\User', 8, 'user', '1543a221847c1e8b0231f4ca87cd3255e570d81ed961abe520550822f85e7d7e', '[\"*\"]', NULL, NULL, '2024-02-19 06:18:09', '2024-02-19 06:18:09'),
 (183, 'App\\Models\\User', 8, 'user', '8c509f49a3d8184b9d6d2cb5f9b33b0472937278177f628741f7970e40b07524', '[\"*\"]', NULL, NULL, '2024-02-19 07:28:02', '2024-02-19 07:28:02'),
 (184, 'App\\Models\\User', 8, 'user', 'fd33ef4619478ab90c8b2246a313d65565e3ee1b910ff8e5d15165ecfe1346bc', '[\"*\"]', NULL, NULL, '2024-02-19 07:28:21', '2024-02-19 07:28:21'),
-(185, 'App\\Models\\User', 8, 'user', '16f40854d6ae44c25de097839343c29e0426c6de3a3f76dfb92a5034ae83019b', '[\"*\"]', NULL, NULL, '2024-02-19 09:38:16', '2024-02-19 09:38:16');
+(185, 'App\\Models\\User', 8, 'user', '16f40854d6ae44c25de097839343c29e0426c6de3a3f76dfb92a5034ae83019b', '[\"*\"]', NULL, NULL, '2024-02-19 09:38:16', '2024-02-19 09:38:16'),
+(186, 'App\\Models\\User', 8, 'user', 'ddec7fa93c7d02130ed77f55522b70c3c28a7d151f34ead4bb6bb8b14ad0c569', '[\"*\"]', NULL, NULL, '2024-02-20 06:46:05', '2024-02-20 06:46:05'),
+(187, 'App\\Models\\User', 8, 'user', '12eef167e97667d3bafacb5f5142e98207fa5d95b60215554afce1bfd7f15b63', '[\"*\"]', NULL, NULL, '2024-02-20 07:40:52', '2024-02-20 07:40:52'),
+(188, 'App\\Models\\User', 8, 'user', '97c156e1a556987272daed78912632d7b98d12f9020250dcec3da8b0e0916b7c', '[\"*\"]', NULL, NULL, '2024-02-20 09:43:57', '2024-02-20 09:43:57'),
+(189, 'App\\Models\\User', 8, 'user', 'fe9aeb2e33f9b6c2517ee7450ca9740f2f3d1a18c623aacd41b32968a7dfa4c6', '[\"*\"]', NULL, NULL, '2024-02-20 09:51:49', '2024-02-20 09:51:49'),
+(190, 'App\\Models\\User', 8, 'user', '8c0620f4004d9a10f797e239b20161fa050d9c11229792a9fcd0ed595ffe96ef', '[\"*\"]', NULL, NULL, '2024-02-21 06:44:05', '2024-02-21 06:44:05'),
+(191, 'App\\Models\\User', 8, 'user', '3897286db70a5f123c9e196939d9555518809d2ede0a053b8ca58792146c9b08', '[\"*\"]', NULL, NULL, '2024-02-21 07:11:07', '2024-02-21 07:11:07'),
+(192, 'App\\Models\\User', 8, 'user', '841d14e24d3182e6d78c3a5b18adbc333552206d396ef5449c76b75f5134c60a', '[\"*\"]', NULL, NULL, '2024-02-21 07:44:18', '2024-02-21 07:44:18'),
+(193, 'App\\Models\\User', 8, 'user', '7b0ed54c86cfca5ad5a6c9d45b8a05e6d1f7d3e4a591ffac0407558bbf6e7ac5', '[\"*\"]', NULL, NULL, '2024-02-21 07:44:41', '2024-02-21 07:44:41'),
+(194, 'App\\Models\\User', 8, 'user', '511d9f06e8cc5d661e8b92ae925698ab333eee2de17dd6d8416f89edeef7732d', '[\"*\"]', NULL, NULL, '2024-02-21 07:45:36', '2024-02-21 07:45:36'),
+(195, 'App\\Models\\User', 8, 'user', '5b0a3646def342e4ad9e211467ddbd601d3a68911e6798629f3c78037e728342', '[\"*\"]', NULL, NULL, '2024-02-21 07:45:58', '2024-02-21 07:45:58'),
+(196, 'App\\Models\\User', 8, 'user', '39083ff956e5b0de4c00e2201d9adb9a14adcc078cbe64422cb012ce76480a36', '[\"*\"]', NULL, NULL, '2024-02-21 07:46:15', '2024-02-21 07:46:15'),
+(197, 'App\\Models\\User', 8, 'user', '594e5b5752e24c6833f3d07e652b35d91c4c315ecb83aec69fa3d5fc00ec405f', '[\"*\"]', NULL, NULL, '2024-02-21 07:47:26', '2024-02-21 07:47:26'),
+(198, 'App\\Models\\User', 8, 'user', 'b7e77140ade3a44ce27eb097ff763db18722d71cd4869a7aa104ffccda4da2db', '[\"*\"]', NULL, NULL, '2024-02-21 07:47:52', '2024-02-21 07:47:52'),
+(199, 'App\\Models\\User', 8, 'user', '7b0816c06f438f23c62ba192ea0e2ee613260427c5768f6ce00e58acd6aa69f1', '[\"*\"]', NULL, NULL, '2024-02-21 07:50:15', '2024-02-21 07:50:15'),
+(200, 'App\\Models\\User', 8, 'user', 'd6e06ce303ff1c91d9a7ba8b503d31b5b999ac18cde992a5de6ecd92c9d546e6', '[\"*\"]', NULL, NULL, '2024-02-21 07:51:54', '2024-02-21 07:51:54'),
+(201, 'App\\Models\\User', 8, 'user', '4a0786c8d4ded981f6d68a0a0c7c1332365206f5466af13c1c9b0f87c10dc483', '[\"*\"]', NULL, NULL, '2024-02-21 07:52:19', '2024-02-21 07:52:19'),
+(202, 'App\\Models\\User', 8, 'user', '770952161354e7faf910a4af1931612b273ce42d162c20724f225bfdc8d3c1c7', '[\"*\"]', NULL, NULL, '2024-02-21 07:53:30', '2024-02-21 07:53:30'),
+(203, 'App\\Models\\User', 8, 'user', '6f2f49cdd499ce7038fbf40f5b70423d4b5fcd6d961d58ad08d6aca583810547', '[\"*\"]', NULL, NULL, '2024-02-21 07:54:40', '2024-02-21 07:54:40'),
+(204, 'App\\Models\\User', 8, 'user', '5f1456f1f96298eacfe2d7b9bb74a2608d8748df9fe0438a5d3ee7bb26444bd9', '[\"*\"]', NULL, NULL, '2024-02-21 07:55:46', '2024-02-21 07:55:46'),
+(205, 'App\\Models\\User', 8, 'user', 'bfac3180ae5e27dad34e42c966c91bf45947ab133363fa19958cd3a6212a2d3d', '[\"*\"]', NULL, NULL, '2024-02-21 07:57:08', '2024-02-21 07:57:08'),
+(206, 'App\\Models\\User', 8, 'user', '4f94226ff2180cfee82ecce8105756e7608db8f7045fdd3d83de8a8716430101', '[\"*\"]', NULL, NULL, '2024-02-21 09:46:19', '2024-02-21 09:46:19'),
+(207, 'App\\Models\\User', 8, 'user', '485128977c636653852e49dcdc05aa3d74cb098b00dd0d7ca5def1ea8467c597', '[\"*\"]', NULL, NULL, '2024-02-21 09:46:50', '2024-02-21 09:46:50'),
+(208, 'App\\Models\\User', 8, 'user', 'fcc24bb2d5f54015fcce4ca02ed516a6ec2c2b593621c4b70aabe48c88bac802', '[\"*\"]', NULL, NULL, '2024-02-22 07:05:13', '2024-02-22 07:05:13');
 
 -- --------------------------------------------------------
 
@@ -1439,7 +1519,7 @@ CREATE TABLE `questions` (
 --
 
 INSERT INTO `questions` (`id`, `lesson_id`, `question`, `state`, `q_url`, `q_code`, `q_type`, `month`, `q_num`, `year`, `section`, `difficulty`, `ans_type`, `updated_at`, `created_at`) VALUES
-(1, 16, 'question 2', '0', NULL, '1234', 'Parallel', '3', '2', '2022', '2', 'A', 'Grid_in', '2024-02-13', '2024-01-29'),
+(1, 4, 'question 2', '0', NULL, '1234', 'Parallel', '3', '2', '2022', '2', 'A', 'Grid_in', '2024-02-13', '2024-01-29'),
 (18, 4, NULL, '1', '2.png', '2', 'Parallel', '3', '21', '2022', '1', 'B', 'MCQ', '2024-02-05', NULL),
 (19, 4, 'Question 2', '2', '2.png', 'sad', 'Trail', '3', '4', '2022', '1', 'A', 'MCQ', '2024-01-29', NULL),
 (20, 4, 'question 2', '0', NULL, '1234', 'Parallel', '3', '2', '2022', '2', 'A', 'Grid_in', '2024-01-29', '2024-01-29'),
@@ -1574,14 +1654,14 @@ CREATE TABLE `q_quizes` (
 
 INSERT INTO `q_quizes` (`id`, `quizze_id`, `question_id`, `created_at`, `updated_at`) VALUES
 (7, 12, 18, '2024-01-18', '2024-01-18'),
-(8, 13, 18, '2024-01-18', '2024-01-18'),
-(11, 14, 18, '2024-01-20', '2024-01-20'),
+(8, 12, 18, '2024-01-18', '2024-01-18'),
+(11, 12, 18, '2024-01-20', '2024-01-20'),
 (49, 18, 18, '2024-01-30', '2024-01-30'),
 (51, 19, 18, '2024-01-30', '2024-01-30'),
 (52, 19, 19, '2024-01-30', '2024-01-30'),
 (55, 20, 18, '2024-01-31', '2024-01-31'),
-(56, 20, 19, '2024-01-31', '2024-01-31'),
-(57, 20, 20, '2024-01-31', '2024-01-31'),
+(56, 12, 19, '2024-01-31', '2024-01-31'),
+(57, 12, 20, '2024-01-31', '2024-01-31'),
 (60, 12, 1, '2024-01-31', '2024-01-31'),
 (62, 14, 21, '2024-01-31', '2024-01-31'),
 (63, 14, 19, '2024-01-31', '2024-01-31'),
@@ -1961,6 +2041,8 @@ CREATE TABLE `users` (
   `l_name` varchar(255) DEFAULT NULL,
   `name` varchar(191) NOT NULL,
   `email` varchar(191) NOT NULL,
+  `exam_number` int(11) NOT NULL DEFAULT 0,
+  `q_number` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `profile_photo_path` varchar(2048) DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `phone` varchar(191) NOT NULL,
@@ -1987,17 +2069,38 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `f_name`, `l_name`, `name`, `email`, `profile_photo_path`, `email_verified_at`, `phone`, `parent_phone`, `parent_email`, `image`, `city_id`, `position`, `grade`, `course_id`, `category_id`, `password`, `state`, `avatar`, `remember_token`, `extra_email`, `created_at`, `updated_at`, `last_login_at`, `last_login_ip`) VALUES
-(1, NULL, NULL, 'Ahmed', 'Ahmed@gmail.com', NULL, NULL, '0113443534', '012345346', 'Ali@gmail.com', '1972024X01X27X10X03X326.jpg', NULL, 'teacher', NULL, 2, 1, '$2y$10$O4pDFFvEQGAkfZ.mcGIhaOb0MQCocleYwEySm4OYgq9./pKT021de', 'Show', NULL, NULL, NULL, NULL, '2024-01-27 08:03:32', NULL, NULL),
-(5, NULL, NULL, 'Teacher 1', 'admin3@gmail.com', NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X42X459672202304300850download.png', NULL, 'super_admin', NULL, NULL, NULL, '$2y$10$abRantqLN7R8dKUzWPGSLebir7D.GcznzfflGYjquM59GZo9f5y3a', 'Show', NULL, NULL, NULL, '2023-12-18 09:42:45', '2023-12-18 09:42:45', NULL, NULL),
-(7, NULL, NULL, 'Teacher 1', 'admin4@gmail.com', NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X43X297615202304300850download.png', NULL, 'super_admin', NULL, NULL, NULL, '$2y$10$CWyZzMn0kdjZKf1f5z0ey.xXzyHVVwkvCFGwakJchI9dwNSyOEyQa', 'Show', NULL, NULL, NULL, '2023-12-18 09:43:29', '2023-12-18 09:43:29', NULL, NULL),
-(8, NULL, NULL, 'Teacher 1', 'admin@gmail.com', NULL, NULL, '01099475851111111114', NULL, NULL, '7452024X02X19X09X11X19202301101725mvf_dark_logo.png', NULL, 'student', NULL, NULL, NULL, '$2y$10$/A0p4679DcC9h6YOqFa1s.zqr9yJbBWVDqTZ.HmKw8afdDXhrhsbS', 'Show', NULL, NULL, NULL, '2023-12-18 09:44:14', '2024-02-19 07:11:19', NULL, NULL),
-(10, NULL, NULL, 'Teacher', 'teacher@gmail.com', NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X50X119775202304090932egyptXflagXwaveXiconX32.png', NULL, 'teacher', NULL, NULL, NULL, '$2y$10$EFSKaqvOqy3o.ihNqVWi7uCPCrFtflwUJGqEBFP1woOuxlRaIqN5u', 'Show', NULL, NULL, NULL, '2023-12-18 09:50:11', '2024-01-27 08:02:15', NULL, NULL),
-(11, NULL, NULL, 'Teacher12', 'teacher2@gmail.com', NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X52X277966202304090932egyptXflagXwaveXiconX32.png', NULL, 'teacher', NULL, 1, 1, '$2y$10$Y4fg1B5EpujC8OVSCO6fNOyxdAj2lPJDZWibbtD8j55Jik6fU4Uq6', 'Show', NULL, NULL, NULL, '2023-12-18 09:52:27', '2024-02-05 10:45:46', NULL, NULL),
-(44, NULL, NULL, 'admin@gmail.com', 'sad@gmail.com', NULL, NULL, '123', '123', NULL, 'default.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$RkeDuqhtAqMTRC7gfMFxG.Vl8pLtWGgj1jisi0ZkphX9LDVUQaZpO', 'Show', NULL, NULL, NULL, '2023-12-31 06:31:28', '2024-02-05 10:15:37', NULL, NULL),
-(46, NULL, NULL, 'asd', 'asd12@gmail.com', NULL, NULL, '123', '123', NULL, 'default.png', NULL, 'student', '1', NULL, NULL, '$2y$10$fHxDlq7YyAFsRbhMc/GicuyEhWJZ2D7z75W/CDKEvcodtPdVstLVC', 'hidden', NULL, NULL, NULL, '2023-12-31 06:33:52', '2023-12-31 06:33:52', NULL, NULL),
-(57, NULL, NULL, 'ahmed1', 'ahmedyahia@yahoo.com', NULL, NULL, '123456789', NULL, NULL, 'default.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$4CuUgVeM.E8K16Tbs5ZdJ.5SvzhdLRr08.J4gkehsTsGNl7g43eVu', 'hidden', NULL, NULL, NULL, '2024-01-01 09:54:47', '2024-01-28 05:55:03', NULL, NULL),
-(59, 'as', 'as', 'as', 'admin2312@gmail.com', NULL, NULL, '213', NULL, NULL, 'default.png', NULL, 'student', '1', NULL, NULL, '$2y$10$UT7CEpaDZ6etgdvQDjN5huCPzvCM/xdiLbT02hZIZh.doXV6/SLRS', 'hidden', NULL, NULL, NULL, '2024-01-03 07:52:53', '2024-01-03 07:52:53', NULL, NULL);
+INSERT INTO `users` (`id`, `f_name`, `l_name`, `name`, `email`, `exam_number`, `q_number`, `profile_photo_path`, `email_verified_at`, `phone`, `parent_phone`, `parent_email`, `image`, `city_id`, `position`, `grade`, `course_id`, `category_id`, `password`, `state`, `avatar`, `remember_token`, `extra_email`, `created_at`, `updated_at`, `last_login_at`, `last_login_ip`) VALUES
+(1, NULL, NULL, 'Ahmed', 'Ahmed@gmail.com', 0, 0, NULL, NULL, '0113443534', '012345346', 'Ali@gmail.com', '1972024X01X27X10X03X326.jpg', NULL, 'teacher', NULL, 2, 1, '$2y$10$O4pDFFvEQGAkfZ.mcGIhaOb0MQCocleYwEySm4OYgq9./pKT021de', 'Show', NULL, NULL, NULL, NULL, '2024-01-27 08:03:32', NULL, NULL),
+(5, NULL, NULL, 'Teacher 1', 'admin3@gmail.com', 0, 0, NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X42X459672202304300850download.png', NULL, 'super_admin', NULL, NULL, NULL, '$2y$10$abRantqLN7R8dKUzWPGSLebir7D.GcznzfflGYjquM59GZo9f5y3a', 'Show', NULL, NULL, NULL, '2023-12-18 09:42:45', '2023-12-18 09:42:45', NULL, NULL),
+(7, NULL, NULL, 'Teacher 1', 'admin4@gmail.com', 0, 0, NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X43X297615202304300850download.png', NULL, 'super_admin', NULL, NULL, NULL, '$2y$10$CWyZzMn0kdjZKf1f5z0ey.xXzyHVVwkvCFGwakJchI9dwNSyOEyQa', 'Show', NULL, NULL, NULL, '2023-12-18 09:43:29', '2023-12-18 09:43:29', NULL, NULL),
+(8, NULL, NULL, 'Teacher 1', 'admin@gmail.com', 8, 0, NULL, NULL, '01099475851111111114', NULL, NULL, '7452024X02X19X09X11X19202301101725mvf_dark_logo.png', NULL, 'student', NULL, NULL, NULL, '$2y$10$/A0p4679DcC9h6YOqFa1s.zqr9yJbBWVDqTZ.HmKw8afdDXhrhsbS', 'Show', NULL, NULL, NULL, '2023-12-18 09:44:14', '2024-02-22 09:40:47', NULL, NULL),
+(10, NULL, NULL, 'Teacher', 'teacher@gmail.com', 0, 0, NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X50X119775202304090932egyptXflagXwaveXiconX32.png', NULL, 'teacher', NULL, NULL, NULL, '$2y$10$EFSKaqvOqy3o.ihNqVWi7uCPCrFtflwUJGqEBFP1woOuxlRaIqN5u', 'Show', NULL, NULL, NULL, '2023-12-18 09:50:11', '2024-01-27 08:02:15', NULL, NULL),
+(11, NULL, NULL, 'Teacher12', 'teacher2@gmail.com', 0, 0, NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X52X277966202304090932egyptXflagXwaveXiconX32.png', NULL, 'teacher', NULL, 1, 1, '$2y$10$Y4fg1B5EpujC8OVSCO6fNOyxdAj2lPJDZWibbtD8j55Jik6fU4Uq6', 'Show', NULL, NULL, NULL, '2023-12-18 09:52:27', '2024-02-05 10:45:46', NULL, NULL),
+(44, NULL, NULL, 'admin@gmail.com', 'sad@gmail.com', 0, 0, NULL, NULL, '123', '123', NULL, 'default.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$RkeDuqhtAqMTRC7gfMFxG.Vl8pLtWGgj1jisi0ZkphX9LDVUQaZpO', 'Show', NULL, NULL, NULL, '2023-12-31 06:31:28', '2024-02-05 10:15:37', NULL, NULL),
+(46, NULL, NULL, 'asd', 'asd12@gmail.com', 0, 0, NULL, NULL, '123', '123', NULL, 'default.png', NULL, 'student', '1', NULL, NULL, '$2y$10$fHxDlq7YyAFsRbhMc/GicuyEhWJZ2D7z75W/CDKEvcodtPdVstLVC', 'hidden', NULL, NULL, NULL, '2023-12-31 06:33:52', '2023-12-31 06:33:52', NULL, NULL),
+(57, NULL, NULL, 'ahmed1', 'ahmedyahia@yahoo.com', 0, 0, NULL, NULL, '123456789', NULL, NULL, 'default.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$4CuUgVeM.E8K16Tbs5ZdJ.5SvzhdLRr08.J4gkehsTsGNl7g43eVu', 'hidden', NULL, NULL, NULL, '2024-01-01 09:54:47', '2024-01-28 05:55:03', NULL, NULL),
+(59, 'as', 'as', 'as', 'admin2312@gmail.com', 0, 0, NULL, NULL, '213', NULL, NULL, 'default.png', NULL, 'student', '1', NULL, NULL, '$2y$10$UT7CEpaDZ6etgdvQDjN5huCPzvCM/xdiLbT02hZIZh.doXV6/SLRS', 'hidden', NULL, NULL, NULL, '2024-01-03 07:52:53', '2024-01-03 07:52:53', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_packages`
+--
+
+CREATE TABLE `user_packages` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `package_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_packages`
+--
+
+INSERT INTO `user_packages` (`id`, `user_id`, `package_id`, `created_at`, `updated_at`) VALUES
+(1, 8, 3, '2024-01-16', '2024-02-02');
 
 -- --------------------------------------------------------
 
@@ -2155,6 +2258,14 @@ ALTER TABLE `dia_questions`
   ADD KEY `FK_Question` (`ques_id`);
 
 --
+-- Indexes for table `exam`
+--
+ALTER TABLE `exam`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_Exam_Course` (`course_id`),
+  ADD KEY `FK_Exam_Time` (`code_id`);
+
+--
 -- Indexes for table `exam_codes`
 --
 ALTER TABLE `exam_codes`
@@ -2240,6 +2351,12 @@ ALTER TABLE `model_has_permissions`
 ALTER TABLE `model_has_roles`
   ADD PRIMARY KEY (`role_id`,`model_id`,`model_type`),
   ADD KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`);
+
+--
+-- Indexes for table `packages`
+--
+ALTER TABLE `packages`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `password_resets`
@@ -2455,6 +2572,14 @@ ALTER TABLE `users`
   ADD KEY `FK_Teacher_Course` (`course_id`);
 
 --
+-- Indexes for table `user_packages`
+--
+ALTER TABLE `user_packages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_Package_User` (`user_id`),
+  ADD KEY `FK_User_Package` (`package_id`);
+
+--
 -- Indexes for table `user_sessions`
 --
 ALTER TABLE `user_sessions`
@@ -2568,6 +2693,12 @@ ALTER TABLE `dia_questions`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
+-- AUTO_INCREMENT for table `exam`
+--
+ALTER TABLE `exam`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `exam_codes`
 --
 ALTER TABLE `exam_codes`
@@ -2628,6 +2759,12 @@ ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT for table `packages`
+--
+ALTER TABLE `packages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `payment_method`
 --
 ALTER TABLE `payment_method`
@@ -2643,7 +2780,7 @@ ALTER TABLE `payment_orders`
 -- AUTO_INCREMENT for table `payment_requests`
 --
 ALTER TABLE `payment_requests`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `payouts`
@@ -2661,7 +2798,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=186;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=209;
 
 --
 -- AUTO_INCREMENT for table `private_request`
@@ -2790,6 +2927,12 @@ ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
+-- AUTO_INCREMENT for table `user_packages`
+--
+ALTER TABLE `user_packages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `user_sessions`
 --
 ALTER TABLE `user_sessions`
@@ -2868,6 +3011,13 @@ ALTER TABLE `diagnostic_exams`
 ALTER TABLE `dia_questions`
   ADD CONSTRAINT `FK_DiaExam` FOREIGN KEY (`daiExam_id`) REFERENCES `diagnostic_exams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_Question` FOREIGN KEY (`ques_id`) REFERENCES `questions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `exam`
+--
+ALTER TABLE `exam`
+  ADD CONSTRAINT `FK_Exam_Course` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_Exam_Time` FOREIGN KEY (`code_id`) REFERENCES `exam_codes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `grid_ans`
@@ -3057,6 +3207,13 @@ ALTER TABLE `usage_promo`
 ALTER TABLE `users`
   ADD CONSTRAINT `FK_Teacher_Categories` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_Teacher_Course` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `user_packages`
+--
+ALTER TABLE `user_packages`
+  ADD CONSTRAINT `FK_Package_User` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_User_Package` FOREIGN KEY (`package_id`) REFERENCES `packages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `wallets`

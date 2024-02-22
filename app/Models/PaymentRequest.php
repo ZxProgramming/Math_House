@@ -18,6 +18,7 @@ class PaymentRequest extends Model
         'user_id',
         'price',
         'image',
+        'module',
     ];
 
     public function method(){

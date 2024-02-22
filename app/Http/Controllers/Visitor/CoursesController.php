@@ -30,13 +30,29 @@ class CoursesController extends Controller
         return view('Visitor.Courses.Courses', compact('courses'));
     }
 
-    public function course($id){
+    public function course($id){ 
         $chapters = Chapter::where('course_id', $id)
         ->get();
-        $course_price = Course::where('id', $id)
+        foreach ($chapters as $key => $item) {
+            $min =  $item->price[0]->price;
+            foreach (  $item->price as $element ) {
+                if ( $min > $element->price ) {
+                    $min = $element->price;
+                }
+            }
+            $chapters[$key]['ch_price'] = $min;
+        } 
+        $course_price = Course::
+        with('prices')
+        ->where('id', $id)
         ->first();
-
-        return view('Visitor.Courses.Chapters', compact('chapters', 'course_price'));
+        $price = $course_price->prices[0]->price;
+        for ($i=0, $end = count($course_price->prices); $i < $end; $i++) { 
+            if( $price > $course_price->prices[$i]->price){
+                $price = $course_price->prices[$i]->price;
+            }
+        }
+        return view('Visitor.Courses.Chapters', compact('chapters', 'course_price', 'price'));
     }
     
     public function buy_chapters( Request $req ){
@@ -49,7 +65,7 @@ class CoursesController extends Controller
 
         return $req->all();
     }
-
+// fghdfhfghfjh
     public function buy_course( Request $req ){
         $data = $req->chapters_data;
         $chapters_price = $req->chapters_price;

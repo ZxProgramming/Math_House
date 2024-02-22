@@ -547,8 +547,8 @@
                         				@foreach( $chapters as $chapter )
 										<div class="details d-flex align-items-center">
                             				<input type="checkbox" class="chapter_item_check" checked />
-											<input type="hidden" class="chapter_id" value="{{$chapter->id}}" />
-											<input type="hidden" class="chapter_price" value="{{$chapter->ch_price}}" />
+											<input type="hidden" class="chapter_id" value="{{$chapter->id}}" />  
+											<input type="hidden" class="chapter_price" value="{{$price}}" />
 											<input type="hidden" class="chapter_data" value="{{$chapter}}" />
 										  	<div id="accordion" class="panel-group w-100 ml-3 cc_tab">
 											    <div class="panel">
@@ -876,12 +876,12 @@
 				</div>
 				<div class="col-lg-4 col-xl-3">
 					<div class="instructor_pricing_widget">
-						<div class="price">Price $<label class="t_price price">{{$course_price->course_price}}</label></div>
-						<input class="course_price" type="hidden" value="{{$course_price->course_price}}" />
+						<div class="price">Price $<label class="t_price price">{{$price}}</label></div>
+						<input class="course_price" type="hidden" value="{{$price}}" />
 						<form method="POST" action="{{route('buy_course')}}">
 							@csrf
 							<input type="hidden" class="chapters_data" name="chapters_data" value="{{$chapters}}" />
-							<input type="hidden" class="chapters_price" name="chapters_price" value="{{$course_price->course_price}}" />
+							<input type="hidden" class="chapters_price" name="chapters_price" value="{{$price}}" />
 							<button class="cart_btnss_white">Buy Now</button>
 						</form>
 						<h5 class="subtitle text-left">Includes</h5>

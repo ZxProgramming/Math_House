@@ -1,8 +1,8 @@
 
 @php
-    $page_name = 'Exam Package';
+    $page_name = 'Package';
 @endphp
-@section('title','Exam Packages')
+@section('title','Packages')
 @include('Student.inc.header')
 @include('Student.inc.menu')
 @extends('Student.inc.nav')
@@ -11,6 +11,7 @@
         
 <div class="row g-4">
     @foreach ( $package as $item )
+    <a href="{{route('package_checkout', ['id' => $item->id])}}">
         <div class="col-xl-4 col-lg-6 col-md-6 py-3">
         <div class="card">
             <div class="card-body">
@@ -27,6 +28,7 @@
             </div>
         </div>
         </div>
+    </a>
     @endforeach
   </div>
 @endsection

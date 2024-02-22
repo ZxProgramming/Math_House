@@ -81,10 +81,7 @@
                                                 {{$course->course_des}}
                                             </p>
 										</div>
-										<div class="tc_footer">
-											<div class="tc_price float-right fn-414">
-                                                {{$course->course_price}}$
-                                            </div>
+										<div class="tc_footer">  
 										</div>
 									</a>
 								</div>

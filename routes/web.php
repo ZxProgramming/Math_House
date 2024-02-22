@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\PackagesController as Ad_PackagesController;
 use App\Http\Controllers\Student\Stu_DashboardController;
 use App\Http\Controllers\Student\Stu_ProfileController;
 use App\Http\Controllers\Student\Stu_MyCourseController;
+use App\Http\Controllers\Student\Stu_PackageController;
 
 use App\Http\Controllers\Visitor\HomeController;
 use App\Http\Controllers\Visitor\ContactController;
@@ -114,13 +115,13 @@ Route::middleware(['auth','auth.Admin'])->prefix('Admin')->group(function(){
         Route::get('/Del', 'del_payment')->name('del_payment');
     });
 
-// Payment Request
-Route::controller(PaymentRequestController::class)->group(function(){
-    Route::get('/PenddingPayment','pendding_payment')->name('pendding_payment');
-    Route::get('/PaymentRequest','payment_request')->name('payment_request');
-    Route::get('/ApprovePayment/{id}','approve_payment')->name('approve_payment');
-    Route::get('/RejectedPayment/{id}','rejected_payment')->name('rejected_payment');
-});
+    // Payment Request
+    Route::controller(PaymentRequestController::class)->group(function(){
+        Route::get('/PenddingPayment','pendding_payment')->name('pendding_payment');
+        Route::get('/PaymentRequest','payment_request')->name('payment_request');
+        Route::get('/ApprovePayment/{id}','approve_payment')->name('approve_payment');
+        Route::get('/RejectedPayment/{id}','rejected_payment')->name('rejected_payment');
+    });
 
 // Marketing
     Route::controller(MarketingController::class)->prefix('Marketing')->group(function(){
@@ -285,11 +286,16 @@ Route::controller(Ad_PackagesController::class)->group(function(){
 });
 
           
-    
+    // Student
 
 Route::middleware(['auth','auth.student'])->prefix('student')->group(function(){
     Route::controller(Stu_DashboardController::class)->group(function(){
         Route::get('Student','index')->name('stu_dashboard');
+    });
+
+    Route::controller(Stu_PackageController::class)->group(function(){
+        Route::get('Package/Checkout/{id}', 'package_checkout')->name('package_checkout');
+        Route::post('Package/Payment/{id}', 'payment_package')->name('payment_package');
     });
     
 

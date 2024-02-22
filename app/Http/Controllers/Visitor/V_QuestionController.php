@@ -90,7 +90,7 @@ class V_QuestionController extends Controller
             ->leftJoin('packages', 'user_packages.package_id', '=', 'packages.id')
             ->where('user_packages.user_id', auth()->user()->id)
             ->where('module', 'Question')
-            ->where('exam_number', '>', 0)
+            ->where('q_number', '>', 0)
             ->get();
             $duration = false;
             for ($i=0, $end = count($user_package); $i < $end; $i++) { 
