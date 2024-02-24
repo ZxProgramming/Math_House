@@ -726,6 +726,7 @@
                                         <input type="hidden" class="add_new_questions" name="add_new_questions" />
 
                                         <tbody class="sel_quz sel_quz_edit">
+                                        <input type="hidden" name="questions" value="{{$item->question}}" />
                                         @foreach( $item->question as $question )
                                         <input type="hidden" class="e_questions" value="{{$question}}" />
                                         <input type="hidden" value="{{$question->question_id}}" name="questions_id[]" class="question_id" />
