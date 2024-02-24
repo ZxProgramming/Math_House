@@ -352,7 +352,10 @@
 
     main .main-wrapper .question .answer-side .answer-chosen .chosen:hover {
         outline: 3px solid #000;
-        /* background: red; */
+    }
+
+    .selectedd {
+        outline: 3px solid #000;
     }
 
     main .main-wrapper .question .answer-side .answer-chosen .chosen button {
@@ -576,68 +579,68 @@
         </div>
     </header>
     <main>
-        <form action="">
+        <form action="" style="width: 100%;">
             <div class="main-wrapper">
-                @foreach ( $quizze->question as $question )
-                    
-                <div class="question">
-                    <div class="question-side">
-                        <div class="text-question">
-                            <span class="question-num">
-                                {{$loop->iteration}}
-                            </span>
-                            <p>
-                                {{$question->question}}
-                            </p>
+                @foreach ($quizze->question as $question)
+                    <div class="question">
+                        <div class="question-side">
+                            <div class="text-question">
+                                <span class="question-num">
+                                    {{ $loop->iteration }}
+                                </span>
+                                <p>
+                                    {{ $question->question }}
+                                </p>
+                            </div>
+                            <div class="img-question">
+                                <span>Examples</span>
+                                @if (!empty($question->q_url))
+                                    <img src="{{ asset('images/questions/' . $question->q_url) }}" alt="question">
+                                @endif
+                            </div>
                         </div>
-                        <div class="img-question">
-                            <span>Examples</span>
-                            @if ( !empty($question->q_url) )
-                            <img src="{{asset('images/questions/' . $question->q_url)}}" alt="question">
+                        <div class="answer-side">
+
+                            {{-- Supp Question --}}
+
+                            {{-- Input to set and send value about answer question to array --}}
+                            <input type="hidden" value="">
+
+                            {{-- Answer chosen --}}
+
+                            @php
+                                $arr = ['A', 'B', 'C', 'D'];
+                                $iter = $loop->iteration;
+                            @endphp
+                            @if ($question->ans_type == 'MCQ')
+                                <div class="answer-chosen">
+                                    @foreach ($question->mcq as $mcq)
+                                        <div class="chosen chosen{{ $iter }}"
+                                            id="chosen{{ $iter }}{{ $loop->iteration }}">
+                                            <button>{{ @$arr[$loop->iteration - 1] }}</button>
+                                            <input type="text" value="{{ $mcq->mcq_ans }}" readonly>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @else
+                                {{-- Answer Set Value --}}
+                                <div class="answer-setValue">
+                                    <div class="section-setValue">
+                                        <span>Answer:</span>
+                                        <div class="input_val">
+
+                                            <input type="number" value="0">
+                                        </div>
+                                    </div>
+                                    <div class="section-value">
+                                        <span>Answer Preview:</span>
+                                        <input type="number" value="00000" readonly>
+                                    </div>
+                                </div>
                             @endif
+
                         </div>
                     </div>
-                    <div class="answer-side">
-    
-                        {{-- Supp Question --}}
-    
-                        {{-- Input to set and send value about answer question to array --}}
-                        <input type="hidden" value="">
-    
-                        {{-- Answer chosen --}}
-    
-                        @php
-                            $arr = ['A', 'B', 'C', 'D'];
-                            $iter = $loop->iteration;
-                        @endphp
-                        @if ( $question->ans_type == 'MCQ' )
-                        <div class="answer-chosen">
-                            @foreach ( $question->mcq as $mcq )
-                                <div class="chosen " id="chosen{{$iter}}{{$loop->iteration}}">
-                                    <button>{{@$arr[$loop->iteration - 1]}}</button>
-                                    <input type="text" value="{{$mcq->mcq_ans}}" readonly>
-                                </div>
-                            @endforeach
-                        </div>
-                        @else
-                        {{-- Answer Set Value --}}
-                        <div class="answer-setValue">
-                            <div class="section-setValue">
-                                <span>Answer:</span>
-                                <div class="input_val">
-    
-                                    <input type="number" value="0">
-                                </div>
-                            </div>
-                            <div class="section-value">
-                                <span>Answer Preview:</span>
-                                <input type="number" value="00000" readonly>
-                            </div>
-                        </div>
-                        @endif
-    
-                    </div>
-                </div>
                 @endforeach
             </div>
             {{-- end Section Question --}}
@@ -765,13 +768,32 @@
         /* /////////////// */
         /* But border out side the answer  */
         /* /////////////// */
-        $(".chosen").on("click", () => {
-            // console.log($(this).attr("class"))
-            // $(this).css("background", "red")
-            $(".chosen").each((ele, val) => {
 
-            });
+
+        $(".chosen").each((elePar, valPar) => {
+
+            var staPar = elePar + 1;
+            console.log("elePar", elePar)
+            console.log("staPar", staPar)
+            console.log("valPar", valPar)
+            var elementPar = `.${$(valPar).attr("class").slice(0, 6) + staPar}`;
+
+            console.log(elementPar)
+
+            $(elementPar).each((ele, val) => {
+                console.log("ele", ele)
+                console.log("val", val)
+                var element = `#${$(val).attr("id")}`;
+                console.log(element)
+                $(element).click(() => {
+                    $(elementPar).removeClass("selectedd");
+                    $(element).addClass("selectedd");
+                })
+            })
         })
+
+
+
 
         /* /////////////// */
         /* Handel pagination question */
@@ -823,6 +845,7 @@
             var totalPages = Math.ceil(numberOfItems / limitPerPage);
             var paginationSize = Math.ceil(numberOfItems /
                 3); //How many question visible show in this page pagination
+
             var currentPage;
 
             console.log("paginationSize", paginationSize)
