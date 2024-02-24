@@ -579,7 +579,8 @@
         </div>
     </header>
     <main>
-        <form action="" style="width: 100%;">
+        <form action="{{route('quizze_ans')}}" method="POST" style="width: 100%;">
+            @csrf
             <div class="main-wrapper">
                 @foreach ($quizze->question as $question)
                     <div class="question">
@@ -604,7 +605,7 @@
                             {{-- Supp Question --}}
 
                             {{-- Input to set and send value about answer question to array --}}
-                            <input type="hidden" value="">
+                            <input type="hidden" name="q_answers" value="">
 
                             {{-- Answer chosen --}}
 

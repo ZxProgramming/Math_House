@@ -18,7 +18,6 @@ class Course extends Model
         'course_name', 
         'teacher_id', 
         'category_id', 
-        'course_price', 
         'course_des', 
         'course_url', 
         'pre_requisition',

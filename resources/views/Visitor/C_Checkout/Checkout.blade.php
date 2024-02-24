@@ -1,7 +1,6 @@
 
 @include('Visitor.inc.header')
 @include('Visitor.inc.menu')
-
 <div class="wrapper">
 	<div class="preloader"></div>
 
@@ -449,10 +448,10 @@
 			<div class="row">
 				<div class="col-xl-6 offset-xl-3 text-center">
 					<div class="breadcrumb_content">
-						<h4 class="breadcrumb_title">Cart</h4>
+						<h4 class="breadcrumb_title">Checkout</h4>
 						<ol class="breadcrumb">
 						    <li class="breadcrumb-item"><a href="#">Home</a></li>
-						    <li class="breadcrumb-item active" aria-current="page">Cart</li>
+						    <li class="breadcrumb-item active" aria-current="page">Checkout</li>
 						</ol>
 					</div>
 				</div>
@@ -460,117 +459,199 @@
 		</div>
 	</section>
 
+	@include('success')
 	<!-- Shop Checkouts Content -->
 	<section class="shop-checkouts">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12 col-lg-8 col-xl-8">
-					<div class="cart_page_form">
-						<form action="#">
-							<table class="table table-responsive">
-							  	<thead>
-								    <tr class="carttable_row">
-								    	<th class="cartm_title">Chapters</th>
-								    	<th class="cartm_title">Duration</th>
-								    	<th class="cartm_title">Price</th>
-								    	<th class="cartm_title">Action</th>
-								    </tr>
-							  	</thead>
-							  	<tbody class="table_body">
-                                    @foreach( $chapters as $chapter )
-								    <tr>
-								    	<th scope="row">
-								    		<ul class="cart_list">
-								    			<li class="list-inline-item pr15"><a href="#">
-                                                    <img src="{{asset('images/Chapters/' . $chapter->ch_url)}}" />
-                                                </a></li>
-								    			<li class="list-inline-item"><a class="cart_title" href="#">
-                                                    {{$chapter->chapter_name}}
-                                                </a></li>
-								    		</ul>
-								    	</th>
-								    	<td>
-                                            <select name="chapter_duration" class="form-control chapter_duration">
-												@foreach ($chapter->price as $item)
-													<option value="{{$item->id}}">
-														{{$item->duration}}
-													</option>
-												@endforeach
-											</select>
-                                        </td>
-										<input type="hidden" class="chapters_price" value="{{json_encode($chapter->price)}}" />
-										<input type="hidden" class="ch_price" value="{{$chapter->ch_price}}" />
-								    	<td class="tbl_chapter_price">
-                                            {{$chapter->ch_price}}$
-                                        </td>
-								    	<td>
-                                            <a href="{{route('remove_course_package', ['id' => $chapter->id])}}" class="btn btn-danger">
-												Remove
-											</a>
-                                        </td>
-								    </tr>
-                                    @endforeach
-							  	</tbody>
-							</table>
-						</form>
-					</div>
-					<div class="checkout_form">
-						<div class="checkout_coupon ui_kit_button">
-							<form method="POST" action="{{route('use_promocode')}}" class="form-inline">
-								@csrf
-						    	<input name="promo_code" class="form-control" type="search" placeholder="Coupon Code" aria-label="Search">
-						    	<button class="btn btn2">Apply Coupon</button>
-						    	<button type="button" class="btn btn3">Update Cart</button>
-						    </form>
-						</div>
-					</div>
+				<div class="col-md-12 col-lg-8 col-xl-8"> 
 				</div>
 				<div class="col-lg-4 col-xl-4">
 					<div class="order_sidebar_widget mb30">
-						<h4 class="title">Cart Totals</h4>
+						<h4 class="title">Your Order</h4>
 						<ul>
-							<li class="subtitle"><p>Total <span class="float-right totals color-orose">
-                                ${{$chapters_price}}
-                            </span></p></li>
+							<li class="subtitle"><p>Product <span class="float-right">Total</span></p></li>
+							
+							<li><p>{{$course->course_name}} <span class="float-right">{{$price}}</span></p></li> 
+							
+							<li class="subtitle"><p>Subtotal <span class="float-right">Subtotal</span></p></li>
+							<li class="subtitle"><p>Total <span class="float-right totals color-orose">${{$price}}</span></p></li>
 						</ul>
 					</div>
-					<div class="ui_kit_button payment_widget_btn">
-						<a href="{{route('check_out')}}" class="btn dbxshad btn-lg btn-thm3 circle btn-block">Proceed To Checkout</a>
+					<form action="{{route('course_payment_money')}}" method="POST" enctype="multipart/form-data">
+						@csrf
+						<div class="payment_widget">
+							<div class="ui_kit_checkbox style2">
+								@foreach( $payment_methods as $item )
+								<div class="custom-control custom-checkbox">
+									<input type="radio" name="payment_method_id" value="{{$item->id}}" class="custom-control-input payment_method_radio" id="customCheck80{{$item->id}}" checked />
+									<label class="custom-control-label" for="customCheck80{{$item->id}}">{{$item->payment}}
+										<img style="height:50px; width:70px;" src="{{asset('images/payment/' . $item->logo)}}" class="pr15" />
+									</label>
+									
+								</div>
+								<div class="bt_details">
+									<p>
+										{{$item->description}}
+									</p>
+								</div>
+
+								<input type="file" id="reset_img" name="image[]" class="form-control d-none" />	
+								<label class="upload_img d-none" style="cursor: pointer;" for="reset_img">
+									<h3>
+										Upload Reseipt
+									</h3>
+								</label>
+								@endforeach
+						<script>
+											
+							let payment_method_radio = document.querySelectorAll('.payment_method_radio');
+							let upload_img = document.querySelectorAll('.upload_img');
+							upload_img[upload_img.length - 1].classList.remove('d-none');
+							for (let i = 0, end = payment_method_radio.length; i < end; i++) {
+								payment_method_radio[i].addEventListener('change', ( e ) => {
+										for (let j = 0; j < end; j++) {
+											if ( e.target == payment_method_radio[j] ) {
+												upload_img[j].classList.remove('d-none');
+											}
+											else{
+												upload_img[j].classList.add('d-none');
+											}
+									}
+								})
+							}
+						</script>
+							</div>
+						</div>
+						<div class="ui_kit_button payment_widget_btn">
+							<button class="btn dbxshad btn-lg btn-thm3 circle btn-block">Place Order</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Our Footer -->
+	<section class="footer_one">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-md-4 col-md-3 col-lg-3">
+					<div class="footer_contact_widget">
+						<h4>CONTACT</h4>
+						<p>329 Queensberry Street, North Melbourne </p>
+						<p>VIC 3051, Australia.</p>
+						<p>123 456 7890</p>
+						<p>support@edumy.com</p>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-4 col-md-3 col-lg-2">
+					<div class="footer_company_widget">
+						<h4>COMPANY</h4>
+						<ul class="list-unstyled">
+							<li><a href="#">About Us</a></li>
+							<li><a href="#">Blog</a></li>
+							<li><a href="page-contact.html">Contact</a></li>
+							<li><a href="#">Become a Teacher</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-4 col-md-3 col-lg-2">
+					<div class="footer_program_widget">
+						<h4>PROGRAMS</h4>
+						<ul class="list-unstyled">
+							<li><a href="#">Nanodegree Plus</a></li>
+							<li><a href="#">Veterans</a></li>
+							<li><a href="#">Georgia</a></li>
+							<li><a href="#">Self-Driving Car</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-4 col-md-3 col-lg-2">
+					<div class="footer_support_widget">
+						<h4>SUPPORT</h4>
+						<ul class="list-unstyled">
+							<li><a href="#">Documentation</a></li>
+							<li><a href="#">Forums</a></li>
+							<li><a href="#">Language Packs</a></li>
+							<li><a href="#">Release Status</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-6 col-md-3 col-lg-3">
+					<div class="footer_apps_widget">
+						<h4>MOBILE</h4>
+						<div class="app_grid">
+							<button class="apple_btn btn-dark">
+								<span class="icon">
+									<span class="flaticon-apple"></span>
+								</span>
+								<span class="title">App Store</span>
+								<span class="subtitle">Available now on the</span>
+							</button>
+							<button class="play_store_btn btn-dark">
+								<span class="icon">
+									<span class="flaticon-google-play"></span>
+								</span>
+								<span class="title">Google Play</span>
+								<span class="subtitle">Get in on</span>
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 
+	<!-- Our Footer Middle Area -->
+	<section class="footer_middle_area p0">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4 col-md-3 col-lg-3 col-xl-2 pb15 pt15">
+					<div class="logo-widget home1">
+						<img class="img-fluid" src="images/header-logo.png" alt="header-logo.png">
+						<span>EDUMY</span>
+					</div>
+				</div>
+				<div class="col-sm-8 col-md-5 col-lg-6 col-xl-6 pb25 pt25 brdr_left_right">
+					<div class="footer_menu_widget">
+						<ul>
+							<li class="list-inline-item"><a href="#">Home</a></li>
+							<li class="list-inline-item"><a href="#">Privacy</a></li>
+							<li class="list-inline-item"><a href="#">Terms</a></li>
+							<li class="list-inline-item"><a href="#">Sitemap</a></li>
+							<li class="list-inline-item"><a href="#">Purchase</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-4 col-lg-3 col-xl-4 pb15 pt15">
+					<div class="footer_social_widget mt15">
+						<ul>
+							<li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li class="list-inline-item"><a href="#"><i class="fa fa-instagram"></i></a></li>
+							<li class="list-inline-item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+							<li class="list-inline-item"><a href="#"><i class="fa fa-dribbble"></i></a></li>
+							<li class="list-inline-item"><a href="#"><i class="fa fa-google"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Our Footer Bottom Area -->
+	<section class="footer_bottom_area pt25 pb25">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 offset-lg-3">
+					<div class="copyright-widget text-center">
+						<p>Copyright Edumy © 2019. All Rights Reserved.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 <a class="scrollToHome" href="#"><i class="flaticon-up-arrow-1"></i></a>
 </div>
-
-
-<script>
-	let chapter_duration = document.querySelectorAll('.chapter_duration');
-	let chapters_price = document.querySelectorAll('.chapters_price');
-	let tbl_chapter_price = document.querySelectorAll('.tbl_chapter_price');
-	let ch_price = document.querySelectorAll('.ch_price');
-
-	for (let i = 0, end = chapter_duration.length; i < end; i++) {
-		chapter_duration[i].addEventListener('change', ( e ) => {
-			for (let j = 0; j < end; j++) {
-				if ( e.target == chapter_duration[j] ) {
-					let money = chapters_price[j];
-					money = money.value;
-					money = JSON.parse(money); 
-					money.forEach(element => {
-						if ( element.id == chapter_duration[j].value ) {
-							money = element.price;
-						}
-					});
-					tbl_chapter_price[j].innerHTML = `
-					${money}$
-					`;
-					ch_price[j].value = money;
-				}
-			}
-		})
-	}
-</script>
 @include('Visitor.inc.footer')

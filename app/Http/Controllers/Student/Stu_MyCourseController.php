@@ -88,6 +88,7 @@ class Stu_MyCourseController extends Controller
 
     public function quizze_ans(Request $req)
     {
+        return $req->all();
         $quizze = quizze::where('id', $req->quizze_id)
             ->first();
         $deg = 0;
