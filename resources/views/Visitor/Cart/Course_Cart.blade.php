@@ -473,11 +473,9 @@
 								    	<th class="cartm_title">Chapters</th>
 								    	<th class="cartm_title">Duration</th>
 								    	<th class="cartm_title">Price</th>
-								    	<th class="cartm_title">Action</th>
 								    </tr>
 							  	</thead>
 							  	<tbody class="table_body">
-                                    @foreach( $courses as $course )
 								    <tr>
 								    	<th scope="row">
 								    		<ul class="cart_list">
@@ -490,7 +488,10 @@
 								    		</ul>
 								    	</th>
 								    	<td>
-                                            <select class="form-control chapter_duration">
+                                            <select name="course_duration" class="form-control chapter_duration">
+                                                <option value="{{$min_price_data->id}}">
+                                                    {{$min_price_data->duration}}
+                                                </option>
 												@foreach ($course->prices as $item)
 													<option value="{{$item->id}}">
 														{{$item->duration}}
@@ -499,17 +500,11 @@
 											</select>
                                         </td>
 										<input type="hidden" class="chapters_price" value="{{json_encode($course->prices)}}" />
-										<input type="hidden" class="ch_price" value="{{$course->ch_price}}" />
+										<input type="hidden" class="ch_price" value="{{$min_price}}" />
 								    	<td class="tbl_chapter_price">
-                                            {{$course->ch_price}}$
-                                        </td>
-								    	<td>
-                                            <a href="{{route('remove_course_package', ['id' => $course->id])}}" class="btn btn-danger">
-												Remove
-											</a>
+                                            {{$min_price}}$
                                         </td>
 								    </tr>
-                                    @endforeach
 							  	</tbody>
 							</table>
 						</form>
@@ -529,14 +524,19 @@
 					<div class="order_sidebar_widget mb30">
 						<h4 class="title">Cart Totals</h4>
 						<ul>
-							<li class="subtitle"><p>Total <span class="float-right totals color-orose">
-                                ${{$courses_price}}
+							<li class="subtitle"><p>Total <span class="total_price float-right totals color-orose">
+                                ${{$min_price}}
                             </span></p></li>
 						</ul>
 					</div>
+                    <form method="POST" action="{{route('check_out_course')}}">
+                    @csrf
+                    <input type="hidden" class="course_price" name="price" value="{{$min_price}}" />
+                    <input type="hidden" name="course" value="{{$course}}" />
 					<div class="ui_kit_button payment_widget_btn">
-						<a href="{{route('check_out')}}" class="btn dbxshad btn-lg btn-thm3 circle btn-block">Proceed To Checkout</a>
+						<button class="btn dbxshad btn-lg btn-thm3 circle btn-block">Proceed To Checkout</button>
 					</div>
+                    </form>
 				</div>
 			</div>
 		</div>
@@ -551,6 +551,8 @@
 	let chapters_price = document.querySelectorAll('.chapters_price');
 	let tbl_chapter_price = document.querySelectorAll('.tbl_chapter_price');
 	let ch_price = document.querySelectorAll('.ch_price');
+	let total_price = document.querySelector('.total_price');
+	let course_price = document.querySelector('.course_price');
 
 	for (let i = 0, end = chapter_duration.length; i < end; i++) {
 		chapter_duration[i].addEventListener('change', ( e ) => {
@@ -567,6 +569,8 @@
 					tbl_chapter_price[j].innerHTML = `
 					${money}$
 					`;
+                    course_price.value = money;
+                    total_price.innerHTML = `${money}$`;
 					ch_price[j].value = money;
 				}
 			}

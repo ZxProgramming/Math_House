@@ -67,19 +67,27 @@ class CoursesController extends Controller
 
         return $req->all();
     }
-// fghdfhfghfjh
+    
     public function buy_course( Request $req ){
         $course_data = json_decode($req->course_data);
-        $courses = Course::where('id', $course_data->id)
+        $course = Course::where('id', $course_data->id)
         ->first();
-        $min_price = $courses->prices[0]->price;
-        foreach ( $courses->prices as $price) {
+        $min_price = $course->prices[0]->price;
+        $min_price_data = $course->prices[0];
+        foreach ( $course->prices as $price) {
             if ( $min_price > $price->price ) {
                 $min_price = $price->price;
+                $min_price_data = $price;
             }
         }
-        if ( $min_price == $req->chapters_price ) {
-            return view('Visitor.Cart.Course_Cart', compact('courses', 'min_price'));
+        Cache::store('file')->put('marketing', $course_data, 10000);
+        Cache::store('file')->put('chapters_price', $min_price, 10000);
+        Cache::store('file')->put('min_price_data', $min_price_data, 10000);
+        if ( empty(auth()->user()) && $min_price == $req->chapters_price ) {
+            return view('Visitor.Login.login');
+        }
+        elseif ( $min_price == $req->chapters_price ) {
+            return view('Visitor.Cart.Course_Cart', compact('course', 'min_price', 'min_price_data'));
         }
         
         $data = $req->chapters_data;
@@ -104,7 +112,13 @@ class CoursesController extends Controller
         $chapters = Cache::get('marketing');
         $chapters = empty($chapters) ? [] : $chapters;
         $chapters_price = Cache::get('chapters_price');
-        
+        if ( !is_array($chapters) ) {
+            $min_price_data = Cache::get('min_price_data');
+            $min_price = $chapters_price;
+            $course = Course::where('id', $chapters->id)
+            ->first();
+            return view('Visitor.Cart.Course_Cart', compact('course', 'min_price', 'min_price_data'));
+        }
         return view('Visitor.Cart', compact('chapters', 'chapters_price'));
     }
 
@@ -146,6 +160,18 @@ class CoursesController extends Controller
         ->get();
 
         return view('Visitor.Checkout.Checkout', compact('price', 'chapters', 'payment_methods'));
+    }
+
+    public function check_out_course( Request $req ){
+        $course = json_decode($req->course);
+        $price = $req->price;
+        Cache::store('file')->put('marketing', $course, 10000);
+        Cache::store('file')->put('chapters_price', $price, 10000);
+        $payment_methods = PaymentMethod::
+        where('statue', 1)
+        ->get();
+
+        return view('Visitor.C_Checkout.Checkout', compact('price', 'course', 'payment_methods'));
     }
 
     public function new_payment(){
@@ -195,6 +221,42 @@ class CoursesController extends Controller
         $price = json_decode(Cache::get('chapters_price'));
         $p_method = $p_request->method->payment;
         return view('Visitor.Order.Order', compact('chapters', 'price', 'p_method'));
+    }
+
+    public function course_payment_money( Request $req ){
+        $arr = $req->only('payment_method_id');
+        $arr['price'] = Cache::get('chapters_price');
+        $arr['user_id'] = auth()->user()->id;
+        $img_state = true;
+
+        extract($_FILES['image']);
+        $img_name = null;
+        for ($i=0, $end = count($name); $i < $end; $i++) { 
+            if ( !empty($name[$i]) ) {
+                    $img_state = false;
+                    $extention_arr = ['jpg', 'jpeg', 'png', 'svg'];
+                    $extention = explode('.', $name[$i]);
+                    $extention = end($extention);
+                    $extention = strtolower($extention);
+                    if ( in_array($extention, $extention_arr)) {
+                        $img_name = now() . rand(1, 10000) . $name[$i];
+                        $img_name = str_replace([' ', ':', '-'], 'X', $img_name);
+                        $arr['image'] = $img_name;
+                    }
+
+                move_uploaded_file($tmp_name[$i], 'images/payment_reset/' . $img_name);
+            }
+        }
+        if ( $img_state ) { 
+            session()->flash('faild', 'You Must Enter Receipt');
+            return redirect()->back();
+        
+        }
+        $p_request = PaymentRequest::create($arr);
+        $course = (Cache::get('marketing'));
+        $price = (Cache::get('chapters_price'));
+        $p_method = $p_request->method->payment;
+        return view('Visitor.C_Order.Order', compact('course', 'price', 'p_method'));
     }
 
     public function remove_course_package( $id ){

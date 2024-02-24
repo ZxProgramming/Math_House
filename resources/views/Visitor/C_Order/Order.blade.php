@@ -2,6 +2,7 @@
 @include('Visitor.inc.header')
 @include('Visitor.inc.menu')
 
+
 <div class="wrapper">
 	<div class="preloader"></div>
 
@@ -449,10 +450,10 @@
 			<div class="row">
 				<div class="col-xl-6 offset-xl-3 text-center">
 					<div class="breadcrumb_content">
-						<h4 class="breadcrumb_title">Cart</h4>
+						<h4 class="breadcrumb_title">ORDER</h4>
 						<ol class="breadcrumb">
 						    <li class="breadcrumb-item"><a href="#">Home</a></li>
-						    <li class="breadcrumb-item active" aria-current="page">Cart</li>
+						    <li class="breadcrumb-item active" aria-current="page">ORDER</li>
 						</ol>
 					</div>
 				</div>
@@ -460,117 +461,58 @@
 		</div>
 	</section>
 
-	<!-- Shop Checkouts Content -->
-	<section class="shop-checkouts">
+	<!-- Shop Order Content -->
+	<section class="shop-order">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12 col-lg-8 col-xl-8">
-					<div class="cart_page_form">
-						<form action="#">
-							<table class="table table-responsive">
-							  	<thead>
-								    <tr class="carttable_row">
-								    	<th class="cartm_title">Chapters</th>
-								    	<th class="cartm_title">Duration</th>
-								    	<th class="cartm_title">Price</th>
-								    	<th class="cartm_title">Action</th>
-								    </tr>
-							  	</thead>
-							  	<tbody class="table_body">
-                                    @foreach( $chapters as $chapter )
-								    <tr>
-								    	<th scope="row">
-								    		<ul class="cart_list">
-								    			<li class="list-inline-item pr15"><a href="#">
-                                                    <img src="{{asset('images/Chapters/' . $chapter->ch_url)}}" />
-                                                </a></li>
-								    			<li class="list-inline-item"><a class="cart_title" href="#">
-                                                    {{$chapter->chapter_name}}
-                                                </a></li>
-								    		</ul>
-								    	</th>
-								    	<td>
-                                            <select name="chapter_duration" class="form-control chapter_duration">
-												@foreach ($chapter->price as $item)
-													<option value="{{$item->id}}">
-														{{$item->duration}}
-													</option>
-												@endforeach
-											</select>
-                                        </td>
-										<input type="hidden" class="chapters_price" value="{{json_encode($chapter->price)}}" />
-										<input type="hidden" class="ch_price" value="{{$chapter->ch_price}}" />
-								    	<td class="tbl_chapter_price">
-                                            {{$chapter->ch_price}}$
-                                        </td>
-								    	<td>
-                                            <a href="{{route('remove_course_package', ['id' => $chapter->id])}}" class="btn btn-danger">
-												Remove
-											</a>
-                                        </td>
-								    </tr>
-                                    @endforeach
-							  	</tbody>
-							</table>
-						</form>
-					</div>
-					<div class="checkout_form">
-						<div class="checkout_coupon ui_kit_button">
-							<form method="POST" action="{{route('use_promocode')}}" class="form-inline">
-								@csrf
-						    	<input name="promo_code" class="form-control" type="search" placeholder="Coupon Code" aria-label="Search">
-						    	<button class="btn btn2">Apply Coupon</button>
-						    	<button type="button" class="btn btn3">Update Cart</button>
-						    </form>
+				<div class="col-xl-8 offset-xl-2">
+					<div class="shop_order_box">
+						<h4 class="main_title">Order</h4>
+						<p class="text-center">Thank you. Your order has been received.</p>
+						<div class="order_list_raw">
+							<ul>
+								<li class="list-inline-item">
+									<h4>Order Number</h4>
+									<p>3743</p>
+								</li>
+								<li class="list-inline-item">
+									<h4>Date</h4>
+									<p>{{date('M d, Y')}}</p>
+								</li>
+								<li class="list-inline-item">
+									<h4>Total</h4>
+									<p>${{$price}}</p>
+								</li>
+								<li class="list-inline-item">
+									<h4>Payment Method</h4>
+									<p>{{$p_method}}</p>
+								</li>
+							</ul>
 						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-xl-4">
-					<div class="order_sidebar_widget mb30">
-						<h4 class="title">Cart Totals</h4>
-						<ul>
-							<li class="subtitle"><p>Total <span class="float-right totals color-orose">
-                                ${{$chapters_price}}
-                            </span></p></li>
-						</ul>
-					</div>
-					<div class="ui_kit_button payment_widget_btn">
-						<a href="{{route('check_out')}}" class="btn dbxshad btn-lg btn-thm3 circle btn-block">Proceed To Checkout</a>
+						<div class="order_details">
+							<h4 class="title text-center mb40">Order Details</h4>
+							<div class="od_content">
+								<ul>
+									<li>
+                                        {{$course->course_name}}
+                                         <span class="float-right">${{$price}}</span>
+                                    </li>
+								</ul>
+							</div>
+							<div class="od_details_contact text-center">
+								<h4 class="title2">Billing Address</h4>
+								<p class="mb0">Collins Street West, Victoria 8007, Australia.</p>
+								<p class="mb0">London/England</p>
+								<p class="mb0">1245 658 965</p>
+								<p>info@example.com</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-
+    
 <a class="scrollToHome" href="#"><i class="flaticon-up-arrow-1"></i></a>
 </div>
-
-
-<script>
-	let chapter_duration = document.querySelectorAll('.chapter_duration');
-	let chapters_price = document.querySelectorAll('.chapters_price');
-	let tbl_chapter_price = document.querySelectorAll('.tbl_chapter_price');
-	let ch_price = document.querySelectorAll('.ch_price');
-
-	for (let i = 0, end = chapter_duration.length; i < end; i++) {
-		chapter_duration[i].addEventListener('change', ( e ) => {
-			for (let j = 0; j < end; j++) {
-				if ( e.target == chapter_duration[j] ) {
-					let money = chapters_price[j];
-					money = money.value;
-					money = JSON.parse(money); 
-					money.forEach(element => {
-						if ( element.id == chapter_duration[j].value ) {
-							money = element.price;
-						}
-					});
-					tbl_chapter_price[j].innerHTML = `
-					${money}$
-					`;
-					ch_price[j].value = money;
-				}
-			}
-		})
-	}
-</script>
 @include('Visitor.inc.footer')
