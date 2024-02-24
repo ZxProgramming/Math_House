@@ -477,34 +477,34 @@
 								    </tr>
 							  	</thead>
 							  	<tbody class="table_body">
-                                    @foreach( $chapters as $chapter )
+                                    @foreach( $courses as $course )
 								    <tr>
 								    	<th scope="row">
 								    		<ul class="cart_list">
 								    			<li class="list-inline-item pr15"><a href="#">
-                                                    <img src="{{asset('images/Chapters/' . $chapter->ch_url)}}" />
+                                                    <img src="{{asset('images/Chapters/' . $course->course_url)}}" />
                                                 </a></li>
 								    			<li class="list-inline-item"><a class="cart_title" href="#">
-                                                    {{$chapter->chapter_name}}
+                                                    {{$course->course_name}}
                                                 </a></li>
 								    		</ul>
 								    	</th>
 								    	<td>
                                             <select class="form-control chapter_duration">
-												@foreach ($chapter->price as $item)
+												@foreach ($course->prices as $item)
 													<option value="{{$item->id}}">
 														{{$item->duration}}
 													</option>
 												@endforeach
 											</select>
                                         </td>
-										<input type="hidden" class="chapters_price" value="{{json_encode($chapter->price)}}" />
-										<input type="hidden" class="ch_price" value="{{$chapter->ch_price}}" />
+										<input type="hidden" class="chapters_price" value="{{json_encode($course->prices)}}" />
+										<input type="hidden" class="ch_price" value="{{$course->ch_price}}" />
 								    	<td class="tbl_chapter_price">
-                                            {{$chapter->ch_price}}$
+                                            {{$course->ch_price}}$
                                         </td>
 								    	<td>
-                                            <a href="{{route('remove_course_package', ['id' => $chapter->id])}}" class="btn btn-danger">
+                                            <a href="{{route('remove_course_package', ['id' => $course->id])}}" class="btn btn-danger">
 												Remove
 											</a>
                                         </td>
@@ -530,7 +530,7 @@
 						<h4 class="title">Cart Totals</h4>
 						<ul>
 							<li class="subtitle"><p>Total <span class="float-right totals color-orose">
-                                ${{$chapters_price}}
+                                ${{$courses_price}}
                             </span></p></li>
 						</ul>
 					</div>

@@ -880,6 +880,7 @@
 						<input class="course_price" type="hidden" value="{{$price}}" />
 						<form method="POST" action="{{route('buy_course')}}">
 							@csrf
+							<input type="hidden" class="course_data" name="course_data" value="{{$course}}" />
 							<input type="hidden" class="chapters_data" name="chapters_data" value="{{$chapters}}" />
 							<input type="hidden" class="chapters_price" name="chapters_price" value="{{$price}}" />
 							<button class="cart_btnss_white">Buy Now</button>

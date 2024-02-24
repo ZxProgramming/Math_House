@@ -33,6 +33,8 @@ class CoursesController extends Controller
     public function course($id){ 
         $chapters = Chapter::where('course_id', $id)
         ->get();
+        $course = Course::where('id', $id)
+        ->first(); 
         foreach ($chapters as $key => $item) {
             $min =  $item->price[0]->price;
             foreach (  $item->price as $element ) {
@@ -52,7 +54,7 @@ class CoursesController extends Controller
                 $price = $course_price->prices[$i]->price;
             }
         }
-        return view('Visitor.Courses.Chapters', compact('chapters', 'course_price', 'price'));
+        return view('Visitor.Courses.Chapters', compact('chapters', 'course_price', 'price', 'course'));
     }
     
     public function buy_chapters( Request $req ){
@@ -67,6 +69,19 @@ class CoursesController extends Controller
     }
 // fghdfhfghfjh
     public function buy_course( Request $req ){
+        $course_data = json_decode($req->course_data);
+        $courses = Course::where('id', $course_data->id)
+        ->first();
+        $min_price = $courses->prices[0]->price;
+        foreach ( $courses->prices as $price) {
+            if ( $min_price > $price->price ) {
+                $min_price = $price->price;
+            }
+        }
+        if ( $min_price == $req->chapters_price ) {
+            return view('Visitor.Cart.Course_Cart', compact('courses', 'min_price'));
+        }
+        
         $data = $req->chapters_data;
         $chapters_price = $req->chapters_price;
         if ( empty($req->chapters_data) ) {
