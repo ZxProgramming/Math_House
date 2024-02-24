@@ -80,7 +80,8 @@ class CoursesController extends Controller
                 $min_price_data = $price;
             }
         }
-        Cache::store('file')->put('marketing', $course_data, 10000);
+        Cache::forget('min_price_data');
+        Cache::store('file')->put('marketing', $course, 10000);
         Cache::store('file')->put('chapters_price', $min_price, 10000);
         Cache::store('file')->put('min_price_data', $min_price_data, 10000);
         if ( empty(auth()->user()) && $min_price == $req->chapters_price ) {
@@ -109,10 +110,11 @@ class CoursesController extends Controller
     }
 
     public function course_payment( Request $req ){
-        $chapters = Cache::get('marketing');
+        $chapters = json_decode(Cache::get('marketing'));
         $chapters = empty($chapters) ? [] : $chapters;
         $chapters_price = Cache::get('chapters_price');
-        if ( !is_array($chapters) ) {
+        
+        if ( @is_numeric(Cache::get('min_price_data')->id) ) {
             $min_price_data = Cache::get('min_price_data');
             $min_price = $chapters_price;
             $course = Course::where('id', $chapters->id)
