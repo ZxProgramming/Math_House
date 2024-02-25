@@ -499,11 +499,12 @@
 											</select>
                                         </td>
 										<input type="hidden" class="chapters_price" value="{{json_encode($chapter->price)}}" />
-										<input type="hidden" class="ch_price" value="{{$chapter->ch_price}}" />
+										<input type="hidden" class="ch_price" name="ch_price[]" value="{{$chapter->ch_price}}" />
+										<input type="hidden" class="ch_price" name="chapter[]" value="{{$chapter}}" />
 								    	<td class="tbl_chapter_price">
                                             {{$chapter->ch_price}}$
                                         </td>
-								    	<td>
+								    	<td> 
                                             <a href="{{route('remove_course_package', ['id' => $chapter->id])}}" class="btn btn-danger">
 												Remove
 											</a>
@@ -551,6 +552,7 @@
 	let chapters_price = document.querySelectorAll('.chapters_price');
 	let tbl_chapter_price = document.querySelectorAll('.tbl_chapter_price');
 	let ch_price = document.querySelectorAll('.ch_price');
+	let totals = document.querySelector('.totals')
 
 	for (let i = 0, end = chapter_duration.length; i < end; i++) {
 		chapter_duration[i].addEventListener('change', ( e ) => {
@@ -570,6 +572,12 @@
 					ch_price[j].value = money;
 				}
 			}
+
+			let total = 0;
+			for (let k = 0, end = ch_price.length; k < end; k++) {
+				total += parseInt(ch_price[k].value);
+			}
+			totals.innerHTML = `$${total}`;
 		})
 	}
 </script>

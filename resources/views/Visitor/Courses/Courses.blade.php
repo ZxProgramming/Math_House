@@ -61,13 +61,15 @@
 							<a href>
 							<div class="courses_list_content">
 								<div class="top_courses list">
+									<a href="{{route('v_course', ['id' => $course->id]) }}" class="details">
 									<div class="thumb">
 										<img class="img-whp" src="{{asset('images/courses/' . $course->course_url)}}" alt="t1.jpg">
 										<div class="overlay">
                                         <i style="font-size: 27px;" class="fa-solid fa-cart-plus cart_btn text-light m-3"></i> 
-											<a class="tc_preview_course" href="#">Preview Course</a>
+											<a class="tc_preview_course" href="{{route('v_course', ['id' => $course->id]) }}">Preview Course</a>
 										</div>
 									</div>
+								</a>
                                     
 									<a href="{{route('v_course', ['id' => $course->id]) }}" class="details">
 										<div class="tc_content">
