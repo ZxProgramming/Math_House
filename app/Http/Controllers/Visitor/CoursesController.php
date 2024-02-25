@@ -48,7 +48,7 @@ class CoursesController extends Controller
         with('prices')
         ->where('id', $id)
         ->first();
-        $price = $course_price->prices[0]->price;
+        $price = @$course_price->prices[0]->price;
         for ($i=0, $end = count($course_price->prices); $i < $end; $i++) { 
             if( $price > $course_price->prices[$i]->price){
                 $price = $course_price->prices[$i]->price;
@@ -155,6 +155,7 @@ class CoursesController extends Controller
     }
 
     public function check_out(){
+        return 65;
         $chapters = json_decode(Cache::get('marketing'));
         $price = json_decode(Cache::get('chapters_price'));
         $payment_methods = PaymentMethod::
