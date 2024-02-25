@@ -132,255 +132,241 @@
                 <div class="modal-body scroll-y m-5">
                     <!--begin::Stepper-->
                     <div class="stepper stepper-links d-flex flex-column" id="kt_modal_create_campaign_stepper">
-                        <!--begin::Nav-->
-                        <div class="stepper-nav justify-content-center py-2">
-                            <!--begin::Step 1-->
-                            <div class="stepper-item me-5 me-md-15 current" data-kt-stepper-element="nav">
-                                <h3 class="stepper-title">Info</h3>
-                            </div>
-                            <!--end::Step 1-->
-                            <!--begin::Step 2-->
-                            <div class="stepper-item me-5 me-md-15" data-kt-stepper-element="nav">
-                                <h3 class="stepper-title">Academic</h3>
-                            </div>
-                            <!--end::Step 2-->
-                            <!--begin::Step 3-->
-                            <div class="stepper-item me-5 me-md-15" data-kt-stepper-element="nav">
-                                <h3 class="stepper-title">Data</h3>
-                            </div>
-                            <!--end::Step 3-->
-                        </div>
-                        <!--end::Nav-->
                         <!--begin::Form-->
                         <form action="{{ route('add_session') }}" method="POST" enctype="multipart/form-data"
-                            class="mx-auto w-100 mw-600px pt-15 pb-10" novalidate="novalidate"
+                            class="mx-auto w-100 mw-600px pb-10" novalidate="novalidate"
                             id="kt_modal_create_campaign_stepper_form">
-                            <!--begin::Step 1-->
-                            <div class="current" data-kt-stepper-element="content">
-                                <!--begin::Wrapper-->
-                                <div class="w-100">
-                                    @csrf
-                                    <div>
-                                        <!--begin::Input group-->
-                                        <div class="mb-10 fv-row">
-                                            <!--begin::Label-->
-                                            <label>
-                                                Session Name
-                                            </label>
-                                            <input class='form-control' name="name" placeholder="Session Name" />
-                                        </div>
-                                        <!--end::Input group-->
-                                        <!--begin::Input group-->
-                                        <div class="mb-10 fv-row">
-                                            <label>
-                                                Session Date
-                                            </label>
-                                            <input class='form-control' name="date" type="date"
-                                                placeholder="Session Date" />
-                                        </div>
-
-                                        <div class="mb-10 fv-row">
-                                            <label>
-                                                From
-                                            </label>
-                                            <input class='form-control' name="from" type="time"
-                                                placeholder="Session From" />
-                                        </div>
-
-                                        <div class="mb-10 fv-row">
-                                            <label>
-                                                To
-                                            </label>
-                                            <input class='form-control' name="to" type="time"
-                                                placeholder="Session To" />
-                                        </div>
-                                        <div class="mb-10 fv-row">
-                                            <label>
-                                                Teacher
-                                            </label>
-                                            <select class="form-control" name="teacher_id">
-                                                <option disabled selected>
-                                                    Select Teacher ...
-                                                </option>
-                                                @foreach ($teachers as $teacher)
-                                                    <option value="{{ $teacher->id }}">
-                                                        {{ $teacher->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="mb-10 fv-row">
-                                            <label>
-                                                Type
-                                            </label>
-                                            <select class="form-control" name="type">
-                                                <option disabled selected>
-                                                    Select Type ...
-                                                </option>
-                                                <option value="group">
-                                                    group
-                                                </option>
-                                                <option value="private">
-                                                    private
-                                                </option>
-                                                <option value="session">
-                                                    session
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div class="mb-10 fv-row">
-                                            <label>
-                                                Group
-                                            </label>
-                                            <select class="form-control" name="group_id">
-                                                <option disabled selected>
-                                                    Select Group ...
-                                                </option>
-                                                @foreach ($groups as $group)
-                                                    <option value="{{ $group->id }}">
-                                                        {{ $group->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="mb-10 fv-row"> 
-                                        <label>
-                                            Users
-                                        </label>
-                                        <div class="select2-danger" data-select2-id="33">
-                                            <div class="position-relative" data-select2-id="443">
-                                                <select id="select2Danger" name="user_id[]" class="select2 form-select select2-hidden-accessible" multiple="" data-select2-id="select2Danger" tabindex="-1" aria-hidden="true">
-                                                    @foreach ($users as $user)
-                                                        <option value="{{$user->id}}" data-select2-id="{{$user->id}}">{{$user->name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        </div>
-
-
-
-                                        <div class="mb-10 fv-row">
-                                            <label>
-                                                Repeat
-                                            </label>
-                                            <select class="form-control s_repeat" name="repeat">
-                                                <option disabled selected>
-                                                    Select ...
-                                                </option>
-                                                <option value="Once">
-                                                    Once
-                                                </option>
-                                                <option value="Repeat">
-                                                    Repeat
-                                                </option>
-                                            </select>
-                                        </div>
-
-                                        <div class="screen d-none">
-                                            <div class="screen_popup">
-                                                <div class="btn btn-sm btn-icon btn-active-color-primary"
-                                                    data-bs-dismiss="modal">
-                                                    <i class="ki-duotone close_btn ki-cross fs-1">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                    </i>
-                                                </div>
-                                                <div class="screen_text">
-                                                    <div class="my-2">
-                                                        <label>
-                                                            Repeat
-                                                        </label>
-                                                        <div class="d-flex">
-                                                            <input type="number" class="form-control"
-                                                                name="repeat_num" />
-                                                            <label>
-                                                                Times
-                                                            </label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="my-2">
-                                                        <label>
-                                                            Repeat every
-                                                        </label>
-                                                        <div>
-                                                            <input id="SaturDay" type="checkbox" name="r_day[]"
-                                                                value="SaturDay" />
-                                                            <label for="SaturDay">
-                                                                SaturDay
-                                                            </label>
-                                                        </div>
-                                                        <div>
-                                                            <input id="SunDay" type="checkbox" name="r_day[]"
-                                                                value="SunDay" />
-                                                            <label for="SunDay">
-                                                                SunDay
-                                                            </label>
-                                                        </div>
-                                                        <div>
-                                                            <input id="MonDay" type="checkbox" name="r_day[]"
-                                                                value="MonDay" />
-                                                            <label for="MonDay">
-                                                                MonDay
-                                                            </label>
-                                                        </div>
-                                                        <div>
-                                                            <input id="TuesDay" type="checkbox" name="r_day[]"
-                                                                value="TuesDay" />
-                                                            <label for="TuesDay">
-                                                                TuesDay
-                                                            </label>
-                                                        </div>
-                                                        <div>
-                                                            <input id="WednesDay" type="checkbox" name="r_day[]"
-                                                                value="WednesDay" />
-                                                            <label for="WednesDay">
-                                                                WednesDay
-                                                            </label>
-                                                        </div>
-                                                        <div>
-                                                            <input id="ThursDay" type="checkbox" name="r_day[]"
-                                                                value="ThursDay" />
-                                                            <label for="ThursDay">
-                                                                ThursDay
-                                                            </label>
-                                                        </div>
-                                                        <div>
-                                                            <input id="FriDay" type="checkbox" name="r_day[]"
-                                                                value="FriDay" />
-                                                            <label for="FriDay">
-                                                                FriDay
-                                                            </label>
-                                                        </div>
-                                                        <div class="mb-10 fv-row">
-                                                            <label>
-                                                                Price
-                                                            </label>
-                                                            <input class='form-control' name="price"
-                                                                placeholder="Price" />
-                                                        </div>
-                                                        <button type="button" class="btn btn-primary btn_repeat">
-                                                            Submit
-                                                        </button>
-                                                        <!--end::Input group-->
-                                                    </div>
-
-                                                </div>
-                                                <!--end::Wrapper-->
-                                            </div>
-                                        </div>
-                                        <!--end::Input group-->
-                                    </div>
-
+                            {{-- Info Tap --}}
+                            <div class="info_section" id="info_section">
+                                <div class="pb-2">
+                                    <!--begin::Title-->
+                                    <h1 class="fw-bold text-gray-900">Info</h1>
+                                    <!--end::Title-->
                                 </div>
-                                <!--end::Wrapper-->
+                                <div class="mb-10 fv-row">
+                                    <!--begin::Label-->
+                                    <label>
+                                        Session Name
+                                    </label>
+                                    <input class="form-control" name="name" placeholder="Session Name">
+                                </div>
+                                <div class="mb-10 fv-row">
+                                    <label>
+                                        Session Date
+                                    </label>
+                                    <input class="form-control" name="date" type="date"
+                                        placeholder="Session Date">
+                                </div>
+                                <div class="mb-10 fv-row">
+                                    <label>
+                                        From
+                                    </label>
+                                    <input class="form-control" name="from" type="time"
+                                        placeholder="Session From">
+                                </div>
+                                <div class="mb-10 fv-row">
+                                    <label>
+                                        To
+                                    </label>
+                                    <input class="form-control" name="to" type="time" placeholder="Session To">
+                                </div>
+                                <div class="mb-10 fv-row">
+                                    <label>
+                                        Teacher
+                                    </label>
+                                    <select class="form-control" name="teacher_id">
+                                        <option disabled="" selected="">
+                                            Select Teacher ...
+                                        </option>
+                                        <option value="1">
+                                            Ahmed
+                                        </option>
+                                        <option value="10">
+                                            Teacher
+                                        </option>
+                                        <option value="11">
+                                            Teacher12
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="mb-10 fv-row">
+                                    <label>
+                                        Type
+                                    </label>
+                                    <select class="form-control" name="type">
+                                        <option disabled="" selected="">
+                                            Select Type ...
+                                        </option>
+                                        <option value="group">
+                                            group
+                                        </option>
+                                        <option value="private">
+                                            private
+                                        </option>
+                                        <option value="session">
+                                            session
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="mb-10 fv-row">
+                                    <label>
+                                        Group
+                                    </label>
+                                    <select class="form-control" name="group_id">
+                                        <option disabled="" selected="">
+                                            Select Group ...
+                                        </option>
+                                        <option value="1">
+                                            group1
+                                        </option>
+                                        <option value="3">
+                                            admin@gmail.com
+                                        </option>
+                                        <option value="5">
+                                            mohamed yasen
+                                        </option>
+                                        <option value="6">
+                                            admin@gmail.com
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="mb-10 fv-row">
+                                    <label>
+                                        Users
+                                    </label>
+                                    <div class="select2-danger" data-select2-id="33">
+                                        <div class="position-relative" data-select2-id="443">
+                                            <select id="select2Danger" name="user_id[]"
+                                                class="select2 form-select select2-hidden-accessible" multiple=""
+                                                data-select2-id="select2Danger" tabindex="-1" aria-hidden="true">
+                                                <option value="46" data-select2-id="46">
+                                                    asd</option>
+                                                <option value="59" data-select2-id="59">
+                                                    as</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-10 fv-row">
+                                    <label>
+                                        Repeat
+                                    </label>
+                                    <select class="form-control s_repeat" name="repeat">
+                                        <option disabled="" selected="">
+                                            Select ...
+                                        </option>
+                                        <option value="Once">
+                                            Once
+                                        </option>
+                                        <option value="Repeat">
+                                            Repeat
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="screen d-none">
+                                    <div class="screen_popup">
+                                        <div class="btn btn-sm btn-icon btn-active-color-primary"
+                                            data-bs-dismiss="modal">
+                                            <i class="ki-duotone close_btn ki-cross fs-1">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                            </i>
+                                        </div>
+                                        <div class="screen_text">
+                                            <div class="my-2">
+                                                <label>
+                                                    Repeat
+                                                </label>
+                                                <div class="d-flex">
+                                                    <input type="number" class="form-control" name="repeat_num">
+                                                    <label>
+                                                        Times
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="my-2">
+                                                <label>
+                                                    Repeat every
+                                                </label>
+                                                <div>
+                                                    <input id="SaturDay" type="checkbox" name="r_day[]"
+                                                        value="SaturDay">
+                                                    <label for="SaturDay">
+                                                        SaturDay
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <input id="SunDay" type="checkbox" name="r_day[]"
+                                                        value="SunDay">
+                                                    <label for="SunDay">
+                                                        SunDay
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <input id="MonDay" type="checkbox" name="r_day[]"
+                                                        value="MonDay">
+                                                    <label for="MonDay">
+                                                        MonDay
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <input id="TuesDay" type="checkbox" name="r_day[]"
+                                                        value="TuesDay">
+                                                    <label for="TuesDay">
+                                                        TuesDay
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <input id="WednesDay" type="checkbox" name="r_day[]"
+                                                        value="WednesDay">
+                                                    <label for="WednesDay">
+                                                        WednesDay
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <input id="ThursDay" type="checkbox" name="r_day[]"
+                                                        value="ThursDay">
+                                                    <label for="ThursDay">
+                                                        ThursDay
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <input id="FriDay" type="checkbox" name="r_day[]"
+                                                        value="FriDay">
+                                                    <label for="FriDay">
+                                                        FriDay
+                                                    </label>
+                                                </div>
+                                                <div class="mb-10 fv-row">
+                                                    <label>
+                                                        Price
+                                                    </label>
+                                                    <input class="form-control" name="price" placeholder="Price">
+                                                </div>
+                                                <button type="button" class="btn btn-primary btn_repeat">
+                                                    Submit
+                                                </button>
+                                                <!--end::Input group-->
+                                            </div>
+
+                                        </div>
+                                        <!--end::Wrapper-->
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-success details_btn" id="details_btn">
+                                    Next
+                                </button>
                             </div>
-                            <!--end::Step 1-->
-                            <!--begin::Step 2-->
-                            <div data-kt-stepper-element="content">
+                            {{-- Details Tap --}}
+                            <div class="details_section d-none" id="details_section">
                                 <!--begin::Wrapper-->
                                 <div class="w-100">
+                                    <div class="pb-2">
+                                        <!--begin::Title-->
+                                        <h1 class="fw-bold text-gray-900">Academic</h1>
+                                        <!--end::Title-->
+                                    </div>
 
                                     <!--begin::Input group-->
                                     <div class="mb-10 fv-row">
@@ -388,14 +374,9 @@
                                             Category
                                         </label>
                                         <select class="form-control sel_cate1">
-                                            <option disabled selected>
-                                                Select Category ...
-                                            </option>
-                                            @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}">
-                                                    {{ $category->cate_name }}
-                                                </option>
-                                            @endforeach
+                                            <option value="1">1</option>
+                                            <option value="1">1</option>
+                                            <option value="1">1</option>
                                         </select>
                                     </div>
 
@@ -404,9 +385,9 @@
                                             Course
                                         </label>
                                         <select class="form-control sel_course1">
-                                            <option disabled selected>
-                                                Select Course ...
-                                            </option>
+                                            <option value="2">2</option>
+                                            <option value="2">2</option>
+                                            <option value="2">2</option>
                                         </select>
                                     </div>
 
@@ -415,9 +396,9 @@
                                             Chapter
                                         </label>
                                         <select class="form-control sel_chapter1">
-                                            <option disabled selected>
-                                                Select Chapter ...
-                                            </option>
+                                            <option value="3">3</option>
+                                            <option value="3">3</option>
+                                            <option value="3">3</option>
                                         </select>
                                     </div>
 
@@ -426,30 +407,30 @@
                                             Lesson
                                         </label>
                                         <select name="lesson_id" class="form-control sel_lesson1">
-                                            <option disabled selected>
-                                                Select Lesson ...
-                                            </option>
+                                            <option value="4">4</option>
+                                            <option value="4">4</option>
+                                            <option value="4">4</option>
                                         </select>
                                     </div>
                                     <!--end::Input group-->
                                 </div>
-                                <!--end::Wrapper-->
+                                <button type="button" class="btn btn-secondary prev_info">
+                                    Back
+                                </button>
+                                <button type="button" class="btn btn-success pricing_btn">
+                                    Next
+                                </button>
                             </div>
-                            <!--end::Step 2-->
-                            <!--begin::Step 5-->
-                            <div data-kt-stepper-element="content">
+                            {{-- Priceing Tap --}}
+                            <div class="priceing_section d-none" id="priceing_section">
                                 <!--begin::Wrapper-->
                                 <div class="w-100">
 
                                     <!--begin::Heading-->
-                                    <div class="pb-10 pb-lg-12">
+                                    <div class="pb-2">
                                         <!--begin::Title-->
                                         <h1 class="fw-bold text-gray-900">Pricing</h1>
                                         <!--end::Title-->
-                                        <!--begin::Description-->
-                                        <div class="text-muted fw-semibold fs-2 d-flex align-items-center">
-                                        </div>
-                                        <!--end::Description-->
                                     </div>
                                     <!--end::Heading-->
                                     <!--begin::Input group-->
@@ -458,50 +439,32 @@
                                         <div class="idea">
                                             <div class="section_idea">
                                                 <span>Session Link</span>
-                                                <input name="link"
+                                                <input name="link" value=""
                                                     class="form-control form-control-lg form-control-solid">
                                             </div>
                                             <div class="section_syllabus">
                                                 <span>Material Link</span>
-                                                <input name="material_link"
+                                                <input name="material_link" value=""
                                                     class="form-control form-control-lg form-control-solid">
                                             </div>
                                         </div>
-
-
-
-
                                     </div>
                                 </div>
-                            </div>
-                            <!--end::Step 5-->
-                            <!--begin::Actions-->
-                            <div class="d-flex flex-stack pt-10">
-                                <!--begin::Wrapper-->
-                                <div class="me-2">
-                                    <button type="button" class="btn btn-lg btn-light-primary me-3"
-                                        data-kt-stepper-action="previous">
-                                        <i class="ki-duotone ki-arrow-left fs-3 me-1">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                        </i>Back</button>
+                                <div class="mt-3">
+                                    <span class='btn btn-secondary prev_details'>
+                                        Back
+                                    </span>
                                 </div>
-                                <!--end::Wrapper-->
-                                <!--begin::Wrapper-->
-                                <div>
-                                    <button class="btn btn-lg btn-primary">
-                                        Submit
+                            </div>
+                            <div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
+                                        Close
                                     </button>
-                                    <button type="button" class="btn btn-lg btn-primary continue_btn"
-                                        data-kt-stepper-action="next">Continue
-                                        <i class="ki-duotone ki-arrow-right fs-3 ms-1 me-0">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                        </i></button>
+                                    <button class="btn btn-primary">Submit</button>
                                 </div>
-                                <!--end::Wrapper-->
                             </div>
-                            <!--end::Actions-->
+                            <!--end::Wrapper-->
                         </form>
                         <!--end::Form-->
                     </div>
@@ -690,406 +653,356 @@
                                             <!--begin::Modal body-->
                                             <div class="modal-body scroll-y m-5">
                                                 <!--begin::Stepper-->
-                                                <div class="stepper stepper-links d-flex flex-column"
-                                                    id="kt_modal_create_campaign_stepper">
-                                                    <!--begin::Nav-->
-                                                    <div class="stepper-nav justify-content-center py-2">
-                                                        <!--begin::Step 1-->
-                                                        <div class="stepper-item me-5 me-md-15 current"
-                                                            data-kt-stepper-element="nav">
-                                                            <h3 class="stepper-title">Info</h3>
-                                                        </div>
-                                                        <!--end::Step 1-->
-                                                        <!--begin::Step 2-->
-                                                        <div class="stepper-item me-5 me-md-15"
-                                                            data-kt-stepper-element="nav">
-                                                            <h3 class="stepper-title">Academic</h3>
-                                                        </div>
-                                                        <!--end::Step 2-->
-                                                        <!--begin::Step 3-->
-                                                        <div class="stepper-item me-5 me-md-15"
-                                                            data-kt-stepper-element="nav">
-                                                            <h3 class="stepper-title">Data</h3>
-                                                        </div>
-                                                        <!--end::Step 3-->
+                                                <div class="info_section" id="info_section{{ $session->id }}">
+                                                    <div class="pb-2">
+                                                        <!--begin::Title-->
+                                                        <h1 class="fw-bold text-gray-900">Info</h1>
+                                                        <!--end::Title-->
                                                     </div>
-                                                    <!--end::Nav-->
-                                                        <!--begin::Step 1-->
-                                                        <div class="current" data-kt-stepper-element="content">
-                                                            <!--begin::Wrapper-->
-                                                            <div class="w-100">
-                                                                <div>
-                                                                    <!--begin::Input group-->
-                                                                    <div class="mb-10 fv-row">
-                                                                        <!--begin::Label-->
+                                                    <div class="mb-10 fv-row">
+                                                        <!--begin::Label-->
+                                                        <label>
+                                                            Session Name
+                                                        </label>
+                                                        <input class="form-control" name="name" value="{{ $session->name }}"
+                                                            placeholder="Session Name">
+                                                    </div>
+                                                    <div class="mb-10 fv-row">
+                                                        <label>
+                                                            Session Date
+                                                        </label>
+                                                        <input class="form-control" name="date" type="date" value="{{ $session->date }}"
+                                                            placeholder="Session Date">
+                                                    </div>
+                                                    <div class="mb-10 fv-row">
+                                                        <label>
+                                                            From
+                                                        </label>
+                                                        <input class="form-control" name="from" type="time" value="{{ $session->from }}"
+                                                            placeholder="Session From">
+                                                    </div>
+                                                    <div class="mb-10 fv-row">
+                                                        <label>
+                                                            To
+                                                        </label>
+                                                        <input class="form-control" value="{{ $session->to }}" name="to" type="time"
+                                                            placeholder="Session To">
+                                                    </div>
+                                                    <div class="mb-10 fv-row">
+                                                        <label>
+                                                            Teacher
+                                                        </label>
+                                                        <select class="form-control" name="teacher_id">
+                                                            <option value="{{ $session->teacher->name }}"
+                                                                selected>
+                                                                {{ $session->teacher->name }}
+                                                            </option>
+                                                            @foreach ($teachers as $teacher)
+                                                                <option value="{{ $teacher->id }}">
+                                                                    {{ $teacher->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-10 fv-row">
+                                                        <label>
+                                                            Type
+                                                        </label>
+                                                        <select class="form-control" name="type">
+                                                            <option value="{{ $session->type }}" selected>
+                                                                {{ $session->type }}
+                                                            </option>
+                                                            <option value="group">
+                                                                group
+                                                            </option>
+                                                            <option value="private">
+                                                                private
+                                                            </option>
+                                                            <option value="session">
+                                                                session
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-10 fv-row">
+                                                        <label>
+                                                            Group
+                                                        </label>
+                                                        <select class="form-control" name="group_id">
+                                                            <option value="{{ $session->group_id }}"
+                                                                selected>
+                                                                {{ @$session->group->name }}
+                                                            </option>
+                                                            @foreach ($groups as $group)
+                                                                <option value="{{ $group->id }}">
+                                                                    {{ $group->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-10 fv-row">
+                                                        <label>
+                                                            Users
+                                                        </label>
+                                                        <div class="select2-danger" data-select2-id="33">
+                                                            <div class="position-relative" data-select2-id="443">
+                                                                <select id="select2Danger" name="user_id[]"
+                                                                    class="select2 form-select select2-hidden-accessible"
+                                                                    multiple=""  
+                                                                    data-select2-id="select2Danger{{ $session->id }}"
+                                                                    tabindex="-1" aria-hidden="true">
+                                                                    @foreach ($session->users as $user)
+                                                                    <option
+                                                                        value="{{ $user->id }}"
+                                                                        selected
+                                                                        data-select2-id="{{ $user->id }}">
+                                                                        {{ $user->name }}</option>
+                                                                @endforeach
+                                                                @foreach ($users as $user)
+                                                                    <option
+                                                                        value="{{ $user->id }}"
+                                                                        data-select2-id="{{ $user->id }}">
+                                                                        {{ $user->name }}</option>
+                                                                @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-10 fv-row">
+                                                        <label>
+                                                            Repeat
+                                                        </label>
+                                                        <select class="form-control s_repeat" name="repeat">
+                                                            <option value="{{ $session->repeat }}"
+                                                                selected>
+                                                                {{ $session->repeat }}
+                                                            </option>
+                                                            <option value="Once">
+                                                                Once
+                                                            </option>
+                                                            <option value="Repeat">
+                                                                Repeat
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="screen d-none">
+                                                        <div class="screen_popup">
+                                                            <div class="btn btn-sm btn-icon btn-active-color-primary"
+                                                                data-bs-dismiss="modal">
+                                                                <i class="ki-duotone close_btn ki-cross fs-1">
+                                                                    <span class="path1"></span>
+                                                                    <span class="path2"></span>
+                                                                </i>
+                                                            </div>
+                                                            <div class="screen_text">
+                                                                <div class="my-2">
+                                                                    <label>
+                                                                        Repeat
+                                                                    </label>
+                                                                    <div class="d-flex">
+                                                                        <input type="number" class="form-control"
+                                                                            name="repeat_num">
                                                                         <label>
-                                                                            Session Name
+                                                                            Times
                                                                         </label>
-                                                                        <input class='form-control' name="name"
-                                                                         value="{{$session->name}}" placeholder="Session Name" />
                                                                     </div>
-                                                                    <!--end::Input group-->
-                                                                    <!--begin::Input group-->
-                                                                    <div class="mb-10 fv-row">
-                                                                        <label>
-                                                                            Session Date
-                                                                        </label>
-                                                                        <input class='form-control' name="date"
-                                                                            type="date" value="{{$session->date}}"
-                                                                            placeholder="Session Date" />
-                                                                    </div>
+                                                                </div>
 
-                                                                    <div class="mb-10 fv-row">
-                                                                        <label>
-                                                                            From
+                                                                <div class="my-2">
+                                                                    <label>
+                                                                        Repeat every
+                                                                    </label>
+                                                                    <div>
+                                                                        <input id="SaturDay" type="checkbox"
+                                                                            name="r_day[]" value="SaturDay">
+                                                                        <label for="SaturDay">
+                                                                            SaturDay
                                                                         </label>
-                                                                        <input class='form-control' name="from"
-                                                                            type="time" value="{{$session->from}}"
-                                                                            placeholder="Session From" />
                                                                     </div>
-
-                                                                    <div class="mb-10 fv-row">
-                                                                        <label>
-                                                                            To
+                                                                    <div>
+                                                                        <input id="SunDay" type="checkbox"
+                                                                            name="r_day[]" value="SunDay">
+                                                                        <label for="SunDay">
+                                                                            SunDay
                                                                         </label>
-                                                                        <input class='form-control' name="to"
-                                                                        value="{{$session->to}}" type="time" placeholder="Session To" />
                                                                     </div>
-                                                                    <div class="mb-10 fv-row">
-                                                                        <label>
-                                                                            Teacher
+                                                                    <div>
+                                                                        <input id="MonDay" type="checkbox"
+                                                                            name="r_day[]" value="MonDay">
+                                                                        <label for="MonDay">
+                                                                            MonDay
                                                                         </label>
-                                                                        <select class="form-control"
-                                                                            name="teacher_id">
-                                                                            <option value="{{$session->teacher->name}}" selected>
-                                                                                {{$session->teacher->name}}
-                                                                            </option>
-                                                                            @foreach ($teachers as $teacher)
-                                                                                <option value="{{ $teacher->id }}">
-                                                                                    {{ $teacher->name }}
-                                                                                </option>
-                                                                            @endforeach
-                                                                        </select>
                                                                     </div>
-                                                                    <div class="mb-10 fv-row">
-                                                                        <label>
-                                                                            Type
+                                                                    <div>
+                                                                        <input id="TuesDay" type="checkbox"
+                                                                            name="r_day[]" value="TuesDay">
+                                                                        <label for="TuesDay">
+                                                                            TuesDay
                                                                         </label>
-                                                                        <select class="form-control" name="type">
-                                                                            <option value="{{$session->type}}" selected>
-                                                                                {{$session->type}}
-                                                                            </option>
-                                                                            <option value="group">
-                                                                                group
-                                                                            </option>
-                                                                            <option value="private">
-                                                                                private
-                                                                            </option>
-                                                                            <option value="session">
-                                                                                session
-                                                                            </option>
-                                                                        </select>
                                                                     </div>
-                                                                    <div class="mb-10 fv-row">
-                                                                        <label>
-                                                                            Group
+                                                                    <div>
+                                                                        <input id="WednesDay" type="checkbox"
+                                                                            name="r_day[]" value="WednesDay">
+                                                                        <label for="WednesDay">
+                                                                            WednesDay
                                                                         </label>
-                                                                        <select class="form-control" name="group_id">
-                                                                            <option value="{{$session->group_id}}" selected>
-                                                                                {{@$session->group->name}}
-                                                                            </option>
-                                                                            @foreach ($groups as $group)
-                                                                                <option value="{{ $group->id }}">
-                                                                                    {{ $group->name }}
-                                                                                </option>
-                                                                            @endforeach
-                                                                        </select>
+                                                                    </div>
+                                                                    <div>
+                                                                        <input id="ThursDay" type="checkbox"
+                                                                            name="r_day[]" value="ThursDay">
+                                                                        <label for="ThursDay">
+                                                                            ThursDay
+                                                                        </label>
+                                                                    </div>
+                                                                    <div>
+                                                                        <input id="FriDay" type="checkbox"
+                                                                            name="r_day[]" value="FriDay">
+                                                                        <label for="FriDay">
+                                                                            FriDay
+                                                                        </label>
                                                                     </div>
                                                                     <div class="mb-10 fv-row">
                                                                         <label>
-                                                                            Users
+                                                                            Price
                                                                         </label>
-                                                                        <div class="select2-danger" data-select2-id="33">
-                                                                            <div class="position-relative" data-select2-id="443">
-                                                                                <select id="select2Danger" name="user_id[]" class="select2 form-select select2-hidden-accessible" multiple="" data-select2-id="select2Danger{{$session->id}}" tabindex="-1" aria-hidden="true">
-                                                                                    @foreach ( $session->users as $user )
-                                                                                        <option value="{{$user->id}}" selected data-select2-id="{{$user->id}}">{{$user->name}}</option>
-                                                                                    @endforeach
-                                                                                    @foreach ($users as $user)
-                                                                                        <option value="{{$user->id}}" data-select2-id="{{$user->id}}">{{$user->name}}</option>
-                                                                                    @endforeach
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
+                                                                        <input class="form-control" name="price"
+                                                                            placeholder="Price">
                                                                     </div>
-
-
-                                                                    <div class="mb-10 fv-row">
-                                                                        <label>
-                                                                            Repeat
-                                                                        </label>
-                                                                        <select class="form-control s_repeat"
-                                                                            name="repeat">
-                                                                            <option value="{{$session->repeat}}" selected>
-                                                                                {{$session->repeat}}
-                                                                            </option>
-                                                                            <option value="Once">
-                                                                                Once
-                                                                            </option>
-                                                                            <option value="Repeat">
-                                                                                Repeat
-                                                                            </option>
-                                                                        </select>
-                                                                    </div>
-
-                                                                    <div class="screen d-none">
-                                                                        <div class="screen_popup">
-                                                                            <div class="btn btn-sm btn-icon btn-active-color-primary"
-                                                                                data-bs-dismiss="modal">
-                                                                                <i
-                                                                                    class="ki-duotone close_btn ki-cross fs-1">
-                                                                                    <span class="path1"></span>
-                                                                                    <span class="path2"></span>
-                                                                                </i>
-                                                                            </div>
-                                                                            <div class="screen_text">
-                                                                                <div class="my-2">
-                                                                                    <label>
-                                                                                        Repeat
-                                                                                    </label>
-                                                                                    <div class="d-flex">
-                                                                                        <input type="number"
-                                                                                            class="form-control"
-                                                                                            name="repeat_num" />
-                                                                                        <label>
-                                                                                            Times
-                                                                                        </label>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <div class="my-2">
-                                                                                    <label>
-                                                                                        Repeat every
-                                                                                    </label>
-                                                                                    <div>
-                                                                                        <input id="SaturDay"
-                                                                                            type="checkbox"
-                                                                                            name="r_day[]"
-                                                                                            value="SaturDay" />
-                                                                                        <label for="SaturDay">
-                                                                                            SaturDay
-                                                                                        </label>
-                                                                                    </div>
-                                                                                    <div>
-                                                                                        <input id="SunDay"
-                                                                                            type="checkbox"
-                                                                                            name="r_day[]"
-                                                                                            value="SunDay" />
-                                                                                        <label for="SunDay">
-                                                                                            SunDay
-                                                                                        </label>
-                                                                                    </div>
-                                                                                    <div>
-                                                                                        <input id="MonDay"
-                                                                                            type="checkbox"
-                                                                                            name="r_day[]"
-                                                                                            value="MonDay" />
-                                                                                        <label for="MonDay">
-                                                                                            MonDay
-                                                                                        </label>
-                                                                                    </div>
-                                                                                    <div>
-                                                                                        <input id="TuesDay"
-                                                                                            type="checkbox"
-                                                                                            name="r_day[]"
-                                                                                            value="TuesDay" />
-                                                                                        <label for="TuesDay">
-                                                                                            TuesDay
-                                                                                        </label>
-                                                                                    </div>
-                                                                                    <div>
-                                                                                        <input id="WednesDay"
-                                                                                            type="checkbox"
-                                                                                            name="r_day[]"
-                                                                                            value="WednesDay" />
-                                                                                        <label for="WednesDay">
-                                                                                            WednesDay
-                                                                                        </label>
-                                                                                    </div>
-                                                                                    <div>
-                                                                                        <input id="ThursDay"
-                                                                                            type="checkbox"
-                                                                                            name="r_day[]"
-                                                                                            value="ThursDay" />
-                                                                                        <label for="ThursDay">
-                                                                                            ThursDay
-                                                                                        </label>
-                                                                                    </div>
-                                                                                    <div>
-                                                                                        <input id="FriDay"
-                                                                                            type="checkbox"
-                                                                                            name="r_day[]"
-                                                                                            value="FriDay" />
-                                                                                        <label for="FriDay">
-                                                                                            FriDay
-                                                                                        </label>
-                                                                                    </div>
-                                                                                    <div class="mb-10 fv-row">
-                                                                                        <label>
-                                                                                            Price
-                                                                                        </label>
-                                                                                        <input class='form-control'
-                                                                                            name="price"
-                                                                                            placeholder="Price" />
-                                                                                    </div>
-                                                                                    <button type="button"
-                                                                                        class="btn btn-primary btn_repeat">
-                                                                                        Submit
-                                                                                    </button>
-                                                                                    <!--end::Input group-->
-                                                                                </div>
-
-                                                                            </div>
-                                                                            <!--end::Wrapper-->
-                                                                        </div>
-                                                                    </div>
+                                                                    <button type="button"
+                                                                        class="btn btn-primary btn_repeat">
+                                                                        Submit
+                                                                    </button>
                                                                     <!--end::Input group-->
                                                                 </div>
 
                                                             </div>
                                                             <!--end::Wrapper-->
                                                         </div>
-                                                        <!--end::Step 1-->
-                                                        <!--begin::Step 2-->
-                                                        <div data-kt-stepper-element="content">
-                                                            <!--begin::Wrapper-->
-                                                            <div class="w-100">
-
-                                                                <!--begin::Input group-->
-                                                                <div class="mb-10 fv-row">
-                                                                    <label>
-                                                                        Category
-                                                                    </label>
-                                                                    <select class="form-control sel_cate1">
-                                                                        <option value="{{$session->lesson->chapter->course->category->id}}" selected>
-                                                                            {{$session->lesson->chapter->course->category->cate_name}}
-                                                                        </option>
-                                                                        @foreach ($categories as $category)
-                                                                            <option value="{{ $category->id }}">
-                                                                                {{ $category->cate_name }}
-                                                                            </option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                </div>
-
-                                                                <div class="mb-10 fv-row">
-                                                                    <label>
-                                                                        Course
-                                                                    </label>
-                                                                    <select class="form-control sel_course1">
-                                                                        <option value="{{$session->lesson->chapter->course->id}}" selected>
-                                                                            {{$session->lesson->chapter->course->course_name}}
-                                                                        </option>
-                                                                    </select>
-                                                                </div>
-
-                                                                <div class="mb-10 fv-row">
-                                                                    <label>
-                                                                        Chapter
-                                                                    </label>
-                                                                    <select class="form-control sel_chapter1">
-                                                                        <option value="{{$session->lesson->chapter->id}}" selected>
-                                                                            {{$session->lesson->chapter->chapter_name}}
-                                                                        </option>
-                                                                    </select>
-                                                                </div>
-
-                                                                <div class="mb-10 fv-row">
-                                                                    <label>
-                                                                        Lesson
-                                                                    </label>
-                                                                    <select name="lesson_id"
-                                                                        class="form-control sel_lesson1">
-                                                                        <option value="{{$session->lesson_id}}" selected>
-                                                                            {{$session->lesson->lesson_name}}
-                                                                        </option>
-                                                                    </select>
-                                                                </div>
-                                                                <!--end::Input group-->
-                                                            </div>
-                                                            <!--end::Wrapper-->
+                                                    </div>
+                                                    <button type="button" class="btn btn-success details_btn"
+                                                        id="details_btn">
+                                                        Next
+                                                    </button>
+                                                </div>
+                                                {{-- Details Tap --}}
+                                                <div class="details_section d-none" id="details_section{{ $session->id }}">
+                                                    <!--begin::Wrapper-->
+                                                    <div class="w-100">
+                                                        <div class="pb-2">
+                                                            <!--begin::Title-->
+                                                            <h1 class="fw-bold text-gray-900">Academic</h1>
+                                                            <!--end::Title-->
                                                         </div>
-                                                        <!--end::Step 2-->
-                                                        <!--begin::Step 5-->
-                                                        <div data-kt-stepper-element="content">
-                                                            <!--begin::Wrapper-->
-                                                            <div class="w-100">
 
-                                                                <!--begin::Heading-->
-                                                                <div class="pb-10 pb-lg-12">
-                                                                    <!--begin::Title-->
-                                                                    <h1 class="fw-bold text-gray-900">Pricing</h1>
-                                                                    <!--end::Title-->
-                                                                    <!--begin::Description-->
-                                                                    <div
-                                                                        class="text-muted fw-semibold fs-2 d-flex align-items-center">
-                                                                    </div>
-                                                                    <!--end::Description-->
+                                                        <!--begin::Input group-->
+                                                        <div class="mb-10 fv-row">
+                                                            <label>
+                                                                Category
+                                                            </label>
+                                                            <select class="form-control sel_cate1">
+                                                                <option
+                                                                value="{{ $session->lesson->chapter->course->category->id }}"
+                                                                selected>
+                                                                {{ $session->lesson->chapter->course->category->cate_name }}
+                                                            </option>
+                                                            @foreach ($categories as $category)
+                                                                <option value="{{ $category->id }}">
+                                                                    {{ $category->cate_name }}
+                                                                </option>
+                                                            @endforeach
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="mb-10 fv-row">
+                                                            <label>
+                                                                Course
+                                                            </label>
+                                                            <select class="form-control sel_course1">
+                                                                <option
+                                                                value="{{ $session->lesson->chapter->course->id }}"
+                                                                selected>
+                                                                {{ $session->lesson->chapter->course->course_name }}
+                                                            </option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="mb-10 fv-row">
+                                                            <label>
+                                                                Chapter
+                                                            </label>
+                                                            <select class="form-control sel_chapter1">
+                                                                <option
+                                                                value="{{ $session->lesson->chapter->id }}"
+                                                                selected>
+                                                                {{ $session->lesson->chapter->chapter_name }}
+                                                            </option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="mb-10 fv-row">
+                                                            <label>
+                                                                Lesson
+                                                            </label>
+                                                            <select name="lesson_id" class="form-control sel_lesson1">
+                                                                <option value="{{ $session->lesson_id }}"
+                                                                    selected>
+                                                                    {{ $session->lesson->lesson_name }}
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                        <!--end::Input group-->
+                                                    </div>
+                                                    <button type="button" class="btn btn-secondary prev_info">
+                                                        Back
+                                                    </button>
+                                                    <button type="button" class="btn btn-success pricing_btn">
+                                                        Next
+                                                    </button>
+                                                </div>
+                                                {{-- Priceing Tap --}}
+                                                <div class="priceing_section d-none" id="priceing_section{{ $session->id }}">
+                                                    <!--begin::Wrapper-->
+                                                    <div class="w-100">
+
+                                                        <!--begin::Heading-->
+                                                        <div class="pb-2">
+                                                            <!--begin::Title-->
+                                                            <h1 class="fw-bold text-gray-900">Pricing</h1>
+                                                            <!--end::Title-->
+                                                        </div>
+                                                        <!--end::Heading-->
+                                                        <!--begin::Input group-->
+                                                        <div class="ideas" id="ideas">
+
+                                                            <div class="idea">
+                                                                <div class="section_idea">
+                                                                    <span>Session Link</span>
+                                                                    <input name="link"
+                                                                            value="{{ $session->link }}"
+                                                                            class="form-control form-control-lg form-control-solid">
                                                                 </div>
-                                                                <!--end::Heading-->
-                                                                <!--begin::Input group-->
-                                                                <div class="ideas" id="ideas">
-
-                                                                    <div class="idea">
-                                                                        <div class="section_idea">
-                                                                            <span>Session Link</span>
-                                                                            <input name="link" value="{{$session->link}}"
-                                                                                class="form-control form-control-lg form-control-solid">
-                                                                        </div>
-                                                                        <div class="section_syllabus">
-                                                                            <span>Material Link</span>
-                                                                            <input name="material_link" value="{{$session->material_link}}"
-                                                                                class="form-control form-control-lg form-control-solid">
-                                                                        </div>
-                                                                    </div>
-
-
-
-
+                                                                <div class="section_syllabus">
+                                                                    <span>Material Link</span>
+                                                                    <input name="material_link"
+                                                                        value="{{ $session->material_link }}"
+                                                                        class="form-control form-control-lg form-control-solid">
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <!--end::Step 5-->
-                                                        <!--begin::Actions-->
-                                                        <div class="d-flex flex-stack pt-10">
-                                                            <!--begin::Wrapper-->
-                                                            <div class="me-2">
-                                                                <button type="button"
-                                                                    class="btn btn-lg btn-light-primary me-3"
-                                                                    data-kt-stepper-action="previous">
-                                                                    <i class="ki-duotone ki-arrow-left fs-3 me-1">
-                                                                        <span class="path1"></span>
-                                                                        <span class="path2"></span>
-                                                                    </i>Back</button>
-                                                            </div>
-                                                            <!--end::Wrapper-->
-                                                            <!--begin::Wrapper-->
-                                                            <div>
-                                                                <button class="btn btn-lg btn-primary">
-                                                                    Submit
-                                                                </button>
-                                                                <button type="button"
-                                                                    class="btn btn-lg btn-primary continue_btn"
-                                                                    data-kt-stepper-action="next">Continue
-                                                                    <i
-                                                                        class="ki-duotone ki-arrow-right fs-3 ms-1 me-0">
-                                                                        <span class="path1"></span>
-                                                                        <span class="path2"></span>
-                                                                    </i></button>
-                                                            </div>
-                                                            <!--end::Wrapper-->
-                                                        </div>
-                                                        <!--end::Actions-->
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <span class='btn btn-secondary prev_details'>
+                                                            Back
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-label-secondary"
+                                                            data-bs-dismiss="modal">
+                                                            Close
+                                                        </button>
+                                                        <button class="btn btn-primary">Submit</button>
+                                                    </div>
                                                 </div>
                                                 <!--end::Stepper-->
                                             </div>
@@ -1215,8 +1128,52 @@
     <script src="assets/plugins/global/lessonSc.js"></script>
     <script src="{{ asset('assets/js/custom/utilities/modals/lessonSc.js') }}"></script>
 
-    <script src="{{asset('assets/js/forms-selects.js')}}"></script>
-    <script src="{{asset('assets/js/forms-tagify.js')}}"></script>
-    <script src="{{asset('assets/js/forms-typeahead.js')}}"></script>
+    <script src="{{ asset('assets/js/forms-selects.js') }}"></script>
+    <script src="{{ asset('assets/js/forms-tagify.js') }}"></script>
+    <script src="{{ asset('assets/js/forms-typeahead.js') }}"></script>
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(document).ready(() => {
+            console.clear();
+            console.log("first")
+            $(".details_btn").click(function() {
+                var info_id = `#${$(this).parent().attr("id")}`;
+                var details_id = `#${$(this).parent().next().attr("id")}`;
+
+
+                $(info_id).addClass("d-none");
+                $(details_id).removeClass("d-none");
+
+            });
+            $(".pricing_btn").click(function() {
+                var details_id = `#${$(this).parent().attr("id")}`;
+                var priceing_id = `#${$(this).parent().next().attr("id")}`;
+
+                $(details_id).addClass("d-none");
+                $(priceing_id).removeClass("d-none");
+            })
+
+            $(".prev_info").click(function() {
+                var details_id = `#${$(this).parent().attr("id")}`;
+                var info_id = `#${$(this).parent().prev().attr("id")}`;
+
+                $(details_id).addClass("d-none");
+                $(info_id).removeClass("d-none");
+            })
+
+            $(".prev_details").click(function() {
+                var priceing_id = `#${$(this).parent().parent().attr("id")}`;
+                var details_id = `#${$(this).parent().parent().prev().attr("id")}`;
+
+                $(priceing_id).addClass("d-none");
+                $(details_id).removeClass("d-none");
+            })
+
+
+
+        })
     </script>
 </x-default-layout>
