@@ -579,8 +579,7 @@
         </div>
     </header>
     <main>
-        <form action="{{route('quizze_ans')}}" method="POST" style="width: 100%;">
-            @csrf
+        <form action="" style="width: 100%;">
             <div class="main-wrapper">
                 @foreach ($quizze->question as $question)
                     <div class="question">
@@ -604,7 +603,12 @@
 
                             {{-- Supp Question --}}
 
+<<<<<<< HEAD
+                            {{-- Input to set and send value about answer question to array --}}
+                            <input type="hidden" value="">
+=======
                             {{-- Input to set and send value about answer question to array --}} 
+>>>>>>> ff2cebb6730769850580e1c4852b5f704a539f89
 
                             {{-- Answer chosen --}}
 
@@ -725,6 +729,15 @@
 
             if (totalSeconds <= 59) {
                 console.log("sec < 59")
+                // var Hours_quizz = $("#hr").text();
+                // var Min_quizz = $("#minutes").text();
+                // var Sec_quizz = $("#seconds").text();
+                // var Timer_quizz = Hours_quizz + Min_quizz + Sec_quizz;
+
+                // console.log("Hours_quizz", Hours_quizz)
+                // console.log("Min_quizz", Min_quizz)
+                // console.log("Sec_quizz", Sec_quizz)
+                // console.log("Timer_quizz", Timer_quizz)
             } else {
                 secondsLabel.html(pad(parseInt(0)));
                 totalSeconds = 0;
@@ -752,6 +765,24 @@
                 return valString;
             }
         }
+
+        /* Send Timer */
+        $(".btn-sendQuizz").click(() => {
+            var Hours_quizz = $("#hour").text();
+            var Min_quizz = $("#minutes").text();
+            var Sec_quizz = $("#seconds").text();
+
+            var objTim = {
+                houres: Hours_quizz,
+                minutes: Min_quizz,
+                seconds: Sec_quizz
+            }
+
+            console.log("Hours_quizz", Hours_quizz)
+            console.log("Min_quizz", Min_quizz)
+            console.log("Sec_quizz", Sec_quizz)
+            console.log("objTim", objTim)
+        })
 
 
         /* Show Discraption */
