@@ -614,34 +614,20 @@
                             @endphp
                             @if ($question->ans_type == 'MCQ')
                                 <div class="answer-chosen">
-                                    <input name="q_answers" type="hidden" class="q_answers"
+                                    <input name="q_answers[]" type="hidden" class="q_answers"
                                     value="{{json_encode(['q_id' => $question->id])}}" />
                                     @foreach ($question->mcq as $mcq)
                                         <div class="chosen chose_mcq chosen{{ $iter }}"
                                             id="chosen{{ $iter }}{{ $loop->iteration }}">
                                             <input type="hidden" class="mcq_id" value="{{$mcq->id}}">
-                                            <button>{{ @$arr[$loop->iteration - 1] }}</button>
+                                            <button class="ans_btn">{{ @$arr[$loop->iteration - 1] }}</button>
                                             <input type="text" value="{{ $mcq->mcq_ans }}" readonly>
                                         </div>
                                     @endforeach
                                 </div>
-                                <script>
-                                    let q_answers = document.querySelectorAll('.q_answers');
-                                    let mcq_id = document.querySelectorAll('.mcq_id');
-                                    let chose_mcq = document.querySelectorAll('.chose_mcq');
-
-                                    for (let i = 0, end = chose_mcq.length; i < end; i++) {
-                                        chose_mcq[i].addEventListener('click', (e) => {
-                                            console.log(546);
-                                            for (let j = 0; j < end; j++) {
-                                                if ( chose_mcq[j] == e.target ) {
-                                                    console.log(chose_mcq[j]);
-                                                }
-                                            }
-                                        })
-                                    }
-                                </script>
                             @else
+                            <input name="q_grid_answers[]" type="hidden" class="q_grid_answers"
+                            value="{{json_encode(['q_id' => $question->id])}}" />
                                 {{-- Answer Set Value --}}
                                 <div class="answer-setValue">
                                     <div class="section-setValue">
@@ -697,6 +683,29 @@
 
 
 @include('Student.inc.footer')
+
+<script>
+    let q_answers = document.querySelectorAll('.q_answers');
+    let mcq_id = document.querySelectorAll('.mcq_id');
+    let chose_mcq = document.querySelectorAll('.chose_mcq');
+    let ans_btn = document.querySelectorAll('.ans_btn');
+
+    for (let i = 0, end = chose_mcq.length; i < end; i++) {
+        chose_mcq[i].addEventListener('click', (e) => {
+            for (let j = 0; j < end; j++) {
+                if ( chose_mcq[j] == e.target || chose_mcq[j] == e.target.parentElement ) {
+                    let question_ans = chose_mcq[j].parentElement.children[0];
+                    let question_id = question_ans.value;
+                    question_id = JSON.parse(question_id);
+                    question_id = question_id.q_id;
+                    let mcq_id = chose_mcq[j].children[0].value
+                    let answer = ans_btn[j].innerText;
+                    question_ans.value = JSON.stringify({'q_id': question_id, 'mcq_id': mcq_id, 'answer': answer});
+                }
+            }
+        })
+    }
+</script>
 <script>
     $(document).ready(function() {
         /* Timer question */
