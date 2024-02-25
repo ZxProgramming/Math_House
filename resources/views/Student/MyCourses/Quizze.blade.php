@@ -604,8 +604,7 @@
 
                             {{-- Supp Question --}}
 
-                            {{-- Input to set and send value about answer question to array --}}
-                            <input type="hidden" name="q_answers" value="">
+                            {{-- Input to set and send value about answer question to array --}} 
 
                             {{-- Answer chosen --}}
 
@@ -615,14 +614,33 @@
                             @endphp
                             @if ($question->ans_type == 'MCQ')
                                 <div class="answer-chosen">
+                                    <input name="q_answers" type="hidden" class="q_answers"
+                                    value="{{json_encode(['q_id' => $question->id])}}" />
                                     @foreach ($question->mcq as $mcq)
-                                        <div class="chosen chosen{{ $iter }}"
+                                        <div class="chosen chose_mcq chosen{{ $iter }}"
                                             id="chosen{{ $iter }}{{ $loop->iteration }}">
+                                            <input type="hidden" class="mcq_id" value="{{$mcq->id}}">
                                             <button>{{ @$arr[$loop->iteration - 1] }}</button>
                                             <input type="text" value="{{ $mcq->mcq_ans }}" readonly>
                                         </div>
                                     @endforeach
                                 </div>
+                                <script>
+                                    let q_answers = document.querySelectorAll('.q_answers');
+                                    let mcq_id = document.querySelectorAll('.mcq_id');
+                                    let chose_mcq = document.querySelectorAll('.chose_mcq');
+
+                                    for (let i = 0, end = chose_mcq.length; i < end; i++) {
+                                        chose_mcq[i].addEventListener('click', (e) => {
+                                            console.log(546);
+                                            for (let j = 0; j < end; j++) {
+                                                if ( chose_mcq[j] == e.target ) {
+                                                    console.log(chose_mcq[j]);
+                                                }
+                                            }
+                                        })
+                                    }
+                                </script>
                             @else
                                 {{-- Answer Set Value --}}
                                 <div class="answer-setValue">
