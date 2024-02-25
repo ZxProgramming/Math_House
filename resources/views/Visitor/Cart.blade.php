@@ -500,7 +500,7 @@
                                         </td>
 										<input type="hidden" class="chapters_price" value="{{json_encode($chapter->price)}}" />
 										<input type="hidden" class="ch_price" name="ch_price[]" value="{{$chapter->ch_price}}" />
-										<input type="hidden" class="ch_price" name="chapter[]" value="{{$chapter}}" />
+										<input type="hidden" class="ch_price" name="chapter[]" value="{{json_encode($chapter)}}" />
 								    	<td class="tbl_chapter_price">
                                             {{$chapter->ch_price}}$
                                         </td>

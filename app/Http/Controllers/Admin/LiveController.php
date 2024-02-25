@@ -52,7 +52,7 @@ class LiveController extends Controller
             'to' => 'required',
             'lesson_id' => 'required',
             'type' => 'required',
-            'teacher_id' => 'required',
+            'teacher_id' => 'required|numeric',
             'repeat' => 'required',
         ]);
         $sessions = Session::

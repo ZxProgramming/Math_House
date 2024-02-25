@@ -137,6 +137,7 @@
                             class="mx-auto w-100 mw-600px pb-10" novalidate="novalidate"
                             id="kt_modal_create_campaign_stepper_form">
                             {{-- Info Tap --}}
+                            @csrf
                             <div class="info_section" id="info_section">
                                 <div class="pb-2">
                                     <!--begin::Title-->
@@ -178,15 +179,11 @@
                                         <option disabled="" selected="">
                                             Select Teacher ...
                                         </option>
-                                        <option value="1">
-                                            Ahmed
-                                        </option>
-                                        <option value="10">
-                                            Teacher
-                                        </option>
-                                        <option value="11">
-                                            Teacher12
-                                        </option>
+                                        @foreach ( $teachers as $item ) 
+                                            <option value="{{$item->id}}">
+                                                {{$item->name}}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="mb-10 fv-row">
@@ -216,18 +213,11 @@
                                         <option disabled="" selected="">
                                             Select Group ...
                                         </option>
-                                        <option value="1">
-                                            group1
+                                        @foreach ($groups as $item)
+                                        <option value="{{$item->id}}">
+                                            {{$item->name}}
                                         </option>
-                                        <option value="3">
-                                            admin@gmail.com
-                                        </option>
-                                        <option value="5">
-                                            mohamed yasen
-                                        </option>
-                                        <option value="6">
-                                            admin@gmail.com
-                                        </option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="mb-10 fv-row">
@@ -374,9 +364,12 @@
                                             Category
                                         </label>
                                         <select class="form-control sel_cate1">
-                                            <option value="1">1</option>
-                                            <option value="1">1</option>
-                                            <option value="1">1</option>
+                                            <option disabled selected>
+                                                Select Category ...
+                                            </option>
+                                            @foreach ( $categories as $item)
+                                            <option value="{{$item->id}}">{{$item->cate_name}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 
@@ -385,9 +378,9 @@
                                             Course
                                         </label>
                                         <select class="form-control sel_course1">
-                                            <option value="2">2</option>
-                                            <option value="2">2</option>
-                                            <option value="2">2</option>
+                                            <option disabled selected>
+                                                Select Course ...
+                                            </option>
                                         </select>
                                     </div>
 
@@ -396,9 +389,9 @@
                                             Chapter
                                         </label>
                                         <select class="form-control sel_chapter1">
-                                            <option value="3">3</option>
-                                            <option value="3">3</option>
-                                            <option value="3">3</option>
+                                            <option disabled selected>
+                                                Select Chapter ...
+                                            </option>
                                         </select>
                                     </div>
 
@@ -407,9 +400,9 @@
                                             Lesson
                                         </label>
                                         <select name="lesson_id" class="form-control sel_lesson1">
-                                            <option value="4">4</option>
-                                            <option value="4">4</option>
-                                            <option value="4">4</option>
+                                            <option disabled selected>
+                                                Select Lesson ...
+                                            </option>
                                         </select>
                                     </div>
                                     <!--end::Input group-->
