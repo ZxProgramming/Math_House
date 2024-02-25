@@ -476,64 +476,6 @@
     <input type="hidden" class="chapter" value="{{ $chapters }}" />
     <input type="hidden" class="lesson" value="{{ $lessons }}" />
 
-    <script>
-        let sel_cate1 = document.querySelector('.sel_cate1');
-        let sel_course1 = document.querySelector('.sel_course1');
-        let sel_chapter1 = document.querySelector('.sel_chapter1');
-        let sel_lesson1 = document.querySelector('.sel_lesson1');
-        let cate = document.querySelector('.cate');
-        let course = document.querySelector('.course');
-        let chapter = document.querySelector('.chapter');
-        let lesson = document.querySelector('.lesson');
-        course = course.value;
-        course = JSON.parse(course);
-        chapter = chapter.value;
-        chapter = JSON.parse(chapter);
-        lesson = lesson.value;
-        lesson = JSON.parse(lesson);
-        sel_cate1.addEventListener('change', () => {
-            sel_course1.innerHTML = `
-                                    <option disabled selected>
-                                        Select Course ...
-                                    </option>`;
-            course.forEach(element => {
-                if (sel_cate1.value == element.category_id) {
-                    sel_course1.innerHTML += `
-                                            <option value="${element.id}">
-                                                ${element.course_name}
-                                            </option>`;
-                }
-            });
-        });
-        sel_course1.addEventListener('change', () => {
-            sel_chapter1.innerHTML = `
-                                    <option disabled selected>
-                                        Select Chapter ...
-                                    </option>`;
-            chapter.forEach(element => {
-                if (sel_course1.value == element.course_id) {
-                    sel_chapter1.innerHTML += `
-                                            <option value="${element.id}">
-                                                ${element.chapter_name}
-                                            </option>`;
-                }
-            });
-        });
-        sel_chapter1.addEventListener('change', () => {
-            sel_lesson1.innerHTML = `
-                                    <option disabled selected>
-                                        Select Lesson ...
-                                    </option>`;
-            lesson.forEach(element => {
-                if (sel_chapter1.value == element.chapter_id) {
-                    sel_lesson1.innerHTML += `
-                                            <option value="${element.id}">
-                                                ${element.lesson_name}
-                                            </option>`;
-                }
-            });
-        });
-    </script>
 
 
     <table id="kt_profile_overview_table"
@@ -891,7 +833,7 @@
                                                             <label>
                                                                 Category
                                                             </label>
-                                                            <select class="form-control sel_cate1">
+                                                            <select class="form-control sel_cate2">
                                                                 <option
                                                                 value="{{ $session->lesson->chapter->course->category->id }}"
                                                                 selected>
@@ -909,7 +851,7 @@
                                                             <label>
                                                                 Course
                                                             </label>
-                                                            <select class="form-control sel_course1">
+                                                            <select class="form-control sel_course2">
                                                                 <option
                                                                 value="{{ $session->lesson->chapter->course->id }}"
                                                                 selected>
@@ -922,7 +864,7 @@
                                                             <label>
                                                                 Chapter
                                                             </label>
-                                                            <select class="form-control sel_chapter1">
+                                                            <select class="form-control sel_chapter2">
                                                                 <option
                                                                 value="{{ $session->lesson->chapter->id }}"
                                                                 selected>
@@ -935,7 +877,7 @@
                                                             <label>
                                                                 Lesson
                                                             </label>
-                                                            <select name="lesson_id" class="form-control sel_lesson1">
+                                                            <select name="lesson_id" class="form-control sel_lesson2">
                                                                 <option value="{{ $session->lesson_id }}"
                                                                     selected>
                                                                     {{ $session->lesson->lesson_name }}
@@ -1041,6 +983,142 @@
             @endforeach
         </tbody>
     </table>
+    
+    <script>
+        let sel_cate2 = document.querySelectorAll('.sel_cate2');
+        let sel_course2 = document.querySelectorAll('.sel_course2');
+        let sel_chapter2 = document.querySelectorAll('.sel_chapter2');
+        let sel_lesson2 = document.querySelectorAll('.sel_lesson2');
+        let cate = document.querySelector('.cate');
+        let course = document.querySelector('.course');
+        let chapter = document.querySelector('.chapter');
+        let lesson = document.querySelector('.lesson');
+        course = course.value;
+        course = JSON.parse(course);
+        chapter = chapter.value;
+        chapter = JSON.parse(chapter);
+        lesson = lesson.value;
+        lesson = JSON.parse(lesson);
+
+        for (let i = 0, end = sel_cate2.length; i < end; i++) { 
+            sel_cate2[i].addEventListener('change', ( e ) => {
+                for (let j = 0; j < end; j++) {
+                    if ( e.target == sel_cate2[j] ) {
+                        sel_course2[j].innerHTML = `
+                        <option disabled selected>
+                            Select Course ...
+                        </option>`;
+                        course.forEach(element => {
+                            if (sel_cate2[j].value == element.category_id) {
+                                sel_course2[j].innerHTML += `
+                                <option value="${element.id}">
+                                    ${element.course_name}
+                                </option>`;
+                            }
+                        });
+                    }
+                }
+            });
+        }
+        for (let i = 0, end = sel_course2.length; i < end; i++) {
+            sel_course2[i].addEventListener('change', ( e ) => {
+                for (let j = 0; j < end; j++) {
+                    if ( e.target == sel_course2[j] ) {
+                        sel_chapter2[j].innerHTML = `
+                        <option disabled selected>
+                            Select Chapter ...
+                        </option>`;
+                        chapter.forEach(element => {
+                            if (sel_course2[j].value == element.course_id) {
+                                sel_chapter2[j].innerHTML += `
+                                <option value="${element.id}">
+                                    ${element.chapter_name}
+                                </option>`;
+                            }
+                        });
+                    }
+                }
+            });
+        }
+        for (let i = 0, end = sel_chapter2.length; i < end; i++) {
+            sel_chapter2[i].addEventListener('change', ( e ) => {
+                for (let j = 0; j < end; j++) {
+                    if ( e.target == sel_chapter2[j] ) {
+                        sel_lesson2[j].innerHTML = `
+                        <option disabled selected>
+                            Select Lesson ...
+                        </option>`;
+                        lesson.forEach(element => {
+                            if (sel_chapter2[j].value == element.chapter_id) {
+                                sel_lesson2[j].innerHTML += `
+                                <option value="${element.id}">
+                                    ${element.lesson_name}
+                                </option>`;
+                            }
+                        });
+                    }
+                }
+            });
+        }
+        
+
+        let sel_cate1 = document.querySelector('.sel_cate1');
+        let sel_course1 = document.querySelector('.sel_course1');
+        let sel_chapter1 = document.querySelector('.sel_chapter1');
+        let sel_lesson1 = document.querySelector('.sel_lesson1');
+        let cate = document.querySelector('.cate');
+        let course = document.querySelector('.course');
+        let chapter = document.querySelector('.chapter');
+        let lesson = document.querySelector('.lesson');
+        course = course.value;
+        course = JSON.parse(course);
+        chapter = chapter.value;
+        chapter = JSON.parse(chapter);
+        lesson = lesson.value;
+        lesson = JSON.parse(lesson);
+        sel_cate1.addEventListener('change', () => {
+            sel_course1.innerHTML = `
+            <option disabled selected>
+                Select Course ...
+            </option>`;
+            course.forEach(element => {
+                if (sel_cate1.value == element.category_id) {
+                    sel_course1.innerHTML += `
+                    <option value="${element.id}">
+                        ${element.course_name}
+                    </option>`;
+                }
+            });
+        });
+        sel_course1.addEventListener('change', () => {
+            sel_chapter1.innerHTML = `
+            <option disabled selected>
+                Select Chapter ...
+            </option>`;
+            chapter.forEach(element => {
+                if (sel_course1.value == element.course_id) {
+                    sel_chapter1.innerHTML += `
+                    <option value="${element.id}">
+                        ${element.chapter_name}
+                    </option>`;
+                }
+            });
+        });
+        sel_chapter1.addEventListener('change', () => {
+            sel_lesson1.innerHTML = `
+            <option disabled selected>
+                Select Lesson ...
+            </option>`;
+            lesson.forEach(element => {
+                if (sel_chapter1.value == element.chapter_id) {
+                    sel_lesson1.innerHTML += `
+                    <option value="${element.id}">
+                        ${element.lesson_name}
+                    </option>`;
+                }
+            });
+        });
+    </script>
 
     <script>
         let s_repeat = document.querySelector('.s_repeat');
