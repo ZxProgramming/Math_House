@@ -75,17 +75,6 @@ class V_QuestionController extends Controller
     public function q_page( $id ){
         
 
-        $newTime = Carbon::now()->subMinutes(120);
-        $q_data = QuestionTime::where('user_id', auth()->user()->id)
-        ->where('q_id', $id)
-        ->where('time', '>', $newTime)
-        ->first();
-        if ( !empty($q_data) ) {
-            $question = Question::where('id', $id)
-            ->first();
-
-            return view('Visitor.Question.Show_Question', compact('question'));
-        }
         if ( empty(auth()->user()) ) {
             if ( !session()->has('previous_page') ) {
                 session(['previous_page' => url()->current()]);
@@ -93,6 +82,18 @@ class V_QuestionController extends Controller
             return redirect()->route('login.index');
         }
         else{
+            $newTime = Carbon::now()->subMinutes(120);
+            $q_data = QuestionTime::where('user_id', auth()->user()->id)
+            ->where('q_id', $id)
+            ->where('time', '>', $newTime)
+            ->first();
+            if ( !empty($q_data) ) {
+                $question = Question::where('id', $id)
+                ->first();
+    
+                return view('Visitor.Question.Show_Question', compact('question'));
+            }
+            
             session()->forget('previous_page');
             $user_package = UserPackage::
             select('*', 'user_packages.created_at AS package_date')

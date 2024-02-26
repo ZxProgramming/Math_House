@@ -77,16 +77,6 @@ class V_ExamController extends Controller
 
     public function exam_page( $id ){
 
-        $newTime = Carbon::now()->subMinutes(120);
-        $exam_data = ExamTime::where('user_id', auth()->user()->id)
-        ->where('exam_id', $id)
-        ->where('time', '>', $newTime)
-        ->first();
-
-        if ( !empty($exam_data) ) {
-            // Return Exam
-            return 563;
-        }
 
         if ( empty(auth()->user()) ) {
             if ( !session()->has('previous_page') ) {
@@ -95,6 +85,16 @@ class V_ExamController extends Controller
             return redirect()->route('login.index');
         }
         else{
+            $newTime = Carbon::now()->subMinutes(120);
+            $exam_data = ExamTime::where('user_id', auth()->user()->id)
+            ->where('exam_id', $id)
+            ->where('time', '>', $newTime)
+            ->first();
+    
+            if ( !empty($exam_data) ) {
+                // Return Exam
+                return 563;
+            }
             session()->forget('previous_page');
             $user_package = UserPackage::
             select('*', 'user_packages.created_at AS package_date')
