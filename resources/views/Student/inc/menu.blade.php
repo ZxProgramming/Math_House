@@ -26,11 +26,11 @@
                             </li>
 
                             <li class="mega__menu position-static">
-                                <a class="headerarea__has__dropdown" href="#">Exams</a>
+                                <a class="headerarea__has__dropdown" href="{{route('v_exams')}}">Exams</a>
                             </li>
 
                             <li class="mega__menu position-static">
-                                <a class="headerarea__has__dropdown" href="#">Question</a>
+                                <a class="headerarea__has__dropdown" href="{{route('v_question')}}">Question</a>
                             </li>
 
                             <li class="mega__menu position-static">
