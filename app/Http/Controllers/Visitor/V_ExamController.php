@@ -12,6 +12,8 @@ use App\Models\Category;
 use App\Models\Package;
 use App\Models\User;
 use App\Models\UserPackage;
+use App\Models\ExamTime;
+
 use Carbon\Carbon;
 
 class V_ExamController extends Controller
@@ -74,7 +76,17 @@ class V_ExamController extends Controller
     }
 
     public function exam_page( $id ){
-        
+
+        $newTime = Carbon::now()->subMinutes(120);
+        $exam_data = ExamTime::where('user_id', auth()->user()->id)
+        ->where('exam_id', $id)
+        ->where('time', '>', $newTime)
+        ->first();
+
+        if ( !empty($exam_data) ) {
+            // Return Exam
+            return $user_package;
+        }
 
         if ( empty(auth()->user()) ) {
             if ( !session()->has('previous_page') ) {
@@ -110,6 +122,12 @@ class V_ExamController extends Controller
                 return view('Student.Exam.Exam_Package', compact('package'));
             }
             else{
+                // Return Exam
+                ExamTime::create([
+                    'user_id' => auth()->user()->id,
+                    'exam_id' => $id,
+                    'time' => now(),
+                ]);
                 User::with('package')
                 ->where('id', auth()->user()->id)
                 ->update([

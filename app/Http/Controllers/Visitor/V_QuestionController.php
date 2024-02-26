@@ -9,6 +9,7 @@ use App\Models\Question;
 use App\Models\User;
 use App\Models\Package;
 use App\Models\UserPackage;
+use App\Models\QuestionTime;
 
 use Carbon\Carbon;
 
@@ -74,6 +75,18 @@ class V_QuestionController extends Controller
     public function q_page( $id ){
         
 
+        $newTime = Carbon::now()->subMinutes(120);
+        $q_data = QuestionTime::where('user_id', auth()->user()->id)
+        ->where('q_id', $id)
+        ->where('time', '>', $newTime)
+        ->first();
+        if ( !empty($q_data) ) {
+            // Return Exam
+            $question = Question::where('id', $id)
+            ->first();
+
+            return view('Visitor.Question.Show_Question', compact('question'));
+        }
         if ( empty(auth()->user()) ) {
             if ( !session()->has('previous_page') ) {
                 session(['previous_page' => url()->current()]);
@@ -108,6 +121,11 @@ class V_QuestionController extends Controller
                 return view('Student.Exam.Exam_Package', compact('package'));
             }
             else{
+                QuestionTime::create([
+                    'user_id' => auth()->user()->id,
+                    'q_id' => $id,
+                    'time' => now(),
+                ]);
                 User::with('package')
                 ->where('id', auth()->user()->id)
                 ->update([
