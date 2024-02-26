@@ -155,7 +155,6 @@ class CoursesController extends Controller
     }
 
     public function check_out(){
-        return 65;
         $chapters = json_decode(Cache::get('marketing'));
         $price = json_decode(Cache::get('chapters_price'));
         $payment_methods = PaymentMethod::
