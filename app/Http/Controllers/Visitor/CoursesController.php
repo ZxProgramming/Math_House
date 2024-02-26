@@ -276,6 +276,8 @@ class CoursesController extends Controller
         $arr = json_encode($arr);
         Cache::store('file')->put('marketing', $arr, 10000);
         Cache::store('file')->put('chapters_price', $price, 10000);
-        return redirect()->back();
+        $chapters_price = $price;
+        $chapters = json_decode(Cache::get('marketing'));
+        return view('Visitor.Cart', compact('chapters', 'chapters_price'));
     }
 }

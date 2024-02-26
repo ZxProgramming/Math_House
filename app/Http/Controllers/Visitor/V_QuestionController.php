@@ -69,9 +69,7 @@ class V_QuestionController extends Controller
 
         return view('Visitor.Question.Filter_Question', 
         compact('q_items'));
-    }
-    
-        
+    } 
  
     public function q_page( $id ){
         
