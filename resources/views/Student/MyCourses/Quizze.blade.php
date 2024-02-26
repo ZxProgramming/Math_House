@@ -603,12 +603,8 @@
 
                             {{-- Supp Question --}}
 
-<<<<<<< HEAD
                             {{-- Input to set and send value about answer question to array --}}
                             <input type="hidden" value="">
-=======
-                            {{-- Input to set and send value about answer question to array --}} 
->>>>>>> ff2cebb6730769850580e1c4852b5f704a539f89
 
                             {{-- Answer chosen --}}
 

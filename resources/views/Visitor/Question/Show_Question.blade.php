@@ -352,7 +352,10 @@
 
     main .main-wrapper .question .answer-side .answer-chosen .chosen:hover {
         outline: 3px solid #000;
-        /* background: red; */
+    }
+
+    .selectedd {
+        outline: 3px solid #000;
     }
 
     main .main-wrapper .question .answer-side .answer-chosen .chosen button {
@@ -576,69 +579,72 @@
         </div>
     </header>
     <main>
-        <form action="">
-            <div class="main-wrapper">
-                @foreach ( $quizze->question as $question )
-                    
-                <div class="question">
-                    <div class="question-side">
-                        <div class="text-question">
-                            <span class="question-num">
-                                {{$loop->iteration}}
-                            </span>
-                            <p>
-                                {{$question->question}}
-                            </p>
+        <form action="" style="width: 100%;">
+            <div class="main-wrapper"> 
+                    <div class="question">
+                        <div class="question-side">
+                            <div class="text-question">
+                                <span class="question-num">
+                                    1
+                                </span>
+                                <p>
+                                    {{ $question->question }}
+                                </p>
+                            </div>
+                            <div class="img-question">
+                                <span>Examples</span>
+                                @if (!empty($question->q_url))
+                                    <img src="{{ asset('images/questions/' . $question->q_url) }}" alt="question">
+                                @endif
+                            </div>
                         </div>
-                        <div class="img-question">
-                            <span>Examples</span>
-                            @if ( !empty($question->q_url) )
-                            <img src="{{asset('images/questions/' . $question->q_url)}}" alt="question">
+                        <div class="answer-side">
+
+                            {{-- Supp Question --}}
+
+                            {{-- Input to set and send value about answer question to array --}}
+                            <input type="hidden" value="">
+
+                            {{-- Answer chosen --}}
+
+                            @php
+                                $arr = ['A', 'B', 'C', 'D'];
+                                $iter = 1;
+                            @endphp
+                            @if ($question->ans_type == 'MCQ')
+                                <div class="answer-chosen">
+                                    <input name="q_answers[]" type="hidden" class="q_answers"
+                                    value="{{json_encode(['q_id' => $question->id])}}" />
+                                    @foreach ($question->mcq as $mcq)
+                                        <div class="chosen chose_mcq chosen{{ $iter }}"
+                                            id="chosen{{ $iter }}{{ $loop->iteration }}">
+                                            <input type="hidden" class="mcq_id" value="{{$mcq->id}}">
+                                            <button class="ans_btn">{{ @$arr[$loop->iteration - 1] }}</button>
+                                            <input type="text" value="{{ $mcq->mcq_ans }}" readonly>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @else
+                            <input name="q_grid_answers[]" type="hidden" class="q_grid_answers"
+                            value="{{json_encode(['q_id' => $question->id])}}" />
+                                {{-- Answer Set Value --}}
+                                <div class="answer-setValue">
+                                    <div class="section-setValue">
+                                        <span>Answer:</span>
+                                        <div class="input_val">
+
+                                            <input type="number" name='q_grid_ans[]' value="0">
+                                        </div>
+                                    </div>
+                                    <div class="section-value">
+                                        <span>Answer Preview:</span>
+                                        <input type="number" value="00000" readonly>
+                                    </div>
+                                </div>
                             @endif
+
                         </div>
-                    </div>
-                    <div class="answer-side">
-    
-                        {{-- Supp Question --}}
-    
-                        {{-- Input to set and send value about answer question to array --}}
-                        <input type="hidden" value="">
-    
-                        {{-- Answer chosen --}}
-    
-                        @php
-                            $arr = ['A', 'B', 'C', 'D'];
-                            $iter = $loop->iteration;
-                        @endphp
-                        @if ( $question->ans_type == 'MCQ' )
-                        <div class="answer-chosen">
-                            @foreach ( $question->mcq as $mcq )
-                                <div class="chosen " id="chosen{{$iter}}{{$loop->iteration}}">
-                                    <button>{{@$arr[$loop->iteration - 1]}}</button>
-                                    <input type="text" value="{{$mcq->mcq_ans}}" readonly>
-                                </div>
-                            @endforeach
-                        </div>
-                        @else
-                        {{-- Answer Set Value --}}
-                        <div class="answer-setValue">
-                            <div class="section-setValue">
-                                <span>Answer:</span>
-                                <div class="input_val">
-    
-                                    <input type="number" value="0">
-                                </div>
-                            </div>
-                            <div class="section-value">
-                                <span>Answer Preview:</span>
-                                <input type="number" value="00000" readonly>
-                            </div>
-                        </div>
-                        @endif
-    
-                    </div>
-                </div>
-                @endforeach
+                    </div> 
             </div>
             {{-- end Section Question --}}
             <ul class="paginationn">
@@ -675,6 +681,29 @@
 
 
 @include('Student.inc.footer')
+
+<script>
+    let q_answers = document.querySelectorAll('.q_answers');
+    let mcq_id = document.querySelectorAll('.mcq_id');
+    let chose_mcq = document.querySelectorAll('.chose_mcq');
+    let ans_btn = document.querySelectorAll('.ans_btn');
+
+    for (let i = 0, end = chose_mcq.length; i < end; i++) {
+        chose_mcq[i].addEventListener('click', (e) => {
+            for (let j = 0; j < end; j++) {
+                if ( chose_mcq[j] == e.target || chose_mcq[j] == e.target.parentElement ) {
+                    let question_ans = chose_mcq[j].parentElement.children[0];
+                    let question_id = question_ans.value;
+                    question_id = JSON.parse(question_id);
+                    question_id = question_id.q_id;
+                    let mcq_id = chose_mcq[j].children[0].value
+                    let answer = ans_btn[j].innerText;
+                    question_ans.value = JSON.stringify({'q_id': question_id, 'mcq_id': mcq_id, 'answer': answer});
+                }
+            }
+        })
+    }
+</script>
 <script>
     $(document).ready(function() {
         /* Timer question */
@@ -694,6 +723,15 @@
 
             if (totalSeconds <= 59) {
                 console.log("sec < 59")
+                // var Hours_quizz = $("#hr").text();
+                // var Min_quizz = $("#minutes").text();
+                // var Sec_quizz = $("#seconds").text();
+                // var Timer_quizz = Hours_quizz + Min_quizz + Sec_quizz;
+
+                // console.log("Hours_quizz", Hours_quizz)
+                // console.log("Min_quizz", Min_quizz)
+                // console.log("Sec_quizz", Sec_quizz)
+                // console.log("Timer_quizz", Timer_quizz)
             } else {
                 secondsLabel.html(pad(parseInt(0)));
                 totalSeconds = 0;
@@ -721,6 +759,24 @@
                 return valString;
             }
         }
+
+        /* Send Timer */
+        $(".btn-sendQuizz").click(() => {
+            var Hours_quizz = $("#hour").text();
+            var Min_quizz = $("#minutes").text();
+            var Sec_quizz = $("#seconds").text();
+
+            var objTim = {
+                houres: Hours_quizz,
+                minutes: Min_quizz,
+                seconds: Sec_quizz
+            }
+
+            console.log("Hours_quizz", Hours_quizz)
+            console.log("Min_quizz", Min_quizz)
+            console.log("Sec_quizz", Sec_quizz)
+            console.log("objTim", objTim)
+        })
 
 
         /* Show Discraption */
@@ -765,13 +821,32 @@
         /* /////////////// */
         /* But border out side the answer  */
         /* /////////////// */
-        $(".chosen").on("click", () => {
-            // console.log($(this).attr("class"))
-            // $(this).css("background", "red")
-            $(".chosen").each((ele, val) => {
 
-            });
+
+        $(".chosen").each((elePar, valPar) => {
+
+            var staPar = elePar + 1;
+            console.log("elePar", elePar)
+            console.log("staPar", staPar)
+            console.log("valPar", valPar)
+            var elementPar = `.${$(valPar).attr("class").slice(0, 6) + staPar}`;
+
+            console.log(elementPar)
+
+            $(elementPar).each((ele, val) => {
+                console.log("ele", ele)
+                console.log("val", val)
+                var element = `#${$(val).attr("id")}`;
+                console.log(element)
+                $(element).click(() => {
+                    $(elementPar).removeClass("selectedd");
+                    $(element).addClass("selectedd");
+                })
+            })
         })
+
+
+
 
         /* /////////////// */
         /* Handel pagination question */
@@ -823,6 +898,7 @@
             var totalPages = Math.ceil(numberOfItems / limitPerPage);
             var paginationSize = Math.ceil(numberOfItems /
                 3); //How many question visible show in this page pagination
+
             var currentPage;
 
             console.log("paginationSize", paginationSize)
