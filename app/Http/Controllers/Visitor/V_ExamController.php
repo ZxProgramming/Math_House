@@ -122,7 +122,6 @@ class V_ExamController extends Controller
                 return view('Student.Exam.Exam_Package', compact('package'));
             }
             else{
-                // Return Exam
                 ExamTime::create([
                     'user_id' => auth()->user()->id,
                     'exam_id' => $id,
@@ -133,6 +132,7 @@ class V_ExamController extends Controller
                 ->update([
                     'exam_number' => $user_package[0]->exam_number - 1
                 ]);
+                // Return Exam
                 return $user_package;
             }
         }

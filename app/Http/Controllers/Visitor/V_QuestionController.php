@@ -81,7 +81,6 @@ class V_QuestionController extends Controller
         ->where('time', '>', $newTime)
         ->first();
         if ( !empty($q_data) ) {
-            // Return Exam
             $question = Question::where('id', $id)
             ->first();
 
