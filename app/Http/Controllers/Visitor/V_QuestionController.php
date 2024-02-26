@@ -105,7 +105,7 @@ class V_QuestionController extends Controller
             
             if ( empty($user_package) || !$duration ) {
                 $package = Package::
-                where('module', 'Exam')
+                where('module', 'Question')
                 ->get();
                 return view('Student.Exam.Exam_Package', compact('package'));
             }
