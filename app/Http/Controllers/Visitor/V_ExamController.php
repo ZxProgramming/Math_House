@@ -85,7 +85,7 @@ class V_ExamController extends Controller
 
         if ( !empty($exam_data) ) {
             // Return Exam
-            return $user_package;
+            return 563;
         }
 
         if ( empty(auth()->user()) ) {
