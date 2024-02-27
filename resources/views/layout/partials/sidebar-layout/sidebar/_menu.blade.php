@@ -481,5 +481,3 @@
 </div>
 <!--end::sidebar menu-->
 @endif
-
-@include('Student.inc.menu')
