@@ -120,6 +120,11 @@
         </div>
     @enderror
     </div>
+    
+    <!--begin::Action-->
+    <a href="#" class="btn btn-primary er fs-6 px-8 py-4 mx-2" data-bs-toggle="modal"
+        data-bs-target="#kt_modal_create_campaign">Add Lesson</a>
+    <!--end::Action-->
     <button type="button" class='btn btn-primary mx-3' data-bs-toggle="modal" data-bs-target="#filter_modal">
         Filter
     </button>
@@ -224,10 +229,6 @@
         </div>
     </div>
 
-    <!--begin::Action-->
-    <a href="#" class="btn btn-primary er fs-6 px-8 py-4 mx-2" data-bs-toggle="modal"
-        data-bs-target="#kt_modal_create_campaign">Add Lesson</a>
-    <!--end::Action-->
 
 
     <table id="kt_profile_overview_table"

@@ -15,10 +15,13 @@
 						<!--begin:Menu item-->
 			<div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('dashboard') ? '' : 'here show' }}">
 				<!--begin:Menu link-->
-				<span class="menu-link">
-					<span class="menu-icon">{!! getIcon('element-11', 'fs-2') !!}</span>
-					<span class="menu-title">Dashboards</span>
-				</span>
+				<a class=" {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
+						
+					<span class="menu-link">
+						<span class="menu-icon">{!! getIcon('element-11', 'fs-2') !!}</span>
+						<span class="menu-title">Dashboards</span>
+					</span>
+				</a>
 			</div>
 
 			{{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('dashboard') ? '' : 'here show' }}">
