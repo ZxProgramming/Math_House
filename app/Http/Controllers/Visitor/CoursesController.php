@@ -285,7 +285,9 @@ class CoursesController extends Controller
         $arr = [];
         foreach ( $req->data as $item ) {
             $price += floatval($item['price']);
-            $arr[] = json_decode($item['chapter']);
+            $ch_arr = json_decode($item['chapter']);
+            $ch_arr->ch_price = floatval($item['price']);
+            $arr[] = $ch_arr;
         }
         $arr = json_encode($arr);
         Cache::store('file')->put('marketing', $arr, 10000);
