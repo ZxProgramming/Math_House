@@ -5,7 +5,8 @@
     }
 @endphp
 <x-default-layout>
-    @include('Admin.courses.Courses.course_header')
+    <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal"
+    data-bs-target="#kt_modal_create_question">Add Course</a>
     @section('title', 'Course')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -35,6 +36,7 @@
     <button type="button" class='btn btn-primary mx-3' data-bs-toggle="modal" data-bs-target="#filter_modal">
         Filter
     </button>
+    @include('Admin.courses.Courses.AddCourse')
 
     <div class="modal fade" id="filter_modal" tabindex="-1" aria-hidden="true">
         <!--begin::Modal dialog-->
@@ -329,4 +331,42 @@
 
         })
     </script>
+@section('script')
+    <script>
+        <!--begin::Javascript
+        -->
+    <script>
+        var hostUrl = "assets/";
+    </script>
+    <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+    <script src="assets/plugins/global/plugins.bundle.js"></script>
+    <script src="assets/js/scripts.bundle.js"></script>
+    <!--end::Global Javascript Bundle-->
+    <!--begin::Vendors Javascript(used for this page only)-->
+    <script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <!--end::Vendors Javascript-->
+    <!--begin::Custom Javascript(used for this page only)-->
+    <script src="{{ asset('assets/js/widgets.bundle.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/widgets.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/apps/chat/chat.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/utilities/modals/upgrade-plan.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/utilities/modals/create-app.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/utilities/modals/create-campaign.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/utilities/modals/users-search.js') }}"></script>
+    <script src="assets/plugins/global/lessonSc.js"></script>
+    <script src="{{ asset('assets/js/custom/utilities/modals/lessonSc.js') }}"></script>
+
+
+    </script>
+    <!--
+                       The "super-build" of CKEditor&nbsp;5 served via CDN contains a large set of plugins and multiple editor types.
+                       See https://ckeditor.com/docs/ckeditor5/latest/installation/getting-started/quick-start.html#running-a-full-featured-editor-from-cdn
+                   -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/super-build/ckeditor.js"></script>
+    <!--
+                       Uncomment to load the Spanish translation
+                       <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/super-build/translations/es.js"></script>
+                   -->
+   
+@endsection
 </x-default-layout>

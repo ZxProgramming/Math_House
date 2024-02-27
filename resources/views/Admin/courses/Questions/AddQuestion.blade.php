@@ -79,8 +79,6 @@
 
  <!--begin::Action-->
  @include('success')
- <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal"
-     data-bs-target="#kt_modal_create_question">Add Question</a>
  <!--end::Action-->
 
  <div class="modal fade" id="kt_modal_create_question" tabindex="-1" aria-hidden="true">

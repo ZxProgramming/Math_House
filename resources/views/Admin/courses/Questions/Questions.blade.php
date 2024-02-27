@@ -270,6 +270,9 @@
                 }); */
     </script>
     @section('title', 'Questions')
+    @include('Admin.courses.Questions.AddQuestion')
+    <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal"
+        data-bs-target="#kt_modal_create_question">Add Question</a>
     <form action="{{ route('filter_question') }}" method="POST">
         @csrf
         <div class="modal-body scroll-y m-5">
@@ -1233,7 +1236,6 @@
     </table>
 
 
-    @include('Admin.courses.Questions.AddQuestion')
 
 
     <script>
