@@ -5,6 +5,6 @@
 data-bs-target="#kt_modal_create_question">
     Add Student
 </a>
-<a href="{{route('stu_info')}}" class="btn btn-primary w-150px my-3 h-45px">
-    Student Edit
+<a href="{{route('student')}}" class="btn btn-primary w-150px my-3 h-45px">
+    Student List
 </a>

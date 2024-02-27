@@ -5,7 +5,7 @@
   }
 @endphp
 <x-default-layout>
-@include('Admin.Users.stu_header')
+@include('Admin.Users.stu_edit_header')
     @section('title','Students Info')
 
     @error('name')

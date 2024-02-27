@@ -5,7 +5,7 @@
   }
 @endphp
 <x-default-layout>
-@include('Admin.Users.teacher_header')
+  @include('Admin.Users.AddTeacher')
     @section('title','Teacher Filter')
 
 <div class='my-3'>
