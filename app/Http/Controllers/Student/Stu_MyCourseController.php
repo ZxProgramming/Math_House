@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Marketing;
 use App\Models\PaymentRequest;
+use App\Models\PaymentOrder;
 use App\Models\quizze;
 use App\Models\QuizzeStuAns;
 use App\Models\StudentQuizze;
@@ -49,6 +50,18 @@ class Stu_MyCourseController extends Controller
 
     public function stu_chapters($id)
     {
+        // New Code
+        // $payment_order = PaymentOrder::where('state', 1)
+        // ->with('chapter')
+        // ->get();
+
+        // $chapters = [];
+        // foreach ($payment_order as $item) {
+        //     $newTime = Carbon::now()->subDays($item->duration);
+        //     if ( $newTime > $item->date ) {
+        //         $chapters[] = $item;
+        //     }
+        // }
         $payment_request = PaymentRequest::where('user_id', auth()->user()->id)
             ->where('state', 'Approve')
             ->get();

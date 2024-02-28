@@ -13,6 +13,7 @@ use App\Models\Chapter;
 use App\Models\UsagePromo;
 use App\Models\PromoCode;
 use App\Models\PaymentMethod;
+use App\Models\PaymentOrder;
 use App\Models\PaymentRequest;
 use Cart;
 
@@ -155,6 +156,7 @@ class CoursesController extends Controller
     }
 
     public function check_out(){
+        
         $chapters = json_decode(Cache::get('marketing'));
         $price = json_decode(Cache::get('chapters_price'));
         $payment_methods = PaymentMethod::
@@ -222,6 +224,19 @@ class CoursesController extends Controller
         $chapters = json_decode(Cache::get('marketing'));
         $price = json_decode(Cache::get('chapters_price'));
         $p_method = $p_request->method->payment;
+        $duration = 0;
+        for ($i=0, $end = count($chapters); $i < $end; $i++) { 
+            foreach ( $chapters[$i]->price as $item ) {
+                if ( $item->price == $chapters[$i]->ch_price ) {
+                    $duration = $item->duration;
+                }
+            }
+            PaymentOrder::create( 
+                ['payment_request_id' => $req->payment_method_id,
+                'chapter_id' => $chapters[$i]->id,
+                'duration' => $duration,]);
+        }
+        
         return view('Visitor.Order.Order', compact('chapters', 'price', 'p_method'));
     }
 
@@ -257,6 +272,24 @@ class CoursesController extends Controller
         $p_request = PaymentRequest::create($arr);
         $course = (Cache::get('marketing'));
         $price = (Cache::get('chapters_price'));
+        $duration = 0;
+        
+        foreach ($course->prices as $item) {
+            if ( $item->price == $price ) {
+                $duration = $item->duration;
+            }
+        }
+        $chapters = Chapter::where('course_id', $course->id)
+        ->get();
+
+        foreach ( $chapters as $item ) {
+            PaymentOrder::create([
+                'payment_request_id' => $p_request->id,
+                'chapter_id' => $item->id,
+                'duration' => $duration,
+            ]);
+        }
+        
         $p_method = $p_request->method->payment;
         return view('Visitor.C_Order.Order', compact('course', 'price', 'p_method'));
     }

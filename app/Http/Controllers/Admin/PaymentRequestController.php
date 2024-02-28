@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\PaymentRequest;
+use App\Models\PaymentOrder;
 
 class PaymentRequestController extends Controller
 {
@@ -32,6 +33,11 @@ class PaymentRequestController extends Controller
         PaymentRequest::
         where('id', $id)
         ->update(['state' => 'Approve']);
+        PaymentOrder::where('payment_request_id', $id)
+        ->update([
+            'state' => 1,
+            'date' => now(),
+        ]);
 
         return redirect()->back();
     }
