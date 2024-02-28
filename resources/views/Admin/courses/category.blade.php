@@ -34,35 +34,19 @@
             <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
                 <!--begin::Toolbar container-->
                 <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
-                    <!--begin::Page title-->
-                    <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
-                        <!--begin::Title-->
-                        <h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">Catigory List</h1>
-                        <!--end::Title-->
-                        <!--begin::Breadcrumb-->
-                        <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
-                            <!--begin::Item-->
-                            <li class="breadcrumb-item text-muted">
-                                <a href="index.html" class="text-muted text-hover-primary">Home</a>
-                            </li>
-                            <!--end::Item-->
-                            <!--begin::Item-->
-                            <li class="breadcrumb-item">
-                                <span class="bullet bg-gray-500 w-5px h-2px"></span>
-                            </li>
-                            <!--end::Item-->
-                            <!--begin::Item-->
-                            <li class="breadcrumb-item text-muted">Category</li>
-                            <!--end::Item-->
-                        </ul>
-                        <!--end::Breadcrumb-->
-                    </div>
-                    <!--end::Page title-->
+                 
                   
                 </div>
                 <!--end::Toolbar container-->
             </div>
             <!--end::Toolbar-->
+            <div data-kt-customer-table-toolbar="base">
+                               
+                <!--begin::Add customer-->
+                <a href="#" class="btn btn-primary er fs-6 px-8 py-4 m-5" data-bs-toggle="modal" data-bs-target="#kt_modal_create_api_key">Cteate New Category</a>
+
+                <!--end::Add customer-->
+            </div>
             <!--begin::Content-->
             <div id="kt_app_content" class="app-content flex-column-fluid">
                 <!--begin::Content container-->
@@ -79,13 +63,7 @@
                             <!--begin::Card toolbar-->
                             <div class="card-toolbar">
                                 <!--begin::Toolbar-->
-                                <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                               
-                                    <!--begin::Add customer-->
-                                    <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_create_api_key">Cteate New Category</a>
-
-                                    <!--end::Add customer-->
-                                </div>
+                              
                                 <!--end::Toolbar-->
                                 <!--begin::Group actions-->
                                 <div class="d-flex justify-content-end align-items-center d-none" data-kt-customer-table-toolbar="selected">

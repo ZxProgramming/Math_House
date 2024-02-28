@@ -213,7 +213,7 @@
             text-align: center !important;
         }
     </style>
-    <div class="section_add">
+    <div class="section_add d-flex justify-content-start">
         <button class="btn_add_quizz" type="button" data-toggle="modal" data-target="#exampleModalCenter">New
             Quizze</button>
     </div>
