@@ -579,7 +579,8 @@
         </div>
     </header>
     <main>
-        <form action="" style="width: 100%;">
+        <form action="{{route('q_sol')}}" method="POST" style="width: 100%;">
+            @csrf
             <div class="main-wrapper"> 
                     <div class="question">
                         <div class="question-side">

@@ -69,6 +69,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('/Question', 'v_question')->name('v_question');
         Route::post('/Question', 'v_filter_question')->name('v_filter_question');
         Route::get('/Question/{id}', 'q_page')->name('q_page');
+        Route::post('/Question/Solve', 'q_sol')->name('q_sol');
     });
     Route::controller(V_ExamController::class)->group(function(){
         Route::get('/Exams', 'v_exams')->name('v_exams');

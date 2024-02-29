@@ -118,4 +118,33 @@ class V_QuestionController extends Controller
             
         }
     }
+
+    public function q_sol( Request $req ){ 
+
+        if ( isset($req->q_answers[0]) ) {
+            $solve = json_decode($req->q_answers[0]);
+           // {"q_id":18,"mcq_id":"1","answer":"A"}
+           $question = Question::where('id', $solve->q_id)
+           ->first();
+            return $question;
+        }
+        else {
+            // "q_grid_answers":["{\"q_id\":1}"],"q_grid_ans":["1"]}
+            $q_id = json_decode($req->q_grid_answers[0]);
+            $question = Question::where('id', $q_id->q_id)
+            ->first();
+            $solve = $question->g_ans;
+            $ans = false;
+
+            foreach ($solve as $item) {
+                if ( $item->grid_ans == $req->q_grid_ans[0] ) {
+                    $ans = true;
+                }
+            }
+             
+            return view('Visitor.Question.Grade', compact('ans', 'question'));
+          
+            
+        } 
+    }
 }
