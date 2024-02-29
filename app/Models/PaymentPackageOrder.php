@@ -5,25 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use App\Models\Chapter;
+use App\Models\Package;
 use App\Models\PaymentRequest;
 
-class PaymentOrder extends Model
+class PaymentPackageOrder extends Model
 {
     use HasFactory;
+
+    protected $table = 'payment_package_order';
     
     protected $fillable = [
         'payment_request_id',
-        'chapter_id',
-        'duration',
-        'state',
+        'package_id',
         'discount',
+        'state',
         'date',
     ];
     
-    public function chapter()
+    public function package()
     {
-        return $this->belongsTo(Chapter::class, 'chapter_id');
+        return $this->belongsTo(Package::class, 'package_id');
     }
     public function pay_req()
     {

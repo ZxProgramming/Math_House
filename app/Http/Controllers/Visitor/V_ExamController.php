@@ -12,7 +12,7 @@ use App\Models\Category;
 use App\Models\Package;
 use App\Models\User;
 use App\Models\UserPackage;
-use App\Models\ExamTime;
+use App\Models\PaymentPackageOrder;
 
 use Carbon\Carbon;
 
@@ -84,57 +84,40 @@ class V_ExamController extends Controller
             }
             return redirect()->route('login.index');
         }
-        else{
-            $newTime = Carbon::now()->subMinutes(120);
-            $exam_data = ExamTime::where('user_id', auth()->user()->id)
-            ->where('exam_id', $id)
-            ->where('time', '>', $newTime)
-            ->first();
-    
-            if ( !empty($exam_data) ) {
-                // Return Exam
-                return 563;
-            }
-            session()->forget('previous_page');
-            $user_package = UserPackage::
-            select('*', 'user_packages.created_at AS package_date')
-            ->leftJoin('users', 'user_packages.user_id', '=', 'users.id')
-            ->leftJoin('packages', 'user_packages.package_id', '=', 'packages.id')
-            ->where('user_packages.user_id', auth()->user()->id)
-            ->where('module', 'Exam')
-            ->where('exam_number', '>', 0)
+        else{  
+            $payments = PaymentPackageOrder::
+            where('state', 1)
+            ->with('pay_req')
+            ->with('package')
             ->get();
-            $duration = false;
-            for ($i=0, $end = count($user_package); $i < $end; $i++) { 
-                $toDate = Carbon::parse(now());
-                $fromDate = Carbon::parse($user_package[$i]->package_date);
-                $days = $toDate->diffInDays($fromDate);
-                
-               if ( $days <= $user_package[$i]->duration ) {
-                $duration = true;
-               }
-            }
+            $user = User::where('id', auth()->user()->id)
+            ->first();
+
+            foreach ( $payments as $item ) { 
+                $newTime = Carbon::now()->subDays($item->package->number); 
+
+                if ( $item->package->module == 'Exam' && 
+                $item->pay_req->user_id == auth()->user()->id &&
+                $item->date > $newTime &&
+                $user->exam_number > 0
+                 ) 
+                 {  
+
+                    User::where('id', auth()->user()->id)
+                    ->update([
+                        'exam_number' => $user->exam_number - 1
+                    ]);
+
+                    // Return Exam
+                     return 34423; 
+                }
+            } 
+            $package = Package::
+            where('module', 'Exam')
+            ->get();
+            return view('Student.Exam.Exam_Package', compact('package'));
+             
             
-            if ( empty($user_package) || !$duration ) {
-                $package = Package::
-                where('module', 'Exam')
-                ->get();
-                return view('Student.Exam.Exam_Package', compact('package'));
-            }
-            else{
-                ExamTime::create([
-                    'user_id' => auth()->user()->id,
-                    'exam_id' => $id,
-                    'time' => now(),
-                ]);
-                User::with('package')
-                ->where('id', auth()->user()->id)
-                ->update([
-                    'exam_number' => $user_package[0]->exam_number - 1
-                ]);
-                // Return Exam
-                return $user_package;
-            }
         }
     }
 

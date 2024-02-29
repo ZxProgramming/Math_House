@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use App\Models\Package;
 use App\Models\PaymentMethod;
 use App\Models\PaymentRequest;
+use App\Models\PaymentPackageOrder;
+
+use Illuminate\Support\Facades\Cache;
 
 class Stu_PackageController extends Controller
 {
@@ -16,7 +19,7 @@ class Stu_PackageController extends Controller
         $package = Package::where('id', $id)
         ->first();
         $payment_methods = PaymentMethod::all();
-
+        Cache::store('file')->put('package', $package, 10000);
         return view('Student.PackageCheckout.Checkout' ,compact('package', 'payment_methods'));
     }
 
@@ -55,6 +58,12 @@ class Stu_PackageController extends Controller
         $p_request = PaymentRequest::create($arr);
         $price = $package->price;
         $p_method = $p_request->method->payment;
+        $package_data = Cache::get('package');
+        PaymentPackageOrder::create([
+            'payment_request_id' => $p_request->id,
+            'package_id' => $package_data->id,
+            'date' => now(),
+        ]);
         return view('Student.Order.Order', compact('package', 'price', 'p_method'));
     }
 }

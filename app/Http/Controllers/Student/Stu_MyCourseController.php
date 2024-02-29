@@ -14,6 +14,8 @@ use App\Models\StudentQuizzeMistake;
 use App\Models\Question;
 use App\Models\Mcq_ans;
 
+use Carbon\Carbon;
+
 class Stu_MyCourseController extends Controller
 {
     public function index()
@@ -51,33 +53,49 @@ class Stu_MyCourseController extends Controller
     public function stu_chapters($id)
     {
         // New Code
-        // $payment_order = PaymentOrder::where('state', 1)
-        // ->with('chapter')
-        // ->get();
+        $payment_order = PaymentOrder::where('state', 1)
+        ->with('chapter')
+        ->with('pay_req')
+        ->get();
 
-        // $chapters = [];
-        // foreach ($payment_order as $item) {
-        //     $newTime = Carbon::now()->subDays($item->duration);
-        //     if ( $newTime > $item->date ) {
-        //         $chapters[] = $item;
-        //     }
-        // }
-        $payment_request = PaymentRequest::where('user_id', auth()->user()->id)
-            ->where('state', 'Approve')
-            ->get();
+        $chapters = [];
+        foreach ($payment_order as $item) {
+            $newTime = Carbon::now()->subDays($item->duration);
+            if ( $newTime > $item->date && $item->pay_req->user_id == auth()->user()->id ) {
+                $chapters[] = $item;
+            }
+        }
         $course_id = $id;
 
-        return view('Student.MyCourses.Chapters_Working', compact('payment_request', 'course_id'));
+        return view('Student.MyCourses.Chapters_Working', compact('chapters', 'course_id'));
     }
 
     public function stu_lessons($id, $L_id, $idea_num)
     {
-        $payment_request = PaymentRequest::where('user_id', auth()->user()->id)
-            ->where('state', 'Approve')
-            ->get();
-        $chapter_id = $id;
+        $payment_order = PaymentOrder::where('state', 1)
+        ->with('chapter')
+        ->with('pay_req')
+        ->get();
+
+        $chapters = [];
+        $chapter_state = false;
+        foreach ($payment_order as $item) {
+            $newTime = Carbon::now()->subDays($item->duration);
+            if ( $newTime > $item->date && $item->pay_req->user_id == auth()->user()->id && $item->chapter_id == $id ) {
+                $chapter_state = true;
+            }
+        }
+        $course_id = $id;
+        $payment_request = [];
+        if ($chapter_state) {
+            $payment_request = PaymentRequest::where('user_id', auth()->user()->id)
+                ->where('state', 'Approve')
+                ->get();
+        }
+        $chapter_id = $id;  
         return view('Student.MyCourses.Lessons', compact('payment_request', 'chapter_id', 'L_id', 'idea_num'));
-    }
+
+     }
 
     public function stu_quizze($quizze_id)
     {
