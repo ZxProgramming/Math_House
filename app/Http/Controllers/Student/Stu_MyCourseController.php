@@ -119,10 +119,15 @@ class Stu_MyCourseController extends Controller
 
     public function quizze_ans(Request $req)
     {
-         
+        $quizze_id = json_decode($req->quizze)->id;
+        $quizze = quizze::where('id', $quizze_id)
+        ->first();
+        return $req->all();
         $deg = 0;
         $mistakes = [];
+        $total_question = 0;
         foreach ( $req->q_answers as $item ) {
+            $total_question++;
             $mcq_item = json_decode($item);
             $question = Question::where('id', $mcq_item->q_id)
             ->first();
@@ -137,23 +142,21 @@ class Stu_MyCourseController extends Controller
         }
 
        // "":["{\"q_id\":20}","{\"q_id\":1}"],"q_grid_ans":["1","1"]}
-        foreach ( $req->q_grid_answers as $item ) {
-            $grid_item = json_decode($item);
+        for ( $i = 0, $end = count($req->q_grid_answers); $i < $end; $i++ ) {
+            $total_question++;
+            $grid_item = json_decode($req->q_grid_answers[$i]);
             $question = Question::where('id', $grid_item->q_id)
             ->first();
             $grid_ans = @$question->g_ans[0]->grid_ans;
+            $answer = $req->q_grid_ans[$i];
             if ($grid_ans == $answer) {
                 $deg++;
             } else {
                 $mistakes[] = $question;
             }
         }
-        return $mistakes;
-        //_____________________________________________
-        
 
         $right_question = $deg;
-        $total_question = count($quizze->question);
         $deg =  $deg / $total_question * 100;
         $score = ($quizze->score / $total_question) * $right_question;
 
@@ -168,7 +171,7 @@ class Stu_MyCourseController extends Controller
                 'quizze_id' => $quizze->id,
                 'student_id' => auth()->user()->id,
                 'score' => $score,
-                'time' => '$req->time',
+                'time' => $req->timer,
                 'r_questions' => $right_question,
             ]);
 

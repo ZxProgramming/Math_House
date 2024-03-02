@@ -19,6 +19,7 @@ class Stu_ProfileController extends Controller
     public function stu_edit_profile( Request $req ){
         $img_name = null;
         extract($_FILES['image']);
+        $arr = [];
         if( !empty($name) ){
             $extension_arr = ['png', 'jpg', 'jpeg', 'svg', 'webp'];
             $extension = explode('.', $name);

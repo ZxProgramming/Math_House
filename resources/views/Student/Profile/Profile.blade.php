@@ -98,7 +98,7 @@
               <input
                 type="hidden"
                 id="OldPassword"
-                name="password" 
+                name="old_password" 
                 value="{{auth()->user()->password}}"
                 class="form-control"
                 placeholder="Enter Your Old Password"
