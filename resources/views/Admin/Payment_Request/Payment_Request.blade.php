@@ -43,7 +43,7 @@
                 ${{$item->price}}
             </td>
             <td>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalReceipt{{$item->id}}">
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalReceipt{{$item->id}}">
                           view
                         </button>
 
@@ -69,10 +69,10 @@
             <td>
             <div class="mt-3">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalCenter{{$item->id}}">
+                        <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalCenter{{$item->id}}">
                           Approve
                         </button>
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalRejected{{$item->id}}">
+                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalRejected{{$item->id}}">
                           Rejected
                         </button>
 

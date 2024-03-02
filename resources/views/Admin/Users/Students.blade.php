@@ -157,7 +157,7 @@
                     </td>
 
                     <td>
-                        <button class='btn btn-primary show_history'>
+                        <button class='btn btn-primary btn-sm show_history'>
                             View
                         </button>
                         <div class="history d-none">
@@ -175,10 +175,10 @@
                             $total = 0;
                         @endphp
 
-                            <button type="button" class="btn btn-primary show_wallet">
+                            <button type="button" class="btn btn-sm btn-primary show_wallet">
                                 View
                             </button>
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
                                 data-bs-target="#modalCenter{{ $item->id }}">
                                 Top up
                             </button>
@@ -230,11 +230,11 @@
                     <td>
                         <div class="mt-3">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#modalCenterEdit{{ $item->id }}">
                                 Edit
                             </button>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#modalDeleteEdit{{ $item->id }}">
                                 Delete
                             </button>

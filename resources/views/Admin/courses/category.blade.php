@@ -89,7 +89,8 @@
                                             <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
                                                 <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_customers_table .form-check-input" value="1">
                                             </div>
-                                        </th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Customer Name: activate to sort column ascending" style="width: 162.262px;">Category Name</th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending" style="width: 200.887px;">Descreptions</th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Company: activate to sort column ascending" style="width: 178.387px;">Image</th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Payment Method: activate to sort column ascending" style="width: 162.262px;">CREATED DATE</th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Created Date: activate to sort column ascending" style="width: 210.887px;">UPDATED DATE</th><th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 124.512px;">Actions</th></tr>
+                                        </th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Customer Name: activate to sort column ascending" style="width: 162.262px;">Category Name</th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending" style="width: 200.887px;">Descreptions</th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Company: activate to sort column ascending" style="width: 178.387px;">Image</th>
+                                        <th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 124.512px;">Actions</th></tr>
                                 </thead>
                                 <tbody class="fw-semibold text-gray-600">
                         
@@ -121,16 +122,14 @@
                                   
                                   
                                     <td data-filter="mastercard">
-                                    <img src="assets/media/svg/card-logos/mastercard.svg" class="w-35px me-3" alt="">{{ $category->updated_at }}</td>
-                                    <td data-order="2020-12-14T20:43:00+02:00">{{ $category->created_at }}</td>
                                     <td class="text-end">
                                             <div class="menu-item px-3">
-                                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_invite_friends{{ $category->id }}">Edit</button>
+                                                <button class="btn btn-primary  btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_invite_friends{{ $category->id }}">Edit</button>
                                             </div>
                                             <!--end::Menu item-->
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-3">
-                                                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#kt_del_btn{{ $category->id }}">Delete</button>
+                                                <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#kt_del_btn{{ $category->id }}">Delete</button>
                                             </div>
                                             <!--end::Menu item-->
                                         <!--end::Menu-->

@@ -5,10 +5,10 @@
   }
 @endphp
 <x-default-layout>
-@include('Admin.Users.admin_header')
+@include('Admin.Users.role_admin_header')
     @section('title','Role Admin')
 
-<div class="px-4">
+<div class="px-5">
   <table id="kt_profile_overview_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable no-footer">
       <thead class="fs-7 text-gray-500 text-uppercase">
           <tr>
@@ -40,10 +40,10 @@
               <td>
               <div class="mt-3">
                           <!-- Button trigger modal -->
-                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter{{$item->id}}">
+                          <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalCenter{{$item->id}}">
                             Edit
                           </button>
-                          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{$item->id}}">
+                          <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalDelete{{$item->id}}">
                             Delete
                           </button>
 

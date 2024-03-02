@@ -250,11 +250,11 @@
                     <td>
                         <div class="mt-3">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#modalCenter{{ $lesson->id }}">
                                 Edit
                             </button>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#modalDelete{{ $lesson->id }}">
                                 Delete
                             </button>

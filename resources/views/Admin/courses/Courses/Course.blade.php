@@ -90,11 +90,11 @@
                     <td>
                         <div class="mt-3">
                             <!-- Button trigger modal -->
-                            <button type="button" id="{{ $item->id }}" class="btn btn-primary btn-edit"
+                            <button type="button" id="{{ $item->id }}" class="btn btn-primary btn-edit  btn-sm"
                                 data-bs-toggle="modal" data-bs-target="#modalCenter{{ $item->id }}">
                                 Edit
                             </button>
-                            <button type="button"id="{{ $item->id }}" class="btn btn-danger"
+                            <button type="button"id="{{ $item->id }}" class="btn btn-danger btn-sm"
                                 data-bs-toggle="modal" data-bs-target="#modalDelete{{ $item->id }}">
                                 Delete
                             </button>

@@ -52,10 +52,10 @@
             <td>
             <div class="mt-3">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ApproveModal{{$item->id}}">
+                        <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#ApproveModal{{$item->id}}">
                           Approve
                         </button>
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#RejectedModal{{$item->id}}">
+                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#RejectedModal{{$item->id}}">
                           Rejected
                         </button>
 

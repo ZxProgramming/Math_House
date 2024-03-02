@@ -131,12 +131,12 @@
                 </td>
                 <td class="sorting_1">
                     <div class="menu-item px-3">
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_invite_friends{{ $item->id }}">Edit</button>
+                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_invite_friends{{ $item->id }}">Edit</button>
                     </div>
                     <!--end::Menu item-->
                     <!--begin::Menu item-->
                     <div class="menu-item px-3">
-                        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#kt_del_btn{{ $item->id }}">Delete</button>
+                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#kt_del_btn{{ $item->id }}">Delete</button>
                     </div>
                 </td>
             </tr>

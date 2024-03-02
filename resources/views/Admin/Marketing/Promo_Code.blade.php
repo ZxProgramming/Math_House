@@ -156,10 +156,10 @@
             <td>
                 <div class="mt-3">
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Edit{{$item->id}}">
+                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#Edit{{$item->id}}">
                     Edit
                 </button>
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#Reject{{$item->id}}">
+                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#Reject{{$item->id}}">
                     Delete
                 </button>
 

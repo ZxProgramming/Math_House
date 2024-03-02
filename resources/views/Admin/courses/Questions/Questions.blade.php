@@ -888,10 +888,10 @@
                     </td>
                     <td>
                         <div class="mt-3">
-                            <button type="button" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#kt_modal_edit{{ $question->id }}">Edit</button>
 
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#modalDelete{{ $question->id }}">
                                 Delete
                             </button>
