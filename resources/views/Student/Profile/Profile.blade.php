@@ -12,7 +12,7 @@
       
     <h5 class="card-header">Profile : {{  auth()->user()->name }}</h5>
     <!-- Account -->
-    
+    @include('success')
       <form id="formAccountSettings" action="{{ route('stu_edit_profile') }}" method="POST" enctype="multipart/form-data" >
           @csrf
           <input type="hidden" name="id" value = {{ auth()->user()->id }}>
@@ -54,7 +54,7 @@
               id="firstName"
               value="{{ auth()->user()->name }}"
               placeholder="{{ auth()->user()->name }}"
-              readonly
+              name="name"
             />
           </div>
          
@@ -65,7 +65,7 @@
               type="text"
               id="email"
               value="{{ auth()->user()->email }}"
-              readonly />
+              name="email" />
           </div>
           
           <div class="mb-3 col-md-6">
@@ -77,7 +77,7 @@
                 id="phoneNumber"
                 class="form-control"
                 value="{{ auth()->user()->phone }}"
-                readonly />
+                name="phone" />
             </div>
           </div>
 

@@ -19,7 +19,14 @@ class Stu_ProfileController extends Controller
     public function stu_edit_profile( Request $req ){
         $img_name = null;
         extract($_FILES['image']);
-        $arr = [];
+        $user = User::where('id', '!=', auth()->user()->id)
+        ->where('email', $req->email)
+        ->first();
+        if ( !empty($user) ) {
+            session()->flash('faild', 'Email Is Exist Please Change It');
+            return redirect()->back();
+        }
+        $arr = $req->only('name', 'email', 'phone');
         if( !empty($name) ){
             $extension_arr = ['png', 'jpg', 'jpeg', 'svg', 'webp'];
             $extension = explode('.', $name);
@@ -33,6 +40,7 @@ class Stu_ProfileController extends Controller
            
         }
         $emails = [];
+        
         if ( !empty($req->password) ) {
             $arr['password'] = bcrypt($req->password);
         }
