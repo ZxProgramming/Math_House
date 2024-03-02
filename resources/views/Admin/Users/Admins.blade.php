@@ -25,6 +25,7 @@
     @enderror
  @include('success')
  
+ <div class="px-4">
 <div class='my-3'>
   <form class='d-flex' action="{{route('admin_filter')}}" method='POST'>
     @csrf
@@ -199,7 +200,7 @@
     
     </tbody>
 </table>
-
+ </div>
 
 
 
