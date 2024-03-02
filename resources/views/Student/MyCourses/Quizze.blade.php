@@ -579,7 +579,8 @@
         </div>
     </header>
     <main>
-        <form action="" style="width: 100%;">
+        <form action="{{route('quizze_ans')}}" method="POST" style="width: 100%;">
+            @csrf
             <div class="main-wrapper">
                 @foreach ($quizze->question as $question)
                     <div class="question">

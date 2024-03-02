@@ -5,89 +5,61 @@
   }
 @endphp
 <x-default-layout>
-    @section('title','Payout')
-
-	<!--begin::Action-->
-    <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_create_campaign">Payout Filter</a>
-    <!--end::Action-->
-    
-    <div class="modal fade" id="kt_modal_create_campaign" tabindex="-1" aria-hidden="true">
-        <!--begin::Modal dialog-->
-        <div class="modal-dialog modal-fullscreen p-9">
-            <!--begin::Modal content-->
-            <div class="modal-content modal-rounded">
-                <!--begin::Modal header-->
-                <div class="modal-header py-7 d-flex justify-content-between">
-                    <!--begin::Modal title-->
-                    <h2>Questions Filter</h2>
-                    <!--end::Modal title-->
-                    <!--begin::Close-->
-                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                        <i class="ki-duotone ki-cross fs-1">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </div>
-                    <!--end::Close-->
-                </div>
-                <!--begin::Modal header-->
-                <!--begin::Modal body-->
-            <form action="{{route('filter_payment')}}" method="POST">
-                @csrf
-                <div class="modal-body scroll-y m-5">
-                    <div class="d-flex">
-                    <!--begin::Input group-->
-                    <div class="mb-10 fv-row w-300px mx-2"> 
-                        <!--begin::Label-->
-                        <label class="required form-label mb-3">Payment Method</label>
-                        <!--end::Label-->
-                        <!--begin::Input-->
-                        <select name="payment_id" class="form-control sel_cate">
-                            <option disabled selected>
-                                Select Payment Method
-                            </option>
-                            @foreach($payments as $payment)
-                            <option value="{{$payment->id}}">
-                                {{$payment->payment}}
-                            </option>
-                            @endforeach
-                        </select>
-                        <!--end::Input-->
-                    </div>
-                    <!--end::Input group--> 
-                    <!--begin::Input group-->
-                    <div class="mb-10 fv-row w-300px mx-2"> 
-                        <!--begin::Label-->
-                        <label class="required form-label mb-3">Date From</label>
-                        <!--end::Label-->
-                        <!--begin::Input-->
-                        <input class="form-control" type="date" name="date_from" />
-                        <!--end::Input-->
-                    </div>
-                    <!--end::Input group--> 
-                    
-                    <!--begin::Input group-->
-                    <div class="mb-10 fv-row w-300px mx-2"> 
-                        <!--begin::Label-->
-                        <label class="required form-label mb-3">Date To</label>
-                        <!--end::Label-->
-                        <!--begin::Input-->
-                        <input class="form-control" type="date" name="date_to" />
-                        <!--end::Input-->
-                    </div>
-                    <!--end::Input group--> 
-                    
-                    </div>
-
-                    <button class="btn btn-primary">
-                        Filter
-                    </button>
-                </div>
-            </form>
-                <!--begin::Modal body-->
+    @section('title','Payout') 
+    <!--begin::Modal body-->
+    <form action="{{route('filter_payment')}}" method="POST">
+        @csrf
+        <div class="modal-body scroll-y m-5">
+            <div class="d-flex align-items-center">
+            <!--begin::Input group-->
+            <div class="mb-10 fv-row w-300px mx-2"> 
+                <!--begin::Label-->
+                <label class="required form-label mb-3">Payment Method</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <select name="payment_id" class="form-control sel_cate">
+                    <option disabled selected>
+                        Select Payment Method
+                    </option>
+                    @foreach($payments as $payment)
+                    <option value="{{$payment->id}}">
+                        {{$payment->payment}}
+                    </option>
+                    @endforeach
+                </select>
+                <!--end::Input-->
             </div>
+            <!--end::Input group--> 
+            <!--begin::Input group-->
+            <div class="mb-10 fv-row w-300px mx-2"> 
+                <!--begin::Label-->
+                <label class="required form-label mb-3">Date From</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input class="form-control" type="date" name="date_from" />
+                <!--end::Input-->
+            </div>
+            <!--end::Input group--> 
+            
+            <!--begin::Input group-->
+            <div class="mb-10 fv-row w-300px mx-2"> 
+                <!--begin::Label-->
+                <label class="required form-label mb-3">Date To</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input class="form-control" type="date" name="date_to" />
+                <!--end::Input-->
+            </div>
+            <!--end::Input group--> 
+            
+            <button class="btn btn-primary">
+                Filter
+            </button>
+            </div>
+
         </div>
-    </div>
+    </form>
+        <!--begin::Modal body-->
 
 <table id="kt_profile_overview_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable no-footer">
     <thead class="fs-7 text-gray-500 text-uppercase">

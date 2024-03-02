@@ -95,7 +95,7 @@ class Stu_MyCourseController extends Controller
         $chapter_id = $id;  
         return view('Student.MyCourses.Lessons', compact('payment_request', 'chapter_id', 'L_id', 'idea_num'));
 
-     }
+    }
 
     public function stu_quizze($quizze_id)
     {
@@ -119,30 +119,38 @@ class Stu_MyCourseController extends Controller
 
     public function quizze_ans(Request $req)
     {
-        return $req->all();
-        $quizze = quizze::where('id', $req->quizze_id)
-            ->first();
+         
         $deg = 0;
         $mistakes = [];
-        foreach ($quizze->question as $question) {
-            $answer = $req['ans' . $question->id];
-            $arr = ['A', 'B', 'C', 'D'];
-            if (in_array($answer, $arr)) {
-                $mcq_ans = $question->mcq[0]->mcq_answers;
-                if ($mcq_ans == $answer) {
-                    $deg++;
-                } else {
-                    $mistakes[] = $question;
-                }
+        foreach ( $req->q_answers as $item ) {
+            $mcq_item = json_decode($item);
+            $question = Question::where('id', $mcq_item->q_id)
+            ->first();
+
+            $stu_solve = $question->mcq[0]->mcq_answers;
+            $arr = ['A', 'B', 'C', 'D']; 
+            if ( isset($mcq_item->answer) && $stu_solve == $mcq_item->answer ) {
+                $deg++;
             } else {
-                $grid_ans = @$question->g_ans[0]->grid_ans;
-                if ($grid_ans == $answer) {
-                    $deg++;
-                } else {
-                    $mistakes[] = $question;
-                }
+                $mistakes[] = $question;
             }
         }
+
+       // "":["{\"q_id\":20}","{\"q_id\":1}"],"q_grid_ans":["1","1"]}
+        foreach ( $req->q_grid_answers as $item ) {
+            $grid_item = json_decode($item);
+            $question = Question::where('id', $grid_item->q_id)
+            ->first();
+            $grid_ans = @$question->g_ans[0]->grid_ans;
+            if ($grid_ans == $answer) {
+                $deg++;
+            } else {
+                $mistakes[] = $question;
+            }
+        }
+        return $mistakes;
+        //_____________________________________________
+        
 
         $right_question = $deg;
         $total_question = count($quizze->question);
