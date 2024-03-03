@@ -121,7 +121,9 @@ Route::middleware(['auth','auth.Admin'])->prefix('Admin')->group(function(){
     // Payment Request
     Route::controller(PaymentRequestController::class)->group(function(){
         Route::get('/PenddingPayment','pendding_payment')->name('pendding_payment');
+        Route::post('/PenddingPayment','filter_pendding_payment')->name('filter_pendding_payment');
         Route::get('/PaymentRequest','payment_request')->name('payment_request');
+        Route::post('/PaymentRequest','filter_payment_req')->name('filter_payment_req');
         Route::get('/ApprovePayment/{id}','approve_payment')->name('approve_payment');
         Route::get('/RejectedPayment/{id}','rejected_payment')->name('rejected_payment');
     });
@@ -239,6 +241,8 @@ Route::controller(QuestionController::class)->group(function(){
 Route::controller(CourseSettingController::class)->group(function(){
     Route::get('/Courses/CodeExam','course_setting')->name('course_setting');
     Route::post('/Courses/CodeExam/Add','code_exam_add')->name('code_exam_add');
+    Route::post('/Courses/CodeExam/Edit/{id}','examCodeEdit')->name('examCodeEdit');
+    Route::get('/Courses/CodeExam/Del/{id}','examCodeDelete')->name('examCodeDelete');
 });
 
 // Diagnostic Exam 

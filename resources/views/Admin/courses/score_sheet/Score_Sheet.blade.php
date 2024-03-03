@@ -210,7 +210,7 @@
                             </div>
                             <!--end::Heading-->
                          
-                            <form action="{{ route('scoreEdit', ['id', $item->id]) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('scoreEdit', ['id' => $item->id]) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             
 

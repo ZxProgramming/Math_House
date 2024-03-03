@@ -22,13 +22,89 @@ class PaymentRequestController extends Controller
         return view('Admin.Payment_Request.Payment_Request', compact('payment'));
     }
 
+    public function filter_payment_req( Request $req ){
+        
+        $payment = PaymentRequest::
+        where('state', '!=', 'Pendding')
+        ->orderByDesc('id')
+        ->get();
+        $data = $payment;
+        if ( !empty($req->from) ) {
+            $data = [];
+            foreach ( $payment as $item ) {
+                if ( $item->created_at >= $req->from ) {
+                    $data[] = $item;
+                }
+            }
+            $payment = $data;
+        }
+        if ( !empty($req->to) ) {
+            $data = [];
+            foreach ( $payment as $item ) {
+                if ( $item->created_at <= $req->to ) {
+                    $data[] = $item;
+                }
+            }
+            $payment = $data;
+        }
+        if ( !empty($req->state) ) {
+            $data = [];
+            foreach ( $payment as $item ) {
+                if ( $item->state == $req->state ) {
+                    $data[] = $item;
+                }
+            }
+            $payment = $data;
+        }
+
+        return view('Admin.Payment_Request.Payment_Request', compact('payment'));
+    }
+
+    public function filter_pendding_payment( Request $req ){
+        
+        $payment = PaymentRequest::
+        where('state', 'Pendding')
+        ->orderByDesc('id')
+        ->get();
+        $data = $payment;
+        if ( !empty($req->from) ) {
+            $data = [];
+            foreach ( $payment as $item ) {
+                if ( $item->created_at >= $req->from ) {
+                    $data[] = $item;
+                }
+            }
+            $payment = $data;
+        }
+        if ( !empty($req->to) ) {
+            $data = [];
+            foreach ( $payment as $item ) {
+                if ( $item->created_at <= $req->to ) {
+                    $data[] = $item;
+                }
+            }
+            $payment = $data;
+        }
+        if ( !empty($req->state) ) {
+            $data = [];
+            foreach ( $payment as $item ) {
+                if ( $item->state == $req->state ) {
+                    $data[] = $item;
+                }
+            }
+            $payment = $data;
+        }
+
+        return view('Admin.Payment_Request.Pendding_Payment', compact('payment'));
+    }
+
     public function pendding_payment(){
         $payment = PaymentRequest::
         where('state', 'Pendding')
         ->orderByDesc('id')
         ->get();
         
-        return view('Admin.Payment_Request.Payment_Request', compact('payment'));
+        return view('Admin.Payment_Request.Pendding_Payment', compact('payment'));
     }
 
     public function approve_payment( $id ){
