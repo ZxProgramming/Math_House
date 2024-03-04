@@ -32,6 +32,7 @@ use App\Http\Controllers\Visitor\AboutController;
 use App\Http\Controllers\Visitor\V_ExamController;
 use App\Http\Controllers\Visitor\V_QuestionController;
 use App\Http\Controllers\Visitor\V_LiveController;
+use App\Http\Controllers\Visitor\V_DiaExamController;
 use App\Http\Controllers\Visitor\CoursesController as V_CoursesController;
 
 use App\Http\Controllers\login\LoginController;
@@ -65,6 +66,13 @@ use Illuminate\Support\Facades\Route;
     
     Route::get('/', [HomeController::class, 'index'])->name('home');
     
+    Route::controller(V_DiaExamController::class)->group(function(){
+        Route::get('/DiaExam', 'index')->name('v_dia_cate');
+        Route::post('/DiaExam/Answer/{id}', 'dia_exam_ans')->name('dia_exam_ans');
+        Route::get('/DiaExam/Course/{id}', 'v_dia_courses')->name('v_dia_courses');
+        Route::get('/DiaExam/Exam/{id}', 'v_dia_exam')->name('v_dia_exam');
+        Route::get('/DiaExam/History', 'dia_exam_history')->name('dia_exam_history');
+    });
     Route::controller(V_QuestionController::class)->group(function(){
         Route::get('/Question', 'v_question')->name('v_question');
         Route::post('/Question', 'v_filter_question')->name('v_filter_question');

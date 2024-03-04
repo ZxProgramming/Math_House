@@ -24,7 +24,7 @@
 		                <a href="{{route('categories')}}"><span class="title">Courses</span></a>
 		            </li>
 		            <li>
-		                <a href="#"><span class="title">Diagnostic Exam</span></a>
+		                <a href="{{route('v_dia_cate')}}"><span class="title">Diagnostic Exam</span></a>
 		            </li>
 		            <li>
 		                <a href="{{route('v_exams')}}"><span class="title">Exams</span></a>

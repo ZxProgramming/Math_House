@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Course;
-use App\Models\DiaQuestion;
+use App\Models\Question;
 
 class DiagnosticExam extends Model
 {
@@ -30,7 +30,7 @@ class DiagnosticExam extends Model
     }
 
     public function question(){
-        return $this->hasMany(DiaQuestion::class, 'daiExam_id');
+        return $this->belongsToMany(Question::class, 'dia_questions');
     }
 
 }
