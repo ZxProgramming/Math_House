@@ -24,7 +24,7 @@
                                     data-target="#app-email-sidebar" data-overlay=""></i>
                                 <div class="mb-0 mb-lg-2 w-100">
                                     <div class="d-flex justify-content-center">
-                                        @if ($deg >= ($exam->pass_score / $exam->score) * 100)
+                                        @if ($grade)
                                             <button class="btn btn-success">
                                                 Success
                                             </button>
@@ -65,8 +65,8 @@
                                     <td>Wrong Question : </td>
                                     <td>{{ $total_question - $right_question }}</td>
                                 </tr>
-                                <tr colspan="2">
-                                    <td class="d-flex justify-content-center">
+                                <tr>
+                                    <td colspan="2" class="d-flex justify-content-center">
                                         <button class="btn btn-primary mistake_btn">
                                             View Mistakes
                                         </button>
@@ -84,22 +84,22 @@
 </div>
 
 
-<div class="app-email card my-3 mistakes_questions">
+<div class="app-email card my-3 mistakes_questions d-none">
     <div class="border-0">
         <div class="row g-0  p-3 align-items-center">
             @foreach ( $mistakes as $item )
-                @if ( !empty($item->question) )
-                {{$item->question}}
-                @endif
-                @if ( !empty($item->q_url) )
-                <img style="width: 200px; height: 200px;"
-                    src="{{ asset('images/questions/' . $item->q_url) }}" />
-                @endif
-                <br />
-                <div class="text-success">
-                Chapter => {{$item->lessons->chapter->chapter_name}}
-                </div>
-                <hr />
+                <table class="table">
+                    <tr>
+                        <td>
+                        Chapter => {{$item->lessons->chapter->chapter_name}}
+                        </td>
+                        <td>
+                            <a href="" class="btn btn-primary">
+                                Buy
+                            </a>
+                        </td>
+                    </tr>
+                </table>
             @endforeach
         </div>
     </div>

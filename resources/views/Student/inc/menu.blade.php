@@ -22,7 +22,7 @@
                             </li>
 
                             <li class="mega__menu position-static">
-                                <a class="headerarea__has__dropdown" href="#">Diagnostic Exam</a>
+                                <a class="headerarea__has__dropdown" href="{{route('v_dia_cate')}}">Diagnostic Exam</a>
                             </li>
 
                             <li class="mega__menu position-static">

@@ -75,7 +75,7 @@ class V_DiaExamController extends Controller
                 if ( isset($mcq_item->answer) && $stu_solve == $mcq_item->answer ) {
                     $deg++;
                 } else {
-                    $mistakes[] = $question;
+                    $mistakes[$question->lessons->chapter->course->id] = $question;
                 }
             }
         }
@@ -92,7 +92,7 @@ class V_DiaExamController extends Controller
                 if ($grid_ans == $answer) {
                     $deg++;
                 } else {
-                    $mistakes[] = $question;
+                    $mistakes[$question->lessons->chapter->course->id] = $question;
                 }
             }
         }
@@ -102,8 +102,8 @@ class V_DiaExamController extends Controller
         where('score_id', $exam->score_id)
         ->where('question_num', $right_question)
         ->first();
-        $score = $score->score;
-
+        $score = $right_question == 0 ? 0 : $score->score;
+        $grade = $exam->pass_score < $score ? true : false;
         $deg =  $deg / $total_question * 100;
 
         $stu_q = DiagnosticExamsHistory::where('user_id', auth()->user()->id)
@@ -128,7 +128,7 @@ class V_DiaExamController extends Controller
             }
         }
 
-        return view('Visitor.Dia_Exam.Grade', compact('deg', 'score', 'exam', 'right_question', 'total_question', 'mistakes'));
+        return view('Visitor.Dia_Exam.Grade', compact('deg', 'grade', 'score', 'exam', 'right_question', 'total_question', 'mistakes'));
     }
 
     public function dia_exam_history(){
