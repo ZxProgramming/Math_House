@@ -11,6 +11,7 @@ use App\Models\DiagnosticExam;
 use App\Models\Question;
 use App\Models\DiagnosticExamsHistory;
 use App\Models\DaiExamMistake;
+use App\Models\ScoreList;
 
 class V_DiaExamController extends Controller
 {
@@ -97,8 +98,13 @@ class V_DiaExamController extends Controller
         }
 
         $right_question = $deg;
+        $score = ScoreList::
+        where('score_id', $exam->score_id)
+        ->where('question_num', $right_question)
+        ->first();
+        $score = $score->score;
+
         $deg =  $deg / $total_question * 100;
-        $score = ($exam->score / $total_question) * $right_question;
 
         $stu_q = DiagnosticExamsHistory::where('user_id', auth()->user()->id)
             ->where('diagnostic_exams_id', $req->quizze_id)

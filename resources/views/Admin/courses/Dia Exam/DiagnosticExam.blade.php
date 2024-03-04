@@ -250,6 +250,20 @@
                   </div>
 
                   <div class="col-md-12 d-flex align-items-center justify-content-around">
+                    <span class="col-md-2" style="font-size: 1.2rem;">Score Name: </span>
+                    <select class="col-md-9 form-control" name="score_id">
+                      <option disabled selected>
+                        Select Score Name ...
+                      </option>
+                      @foreach ($scores as $score)
+                          <option value="{{$score->id}}">
+                            {{$score->name}}
+                          </option>
+                      @endforeach
+                    </select>
+                  </div>
+
+                  <div class="col-md-12 d-flex align-items-center justify-content-around">
                     <span class="col-md-2" style="font-size: 1.2rem;">Total Score: </span>
                     <input type="text" name="score" class="col-md-9 form-control">
                   </div>
@@ -533,6 +547,20 @@
                                   </div>
 
                                   <div class="col-md-12 d-flex align-items-center justify-content-around">
+                                    <span class="col-md-2" style="font-size: 1.2rem;">Score Name: </span>
+                                    <select class="col-md-9 form-control" name="score_id">
+                                      <option value="{{$item->score_id}}">
+                                        {{$item->dia_score->name}}
+                                      </option>
+                                      @foreach ($scores as $score)
+                                          <option value="{{$score->id}}">
+                                            {{$score->name}}
+                                          </option>
+                                      @endforeach
+                                    </select>
+                                  </div>
+
+                                  <div class="col-md-12 d-flex align-items-center justify-content-around">
                                     <span class="col-md-2" style="font-size: 1.2rem;">Total Score: </span>
                                     <input type="text" name="score" value="{{ $item->score }}" class="col-md-9 form-control">
                                   </div>
@@ -707,13 +735,13 @@
                                             <td style="font-weight: 500; font-size: 1.1rem">
                                               {{$loop->iteration}}
                                             </td>
-                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->q_type}}</td>
-                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->year	}}</td>
-                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->month}}</td>
-                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->q_code}}</td>
-                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->section}}</td>
-                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->q_num}}</td>
-                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->difficulty}}</td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->q_type}}</td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->year	}}</td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->month}}</td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->q_code}}</td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->section}}</td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->q_num}}</td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->difficulty}}</td>
                                             <td style='width: 150px !important; padding: 0 !important;'>
                                               <button type='button' class='remove_qz_edit'>Remove</button>
                                             </td>

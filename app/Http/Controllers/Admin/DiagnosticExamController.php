@@ -11,6 +11,7 @@ use App\Models\Category;
 use App\Models\Course;
 use App\Models\DiagnosticExam;
 use App\Models\DiaQuestion;
+use App\Models\ScoreSheet;
 
 class DiagnosticExamController extends Controller
 {
@@ -20,13 +21,14 @@ class DiagnosticExamController extends Controller
         ->leftJoin('lessons', 'questions.lesson_id', '=', 'lessons.id')
         ->leftJoin('chapters', 'lessons.chapter_id', '=', 'chapters.id')
         ->leftJoin('courses', 'chapters.course_id', '=', 'courses.id')
-        ->get();;
+        ->get();
         $exams = DiagnosticExam::all();
         $categories = Category::all();
         $courses = Course::all();
+        $scores = ScoreSheet::all();
 
         return view('Admin.courses.Dia Exam.DiagnosticExam', 
-        compact('questions', 'exams', 'categories', 'courses'));
+        compact('questions', 'exams', 'categories', 'courses', 'scores'));
     }
 
     public function dia_exam_data( Request $req ){
@@ -62,13 +64,13 @@ class DiagnosticExamController extends Controller
 
     public function add_diaexam( Request $req ){ 
         $questions = json_decode($req->ques_id);
-       $arr = $req->only('title', 'description', 'score', 'pass_score', 'course_id');
+       $arr = $req->only('title', 'description', 'score', 'pass_score', 'course_id', 'score_id', 'state');
        $arr['time'] = $req->time_h . 'Hours ' . $req->time_m . ' M';
        $dia_exam = DiagnosticExam::create($arr);
        foreach ($questions as $ques) {
         DiaQuestion::create([
-            'daiExam_id' => $dia_exam->id,
-            'ques_id' => $ques->id,
+            'diagnostic_exam_id' => $dia_exam->id,
+            'question_id' => $ques->id,
         ]);
        }
 
