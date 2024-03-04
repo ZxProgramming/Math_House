@@ -51,7 +51,7 @@
                                 </tr>
                                 <tr>
                                     <td>Score : </td>
-                                    <td>{{ $deg }} %</td>
+                                    <td>{{ $score }} </td>
                                 </tr>
                                 <tr>
                                     <td>Total Question : </td>

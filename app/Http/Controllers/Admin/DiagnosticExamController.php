@@ -77,4 +77,17 @@ class DiagnosticExamController extends Controller
        return redirect()->back();
     }
 
+    public function edit_dia_exam( $id, Request $req){
+        $questions = json_decode($req->ques_id);
+       $arr = $req->only('title', 'description', 'score', 'pass_score', 'course_id', 'score_id');
+       $arr['state'] = isset($req->state) ? 1 : 0;
+       $arr['time'] = $req->time_h . 'Hours ' . $req->time_m . ' M';
+       $dia_exam = DiagnosticExam::
+       where('id', $id)
+       ->update($arr);
+       
+
+       return redirect()->back();
+    }
+
 }

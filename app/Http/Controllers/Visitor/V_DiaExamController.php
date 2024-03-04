@@ -128,7 +128,7 @@ class V_DiaExamController extends Controller
             }
         }
 
-        return view('Visitor.Dia_Exam.Grade', compact('deg', 'exam', 'right_question', 'total_question', 'mistakes'));
+        return view('Visitor.Dia_Exam.Grade', compact('deg', 'score', 'exam', 'right_question', 'total_question', 'mistakes'));
     }
 
     public function dia_exam_history(){

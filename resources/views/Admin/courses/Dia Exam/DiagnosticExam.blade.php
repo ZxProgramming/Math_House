@@ -501,7 +501,7 @@
                 <div class="modal fade modal_edit" id="modalCenter{{$item->id}}" style="transform: translate(20px, 0px); " tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" style="max-width: 1300px !important; display: flex;align-items: center;justify-content: center;" role="document">
                     <div class="modal-content" style="border-radius: 15px;">
-                      <form action="{{route('edit_quizze', ['id' => $item->id])}}" method="POST">
+                      <form action="{{route('edit_dia_exam', ['id' => $item->id])}}" method="POST">
                       @csrf
                       <input type="hidden" class="questions_data" name="ques_id" />
                         <div class="modal-header" style="border-bottom: 0 !important;">
