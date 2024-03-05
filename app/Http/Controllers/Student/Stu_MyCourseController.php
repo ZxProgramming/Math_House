@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Student;
 
+use Illuminate\Support\Facades\Cache;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Marketing;
@@ -13,6 +15,7 @@ use App\Models\StudentQuizze;
 use App\Models\StudentQuizzeMistake;
 use App\Models\Question;
 use App\Models\Mcq_ans;
+use App\Models\Chapter;
 
 use Carbon\Carbon;
 
@@ -224,4 +227,59 @@ class Stu_MyCourseController extends Controller
 
         return view('Student.MyCourses.History', compact('history'));
     }
+
+    public function buy_chapter( $id ){
+        
+        $chapters = Chapter::where('id', $id)
+        ->first(); 
+        $prices = $chapters->price;
+        $min = $prices[0]->price;
+        foreach ($prices as $key => $price) {
+            if ( $min > $price->price ) {
+                $min = $price->price;
+            }
+        }
+        $chapters_price = $min;
+        
+        Cache::store('file')->put('marketing', $chapters, 10000);
+        Cache::store('file')->put('chapters_price', $chapters_price, 10000);
+         
+        if ( empty(auth()->user()) ) {
+            return view('Visitor.Login.login');
+        }
+        else{
+            $chapters = [$chapters];
+            return view('Visitor.Cart', compact('chapters', 'chapters_price'));
+        }
+    }
+
+    public function dia_buy_chapters( Request $req ){
+        $ids = json_decode($req->ids);
+        $chapters = Chapter::whereIn('id', $ids)
+        ->get();
+        $chapters_price = 0;
+        
+        foreach ($chapters as $key => $chapter) {
+            $prices = $chapter->price;
+            $min = $prices[0]->price;
+            foreach ($prices as $key => $price) {
+                if ( $min > $price->price ) {
+                    $min = $price->price;
+                }
+            }
+            $chapters_price+= $min;
+        }
+        
+        Cache::store('file')->put('marketing', $chapters, 10000);
+        Cache::store('file')->put('chapters_price', $chapters_price, 10000);
+         
+        if ( empty(auth()->user()) ) {
+            return view('Visitor.Login.login');
+        }
+        else{
+            $chapters = $chapters;
+            return view('Visitor.Cart', compact('chapters', 'chapters_price'));
+        }
+    }
+
 }

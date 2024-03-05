@@ -9,6 +9,7 @@ use App\Models\Question;
 use App\Models\quizze;
 use App\Models\Category;
 use App\Models\Course;
+use App\Models\Chapter;
 use App\Models\DiagnosticExam;
 use App\Models\DiaQuestion;
 use App\Models\ScoreSheet;
@@ -89,5 +90,6 @@ class DiagnosticExamController extends Controller
 
        return redirect()->back();
     }
+
 
 }

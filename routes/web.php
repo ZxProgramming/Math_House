@@ -331,6 +331,8 @@ Route::middleware(['auth','auth.student'])->prefix('student')->group(function(){
         Route::get('/Quizze/Parallel/{id}','question_parallel')->name('question_parallel');
         Route::post('/Quizze/Solve_Parallel/{id}','solve_parallel')->name('solve_parallel');
         Route::get('/HistoryQuizze','quizze_history')->name('quizze_history');
+        Route::get('/Buy_Chapter/{id}','buy_chapter')->name('buy_chapter');
+        Route::post('/Buy_Chapters','dia_buy_chapters')->name('dia_buy_chapters');
     });
     
 });

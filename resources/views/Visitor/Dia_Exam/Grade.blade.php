@@ -87,6 +87,9 @@
 <div class="app-email card my-3 mistakes_questions d-none">
     <div class="border-0">
         <div class="row g-0  p-3 align-items-center">
+            @php
+                $arr_id = [];
+            @endphp
             @foreach ( $mistakes as $item )
                 <table class="table">
                     <tr>
@@ -94,13 +97,24 @@
                         Chapter => {{$item->lessons->chapter->chapter_name}}
                         </td>
                         <td>
-                            <a href="" class="btn btn-primary">
+                            <a href="{{route('buy_chapter', ['id' => $item->lessons->chapter->id])}}" class="btn btn-primary">
                                 Buy
                             </a>
+                            @php
+                                $arr_id[] = $item->lessons->chapter->id;
+                            @endphp
                         </td>
                     </tr>
                 </table>
             @endforeach
+
+            <form action="{{route('dia_buy_chapters')}}" method="POST">
+                @csrf
+                <input type="hidden" name="ids" value="{{json_encode($arr_id)}}" />
+                <button class="btn btn-primary mb-5">
+                    Buy All
+                </button>
+            </form>
         </div>
     </div>
 </div>

@@ -84,11 +84,11 @@ class CoursesController extends Controller
         Cache::forget('min_price_data');
         Cache::store('file')->put('marketing', $course, 10000);
         Cache::store('file')->put('chapters_price', $min_price, 10000);
-        Cache::store('file')->put('min_price_data', $min_price_data, 10000);
         if ( empty(auth()->user()) && $min_price == $req->chapters_price ) {
             return view('Visitor.Login.login');
         }
         elseif ( $min_price == $req->chapters_price ) {
+            Cache::store('file')->put('min_price_data', $min_price_data, 10000);
             return view('Visitor.Cart.Course_Cart', compact('course', 'min_price', 'min_price_data'));
         }
         
