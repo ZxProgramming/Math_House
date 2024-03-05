@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 04, 2024 at 11:14 AM
+-- Generation Time: Mar 05, 2024 at 10:51 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -877,7 +877,155 @@ INSERT INTO `dai_exam_mistakes` (`id`, `student_exam_id`, `question_id`, `create
 (274, 21, 20, '2024-03-04', '2024-03-04'),
 (275, 21, 20, '2024-03-04', '2024-03-04'),
 (276, 21, 20, '2024-03-04', '2024-03-04'),
-(277, 21, 20, '2024-03-04', '2024-03-04');
+(277, 21, 20, '2024-03-04', '2024-03-04'),
+(278, 22, 19, '2024-03-04', '2024-03-04'),
+(279, 22, 19, '2024-03-04', '2024-03-04'),
+(280, 22, 19, '2024-03-04', '2024-03-04'),
+(281, 22, 19, '2024-03-04', '2024-03-04'),
+(282, 22, 19, '2024-03-04', '2024-03-04'),
+(283, 22, 19, '2024-03-04', '2024-03-04'),
+(284, 22, 19, '2024-03-04', '2024-03-04'),
+(285, 22, 19, '2024-03-04', '2024-03-04'),
+(286, 22, 20, '2024-03-04', '2024-03-04'),
+(287, 22, 20, '2024-03-04', '2024-03-04'),
+(288, 22, 20, '2024-03-04', '2024-03-04'),
+(289, 22, 20, '2024-03-04', '2024-03-04'),
+(290, 22, 20, '2024-03-04', '2024-03-04'),
+(291, 23, 18, '2024-03-04', '2024-03-04'),
+(292, 23, 18, '2024-03-04', '2024-03-04'),
+(293, 23, 18, '2024-03-04', '2024-03-04'),
+(294, 23, 18, '2024-03-04', '2024-03-04'),
+(295, 23, 18, '2024-03-04', '2024-03-04'),
+(296, 23, 1, '2024-03-04', '2024-03-04'),
+(297, 23, 1, '2024-03-04', '2024-03-04'),
+(298, 23, 1, '2024-03-04', '2024-03-04'),
+(299, 23, 1, '2024-03-04', '2024-03-04'),
+(300, 23, 1, '2024-03-04', '2024-03-04'),
+(301, 24, 18, '2024-03-04', '2024-03-04'),
+(302, 24, 18, '2024-03-04', '2024-03-04'),
+(303, 24, 18, '2024-03-04', '2024-03-04'),
+(304, 24, 18, '2024-03-04', '2024-03-04'),
+(305, 24, 18, '2024-03-04', '2024-03-04'),
+(306, 24, 1, '2024-03-04', '2024-03-04'),
+(307, 24, 1, '2024-03-04', '2024-03-04'),
+(308, 24, 1, '2024-03-04', '2024-03-04'),
+(309, 24, 1, '2024-03-04', '2024-03-04'),
+(310, 24, 1, '2024-03-04', '2024-03-04'),
+(311, 25, 19, '2024-03-04', '2024-03-04'),
+(312, 25, 19, '2024-03-04', '2024-03-04'),
+(313, 25, 19, '2024-03-04', '2024-03-04'),
+(314, 25, 19, '2024-03-04', '2024-03-04'),
+(315, 25, 19, '2024-03-04', '2024-03-04'),
+(316, 25, 18, '2024-03-04', '2024-03-04'),
+(317, 25, 18, '2024-03-04', '2024-03-04'),
+(318, 25, 18, '2024-03-04', '2024-03-04'),
+(319, 25, 18, '2024-03-04', '2024-03-04'),
+(320, 25, 20, '2024-03-04', '2024-03-04'),
+(321, 25, 20, '2024-03-04', '2024-03-04'),
+(322, 26, 19, '2024-03-04', '2024-03-04'),
+(323, 26, 19, '2024-03-04', '2024-03-04'),
+(324, 26, 19, '2024-03-04', '2024-03-04'),
+(325, 26, 19, '2024-03-04', '2024-03-04'),
+(326, 26, 19, '2024-03-04', '2024-03-04'),
+(327, 26, 18, '2024-03-04', '2024-03-04'),
+(328, 26, 18, '2024-03-04', '2024-03-04'),
+(329, 26, 18, '2024-03-04', '2024-03-04'),
+(330, 26, 18, '2024-03-04', '2024-03-04'),
+(331, 26, 20, '2024-03-04', '2024-03-04'),
+(332, 26, 20, '2024-03-04', '2024-03-04'),
+(333, 27, 19, '2024-03-04', '2024-03-04'),
+(334, 27, 19, '2024-03-04', '2024-03-04'),
+(335, 27, 19, '2024-03-04', '2024-03-04'),
+(336, 27, 19, '2024-03-04', '2024-03-04'),
+(337, 27, 19, '2024-03-04', '2024-03-04'),
+(338, 27, 18, '2024-03-04', '2024-03-04'),
+(339, 27, 18, '2024-03-04', '2024-03-04'),
+(340, 27, 18, '2024-03-04', '2024-03-04'),
+(341, 27, 18, '2024-03-04', '2024-03-04'),
+(342, 27, 20, '2024-03-04', '2024-03-04'),
+(343, 27, 20, '2024-03-04', '2024-03-04'),
+(344, 28, 19, '2024-03-04', '2024-03-04'),
+(345, 28, 19, '2024-03-04', '2024-03-04'),
+(346, 28, 19, '2024-03-04', '2024-03-04'),
+(347, 28, 19, '2024-03-04', '2024-03-04'),
+(348, 28, 19, '2024-03-04', '2024-03-04'),
+(349, 28, 18, '2024-03-04', '2024-03-04'),
+(350, 28, 18, '2024-03-04', '2024-03-04'),
+(351, 28, 18, '2024-03-04', '2024-03-04'),
+(352, 28, 18, '2024-03-04', '2024-03-04'),
+(353, 28, 20, '2024-03-04', '2024-03-04'),
+(354, 28, 20, '2024-03-04', '2024-03-04'),
+(355, 29, 19, '2024-03-04', '2024-03-04'),
+(356, 29, 19, '2024-03-04', '2024-03-04'),
+(357, 29, 19, '2024-03-04', '2024-03-04'),
+(358, 29, 19, '2024-03-04', '2024-03-04'),
+(359, 29, 19, '2024-03-04', '2024-03-04'),
+(360, 29, 19, '2024-03-04', '2024-03-04'),
+(361, 29, 19, '2024-03-04', '2024-03-04'),
+(362, 29, 19, '2024-03-04', '2024-03-04'),
+(363, 29, 20, '2024-03-04', '2024-03-04'),
+(364, 29, 20, '2024-03-04', '2024-03-04'),
+(365, 29, 20, '2024-03-04', '2024-03-04'),
+(366, 29, 20, '2024-03-04', '2024-03-04'),
+(367, 30, 19, '2024-03-04', '2024-03-04'),
+(368, 30, 19, '2024-03-04', '2024-03-04'),
+(369, 30, 19, '2024-03-04', '2024-03-04'),
+(370, 30, 19, '2024-03-04', '2024-03-04'),
+(371, 30, 19, '2024-03-04', '2024-03-04'),
+(372, 30, 19, '2024-03-04', '2024-03-04'),
+(373, 30, 19, '2024-03-04', '2024-03-04'),
+(374, 30, 19, '2024-03-04', '2024-03-04'),
+(375, 30, 20, '2024-03-04', '2024-03-04'),
+(376, 30, 20, '2024-03-04', '2024-03-04'),
+(377, 30, 20, '2024-03-04', '2024-03-04'),
+(378, 30, 20, '2024-03-04', '2024-03-04'),
+(379, 31, 19, '2024-03-04', '2024-03-04'),
+(380, 31, 19, '2024-03-04', '2024-03-04'),
+(381, 31, 19, '2024-03-04', '2024-03-04'),
+(382, 31, 19, '2024-03-04', '2024-03-04'),
+(383, 31, 19, '2024-03-04', '2024-03-04'),
+(384, 31, 19, '2024-03-04', '2024-03-04'),
+(385, 31, 19, '2024-03-04', '2024-03-04'),
+(386, 31, 19, '2024-03-04', '2024-03-04'),
+(387, 31, 20, '2024-03-04', '2024-03-04'),
+(388, 31, 20, '2024-03-04', '2024-03-04'),
+(389, 31, 20, '2024-03-04', '2024-03-04'),
+(390, 31, 20, '2024-03-04', '2024-03-04'),
+(391, 32, 19, '2024-03-04', '2024-03-04'),
+(392, 32, 19, '2024-03-04', '2024-03-04'),
+(393, 32, 19, '2024-03-04', '2024-03-04'),
+(394, 32, 19, '2024-03-04', '2024-03-04'),
+(395, 32, 19, '2024-03-04', '2024-03-04'),
+(396, 32, 19, '2024-03-04', '2024-03-04'),
+(397, 32, 19, '2024-03-04', '2024-03-04'),
+(398, 32, 19, '2024-03-04', '2024-03-04'),
+(399, 32, 20, '2024-03-04', '2024-03-04'),
+(400, 32, 20, '2024-03-04', '2024-03-04'),
+(401, 32, 20, '2024-03-04', '2024-03-04'),
+(402, 32, 20, '2024-03-04', '2024-03-04'),
+(403, 33, 19, '2024-03-04', '2024-03-04'),
+(404, 33, 19, '2024-03-04', '2024-03-04'),
+(405, 33, 19, '2024-03-04', '2024-03-04'),
+(406, 33, 19, '2024-03-04', '2024-03-04'),
+(407, 33, 19, '2024-03-04', '2024-03-04'),
+(408, 33, 19, '2024-03-04', '2024-03-04'),
+(409, 33, 19, '2024-03-04', '2024-03-04'),
+(410, 33, 19, '2024-03-04', '2024-03-04'),
+(411, 33, 20, '2024-03-04', '2024-03-04'),
+(412, 33, 20, '2024-03-04', '2024-03-04'),
+(413, 33, 20, '2024-03-04', '2024-03-04'),
+(414, 33, 20, '2024-03-04', '2024-03-04'),
+(415, 34, 20, '2024-03-04', '2024-03-04'),
+(416, 35, 20, '2024-03-04', '2024-03-04'),
+(417, 36, 20, '2024-03-04', '2024-03-04'),
+(418, 37, 20, '2024-03-04', '2024-03-04'),
+(419, 38, 20, '2024-03-04', '2024-03-04'),
+(420, 39, 20, '2024-03-04', '2024-03-04'),
+(421, 40, 20, '2024-03-04', '2024-03-04'),
+(422, 41, 20, '2024-03-04', '2024-03-04'),
+(423, 42, 20, '2024-03-04', '2024-03-04'),
+(424, 43, 20, '2024-03-04', '2024-03-04'),
+(425, 44, 20, '2024-03-04', '2024-03-04');
 
 -- --------------------------------------------------------
 
@@ -904,14 +1052,14 @@ CREATE TABLE `diagnostic_exams` (
 --
 
 INSERT INTO `diagnostic_exams` (`id`, `title`, `description`, `time`, `score`, `pass_score`, `course_id`, `score_id`, `state`, `created_at`, `updated_at`) VALUES
-(10, 'sad', 'asd', '1Hours 1 M', 100, 48, 1, 2, 0, '2024-01-24', '2024-01-24'),
+(10, 'sad', 'asd', '1Hours 1 M', 100, 48, 1, 4, 0, '2024-01-24', '2024-01-24'),
 (12, 'ggggg', 'ggggg', '1Hours 1 M', 100, 48, 1, 4, 0, '2024-02-03', '2024-02-03'),
 (13, 'sasasasasasasa', 'sasasa', '1Hours 1 M', 100, 40, 1, 4, 0, '2024-02-15', '2024-02-15'),
-(14, 'asddsa', 'asds', '1Hours 2 M', 100, 21, 1, 5, 0, '2024-03-04', '2024-03-04'),
-(15, 'asddsa', 'asds', '1Hours 2 M', 100, 21, 1, 5, 0, '2024-03-04', '2024-03-04'),
-(16, 'asddsa', 'asds', '1Hours 2 M', 100, 21, 1, 5, 1, '2024-03-04', '2024-03-04'),
-(17, 'scdas', 'asd', '1Hours 1 M', 100, 8, 1, 2, 1, '2024-03-04', '2024-03-04'),
-(18, 'adf', 'asd', 'Hours  M', 100, 22, 1, 2, 1, '2024-03-04', '2024-03-04');
+(14, 'asddsa', 'asds', '1Hours 2 M', 100, 21, 1, 4, 0, '2024-03-04', '2024-03-04'),
+(15, 'asddsa', 'asds', '1Hours 2 M', 100, 21, 1, 4, 0, '2024-03-04', '2024-03-04'),
+(16, 'asddsa', 'asds', '1Hours 2 M', 100, 21, 1, 4, 1, '2024-03-04', '2024-03-04'),
+(17, 'scdas', 'asd', '1Hours 1 M', 100, 8, 1, 4, 1, '2024-03-04', '2024-03-04'),
+(18, 'adf', 'asd', 'Hours  M', 100, 22, 1, 4, 1, '2024-03-04', '2024-03-04');
 
 -- --------------------------------------------------------
 
@@ -956,7 +1104,30 @@ INSERT INTO `diagnostic_exams_history` (`id`, `user_id`, `diagnostic_exams_id`, 
 (18, 8, 12, 3, NULL, 2, NULL, '2024-03-04', '2024-03-04'),
 (19, 8, 12, 3, NULL, 2, NULL, '2024-03-04', '2024-03-04'),
 (20, 8, 12, 3, NULL, 2, NULL, '2024-03-04', '2024-03-04'),
-(21, 8, 12, 3, NULL, 2, NULL, '2024-03-04', '2024-03-04');
+(21, 8, 12, 3, NULL, 2, NULL, '2024-03-04', '2024-03-04'),
+(22, 8, 12, 3, NULL, 2, NULL, '2024-03-04', '2024-03-04'),
+(23, 8, 13, 0, NULL, 0, NULL, '2024-03-04', '2024-03-04'),
+(24, 8, 13, 0, NULL, 0, NULL, '2024-03-04', '2024-03-04'),
+(25, 8, 16, 5, NULL, 4, NULL, '2024-03-04', '2024-03-04'),
+(26, 8, 16, 5, NULL, 4, NULL, '2024-03-04', '2024-03-04'),
+(27, 8, 16, 5, NULL, 4, NULL, '2024-03-04', '2024-03-04'),
+(28, 8, 16, 5, NULL, 4, NULL, '2024-03-04', '2024-03-04'),
+(29, 8, 12, 4, NULL, 3, NULL, '2024-03-04', '2024-03-04'),
+(30, 8, 12, 4, NULL, 3, NULL, '2024-03-04', '2024-03-04'),
+(31, 8, 12, 4, NULL, 3, NULL, '2024-03-04', '2024-03-04'),
+(32, 8, 12, 4, NULL, 3, NULL, '2024-03-04', '2024-03-04'),
+(33, 8, 12, 4, NULL, 3, NULL, '2024-03-04', '2024-03-04'),
+(34, 8, 12, 4, NULL, 3, NULL, '2024-03-04', '2024-03-04'),
+(35, 8, 12, 2, NULL, 1, NULL, '2024-03-04', '2024-03-04'),
+(36, 8, 12, 2, NULL, 1, NULL, '2024-03-04', '2024-03-04'),
+(37, 8, 12, 2, NULL, 1, NULL, '2024-03-04', '2024-03-04'),
+(38, 8, 12, 2, NULL, 1, NULL, '2024-03-04', '2024-03-04'),
+(39, 8, 12, 2, NULL, 1, NULL, '2024-03-04', '2024-03-04'),
+(40, 8, 12, 2, NULL, 1, NULL, '2024-03-04', '2024-03-04'),
+(41, 8, 12, 2, NULL, 1, NULL, '2024-03-04', '2024-03-04'),
+(42, 8, 12, 2, NULL, 1, NULL, '2024-03-04', '2024-03-04'),
+(43, 8, 12, 2, NULL, 1, NULL, '2024-03-04', '2024-03-04'),
+(44, 8, 12, 2, NULL, 1, NULL, '2024-03-04', '2024-03-04');
 
 -- --------------------------------------------------------
 
@@ -999,13 +1170,15 @@ INSERT INTO `dia_questions` (`id`, `diagnostic_exam_id`, `question_id`, `created
 CREATE TABLE `exam` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `title` varchar(255) NOT NULL,
-  `time` time NOT NULL,
+  `description` text DEFAULT NULL,
+  `time` varchar(255) NOT NULL,
   `score` int(11) NOT NULL,
   `pass_score` int(11) NOT NULL,
   `year` year(4) NOT NULL,
   `month` int(10) UNSIGNED NOT NULL,
   `code_id` bigint(20) UNSIGNED NOT NULL,
   `course_id` bigint(20) UNSIGNED NOT NULL,
+  `score_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` date DEFAULT NULL,
   `updated_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -1014,8 +1187,9 @@ CREATE TABLE `exam` (
 -- Dumping data for table `exam`
 --
 
-INSERT INTO `exam` (`id`, `title`, `time`, `score`, `pass_score`, `year`, `month`, `code_id`, `course_id`, `created_at`, `updated_at`) VALUES
-(2, 'Exam 2', '11:37:12', 100, 40, '2024', 3, 2, 2, NULL, NULL);
+INSERT INTO `exam` (`id`, `title`, `description`, `time`, `score`, `pass_score`, `year`, `month`, `code_id`, `course_id`, `score_id`, `created_at`, `updated_at`) VALUES
+(2, 'Exam 2', NULL, '11:37:12', 100, 40, '2024', 3, 2, 2, 2, NULL, NULL),
+(3, 'sddas', 'asdadf', '1Hours 1 M', 100, 40, '2013', 9, 2, 1, 2, '2024-03-05', '2024-03-05');
 
 -- --------------------------------------------------------
 
@@ -1036,6 +1210,28 @@ CREATE TABLE `exam_codes` (
 
 INSERT INTO `exam_codes` (`id`, `exam_code`, `created_at`, `updated_at`) VALUES
 (2, '1234', '2024-01-24', '2024-03-02');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `exam_questions`
+--
+
+CREATE TABLE `exam_questions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `exam_id` bigint(20) UNSIGNED NOT NULL,
+  `question_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `exam_questions`
+--
+
+INSERT INTO `exam_questions` (`id`, `exam_id`, `question_id`, `created_at`, `updated_at`) VALUES
+(1, 3, 20, NULL, NULL),
+(2, 3, 19, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1913,7 +2109,14 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (264, 'App\\Models\\User', 8, 'user', '78f8ec612b3ccfa4735d05b2670717517eedbb417745505443c73553f9450ba9', '[\"*\"]', NULL, NULL, '2024-03-03 05:23:59', '2024-03-03 05:23:59'),
 (265, 'App\\Models\\User', 8, 'user', 'f5bc3f8ffa597340497d1105f35e6786e5164a66353d8f462be1fb8b12df4701', '[\"*\"]', NULL, NULL, '2024-03-04 05:27:03', '2024-03-04 05:27:03'),
 (266, 'App\\Models\\User', 8, 'user', '62dc80bd2b4e2e1942e4f0bf0a531d5a2213db84eee6a074f5bccb67fa493110', '[\"*\"]', NULL, NULL, '2024-03-04 07:15:19', '2024-03-04 07:15:19'),
-(267, 'App\\Models\\User', 8, 'user', '6840cafe3ec5033562207f09558357842c2333d874fef91091c117725a24d03a', '[\"*\"]', NULL, NULL, '2024-03-04 07:48:10', '2024-03-04 07:48:10');
+(267, 'App\\Models\\User', 8, 'user', '6840cafe3ec5033562207f09558357842c2333d874fef91091c117725a24d03a', '[\"*\"]', NULL, NULL, '2024-03-04 07:48:10', '2024-03-04 07:48:10'),
+(268, 'App\\Models\\User', 8, 'user', '931d628adc4d87ba050a4f48315d99a7fdeea5731a6cb4296a78bb4ebe4a8819', '[\"*\"]', NULL, NULL, '2024-03-05 05:36:59', '2024-03-05 05:36:59'),
+(269, 'App\\Models\\User', 8, 'user', '5d340fe9fae7729db1f996f90057e2dacfd61d534bdd1cfa57a33b5bf120fa15', '[\"*\"]', NULL, NULL, '2024-03-05 06:01:54', '2024-03-05 06:01:54'),
+(270, 'App\\Models\\User', 8, 'user', 'c7422cb4eb2ca0529f878f9d37cbfaa2a8828b74dd8b712a73abbcfdc8563af4', '[\"*\"]', NULL, NULL, '2024-03-05 06:03:43', '2024-03-05 06:03:43'),
+(271, 'App\\Models\\User', 8, 'user', '0441ebec62e647d859bb22dcac21ffc6250c79668efaa08bc9922d1bbc3e5d61', '[\"*\"]', NULL, NULL, '2024-03-05 06:09:45', '2024-03-05 06:09:45'),
+(272, 'App\\Models\\User', 8, 'user', '0883cdf5535774c6afe44f10fbe81b01fa05e32b6e531761d27cdc70c5312ddf', '[\"*\"]', NULL, NULL, '2024-03-05 06:41:55', '2024-03-05 06:41:55'),
+(273, 'App\\Models\\User', 8, 'user', 'a24d2370223c7b4d6a2cf5993462dbd9a9bd27c6f86d27b3d6b98641bcb1a834', '[\"*\"]', NULL, NULL, '2024-03-05 06:42:46', '2024-03-05 06:42:46'),
+(274, 'App\\Models\\User', 8, 'user', '489f0e829b3003d17e07b2d4f2cf697345bb10fe7bf9f0a3ffb35d874e1933ca', '[\"*\"]', NULL, NULL, '2024-03-05 06:43:18', '2024-03-05 06:43:18');
 
 -- --------------------------------------------------------
 
@@ -2017,9 +2220,9 @@ CREATE TABLE `questions` (
   `q_url` varchar(255) DEFAULT NULL,
   `q_code` varchar(255) DEFAULT NULL,
   `q_type` enum('Trail','Parallel','Extra') DEFAULT NULL,
-  `month` varchar(20) DEFAULT NULL,
+  `month` int(11) DEFAULT NULL,
   `q_num` varchar(20) DEFAULT NULL,
-  `year` varchar(20) DEFAULT NULL,
+  `year` int(11) DEFAULT NULL,
   `section` enum('1','2','3','4') DEFAULT NULL,
   `difficulty` enum('A','B','C','D','E') NOT NULL,
   `ans_type` enum('MCQ','Grid_in') DEFAULT NULL,
@@ -2032,11 +2235,11 @@ CREATE TABLE `questions` (
 --
 
 INSERT INTO `questions` (`id`, `lesson_id`, `question`, `state`, `q_url`, `q_code`, `q_type`, `month`, `q_num`, `year`, `section`, `difficulty`, `ans_type`, `updated_at`, `created_at`) VALUES
-(1, 4, 'question 2', '0', NULL, '1234', 'Parallel', '3', '2', '2022', '2', 'A', 'Grid_in', '2024-02-13', '2024-01-29'),
-(18, 4, NULL, '1', '2.png', '2', 'Parallel', '3', '21', '2022', '1', 'B', 'MCQ', '2024-02-05', NULL),
-(19, 4, 'Question 2', '2', '2.png', 'sad', 'Trail', '3', '4', '2022', '1', 'A', 'MCQ', '2024-01-29', NULL),
-(20, 4, 'question 2', '0', NULL, '1234', 'Parallel', '3', '2', '2022', '2', 'A', 'Grid_in', '2024-01-29', '2024-01-29'),
-(21, 4, 'question 2', '0', NULL, '1234', 'Parallel', '3', '2', '2022', '2', 'A', 'Grid_in', '2024-01-29', '2024-01-29');
+(1, 4, 'question 2', '0', NULL, '1234', 'Parallel', 3, '2', 2022, '2', 'A', 'Grid_in', '2024-02-13', '2024-01-29'),
+(18, 4, NULL, '1', '2.png', '2', 'Parallel', 3, '21', 2022, '1', 'B', 'MCQ', '2024-02-05', NULL),
+(19, 4, 'Question 2', '2', '2.png', 'sad', 'Trail', 3, '4', 2022, '1', 'A', 'MCQ', '2024-01-29', NULL),
+(20, 4, 'question 2', '0', NULL, '1234', 'Parallel', 3, '2', 2022, '2', 'A', 'Grid_in', '2024-01-29', '2024-01-29'),
+(21, 4, 'question 2', '0', NULL, '1234', 'Parallel', 3, '2', 2022, '2', 'A', 'Grid_in', '2024-01-29', '2024-01-29');
 
 -- --------------------------------------------------------
 
@@ -2622,7 +2825,7 @@ INSERT INTO `users` (`id`, `f_name`, `l_name`, `name`, `email`, `exam_number`, `
 (1, NULL, NULL, 'Ahmed', 'Ahmed@gmail.com', 0, 0, 0, NULL, NULL, '0113443534', '012345346', 'Ali@gmail.com', '1972024X01X27X10X03X326.jpg', NULL, 'teacher', NULL, 2, 1, '$2y$10$O4pDFFvEQGAkfZ.mcGIhaOb0MQCocleYwEySm4OYgq9./pKT021de', 'Show', NULL, NULL, NULL, NULL, '2024-01-27 08:03:32', NULL, NULL),
 (5, NULL, NULL, 'Teacher 1', 'admin3@gmail.com', 0, 0, 0, NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X42X459672202304300850download.png', NULL, 'super_admin', NULL, NULL, NULL, '$2y$10$abRantqLN7R8dKUzWPGSLebir7D.GcznzfflGYjquM59GZo9f5y3a', 'Show', NULL, NULL, NULL, '2023-12-18 09:42:45', '2023-12-18 09:42:45', NULL, NULL),
 (7, NULL, NULL, 'Teacher 1', 'admin4@gmail.com', 0, 0, 0, NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X43X297615202304300850download.png', NULL, 'super_admin', NULL, NULL, NULL, '$2y$10$CWyZzMn0kdjZKf1f5z0ey.xXzyHVVwkvCFGwakJchI9dwNSyOEyQa', 'Show', NULL, NULL, NULL, '2023-12-18 09:43:29', '2023-12-18 09:43:29', NULL, NULL),
-(8, NULL, NULL, 'Teacher 1', 'admin@gmail.com', 4, 0, 0, NULL, NULL, '0109947345', NULL, NULL, '7452024X02X19X09X11X19202301101725mvf_dark_logo.png', NULL, 'student', NULL, NULL, NULL, '$2y$10$Oj4cP4avEst9pP/kadNnWuJxlqGzp098jei5PZNL3bVebYVZtjpEO', 'Show', NULL, NULL, NULL, '2023-12-18 09:44:14', '2024-03-02 08:09:21', NULL, NULL),
+(8, NULL, NULL, 'Teacher 1', 'admin@gmail.com', 3, 0, 0, NULL, NULL, '0109947345', NULL, NULL, '7452024X02X19X09X11X19202301101725mvf_dark_logo.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$Oj4cP4avEst9pP/kadNnWuJxlqGzp098jei5PZNL3bVebYVZtjpEO', 'Show', NULL, NULL, NULL, '2023-12-18 09:44:14', '2024-03-05 06:28:25', NULL, NULL),
 (10, NULL, NULL, 'Teacher', 'teacher@gmail.com', 0, 0, 0, NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X50X119775202304090932egyptXflagXwaveXiconX32.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$EFSKaqvOqy3o.ihNqVWi7uCPCrFtflwUJGqEBFP1woOuxlRaIqN5u', 'Show', NULL, NULL, NULL, '2023-12-18 09:50:11', '2024-01-27 08:02:15', NULL, NULL),
 (11, NULL, NULL, 'Teacher12', 'teacher2@gmail.com', 0, 0, 0, NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X52X277966202304090932egyptXflagXwaveXiconX32.png', NULL, 'teacher', NULL, 1, 1, '$2y$10$Y4fg1B5EpujC8OVSCO6fNOyxdAj2lPJDZWibbtD8j55Jik6fU4Uq6', 'Show', NULL, NULL, NULL, '2023-12-18 09:52:27', '2024-02-05 10:45:46', NULL, NULL),
 (44, NULL, NULL, 'admin@gmail.com', 'sad@gmail.com', 0, 0, 0, NULL, NULL, '123', '123', NULL, 'default.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$RkeDuqhtAqMTRC7gfMFxG.Vl8pLtWGgj1jisi0ZkphX9LDVUQaZpO', 'Show', NULL, NULL, NULL, '2023-12-31 06:31:28', '2024-02-05 10:15:37', NULL, NULL),
@@ -2832,13 +3035,22 @@ ALTER TABLE `dia_questions`
 ALTER TABLE `exam`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_Exam_Course` (`course_id`),
-  ADD KEY `FK_Exam_Time` (`code_id`);
+  ADD KEY `FK_Exam_Time` (`code_id`),
+  ADD KEY `FK_Exam_Score` (`score_id`);
 
 --
 -- Indexes for table `exam_codes`
 --
 ALTER TABLE `exam_codes`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `exam_questions`
+--
+ALTER TABLE `exam_questions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_Exam_Exam` (`exam_id`),
+  ADD KEY `FK_Exam_Question` (`question_id`);
 
 --
 -- Indexes for table `exam_time`
@@ -3275,7 +3487,7 @@ ALTER TABLE `course_prices`
 -- AUTO_INCREMENT for table `dai_exam_mistakes`
 --
 ALTER TABLE `dai_exam_mistakes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=278;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=426;
 
 --
 -- AUTO_INCREMENT for table `diagnostic_exams`
@@ -3287,7 +3499,7 @@ ALTER TABLE `diagnostic_exams`
 -- AUTO_INCREMENT for table `diagnostic_exams_history`
 --
 ALTER TABLE `diagnostic_exams_history`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `dia_questions`
@@ -3299,12 +3511,18 @@ ALTER TABLE `dia_questions`
 -- AUTO_INCREMENT for table `exam`
 --
 ALTER TABLE `exam`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `exam_codes`
 --
 ALTER TABLE `exam_codes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `exam_questions`
+--
+ALTER TABLE `exam_questions`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
@@ -3413,7 +3631,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=268;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=275;
 
 --
 -- AUTO_INCREMENT for table `private_request`
@@ -3653,7 +3871,15 @@ ALTER TABLE `dia_questions`
 --
 ALTER TABLE `exam`
   ADD CONSTRAINT `FK_Exam_Course` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_Exam_Score` FOREIGN KEY (`score_id`) REFERENCES `score_sheet` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_Exam_Time` FOREIGN KEY (`code_id`) REFERENCES `exam_codes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `exam_questions`
+--
+ALTER TABLE `exam_questions`
+  ADD CONSTRAINT `FK_Exam_Exam` FOREIGN KEY (`exam_id`) REFERENCES `exam` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_Exam_Question` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `exam_time`
