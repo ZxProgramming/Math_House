@@ -267,6 +267,26 @@
                         </div>
                         
                         <div class="score_list">
+                            
+                        {{-- <table class="table">
+                            <thead>
+                                <th>Row Score</th>
+                                <th>Score</th>    
+                            </thead> 
+                            <tbody>
+                                @foreach ($item->score_list as $element)
+                                <tr>
+                                    <td>
+                                        <input type="hidden" value="{{$element->question_num}}" name="question_num[]" />
+                                        {{$element->question_num}}
+                                    </td>
+                                    <td>
+                                        <input class="form-control" value="{{$element->score}}" name="score_list[]" />
+                                    </td>  
+                                </tr> 
+                                @endforeach
+                            </tbody>   
+                        </table> --}}
                         </div>
 
                         
