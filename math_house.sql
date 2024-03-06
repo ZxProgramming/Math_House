@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 05, 2024 at 10:51 AM
+-- Generation Time: Mar 06, 2024 at 10:53 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -1174,11 +1174,13 @@ CREATE TABLE `exam` (
   `time` varchar(255) NOT NULL,
   `score` int(11) NOT NULL,
   `pass_score` int(11) NOT NULL,
-  `year` year(4) NOT NULL,
-  `month` int(10) UNSIGNED NOT NULL,
-  `code_id` bigint(20) UNSIGNED NOT NULL,
+  `year` year(4) DEFAULT NULL,
+  `month` int(10) UNSIGNED DEFAULT NULL,
+  `code_id` bigint(20) UNSIGNED DEFAULT NULL,
   `course_id` bigint(20) UNSIGNED NOT NULL,
   `score_id` bigint(20) UNSIGNED NOT NULL,
+  `type` enum('extra','trail') NOT NULL,
+  `state` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` date DEFAULT NULL,
   `updated_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -1187,9 +1189,9 @@ CREATE TABLE `exam` (
 -- Dumping data for table `exam`
 --
 
-INSERT INTO `exam` (`id`, `title`, `description`, `time`, `score`, `pass_score`, `year`, `month`, `code_id`, `course_id`, `score_id`, `created_at`, `updated_at`) VALUES
-(2, 'Exam 2', NULL, '11:37:12', 100, 40, '2024', 3, 2, 2, 2, NULL, NULL),
-(3, 'sddas', 'asdadf', '1Hours 1 M', 100, 40, '2013', 9, 2, 1, 2, '2024-03-05', '2024-03-05');
+INSERT INTO `exam` (`id`, `title`, `description`, `time`, `score`, `pass_score`, `year`, `month`, `code_id`, `course_id`, `score_id`, `type`, `state`, `created_at`, `updated_at`) VALUES
+(2, 'Exam 1', '111', '11:37:12', 111, 11, '2024', 3, 2, 2, 4, 'extra', 0, NULL, '2024-03-05'),
+(4, 'dcf', 'fdsf', '1Hours 1 M', 100, 21, '2011', NULL, NULL, 1, 4, 'trail', 1, '2024-03-05', '2024-03-05');
 
 -- --------------------------------------------------------
 
@@ -1214,6 +1216,131 @@ INSERT INTO `exam_codes` (`id`, `exam_code`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `exam_history`
+--
+
+CREATE TABLE `exam_history` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `exam_id` bigint(20) UNSIGNED NOT NULL,
+  `score` int(11) NOT NULL,
+  `time` int(11) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `r_questions` int(11) NOT NULL,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `exam_history`
+--
+
+INSERT INTO `exam_history` (`id`, `user_id`, `exam_id`, `score`, `time`, `date`, `r_questions`, `created_at`, `updated_at`) VALUES
+(1, 8, 2, 2, NULL, '2024-03-06', 1, '2024-03-06', '2024-03-06'),
+(2, 8, 2, 2, NULL, '2024-03-06', 1, '2024-03-06', '2024-03-06'),
+(3, 8, 2, 2, NULL, '2024-03-06', 1, '2024-03-06', '2024-03-06'),
+(4, 8, 2, 2, NULL, '2024-03-06', 1, '2024-03-06', '2024-03-06'),
+(5, 8, 2, 2, NULL, '2024-03-06', 1, '2024-03-06', '2024-03-06'),
+(6, 8, 2, 2, NULL, '2024-03-06', 1, '2024-03-06', '2024-03-06'),
+(7, 8, 2, 2, NULL, '2024-03-06', 1, '2024-03-06', '2024-03-06'),
+(8, 8, 2, 2, NULL, '2024-03-06', 1, '2024-03-06', '2024-03-06'),
+(9, 8, 2, 2, NULL, '2024-03-06', 1, '2024-03-06', '2024-03-06');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `exam_mistakes`
+--
+
+CREATE TABLE `exam_mistakes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `student_exam_id` bigint(20) UNSIGNED NOT NULL,
+  `question_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `exam_mistakes`
+--
+
+INSERT INTO `exam_mistakes` (`id`, `student_exam_id`, `question_id`, `created_at`, `updated_at`) VALUES
+(2, 2, 1, '2024-03-06', '2024-03-06'),
+(3, 2, 1, '2024-03-06', '2024-03-06'),
+(4, 2, 1, '2024-03-06', '2024-03-06'),
+(5, 2, 1, '2024-03-06', '2024-03-06'),
+(6, 2, 19, '2024-03-06', '2024-03-06'),
+(7, 2, 19, '2024-03-06', '2024-03-06'),
+(8, 2, 19, '2024-03-06', '2024-03-06'),
+(9, 2, 19, '2024-03-06', '2024-03-06'),
+(10, 2, 19, '2024-03-06', '2024-03-06'),
+(11, 2, 19, '2024-03-06', '2024-03-06'),
+(12, 2, 19, '2024-03-06', '2024-03-06'),
+(13, 2, 19, '2024-03-06', '2024-03-06'),
+(14, 2, 1, '2024-03-06', '2024-03-06'),
+(15, 2, 1, '2024-03-06', '2024-03-06'),
+(16, 2, 1, '2024-03-06', '2024-03-06'),
+(17, 2, 1, '2024-03-06', '2024-03-06'),
+(18, 2, 1, '2024-03-06', '2024-03-06'),
+(19, 2, 1, '2024-03-06', '2024-03-06'),
+(20, 2, 1, '2024-03-06', '2024-03-06'),
+(21, 2, 1, '2024-03-06', '2024-03-06'),
+(22, 2, 1, '2024-03-06', '2024-03-06'),
+(23, 2, 19, '2024-03-06', '2024-03-06'),
+(24, 2, 19, '2024-03-06', '2024-03-06'),
+(25, 2, 19, '2024-03-06', '2024-03-06'),
+(26, 2, 19, '2024-03-06', '2024-03-06'),
+(27, 2, 19, '2024-03-06', '2024-03-06'),
+(28, 2, 19, '2024-03-06', '2024-03-06'),
+(29, 2, 19, '2024-03-06', '2024-03-06'),
+(30, 2, 19, '2024-03-06', '2024-03-06'),
+(31, 2, 1, '2024-03-06', '2024-03-06'),
+(32, 2, 1, '2024-03-06', '2024-03-06'),
+(33, 2, 1, '2024-03-06', '2024-03-06'),
+(34, 2, 1, '2024-03-06', '2024-03-06'),
+(35, 2, 1, '2024-03-06', '2024-03-06'),
+(36, 2, 1, '2024-03-06', '2024-03-06'),
+(37, 2, 1, '2024-03-06', '2024-03-06'),
+(38, 2, 1, '2024-03-06', '2024-03-06'),
+(39, 2, 1, '2024-03-06', '2024-03-06'),
+(40, 2, 19, '2024-03-06', '2024-03-06'),
+(41, 2, 19, '2024-03-06', '2024-03-06'),
+(42, 2, 19, '2024-03-06', '2024-03-06'),
+(43, 2, 19, '2024-03-06', '2024-03-06'),
+(44, 2, 19, '2024-03-06', '2024-03-06'),
+(45, 2, 19, '2024-03-06', '2024-03-06'),
+(46, 2, 19, '2024-03-06', '2024-03-06'),
+(47, 2, 19, '2024-03-06', '2024-03-06'),
+(48, 2, 1, '2024-03-06', '2024-03-06'),
+(49, 2, 1, '2024-03-06', '2024-03-06'),
+(50, 2, 1, '2024-03-06', '2024-03-06'),
+(51, 2, 1, '2024-03-06', '2024-03-06'),
+(52, 2, 1, '2024-03-06', '2024-03-06'),
+(53, 2, 1, '2024-03-06', '2024-03-06'),
+(54, 2, 1, '2024-03-06', '2024-03-06'),
+(55, 2, 1, '2024-03-06', '2024-03-06'),
+(56, 2, 1, '2024-03-06', '2024-03-06'),
+(57, 2, 19, '2024-03-06', '2024-03-06'),
+(58, 2, 19, '2024-03-06', '2024-03-06'),
+(59, 2, 19, '2024-03-06', '2024-03-06'),
+(60, 2, 19, '2024-03-06', '2024-03-06'),
+(61, 2, 19, '2024-03-06', '2024-03-06'),
+(62, 2, 19, '2024-03-06', '2024-03-06'),
+(63, 2, 19, '2024-03-06', '2024-03-06'),
+(64, 2, 19, '2024-03-06', '2024-03-06'),
+(65, 2, 1, '2024-03-06', '2024-03-06'),
+(66, 2, 1, '2024-03-06', '2024-03-06'),
+(67, 2, 1, '2024-03-06', '2024-03-06'),
+(68, 2, 1, '2024-03-06', '2024-03-06'),
+(69, 2, 1, '2024-03-06', '2024-03-06'),
+(70, 2, 1, '2024-03-06', '2024-03-06'),
+(71, 2, 1, '2024-03-06', '2024-03-06'),
+(72, 2, 1, '2024-03-06', '2024-03-06'),
+(73, 2, 1, '2024-03-06', '2024-03-06');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `exam_questions`
 --
 
@@ -1230,8 +1357,8 @@ CREATE TABLE `exam_questions` (
 --
 
 INSERT INTO `exam_questions` (`id`, `exam_id`, `question_id`, `created_at`, `updated_at`) VALUES
-(1, 3, 20, NULL, NULL),
-(2, 3, 19, NULL, NULL);
+(3, 2, 1, NULL, NULL),
+(4, 2, 19, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2116,7 +2243,11 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (271, 'App\\Models\\User', 8, 'user', '0441ebec62e647d859bb22dcac21ffc6250c79668efaa08bc9922d1bbc3e5d61', '[\"*\"]', NULL, NULL, '2024-03-05 06:09:45', '2024-03-05 06:09:45'),
 (272, 'App\\Models\\User', 8, 'user', '0883cdf5535774c6afe44f10fbe81b01fa05e32b6e531761d27cdc70c5312ddf', '[\"*\"]', NULL, NULL, '2024-03-05 06:41:55', '2024-03-05 06:41:55'),
 (273, 'App\\Models\\User', 8, 'user', 'a24d2370223c7b4d6a2cf5993462dbd9a9bd27c6f86d27b3d6b98641bcb1a834', '[\"*\"]', NULL, NULL, '2024-03-05 06:42:46', '2024-03-05 06:42:46'),
-(274, 'App\\Models\\User', 8, 'user', '489f0e829b3003d17e07b2d4f2cf697345bb10fe7bf9f0a3ffb35d874e1933ca', '[\"*\"]', NULL, NULL, '2024-03-05 06:43:18', '2024-03-05 06:43:18');
+(274, 'App\\Models\\User', 8, 'user', '489f0e829b3003d17e07b2d4f2cf697345bb10fe7bf9f0a3ffb35d874e1933ca', '[\"*\"]', NULL, NULL, '2024-03-05 06:43:18', '2024-03-05 06:43:18'),
+(275, 'App\\Models\\User', 8, 'user', 'fccdfbfe20d5592c84e3d66d1dd1727c0b4759989b045252c0e1fd727e94a72f', '[\"*\"]', NULL, NULL, '2024-03-05 09:43:59', '2024-03-05 09:43:59'),
+(276, 'App\\Models\\User', 8, 'user', '7fb8a12ede21433d425d88b3afc4b7167094d893af30a20e75e482cd21baaddb', '[\"*\"]', NULL, NULL, '2024-03-05 09:43:59', '2024-03-05 09:43:59'),
+(277, 'App\\Models\\User', 8, 'user', '6615e017bf9d575f77efa7a423e84d2d329ca89011fe30221ad4dc9ff11cb8a3', '[\"*\"]', NULL, NULL, '2024-03-06 05:29:44', '2024-03-06 05:29:44'),
+(278, 'App\\Models\\User', 8, 'user', '7f64d0f73cd46a6ed219d5a89fbc292728e7a83b73bbe1c325d1703a760fb4ab', '[\"*\"]', NULL, NULL, '2024-03-06 05:57:22', '2024-03-06 05:57:22');
 
 -- --------------------------------------------------------
 
@@ -2825,7 +2956,7 @@ INSERT INTO `users` (`id`, `f_name`, `l_name`, `name`, `email`, `exam_number`, `
 (1, NULL, NULL, 'Ahmed', 'Ahmed@gmail.com', 0, 0, 0, NULL, NULL, '0113443534', '012345346', 'Ali@gmail.com', '1972024X01X27X10X03X326.jpg', NULL, 'teacher', NULL, 2, 1, '$2y$10$O4pDFFvEQGAkfZ.mcGIhaOb0MQCocleYwEySm4OYgq9./pKT021de', 'Show', NULL, NULL, NULL, NULL, '2024-01-27 08:03:32', NULL, NULL),
 (5, NULL, NULL, 'Teacher 1', 'admin3@gmail.com', 0, 0, 0, NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X42X459672202304300850download.png', NULL, 'super_admin', NULL, NULL, NULL, '$2y$10$abRantqLN7R8dKUzWPGSLebir7D.GcznzfflGYjquM59GZo9f5y3a', 'Show', NULL, NULL, NULL, '2023-12-18 09:42:45', '2023-12-18 09:42:45', NULL, NULL),
 (7, NULL, NULL, 'Teacher 1', 'admin4@gmail.com', 0, 0, 0, NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X43X297615202304300850download.png', NULL, 'super_admin', NULL, NULL, NULL, '$2y$10$CWyZzMn0kdjZKf1f5z0ey.xXzyHVVwkvCFGwakJchI9dwNSyOEyQa', 'Show', NULL, NULL, NULL, '2023-12-18 09:43:29', '2023-12-18 09:43:29', NULL, NULL),
-(8, NULL, NULL, 'Teacher 1', 'admin@gmail.com', 3, 0, 0, NULL, NULL, '0109947345', NULL, NULL, '7452024X02X19X09X11X19202301101725mvf_dark_logo.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$Oj4cP4avEst9pP/kadNnWuJxlqGzp098jei5PZNL3bVebYVZtjpEO', 'Show', NULL, NULL, NULL, '2023-12-18 09:44:14', '2024-03-05 06:28:25', NULL, NULL),
+(8, NULL, NULL, 'Teacher 1', 'admin@gmail.com', 1, 0, 0, NULL, NULL, '0109947345', NULL, NULL, '7452024X02X19X09X11X19202301101725mvf_dark_logo.png', NULL, 'student', NULL, NULL, NULL, '$2y$10$Oj4cP4avEst9pP/kadNnWuJxlqGzp098jei5PZNL3bVebYVZtjpEO', 'Show', NULL, NULL, NULL, '2023-12-18 09:44:14', '2024-03-06 06:05:16', NULL, NULL),
 (10, NULL, NULL, 'Teacher', 'teacher@gmail.com', 0, 0, 0, NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X50X119775202304090932egyptXflagXwaveXiconX32.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$EFSKaqvOqy3o.ihNqVWi7uCPCrFtflwUJGqEBFP1woOuxlRaIqN5u', 'Show', NULL, NULL, NULL, '2023-12-18 09:50:11', '2024-01-27 08:02:15', NULL, NULL),
 (11, NULL, NULL, 'Teacher12', 'teacher2@gmail.com', 0, 0, 0, NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X52X277966202304090932egyptXflagXwaveXiconX32.png', NULL, 'teacher', NULL, 1, 1, '$2y$10$Y4fg1B5EpujC8OVSCO6fNOyxdAj2lPJDZWibbtD8j55Jik6fU4Uq6', 'Show', NULL, NULL, NULL, '2023-12-18 09:52:27', '2024-02-05 10:45:46', NULL, NULL),
 (44, NULL, NULL, 'admin@gmail.com', 'sad@gmail.com', 0, 0, 0, NULL, NULL, '123', '123', NULL, 'default.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$RkeDuqhtAqMTRC7gfMFxG.Vl8pLtWGgj1jisi0ZkphX9LDVUQaZpO', 'Show', NULL, NULL, NULL, '2023-12-31 06:31:28', '2024-02-05 10:15:37', NULL, NULL),
@@ -3043,6 +3174,22 @@ ALTER TABLE `exam`
 --
 ALTER TABLE `exam_codes`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `exam_history`
+--
+ALTER TABLE `exam_history`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_EHistory_Exam` (`exam_id`),
+  ADD KEY `FK_EHistory_Student` (`user_id`);
+
+--
+-- Indexes for table `exam_mistakes`
+--
+ALTER TABLE `exam_mistakes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_EMistakes_Exam` (`student_exam_id`),
+  ADD KEY `FK_EMistakes_Question` (`question_id`);
 
 --
 -- Indexes for table `exam_questions`
@@ -3511,7 +3658,7 @@ ALTER TABLE `dia_questions`
 -- AUTO_INCREMENT for table `exam`
 --
 ALTER TABLE `exam`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `exam_codes`
@@ -3520,10 +3667,22 @@ ALTER TABLE `exam_codes`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `exam_history`
+--
+ALTER TABLE `exam_history`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `exam_mistakes`
+--
+ALTER TABLE `exam_mistakes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+
+--
 -- AUTO_INCREMENT for table `exam_questions`
 --
 ALTER TABLE `exam_questions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `exam_time`
@@ -3631,7 +3790,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=275;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=279;
 
 --
 -- AUTO_INCREMENT for table `private_request`
@@ -3873,6 +4032,20 @@ ALTER TABLE `exam`
   ADD CONSTRAINT `FK_Exam_Course` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_Exam_Score` FOREIGN KEY (`score_id`) REFERENCES `score_sheet` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_Exam_Time` FOREIGN KEY (`code_id`) REFERENCES `exam_codes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `exam_history`
+--
+ALTER TABLE `exam_history`
+  ADD CONSTRAINT `FK_EHistory_Exam` FOREIGN KEY (`exam_id`) REFERENCES `exam` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_EHistory_Student` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `exam_mistakes`
+--
+ALTER TABLE `exam_mistakes`
+  ADD CONSTRAINT `FK_EMistakes_Exam` FOREIGN KEY (`student_exam_id`) REFERENCES `exam` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_EMistakes_Question` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `exam_questions`
