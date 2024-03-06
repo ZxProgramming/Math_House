@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\QuizzeController;
 use App\Http\Controllers\Admin\DiagnosticExamController;
+use App\Http\Controllers\Admin\ExamController;
 
 use App\Http\Controllers\Visitor\CoursesController;
 use App\Http\Controllers\Student\Stu_MyCourseController;
@@ -34,6 +35,7 @@ Route::get('/quize_del_q', [QuizzeController::class, 'quize_del_q'])->name('quiz
 Route::get('/quize_add_q', [QuizzeController::class, 'quize_add_q'])->name('quize_add_q')->middleware('auth:sanctum');
 Route::get('/buy_chapters', [CoursesController::class, 'buy_chapters'])->name('buy_chapters')->middleware('auth:sanctum');
 Route::get('/sel_duration_course', [CoursesController::class, 'sel_duration_course'])->name('sel_duration_course')->middleware('auth:sanctum');
+Route::get('/exam_data', [ExamController::class, 'exam_data'])->name('exam_data')->middleware('auth:sanctum');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

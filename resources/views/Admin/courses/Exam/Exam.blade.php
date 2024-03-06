@@ -213,7 +213,7 @@
               <li class="nav-item" style="width: calc(100% / 3);text-align: center;">
                 <a class="nav-link" data-bs-toggle="tab" href="#menu1">DETAILS</a>
               </li>
-              <li class="nav-item" style="width: calc(100% / 3);text-align: center;">
+              <li class="nav-item question_btn" style="width: calc(100% / 3);text-align: center;">
                 <a class="nav-link" data-bs-toggle="tab" href="#menu2">QUESTIONS</a>
               </li>
             </ul>
@@ -246,6 +246,19 @@
                         <span>Minets: </span>
                         <input type="number" name="time_m" max="60" min="1" class="col-md-4 form-control">
                       </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12 d-flex align-items-center justify-content-around">
+                    <span class="col-md-2" style="font-size: 1.2rem;">Type: </span>
+                    <div class="col-md-9" style="display: flex; align-items: center;padding: 0;justify-content: start">
+                      <select class="form-control sel_exam_type" name="type">
+                        <option selected disabled>
+                          Select Type ...
+                        </option>
+                        <option value="extra">Extra</option>
+                        <option value="trail">Trail</option>
+                      </select>
                     </div>
                   </div>
 
@@ -312,46 +325,48 @@
                       </select>
                     </div> 
 
-                    <div style="width: 100%;" class="d-flex align-items-center justify-content-start">
-                      <span class="col-md-2" style="font-size: 1.2rem;">Year: </span>
-                      <select name="year" class="col-md-2 form-control">
-                        <option selected disabled>
-                          Select Year ...
-                        </option>
-                        @for ($i = date('Y'); $i > 1950; $i--)
-                          <option value="{{$i}}">{{$i}}</option>
-                        @endfor
-                      </select>
-                    </div> 
+                    <div style="width: 100%;" class="trial_block">
+                      <div style="width: 100%;" class="d-flex my-2 align-items-center justify-content-start">
+                        <span class="col-md-2" style="font-size: 1.2rem;">Year: </span>
+                        <select name="year" class="col-md-2 form-control sel_year">
+                          <option selected disabled>
+                            Select Year ...
+                          </option>
+                          @for ($i = date('Y'); $i > 1950; $i--)
+                            <option value="{{$i}}">{{$i}}</option>
+                          @endfor
+                        </select>
+                      </div> 
 
-                    <div style="width: 100%;" class="d-flex align-items-center justify-content-start">
-                      <span class="col-md-2" style="font-size: 1.2rem;">Month: </span>
-                      <select name="month" class="col-md-2 form-control">
-                        <option selected disabled>
-                          Select Month ...
-                        </option>
-                        @for ($i = 0; $i < 12; $i++)
-                          <option value="{{$i + 1}}">{{date('M', (60*60*24*31*$i))}}</option>
-                        @endfor
-                      </select>
-                    </div> 
+                      <div style="width: 100%;" class="d-flex my-2 align-items-center justify-content-start">
+                        <span class="col-md-2" style="font-size: 1.2rem;">Month: </span>
+                        <select name="month" class="col-md-2 form-control sel_month">
+                          <option selected disabled>
+                            Select Month ...
+                          </option>
+                          @for ($i = 0; $i < 12; $i++)
+                            <option value="{{$i + 1}}">{{date('M', (60*60*24*31*$i))}}</option>
+                          @endfor
+                        </select>
+                      </div> 
 
-                    <div style="width: 100%;" class="d-flex align-items-center justify-content-start">
-                      <span class="col-md-2" style="font-size: 1.2rem;">Code: </span>
-                      <select name="code_id" class="col-md-2 form-control">
-                        <option selected disabled>
-                          Select Code ...
-                        </option>
-                        @foreach ( $codes as $code )
-                          <option value="{{$code->id}}">{{$code->exam_code}}</option>
-                        @endforeach
-                      </select>
-                    </div> 
+                      <div style="width: 100%;" class="d-flex my-2 align-items-center justify-content-start">
+                        <span class="col-md-2" style="font-size: 1.2rem;">Code: </span>
+                        <select name="code_id" class="col-md-2 form-control sel_code">
+                          <option selected disabled>
+                            Select Code ...
+                          </option>
+                          @foreach ( $codes as $code )
+                            <option value="{{$code->id}}">{{$code->exam_code}}</option>
+                          @endforeach
+                        </select>
+                      </div> 
+                    </div>
  
                   </div>
                   <div class="d-flex justify-content-end" style="column-gap: 16px">
                     <a class="btnPrevious btn_add_quizz">Prev</a>
-                    <a class="btnNext btn_add_quizz next_btn d-none">Next</a>
+                    <a class="btnNext btn_add_quizz next_btn_2 next_btn">Next</a>
                   </div>
                 </div>
               </div>
@@ -537,7 +552,7 @@
                 <div class="modal fade modal_edit" id="modalCenter{{$item->id}}" style="transform: translate(20px, 0px); " tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" style="max-width: 1300px !important; display: flex;align-items: center;justify-content: center;" role="document">
                     <div class="modal-content" style="border-radius: 15px;">
-                      <form action="{{route('edit_dia_exam', ['id' => $item->id])}}" method="POST">
+                      <form action="{{route('edit_exam', ['id' => $item->id])}}" method="POST">
                       @csrf
                       <input type="hidden" class="questions_data" name="ques_id" />
                         <div class="modal-header" style="border-bottom: 0 !important;">
@@ -828,7 +843,7 @@
                         <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
                           Close
                         </button>
-                        <a href="{{route('del_dia_exam', ['id'=>$item->id])}}" class="btn btn-danger">Delete</a>
+                        <a href="{{route('del_exam', ['id'=>$item->id])}}" class="btn btn-danger">Delete</a>
                       </div>
                     </div>
                   </div>
@@ -984,18 +999,171 @@ sel_category.addEventListener('change', () => {
     }
   })
 });
- 
- 
 
+let question_btn = document.querySelector('.question_btn');
+let next_btn_2 = document.querySelector('.next_btn_2');
+let sel_year = document.querySelector('.sel_year');
+let sel_month = document.querySelector('.sel_month');
+let sel_code = document.querySelector('.sel_code');
+let sel_exam_type = document.querySelector('.sel_exam_type');
 let quizze_item = document.querySelector('.quizze_item');
+let trial_block = document.querySelector('.trial_block');
+let all_question = false;
 
-sel_course.addEventListener('change', () => {
+sel_exam_type.addEventListener('change', () => {
+  if (sel_exam_type.value == 'trail') {
+    trial_block.classList.remove('d-none');
+    all_question = false;
+  }
+  else{
+    trial_block.classList.add('d-none');
+    all_question = true;
+  }
+})
+
+question_btn.addEventListener('click', () => {
   
   $(".next_btn").removeClass("d-none");
 
-  $.ajax("{{route('dia_exam_data')}}", {
+  $.ajax("{{route('exam_data')}}", {
       type: 'GET',  // http method
-      data: { course_id: sel_course.value },  // data to submit
+      data: { 
+        course_id: sel_course.value,
+        month: sel_month.value,
+        year: sel_year.value,
+        all_question: all_question,
+       },  // data to submit
+      success: function (data) {
+          quizze_item.innerHTML = null; 
+          console.log(data);
+          console.log(data);
+          data.forEach((element, index) => {
+            quizze_item.innerHTML += `<tr>
+                              <th scope="row" class="idd d-none">${element.question_id}</th>
+                              <th>${index + 1}</th>
+                              <td class="type">${element.q_type}</td>
+                              <td class="year">${element.year}</td>
+                              <td class="month">${element.month}</td>
+                              <td class="code">${element.q_code}</td>
+                              <td class="section">${element.section}</td>
+                              <td class="noNum">${element.q_num}</td>
+                              <td class="diff">${element.difficulty}</td>
+                              <td class="p-0">
+                                <button type="button" class="add_qz">Add</button>
+                              </td>
+                            </tr>`;
+            });
+
+          var quizzes = [];
+          
+          $(".add_qz").click(function(){
+
+            var quziId = $(this).closest("tr").find(".idd").text();
+            var quziType = $(this).closest("tr").find(".type").text();
+            var quziYear = $(this).closest("tr").find(".year").text();
+            var quziMonth = $(this).closest("tr").find(".month").text();
+            var quziCode = $(this).closest("tr").find(".code").text();
+            var quziNoNum = $(this).closest("tr").find(".noNum").text();
+            var quziSection = $(this).closest("tr").find(".section").text();
+            var quziDiff = $(this).closest("tr").find(".diff").text();
+
+            var allData = []; 
+
+
+            var quziObject = {
+              id: quziId,
+              type: quziType,
+              year: quziYear,
+              month: quziMonth,
+              code: quziCode,
+              section: quziSection,
+              noNum: quziNoNum,
+              diff: quziDiff,
+            }
+            
+            allData.push(quziObject);
+
+            quizzes.push(...allData); 
+            var object_serialized = JSON.stringify(allData);
+
+
+            var allObject_serialized = JSON.stringify(quizzes);
+
+            localStorage.setItem("Allquizzes", allObject_serialized)
+
+
+
+            localStorage.setItem("quizzes", object_serialized)
+             
+
+            var myObjectDeserialized = JSON.parse(localStorage.getItem("quizzes"));
+             
+
+            var quizz_container = $(".sel_quz");
+
+            var index = quizzes.length;
+            var removeBtn =  "<button type='button' class='remove_qz'>Remove</button>";
+            
+            
+            myObjectDeserialized.forEach(element => {
+              var dynamicTR = "<tr>";
+                dynamicTR = dynamicTR + "<td class='iddd'> " + index + "</td>"; 
+                dynamicTR = dynamicTR + "<td> " + element.type + "</td>"; 
+                dynamicTR = dynamicTR + "<td> " + element.year + "</td>"; 
+                dynamicTR = dynamicTR + "<td> " + element.month + "</td>"; 
+                dynamicTR = dynamicTR + "<td> " + element.code + "</td>"; 
+                dynamicTR = dynamicTR + "<td> " + element.section + "</td>"; 
+                dynamicTR = dynamicTR + "<td> " + element.noNum + "</td>"; 
+                dynamicTR = dynamicTR + "<td> " + element.diff + "</td>"; 
+                dynamicTR = dynamicTR + "<td style='width: 150px !important; padding: 0 !important;'  > " + removeBtn + "</td>"; 
+                
+                dynamicTR = dynamicTR + " </tr>";
+
+                index++;
+                //_____________________________________________________________________________
+                quizz_container.append(dynamicTR);
+                questions_data.value = JSON.stringify(quizzes);
+                //_____________________________________________________________________________
+            });
+
+            if($("tbody").length <= 1){ 
+              addEmptyRow();
+            }else{ 
+              $(".avil").parent().remove();
+            };
+          });
+
+          $(document).on('click', '.remove_qz', function() {
+            var emptyRow = "<tr><td colspan='12' class='avil'> No Quizzes Available</td></tr>";
+             
+            
+            var getIndex = $(this).closest("tr").index();
+            
+            quizzes.splice(getIndex , 1);
+             
+
+            $(this).closest("tr").remove();
+            
+            if ($("#tblData .sel_quz").html() == "") { 
+              $("#tblData .sel_quz").append(emptyRow);
+            };
+          });
+      },
+  });
+});
+
+next_btn_2.addEventListener('click', () => {
+  
+  $(".next_btn").removeClass("d-none");
+
+  $.ajax("{{route('exam_data')}}", {
+      type: 'GET',  // http method
+      data: { 
+        course_id: sel_course.value,
+        month: sel_month.value,
+        year: sel_year.value,
+        all_question: all_question,
+       },  // data to submit
       success: function (data) {
           quizze_item.innerHTML = null; 
           console.log(data);

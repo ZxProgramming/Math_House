@@ -26,6 +26,8 @@ class Exam extends Model
         'code_id',
         'course_id',
         'score_id',
+        'state',
+        'type',
     ];
     
     public function course()

@@ -34,7 +34,7 @@ class ExamController extends Controller
 
     public function add_exam( Request $req ){
         $questions = json_decode($req->ques_id);
-        $arr = $req->only('title', 'description', 'score', 'pass_score', 
+        $arr = $req->only('title', 'description', 'score', 'pass_score', 'type',
         'year', 'month', 'code_id', 'course_id', 'score_id', 'state');
         $arr['time'] = $req->time_h . 'Hours ' . $req->time_m . ' M';
         $dia_exam = Exam::create($arr);
@@ -78,5 +78,52 @@ class ExamController extends Controller
 
         return redirect()->back();
     }
+
+    public function exam_data ( Request $req ){
+
+        if ( $req->all_question == 'true' ) {
+            $exam = Question::
+            select('*', 'questions.id as question_id')
+            ->leftJoin('lessons', 'questions.lesson_id', '=', 'lessons.id')
+            ->leftJoin('chapters', 'lessons.chapter_id', '=', 'chapters.id')
+            ->leftJoin('courses', 'chapters.course_id', '=', 'courses.id')
+            ->where('courses.id', $req->course_id)
+            ->get();
+        }
+        else {
+            $exam = Question::
+            select('*', 'questions.id as question_id')
+            ->leftJoin('lessons', 'questions.lesson_id', '=', 'lessons.id')
+            ->leftJoin('chapters', 'lessons.chapter_id', '=', 'chapters.id')
+            ->leftJoin('courses', 'chapters.course_id', '=', 'courses.id')
+            ->where('courses.id', $req->course_id)
+            ->where('questions.month', $req->month)
+            ->where('questions.year', $req->year)
+            ->get();
+        }
+
+        return $exam;
+    }
+
+    public function del_exam( $id ){
+        Exam::where('id', $id)
+        ->delete();
+
+        return redirect()->back();
+    }
+
+    public function edit_exam( $id, Request $req){
+        $questions = json_decode($req->ques_id);
+       $arr = $req->only('title', 'description', 'score', 'pass_score', 'course_id', 'score_id');
+       $arr['state'] = isset($req->state) ? 1 : 0;
+       $arr['time'] = $req->time;
+       $exam = Exam::
+       where('id', $id)
+       ->update($arr);
+       
+
+       return redirect()->back();
+    }
+
 
 }

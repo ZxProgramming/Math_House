@@ -81,6 +81,7 @@ use Illuminate\Support\Facades\Route;
     });
     Route::controller(V_ExamController::class)->group(function(){
         Route::get('/Exams', 'v_exams')->name('v_exams');
+        Route::post('/Exam/Answer','exam_ans')->name('exam_ans');
         Route::post('/Exams', 'filter_exam')->name('filter_exam');
         Route::get('/Exam/{id}', 'exam_page')->name('exam_page');
     });
@@ -263,6 +264,8 @@ Route::controller(DiagnosticExamController::class)->group(function(){
 
 // Exam 
 Route::controller(ExamController::class)->group(function(){
+    Route::get('/Exam/Del/{id}','del_exam')->name('del_exam');
+    Route::post('/Exam/Edit/{id}','edit_exam')->name('edit_exam'); 
     Route::get('/Exam','index')->name('exam'); 
     Route::post('/Exam/Add','add_exam')->name('add_exam');
     Route::get('/ScoreSheet','score_sheet')->name('score_sheet');
