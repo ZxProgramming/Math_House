@@ -203,5 +203,9 @@ class V_ExamController extends Controller
 
         return view('Visitor.Exam.Grade', compact('deg', 'grade', 'score', 'exam', 'right_question', 'total_question', 'mistakes'));
     }
+    
+    public function exam_history(){
+        
+    }
 
 }

@@ -101,8 +101,8 @@
 </table>
 
 <script>
-    let mistakes_questions = document.querySelector('.mistakes_questions');
-    let mistake_btn = document.querySelector('.mistake_btn');
+    let mistakes_questions = document.querySelectorAll('.mistakes_questions');
+    let mistake_btn = document.querySelectorAll('.mistake_btn');
     let ans_item_btn = document.querySelectorAll('.ans_item_btn');
     let ans_item = document.querySelectorAll('.ans_item');
     
@@ -115,9 +115,15 @@
             }
         })
     }
-    mistake_btn.addEventListener('click', () => {
-        mistakes_questions.classList.toggle('d-none');
-    })
+    for (let i = 0, end = mistake_btn.length; i < end; i++) {
+        mistake_btn[i].addEventListener('click', ( e ) => {
+            for (let j = 0; j < end; j++) {
+                if ( e.target == mistake_btn[j] ) {
+                    mistakes_questions[j].classList.toggle('d-none');
+                }
+            }
+        });
+    }
 </script>
 @endsection
 

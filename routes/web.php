@@ -25,6 +25,7 @@ use App\Http\Controllers\Student\Stu_DashboardController;
 use App\Http\Controllers\Student\Stu_ProfileController;
 use App\Http\Controllers\Student\Stu_MyCourseController;
 use App\Http\Controllers\Student\Stu_PackageController;
+use App\Http\Controllers\Student\Stu_ExamController;
 
 use App\Http\Controllers\Visitor\HomeController;
 use App\Http\Controllers\Visitor\ContactController;
@@ -266,7 +267,7 @@ Route::controller(DiagnosticExamController::class)->group(function(){
 Route::controller(ExamController::class)->group(function(){
     Route::get('/Exam/Del/{id}','del_exam')->name('del_exam');
     Route::post('/Exam/Edit/{id}','edit_exam')->name('edit_exam'); 
-    Route::get('/Exam','index')->name('exam'); 
+    Route::get('/Exam','index')->name('exam');
     Route::post('/Exam/Add','add_exam')->name('add_exam');
     Route::get('/ScoreSheet','score_sheet')->name('score_sheet');
     Route::post('/ScoreSheet/Add','addScore')->name('addScore'); 
@@ -284,12 +285,12 @@ Route::controller(CategoryController::class)->group(function(){
 
 // Lesson 
 Route::controller(LessonController::class)->group(function(){
-        Route::get('Lesson/Lessons','index')->name('lesson');
-        Route::post('Lesson/AddLesson','addLesson')->name('addLesson');
-        Route::post('Lesson/Edit','lesson_edit')->name('lesson_edit');
-        Route::get('Lesson/Del/{id}','del_lesson')->name('del_lesson');
-        Route::post('Lesson/Filter','filter_lesson')->name('filter_lesson');
-        Route::get('Lesson/Filter','filter_lesson')->name('filter_lesson');
+    Route::get('Lesson/Lessons','index')->name('lesson');
+    Route::post('Lesson/AddLesson','addLesson')->name('addLesson');
+    Route::post('Lesson/Edit','lesson_edit')->name('lesson_edit');
+    Route::get('Lesson/Del/{id}','del_lesson')->name('del_lesson');
+    Route::post('Lesson/Filter','filter_lesson')->name('filter_lesson');
+    Route::get('Lesson/Filter','filter_lesson')->name('filter_lesson');
 });
 
 // Packages 
@@ -324,6 +325,11 @@ Route::middleware(['auth','auth.student'])->prefix('student')->group(function(){
         Route::get('/Profile','index')->name('stu_profile');
         Route::post('/Profile/Edit','stu_edit_profile')->name('stu_edit_profile');
     });
+
+    Route::controller(Stu_ExamController::class)->group(function(){
+        Route::get('/Exam/History','exam_history')->name('exam_history');
+    });
+    
 
     Route::controller(Stu_MyCourseController::class)->prefix('MyCourses')->group(function(){
         Route::get('/','index')->name('stu_my_courses');

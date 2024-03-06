@@ -19,7 +19,7 @@
     </thead>
 
     <tbody>
-        @foreach( $dia_history as $item )
+        @foreach( $exam_history as $item )
         <tr>
             <td>
                 {{$loop->iteration}}
