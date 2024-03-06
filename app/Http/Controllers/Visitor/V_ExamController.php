@@ -11,8 +11,12 @@ use App\Models\Course;
 use App\Models\Category;
 use App\Models\Package;
 use App\Models\User;
+use App\Models\Question;
 use App\Models\UserPackage;
 use App\Models\PaymentPackageOrder;
+use App\Models\ScoreList;
+use App\Models\ExamHistory;
+use App\Models\ExamMistake;
 
 use Carbon\Carbon;
 
@@ -143,7 +147,7 @@ class V_ExamController extends Controller
                 if ( isset($mcq_item->answer) && $stu_solve == $mcq_item->answer ) {
                     $deg++;
                 } else {
-                    $mistakes[$question->lessons->chapter->course->id] = $question;
+                    $mistakes[] = $question;
                 }
             }
         }
@@ -160,7 +164,7 @@ class V_ExamController extends Controller
                 if ($grid_ans == $answer) {
                     $deg++;
                 } else {
-                    $mistakes[$question->lessons->chapter->course->id] = $question;
+                    $mistakes[] = $question;
                 }
             }
         }
@@ -179,24 +183,25 @@ class V_ExamController extends Controller
         //     ->first();
 
         if (empty($stu_q)) {
-            $stu_exam = DiagnosticExamsHistory::create([
+            $stu_exam = ExamHistory::create([
                 'date' => now(),
                 'user_id' => auth()->user()->id,
                 'diagnostic_exams_id' => $exam->id,
                 'score' => $score,
                 'time' => $req->timer, 
                 'r_questions' => $right_question,
+                'exam_id' => $exam->id,
             ]);
 
             foreach ($mistakes as $item) {
-                DaiExamMistake::create([
-                    'student_exam_id' => $stu_exam->id,
+                ExamMistake::create([
+                    'student_exam_id' => $exam->id,
                     'question_id' => $item->id
                 ]);
             }
         }
 
-        return view('Visitor.Dia_Exam.Grade', compact('deg', 'grade', 'score', 'exam', 'right_question', 'total_question', 'mistakes'));
+        return view('Visitor.Exam.Grade', compact('deg', 'grade', 'score', 'exam', 'right_question', 'total_question', 'mistakes'));
     }
 
 }

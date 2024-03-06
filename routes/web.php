@@ -81,7 +81,7 @@ use Illuminate\Support\Facades\Route;
     });
     Route::controller(V_ExamController::class)->group(function(){
         Route::get('/Exams', 'v_exams')->name('v_exams');
-        Route::post('/Exam/Answer','exam_ans')->name('exam_ans');
+        Route::post('/Exam/Answer/{id}','exam_ans')->name('exam_ans');
         Route::post('/Exams', 'filter_exam')->name('filter_exam');
         Route::get('/Exam/{id}', 'exam_page')->name('exam_page');
     });
