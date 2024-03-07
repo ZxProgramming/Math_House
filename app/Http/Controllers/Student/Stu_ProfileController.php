@@ -64,4 +64,5 @@ class Stu_ProfileController extends Controller
         ->update($arr);
         return redirect()->back();
     }
+    
 }

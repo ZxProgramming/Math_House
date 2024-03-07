@@ -503,6 +503,16 @@
 									</h3>
 								</label>
 								@endforeach
+
+								<div class="custom-control custom-checkbox">
+									<input type="radio" name="payment_method_id" value="Wallet" class="custom-control-input payment_method_radio" id="customCheck80" checked />
+									<label class="custom-control-label" for="customCheck80"> 
+										<h3>
+										Using Wallet
+										</h3>
+									</label>
+									
+								</div>
 						<script>
 											
 							let payment_method_radio = document.querySelectorAll('.payment_method_radio');

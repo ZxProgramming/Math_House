@@ -15,6 +15,7 @@ use App\Models\PromoCode;
 use App\Models\PaymentMethod;
 use App\Models\PaymentOrder;
 use App\Models\PaymentRequest;
+use App\Models\Wallet;
 use Cart;
 
 class CoursesController extends Controller
@@ -192,7 +193,6 @@ class CoursesController extends Controller
     }
 
     public function payment_money( Request $req ){
-        $arr = $req->only('payment_method_id');
         $arr['price'] = Cache::get('chapters_price');
         $arr['user_id'] = auth()->user()->id;
         $img_state = true;
@@ -215,15 +215,33 @@ class CoursesController extends Controller
                 move_uploaded_file($tmp_name[$i], 'images/payment_reset/' . $img_name);
             }
         }
-        if ( $img_state ) { 
+        $chapters = json_decode(Cache::get('marketing'));
+        $price = json_decode(Cache::get('chapters_price'));
+        if ( $req->payment_method_id == 'Wallet' ) {
+            $wallet = Wallet::
+            where('student_id', auth()->user()->id)
+            ->sum('wallet');
+            if ( $wallet < $price ) {
+                session()->flash('faild', 'You Wallet Is not Enough');
+                return redirect()->back();
+            }
+            Wallet::create([
+                'student_id' => auth()->user()->id,
+                'wallet' => -$price,
+                'state' => 'Pendding',
+                'date' => now(),
+            ]);
+        }
+        elseif ( $img_state ) { 
             session()->flash('faild', 'You Must Enter Receipt');
             return redirect()->back();
         
         }
+        else{ 
+            $arr[] = $req->payment_method_id;
+        }
         $p_request = PaymentRequest::create($arr);
-        $chapters = json_decode(Cache::get('marketing'));
-        $price = json_decode(Cache::get('chapters_price'));
-        $p_method = $p_request->method->payment;
+        $p_method = isset($p_request->method->payment) ? $p_request->method->payment : 'Wallet';
         $duration = 0;
         for ($i=0, $end = count($chapters); $i < $end; $i++) { 
             foreach ( $chapters[$i]->price as $item ) {
@@ -232,7 +250,7 @@ class CoursesController extends Controller
                 }
             }
             PaymentOrder::create( 
-                ['payment_request_id' => $req->payment_method_id,
+                ['payment_request_id' => $p_request->id,
                 'chapter_id' => $chapters[$i]->id,
                 'duration' => $duration,]);
         }
@@ -241,7 +259,6 @@ class CoursesController extends Controller
     }
 
     public function course_payment_money( Request $req ){
-        $arr = $req->only('payment_method_id');
         $arr['price'] = Cache::get('chapters_price');
         $arr['user_id'] = auth()->user()->id;
         $img_state = true;
@@ -264,14 +281,33 @@ class CoursesController extends Controller
                 move_uploaded_file($tmp_name[$i], 'images/payment_reset/' . $img_name);
             }
         }
-        if ( $img_state ) { 
-            session()->flash('faild', 'You Must Enter Receipt');
-            return redirect()->back();
-        
-        }
-        $p_request = PaymentRequest::create($arr);
         $course = (Cache::get('marketing'));
         $price = (Cache::get('chapters_price'));
+        
+        if ( $req->payment_method_id == 'Wallet' ) {
+            $wallet = Wallet::
+            where('student_id', auth()->user()->id)
+            ->sum('wallet');
+            if ( $wallet < $price ) {
+                session()->flash('faild', 'You Wallet Is not Enough');
+                return redirect()->back();
+            }
+            Wallet::create([
+                'student_id' => auth()->user()->id,
+                'wallet' => -$price,
+                'state' => 'Pendding',
+                'date' => now(),
+            ]);
+        }
+        elseif ( $img_state ) { 
+            session()->flash('faild', 'You Must Enter Receipt');
+            return redirect()->back();
+        }
+        else{ 
+            $arr[] = $req->payment_method_id;
+            $arr = $req->only('payment_method_id');
+        }
+        $p_request = PaymentRequest::create($arr);
         $duration = 0;
         
         foreach ($course->prices as $item) {
@@ -290,7 +326,7 @@ class CoursesController extends Controller
             ]);
         }
         
-        $p_method = $p_request->method->payment;
+        $p_method = isset($p_request->method->payment) ? $p_request->method->payment : 'Wallet';
         return view('Visitor.C_Order.Order', compact('course', 'price', 'p_method'));
     }
 

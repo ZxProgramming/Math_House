@@ -26,6 +26,8 @@ use App\Http\Controllers\Student\Stu_ProfileController;
 use App\Http\Controllers\Student\Stu_MyCourseController;
 use App\Http\Controllers\Student\Stu_PackageController;
 use App\Http\Controllers\Student\Stu_ExamController;
+use App\Http\Controllers\Student\Stu_PaymentController;
+use App\Http\Controllers\Student\Stu_WalletController;
 
 use App\Http\Controllers\Visitor\HomeController;
 use App\Http\Controllers\Visitor\ContactController;
@@ -317,6 +319,15 @@ Route::middleware(['auth','auth.student'])->prefix('student')->group(function(){
     Route::controller(Stu_PackageController::class)->group(function(){
         Route::get('Package/Checkout/{id}', 'package_checkout')->name('package_checkout');
         Route::post('Package/Payment/{id}', 'payment_package')->name('payment_package');
+    }); 
+
+    Route::controller(Stu_PaymentController::class)->group(function(){
+        Route::get('PaymentHistory', 'stu_payment_history')->name('stu_payment_history');
+    });
+
+    Route::controller(Stu_WalletController::class)->group(function(){
+        Route::get('Wallet', 'index')->name('wallet');
+        Route::post('Wallet/Add', 'add_wallet')->name('add_wallet');
     });
     
 
