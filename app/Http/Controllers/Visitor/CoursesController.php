@@ -289,8 +289,12 @@ class CoursesController extends Controller
             where('student_id', auth()->user()->id)
             ->sum('wallet');
             if ( $wallet < $price ) {
-                session()->flash('faild', 'You Wallet Is not Enough');
-                return redirect()->back();
+                session()->flash('faild', 'You Wallet Is not Enough'); 
+                $payment_methods = PaymentMethod::
+                where('statue', 1)
+                ->get();
+        
+                return view('Visitor.C_Checkout.Checkout', compact('price', 'course', 'payment_methods'));
             }
             Wallet::create([
                 'student_id' => auth()->user()->id,
@@ -301,7 +305,11 @@ class CoursesController extends Controller
         }
         elseif ( $img_state ) { 
             session()->flash('faild', 'You Must Enter Receipt');
-            return redirect()->back();
+            $payment_methods = PaymentMethod::
+            where('statue', 1)
+            ->get();
+    
+            return view('Visitor.C_Checkout.Checkout', compact('price', 'course', 'payment_methods'));
         }
         else{ 
             $arr[] = $req->payment_method_id;
