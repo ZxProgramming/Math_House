@@ -215,9 +215,10 @@ class UserController extends Controller
         compact('teachers', 'categories', 'courses'));
     }
     
-    public function add_wallet( Request $req ){
+    public function ad_add_wallet( Request $req ){
         $arr = $req->only('wallet', 'student_id');
         $arr['date'] = now();
+        $arr['state'] = 'Approve';
         Wallet::create($arr);
         return redirect()->back();
     }

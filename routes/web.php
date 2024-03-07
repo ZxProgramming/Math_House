@@ -205,7 +205,7 @@ Route::middleware(['auth','auth.Admin'])->prefix('Admin')->group(function(){
         Route::get('/Teacher/Del/{id}', 'del_teacher')->name('del_teacher');
         
         // Students  
-        Route::post('/Add_Wallet', 'add_wallet')->name('add_wallet');
+        Route::post('/Add_Wallet', 'ad_add_wallet')->name('ad_add_wallet');
         Route::get('/Student', 'student')->name('student');
         Route::post('/Student_Filter', 'student_filter')->name('student_filter');
         Route::get('/Student/Info', 'stu_info')->name('stu_info');

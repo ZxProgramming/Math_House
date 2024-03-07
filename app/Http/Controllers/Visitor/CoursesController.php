@@ -220,17 +220,13 @@ class CoursesController extends Controller
         if ( $req->payment_method_id == 'Wallet' ) {
             $wallet = Wallet::
             where('student_id', auth()->user()->id)
+            ->where('state', 'Approve')
             ->sum('wallet');
+            
             if ( $wallet < $price ) {
                 session()->flash('faild', 'You Wallet Is not Enough');
                 return redirect()->back();
             }
-            Wallet::create([
-                'student_id' => auth()->user()->id,
-                'wallet' => -$price,
-                'state' => 'Pendding',
-                'date' => now(),
-            ]);
         }
         elseif ( $img_state ) { 
             session()->flash('faild', 'You Must Enter Receipt');
@@ -241,6 +237,15 @@ class CoursesController extends Controller
             $arr[] = $req->payment_method_id;
         }
         $p_request = PaymentRequest::create($arr);
+        if ( $req->payment_method_id == 'Wallet' ) {
+            Wallet::create([
+                'student_id' => auth()->user()->id,
+                'wallet' => -$price,
+                'state' => 'Pendding',
+                'date' => now(),
+                'payment_request_id' => $p_request->id,
+            ]);
+        }
         $p_method = isset($p_request->method->payment) ? $p_request->method->payment : 'Wallet';
         $duration = 0;
         for ($i=0, $end = count($chapters); $i < $end; $i++) { 
@@ -287,7 +292,9 @@ class CoursesController extends Controller
         if ( $req->payment_method_id == 'Wallet' ) {
             $wallet = Wallet::
             where('student_id', auth()->user()->id)
-            ->sum('wallet');
+            ->where('state', 'Approve')
+            ->sum('wallet'); 
+
             if ( $wallet < $price ) {
                 session()->flash('faild', 'You Wallet Is not Enough'); 
                 $payment_methods = PaymentMethod::
@@ -296,12 +303,6 @@ class CoursesController extends Controller
         
                 return view('Visitor.C_Checkout.Checkout', compact('price', 'course', 'payment_methods'));
             }
-            Wallet::create([
-                'student_id' => auth()->user()->id,
-                'wallet' => -$price,
-                'state' => 'Pendding',
-                'date' => now(),
-            ]);
         }
         elseif ( $img_state ) { 
             session()->flash('faild', 'You Must Enter Receipt');
@@ -318,6 +319,15 @@ class CoursesController extends Controller
         $p_request = PaymentRequest::create($arr);
         $duration = 0;
         
+        if ( $req->payment_method_id == 'Wallet' ) {
+            Wallet::create([
+                'student_id' => auth()->user()->id,
+                'wallet' => -$price,
+                'state' => 'Pendding',
+                'date' => now(),
+                'payment_request_id' => $p_request->id,
+            ]);
+        }
         foreach ($course->prices as $item) {
             if ( $item->price == $price ) {
                 $duration = $item->duration;

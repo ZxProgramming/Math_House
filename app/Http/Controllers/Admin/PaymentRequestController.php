@@ -16,6 +16,7 @@ class PaymentRequestController extends Controller
     public function payment_request(){
         $payment = PaymentRequest::
         where('state', '!=', 'Pendding')
+        ->where('payment_method_id', '!=', null)
         ->orderByDesc('id')
         ->get();
         
@@ -26,6 +27,7 @@ class PaymentRequestController extends Controller
         
         $payment = PaymentRequest::
         where('state', '!=', 'Pendding')
+        ->where('payment_method_id', '!=', null)
         ->orderByDesc('id')
         ->get();
         $data = $payment;
@@ -64,6 +66,7 @@ class PaymentRequestController extends Controller
         
         $payment = PaymentRequest::
         where('state', 'Pendding')
+        ->where('payment_method_id', '!=', null)
         ->orderByDesc('id')
         ->get();
         $data = $payment;
@@ -101,6 +104,7 @@ class PaymentRequestController extends Controller
     public function pendding_payment(){
         $payment = PaymentRequest::
         where('state', 'Pendding')
+        ->where('payment_method_id', '!=', null)
         ->orderByDesc('id')
         ->get();
         

@@ -200,7 +200,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <form method="POST" action="{{ route('add_wallet') }}">
+                                    <form method="POST" action="{{ route('ad_add_wallet') }}">
                                         @csrf
                                         <div class='p-3'>
                                             Wallet
