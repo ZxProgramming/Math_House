@@ -489,14 +489,14 @@
                                                 </a></li>
 								    		</ul>
 								    	</th>
-								    	<td>
+								    	<td class="" style="width: 200px;">
                                             <select name="chapter_duration" class="form-control chapter_duration">
 												@foreach ($chapter->price as $item)
 													<option value="{{$item->id}}">
-														{{$item->duration}}
+														{{$item->duration}} Days
 													</option>
 												@endforeach
-											</select>
+											</select> 
                                         </td>
 										<input type="hidden" class="chapters_price" value="{{json_encode($chapter->price)}}" />
 										<input type="hidden" class="ch_price" name="ch_price[]" value="{{$chapter->ch_price}}" />

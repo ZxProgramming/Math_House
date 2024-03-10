@@ -236,10 +236,10 @@ class Stu_MyCourseController extends Controller
         $min = $prices[0]->price;
         foreach ($prices as $key => $price) {
             if ( $min > $price->price ) {
-                $min = $price->price;
+                $min = $price;
             }
         }
-        $chapters_price = $min;
+        $chapters_price = $min->price;
         
         Cache::store('file')->put('marketing', $chapters, 10000);
         Cache::store('file')->put('chapters_price', $chapters_price, 10000);

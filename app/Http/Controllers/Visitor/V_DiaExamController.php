@@ -51,6 +51,10 @@ class V_DiaExamController extends Controller
         $exam = DiagnosticExam::where('course_id', $id)
         ->get();
         $num = rand(0, count($exam) - 1);
+        if ( !isset($exam[$num]) ) {
+            session()->flash('faild','Diagnostic Exams Is Empty');
+            return redirect()->back();
+        }
         $exam = $exam[$num];
         
         return view('Visitor.Dia_Exam.Exam', compact('exam'));

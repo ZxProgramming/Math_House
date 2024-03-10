@@ -116,8 +116,14 @@ class CoursesController extends Controller
         $chapters = empty($chapters) ? [] : $chapters;
         $chapters_price = Cache::get('chapters_price');
         
-        if ( @is_numeric(Cache::get('min_price_data')->id) ) {
-            $min_price_data = Cache::get('min_price_data');
+        if ( isset($chapters->prices[0]->price) ) {
+            
+            $min_price_data = $chapters->prices[0]->price;
+            foreach ($chapters->prices as $item) {
+                if ( $item->price < $min_price_data ) {
+                    $min_price_data = $item;
+                }
+            }
             $min_price = $chapters_price;
             $course = Course::where('id', $chapters->id)
             ->first();
@@ -185,7 +191,7 @@ class CoursesController extends Controller
             return view('Visitor.Login.login');
         }
         else{
-            $chapters = Cache::get('marketing');
+            $chapters =json_decode(Cache::get('marketing'));
             $chapters_price = Cache::get('chapters_price');
             $chapters = empty($chapters) ? [] : $chapters;
             return view('Visitor.Cart', compact('chapters', 'chapters_price'));
@@ -227,6 +233,7 @@ class CoursesController extends Controller
                 session()->flash('faild', 'You Wallet Is not Enough');
                 return redirect()->back();
             }
+            $arr['state'] = 'Approve'; 
         }
         elseif ( $img_state ) { 
             session()->flash('faild', 'You Must Enter Receipt');
@@ -234,14 +241,14 @@ class CoursesController extends Controller
         
         }
         else{ 
-            $arr[] = $req->payment_method_id;
+            $arr['payment_method_id'] = $req->payment_method_id;
         }
         $p_request = PaymentRequest::create($arr);
         if ( $req->payment_method_id == 'Wallet' ) {
             Wallet::create([
                 'student_id' => auth()->user()->id,
                 'wallet' => -$price,
-                'state' => 'Pendding',
+                'state' => 'Approve',
                 'date' => now(),
                 'payment_request_id' => $p_request->id,
             ]);
@@ -303,6 +310,7 @@ class CoursesController extends Controller
         
                 return view('Visitor.C_Checkout.Checkout', compact('price', 'course', 'payment_methods'));
             }
+            $arr['state'] = 'Approve'; 
         }
         elseif ( $img_state ) { 
             session()->flash('faild', 'You Must Enter Receipt');
@@ -313,8 +321,7 @@ class CoursesController extends Controller
             return view('Visitor.C_Checkout.Checkout', compact('price', 'course', 'payment_methods'));
         }
         else{ 
-            $arr[] = $req->payment_method_id;
-            $arr = $req->only('payment_method_id');
+            $arr['payment_method_id'] = $req->payment_method_id;
         }
         $p_request = PaymentRequest::create($arr);
         $duration = 0;
@@ -323,7 +330,7 @@ class CoursesController extends Controller
             Wallet::create([
                 'student_id' => auth()->user()->id,
                 'wallet' => -$price,
-                'state' => 'Pendding',
+                'state' => 'Approve',
                 'date' => now(),
                 'payment_request_id' => $p_request->id,
             ]);

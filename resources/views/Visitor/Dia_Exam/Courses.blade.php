@@ -22,6 +22,7 @@
 		</div>
 	</section>
 
+	@include('success')
 	<!-- Courses List 2 -->
 	<section class="courses-list2 pb40">
 		<div class="container">
@@ -57,20 +58,20 @@
 					</div>
 					<div class="row courses_container style2">
                         @foreach( $courses as $course )
-						<div class="col-lg-12 p0">
+						<div class="col-lg-12 p0 wallet_btn">
 							<div class="courses_list_content">
 								<div class="top_courses list">
-									<a href="{{route('v_dia_exam', ['id' => $course->id]) }}" class="details">
+									<div class="details">
 									<div class="thumb">
 										<img class="img-whp" src="{{asset('images/courses/' . $course->course_url)}}" alt="t1.jpg">
 										<div class="overlay">
                                         <i style="font-size: 27px;" class="fa-solid fa-cart-plus cart_btn text-light m-3"></i> 
-											<a class="tc_preview_course" href="{{route('v_dia_exam', ['id' => $course->id]) }}">Preview Course</a>
+											<div class="tc_preview_course" href="{{route('v_dia_exam', ['id' => $course->id]) }}">Preview Course</div>
 										</div>
 									</div>
-								</a>
+								</div>
                                     
-									<a href="{{route('v_dia_exam', ['id' => $course->id]) }}" class="details">
+									<div href="{{route('v_dia_exam', ['id' => $course->id]) }}" class="details">
 										<div class="tc_content">
 											<p>
                                                 {{$course->teacher->name}}
@@ -81,10 +82,31 @@
 											<p>
                                                 {{$course->course_des}}
                                             </p>
-										</div>
-										<div class="tc_footer">  
+										</div>   
 									</div>
 								</div>
+							</div>
+						</div>
+						<div class="modal show_wallet fade show d-none" id="modalCenter" tabindex="-1" style="display: block;" aria-modal="true" role="dialog">
+							<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+								<h5 class="modal-title" id="modalCenterTitle">Exam</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									Start Exam ??
+			
+								</div>
+								<div class="modal-footer">
+								<button type="button" class="btn btn-label-secondary close_wallet_btn" data-bs-dismiss="modal">
+									Close
+								</button>
+								<a class="btn btn-success" href="{{route('v_dia_exam', ['id' => $course->id]) }}">
+									Start
+								</a>
+								</div>
+							</div>
 							</div>
 						</div>
                         @endforeach
@@ -95,4 +117,40 @@
 
 <a class="scrollToHome" href="#"><i class="flaticon-up-arrow-1"></i></a>
 </div>
+
+
+<script>
+    let wallet_btn = document.querySelectorAll('.wallet_btn');
+    let show_wallet = document.querySelectorAll('.show_wallet');
+    let btn_close = document.querySelectorAll('.btn-close');
+    let close_wallet_btn = document.querySelectorAll('.close_wallet_btn');
+
+    for (let i = 0, end = wallet_btn.length; i < end; i++) {
+        wallet_btn[i].addEventListener('click', ( e ) => {
+            for (let j = 0; j < end; j++) {
+                if ( e.target == wallet_btn[j] ||  e.target.parentElement == wallet_btn[j] 
+				||  e.target.parentElement.parentElement == wallet_btn[j]||  
+				e.target.parentElement.parentElement.parentElement == wallet_btn[j]||  
+				e.target.parentElement.parentElement.parentElement.parentElement == wallet_btn[j]||  
+				e.target.parentElement.parentElement.parentElement.parentElement.parentElement == wallet_btn[j] ) {
+                    show_wallet[j].classList.remove('d-none');
+                }
+            }
+        })
+        btn_close[i].addEventListener('click', ( e ) => {
+            for (let j = 0; j < end; j++) {
+                if ( e.target == show_wallet[j] ) {
+                    show_wallet[j].classList.add('d-none');
+                }
+            }
+        })
+        close_wallet_btn[i].addEventListener('click', ( e ) => {
+            for (let j = 0; j < end; j++) {
+                if ( e.target == close_wallet_btn[j] ) {
+                    show_wallet[j].classList.add('d-none');
+                }
+            }
+        })
+    }
+</script>
 @include('Visitor.inc.footer')

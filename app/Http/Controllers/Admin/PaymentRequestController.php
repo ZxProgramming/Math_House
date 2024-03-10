@@ -16,7 +16,6 @@ class PaymentRequestController extends Controller
     public function payment_request(){
         $payment = PaymentRequest::
         where('state', '!=', 'Pendding')
-        ->where('payment_method_id', '!=', null)
         ->orderByDesc('id')
         ->get();
         

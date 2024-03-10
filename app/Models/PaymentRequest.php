@@ -19,6 +19,7 @@ class PaymentRequest extends Model
         'price',
         'image',
         'module',
+        'state',
     ];
 
     public function method(){

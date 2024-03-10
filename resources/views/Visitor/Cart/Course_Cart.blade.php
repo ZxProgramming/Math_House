@@ -487,17 +487,17 @@
                                                 </a></li>
 								    		</ul>
 								    	</th>
-								    	<td>
+								    	<td class="" style="width: 200px;">
                                             <select name="course_duration" class="form-control chapter_duration">
                                                 <option value="{{$min_price_data->id}}">
-                                                    {{$min_price_data->duration}}
+                                                    {{$min_price_data->duration}} Days
                                                 </option>
 												@foreach ($course->prices as $item)
 													<option value="{{$item->id}}">
-														{{$item->duration}}
+														{{$item->duration}} Days
 													</option>
 												@endforeach
-											</select>
+											</select> 
                                         </td>
 										<input type="hidden" class="chapters_price" value="{{json_encode($course->prices)}}" />
 										<input type="hidden" class="ch_price" value="{{$min_price}}" />
@@ -524,14 +524,21 @@
 					<div class="order_sidebar_widget mb30">
 						<h4 class="title">Cart Totals</h4>
 						<ul>
-							<li class="subtitle"><p>Total <span class="total_price float-right totals color-orose">
-                                ${{$min_price}}
+							<li class="subtitle"><p>Total <span class="float-right totals color-orose total_price">
+								@if ( $min_price_data->discount != null && $min_price_data->discount != 0 )
+									<del> ${{$min_price}}</del>
+									<span class="dicount_price text-success">
+										${{$min_price - ($min_price_data->discount * $min_price / 100)}}
+									</span>
+								@else
+									${{$min_price}}
+								@endif
                             </span></p></li>
 						</ul>
 					</div>
                     <form method="POST" action="{{route('check_out_course')}}">
                     @csrf
-                    <input type="hidden" class="course_price" name="price" value="{{$min_price}}" />
+                    <input type="hidden" class="course_price" name="price" value="{{$min_price - ($min_price_data->discount * $min_price / 100)}}" />
                     <input type="hidden" name="course" value="{{$course}}" />
 					<div class="ui_kit_button payment_widget_btn">
 						<button class="btn dbxshad btn-lg btn-thm3 circle btn-block">Proceed To Checkout</button>
@@ -559,19 +566,39 @@
 			for (let j = 0; j < end; j++) {
 				if ( e.target == chapter_duration[j] ) {
 					let money = chapters_price[j];
+					let discount = 0;
 					money = money.value;
 					money = JSON.parse(money); 
 					money.forEach(element => {
 						if ( element.id == chapter_duration[j].value ) {
+							discount = element.discount;
 							money = element.price;
 						}
 					});
-					tbl_chapter_price[j].innerHTML = `
-					${money}$
-					`;
+					if ( discount != 0 && discount != null) { 
+						let total = money - (money * discount / 100);
+						tbl_chapter_price[j].innerHTML = `
+						 <del>${money}$</del>
+						 <span class="text-success">
+							${total}$	
+						</span>
+						`;
+                    course_price.value = total;
+                    total_price.innerHTML = `
+						 <del>${money}$</del>
+						 <span>
+							${total}$	
+						</span>`;
+					ch_price[j].value = total;
+					} 
+					else {
+						tbl_chapter_price[j].innerHTML = `
+						${money}$
+						`;
                     course_price.value = money;
                     total_price.innerHTML = `${money}$`;
 					ch_price[j].value = money;
+					}
 				}
 			}
 		})

@@ -6,6 +6,29 @@
     @csrf
     <div style="padding: 100px 100px 0 100px">
         <div class="d-flex my-2">
+            <select class="form-control mx-2 cate_sel">
+                <option disabled selected>
+                    Select Category ...
+                </option>
+                @foreach ( $categories as $item )
+                    <option value="{{$item->id}}">
+                        {{$item->cate_name}}
+                    </option>
+                @endforeach
+            </select>
+            
+            <input type="hidden" class="courses_data" value="{{$courses}}" />
+
+            <select class="form-control mx-2 course_sel" name="course_id">
+                <option disabled selected>
+                    Select Course ...
+                </option>
+            </select>
+
+
+        </div>
+
+        <div class="d-flex my-2">
             <select class="form-control mx-2" name="year">
                 <option disabled selected>
                     Select Year ...
@@ -36,32 +59,10 @@
                     </option>
                 @endforeach
             </select>
-        </div>
-        
-        <div class="d-flex my-2">
-            <select class="form-control mx-2 cate_sel">
-                <option disabled selected>
-                    Select Category ...
-                </option>
-                @foreach ( $categories as $item )
-                    <option value="{{$item->id}}">
-                        {{$item->cate_name}}
-                    </option>
-                @endforeach
-            </select>
             
-            <input type="hidden" class="courses_data" value="{{$courses}}" />
-
-            <select class="form-control mx-2 course_sel" name="course_id">
-                <option disabled selected>
-                    Select Course ...
-                </option>
-            </select>
-
-
             <button class="btn btn-primary mx-2 px-4">
                 Search
-            </button>
+            </button> 
         </div>
     </div>
 </form>
@@ -90,5 +91,5 @@
             }
         });
     });
-</script>
+</script> 
 @include('Visitor.inc.footer')

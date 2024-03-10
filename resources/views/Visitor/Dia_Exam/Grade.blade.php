@@ -68,7 +68,7 @@
                                 <tr>
                                     <td colspan="2" class="d-flex justify-content-center">
                                         <button class="btn btn-primary mistake_btn">
-                                            View Mistakes
+                                            Recommendation
                                         </button>
                                     </td>
                                 </tr>
