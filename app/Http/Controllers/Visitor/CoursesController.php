@@ -127,24 +127,55 @@ class CoursesController extends Controller
     }
 
     public function course_payment( Request $req ){
-        $chapters = json_decode(Cache::get('marketing'));
-        $chapters = empty($chapters) ? [] : $chapters;
-        $chapters_price = Cache::get('chapters_price');
         
-        if ( isset($chapters->prices[0]->price) ) {
-            
-            $min_price_data = $chapters->prices[0]->price;
-            foreach ($chapters->prices as $item) {
-                if ( $item->price < $min_price_data ) {
-                    $min_price_data = $item;
-                }
+        $course_data = Cache::get('marketing');
+        $chapters_price = Cache::get('chapters_price');
+        $course = Course::where('id', $course_data->id)
+        ->first();
+        $min_price = $course->prices[0]->price;
+        $min_price_data = $course->prices[0];
+        foreach ( $course->prices as $price) {
+            if ( $min_price > $price->price ) {
+                $min_price = $price->price;
+                $min_price_data = $price;
             }
-            $min_price = $chapters_price;
-            $course = Course::where('id', $chapters->id)
-            ->first();
+        }
+        Cache::forget('min_price_data');
+        if ( empty(auth()->user()) && $min_price == $chapters_price ) {
+            return view('Visitor.Login.login');
+        }
+        elseif ( $min_price == $chapters_price ) {
+            Cache::store('file')->put('min_price_data', $min_price_data, 10000);
             return view('Visitor.Cart.Course_Cart', compact('course', 'min_price', 'min_price_data'));
         }
-        return view('Visitor.Cart', compact('chapters', 'chapters_price'));
+
+
+        $data = Cache::get('marketing');
+        $chapters_price = Cache::get('chapters_price');
+        $chapter_discount = 0;
+        $price_data = json_decode($data);
+        $price_arr = [];
+        foreach ( $price_data as $item ) {
+            $min = $item->price[0];
+            foreach ($item->price as $element) {
+                if ( $element->price < $min->price ) {
+                    $min = $element;
+                }
+            }
+            $chapter_discount += $min->price - ($min->price * $min->discount / 100);
+            $price_arr[] = $min;
+        }
+        
+        if ( empty($req->chapters_data) ) {
+            $data = Cache::get('marketing');
+            $chapters_price = Cache::get('chapters_price');
+        }
+        Cache::store('file')->put('marketing', $data, 10000);
+        Cache::store('file')->put('chapters_price', $chapters_price, 10000);
+        Cache::store('file')->put('price_arr', $price_arr, 10000);
+        $price_arr = json_encode($price_arr);
+        $chapters = json_decode(Cache::get('marketing'));
+        return view('Visitor.Cart', compact('chapters', 'chapters_price', 'price_arr', 'chapter_discount'));
     }
 
     public function Use_Promocode( Request $req ){
