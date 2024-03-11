@@ -531,7 +531,10 @@
 						<h4 class="title">Cart Totals</h4>
 						<ul>
 							<li class="subtitle"><p>Total <span class="float-right totals color-orose">
-                                ${{$chapters_price}}
+                                <del> ${{$chapters_price}} </del>
+								<span class="text-success">
+									${{$chapter_discount}}
+								</span>
                             </span></p></li>
 						</ul>
 					</div>
@@ -543,6 +546,7 @@
 		</div>
 	</section>
 
+<input type="hidden" class="price_arr" value="{{json_encode($price_arr)}}" />
 <a class="scrollToHome" href="#"><i class="flaticon-up-arrow-1"></i></a>
 </div>
 
@@ -552,11 +556,15 @@
 	let chapters_price = document.querySelectorAll('.chapters_price');
 	let tbl_chapter_price = document.querySelectorAll('.tbl_chapter_price');
 	let ch_price = document.querySelectorAll('.ch_price');
-	let totals = document.querySelector('.totals')
-	let chapter_data = document.querySelectorAll('.chapter_data')
+	let totals = document.querySelector('.totals');
+	let price_arr = document.querySelector('.price_arr');
+	let chapter_data = document.querySelectorAll('.chapter_data');
 	let arr_chapters = [];
-	let arr_prices = [];
-
+	let arr_prices = price_arr.value;
+	let total_money = 0;
+	arr_prices = JSON.parse(arr_prices);
+	let price_discount = 0;
+	
 	for (let i = 0, end = chapter_duration.length; i < end; i++) {
 		chapter_duration[i].addEventListener('change', ( e ) => {
 			for (let j = 0; j < end; j++) {
@@ -566,7 +574,9 @@
 					money = JSON.parse(money); 
 					money.forEach(element => {
 						if ( element.id == chapter_duration[j].value ) {
+						let new_pricing = [element];
 							money = element.price;
+							price_discount = element.price - (element.price * element.discount / 100);
 						}
 					});
 					tbl_chapter_price[j].innerHTML = `
@@ -580,9 +590,10 @@
 			for (let k = 0, end = ch_price.length; k < end; k++) {
 				total += parseFloat(ch_price[k].value);
 				arr_chapters = [...arr_chapters, 
-				{'chapter': chapter_data[k].value, 'price': ch_price[k].value}]; 
+				{'chapter': chapter_data[k].value, 'price': ch_price[k].value}]; chapters_price
 			}
-			totals.innerHTML = `$${total}`;
+			totals.innerHTML = `<del>$${total}</del>
+			<span class="text-success">$${total_money}</span>`;
 			
 			
             $.ajax("{{route('sel_duration_course')}}", {

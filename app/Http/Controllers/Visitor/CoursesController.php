@@ -95,19 +95,34 @@ class CoursesController extends Controller
         
         $data = $req->chapters_data;
         $chapters_price = $req->chapters_price;
+        $chapter_discount = 0;
+        $price_data = json_decode($data);
+        $price_arr = [];
+        foreach ( $price_data as $item ) {
+            $min = $item->price[0];
+            foreach ($item->price as $element) {
+                if ( $element->price < $min->price ) {
+                    $min = $element;
+                }
+            }
+            $chapter_discount += $min->price - ($min->price * $min->discount / 100);
+            $price_arr[] = $min;
+        }
+        
         if ( empty($req->chapters_data) ) {
             $data = Cache::get('marketing');
             $chapters_price = Cache::get('chapters_price');
         }
         Cache::store('file')->put('marketing', $data, 10000);
         Cache::store('file')->put('chapters_price', $chapters_price, 10000);
-         
+        Cache::store('file')->put('price_arr', $price_arr, 10000);
+         $price_arr = json_encode($price_arr);
         if ( empty(auth()->user()) ) {
             return view('Visitor.Login.login');
         }
         else{
             $chapters = json_decode(Cache::get('marketing'));
-            return view('Visitor.Cart', compact('chapters', 'chapters_price'));
+            return view('Visitor.Cart', compact('chapters', 'chapters_price', 'price_arr', 'chapter_discount'));
         }
     }
 
