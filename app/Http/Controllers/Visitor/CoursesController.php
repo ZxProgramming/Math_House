@@ -130,23 +130,26 @@ class CoursesController extends Controller
         
         $course_data = Cache::get('marketing');
         $chapters_price = Cache::get('chapters_price');
-        $course = Course::where('id', $course_data->id)
-        ->first();
-        $min_price = $course->prices[0]->price;
-        $min_price_data = $course->prices[0];
-        foreach ( $course->prices as $price) {
-            if ( $min_price > $price->price ) {
-                $min_price = $price->price;
-                $min_price_data = $price;
+        if ( isset($course_data->id) ) { 
+            
+            $course = Course::where('id', $course_data->id)
+            ->first();
+            $min_price = $course->prices[0]->price;
+            $min_price_data = $course->prices[0];
+            foreach ( $course->prices as $price) {
+                if ( $min_price > $price->price ) {
+                    $min_price = $price->price;
+                    $min_price_data = $price;
+                }
             }
-        }
-        Cache::forget('min_price_data');
-        if ( empty(auth()->user()) && $min_price == $chapters_price ) {
-            return view('Visitor.Login.login');
-        }
-        elseif ( $min_price == $chapters_price ) {
-            Cache::store('file')->put('min_price_data', $min_price_data, 10000);
-            return view('Visitor.Cart.Course_Cart', compact('course', 'min_price', 'min_price_data'));
+            Cache::forget('min_price_data');
+            if ( empty(auth()->user()) && $min_price == $chapters_price ) {
+                return view('Visitor.Login.login');
+            }
+            elseif ( $min_price == $chapters_price ) {
+                Cache::store('file')->put('min_price_data', $min_price_data, 10000);
+                return view('Visitor.Cart.Course_Cart', compact('course', 'min_price', 'min_price_data'));
+            }
         }
 
 
