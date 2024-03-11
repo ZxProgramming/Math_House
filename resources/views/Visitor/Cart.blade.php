@@ -554,7 +554,11 @@
 						</ul>
 					</div>
 					<div class="ui_kit_button payment_widget_btn">
-						<a href="{{route('check_out')}}" class="btn dbxshad btn-lg btn-thm3 circle btn-block">Proceed To Checkout</a>
+						<form action="{{route('check_out')}}" method="POST">
+							@csrf
+							<input type="hidden" class="chapters_pricing" name="chapters_pricing" value="{{$chapter_discount}}" />
+							<button class="btn dbxshad btn-lg btn-thm3 circle btn-block">Proceed To Checkout</button>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -576,6 +580,7 @@
 	let price_arr = document.querySelector('.price_arr');
 	let ch_total_discount = document.querySelector('.ch_total_discount');
 	let chapter_data = document.querySelectorAll('.chapter_data');
+	let chapters_pricing = document.querySelector('.chapters_pricing');
 	let arr_chapters = [];
 	let arr_prices = price_arr.value;
 	let total_money = 0;
@@ -658,6 +663,7 @@
 			totals.innerHTML = `<del>$${total}</del>
 			<span class="text-success">$${allPrices}</span>`;
 			
+			chapters_pricing.value = allPrices;
 		// 	var Prices = [];
 		
 		// 	var iTEM  = $(".ch_price_discount");

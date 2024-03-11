@@ -211,9 +211,9 @@ class CoursesController extends Controller
         return redirect()->route('new_payment'); 
     }
 
-    public function check_out(){
-        
+    public function check_out( Request $req ){ 
         $chapters = json_decode(Cache::get('marketing'));
+        Cache::store('file')->put('chapters_price', $req->chapters_pricing, 10000);
         $price = json_decode(Cache::get('chapters_price'));
         $payment_methods = PaymentMethod::
         where('statue', 1)
