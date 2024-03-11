@@ -1,6 +1,7 @@
 
 @include('Visitor.inc.header')
 @include('Visitor.inc.menu')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <div class="wrapper">
 	<div class="preloader"></div>
@@ -491,6 +492,17 @@
 								    	</th>
 								    	<td class="" style="width: 200px;">
                                             <select name="chapter_duration" class="form-control chapter_duration">
+												@php
+												$min = $chapter->price[0];
+													foreach ( $chapter->price as $item ) {
+														if ( $item->duration < $min->duration  ) {
+															$min = $item;
+														}
+													}
+												@endphp
+												<option value="{{$min->id}}">
+													{{$min->duration}} Days
+												</option>
 												@foreach ($chapter->price as $item)
 													<option value="{{$item->id}}">
 														{{$item->duration}} Days
@@ -500,6 +512,7 @@
                                         </td>
 										<input type="hidden" class="chapters_price" value="{{json_encode($chapter->price)}}" />
 										<input type="hidden" class="ch_price" name="ch_price[]" value="{{$chapter->ch_price}}" />
+										<input type="hidden" class="ch_price_discount" name="ch_price_discount[]" />
 										<input type="hidden" class="chapter_data" name="chapter[]" value="{{json_encode($chapter)}}" />
 								    	<td class="tbl_chapter_price">
                                             {{$chapter->ch_price}}$
@@ -532,10 +545,12 @@
 						<ul>
 							<li class="subtitle"><p>Total <span class="float-right totals color-orose">
                                 <del> ${{$chapters_price}} </del>
-								<span class="text-success">
+								<span class="text-success ch_total_discount">
 									${{$chapter_discount}}
 								</span>
                             </span></p></li>
+							{{-- <span class="text-success">$</span>
+							<span class="text-success disc_price">sss</span>	 --}}
 						</ul>
 					</div>
 					<div class="ui_kit_button payment_widget_btn">
@@ -556,8 +571,10 @@
 	let chapters_price = document.querySelectorAll('.chapters_price');
 	let tbl_chapter_price = document.querySelectorAll('.tbl_chapter_price');
 	let ch_price = document.querySelectorAll('.ch_price');
+	let ch_price_discount = document.querySelectorAll('.ch_price_discount');
 	let totals = document.querySelector('.totals');
 	let price_arr = document.querySelector('.price_arr');
+	let ch_total_discount = document.querySelector('.ch_total_discount');
 	let chapter_data = document.querySelectorAll('.chapter_data');
 	let arr_chapters = [];
 	let arr_prices = price_arr.value;
@@ -565,8 +582,28 @@
 	arr_prices = JSON.parse(arr_prices);
 	let price_discount = 0;
 	
+	for (let j = 0, end = chapter_duration.length; j < end; j++) {
+		let money = chapters_price[j];
+		money = money.value;
+		money = JSON.parse(money); 
+		money.forEach(element => {
+			if ( element.id == chapter_duration[j].value ) {
+			let new_pricing = [element];
+				money = element.price;
+				price_discount = element.price - (element.price * element.discount / 100);
+			}
+		});
+		ch_price_discount[j].value = price_discount;
+	}
+	// let total_discount = 0;
+	// for (let i = 0, end = ch_price_discount.length; i < end; i++) {
+	// 	total_discount += parseFloat(ch_price_discount[i].value);
+	// } 
+	// ch_total_discount.innerHTML = `${total_discount}$`;
+
 	for (let i = 0, end = chapter_duration.length; i < end; i++) {
 		chapter_duration[i].addEventListener('change', ( e ) => {
+			
 			for (let j = 0; j < end; j++) {
 				if ( e.target == chapter_duration[j] ) {
 					let money = chapters_price[j];
@@ -583,9 +620,35 @@
 					${money}$
 					`;
 					ch_price[j].value = money;
+					ch_price_discount[j].value = price_discount;
+					
+					let total_discount = 0;
+					for (let x = 0, end = ch_price_discount.length;x < end;x++) {
+						total_discount += parseFloat(ch_price_discount[x].value);
+					} 
+					ch_total_discount.innerHTML = `${total_discount}$`;
 				}
 			}
 
+
+		var Prices = [];
+		var iTEM  = $(".ch_price_discount");
+
+		$(iTEM).each((ele,val)=>{
+			var price = parseInt($(val).val());
+			console.log(ele);
+			console.log($(val).val());
+			console.log("disc_price",$(".disc_price").text());
+
+			Prices.push(price)
+			console.log("Prices",Prices);
+		})
+
+		var  allPrices = Prices.reduce((oldP,newP) => {
+			return oldP + newP;
+		},0)
+
+		// $(".disc_price").text(allPr\ices);
 			let total = 0;
 			for (let k = 0, end = ch_price.length; k < end; k++) {
 				total += parseFloat(ch_price[k].value);
@@ -593,7 +656,29 @@
 				{'chapter': chapter_data[k].value, 'price': ch_price[k].value}]; chapters_price
 			}
 			totals.innerHTML = `<del>$${total}</del>
-			<span class="text-success">$${total_money}</span>`;
+			<span class="text-success">$${allPrices}</span>`;
+			
+		// 	var Prices = [];
+		
+		// 	var iTEM  = $(".ch_price_discount");
+		// $(iTEM).each((ele,val)=>{
+		// 	var price = parseInt($(val).val());
+		// 	console.log(ele);
+		// 	console.log($(val).val());
+		// 	console.log("disc_price",$(".disc_price").text());
+
+		// 	Prices.push(price)
+		// 	console.log("Prices",Prices);
+		// })
+
+		// var  allPrices = Prices.reduce((oldP,newP) => {
+		// 	return oldP + newP;
+		// },0)
+
+		// $(".disc_price").text(allPrices);
+		// console.log("allPrices",allPrices);
+		// console.log("allPricessssssss",$(".disc_price").text());
+
 			
 			
             $.ajax("{{route('sel_duration_course')}}", {
@@ -605,5 +690,27 @@
             });
 		})
 	}
+</script>
+<script>
+	$(document).ready(()=>{
+		// var Prices = [];
+		// var iTEM  = $(".ch_price_discount");
+		// $(iTEM).each((ele,val)=>{
+		// 	var price = parseInt($(val).val());
+		// 	console.log(ele);
+		// 	console.log($(val).val());
+		// 	console.log($(".disc_price").text());
+
+		// 	Prices.push(price)
+		// 	console.log("Prices",Prices);
+		// })
+
+		// var  allPrices = Prices.reduce((oldP,newP) => {
+		// 	return oldP + newP;
+		// },0)
+		// $(".disc_price").text(allPrices)
+		// console.log("allPrices",allPrices);
+		// console.log(iTEM);
+	})
 </script>
 @include('Visitor.inc.footer')
