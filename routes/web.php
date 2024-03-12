@@ -178,6 +178,7 @@ Route::middleware(['auth','auth.Admin'])->prefix('Admin')->group(function(){
         Route::get('/Cancelation', 'cancelation')->name('cancelation');
         Route::get('/Cancelation/Approve/{id}', 'approve_cancelation')->name('approve_cancelation');
         Route::get('/Cancelation/Rejected/{id}', 'reject_cancelation')->name('reject_cancelation');
+        Route::get('/Live/Calender', 'live_calender')->name('live_calender');
     });
 
     Route::controller(UserController::class)->prefix('Users')->group(function(){

@@ -231,6 +231,12 @@
 							</span>
 							<span class="menu-title">Sessions</span>
 						</a>
+						<a class="menu-link " href="{{ route('live_calender') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Calender</span>
+						</a>
 						<a class="menu-link " href="{{ route('session_g') }}">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
