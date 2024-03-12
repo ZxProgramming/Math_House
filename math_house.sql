@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 09, 2024 at 02:11 PM
+-- Generation Time: Mar 11, 2024 at 02:04 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -198,10 +198,10 @@ CREATE TABLE `chapter_prices` (
 --
 
 INSERT INTO `chapter_prices` (`id`, `duration`, `price`, `discount`, `chapter_id`, `created_at`, `updated_at`) VALUES
-(3, '33', 23, 2, 5, '2024-01-04', '2024-01-04'),
-(5, '22', 222, 22, 6, '2024-01-24', '2024-01-24'),
-(7, '22', 22, 11, 6, '2024-01-30', '2024-01-30'),
-(9, '11', 236, 77, 5, '2024-01-30', '2024-01-30'),
+(3, '33', 255, 2, 5, '2024-01-04', '2024-01-04'),
+(5, '50', 225, 22, 6, '2024-01-24', '2024-01-24'),
+(7, '22', 25, 11, 6, '2024-01-30', '2024-01-30'),
+(9, '11', 50, 77, 5, '2024-01-30', '2024-01-30'),
 (10, '33', 23, 231, NULL, '2024-01-30', '2024-01-30'),
 (11, '11', 236, 77, NULL, '2024-01-30', '2024-01-30'),
 (12, '11', 33, 33, NULL, '2024-01-30', '2024-01-30'),
@@ -2380,7 +2380,20 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (295, 'App\\Models\\User', 8, 'user', 'fff5f5e293fc5f95e6a6357d701e8a35589bf5de4f891dfbb64b468ab737f37b', '[\"*\"]', NULL, NULL, '2024-03-09 07:43:33', '2024-03-09 07:43:33'),
 (296, 'App\\Models\\User', 8, 'user', '9492df5c242f3692522a7c1a55a87d71a20965038cb19b0fef1c3887c84ba84f', '[\"*\"]', NULL, NULL, '2024-03-09 07:45:52', '2024-03-09 07:45:52'),
 (297, 'App\\Models\\User', 8, 'user', '5db0f9a09ded5bd2e2d17760a50db2a61724be826bfae5e1d059d07705ebe077', '[\"*\"]', NULL, NULL, '2024-03-09 07:54:06', '2024-03-09 07:54:06'),
-(298, 'App\\Models\\User', 8, 'user', '5471e7f9b3eec26ece7391f142e1ff63902f9daef268e19df59716981a89ed34', '[\"*\"]', NULL, NULL, '2024-03-09 08:03:38', '2024-03-09 08:03:38');
+(298, 'App\\Models\\User', 8, 'user', '5471e7f9b3eec26ece7391f142e1ff63902f9daef268e19df59716981a89ed34', '[\"*\"]', NULL, NULL, '2024-03-09 08:03:38', '2024-03-09 08:03:38'),
+(299, 'App\\Models\\User', 8, 'user', 'd7c55551884855d6833753a5a4ae8c282f3dc1ef21e9e5a9678483325aeffb4d', '[\"*\"]', NULL, NULL, '2024-03-10 06:01:51', '2024-03-10 06:01:51'),
+(300, 'App\\Models\\User', 8, 'user', 'd426863cb4b080c2e105e3c6605bf1898df72f9ce74b01acc2cb72c51af36352', '[\"*\"]', NULL, NULL, '2024-03-11 05:19:11', '2024-03-11 05:19:11'),
+(301, 'App\\Models\\User', 8, 'user', '36e82a8159ccae90b55c3d357808bf6d78fe4e36192680beb5246948fe6ad091', '[\"*\"]', NULL, NULL, '2024-03-11 09:28:26', '2024-03-11 09:28:26'),
+(302, 'App\\Models\\User', 8, 'user', 'd8079fb709e11fecfaa8f9ddd9821f6ac1f505da6c81cfd58e205fb3e54b9ecf', '[\"*\"]', NULL, NULL, '2024-03-11 09:49:26', '2024-03-11 09:49:26'),
+(303, 'App\\Models\\User', 8, 'user', 'f1009c25ed77a78b16ee2538a9103cf09e86ae0cbaabafc2c070e2486bea644c', '[\"*\"]', NULL, NULL, '2024-03-11 09:49:58', '2024-03-11 09:49:58'),
+(304, 'App\\Models\\User', 8, 'user', 'df01c1981ee20f48d6bf9c197c55981da4bc2c55dd231fae339e2da8b1ea3b20', '[\"*\"]', NULL, NULL, '2024-03-11 09:56:55', '2024-03-11 09:56:55'),
+(305, 'App\\Models\\User', 8, 'user', 'bbed80eafff8d9517ad1e65fef6c26f140371b251404abf8409e788b96243da0', '[\"*\"]', NULL, NULL, '2024-03-11 09:58:00', '2024-03-11 09:58:00'),
+(306, 'App\\Models\\User', 8, 'user', '87c7244b64e96f98c20fd076d64470682f01599a56030a4f3078330202a3394e', '[\"*\"]', NULL, NULL, '2024-03-11 09:59:17', '2024-03-11 09:59:17'),
+(307, 'App\\Models\\User', 8, 'user', 'c23719d81624eb4781fd4af256aa5ec4ace20610c3095331ad987f014b3488b2', '[\"*\"]', NULL, NULL, '2024-03-11 10:00:27', '2024-03-11 10:00:27'),
+(308, 'App\\Models\\User', 8, 'user', 'da9d49d107b7fa7dba0b49ada1762a7b25fb024a910ec0c8cfeb357a9a18b5e5', '[\"*\"]', NULL, NULL, '2024-03-11 10:01:04', '2024-03-11 10:01:04'),
+(309, 'App\\Models\\User', 8, 'user', 'e80a3b194faf6b89578ce61c568ac2a3d111e69c53367de1634a7cf389616ef9', '[\"*\"]', NULL, NULL, '2024-03-11 10:03:25', '2024-03-11 10:03:25'),
+(310, 'App\\Models\\User', 8, 'user', '2d6601bfa1b0c0e082f63d1dbb2ab660bbcffca9135c052bbd68c2983bc0f8b8', '[\"*\"]', NULL, NULL, '2024-03-11 10:04:06', '2024-03-11 10:04:06'),
+(311, 'App\\Models\\User', 8, 'user', 'c6c57887c26a9b0ddf365b0ea4501db9243e43620f5083b7e5e97887f0f939dd', '[\"*\"]', NULL, NULL, '2024-03-11 10:15:11', '2024-03-11 10:15:11');
 
 -- --------------------------------------------------------
 
@@ -3961,7 +3974,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=299;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=312;
 
 --
 -- AUTO_INCREMENT for table `private_request`

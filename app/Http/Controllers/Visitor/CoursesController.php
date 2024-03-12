@@ -205,10 +205,65 @@ class CoursesController extends Controller
                     'promo_id' => $promo->id,
                     'promo' => $req->promo_code
                 ]);
-                return redirect()->route('check_out'); 
+                return redirect()->route('promo_check_out_chapter'); 
+                
             }
         } 
+        session()->flash('faild', 'Promo Code Is Uses');
         return redirect()->route('new_payment'); 
+    }
+
+    public function promo_check_out_chapter( Request $req ){ 
+        $chapters = json_decode(Cache::get('marketing'));
+        $price = json_decode(Cache::get('chapters_price'));
+        $payment_methods = PaymentMethod::
+        where('statue', 1)
+        ->get();
+
+        return view('Visitor.Checkout.Checkout', compact('price', 'chapters', 'payment_methods'));
+    }
+
+    public function course_use_promocode( Request $req ){
+        $uses = UsagePromo::where('user_id', auth()->user()->id)
+        ->where('promo', $req->promo_code)
+        ->first(); 
+        
+        if ( empty($uses) ) {
+            $promo = PromoCode::where('starts', '<=', now())
+            ->where('ends', '>=', now())
+            ->where('num_usage', '>', 0)
+            ->where('name', $req->promo_code)
+            ->first();
+            if ( !empty($promo) ) {
+                $price = Cache::get('chapters_price');
+                $price = $price - $price * $promo->discount	/ 100;
+                Cache::store('file')->put('chapters_price', $price, 10000);
+                PromoCode::where('id', $promo->id)
+                ->update([
+                    'num_usage' => $promo->num_usage - 1
+                ]);
+                UsagePromo::create([
+                    'user_id' => auth()->user()->id,
+                    'promo_id' => $promo->id,
+                    'promo' => $req->promo_code
+                ]);
+                return redirect()->route('promo_check_out_course'); 
+                
+            }
+        } 
+        
+        session()->flash('faild', 'Promo Code Is Uses');
+        return redirect()->route('c_new_payment'); 
+    }
+
+    public function promo_check_out_course( Request $req ){
+        $course = Cache::get('marketing');
+        $price = Cache::get('chapters_price');
+        $payment_methods = PaymentMethod::
+        where('statue', 1)
+        ->get();
+
+        return view('Visitor.C_Checkout.Checkout', compact('price', 'course', 'payment_methods'));
     }
 
     public function check_out( Request $req ){ 
@@ -235,15 +290,80 @@ class CoursesController extends Controller
     }
 
     public function new_payment(){
-         
-        if ( empty(auth()->user()) ) {
+        $course_data = Cache::get('marketing');
+        $chapters_price = Cache::get('chapters_price');
+        if ( isset($course_data->id) ) { 
+            
+            $course = Course::where('id', $course_data->id)
+            ->first();
+            $min_price = $course->prices[0]->price;
+            $min_price_data = $course->prices[0];
+            foreach ( $course->prices as $price) {
+                if ( $min_price > $price->price ) {
+                    $min_price = $price->price;
+                    $min_price_data = $price;
+                }
+            }
+            Cache::forget('min_price_data');
+            if ( empty(auth()->user()) && $min_price == $chapters_price ) {
+                return view('Visitor.Login.login');
+            }
+            elseif ( $min_price == $chapters_price ) {
+                Cache::store('file')->put('min_price_data', $min_price_data, 10000);
+                return view('Visitor.Cart.Course_Cart', compact('course', 'min_price', 'min_price_data'));
+            }
+        }
+
+
+        $data = Cache::get('marketing');
+        $chapters_price = Cache::get('chapters_price');
+        $chapter_discount = 0;
+        $price_data = json_decode($data);
+        $price_arr = [];
+        foreach ( $price_data as $item ) {
+            $min = $item->price[0];
+            foreach ($item->price as $element) {
+                if ( $element->price < $min->price ) {
+                    $min = $element;
+                }
+            }
+            $chapter_discount += $min->price - ($min->price * $min->discount / 100);
+            $price_arr[] = $min;
+        }
+        
+        if ( empty($req->chapters_data) ) {
+            $data = Cache::get('marketing');
+            $chapters_price = Cache::get('chapters_price');
+        }
+        Cache::store('file')->put('marketing', $data, 10000);
+        Cache::store('file')->put('chapters_price', $chapters_price, 10000);
+        Cache::store('file')->put('price_arr', $price_arr, 10000);
+        $price_arr = json_encode($price_arr);
+        $chapters = json_decode(Cache::get('marketing'));
+        return view('Visitor.Cart', compact('chapters', 'chapters_price', 'price_arr', 'chapter_discount'));
+    }
+
+    public function c_new_payment(){
+        $course_data = Cache::get('marketing');
+        $chapters_price = Cache::get('chapters_price');
+            
+        $course = Course::where('id', $course_data->id)
+        ->first();
+        $min_price = $course->prices[0]->price;
+        $min_price_data = $course->prices[0];
+        foreach ( $course->prices as $price) {
+            if ( $min_price > $price->price ) {
+                $min_price = $price->price;
+                $min_price_data = $price;
+            }
+        }
+        Cache::forget('min_price_data');
+        if ( empty(auth()->user()) && $min_price == $chapters_price ) {
             return view('Visitor.Login.login');
         }
-        else{
-            $chapters =json_decode(Cache::get('marketing'));
-            $chapters_price = Cache::get('chapters_price');
-            $chapters = empty($chapters) ? [] : $chapters;
-            return view('Visitor.Cart', compact('chapters', 'chapters_price'));
+        elseif ( $min_price == $chapters_price ) {
+            Cache::store('file')->put('min_price_data', $min_price_data, 10000);
+            return view('Visitor.Cart.Course_Cart', compact('course', 'min_price', 'min_price_data'));
         }
     }
 

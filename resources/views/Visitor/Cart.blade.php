@@ -461,6 +461,8 @@
 		</div>
 	</section>
 
+	@include('success')
+	
 	<!-- Shop Checkouts Content -->
 	<section class="shop-checkouts">
 		<div class="container">

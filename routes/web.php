@@ -91,11 +91,14 @@ use Illuminate\Support\Facades\Route;
     Route::controller(V_CoursesController::class)->group(function(){
         Route::post('/Use_Promocode', 'use_promocode')->name('use_promocode');
         Route::post('/CheckOut/Course', 'check_out_course')->name('check_out_course');
-        Route::get('/CheckOut/Course', 'check_out_course')->name('check_out_course');
+        Route::get('/CheckOut/Promo/Course', 'promo_check_out_course')->name('promo_check_out_course');
+        Route::post('/CheckOut/Course/PromoCode', 'course_use_promocode')->name('course_use_promocode');
         Route::post('/CheckOut', 'check_out')->name('check_out');
+        Route::get('/CheckOut/Chapter/Promo', 'promo_check_out_chapter')->name('promo_check_out_chapter');
         Route::post('/Course_Payment_Money', 'course_payment_money')->name('course_payment_money');
         Route::post('/Payment_Money', 'payment_money')->name('payment_money');
         Route::get('/BuyCourse', 'new_payment')->name('new_payment');
+        Route::get('/BuyCourse/Promo', 'c_new_payment')->name('c_new_payment');
         Route::get('/Courses', 'categories')->name('categories');
         Route::post('/Buy_Course', 'buy_course')->name('buy_course');
         Route::get('/Buy_Course', 'buy_course')->name('buy_course');

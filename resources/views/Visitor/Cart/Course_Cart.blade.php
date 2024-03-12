@@ -460,6 +460,7 @@
 		</div>
 	</section>
 
+	@include('success')
 	<!-- Shop Checkouts Content -->
 	<section class="shop-checkouts">
 		<div class="container">
@@ -511,7 +512,7 @@
 					</div>
 					<div class="checkout_form">
 						<div class="checkout_coupon ui_kit_button">
-							<form method="POST" action="{{route('use_promocode')}}" class="form-inline">
+							<form method="POST" action="{{route('course_use_promocode')}}" class="form-inline">
 								@csrf
 						    	<input name="promo_code" class="form-control" type="search" placeholder="Coupon Code" aria-label="Search">
 						    	<button class="btn btn2">Apply Coupon</button>
