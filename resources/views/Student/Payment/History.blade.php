@@ -28,7 +28,7 @@
                 {{$item->created_at}}
             </td>
             <td>
-                {{$item->method->payment}}
+                {{isset($item->method->payment) ? $item->method->payment : 'Wallet' }}
             </td>
             <td>
                 {{$item->price}}
