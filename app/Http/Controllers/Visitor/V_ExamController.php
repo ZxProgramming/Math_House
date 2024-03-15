@@ -103,13 +103,13 @@ class V_ExamController extends Controller
                 if ( $item->package->module == 'Exam' && 
                 $item->pay_req->user_id == auth()->user()->id &&
                 $item->date > $newTime &&
-                $user->exam_number > 0
+                $item->number > 0
                  ) 
                  {  
 
-                    User::where('id', auth()->user()->id)
+                    PaymentPackageOrder::where('id', $item->id)
                     ->update([
-                        'exam_number' => $user->exam_number - 1
+                        'number' => $item->number - 1
                     ]);
 
                     // Return Exam
@@ -119,6 +119,7 @@ class V_ExamController extends Controller
                     return view('Visitor.Exam.Exam_Question', compact('exam'));
                 }
             } 
+
             $package = Package::
             where('module', 'Exam')
             ->get();
@@ -127,6 +128,15 @@ class V_ExamController extends Controller
             
         }
     }
+
+    public function e_package(){
+        
+        $package = Package::
+        where('module', 'Exam')
+        ->get();
+        return view('Student.Exam.Exam_Package', compact('package'));
+    }
+
 
     public function exam_ans( $id, Request $req )
     {

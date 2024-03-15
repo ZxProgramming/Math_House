@@ -233,13 +233,14 @@ class Stu_MyCourseController extends Controller
         $chapters = Chapter::where('id', $id)
         ->first(); 
         $prices = $chapters->price;
-        $min = $prices[0]->price;
+        $min = $prices[0];
         foreach ($prices as $key => $price) {
-            if ( $min > $price->price ) {
+            if ( $min->price > $price->price ) {
                 $min = $price;
             }
         }
         $chapters_price = $min->price;
+        $chapter_discount = $min->price - ($min->price * $min->discount / 100);
         
         Cache::store('file')->put('marketing', $chapters, 10000);
         Cache::store('file')->put('chapters_price', $chapters_price, 10000);
@@ -249,7 +250,7 @@ class Stu_MyCourseController extends Controller
         }
         else{
             $chapters = [$chapters];
-            return view('Visitor.Cart', compact('chapters', 'chapters_price'));
+            return view('Visitor.Cart', compact('chapters', 'chapters_price', 'chapter_discount'));
         }
     }
 

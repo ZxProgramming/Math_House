@@ -15,7 +15,7 @@
 
 <div class="text-center">
     <button type="button" class="btn btn-primary wallet_btn" data-bs-toggle="modal" data-bs-target="#modalCenter">
-        Add to Wallet
+        Wallet Recharge
     </button>
 </div>
 
@@ -25,14 +25,14 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="modalCenterTitle">Add Wallet</h5>
+            <h5 class="modal-title" id="modalCenterTitle">Add to Wallet</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
             <div class="row">
                 <div class="col mb-3">
                 <label for="nameWithTitle" class="form-label">Wallet</label>
-                <input type="number" name='wallet' min="1" id="nameWithTitle" class="form-control" placeholder="Enter Number">
+                <input type="number" name='wallet' min="1" id="nameWithTitle" class="form-control" placeholder="Amount">
                 </div>
             </div>
             <div class="row g-2">
@@ -55,7 +55,14 @@
     </div>
 </form>
 
-<table class="table">
+<div class="text-center my-2">
+<button class="btn btn-primary history_btn">
+    History
+    <i class="fa fa-arrow-down arrow_icon"></i>
+</button>
+</div>
+
+<table class="table show_history d-none">
     <thead>
         <th>#</th>
         <th>Wallet</th> 
@@ -84,10 +91,20 @@
 </table>
 
 <script>
+    let history_btn = document.querySelector('.history_btn');
+    let show_history = document.querySelector('.show_history');
+    let arrow_icon = document.querySelector('.arrow_icon');
+
     let wallet_btn = document.querySelector('.wallet_btn');
     let show_wallet = document.querySelector('.show_wallet');
     let btn_close = document.querySelector('.btn-close');
     let close_wallet_btn = document.querySelector('.close_wallet_btn');
+
+    history_btn.addEventListener('click', () => {
+        show_history.classList.toggle('d-none');
+        arrow_icon.classList.toggle('fa-arrow-down');
+        arrow_icon.classList.toggle('fa-arrow-up');
+    })
 
     wallet_btn.addEventListener('click', () => {
         show_wallet.classList.remove('d-none');

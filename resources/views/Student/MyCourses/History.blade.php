@@ -1,8 +1,8 @@
 
 @php
-    $page_name = 'Chapter';
+    $page_name = 'Quizze History';
 @endphp
-@section('title','Chapters')
+@section('title','Quizze History')
 @include('Student.inc.header')
 @include('Student.inc.menu')
 @extends('Student.inc.nav')
@@ -16,6 +16,7 @@
         <th>Quizze Details</th>
         <th>Quize</th>
         <th>Score</th>
+        <th>Question No.</th>
         <th>Score Details</th>
         <th>Time</th>
         <th>Action</th>
@@ -45,7 +46,11 @@
                 {{$item->score}}
             </td>
             <td>
+                {{count($item->quizze->question)}}
+            </td>
+            <td>
                 Right: {{$item->r_questions}}
+                <br />
                 Wrong: {{count($item->quizze->question) - $item->r_questions}}
             </td>
             <td>

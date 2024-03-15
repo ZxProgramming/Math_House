@@ -26,7 +26,7 @@ class Stu_ProfileController extends Controller
             session()->flash('faild', 'Email Is Exist Please Change It');
             return redirect()->back();
         }
-        $arr = $req->only('name', 'email', 'phone');
+        $arr = $req->only('name', 'email', 'phone', 'nick_name');
         if( !empty($name) ){
             $extension_arr = ['png', 'jpg', 'jpeg', 'svg', 'webp'];
             $extension = explode('.', $name);

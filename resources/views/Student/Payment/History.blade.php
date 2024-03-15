@@ -1,8 +1,8 @@
 
 @php
-    $page_name = 'Chapter';
+    $page_name = 'Payment History';
 @endphp
-@section('title','Chapters')
+@section('title','Payment History')
 @include('Student.inc.header')
 @include('Student.inc.menu')
 @extends('Student.inc.nav')
@@ -14,8 +14,11 @@
         <th>#</th>
         <th>Date</th> 
         <th>Service</th>
+        <th>Payment Method</th>
         <th>Price</th> 
+        <th>Rejected Reason</th> 
         <th>Statues</th>
+        <th>Details</th>
     </thead>
 
     <tbody>
@@ -28,13 +31,24 @@
                 {{$item->created_at}}
             </td>
             <td>
+                {{$item->module}}
+            </td>
+            <td>
                 {{isset($item->method->payment) ? $item->method->payment : 'Wallet' }}
             </td>
             <td>
                 {{$item->price}}
             </td> 
             <td>
+                {{$item->rejected_reason}}
+            </td> 
+            <td>
                 {{$item->state}}
+            </td>
+            <td>
+                <a href="{{route('payment_invoice', ['id'=> $item->id])}}" class="btn btn-primary">
+                    Invoice
+                </a>
             </td>
         </tr>
         @endforeach

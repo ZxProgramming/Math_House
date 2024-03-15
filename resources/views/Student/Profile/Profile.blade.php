@@ -57,6 +57,18 @@
               name="name"
             />
           </div>
+
+          <div class="mb-3 col-md-6">
+            <label for="nick_name" class="form-label">Nick Name</label>
+            <input
+              class="form-control"
+              type="text"
+              id="nick_name"
+              value="{{ auth()->user()->nick_name }}"
+              placeholder="Nick Name"
+              name="nick_name"
+            />
+          </div>
          
           <div class="mb-3 col-md-6">
             <label for="email" class="form-label">E-mail</label>

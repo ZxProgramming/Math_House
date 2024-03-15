@@ -11,6 +11,7 @@ use App\Models\Package;
 use App\Models\UserPackage;
 use App\Models\PaymentPackageOrder;
 use App\Models\QuestionTime;
+use App\Models\QuestionHistory;
 
 use Carbon\Carbon;
 
@@ -99,13 +100,13 @@ class V_QuestionController extends Controller
                 if ( $item->package->module == 'Question' && 
                 $item->pay_req->user_id == auth()->user()->id &&
                 $item->date > $newTime &&
-                $user->q_number > 0
+                $item->number > 0
                  ) 
                  {  
 
-                    User::where('id', auth()->user()->id)
+                    PaymentPackageOrder::where('id', $item->id)
                     ->update([
-                        'q_number' => $user->q_number - 1
+                        'number' => $item->number - 1
                     ]);
                      return view('Visitor.Question.Show_Question', compact('question')); 
                 }
@@ -119,8 +120,16 @@ class V_QuestionController extends Controller
         }
     }
 
+    public function q_package(){ 
+        $package = Package::
+        where('module', 'Question')
+        ->get();
+        return view('Student.Exam.Exam_Package', compact('package'));
+    }
+
     public function q_sol( Request $req ){ 
 
+        $arr = [];
         $ans = false;
         $question = [];
         if ( isset($req->q_answers[0]) ) {
@@ -128,6 +137,7 @@ class V_QuestionController extends Controller
            // {"q_id":18,"mcq_id":"1","answer":"A"}
            $question = Question::where('id', $solve->q_id)
            ->first();
+           $arr['question_id'] = $solve->q_id;
            $stu_solve = $question->mcq[0]->mcq_answers;
            if ( $stu_solve == $solve->answer ) {
                 $ans = true;
@@ -138,6 +148,7 @@ class V_QuestionController extends Controller
             $q_id = json_decode($req->q_grid_answers[0]);
             $question = Question::where('id', $q_id->q_id)
             ->first();
+            $arr['question_id'] = $q_id->q_id;
             $solve = $question->g_ans;
 
             foreach ($solve as $item) {
@@ -148,7 +159,10 @@ class V_QuestionController extends Controller
           
             
         } 
-             
+        $arr['user_id'] = auth()->user()->id;
+        $arr['answer'] = $ans;
+       // $arr['time'] = ;
+        QuestionHistory::create($arr);
         return view('Visitor.Question.Grade', compact('ans', 'question'));
     }
 }

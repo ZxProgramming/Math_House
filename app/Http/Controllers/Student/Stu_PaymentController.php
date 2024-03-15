@@ -18,4 +18,12 @@ class Stu_PaymentController extends Controller
 
         return view('Student.Payment.History', compact('payments'));
     }
+
+    public function payment_invoice( $id ){
+        $payment = PaymentRequest::where('id', $id)
+        ->first();
+
+        return view('Student.Payment.Invoice', compact('payment'));
+    }
+
 }

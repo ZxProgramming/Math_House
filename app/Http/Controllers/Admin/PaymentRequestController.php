@@ -171,10 +171,11 @@ class PaymentRequestController extends Controller
         return redirect()->back();
     }
 
-    public function rejected_payment( $id ){
+    public function rejected_payment( $id, Request $req ){
         PaymentRequest::
         where('id', $id)
-        ->update(['state' => 'Rejected']);
+        ->update(['state' => 'Rejected',
+                'rejected_reason' => $req->rejected_reason]);
 
         return redirect()->back();
     }

@@ -546,10 +546,16 @@
 						<h4 class="title">Cart Totals</h4>
 						<ul>
 							<li class="subtitle"><p>Total <span class="float-right totals color-orose">
-                                <del> ${{$chapters_price}} </del>
+								@if ( isset($chapter_discount) && $chapter_discount != null && $chapter_discount != 0)
+									<del> ${{$chapters_price}} </del>
+									<span class="text-success ch_total_discount">
+										${{$chapter_discount}}
+									</span>
+								@else 
 								<span class="text-success ch_total_discount">
-									${{$chapter_discount}}
+									${{$chapters_price}}
 								</span>
+								@endif
                             </span></p></li>
 							{{-- <span class="text-success">$</span>
 							<span class="text-success disc_price">sss</span>	 --}}
@@ -558,7 +564,11 @@
 					<div class="ui_kit_button payment_widget_btn">
 						<form action="{{route('check_out')}}" method="POST">
 							@csrf
-							<input type="hidden" class="chapters_pricing" name="chapters_pricing" value="{{$chapter_discount}}" />
+							@if ( isset($chapter_discount) && $chapter_discount != null && $chapter_discount != 0)
+								<input type="hidden" class="chapters_pricing" name="chapters_pricing" value="{{$chapter_discount}}" />
+							@else 
+								<input type="hidden" class="chapters_pricing" name="chapters_pricing" value="{{$chapters_price}}" />
+							@endif
 							<button class="btn dbxshad btn-lg btn-thm3 circle btn-block">Proceed To Checkout</button>
 						</form>
 					</div>
@@ -567,7 +577,7 @@
 		</div>
 	</section>
 
-<input type="hidden" class="price_arr" value="{{json_encode($price_arr)}}" />
+<input type="hidden" class="price_arr" value="{{json_encode(@$price_arr)}}" />
 <a class="scrollToHome" href="#"><i class="flaticon-up-arrow-1"></i></a>
 </div>
 

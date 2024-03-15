@@ -28,6 +28,8 @@ use App\Http\Controllers\Student\Stu_PackageController;
 use App\Http\Controllers\Student\Stu_ExamController;
 use App\Http\Controllers\Student\Stu_PaymentController;
 use App\Http\Controllers\Student\Stu_WalletController;
+use App\Http\Controllers\Student\Stu_MyPackagesController;
+use App\Http\Controllers\Student\Stu_QuestionController;
 
 use App\Http\Controllers\Visitor\HomeController;
 use App\Http\Controllers\Visitor\ContactController;
@@ -69,6 +71,10 @@ use Illuminate\Support\Facades\Route;
     
     Route::get('/', [HomeController::class, 'index'])->name('home');
     
+    Route::controller(V_LiveController::class)->group(function(){
+        Route::get('/Live_Package', 'live_package')->name('live_package');
+    });
+
     Route::controller(V_DiaExamController::class)->group(function(){
         Route::get('/DiaExam', 'index')->name('v_dia_cate');
         Route::post('/DiaExam/Answer/{id}', 'dia_exam_ans')->name('dia_exam_ans');
@@ -80,6 +86,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('/Question', 'v_question')->name('v_question');
         Route::post('/Question', 'v_filter_question')->name('v_filter_question');
         Route::get('/Question/{id}', 'q_page')->name('q_page');
+        Route::get('/Question_Package', 'q_package')->name('q_package');
         Route::post('/Question/Solve', 'q_sol')->name('q_sol');
     });
     Route::controller(V_ExamController::class)->group(function(){
@@ -87,6 +94,7 @@ use Illuminate\Support\Facades\Route;
         Route::post('/Exam/Answer/{id}','exam_ans')->name('exam_ans');
         Route::post('/Exams', 'filter_exam')->name('filter_exam');
         Route::get('/Exam/{id}', 'exam_page')->name('exam_page');
+        Route::get('/Exam_package', 'e_package')->name('e_package');
     });
     Route::controller(V_CoursesController::class)->group(function(){
         Route::post('/Use_Promocode', 'use_promocode')->name('use_promocode');
@@ -141,7 +149,7 @@ Route::middleware(['auth','auth.Admin'])->prefix('Admin')->group(function(){
         Route::get('/PaymentRequest','payment_request')->name('payment_request');
         Route::post('/PaymentRequest','filter_payment_req')->name('filter_payment_req');
         Route::get('/ApprovePayment/{id}','approve_payment')->name('approve_payment');
-        Route::get('/RejectedPayment/{id}','rejected_payment')->name('rejected_payment');
+        Route::post('/RejectedPayment/{id}','rejected_payment')->name('rejected_payment');
     });
 
 // Marketing
@@ -315,8 +323,17 @@ Route::controller(Ad_PackagesController::class)->group(function(){
 
           
     // Student
+use App\Models\Wallet;
 
 Route::middleware(['auth','auth.student'])->prefix('student')->group(function(){
+    \App::singleton('wallet', function(){
+        $money = Wallet::where('student_id', auth()->user()->id)
+        ->where('state', 'Approve')
+        ->sum('wallet');
+
+        return $money;
+    });
+
     Route::controller(Stu_DashboardController::class)->group(function(){
         Route::get('Student','index')->name('stu_dashboard');
     });
@@ -328,6 +345,15 @@ Route::middleware(['auth','auth.student'])->prefix('student')->group(function(){
 
     Route::controller(Stu_PaymentController::class)->group(function(){
         Route::get('PaymentHistory', 'stu_payment_history')->name('stu_payment_history');
+        Route::get('PaymentInvoice/{id}', 'payment_invoice')->name('payment_invoice');
+    });
+
+    Route::controller(Stu_QuestionController::class)->group(function(){
+        Route::get('QuestionHistory', 'question_history')->name('question_history');
+    }); 
+
+    Route::controller(Stu_MyPackagesController::class)->group(function(){
+        Route::get('MyPackages', 'my_packages')->name('my_packages');
     });
 
     Route::controller(Stu_WalletController::class)->group(function(){

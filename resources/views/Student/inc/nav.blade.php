@@ -4,12 +4,12 @@
         <div class="col-xl-3 col-lg-3 col-md-12">
             <div class="dashboard__inner sticky-top">
                 <div class="dashboard__nav__title">
-                    <h6>Welcome, Dond Tond </h6>
+                    <h6>Welcome, {{auth()->user()->name}} </h6>
                 </div>
                 <div class="dashboard__nav">
                     <ul>
                         <li>
-                            <a class="active" href="student-dashboard.html">
+                            <a class="active" href="#">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                                 Dashboard</a>
                         </li>
@@ -35,6 +35,11 @@
                                 Diagnostic Exam History</a>
                         </li>
                         <li>
+                            <a href="{{ route('question_history') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bookmark"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                                Question History</a>
+                        </li>
+                        <li>
                             <a href="{{ route('exam_history') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                                 Exam History
@@ -47,13 +52,19 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{route('my_packages')}}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-volume-1"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                                My Packages    
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{route('wallet')}}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-volume-1"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
                                 Wallet    
                             </a>
                         </li>
                         <li>
-                            <a href="student-settings.html">
+                            <a href="#">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
                                Settings</a>
                         </li>
@@ -74,7 +85,7 @@
                         <div class="col-xl-12">
                             <div class="dashboardarea__wraper">
                                 <div class="dashboardarea__img">
-                                    <div class="dashboardarea__inner student__dashboard__inner">
+                                    <div class="dashboardarea__inner bg-danger student__dashboard__inner">
                                         <div class="dashboardarea__left">
                                             <div class="dashboardarea__left__img">
                                                 <img loading="lazy"  src="{{asset('images/users/' . auth()->user()->image)}}" alt="">
@@ -90,8 +101,13 @@
                                             </div>
                                         </div>
                                         <div class="dashboardarea__right">
+                                            <div style="font-weight: bold; color: #fff; font-size: 22px" class="dashboardarea__right__button">
+                                                ${{ app('wallet')}}
+                                            </div>
+                                        </div>
+                                        <div class="dashboardarea__right">
                                             <div class="dashboardarea__right__button">
-                                                <a class="default__button" href="{{route('categories')}}">Enroll A New Course
+                                                <a class="default__button bg-dark" href="{{route('wallet')}}">My Wallet
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
                                             </div>
                                         </div>

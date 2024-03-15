@@ -133,16 +133,18 @@
                                 <h5 class="modal-title" id="modalCenterTitle">Delete Payment</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div> 
-                              
-                              <div class='p-3'>
-                                Are You Sure To Reject
-                              </div>
+                              <form action="{{route('rejected_payment', ['id'=>$item->id])}}" method="POST">
+                                @csrf
+                                <div class='p-3'>
+                                  <input class="form-control" name="rejected_reason" placeholder="Rejected Reasons" />
+                                </div>
 
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
-                                  Close
-                                </button>
-                                <a href="{{route('rejected_payment', ['id'=>$item->id])}}" class="btn btn-danger">Reject</a>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
+                                    Close
+                                  </button>
+                                  <button class="btn btn-danger">Reject</button>
+                                </form>
                               </div>
                             </div>
                           </div>

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\PaymentMethod;
 use App\Models\Chapter;
 use App\Models\User;
+use App\Models\PaymentPackageOrder;
 
 class PaymentRequest extends Model
 {
@@ -20,7 +21,12 @@ class PaymentRequest extends Model
         'image',
         'module',
         'state',
+        'rejected_reason'
     ];
+
+    public function package_order(){
+        return $this->hasMany(PaymentPackageOrder::class, 'payment_request_id');
+    }
 
     public function method(){
         return $this->belongsTo(PaymentMethod::class, 'payment_method_id');

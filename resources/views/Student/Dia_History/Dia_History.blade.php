@@ -35,24 +35,49 @@
             </td> 
             <td>
             <button class="btn btn-primary mistake_btn">
-                View Mistakes
-            </button>
-            <div class="app-email d-none card my-3 mistakes_questions">
-                <div class="border-0">
-                    <div class="row g-0  p-3">
-                        @foreach ( $item->exams->question as $item )
-                            @if ( !empty($item->question) )
-                                {{$item->question}}
-                            @endif
-                            @if ( !empty($item->q_url) )
-                            <img style="width: 200px; height: 200px;"
-                                src="{{ asset('images/questions/' . $item->q_url) }}" />
-                            @endif
-                            <hr />
-                        @endforeach
-                    </div>
-                </div>
-            </div>
+                Recommendation
+            </button> 
+            
+<div class="app-email card my-3 mistakes_questions d-none">
+    <div class="border-0">
+        <div class="row g-0  p-3 align-items-center">
+            @php
+                $arr_id = [];
+                $ch_arr = [];
+            @endphp
+            @foreach ( $item->exams->question as $item )
+            @if ( !isset($ch_arr[$item->lessons->chapter->chapter_name]) )
+            <table class="table">
+                <tr>
+                    <td>
+                    Chapter => {{$item->lessons->chapter->chapter_name}}
+                    </td>
+                    <td>
+                        <a href="{{route('buy_chapter', ['id' => $item->lessons->chapter->id])}}" class="btn btn-primary">
+                            Buy
+                        </a>
+                        @php
+                            $arr_id[] = $item->lessons->chapter->id;
+                        @endphp
+                    </td>
+                </tr>
+            </table>
+            @endif
+            @php
+                $ch_arr[$item->lessons->chapter->chapter_name] = $item->lessons->chapter->chapter_name;
+            @endphp
+            @endforeach
+
+            <form action="{{route('dia_buy_chapters')}}" method="POST">
+                @csrf
+                <input type="hidden" name="ids" value="{{json_encode($arr_id)}}" />
+                <button class="btn btn-primary mb-5">
+                    Buy All
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
             </td>
         </tr>
         @endforeach

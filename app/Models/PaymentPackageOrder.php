@@ -20,6 +20,7 @@ class PaymentPackageOrder extends Model
         'discount',
         'state',
         'date',
+        'number',
     ];
     
     public function package()

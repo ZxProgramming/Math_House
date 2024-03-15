@@ -80,29 +80,14 @@ class Stu_PackageController extends Controller
             if ( $package->module == 'Exam' ) {
                 $user_acc = User::where('id', auth()->user()->id)
                 ->first();
-
-                User::where('id', auth()->user()->id)
-                ->update([
-                    'exam_number' => $package->number + $user_acc->exam_number
-                ]);
             }
             elseif ( $package->module == 'Question' ) {
                 $user_acc = User::where('id', auth()->user()->id)
                 ->first();
-
-                User::where('id', auth()->user()->id)
-                ->update([
-                    'q_number' => $package->number + $user_acc->q_number
-                ]);
             }
             elseif ( $package->module == 'Live' ) {
                 $user_acc = User::where('id', auth()->user()->id)
                 ->first();
-
-                User::where('id', auth()->user()->id)
-                ->update([
-                    'live_number' => $package->number + $user_acc->live_number
-                ]);
             }
             Wallet::create([
                 'student_id' => auth()->user()->id,
@@ -111,12 +96,21 @@ class Stu_PackageController extends Controller
                 'date' => now(),
                 'payment_request_id' => $p_request->id,
             ]);
+            PaymentPackageOrder::create([
+                'payment_request_id' => $p_request->id,
+                'package_id' => $package_data->id,
+                'date' => now(),
+                'state' => 1,
+                'number' => $package->number
+            ]);
         }
-        PaymentPackageOrder::create([
-            'payment_request_id' => $p_request->id,
-            'package_id' => $package_data->id,
-            'date' => now(),
-        ]);
+        else{
+            PaymentPackageOrder::create([
+                'payment_request_id' => $p_request->id,
+                'package_id' => $package_data->id,
+                'date' => now(),
+            ]);
+        }
         return view('Student.Order.Order', compact('package', 'price', 'p_method'));
     }
 }
