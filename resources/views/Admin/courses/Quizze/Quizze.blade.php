@@ -599,8 +599,8 @@
                                     style="max-width: 1300px !important; display: flex;align-items: center;justify-content: center;"
                                     role="document">
                                     <div class="modal-content" style="border-radius: 15px;">
-                                        <form action="{{ route('edit_quizze', ['id' => $item->id]) }}"
-                                            method="POST">
+                                        <form class="form_editquizze"
+                                            action="{{ route('edit_quizze', ['id' => $item->id]) }}" method="POST">
                                             @csrf
                                             <div class="modal-header" style="border-bottom: 0 !important;">
                                                 <h2 class="modal-title" id="exampleModalLongTitle">Edit Quizze</h2>
@@ -627,7 +627,7 @@
                                                 </ul>
 
                                                 <!-- Tab panes -->
-                                                <div class="tab-content">
+                                                <div class="tab-content" id="tab_info{{ $item->id }}">
                                                     {{-- Info --}}
                                                     <div class="tab-pane container active"
                                                         style="min-height: 300px; max-width: 1340px !important;margin: 15px 0;"
@@ -642,14 +642,15 @@
                                                                     style="font-size: 1.2rem;">Title: </span>
                                                                 <input type="text" name="title"
                                                                     value="{{ $item->title }}"
-                                                                    class="col-md-9 form-control">
+                                                                    class="col-md-9 form-control quizze_title">
                                                             </div>
 
                                                             <div
                                                                 class="col-md-12 d-flex align-items-center justify-content-around">
                                                                 <span class="col-md-2"
                                                                     style="font-size: 1.2rem;">Description: </span>
-                                                                <textarea class="col-md-9 form-control" name="description" id="dec_quizze" cols="30" rows="3">{{ $item->description }}</textarea>
+                                                                <textarea class="col-md-9 form-control quizze_description" name="description" id="dec_quizze" cols="30"
+                                                                    rows="3">{{ $item->description }}</textarea>
                                                             </div>
 
                                                             <div
@@ -660,7 +661,7 @@
                                                                     style="display: flex; align-items: center;padding: 0;justify-content: start">
                                                                     <input name="time" value="{{ $item->time }}"
                                                                         max="60" min="1"
-                                                                        class="col-md-4 form-control">
+                                                                        class="col-md-4 form-control quizze_duration">
                                                                 </div>
                                                             </div>
 
@@ -670,7 +671,7 @@
                                                                     style="font-size: 1.2rem;">Total Score: </span>
                                                                 <input type="text" name="score"
                                                                     value="{{ $item->score }}"
-                                                                    class="col-md-9 form-control">
+                                                                    class="col-md-9 form-control quizze_Total_Score">
                                                             </div>
 
                                                             <div
@@ -679,7 +680,7 @@
                                                                     Score: </span>
                                                                 <input type="text" name="pass_score"
                                                                     value="{{ $item->pass_score }}"
-                                                                    class="col-md-9 form-control">
+                                                                    class="col-md-9 form-control quizze_Pass_Score">
                                                             </div>
 
                                                             <div
@@ -689,7 +690,7 @@
                                                                 <input type="number" min="0"
                                                                     name="quizze_order"
                                                                     value="{{ $item->quizze_order }}"
-                                                                    class="col-md-9 form-control">
+                                                                    class="col-md-9 form-control quizze_Quizze_Order">
                                                             </div>
 
                                                             <div
@@ -699,10 +700,12 @@
                                                                 <div class="col-md-9 p-0">
                                                                     <label class="btn-container">
                                                                         @if ($item->state == 0)
-                                                                            <input name="state" value="1"
-                                                                                type="checkbox" />
+                                                                            <input name="state" value="0"
+                                                                                type="checkbox"
+                                                                                class="quizze_Active" />
                                                                         @else
-                                                                            <input name="state" value="1"
+                                                                            <input name="state"
+                                                                                class="quizze_Active" value="1"
                                                                                 type="checkbox" checked />
                                                                         @endif
                                                                         <div class="checkmark"></div>
@@ -717,7 +720,7 @@
                                                     </div>
                                                     {{-- Questions --}}
 
-                                                    <div class="tab-pane container fade"
+                                                    <div class="tab-pane container fade question_edit_parQ"
                                                         style="min-height: 300px; max-width: 1340px !important;margin: 10px 0;"
                                                         id="question_edit{{ $item->id }}">
 
@@ -855,16 +858,16 @@
                                                                         @foreach ($questions as $question)
                                                                             @if ($question->lesson_id == $item->lesson_id)
                                                                                 <input type="hidden"
-                                                                                    value="{{ $question->id }}"
-                                                                                    class="question_id ques_id" />
-                                                                                <input type="hidden"
                                                                                     value="{{ $item->id }}"
                                                                                     name="quizze_id"
-                                                                                    class="quizze_id" />
+                                                                                    class="quizze_idd" />
                                                                                 <tr>
-                                                                                    <th scope="row"
+                                                                                    <input type="hidden"
+                                                                                        value="{{ $question->id }}"
+                                                                                        class="question_id ques_id" />
+                                                                                    {{-- <th scope="row"
                                                                                         class="idd d-none">
-                                                                                        {{ $question->id }}</th>
+                                                                                        {{ $question->id }}</th> --}}
                                                                                     <th>{{ $loop->iteration }}</th>
                                                                                     <td class="type">
                                                                                         {{ $question->q_type }}</td>
@@ -905,9 +908,6 @@
                                                                         <tr>
                                                                             <th scope="col"
                                                                                 style="font-weight: 500; font-size: 1.1rem">
-                                                                                #</th>
-                                                                            <th scope="col"
-                                                                                style="font-weight: 500; font-size: 1.1rem">
                                                                                 Typeeee</th>
                                                                             <th scope="col"
                                                                                 style="font-weight: 500; font-size: 1.1rem">
@@ -935,47 +935,69 @@
                                                                     <input type="hidden" class="add_new_questions"
                                                                         name="add_new_questions" />
 
-                                                                    <tbody class="sel_quz sel_quz_edit">
-                                                                        <input type="text" name="questions"
-                                                                            value="{{ $item->question }}" />
+                                                                    <tbody class="sel_quz sel_quz_edit"
+                                                                        id="sel_quz_edit{{ $item->id }}">
+
+                                                                        {{-- <input type="text" id="allQuestion"
+                                                                            name="questions" value="" /> --}}
                                                                         @foreach ($item->question as $question)
-                                                                            <input type="hidden" class="e_questions"
-                                                                                value="{{ $question }}" />
-                                                                            <input type="hidden"
+                                                                            {{-- <input type="hidden" class="e_questions"
+                                                                                value="{{ $question }}" /> --}}
+                                                                            {{-- <input type="hidden"
                                                                                 value="{{ $question->question_id }}"
                                                                                 name="questions_id[]"
-                                                                                class="question_id" />
-                                                                            <tr>
-                                                                                <td
+                                                                                class="question_id" /> --}}
+                                                                            <tr class="tr_edite{{ $item->id }}"
+                                                                                id="tr_edite{{ $question->id }}">
+
+                                                                                <input type="hidden"
+                                                                                    value="{{ $question->id }}"
+                                                                                    name="question_id[]"
+                                                                                    class="question_edite_id"
+                                                                                    id="question_edite_id{{ $question->id }}" />
+
+                                                                                <td class="question_edite_type"
+                                                                                    id="question_edite_type{{ $question->id }}"
                                                                                     style="font-weight: 500; font-size: 1.1rem">
-                                                                                    {{ $loop->iteration }}
-                                                                                </td>
-                                                                                <td
-                                                                                    style="font-weight: 500; font-size: 1.1rem">
-                                                                                    <input type="hidden"
-                                                                                        value="{{ $question->question_id }}"
-                                                                                        name="question_id[]"
-                                                                                        class="question_id" />
                                                                                     {{ $question->q_type }}
                                                                                 </td>
-                                                                                <td
+
+                                                                                <td class="question_edite_year"
+                                                                                    id="question_edite_year{{ $question->id }}"
                                                                                     style="font-weight: 500; font-size: 1.1rem">
-                                                                                    {{ $question->year }}</td>
-                                                                                <td
+                                                                                    {{ $question->year }}
+                                                                                </td>
+
+                                                                                <td class="question_edite_month"
+                                                                                    id="question_edite_month{{ $question->id }}"
                                                                                     style="font-weight: 500; font-size: 1.1rem">
-                                                                                    {{ $question->month }}</td>
-                                                                                <td
+                                                                                    {{ $question->month }}
+                                                                                </td>
+
+                                                                                <td class="question_edite_code"
+                                                                                    id="question_edite_code{{ $question->id }}"
                                                                                     style="font-weight: 500; font-size: 1.1rem">
-                                                                                    {{ $question->q_code }}</td>
-                                                                                <td
+                                                                                    {{ $question->q_code }}
+                                                                                </td>
+
+                                                                                <td class="question_edite_section"
+                                                                                    id="question_edite_section{{ $question->id }}"
                                                                                     style="font-weight: 500; font-size: 1.1rem">
-                                                                                    {{ $question->section }}</td>
-                                                                                <td
+                                                                                    {{ $question->section }}
+                                                                                </td>
+
+                                                                                <td class="question_edite_num"
+                                                                                    id="question_edite_num{{ $question->id }}"
                                                                                     style="font-weight: 500; font-size: 1.1rem">
-                                                                                    {{ $question->q_num }}</td>
-                                                                                <td
+                                                                                    {{ $question->q_num }}
+                                                                                </td>
+
+                                                                                <td class="question_edite_difficulty"
+                                                                                    id="question_edite_difficulty{{ $question->id }}"
                                                                                     style="font-weight: 500; font-size: 1.1rem">
-                                                                                    {{ $question->difficulty }}</td>
+                                                                                    {{ $question->difficulty }}
+                                                                                </td>
+
                                                                                 <td
                                                                                     style='width: 150px !important; padding: 0 !important;'>
                                                                                     <button type='button'
@@ -1001,7 +1023,8 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary close_btn"
                                                     data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary add_btn">Edit</button>
+                                                <button type="submit" class="btn btn-primary add_btn btn_Edit_quizze"
+                                                    id="btn_Edit_quizze{{ $item->id }}">Edit</button>
                                             </div>
                                         </form>
                                     </div>
@@ -1197,21 +1220,21 @@
         let ques_id = document.querySelectorAll('.ques_id');
         let quizze_id = document.querySelectorAll('.quizze_id');
         let arr = [];
-        for (let i = 0, end = add_question_btn.length; i < end; i++) {
-            add_question_btn[i].addEventListener('click', (e) => {
-                for (let j = 0; j < end; j++) {
-                    if (e.target == add_question_btn[j]) {
-                        let ques = ques_id[j].value;
-                        let quizze = quizze_id[j].value;
-                        let obj = {
-                            'ques_id': ques,
-                            'quizze_id': quizze
-                        }
-                        arr = [...arr, obj];
-                    }
-                }
-            })
-        }
+        // for (let i = 0, end = add_question_btn.length; i < end; i++) {
+        //     add_question_btn[i].addEventListener('click', (e) => {
+        //         for (let j = 0; j < end; j++) {
+        //             if (e.target == add_question_btn[j]) {
+        //                 let ques = ques_id[j].value;
+        //                 let quizze = quizze_idd[j].value;
+        //                 let obj = {
+        //                     'ques_id': ques,
+        //                     'quizze_id': quizze
+        //                 }
+        //                 arr = [...arr, obj];
+        //             }
+        //         }
+        //     })
+        // }
 
         sel_lesson.addEventListener('change', () => {
 
@@ -1351,7 +1374,10 @@
             var quizzesEdit = [];
             $(".edit_qz").click(function() {
 
-                var quziId = $(this).closest("tr").find(".idd").text();
+                var question_idd = $(this).closest("tr").find(".ques_id").val();
+                var quizze_idd = $(this).closest(".lesson_quizze").find(".quizze_idd").val();
+
+                // var quziId = $(this).closest("tr").find(".idd").text();
                 var quziType = $(this).closest("tr").find(".type").text();
                 var quziYear = $(this).closest("tr").find(".year").text();
                 var quziMonth = $(this).closest("tr").find(".month").text();
@@ -1359,69 +1385,60 @@
                 var quziNoNum = $(this).closest("tr").find(".noNum").text();
                 var quziSection = $(this).closest("tr").find(".section").text();
                 var quziDiff = $(this).closest("tr").find(".diff").text();
-
-                var allDataEdit = [];
-
-
-                var quziObjectEdit = {
-                    id: quziId,
-                    type: quziType,
-                    year: quziYear,
-                    month: quziMonth,
-                    code: quziCode,
-                    section: quziSection,
-                    noNum: quziNoNum,
-                    diff: quziDiff,
-                }
-
-                allDataEdit.push(quziObjectEdit);
-
-                quizzesEdit.push(...allDataEdit);
-
-                var object_serialized_edit = JSON.stringify(allDataEdit);
+                var edit_eray = `#${$(this).closest(".form_editquizze").find(".sel_quz_edit").attr("id")}`;
 
 
-                var allObject_serialized_edit = JSON.stringify(quizzesEdit);
+                var indexx = `#${$(this).closest(".form_editquizze").find(".sel_quz_edit").attr("id")}`;
+                var count_tr_edit = $(indexx).find("tr").length;
+                // var indexQuizze = $(count_tr_edit);
+                console.log("##############")
 
-                localStorage.setItem("AllquizzesEdit", allObject_serialized_edit)
-
-
-
-                localStorage.setItem("quizzesEdit", object_serialized_edit)
-
-
-                var myObjectDeserializedEdit = JSON.parse(localStorage.getItem("quizzesEdit"));
-
-
-                var quizz_container_edit = $(".sel_quz");
-
-                var index = quizzesEdit.length;
+                console.log("indexx", indexx)
+                console.log("count_edit_lenght", count_tr_edit)
+                // console.log("indexQuizze", indexQuizze)
+                console.log("##############")
 
 
-                myObjectDeserializedEdit.forEach(element => {
-                    var removeBtn =
-                        `<button type='button' class='remove_qz_edit' id='remove_qz_edit${index}'>Remoeve</button>`;
-                    var dynamicTREdit = "<tr>";
-                    dynamicTREdit = dynamicTREdit + "<td class='iddd'> " + index + "</td>";
-                    dynamicTREdit = dynamicTREdit + "<td> " + element.type + "</td>";
-                    dynamicTREdit = dynamicTREdit + "<td> " + element.year + "</td>";
-                    dynamicTREdit = dynamicTREdit + "<td> " + element.month + "</td>";
-                    dynamicTREdit = dynamicTREdit + "<td> " + element.code + "</td>";
-                    dynamicTREdit = dynamicTREdit + "<td> " + element.section + "</td>";
-                    dynamicTREdit = dynamicTREdit + "<td> " + element.noNum + "</td>";
-                    dynamicTREdit = dynamicTREdit + "<td> " + element.diff + "</td>";
-                    dynamicTREdit = dynamicTREdit +
-                        "<td style='width: 150px !important; padding: 0 !important;'> " +
-                        removeBtn + "</td>";
+                console.log("question_idd", question_idd);
+                console.log("quizze_idd", quizze_idd);
 
-                    dynamicTREdit = dynamicTREdit + " </tr>";
+                // console.log("quziId", quziId);
+                console.log("quziType", quziType);
+                console.log("quziYear", quziYear);
+                console.log("quziMonth", quziMonth);
+                console.log("quziCode", quziCode);
+                console.log("quziNoNum", quziNoNum);
+                console.log("quziSection", quziSection);
+                console.log("quziDiff", quziDiff);
+                console.log("##########")
+                console.log("edit_eray", edit_eray);
 
-                    index++;
-                    //_____________________________________________________________________________
-                    quizz_container_edit.append(dynamicTREdit);
-                    questions_data.value = JSON.stringify(quizzesEdit);
-                    //_____________________________________________________________________________
-                });
+                var new_Ele_Edit = `<tr class='tr_edite${quizze_idd}' id='tr_edite${question_idd}'>
+                                        <input type="hidden"
+                                        value=${question_idd}
+                                        name='question_id[]'
+                                        class='question_edite_id' id='question_edite_id${question_idd}'/>
+                                        <td class="question_edite_type" id='question_edite_type${question_idd}' style="font-weight: 500; font-size: 1.1rem">
+                                            ${quziType}
+                                        </td>
+                                        <td class="question_edite_year" id='question_edite_year${question_idd}' style="font-weight: 500; font-size: 1.1rem">
+                                            ${quziYear}</td>
+                                        <td class="question_edite_month" id='question_edite_month${question_idd}' style="font-weight: 500; font-size: 1.1rem">
+                                            ${quziMonth}</td>
+                                        <td class="question_edite_code" id='question_edite_code${question_idd}' style="font-weight: 500; font-size: 1.1rem">
+                                            ${quziCode}</td>
+                                        <td class="question_edite_section" id='question_edite_section${question_idd}' style="font-weight: 500; font-size: 1.1rem">
+                                            ${quziSection}</td>
+                                        <td class="question_edite_num" id='question_edite_num${question_idd}' style="font-weight: 500; font-size: 1.1rem">
+                                            ${quziNoNum}</td>
+                                        <td class="question_edite_difficulty" id='question_edite_difficulty${question_idd}' style="font-weight: 500; font-size: 1.1rem">
+                                            ${quziDiff}</td>
+                                        <td style="width: 150px !important; padding: 0 !important;">
+                                            <button type="button" class="remove_qz_edit">Remove</button>
+                                        </td>
+                                    </tr>`
+
+                $(edit_eray).append(new_Ele_Edit);
 
                 if ($("tbody").length <= 1) {
                     addEmptyRow();
@@ -1431,8 +1448,12 @@
             });
 
             $(document).on('click', '.remove_qz_edit', function() {
-                var emptyRowEdit = "<tr><td colspan='12' class='avil'> No Quizzes Available</td></tr>";
 
+                var emptyRowEdit = "<tr><td colspan='12' class='avil'> No Quizzes Available</td></tr>";
+                var countEle = `#${$(this).closest(".form_editquizze").find(".sel_quz_edit").attr("id")}`;
+                var indexQuizzes =
+                    `#${$(this).closest(".form_editquizze").find(".sel_quz_edit").attr("id")}`;
+                var count_tr_editt = $(indexQuizzes).find("tr").length;
 
                 var getIndexEdit = $(this).closest("tr").index();
 
@@ -1443,10 +1464,132 @@
                 console.log("this", $(this).attr("class"))
                 console.log("ele", $(this).closest(".sel_quz_edit").html())
                 console.log("first");
-                if ($(this).closest(".sel_quz_edit").length == 0) {
+
+                console.log("count_tr_editt", count_tr_editt)
+                if (count_tr_editt <= 1) {
                     $("#tblData_Edite tbody").append(emptyRowEdit);
                 };
             });
+
+            var allDataEdite = [];
+            $(".btn_Edit_quizze").click(function() {
+                console.clear();
+
+                allDataEdite = [];
+                var InfoEdite = [];
+
+                var btn_editee = `#${$(this).attr("id")}`;
+                /* Parent from Modal */
+                var parModel =
+                    `#${$(btn_editee).closest(".form_editquizze").find(".tab-content").attr("id")}`;
+                /* Quizze Title */
+                var info_Title = $(parModel).find(".quizze_title").val();
+                /* Quizze Description */
+                var info_Description = $(parModel).find(".quizze_description").val();
+                /* Quizze Duration */
+                var info_Duration = $(parModel).find(".quizze_duration").val();
+                /* Quizze Total Score */
+                var info_Total_Score = $(parModel).find(".quizze_Total_Score").val();
+                /* Quizze Pass Score */
+                var info_Pass_Score = $(parModel).find(".quizze_Pass_Score").val();
+                /* Quizze Quizze Order */
+                var info_Quizze_Order = $(parModel).find(".quizze_Quizze_Order").val();
+                /* Quizze Active */
+                var info_Active = $(parModel).find(".quizze_Active").val();
+
+
+                var info_obj = {
+                    title: info_Title,
+                    description: info_Description,
+                    time: info_Duration,
+                    score: info_Total_Score,
+                    pass_score: info_Pass_Score,
+                    quizze_order: info_Quizze_Order,
+                    state: info_Active,
+                }
+                InfoEdite.push(info_obj);
+
+                allDataEdite.push(InfoEdite)
+
+
+                /* Parent from table */
+                var parEdite =
+                    `#${$(btn_editee).closest(".form_editquizze").find(".sel_quz_edit").attr("id")}`;
+                var childEdite = `.${$(parEdite).find("tr").attr("class")}`
+
+                console.log("childEdite", childEdite)
+                console.log("childEdite length", $(childEdite).length)
+
+
+                $(childEdite).each((childEle, childVal) => {
+
+                    var parEle = `#${$(childVal).attr("id")}`;
+                    /* ########### */
+                    var question_edit_id = `#${$(parEle).find(".question_edite_id").attr("id")}`;
+                    var ques_ID = $(question_edit_id).val();
+
+                    /* ########### */
+                    var question_edit_type =
+                        `#${$(parEle).find(".question_edite_type").attr("id")}`;
+                    var ques_TYPE = $(question_edit_type).text().trim();
+
+                    /* ########### */
+                    var question_edit_year =
+                        `#${$(parEle).find(".question_edite_year").attr("id")}`;
+                    var ques_YEAR = $(question_edit_year).text();
+
+                    /* ########### */
+                    var question_edit_month =
+                        `#${$(parEle).find(".question_edite_month").attr("id")}`;
+                    var ques_MONTH = $(question_edit_month).text();
+
+                    /* ########### */
+                    var question_edit_code =
+                        `#${$(parEle).find(".question_edite_code").attr("id")}`;
+                    var ques_CODE = $(question_edit_code).text().trim();
+
+                    /* ########### */
+                    var question_edit_section =
+                        `#${$(parEle).find(".question_edite_section").attr("id")}`;
+                    var ques_SECTION = $(question_edit_section).text();
+
+                    /* ########### */
+                    var question_edit_num = `#${$(parEle).find(".question_edite_num").attr("id")}`;
+                    var ques_NUM = $(question_edit_num).text();
+                    /* ########### */
+                    var question_edit_difficulty =
+                        `#${$(parEle).find(".question_edite_difficulty").attr("id")}`;
+                    var ques_DIFFICULTY = $(question_edit_difficulty).text().trim();
+                    /* ########### */
+
+
+                    var question_obj = {
+                        question_ID: JSON.parse(ques_ID),
+                        question_Type: ques_TYPE,
+                        question_Year: JSON.parse(ques_YEAR),
+                        question_Month: JSON.parse(ques_MONTH),
+                        question_Code: ques_CODE,
+                        question_Section: JSON.parse(ques_SECTION),
+                        question_Num: JSON.parse(ques_NUM),
+                        question_Difficulty: ques_DIFFICULTY,
+                    }
+
+                    console.log("childEle", childEle)
+                    console.log("childVal", childVal)
+
+                    allDataEdite.push(question_obj);
+                })
+
+                $("#allQuestion").val(JSON.stringify(allDataEdite))
+                console.log("#############")
+                // console.log("parEdite", parEdite)
+                // console.log("parModel", parModel)
+                console.log("#############")
+                console.log("InfoEdite", InfoEdite)
+                console.log("allDataEdite", allDataEdite)
+                console.log("#############")
+
+            })
 
         });
     </script>
