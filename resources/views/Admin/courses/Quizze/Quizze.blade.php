@@ -213,7 +213,7 @@
             text-align: center !important;
         }
     </style>
-    <div class="section_add">
+    <div class="section_add d-flex justify-content-start">
         <button class="btn_add_quizz" type="button" data-toggle="modal" data-target="#exampleModalCenter">New
             Quizze</button>
     </div>
@@ -581,12 +581,12 @@
                     <td>
                         <div style="position: relative; text-align: left;">
 
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#modalCenter{{ $item->id }}">
                                 Edit
                             </button>
 
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#modalDelete{{ $item->id }}">
                                 Delete
                             </button>

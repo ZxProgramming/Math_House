@@ -250,6 +250,20 @@
                   </div>
 
                   <div class="col-md-12 d-flex align-items-center justify-content-around">
+                    <span class="col-md-2" style="font-size: 1.2rem;">Score Name: </span>
+                    <select class="col-md-9 form-control" name="score_id">
+                      <option disabled selected>
+                        Select Score Name ...
+                      </option>
+                      @foreach ($scores as $score)
+                          <option value="{{$score->id}}">
+                            {{$score->name}}
+                          </option>
+                      @endforeach
+                    </select>
+                  </div>
+
+                  <div class="col-md-12 d-flex align-items-center justify-content-around">
                     <span class="col-md-2" style="font-size: 1.2rem;">Total Score: </span>
                     <input type="text" name="score" class="col-md-9 form-control">
                   </div>
@@ -475,11 +489,11 @@
             <td>
               <div style="position: relative; text-align: left;">
  
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter{{$item->id}}">
+                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalCenter{{$item->id}}">
                   Edit
                 </button>
                 
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{$item->id}}">
+                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalDelete{{$item->id}}">
                   Delete
                 </button>
 
@@ -487,7 +501,7 @@
                 <div class="modal fade modal_edit" id="modalCenter{{$item->id}}" style="transform: translate(20px, 0px); " tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" style="max-width: 1300px !important; display: flex;align-items: center;justify-content: center;" role="document">
                     <div class="modal-content" style="border-radius: 15px;">
-                      <form action="{{route('edit_quizze', ['id' => $item->id])}}" method="POST">
+                      <form action="{{route('edit_dia_exam', ['id' => $item->id])}}" method="POST">
                       @csrf
                       <input type="hidden" class="questions_data" name="ques_id" />
                         <div class="modal-header" style="border-bottom: 0 !important;">
@@ -530,6 +544,20 @@
                                     <div class="col-md-9" style="display: flex; align-items: center;padding: 0;justify-content: start">
                                         <input name="time" value="{{ $item->time }}" max="60" min="1" class="col-md-4 form-control">
                                     </div>
+                                  </div>
+
+                                  <div class="col-md-12 d-flex align-items-center justify-content-around">
+                                    <span class="col-md-2" style="font-size: 1.2rem;">Score Name: </span>
+                                    <select class="col-md-9 form-control" name="score_id">
+                                      <option value="{{$item->score_id}}">
+                                        {{$item->dia_score->name}}
+                                      </option>
+                                      @foreach ($scores as $score)
+                                          <option value="{{$score->id}}">
+                                            {{$score->name}}
+                                          </option>
+                                      @endforeach
+                                    </select>
                                   </div>
 
                                   <div class="col-md-12 d-flex align-items-center justify-content-around">
@@ -707,13 +735,13 @@
                                             <td style="font-weight: 500; font-size: 1.1rem">
                                               {{$loop->iteration}}
                                             </td>
-                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->q_type}}</td>
-                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->year	}}</td>
-                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->month}}</td>
-                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->q_code}}</td>
-                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->section}}</td>
-                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->q_num}}</td>
-                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->question->difficulty}}</td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->q_type}}</td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->year	}}</td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->month}}</td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->q_code}}</td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->section}}</td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->q_num}}</td>
+                                            <td style="font-weight: 500; font-size: 1.1rem">{{$question->difficulty}}</td>
                                             <td style='width: 150px !important; padding: 0 !important;'>
                                               <button type='button' class='remove_qz_edit'>Remove</button>
                                             </td>

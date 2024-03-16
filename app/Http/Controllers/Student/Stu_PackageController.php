@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 use App\Models\Package;
 use App\Models\PaymentMethod;
 use App\Models\PaymentRequest;
+use App\Models\PaymentPackageOrder;
+use App\Models\Wallet;
+use App\Models\User;
+
+use Illuminate\Support\Facades\Cache;
 
 class Stu_PackageController extends Controller
 {
@@ -16,14 +21,14 @@ class Stu_PackageController extends Controller
         $package = Package::where('id', $id)
         ->first();
         $payment_methods = PaymentMethod::all();
-
+        Cache::store('file')->put('package', $package, 10000);
         return view('Student.PackageCheckout.Checkout' ,compact('package', 'payment_methods'));
     }
 
     public function payment_package( $id, Request $req ){
-        $arr = $req->only('payment_method_id');
         $package = Package::where('id', $id)
         ->first();
+        $price = $package->price;
         $arr['price'] = $package->price;
         $arr['module'] = 'Package';
         $arr['user_id'] = auth()->user()->id;
@@ -47,14 +52,65 @@ class Stu_PackageController extends Controller
                 move_uploaded_file($tmp_name[$i], 'images/payment_reset/' . $img_name);
             }
         }
-        if ( $img_state ) { 
+        
+        if ( $req->payment_method_id == 'Wallet' ) {
+            $wallet = Wallet::
+            where('student_id', auth()->user()->id)
+            ->where('state', 'Approve')
+            ->sum('wallet'); 
+
+            if ( $wallet < $price ) {
+                session()->flash('faild', 'You Wallet Is not Enough'); 
+                return redirect()->back();
+            }
+            $arr['state'] = 'Approve'; 
+        }
+        elseif ( $img_state ) { 
             session()->flash('faild', 'You Must Enter Receipt');
             return redirect()->back();
         
         }
+        else{ 
+            $arr['payment_method_id'] = $req->payment_method_id;
+        }
         $p_request = PaymentRequest::create($arr);
-        $price = $package->price;
-        $p_method = $p_request->method->payment;
+        $p_method = isset($p_request->method->payment) ? $p_request->method->payment : 'Wallet';
+        $package_data = Cache::get('package');
+        if ( $req->payment_method_id == 'Wallet' ) {
+            if ( $package->module == 'Exam' ) {
+                $user_acc = User::where('id', auth()->user()->id)
+                ->first();
+            }
+            elseif ( $package->module == 'Question' ) {
+                $user_acc = User::where('id', auth()->user()->id)
+                ->first();
+            }
+            elseif ( $package->module == 'Live' ) {
+                $user_acc = User::where('id', auth()->user()->id)
+                ->first();
+            }
+            Wallet::create([
+                'student_id' => auth()->user()->id,
+                'wallet' => -$price,
+                'state' => 'Approve',
+                'date' => now(),
+                'payment_request_id' => $p_request->id,
+            ]);
+            PaymentPackageOrder::create([
+                'payment_request_id' => $p_request->id,
+                'package_id' => $package_data->id,
+                'date' => now(),
+                'state' => 1,
+                'number' => $package->number
+            ]);
+        }
+        else{
+            PaymentPackageOrder::create([
+                'payment_request_id' => $p_request->id,
+                'package_id' => $package_data->id,
+                'date' => now(),
+            ]);
+        }
         return view('Student.Order.Order', compact('package', 'price', 'p_method'));
     }
 }

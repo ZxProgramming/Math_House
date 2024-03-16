@@ -143,7 +143,7 @@ class UserController extends Controller
         $students = User::where('position', 'student')
         ->get();
 
-        return view('Admin.Users.StudentsInfo', compact('students'));
+        return view('Admin.Users.Students', compact('students'));
     }
 
     public function add_student(){
@@ -156,8 +156,6 @@ class UserController extends Controller
         'name'         => 'required',
         'email'        => 'required|email',
         'phone'        => 'required',
-        'parent_email' => 'required|email',
-        'parent_phone' => 'required',
         ]);
         $arr['password'] = bcrypt($req->password);
         $arr['position'] = 'student';
@@ -173,8 +171,6 @@ class UserController extends Controller
         'name'         => 'required',
         'email'        => 'required|email',
         'phone'        => 'required',
-        'parent_email' => 'required|email',
-        'parent_phone' => 'required',
         ]);
         $arr['password'] = bcrypt($req->password);
         User::
@@ -219,9 +215,10 @@ class UserController extends Controller
         compact('teachers', 'categories', 'courses'));
     }
     
-    public function add_wallet( Request $req ){
+    public function ad_add_wallet( Request $req ){
         $arr = $req->only('wallet', 'student_id');
         $arr['date'] = now();
+        $arr['state'] = 'Approve';
         Wallet::create($arr);
         return redirect()->back();
     }

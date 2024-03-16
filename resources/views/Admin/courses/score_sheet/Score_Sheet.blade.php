@@ -131,12 +131,12 @@
                 </td>
                 <td class="sorting_1">
                     <div class="menu-item px-3">
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_invite_friends{{ $item->id }}">Edit</button>
+                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_invite_friends{{ $item->id }}">Edit</button>
                     </div>
                     <!--end::Menu item-->
                     <!--begin::Menu item-->
                     <div class="menu-item px-3">
-                        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#kt_del_btn{{ $item->id }}">Delete</button>
+                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#kt_del_btn{{ $item->id }}">Delete</button>
                     </div>
                 </td>
             </tr>
@@ -210,7 +210,7 @@
                             </div>
                             <!--end::Heading-->
                          
-                            <form action="{{ route('scoreEdit', ['id', $item->id]) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('scoreEdit', ['id' => $item->id]) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             
 
@@ -267,6 +267,26 @@
                         </div>
                         
                         <div class="score_list">
+                            
+                        {{-- <table class="table">
+                            <thead>
+                                <th>Row Score</th>
+                                <th>Score</th>    
+                            </thead> 
+                            <tbody>
+                                @foreach ($item->score_list as $element)
+                                <tr>
+                                    <td>
+                                        <input type="hidden" value="{{$element->question_num}}" name="question_num[]" />
+                                        {{$element->question_num}}
+                                    </td>
+                                    <td>
+                                        <input class="form-control" value="{{$element->score}}" name="score_list[]" />
+                                    </td>  
+                                </tr> 
+                                @endforeach
+                            </tbody>   
+                        </table> --}}
                         </div>
 
                         

@@ -13,5 +13,9 @@ class Wallet extends Model
         'student_id', 
         'wallet', 
         'date',
+        'image',
+        'payment_method_id',
+        'state',
+        'payment_request_id',
     ];
 }

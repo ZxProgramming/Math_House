@@ -270,6 +270,9 @@
                 }); */
     </script>
     @section('title', 'Questions')
+    @include('Admin.courses.Questions.AddQuestion')
+    <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal"
+        data-bs-target="#kt_modal_create_question">Add Question</a>
     <form action="{{ route('filter_question') }}" method="POST">
         @csrf
         <div class="modal-body scroll-y m-5">
@@ -885,10 +888,10 @@
                     </td>
                     <td>
                         <div class="mt-3">
-                            <button type="button" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#kt_modal_edit{{ $question->id }}">Edit</button>
 
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#modalDelete{{ $question->id }}">
                                 Delete
                             </button>
@@ -1233,7 +1236,6 @@
     </table>
 
 
-    @include('Admin.courses.Questions.AddQuestion')
 
 
     <script>

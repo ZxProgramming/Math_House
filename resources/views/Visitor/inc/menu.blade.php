@@ -24,7 +24,7 @@
 		                <a href="{{route('categories')}}"><span class="title">Courses</span></a>
 		            </li>
 		            <li>
-		                <a href="#"><span class="title">Diagnostic Exam</span></a>
+		                <a href="{{route('v_dia_cate')}}"><span class="title">Diagnostic Exam</span></a>
 		            </li>
 		            <li>
 		                <a href="{{route('v_exams')}}"><span class="title">Exams</span></a>
@@ -42,6 +42,12 @@
 		                <a href="{{route('contact_us')}}"><span class="title">Contact</span></a>
 		            </li>
 		        </ul>
+				<ul class="sign_up_btn pull-right dn-smd mt20">
+	                <li class="list-inline-item list_s">
+						<a href="{{route('login.index')}}" class="btn flaticon-user"> <span class="dn-lg">Login</span></a>
+					</li>
+	                  
+	            </ul>
 		    </nav>
 		</div>
 	</header>

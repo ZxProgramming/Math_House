@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Course;
-use App\Models\DiaQuestion;
+use App\Models\Question;
+use App\Models\ScoreSheet;
 
 class DiagnosticExam extends Model
 {
@@ -20,6 +21,7 @@ class DiagnosticExam extends Model
         'time',
         'score',
         'pass_score',
+        'score_id',
         'course_id',
         'state',
     ];
@@ -30,7 +32,11 @@ class DiagnosticExam extends Model
     }
 
     public function question(){
-        return $this->hasMany(DiaQuestion::class, 'daiExam_id');
+        return $this->belongsToMany(Question::class, 'dia_questions');
+    }
+
+    public function dia_score(){
+        return $this->belongsTo(ScoreSheet::class, 'score_id');
     }
 
 }

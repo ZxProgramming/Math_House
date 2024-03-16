@@ -28,14 +28,13 @@
                                         role="tabpanel" aria-labelledby="projects__one">
                                         <div class="row">
 
-                                            @foreach( $payment_request as $order )
-                                            @foreach( $order->order as $chapter )
-                                            @if( $course_id == $chapter->course_id )
+                                            @foreach( $chapters as $item )
+                                            @if( $course_id == $item->chapter->course_id )
                                             <div class="col-xl-4 col-lg-6 col-md-6 col-12">
                                                 <div class="gridarea__wraper">
                                                     <div class="gridarea__img">
-                                                        <a href="{{route('stu_lessons', ['id' => $chapter->id, 'L_id' =>  $chapter->lessons[0]->id, 'idea' => $chapter->lessons[0]->ideas[0]->id])}}"><img loading="lazy"
-                                                                src="{{asset('images/Chapters/' . $chapter->ch_url)}}"
+                                                        <a href="{{route('stu_lessons', ['id' => $item->chapter->id, 'L_id' =>  $item->chapter->lessons[0]->id, 'idea' => $item->chapter->lessons[0]->ideas[0]->id])}}"><img loading="lazy"
+                                                                src="{{asset('images/Chapters/' . $item->chapter->ch_url)}}"
                                                                 alt="grid"></a>
                                                         <div class="gridarea__small__button">
                                                             <div class="grid__badge">Data &amp; Tech</div>
@@ -51,14 +50,14 @@
                                                             <ul>
                                                                 <li>
                                                                     <i class="icofont-book-alt"></i> 
-                                                                    {{count($chapter->lessons)}} 
+                                                                    {{count($item->chapter->lessons)}} 
                                                                     Lesson
                                                                 </li> 
                                                             </ul>
                                                         </div>
                                                         <div class="gridarea__heading">
-                                                            <h3><a href="{{route('stu_lessons', ['id'=> $chapter->id, 'L_id' => $chapter->lessons[0]->id, 'idea' =>$chapter->lessons[0]->ideas[0]->id])}}">
-                                                                    {{$chapter->chapter_name}}
+                                                            <h3><a href="{{route('stu_lessons', ['id'=> $item->chapter->id, 'L_id' => $item->chapter->lessons[0]->id, 'idea' =>$item->chapter->lessons[0]->ideas[0]->id])}}">
+                                                                    {{$item->chapter->chapter_name}}
                                                             </a></h3>
                                                         </div> 
                                                         <div class="gridarea__bottom">
@@ -72,7 +71,6 @@
                                                 </div>
                                             </div>
                                             @endif
-                                            @endforeach
                                             @endforeach
 
 

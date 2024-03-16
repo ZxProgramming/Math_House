@@ -34,35 +34,19 @@
             <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
                 <!--begin::Toolbar container-->
                 <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
-                    <!--begin::Page title-->
-                    <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
-                        <!--begin::Title-->
-                        <h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">Catigory List</h1>
-                        <!--end::Title-->
-                        <!--begin::Breadcrumb-->
-                        <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
-                            <!--begin::Item-->
-                            <li class="breadcrumb-item text-muted">
-                                <a href="index.html" class="text-muted text-hover-primary">Home</a>
-                            </li>
-                            <!--end::Item-->
-                            <!--begin::Item-->
-                            <li class="breadcrumb-item">
-                                <span class="bullet bg-gray-500 w-5px h-2px"></span>
-                            </li>
-                            <!--end::Item-->
-                            <!--begin::Item-->
-                            <li class="breadcrumb-item text-muted">Category</li>
-                            <!--end::Item-->
-                        </ul>
-                        <!--end::Breadcrumb-->
-                    </div>
-                    <!--end::Page title-->
+                 
                   
                 </div>
                 <!--end::Toolbar container-->
             </div>
             <!--end::Toolbar-->
+            <div data-kt-customer-table-toolbar="base">
+                               
+                <!--begin::Add customer-->
+                <a href="#" class="btn btn-primary er fs-6 px-8 py-4 m-5" data-bs-toggle="modal" data-bs-target="#kt_modal_create_api_key">Cteate New Category</a>
+
+                <!--end::Add customer-->
+            </div>
             <!--begin::Content-->
             <div id="kt_app_content" class="app-content flex-column-fluid">
                 <!--begin::Content container-->
@@ -79,13 +63,7 @@
                             <!--begin::Card toolbar-->
                             <div class="card-toolbar">
                                 <!--begin::Toolbar-->
-                                <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                               
-                                    <!--begin::Add customer-->
-                                    <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_create_api_key">Cteate New Category</a>
-
-                                    <!--end::Add customer-->
-                                </div>
+                              
                                 <!--end::Toolbar-->
                                 <!--begin::Group actions-->
                                 <div class="d-flex justify-content-end align-items-center d-none" data-kt-customer-table-toolbar="selected">
@@ -111,7 +89,8 @@
                                             <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
                                                 <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_customers_table .form-check-input" value="1">
                                             </div>
-                                        </th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Customer Name: activate to sort column ascending" style="width: 162.262px;">Category Name</th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending" style="width: 200.887px;">Descreptions</th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Company: activate to sort column ascending" style="width: 178.387px;">Image</th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Payment Method: activate to sort column ascending" style="width: 162.262px;">CREATED DATE</th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Created Date: activate to sort column ascending" style="width: 210.887px;">UPDATED DATE</th><th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 124.512px;">Actions</th></tr>
+                                        </th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Customer Name: activate to sort column ascending" style="width: 162.262px;">Category Name</th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending" style="width: 200.887px;">Descreptions</th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Company: activate to sort column ascending" style="width: 178.387px;">Image</th>
+                                        <th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 124.512px;">Actions</th></tr>
                                 </thead>
                                 <tbody class="fw-semibold text-gray-600">
                         
@@ -143,16 +122,14 @@
                                   
                                   
                                     <td data-filter="mastercard">
-                                    <img src="assets/media/svg/card-logos/mastercard.svg" class="w-35px me-3" alt="">{{ $category->updated_at }}</td>
-                                    <td data-order="2020-12-14T20:43:00+02:00">{{ $category->created_at }}</td>
                                     <td class="text-end">
                                             <div class="menu-item px-3">
-                                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_invite_friends{{ $category->id }}">Edit</button>
+                                                <button class="btn btn-primary  btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_invite_friends{{ $category->id }}">Edit</button>
                                             </div>
                                             <!--end::Menu item-->
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-3">
-                                                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#kt_del_btn{{ $category->id }}">Delete</button>
+                                                <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#kt_del_btn{{ $category->id }}">Delete</button>
                                             </div>
                                             <!--end::Menu item-->
                                         <!--end::Menu-->

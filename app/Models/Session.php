@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Lesson;
 use App\Models\SessionGroup;
+use App\Models\SessionDay;
 
 class Session extends Model
 {
@@ -48,4 +49,9 @@ class Session extends Model
     {
         return $this->belongsToMany(User::class, 'session_students');
     }
+
+    public function days(){
+        return $this->hasMany(SessionDay::class, 'session_id');
+    }
+
 }

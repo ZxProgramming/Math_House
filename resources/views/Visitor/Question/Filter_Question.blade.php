@@ -44,17 +44,69 @@
     @foreach ( $q_items as $item )
     <tr>
         <td class="px-5">
-            <a style="font-size: 19px; color:black;font-weight: bold;" 
-            href="{{route('q_page', ['id' => $item->id])}}">
+            <div style="font-size: 19px; color:black;font-weight: bold;" type="button" class="btn btn-primary wallet_btn" data-bs-toggle="modal" data-bs-target="#modalCenter">
                 {{date('M', ($item->month - 1)* 31 * 24 * 60 *60)}}
                 {{$item->year}}
                 Section : {{$item->section}}
                 Code : {{$item->q_code}}
                 QNumber : {{$item->q_num}}
-            </a>
+            </div> 
+
+            <div class="modal show_wallet fade show d-none" id="modalCenter" tabindex="-1" style="display: block;" aria-modal="true" role="dialog">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="modalCenterTitle">Question</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Start Question ??
+
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-label-secondary close_wallet_btn" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <a class="btn btn-success"  href="{{route('q_page', ['id' => $item->id])}}">
+                        Start
+                    </a>
+                    </div>
+                </div>
+                </div>
+            </div>
         </td>
     </tr>
     @endforeach
 </table>
 
+<script>
+    let wallet_btn = document.querySelectorAll('.wallet_btn');
+    let show_wallet = document.querySelectorAll('.show_wallet');
+    let btn_close = document.querySelectorAll('.btn-close');
+    let close_wallet_btn = document.querySelectorAll('.close_wallet_btn');
+
+    for (let i = 0, end = wallet_btn.length; i < end; i++) {
+        wallet_btn[i].addEventListener('click', ( e ) => {
+            for (let j = 0; j < end; j++) {
+                if ( e.target == wallet_btn[j] ) {
+                    show_wallet[j].classList.remove('d-none');
+                }
+            }
+        })
+        btn_close[i].addEventListener('click', ( e ) => {
+            for (let j = 0; j < end; j++) {
+                if ( e.target == show_wallet[j] ) {
+                    show_wallet[j].classList.add('d-none');
+                }
+            }
+        })
+        close_wallet_btn[i].addEventListener('click', ( e ) => {
+            for (let j = 0; j < end; j++) {
+                if ( e.target == close_wallet_btn[j] ) {
+                    show_wallet[j].classList.add('d-none');
+                }
+            }
+        })
+    }
+</script>
 @include('Visitor.inc.footer')

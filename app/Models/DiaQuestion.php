@@ -12,8 +12,8 @@ class DiaQuestion extends Model
     use HasFactory;
 
     protected $fillable = [
-        'daiExam_id',
-        'ques_id',
+        'diagnostic_exam_id',
+        'question_id',
     ];
  
 

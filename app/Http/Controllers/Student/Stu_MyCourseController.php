@@ -2,16 +2,25 @@
 
 namespace App\Http\Controllers\Student;
 
+use Illuminate\Support\Facades\Cache;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Marketing;
 use App\Models\PaymentRequest;
+use App\Models\PaymentOrder;
 use App\Models\quizze;
 use App\Models\QuizzeStuAns;
 use App\Models\StudentQuizze;
 use App\Models\StudentQuizzeMistake;
 use App\Models\Question;
 use App\Models\Mcq_ans;
+use App\Models\Chapter;
+use App\Models\PaymentPackageOrder;
+use App\Models\User;
+use App\Models\Package;
+
+use Carbon\Carbon;
 
 class Stu_MyCourseController extends Controller
 {
@@ -49,21 +58,95 @@ class Stu_MyCourseController extends Controller
 
     public function stu_chapters($id)
     {
-        $payment_request = PaymentRequest::where('user_id', auth()->user()->id)
-            ->where('state', 'Approve')
-            ->get();
+        // New Code
+        $payment_order = PaymentOrder::where('state', 1)
+        ->with('chapter')
+        ->with('pay_req')
+        ->get();
+
+        $chapters = [];
+        foreach ($payment_order as $item) {
+            $newTime = Carbon::now()->subDays($item->duration);
+            if ( $newTime > $item->date && $item->pay_req->user_id == auth()->user()->id ) {
+                $chapters[] = $item;
+            }
+        }
         $course_id = $id;
 
-        return view('Student.MyCourses.Chapters_Working', compact('payment_request', 'course_id'));
+        return view('Student.MyCourses.Chapters_Working', compact('chapters', 'course_id'));
     }
 
     public function stu_lessons($id, $L_id, $idea_num)
     {
-        $payment_request = PaymentRequest::where('user_id', auth()->user()->id)
-            ->where('state', 'Approve')
-            ->get();
-        $chapter_id = $id;
+        $payment_order = PaymentOrder::where('state', 1)
+        ->with('chapter')
+        ->with('pay_req')
+        ->get();
+
+        $chapters = [];
+        $chapter_state = false;
+        foreach ($payment_order as $item) {
+            $newTime = Carbon::now()->subDays($item->duration);
+            if ( $newTime > $item->date && $item->pay_req->user_id == auth()->user()->id && $item->chapter_id == $id ) {
+                $chapter_state = true;
+            }
+        }
+        $course_id = $id;
+        $payment_request = [];
+        if ($chapter_state) {
+            $payment_request = PaymentRequest::where('user_id', auth()->user()->id)
+                ->where('state', 'Approve')
+                ->get();
+        }
+        $chapter_id = $id;  
         return view('Student.MyCourses.Lessons', compact('payment_request', 'chapter_id', 'L_id', 'idea_num'));
+
+    }
+
+    public function quizze_ques_ans( $id ){
+        
+
+        if ( empty(auth()->user()) ) {
+            if ( !session()->has('previous_page') ) {
+                session(['previous_page' => url()->current()]);
+            }
+            return redirect()->route('login.index');
+        }
+        else{  
+            $payments = PaymentPackageOrder::
+            where('state', 1)
+            ->with('pay_req')
+            ->with('package')
+            ->get();
+            $user = User::where('id', auth()->user()->id)
+            ->first();
+
+            foreach ( $payments as $item ) { 
+                $newTime = Carbon::now()->subDays($item->package->number);
+                $question = Question::where('id', $id)
+                ->first();
+
+                if ( $item->package->module == 'Question' && 
+                $item->pay_req->user_id == auth()->user()->id &&
+                $item->date > $newTime &&
+                $item->number > 0
+                 ) 
+                 {  
+
+                    PaymentPackageOrder::where('id', $item->id)
+                    ->update([
+                        'number' => $item->number - 1
+                    ]);
+                    return view('Student.Question_History.Question_Ans', compact('question')); 
+                }
+            } 
+            $package = Package::
+            where('module', 'Question')
+            ->get();
+            return view('Student.Exam.Exam_Package', compact('package'));
+             
+            
+        }
     }
 
     public function stu_quizze($quizze_id)
@@ -88,33 +171,44 @@ class Stu_MyCourseController extends Controller
 
     public function quizze_ans(Request $req)
     {
+        $quizze_id = json_decode($req->quizze)->id;
+        $quizze = quizze::where('id', $quizze_id)
+        ->first();
         return $req->all();
-        $quizze = quizze::where('id', $req->quizze_id)
-            ->first();
         $deg = 0;
         $mistakes = [];
-        foreach ($quizze->question as $question) {
-            $answer = $req['ans' . $question->id];
-            $arr = ['A', 'B', 'C', 'D'];
-            if (in_array($answer, $arr)) {
-                $mcq_ans = $question->mcq[0]->mcq_answers;
-                if ($mcq_ans == $answer) {
-                    $deg++;
-                } else {
-                    $mistakes[] = $question;
-                }
+        $total_question = 0;
+        foreach ( $req->q_answers as $item ) {
+            $total_question++;
+            $mcq_item = json_decode($item);
+            $question = Question::where('id', $mcq_item->q_id)
+            ->first();
+
+            $stu_solve = $question->mcq[0]->mcq_answers;
+            $arr = ['A', 'B', 'C', 'D']; 
+            if ( isset($mcq_item->answer) && $stu_solve == $mcq_item->answer ) {
+                $deg++;
             } else {
-                $grid_ans = @$question->g_ans[0]->grid_ans;
-                if ($grid_ans == $answer) {
-                    $deg++;
-                } else {
-                    $mistakes[] = $question;
-                }
+                $mistakes[] = $question;
+            }
+        }
+
+       // "":["{\"q_id\":20}","{\"q_id\":1}"],"q_grid_ans":["1","1"]}
+        for ( $i = 0, $end = count($req->q_grid_answers); $i < $end; $i++ ) {
+            $total_question++;
+            $grid_item = json_decode($req->q_grid_answers[$i]);
+            $question = Question::where('id', $grid_item->q_id)
+            ->first();
+            $grid_ans = @$question->g_ans[0]->grid_ans;
+            $answer = $req->q_grid_ans[$i];
+            if ($grid_ans == $answer) {
+                $deg++;
+            } else {
+                $mistakes[] = $question;
             }
         }
 
         $right_question = $deg;
-        $total_question = count($quizze->question);
         $deg =  $deg / $total_question * 100;
         $score = ($quizze->score / $total_question) * $right_question;
 
@@ -129,7 +223,7 @@ class Stu_MyCourseController extends Controller
                 'quizze_id' => $quizze->id,
                 'student_id' => auth()->user()->id,
                 'score' => $score,
-                'time' => '$req->time',
+                'time' => $req->timer,
                 'r_questions' => $right_question,
             ]);
 
@@ -182,4 +276,60 @@ class Stu_MyCourseController extends Controller
 
         return view('Student.MyCourses.History', compact('history'));
     }
+
+    public function buy_chapter( $id ){
+        
+        $chapters = Chapter::where('id', $id)
+        ->first(); 
+        $prices = $chapters->price;
+        $min = $prices[0];
+        foreach ($prices as $key => $price) {
+            if ( $min->price > $price->price ) {
+                $min = $price;
+            }
+        }
+        $chapters_price = $min->price;
+        $chapter_discount = $min->price - ($min->price * $min->discount / 100);
+        
+        Cache::store('file')->put('marketing', $chapters, 10000);
+        Cache::store('file')->put('chapters_price', $chapters_price, 10000);
+         
+        if ( empty(auth()->user()) ) {
+            return view('Visitor.Login.login');
+        }
+        else{
+            $chapters = [$chapters];
+            return view('Visitor.Cart', compact('chapters', 'chapters_price', 'chapter_discount'));
+        }
+    }
+
+    public function dia_buy_chapters( Request $req ){
+        $ids = json_decode($req->ids);
+        $chapters = Chapter::whereIn('id', $ids)
+        ->get();
+        $chapters_price = 0;
+        
+        foreach ($chapters as $key => $chapter) {
+            $prices = $chapter->price;
+            $min = $prices[0]->price;
+            foreach ($prices as $key => $price) {
+                if ( $min > $price->price ) {
+                    $min = $price->price;
+                }
+            }
+            $chapters_price+= $min;
+        }
+        
+        Cache::store('file')->put('marketing', $chapters, 10000);
+        Cache::store('file')->put('chapters_price', $chapters_price, 10000);
+         
+        if ( empty(auth()->user()) ) {
+            return view('Visitor.Login.login');
+        }
+        else{
+            $chapters = $chapters;
+            return view('Visitor.Cart', compact('chapters', 'chapters_price'));
+        }
+    }
+
 }

@@ -9,11 +9,41 @@ use App\Models\ScoreSheet;
 use App\Models\ScoreList;
 use App\Models\Category;
 use App\Models\Course;
+use App\Models\Question;
+use App\Models\Exam;
+use App\Models\ExamCodes;
 
 class ExamController extends Controller
 {
     public function index(){
-        return view('Admin.courses.Exam.Exam');
+        $questions = Question::
+        select('*', 'questions.id as question_id')
+        ->leftJoin('lessons', 'questions.lesson_id', '=', 'lessons.id')
+        ->leftJoin('chapters', 'lessons.chapter_id', '=', 'chapters.id')
+        ->leftJoin('courses', 'chapters.course_id', '=', 'courses.id')
+        ->get();
+        $exams = Exam::all();
+        $categories = Category::all();
+        $courses = Course::all();
+        $scores = ScoreSheet::all();
+        $codes = ExamCodes::all();
+
+        return view('Admin.courses.Exam.Exam', 
+        compact('questions', 'exams', 'categories', 'courses', 'scores', 'codes'));
+    }
+
+    public function add_exam( Request $req ){
+        $questions = json_decode($req->ques_id);
+        $arr = $req->only('title', 'description', 'score', 'pass_score', 'type',
+        'year', 'month', 'code_id', 'course_id', 'score_id', 'state');
+        $arr['time'] = $req->time_h . 'Hours ' . $req->time_m . ' M';
+        $dia_exam = Exam::create($arr);
+        foreach ($questions as $ques) {
+            $exam = Exam::findorfail($dia_exam->id);
+            $exam->question()->syncWithoutDetaching($ques->id);
+        }
+
+        return redirect()->back();
     }
 
     public function score_sheet(){
@@ -48,5 +78,52 @@ class ExamController extends Controller
 
         return redirect()->back();
     }
+
+    public function exam_data ( Request $req ){
+
+        if ( $req->all_question == 'true' ) {
+            $exam = Question::
+            select('*', 'questions.id as question_id')
+            ->leftJoin('lessons', 'questions.lesson_id', '=', 'lessons.id')
+            ->leftJoin('chapters', 'lessons.chapter_id', '=', 'chapters.id')
+            ->leftJoin('courses', 'chapters.course_id', '=', 'courses.id')
+            ->where('courses.id', $req->course_id)
+            ->get();
+        }
+        else {
+            $exam = Question::
+            select('*', 'questions.id as question_id')
+            ->leftJoin('lessons', 'questions.lesson_id', '=', 'lessons.id')
+            ->leftJoin('chapters', 'lessons.chapter_id', '=', 'chapters.id')
+            ->leftJoin('courses', 'chapters.course_id', '=', 'courses.id')
+            ->where('courses.id', $req->course_id)
+            ->where('questions.month', $req->month)
+            ->where('questions.year', $req->year)
+            ->get();
+        }
+
+        return $exam;
+    }
+
+    public function del_exam( $id ){
+        Exam::where('id', $id)
+        ->delete();
+
+        return redirect()->back();
+    }
+
+    public function edit_exam( $id, Request $req){
+        $questions = json_decode($req->ques_id);
+       $arr = $req->only('title', 'description', 'score', 'pass_score', 'course_id', 'score_id');
+       $arr['state'] = isset($req->state) ? 1 : 0;
+       $arr['time'] = $req->time;
+       $exam = Exam::
+       where('id', $id)
+       ->update($arr);
+       
+
+       return redirect()->back();
+    }
+
 
 }

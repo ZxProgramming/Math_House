@@ -22,4 +22,20 @@ class CourseSettingController extends Controller
         return redirect()->back();
     }
 
+    public function examCodeDelete($id, Request $req){
+        ExamCodes::where('id', $id)
+        ->delete();
+
+        return redirect()->back();
+    }
+
+    public function examCodeEdit($id, Request $req){
+        ExamCodes::where('id', $id)
+        ->update([
+            'exam_code' => $req->exam_code
+        ]);
+
+        return redirect()->back();
+    }
+
 }

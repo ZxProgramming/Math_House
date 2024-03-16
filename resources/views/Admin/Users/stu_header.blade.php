@@ -1,10 +1,7 @@
 
-<a href="{{route('student')}}" class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-150px h-35px">
-    Student List
-</a>
-<a href="{{route('stu_info')}}" class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-150px h-35px">
-    Student Edit
-</a>
-<a href="{{route('add_student')}}" class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-150px h-35px">
-    Add Student 
+
+@include('Admin.Users.AddStudent')
+<a href="#" class="btn btn-primary w-150px my-3 h-45px" data-bs-toggle="modal"
+data-bs-target="#kt_modal_create_question">
+    Add Student
 </a>

@@ -25,6 +25,11 @@ use App\Http\Controllers\Student\Stu_DashboardController;
 use App\Http\Controllers\Student\Stu_ProfileController;
 use App\Http\Controllers\Student\Stu_MyCourseController;
 use App\Http\Controllers\Student\Stu_PackageController;
+use App\Http\Controllers\Student\Stu_ExamController;
+use App\Http\Controllers\Student\Stu_PaymentController;
+use App\Http\Controllers\Student\Stu_WalletController;
+use App\Http\Controllers\Student\Stu_MyPackagesController;
+use App\Http\Controllers\Student\Stu_QuestionController;
 
 use App\Http\Controllers\Visitor\HomeController;
 use App\Http\Controllers\Visitor\ContactController;
@@ -32,6 +37,7 @@ use App\Http\Controllers\Visitor\AboutController;
 use App\Http\Controllers\Visitor\V_ExamController;
 use App\Http\Controllers\Visitor\V_QuestionController;
 use App\Http\Controllers\Visitor\V_LiveController;
+use App\Http\Controllers\Visitor\V_DiaExamController;
 use App\Http\Controllers\Visitor\CoursesController as V_CoursesController;
 
 use App\Http\Controllers\login\LoginController;
@@ -65,23 +71,42 @@ use Illuminate\Support\Facades\Route;
     
     Route::get('/', [HomeController::class, 'index'])->name('home');
     
+    Route::controller(V_LiveController::class)->group(function(){
+        Route::get('/Live_Package', 'live_package')->name('live_package');
+    });
+
+    Route::controller(V_DiaExamController::class)->group(function(){
+        Route::get('/DiaExam', 'index')->name('v_dia_cate');
+        Route::post('/DiaExam/Answer/{id}', 'dia_exam_ans')->name('dia_exam_ans');
+        Route::get('/DiaExam/Course/{id}', 'v_dia_courses')->name('v_dia_courses');
+        Route::get('/DiaExam/Exam/{id}', 'v_dia_exam')->name('v_dia_exam');
+        Route::get('/DiaExam/History', 'dia_exam_history')->name('dia_exam_history');
+    });
     Route::controller(V_QuestionController::class)->group(function(){
         Route::get('/Question', 'v_question')->name('v_question');
         Route::post('/Question', 'v_filter_question')->name('v_filter_question');
         Route::get('/Question/{id}', 'q_page')->name('q_page');
+        Route::get('/Question_Package', 'q_package')->name('q_package');
+        Route::post('/Question/Solve', 'q_sol')->name('q_sol');
     });
     Route::controller(V_ExamController::class)->group(function(){
         Route::get('/Exams', 'v_exams')->name('v_exams');
+        Route::post('/Exam/Answer/{id}','exam_ans')->name('exam_ans');
         Route::post('/Exams', 'filter_exam')->name('filter_exam');
         Route::get('/Exam/{id}', 'exam_page')->name('exam_page');
+        Route::get('/Exam_package', 'e_package')->name('e_package');
     });
     Route::controller(V_CoursesController::class)->group(function(){
         Route::post('/Use_Promocode', 'use_promocode')->name('use_promocode');
         Route::post('/CheckOut/Course', 'check_out_course')->name('check_out_course');
+        Route::get('/CheckOut/Promo/Course', 'promo_check_out_course')->name('promo_check_out_course');
+        Route::post('/CheckOut/Course/PromoCode', 'course_use_promocode')->name('course_use_promocode');
         Route::post('/CheckOut', 'check_out')->name('check_out');
+        Route::get('/CheckOut/Chapter/Promo', 'promo_check_out_chapter')->name('promo_check_out_chapter');
         Route::post('/Course_Payment_Money', 'course_payment_money')->name('course_payment_money');
         Route::post('/Payment_Money', 'payment_money')->name('payment_money');
         Route::get('/BuyCourse', 'new_payment')->name('new_payment');
+        Route::get('/BuyCourse/Promo', 'c_new_payment')->name('c_new_payment');
         Route::get('/Courses', 'categories')->name('categories');
         Route::post('/Buy_Course', 'buy_course')->name('buy_course');
         Route::get('/Buy_Course', 'buy_course')->name('buy_course');
@@ -120,9 +145,11 @@ Route::middleware(['auth','auth.Admin'])->prefix('Admin')->group(function(){
     // Payment Request
     Route::controller(PaymentRequestController::class)->group(function(){
         Route::get('/PenddingPayment','pendding_payment')->name('pendding_payment');
+        Route::post('/PenddingPayment','filter_pendding_payment')->name('filter_pendding_payment');
         Route::get('/PaymentRequest','payment_request')->name('payment_request');
+        Route::post('/PaymentRequest','filter_payment_req')->name('filter_payment_req');
         Route::get('/ApprovePayment/{id}','approve_payment')->name('approve_payment');
-        Route::get('/RejectedPayment/{id}','rejected_payment')->name('rejected_payment');
+        Route::post('/RejectedPayment/{id}','rejected_payment')->name('rejected_payment');
     });
 
 // Marketing
@@ -159,6 +186,7 @@ Route::middleware(['auth','auth.Admin'])->prefix('Admin')->group(function(){
         Route::get('/Cancelation', 'cancelation')->name('cancelation');
         Route::get('/Cancelation/Approve/{id}', 'approve_cancelation')->name('approve_cancelation');
         Route::get('/Cancelation/Rejected/{id}', 'reject_cancelation')->name('reject_cancelation');
+        Route::get('/Live/Calender', 'live_calender')->name('live_calender');
     });
 
     Route::controller(UserController::class)->prefix('Users')->group(function(){
@@ -189,7 +217,7 @@ Route::middleware(['auth','auth.Admin'])->prefix('Admin')->group(function(){
         Route::get('/Teacher/Del/{id}', 'del_teacher')->name('del_teacher');
         
         // Students  
-        Route::post('/Add_Wallet', 'add_wallet')->name('add_wallet');
+        Route::post('/Add_Wallet', 'ad_add_wallet')->name('ad_add_wallet');
         Route::get('/Student', 'student')->name('student');
         Route::post('/Student_Filter', 'student_filter')->name('student_filter');
         Route::get('/Student/Info', 'stu_info')->name('stu_info');
@@ -238,6 +266,8 @@ Route::controller(QuestionController::class)->group(function(){
 Route::controller(CourseSettingController::class)->group(function(){
     Route::get('/Courses/CodeExam','course_setting')->name('course_setting');
     Route::post('/Courses/CodeExam/Add','code_exam_add')->name('code_exam_add');
+    Route::post('/Courses/CodeExam/Edit/{id}','examCodeEdit')->name('examCodeEdit');
+    Route::get('/Courses/CodeExam/Del/{id}','examCodeDelete')->name('examCodeDelete');
 });
 
 // Diagnostic Exam 
@@ -245,12 +275,16 @@ Route::controller(DiagnosticExamController::class)->group(function(){
     Route::get('/Diagnostic_Exam','index')->name('dia_exam');
     Route::post('/Diagnostic_Exam/Add','add_diaexam')->name('add_diaexam');
     Route::get('/Diagnostic_Exam/Del/{id}','del_dia_exam')->name('del_dia_exam');
+    Route::post('/Diagnostic_Exam/Edit/{id}','edit_dia_exam')->name('edit_dia_exam');
 });
 
 // Exam 
 Route::controller(ExamController::class)->group(function(){
-    Route::get('/Exam','index')->name('exam'); 
-    Route::get('/ScoreSheet','score_sheet')->name('score_sheet'); 
+    Route::get('/Exam/Del/{id}','del_exam')->name('del_exam');
+    Route::post('/Exam/Edit/{id}','edit_exam')->name('edit_exam'); 
+    Route::get('/Exam','index')->name('exam');
+    Route::post('/Exam/Add','add_exam')->name('add_exam');
+    Route::get('/ScoreSheet','score_sheet')->name('score_sheet');
     Route::post('/ScoreSheet/Add','addScore')->name('addScore'); 
     Route::get('/ScoreSheet/Del/{id}','scoreDelete')->name('scoreDelete'); 
     Route::post('/ScoreSheet/Edit/{id}','scoreEdit')->name('scoreEdit'); 
@@ -266,12 +300,12 @@ Route::controller(CategoryController::class)->group(function(){
 
 // Lesson 
 Route::controller(LessonController::class)->group(function(){
-        Route::get('Lesson/Lessons','index')->name('lesson');
-        Route::post('Lesson/AddLesson','addLesson')->name('addLesson');
-        Route::post('Lesson/Edit','lesson_edit')->name('lesson_edit');
-        Route::get('Lesson/Del/{id}','del_lesson')->name('del_lesson');
-        Route::post('Lesson/Filter','filter_lesson')->name('filter_lesson');
-        Route::get('Lesson/Filter','filter_lesson')->name('filter_lesson');
+    Route::get('Lesson/Lessons','index')->name('lesson');
+    Route::post('Lesson/AddLesson','addLesson')->name('addLesson');
+    Route::post('Lesson/Edit','lesson_edit')->name('lesson_edit');
+    Route::get('Lesson/Del/{id}','del_lesson')->name('del_lesson');
+    Route::post('Lesson/Filter','filter_lesson')->name('filter_lesson');
+    Route::get('Lesson/Filter','filter_lesson')->name('filter_lesson');
 });
 
 // Packages 
@@ -289,8 +323,17 @@ Route::controller(Ad_PackagesController::class)->group(function(){
 
           
     // Student
+use App\Models\Wallet;
 
 Route::middleware(['auth','auth.student'])->prefix('student')->group(function(){
+    \App::singleton('wallet', function(){
+        $money = Wallet::where('student_id', auth()->user()->id)
+        ->where('state', 'Approve')
+        ->sum('wallet');
+
+        return $money;
+    });
+
     Route::controller(Stu_DashboardController::class)->group(function(){
         Route::get('Student','index')->name('stu_dashboard');
     });
@@ -298,6 +341,24 @@ Route::middleware(['auth','auth.student'])->prefix('student')->group(function(){
     Route::controller(Stu_PackageController::class)->group(function(){
         Route::get('Package/Checkout/{id}', 'package_checkout')->name('package_checkout');
         Route::post('Package/Payment/{id}', 'payment_package')->name('payment_package');
+    }); 
+
+    Route::controller(Stu_PaymentController::class)->group(function(){
+        Route::get('PaymentHistory', 'stu_payment_history')->name('stu_payment_history');
+        Route::get('PaymentInvoice/{id}', 'payment_invoice')->name('payment_invoice');
+    });
+
+    Route::controller(Stu_QuestionController::class)->group(function(){
+        Route::get('QuestionHistory', 'question_history')->name('question_history');
+    }); 
+
+    Route::controller(Stu_MyPackagesController::class)->group(function(){
+        Route::get('MyPackages', 'my_packages')->name('my_packages');
+    });
+
+    Route::controller(Stu_WalletController::class)->group(function(){
+        Route::get('Wallet', 'index')->name('wallet');
+        Route::post('Wallet/Add', 'add_wallet')->name('add_wallet');
     });
     
 
@@ -307,16 +368,24 @@ Route::middleware(['auth','auth.student'])->prefix('student')->group(function(){
         Route::post('/Profile/Edit','stu_edit_profile')->name('stu_edit_profile');
     });
 
+    Route::controller(Stu_ExamController::class)->group(function(){
+        Route::get('/Exam/History','exam_history')->name('exam_history');
+    });
+    
+
     Route::controller(Stu_MyCourseController::class)->prefix('MyCourses')->group(function(){
         Route::get('/','index')->name('stu_my_courses');
         Route::get('/Courses','courses')->name('stu_courses');
         Route::get('/Chapters/{id}','stu_chapters')->name('stu_chapters');
         Route::get('/Lesson/{id}/{L_id}/{idea}','stu_lessons')->name('stu_lessons');
-        Route::get('/Quizze/{id}','stu_quizze')->name('stu_quizze');
         Route::post('/Quizze/Answer','quizze_ans')->name('quizze_ans');
         Route::get('/Quizze/Parallel/{id}','question_parallel')->name('question_parallel');
         Route::post('/Quizze/Solve_Parallel/{id}','solve_parallel')->name('solve_parallel');
+        Route::get('/Quizze/{id}','stu_quizze')->name('stu_quizze');
         Route::get('/HistoryQuizze','quizze_history')->name('quizze_history');
+        Route::get('/Quizze/Question/{id}','quizze_ques_ans')->name('quizze_ques_ans');
+        Route::get('/Buy_Chapter/{id}','buy_chapter')->name('buy_chapter');
+        Route::post('/Buy_Chapters','dia_buy_chapters')->name('dia_buy_chapters');
     });
     
 });

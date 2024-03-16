@@ -17,6 +17,9 @@ class Logincontroller extends Controller
 {
 
         public function index(){
+                if ( isset(auth()->user()->position) && auth()->user()->position == 'student' ) {
+                        return redirect()->route('stu_dashboard');
+                }
                 return view('pages.authanticated.login');            
         }
 
@@ -29,6 +32,7 @@ class Logincontroller extends Controller
                 'email.email'=> 'Email or Password Invalid',
                 'password.required'=> 'Email or Password Invalid',
                 ]);
+
 
                         $user = User::where('email',$request->input('email'))->first();
                         if(!$user){

@@ -13,7 +13,9 @@ use App\Models\Chapter;
 use App\Models\UsagePromo;
 use App\Models\PromoCode;
 use App\Models\PaymentMethod;
+use App\Models\PaymentOrder;
 use App\Models\PaymentRequest;
+use App\Models\Wallet;
 use Cart;
 
 class CoursesController extends Controller
@@ -83,45 +85,100 @@ class CoursesController extends Controller
         Cache::forget('min_price_data');
         Cache::store('file')->put('marketing', $course, 10000);
         Cache::store('file')->put('chapters_price', $min_price, 10000);
-        Cache::store('file')->put('min_price_data', $min_price_data, 10000);
         if ( empty(auth()->user()) && $min_price == $req->chapters_price ) {
             return view('Visitor.Login.login');
         }
         elseif ( $min_price == $req->chapters_price ) {
+            Cache::store('file')->put('min_price_data', $min_price_data, 10000);
             return view('Visitor.Cart.Course_Cart', compact('course', 'min_price', 'min_price_data'));
         }
         
         $data = $req->chapters_data;
         $chapters_price = $req->chapters_price;
+        $chapter_discount = 0;
+        $price_data = json_decode($data);
+        $price_arr = [];
+        foreach ( $price_data as $item ) {
+            $min = $item->price[0];
+            foreach ($item->price as $element) {
+                if ( $element->price < $min->price ) {
+                    $min = $element;
+                }
+            }
+            $chapter_discount += $min->price - ($min->price * $min->discount / 100);
+            $price_arr[] = $min;
+        }
+        
         if ( empty($req->chapters_data) ) {
             $data = Cache::get('marketing');
             $chapters_price = Cache::get('chapters_price');
         }
         Cache::store('file')->put('marketing', $data, 10000);
         Cache::store('file')->put('chapters_price', $chapters_price, 10000);
-         
+        Cache::store('file')->put('price_arr', $price_arr, 10000);
+         $price_arr = json_encode($price_arr);
         if ( empty(auth()->user()) ) {
             return view('Visitor.Login.login');
         }
         else{
             $chapters = json_decode(Cache::get('marketing'));
-            return view('Visitor.Cart', compact('chapters', 'chapters_price'));
+            return view('Visitor.Cart', compact('chapters', 'chapters_price', 'price_arr', 'chapter_discount'));
         }
     }
 
     public function course_payment( Request $req ){
-        $chapters = json_decode(Cache::get('marketing'));
-        $chapters = empty($chapters) ? [] : $chapters;
-        $chapters_price = Cache::get('chapters_price');
         
-        if ( @is_numeric(Cache::get('min_price_data')->id) ) {
-            $min_price_data = Cache::get('min_price_data');
-            $min_price = $chapters_price;
-            $course = Course::where('id', $chapters->id)
+        $course_data = Cache::get('marketing');
+        $chapters_price = Cache::get('chapters_price');
+        if ( isset($course_data->id) ) { 
+            
+            $course = Course::where('id', $course_data->id)
             ->first();
-            return view('Visitor.Cart.Course_Cart', compact('course', 'min_price', 'min_price_data'));
+            $min_price = $course->prices[0]->price;
+            $min_price_data = $course->prices[0];
+            foreach ( $course->prices as $price) {
+                if ( $min_price > $price->price ) {
+                    $min_price = $price->price;
+                    $min_price_data = $price;
+                }
+            }
+            Cache::forget('min_price_data');
+            if ( empty(auth()->user()) && $min_price == $chapters_price ) {
+                return view('Visitor.Login.login');
+            }
+            elseif ( $min_price == $chapters_price ) {
+                Cache::store('file')->put('min_price_data', $min_price_data, 10000);
+                return view('Visitor.Cart.Course_Cart', compact('course', 'min_price', 'min_price_data'));
+            }
         }
-        return view('Visitor.Cart', compact('chapters', 'chapters_price'));
+
+
+        $data = Cache::get('marketing');
+        $chapters_price = Cache::get('chapters_price');
+        $chapter_discount = 0;
+        $price_data = json_decode($data);
+        $price_arr = [];
+        foreach ( $price_data as $item ) {
+            $min = $item->price[0];
+            foreach ($item->price as $element) {
+                if ( $element->price < $min->price ) {
+                    $min = $element;
+                }
+            }
+            $chapter_discount += $min->price - ($min->price * $min->discount / 100);
+            $price_arr[] = $min;
+        }
+        
+        if ( empty($req->chapters_data) ) {
+            $data = Cache::get('marketing');
+            $chapters_price = Cache::get('chapters_price');
+        }
+        Cache::store('file')->put('marketing', $data, 10000);
+        Cache::store('file')->put('chapters_price', $chapters_price, 10000);
+        Cache::store('file')->put('price_arr', $price_arr, 10000);
+        $price_arr = json_encode($price_arr);
+        $chapters = json_decode(Cache::get('marketing'));
+        return view('Visitor.Cart', compact('chapters', 'chapters_price', 'price_arr', 'chapter_discount'));
     }
 
     public function Use_Promocode( Request $req ){
@@ -148,15 +205,70 @@ class CoursesController extends Controller
                     'promo_id' => $promo->id,
                     'promo' => $req->promo_code
                 ]);
-                return redirect()->route('check_out'); 
+                return redirect()->route('promo_check_out_chapter'); 
+                
             }
         } 
+        session()->flash('faild', 'Promo Code Is Uses');
         return redirect()->route('new_payment'); 
     }
 
-    public function check_out(){
-        return 65;
+    public function promo_check_out_chapter( Request $req ){ 
         $chapters = json_decode(Cache::get('marketing'));
+        $price = json_decode(Cache::get('chapters_price'));
+        $payment_methods = PaymentMethod::
+        where('statue', 1)
+        ->get();
+
+        return view('Visitor.Checkout.Checkout', compact('price', 'chapters', 'payment_methods'));
+    }
+
+    public function course_use_promocode( Request $req ){
+        $uses = UsagePromo::where('user_id', auth()->user()->id)
+        ->where('promo', $req->promo_code)
+        ->first(); 
+        
+        if ( empty($uses) ) {
+            $promo = PromoCode::where('starts', '<=', now())
+            ->where('ends', '>=', now())
+            ->where('num_usage', '>', 0)
+            ->where('name', $req->promo_code)
+            ->first();
+            if ( !empty($promo) ) {
+                $price = Cache::get('chapters_price');
+                $price = $price - $price * $promo->discount	/ 100;
+                Cache::store('file')->put('chapters_price', $price, 10000);
+                PromoCode::where('id', $promo->id)
+                ->update([
+                    'num_usage' => $promo->num_usage - 1
+                ]);
+                UsagePromo::create([
+                    'user_id' => auth()->user()->id,
+                    'promo_id' => $promo->id,
+                    'promo' => $req->promo_code
+                ]);
+                return redirect()->route('promo_check_out_course'); 
+                
+            }
+        } 
+        
+        session()->flash('faild', 'Promo Code Is Uses');
+        return redirect()->route('c_new_payment'); 
+    }
+
+    public function promo_check_out_course( Request $req ){
+        $course = Cache::get('marketing');
+        $price = Cache::get('chapters_price');
+        $payment_methods = PaymentMethod::
+        where('statue', 1)
+        ->get();
+
+        return view('Visitor.C_Checkout.Checkout', compact('price', 'course', 'payment_methods'));
+    }
+
+    public function check_out( Request $req ){ 
+        $chapters = json_decode(Cache::get('marketing'));
+        Cache::store('file')->put('chapters_price', $req->chapters_pricing, 10000);
         $price = json_decode(Cache::get('chapters_price'));
         $payment_methods = PaymentMethod::
         where('statue', 1)
@@ -178,20 +290,84 @@ class CoursesController extends Controller
     }
 
     public function new_payment(){
-         
-        if ( empty(auth()->user()) ) {
+        $course_data = Cache::get('marketing');
+        $chapters_price = Cache::get('chapters_price');
+        if ( isset($course_data->id) ) { 
+            
+            $course = Course::where('id', $course_data->id)
+            ->first();
+            $min_price = $course->prices[0]->price;
+            $min_price_data = $course->prices[0];
+            foreach ( $course->prices as $price) {
+                if ( $min_price > $price->price ) {
+                    $min_price = $price->price;
+                    $min_price_data = $price;
+                }
+            }
+            Cache::forget('min_price_data');
+            if ( empty(auth()->user()) && $min_price == $chapters_price ) {
+                return view('Visitor.Login.login');
+            }
+            elseif ( $min_price == $chapters_price ) {
+                Cache::store('file')->put('min_price_data', $min_price_data, 10000);
+                return view('Visitor.Cart.Course_Cart', compact('course', 'min_price', 'min_price_data'));
+            }
+        }
+
+
+        $data = Cache::get('marketing');
+        $chapters_price = Cache::get('chapters_price');
+        $chapter_discount = 0;
+        $price_data = json_decode($data);
+        $price_arr = [];
+        foreach ( $price_data as $item ) {
+            $min = $item->price[0];
+            foreach ($item->price as $element) {
+                if ( $element->price < $min->price ) {
+                    $min = $element;
+                }
+            }
+            $chapter_discount += $min->price - ($min->price * $min->discount / 100);
+            $price_arr[] = $min;
+        }
+        
+        if ( empty($req->chapters_data) ) {
+            $data = Cache::get('marketing');
+            $chapters_price = Cache::get('chapters_price');
+        }
+        Cache::store('file')->put('marketing', $data, 10000);
+        Cache::store('file')->put('chapters_price', $chapters_price, 10000);
+        Cache::store('file')->put('price_arr', $price_arr, 10000);
+        $price_arr = json_encode($price_arr);
+        $chapters = json_decode(Cache::get('marketing'));
+        return view('Visitor.Cart', compact('chapters', 'chapters_price', 'price_arr', 'chapter_discount'));
+    }
+
+    public function c_new_payment(){
+        $course_data = Cache::get('marketing');
+        $chapters_price = Cache::get('chapters_price');
+            
+        $course = Course::where('id', $course_data->id)
+        ->first();
+        $min_price = $course->prices[0]->price;
+        $min_price_data = $course->prices[0];
+        foreach ( $course->prices as $price) {
+            if ( $min_price > $price->price ) {
+                $min_price = $price->price;
+                $min_price_data = $price;
+            }
+        }
+        Cache::forget('min_price_data');
+        if ( empty(auth()->user()) && $min_price == $chapters_price ) {
             return view('Visitor.Login.login');
         }
-        else{
-            $chapters = Cache::get('marketing');
-            $chapters_price = Cache::get('chapters_price');
-            $chapters = empty($chapters) ? [] : $chapters;
-            return view('Visitor.Cart', compact('chapters', 'chapters_price'));
+        elseif ( $min_price == $chapters_price ) {
+            Cache::store('file')->put('min_price_data', $min_price_data, 10000);
+            return view('Visitor.Cart.Course_Cart', compact('course', 'min_price', 'min_price_data'));
         }
     }
 
     public function payment_money( Request $req ){
-        $arr = $req->only('payment_method_id');
         $arr['price'] = Cache::get('chapters_price');
         $arr['user_id'] = auth()->user()->id;
         $img_state = true;
@@ -214,20 +390,56 @@ class CoursesController extends Controller
                 move_uploaded_file($tmp_name[$i], 'images/payment_reset/' . $img_name);
             }
         }
-        if ( $img_state ) { 
+        $chapters = json_decode(Cache::get('marketing'));
+        $price = json_decode(Cache::get('chapters_price'));
+        if ( $req->payment_method_id == 'Wallet' ) {
+            $wallet = Wallet::
+            where('student_id', auth()->user()->id)
+            ->where('state', 'Approve')
+            ->sum('wallet');
+            
+            if ( $wallet < $price ) {
+                session()->flash('faild', 'You Wallet Is not Enough');
+                return redirect()->back();
+            }
+            $arr['state'] = 'Approve'; 
+        }
+        elseif ( $img_state ) { 
             session()->flash('faild', 'You Must Enter Receipt');
             return redirect()->back();
         
         }
+        else{ 
+            $arr['payment_method_id'] = $req->payment_method_id;
+        }
         $p_request = PaymentRequest::create($arr);
-        $chapters = json_decode(Cache::get('marketing'));
-        $price = json_decode(Cache::get('chapters_price'));
-        $p_method = $p_request->method->payment;
+        if ( $req->payment_method_id == 'Wallet' ) {
+            Wallet::create([
+                'student_id' => auth()->user()->id,
+                'wallet' => -$price,
+                'state' => 'Approve',
+                'date' => now(),
+                'payment_request_id' => $p_request->id,
+            ]);
+        }
+        $p_method = isset($p_request->method->payment) ? $p_request->method->payment : 'Wallet';
+        $duration = 0;
+        for ($i=0, $end = count($chapters); $i < $end; $i++) { 
+            foreach ( $chapters[$i]->price as $item ) {
+                if ( $item->price == $chapters[$i]->ch_price ) {
+                    $duration = $item->duration;
+                }
+            }
+            PaymentOrder::create( 
+                ['payment_request_id' => $p_request->id,
+                'chapter_id' => $chapters[$i]->id,
+                'duration' => $duration,]);
+        }
+        
         return view('Visitor.Order.Order', compact('chapters', 'price', 'p_method'));
     }
 
     public function course_payment_money( Request $req ){
-        $arr = $req->only('payment_method_id');
         $arr['price'] = Cache::get('chapters_price');
         $arr['user_id'] = auth()->user()->id;
         $img_state = true;
@@ -250,15 +462,65 @@ class CoursesController extends Controller
                 move_uploaded_file($tmp_name[$i], 'images/payment_reset/' . $img_name);
             }
         }
-        if ( $img_state ) { 
-            session()->flash('faild', 'You Must Enter Receipt');
-            return redirect()->back();
-        
-        }
-        $p_request = PaymentRequest::create($arr);
         $course = (Cache::get('marketing'));
         $price = (Cache::get('chapters_price'));
-        $p_method = $p_request->method->payment;
+        
+        if ( $req->payment_method_id == 'Wallet' ) {
+            $wallet = Wallet::
+            where('student_id', auth()->user()->id)
+            ->where('state', 'Approve')
+            ->sum('wallet'); 
+
+            if ( $wallet < $price ) {
+                session()->flash('faild', 'You Wallet Is not Enough'); 
+                $payment_methods = PaymentMethod::
+                where('statue', 1)
+                ->get();
+        
+                return view('Visitor.C_Checkout.Checkout', compact('price', 'course', 'payment_methods'));
+            }
+            $arr['state'] = 'Approve'; 
+        }
+        elseif ( $img_state ) { 
+            session()->flash('faild', 'You Must Enter Receipt');
+            $payment_methods = PaymentMethod::
+            where('statue', 1)
+            ->get();
+    
+            return view('Visitor.C_Checkout.Checkout', compact('price', 'course', 'payment_methods'));
+        }
+        else{ 
+            $arr['payment_method_id'] = $req->payment_method_id;
+        }
+        $p_request = PaymentRequest::create($arr);
+        $duration = 0;
+        
+        if ( $req->payment_method_id == 'Wallet' ) {
+            Wallet::create([
+                'student_id' => auth()->user()->id,
+                'wallet' => -$price,
+                'state' => 'Approve',
+                'date' => now(),
+                'payment_request_id' => $p_request->id,
+            ]);
+        }
+        foreach ($course->prices as $item) {
+            if ( $item->price == $price ) {
+                $duration = $item->duration;
+            }
+        }
+        $chapters = Chapter::where('course_id', $course->id)
+        ->get();
+
+        foreach ( $chapters as $item ) {
+            PaymentOrder::create([
+                'payment_request_id' => $p_request->id,
+                'chapter_id' => $item->id,
+                'duration' => $duration,
+            ]);
+        }
+        
+        $p_method = isset($p_request->method->payment) ? $p_request->method->payment : 'Wallet';
         return view('Visitor.C_Order.Order', compact('course', 'price', 'p_method'));
     }
 
@@ -276,6 +538,25 @@ class CoursesController extends Controller
         $arr = json_encode($arr);
         Cache::store('file')->put('marketing', $arr, 10000);
         Cache::store('file')->put('chapters_price', $price, 10000);
-        return redirect()->back();
+        $chapters_price = $price;
+        $chapters = json_decode(Cache::get('marketing'));
+        return view('Visitor.Cart', compact('chapters', 'chapters_price'));
+    }
+
+    public function sel_duration_course( Request $req ){
+        $price = 0;
+        $arr = [];
+        foreach ( $req->data as $item ) {
+            $price += floatval($item['price']);
+            $ch_arr = json_decode($item['chapter']);
+            $ch_arr->ch_price = floatval($item['price']);
+            $arr[] = $ch_arr;
+        }
+        $arr = json_encode($arr);
+        Cache::store('file')->put('marketing', $arr, 10000);
+        Cache::store('file')->put('chapters_price', $price, 10000);
+        return response()->json([
+            'req' => $arr
+        ]);
     }
 }

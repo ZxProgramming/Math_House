@@ -42,6 +42,14 @@ class LiveController extends Controller
         'courses', 'chapters', 'lessons', 'teachers'));
     }
 
+    public function live_calender(){
+        $sessions = Session::
+        with('days')
+        ->get();
+
+        return view('Admin.Live.Calender');
+    }
+
     public function session_edit( $id, Request $req ){
         $arr = $req->only('link', 'name', 'date', 'from', 'to', 'lesson_id', 
         'type', 'access_dayes', 'price', 'teacher_id', 'repeat', 'group_id', 'material_link');
@@ -52,7 +60,7 @@ class LiveController extends Controller
             'to' => 'required',
             'lesson_id' => 'required',
             'type' => 'required',
-            'teacher_id' => 'required',
+            'teacher_id' => 'required|numeric',
             'repeat' => 'required',
         ]);
         $sessions = Session::

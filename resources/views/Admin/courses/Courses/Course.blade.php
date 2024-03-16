@@ -5,7 +5,8 @@
     }
 @endphp
 <x-default-layout>
-    @include('Admin.courses.Courses.course_header')
+    <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal"
+    data-bs-target="#kt_modal_create_question">Add Course</a>
     @section('title', 'Course')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -31,53 +32,28 @@
             {{ $message }}
         </div>
     @enderror
+  
+    @include('Admin.courses.Courses.AddCourse')
 
-    <button type="button" class='btn btn-primary mx-3' data-bs-toggle="modal" data-bs-target="#filter_modal">
-        Filter
-    </button>
+    <form action="{{ route('course_filter') }}" method="POST">
+        <div class="py-5 d-flex">
+            @csrf
+            <select name="category_id" class="form-control sel_category mx-2">
+                <option disabled selected>
+                    Select Category ...
+                </option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">
+                        {{ $category->cate_name }}
+                    </option>
+                @endforeach
+            </select>
 
-    <div class="modal fade" id="filter_modal" tabindex="-1" aria-hidden="true">
-        <!--begin::Modal dialog-->
-        <div class="modal-dialog modal-fullscreen p-9">
-            <!--begin::Modal content-->
-            <div class="modal-content modal-rounded">
-                <!--begin::Modal header-->
-                <div class="modal-header py-7 d-flex justify-content-between">
-                    <!--begin::Modal title-->
-                    <h2>Filter Lesson</h2>
-                    <!--end::Modal title-->
-                    <!--begin::Close-->
-                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                        <i class="ki-duotone ki-cross fs-1">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </div>
-                    <!--end::Close-->
-                </div>
-                <!--begin::Modal header-->
-                <form action="{{ route('course_filter') }}" method="POST">
-                    <div class="p-5 d-flex">
-                        @csrf
-                        <select name="category_id" class="form-control sel_category mx-2">
-                            <option disabled selected>
-                                Select Category ...
-                            </option>
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">
-                                    {{ $category->cate_name }}
-                                </option>
-                            @endforeach
-                        </select>
-
-                        <button class="btn btn-primary mx-2">
-                            Submit
-                        </button>
-                    </div>
-                </form>
-            </div>
+            <button class="btn btn-primary mx-2">
+                Submit
+            </button>
         </div>
-    </div>
+    </form>
 
     <table id="kt_profile_overview_table"
         class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable no-footer">
@@ -114,11 +90,11 @@
                     <td>
                         <div class="mt-3">
                             <!-- Button trigger modal -->
-                            <button type="button" id="{{ $item->id }}" class="btn btn-primary btn-edit"
+                            <button type="button" id="{{ $item->id }}" class="btn btn-primary btn-edit  btn-sm"
                                 data-bs-toggle="modal" data-bs-target="#modalCenter{{ $item->id }}">
                                 Edit
                             </button>
-                            <button type="button"id="{{ $item->id }}" class="btn btn-danger"
+                            <button type="button"id="{{ $item->id }}" class="btn btn-danger btn-sm"
                                 data-bs-toggle="modal" data-bs-target="#modalDelete{{ $item->id }}">
                                 Delete
                             </button>
@@ -329,4 +305,42 @@
 
         })
     </script>
+@section('script')
+    <script>
+        <!--begin::Javascript
+        -->
+    <script>
+        var hostUrl = "assets/";
+    </script>
+    <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+    <script src="assets/plugins/global/plugins.bundle.js"></script>
+    <script src="assets/js/scripts.bundle.js"></script>
+    <!--end::Global Javascript Bundle-->
+    <!--begin::Vendors Javascript(used for this page only)-->
+    <script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <!--end::Vendors Javascript-->
+    <!--begin::Custom Javascript(used for this page only)-->
+    <script src="{{ asset('assets/js/widgets.bundle.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/widgets.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/apps/chat/chat.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/utilities/modals/upgrade-plan.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/utilities/modals/create-app.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/utilities/modals/create-campaign.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/utilities/modals/users-search.js') }}"></script>
+    <script src="assets/plugins/global/lessonSc.js"></script>
+    <script src="{{ asset('assets/js/custom/utilities/modals/lessonSc.js') }}"></script>
+
+
+    </script>
+    <!--
+                       The "super-build" of CKEditor&nbsp;5 served via CDN contains a large set of plugins and multiple editor types.
+                       See https://ckeditor.com/docs/ckeditor5/latest/installation/getting-started/quick-start.html#running-a-full-featured-editor-from-cdn
+                   -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/super-build/ckeditor.js"></script>
+    <!--
+                       Uncomment to load the Spanish translation
+                       <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/super-build/translations/es.js"></script>
+                   -->
+   
+@endsection
 </x-default-layout>
