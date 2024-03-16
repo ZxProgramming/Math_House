@@ -42,7 +42,7 @@
       </div>
       <div class="table-responsive px-4">
         <h6 class="pb-2">Payment Method</h6>
-        {{$payment->method->payment}}
+        {{isset($payment->method->payment) ? $payment->method->payment : 'Wallet'}}
          
       </div>
 
