@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2024 at 10:01 AM
+-- Generation Time: Mar 16, 2024 at 12:11 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -1886,6 +1886,7 @@ CREATE TABLE `payment_package_order` (
   `discount` float DEFAULT NULL,
   `state` tinyint(1) NOT NULL DEFAULT 0,
   `date` datetime(1) NOT NULL,
+  `number` int(11) NOT NULL DEFAULT 0,
   `created_at` date DEFAULT NULL,
   `updated_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -1894,14 +1895,20 @@ CREATE TABLE `payment_package_order` (
 -- Dumping data for table `payment_package_order`
 --
 
-INSERT INTO `payment_package_order` (`id`, `payment_request_id`, `package_id`, `discount`, `state`, `date`, `created_at`, `updated_at`) VALUES
-(1, 66, 2, NULL, 1, '2024-02-29 11:26:29.0', '2024-02-29', '2024-02-29'),
-(2, 67, 3, NULL, 1, '2024-02-29 12:14:45.0', '2024-02-29', '2024-02-29'),
-(3, 68, 3, NULL, 1, '2024-02-29 12:21:35.0', '2024-02-29', '2024-02-29'),
-(4, 69, 2, NULL, 1, '2024-02-29 12:29:57.0', '2024-02-29', '2024-02-29'),
-(5, 90, 2, NULL, 0, '2024-03-07 13:16:50.0', '2024-03-07', '2024-03-07'),
-(6, 92, 2, NULL, 0, '2024-03-07 13:25:28.0', '2024-03-07', '2024-03-07'),
-(7, 93, 3, NULL, 0, '2024-03-07 13:26:26.0', '2024-03-07', '2024-03-07');
+INSERT INTO `payment_package_order` (`id`, `payment_request_id`, `package_id`, `discount`, `state`, `date`, `number`, `created_at`, `updated_at`) VALUES
+(1, 66, 2, NULL, 1, '2024-02-29 11:26:29.0', 0, '2024-02-29', '2024-02-29'),
+(2, 67, 3, NULL, 1, '2024-02-29 12:14:45.0', 0, '2024-02-29', '2024-02-29'),
+(3, 68, 3, NULL, 1, '2024-02-29 12:21:35.0', 0, '2024-02-29', '2024-02-29'),
+(4, 69, 2, NULL, 1, '2024-02-29 12:29:57.0', 0, '2024-02-29', '2024-02-29'),
+(5, 90, 2, NULL, 0, '2024-03-07 13:16:50.0', 0, '2024-03-07', '2024-03-07'),
+(6, 92, 2, NULL, 0, '2024-03-07 13:25:28.0', 0, '2024-03-07', '2024-03-07'),
+(7, 93, 3, NULL, 0, '2024-03-07 13:26:26.0', 0, '2024-03-07', '2024-03-07'),
+(8, 94, 3, NULL, 0, '2024-03-14 11:14:38.0', 0, '2024-03-14', '2024-03-14'),
+(9, 95, 3, NULL, 0, '2024-03-14 11:16:27.0', 0, '2024-03-14', '2024-03-14'),
+(10, 96, 3, NULL, 1, '2024-03-14 11:35:21.0', 0, '2024-03-14', '2024-03-14'),
+(11, 97, 3, NULL, 1, '2024-03-15 19:38:51.0', 0, '2024-03-15', '2024-03-15'),
+(12, 98, 2, NULL, 1, '2024-03-15 19:42:07.0', 9, '2024-03-15', '2024-03-15'),
+(13, 99, 3, NULL, 1, '2024-03-16 10:52:22.0', 3, '2024-03-16', '2024-03-16');
 
 -- --------------------------------------------------------
 
@@ -1917,6 +1924,7 @@ CREATE TABLE `payment_requests` (
   `image` varchar(255) DEFAULT NULL,
   `module` enum('Chapters','Package') NOT NULL DEFAULT 'Chapters',
   `state` enum('Pendding','Approve','Rejected') NOT NULL DEFAULT 'Pendding',
+  `rejected_reason` varchar(255) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   `updated_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -1925,100 +1933,106 @@ CREATE TABLE `payment_requests` (
 -- Dumping data for table `payment_requests`
 --
 
-INSERT INTO `payment_requests` (`id`, `payment_method_id`, `user_id`, `price`, `image`, `module`, `state`, `created_at`, `updated_at`) VALUES
-(1, 2, 8, 800, NULL, 'Chapters', 'Approve', NULL, '2024-03-03'),
-(2, 2, 11, 300, NULL, 'Chapters', 'Approve', NULL, '2024-01-28'),
-(3, 4, 8, 100, '2024X01X28X12X04X3729854.jpg', 'Chapters', 'Pendding', '2024-01-28', '2024-01-28'),
-(4, 4, 8, 100, '2024X01X28X12X05X4260874.jpg', 'Chapters', 'Pendding', '2024-01-28', '2024-01-28'),
-(5, 4, 8, 400, '2024X01X29X09X58X1436634.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
-(6, 4, 8, 100, NULL, 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
-(7, 2, 8, 300, NULL, 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
-(8, 2, 8, 300, '2024X01X29X12X52X3733564.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
-(9, 2, 8, 300, '2024X01X29X12X54X484494.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
-(10, 2, 8, 300, '2024X01X29X12X55X4948744.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
-(11, 2, 8, 300, '2024X01X29X12X57X4189054.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
-(12, 2, 8, 300, '2024X01X29X12X58X0850554.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
-(13, 2, 8, 300, '2024X01X29X12X58X1712044.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
-(14, 2, 8, 300, '2024X01X29X12X58X5794914.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
-(15, 2, 8, 300, '2024X01X29X13X00X1860184.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
-(16, 2, 8, 300, '2024X01X29X13X00X5675254.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
-(17, 2, 8, 300, '2024X01X29X13X01X5242194.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
-(18, 2, 8, 300, '2024X01X29X13X02X1810384.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
-(19, 2, 8, 300, '2024X01X29X13X02X5990354.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
-(20, 2, 8, 300, '2024X01X29X13X03X2076884.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
-(21, 2, 8, 300, '2024X01X29X13X08X2777064.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
-(22, 2, 8, 300, '2024X01X29X13X09X1285114.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
-(23, 2, 8, 300, '2024X01X29X13X10X1715834.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
-(24, 2, 8, 300, '2024X01X29X13X10X4853924.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
-(25, 2, 8, 300, '2024X01X29X13X11X1448174.png', 'Chapters', 'Pendding', '2024-01-29', '2024-01-29'),
-(26, 4, 8, 300, '2024X01X30X07X26X4649074.png', 'Chapters', 'Rejected', '2024-01-30', '2024-02-05'),
-(27, 5, 8, 350, NULL, 'Chapters', 'Pendding', '2024-02-12', '2024-02-12'),
-(28, 7, 8, 100, '2024X02X12X12X51X237693202301101726mvf_dark_logo.png', 'Chapters', 'Pendding', '2024-02-12', '2024-02-12'),
-(29, 5, 8, 100, '2024X02X12X13X15X199673202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', '2024-02-12', '2024-02-12'),
-(30, 7, 8, 550, '2024X02X13X12X59X048766202301101726mvf_dark_logo.png', 'Chapters', 'Rejected', '2024-02-13', '2024-02-13'),
-(31, 7, 8, 60, '2024X02X22X12X38X4710000202301111020C5631746XA3DDX43F6XA634X158716ABFA8B.jpeg', 'Package', 'Pendding', '2024-02-22', '2024-02-22'),
-(32, 7, 8, 60, '2024X02X22X12X39X331211202304300850download.png', 'Package', 'Pendding', '2024-02-22', '2024-02-22'),
-(33, 2, 8, 60, '2024X02X22X12X41X22581202301101725mvf_dark_logo.png', 'Package', 'Pendding', '2024-02-22', '2024-02-22'),
-(34, 7, 8, 400, '2024X02X22X13X19X297222202301111020C5631746XA3DDX43F6XA634X158716ABFA8B.jpeg', 'Chapters', 'Pendding', '2024-02-22', '2024-02-22'),
-(35, 4, 8, 500, '2024X02X24X09X51X30568202301101726mvf_dark_logo.png', 'Chapters', 'Pendding', '2024-02-24', '2024-02-24'),
-(36, 7, 8, 500, '2024X02X24X09X54X31504202301111011mvf_light_logo.png', 'Chapters', 'Pendding', '2024-02-24', '2024-02-24'),
-(37, 7, 8, 500, '2024X02X24X09X55X469681202301111011mvf_light_logo.png', 'Chapters', 'Pendding', '2024-02-24', '2024-02-24'),
-(38, 7, 8, 500, '2024X02X24X09X58X087623202301111011mvf_light_logo.png', 'Chapters', 'Pendding', '2024-02-24', '2024-02-24'),
-(39, 7, 8, 500, '2024X02X24X09X58X296531202301111011mvf_light_logo.png', 'Chapters', 'Pendding', '2024-02-24', '2024-02-24'),
-(40, 2, 8, 500, '2024X02X24X11X28X297125202301111011mvf_light_logo.png', 'Chapters', 'Pendding', '2024-02-24', '2024-02-24'),
-(41, 2, 8, 60, '2024X02X25X14X04X0175577922024X02X19X07X46X04202301101725mvf_dark_logo.png', 'Package', 'Approve', '2024-02-25', '2024-02-27'),
-(42, 7, 8, 60, '2024X02X27X08X35X2155602024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Package', 'Approve', '2024-02-27', '2024-02-27'),
-(43, 2, 8, 68, '2024X02X28X08X39X35772024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', '2024-02-28', '2024-02-28'),
-(44, 7, 8, 68, '2024X02X28X09X00X5528542024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', '2024-02-28', '2024-02-28'),
-(45, 7, 8, 400, '2024X02X28X09X11X1750042024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', '2024-02-28', '2024-02-28'),
-(46, 7, 8, 400, '2024X02X28X09X12X1653722024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', '2024-02-28', '2024-02-28'),
-(47, 7, 8, 400, '2024X02X28X09X14X1064582024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', '2024-02-28', '2024-02-28'),
-(48, 7, 8, 400, '2024X02X28X09X14X179652024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', '2024-02-28', '2024-02-28'),
-(49, 7, 8, 400, '2024X02X28X09X14X3066252024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', '2024-02-28', '2024-02-28'),
-(50, 7, 8, 500, '2024X02X28X09X28X3088652024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', '2024-02-28', '2024-02-28'),
-(51, 7, 8, 500, '2024X02X28X09X31X3315882024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', '2024-02-28', '2024-02-28'),
-(52, 7, 8, 500, '2024X02X28X09X32X4651172024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', '2024-02-28', '2024-02-28'),
-(53, 7, 8, 500, '2024X02X28X09X40X2712732024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', '2024-02-28', '2024-02-28'),
-(54, 7, 8, 500, '2024X02X28X09X44X0899562024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', '2024-02-28', '2024-02-28'),
-(55, 7, 8, 500, '2024X02X28X09X44X5762522024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', '2024-02-28', '2024-02-28'),
-(56, 7, 8, 500, '2024X02X28X09X45X1078692024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', '2024-02-28', '2024-02-28'),
-(57, 7, 8, 500, '2024X02X28X09X47X2725422024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', '2024-02-28', '2024-02-28'),
-(58, 7, 8, 500, '2024X02X28X09X49X5766112024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', '2024-02-28', '2024-02-28'),
-(59, 7, 8, 400, '2024X02X28X09X50X3424812024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', '2024-02-28', '2024-02-28'),
-(60, 7, 8, 400, '2024X02X28X09X50X5243942024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', '2024-02-28', '2024-02-28'),
-(61, 7, 8, 400, '2024X02X28X09X51X0395002024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', '2024-02-28', '2024-02-28'),
-(62, 7, 8, 400, '2024X02X28X09X51X3374182024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', '2024-02-28', '2024-02-28'),
-(63, 7, 8, 60, '2024X02X29X10X02X0355692024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Package', 'Pendding', '2024-02-29', '2024-02-29'),
-(64, 7, 8, 60, '2024X02X29X10X03X1477212024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Package', 'Approve', '2024-02-29', '2024-02-29'),
-(65, 7, 8, 60, '2024X02X29X10X03X5515912024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Package', 'Approve', '2024-02-29', '2024-02-29'),
-(66, 7, 8, 60, '2024X02X29X10X04X386382024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Package', 'Approve', '2024-02-29', '2024-02-29'),
-(67, 7, 8, 111, '2024X02X29X12X13X2837192024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Package', 'Approve', '2024-02-29', '2024-02-29'),
-(68, 7, 8, 111, '2024X02X29X12X19X0299222024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Package', 'Approve', '2024-02-29', '2024-02-29'),
-(69, 7, 8, 60, '2024X02X29X12X29X2282812024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Package', 'Approve', '2024-02-29', '2024-02-29'),
-(70, NULL, 8, 57, NULL, 'Chapters', 'Pendding', '2024-03-07', '2024-03-07'),
-(71, NULL, 8, 57, NULL, 'Chapters', 'Pendding', '2024-03-07', '2024-03-07'),
-(72, NULL, 8, 57, NULL, 'Chapters', 'Pendding', '2024-03-07', '2024-03-07'),
-(73, NULL, 8, 400, NULL, 'Chapters', 'Pendding', '2024-03-07', '2024-03-07'),
-(74, NULL, 8, 400, NULL, 'Chapters', 'Pendding', '2024-03-07', '2024-03-07'),
-(75, NULL, 8, 400, NULL, 'Chapters', 'Pendding', '2024-03-07', '2024-03-07'),
-(76, NULL, 8, 400, NULL, 'Chapters', 'Pendding', '2024-03-07', '2024-03-07'),
-(77, NULL, 8, 400, NULL, 'Chapters', 'Pendding', '2024-03-07', '2024-03-07'),
-(78, NULL, 8, 400, NULL, 'Chapters', 'Pendding', '2024-03-07', '2024-03-07'),
-(79, NULL, 8, 400, NULL, 'Chapters', 'Pendding', '2024-03-07', '2024-03-07'),
-(80, NULL, 8, 400, NULL, 'Chapters', 'Pendding', '2024-03-07', '2024-03-07'),
-(81, NULL, 8, 400, NULL, 'Chapters', 'Pendding', '2024-03-07', '2024-03-07'),
-(82, NULL, 8, 400, NULL, 'Chapters', 'Pendding', '2024-03-07', '2024-03-07'),
-(83, NULL, 8, 400, NULL, 'Chapters', 'Pendding', '2024-03-07', '2024-03-07'),
-(84, NULL, 8, 400, NULL, 'Chapters', 'Pendding', '2024-03-07', '2024-03-07'),
-(85, NULL, 8, 68, NULL, 'Chapters', 'Pendding', '2024-03-07', '2024-03-07'),
-(86, NULL, 8, 68, NULL, 'Chapters', 'Pendding', '2024-03-07', '2024-03-07'),
-(87, NULL, 8, 68, NULL, 'Chapters', 'Pendding', '2024-03-07', '2024-03-07'),
-(88, NULL, 8, 68, NULL, 'Chapters', 'Approve', '2024-03-07', '2024-03-07'),
-(89, NULL, 8, 60, NULL, 'Package', 'Approve', '2024-03-07', '2024-03-07'),
-(90, NULL, 8, 60, NULL, 'Package', 'Approve', '2024-03-07', '2024-03-07'),
-(91, NULL, 8, 60, NULL, 'Package', 'Approve', '2024-03-07', '2024-03-07'),
-(92, NULL, 8, 60, NULL, 'Package', 'Approve', '2024-03-07', '2024-03-07'),
-(93, NULL, 8, 111, NULL, 'Package', 'Approve', '2024-03-07', '2024-03-07');
+INSERT INTO `payment_requests` (`id`, `payment_method_id`, `user_id`, `price`, `image`, `module`, `state`, `rejected_reason`, `created_at`, `updated_at`) VALUES
+(1, 2, 8, 800, NULL, 'Chapters', 'Approve', NULL, NULL, '2024-03-03'),
+(2, 2, 11, 300, NULL, 'Chapters', 'Approve', NULL, NULL, '2024-01-28'),
+(3, 4, 8, 100, '2024X01X28X12X04X3729854.jpg', 'Chapters', 'Pendding', NULL, '2024-01-28', '2024-01-28'),
+(4, 4, 8, 100, '2024X01X28X12X05X4260874.jpg', 'Chapters', 'Pendding', NULL, '2024-01-28', '2024-01-28'),
+(5, 4, 8, 400, '2024X01X29X09X58X1436634.png', 'Chapters', 'Pendding', NULL, '2024-01-29', '2024-01-29'),
+(6, 4, 8, 100, NULL, 'Chapters', 'Pendding', NULL, '2024-01-29', '2024-01-29'),
+(7, 2, 8, 300, NULL, 'Chapters', 'Pendding', NULL, '2024-01-29', '2024-01-29'),
+(8, 2, 8, 300, '2024X01X29X12X52X3733564.png', 'Chapters', 'Pendding', NULL, '2024-01-29', '2024-01-29'),
+(9, 2, 8, 300, '2024X01X29X12X54X484494.png', 'Chapters', 'Pendding', NULL, '2024-01-29', '2024-01-29'),
+(10, 2, 8, 300, '2024X01X29X12X55X4948744.png', 'Chapters', 'Pendding', NULL, '2024-01-29', '2024-01-29'),
+(11, 2, 8, 300, '2024X01X29X12X57X4189054.png', 'Chapters', 'Pendding', NULL, '2024-01-29', '2024-01-29'),
+(12, 2, 8, 300, '2024X01X29X12X58X0850554.png', 'Chapters', 'Pendding', NULL, '2024-01-29', '2024-01-29'),
+(13, 2, 8, 300, '2024X01X29X12X58X1712044.png', 'Chapters', 'Pendding', NULL, '2024-01-29', '2024-01-29'),
+(14, 2, 8, 300, '2024X01X29X12X58X5794914.png', 'Chapters', 'Pendding', NULL, '2024-01-29', '2024-01-29'),
+(15, 2, 8, 300, '2024X01X29X13X00X1860184.png', 'Chapters', 'Pendding', NULL, '2024-01-29', '2024-01-29'),
+(16, 2, 8, 300, '2024X01X29X13X00X5675254.png', 'Chapters', 'Pendding', NULL, '2024-01-29', '2024-01-29'),
+(17, 2, 8, 300, '2024X01X29X13X01X5242194.png', 'Chapters', 'Pendding', NULL, '2024-01-29', '2024-01-29'),
+(18, 2, 8, 300, '2024X01X29X13X02X1810384.png', 'Chapters', 'Pendding', NULL, '2024-01-29', '2024-01-29'),
+(19, 2, 8, 300, '2024X01X29X13X02X5990354.png', 'Chapters', 'Pendding', NULL, '2024-01-29', '2024-01-29'),
+(20, 2, 8, 300, '2024X01X29X13X03X2076884.png', 'Chapters', 'Pendding', NULL, '2024-01-29', '2024-01-29'),
+(21, 2, 8, 300, '2024X01X29X13X08X2777064.png', 'Chapters', 'Pendding', NULL, '2024-01-29', '2024-01-29'),
+(22, 2, 8, 300, '2024X01X29X13X09X1285114.png', 'Chapters', 'Pendding', NULL, '2024-01-29', '2024-01-29'),
+(23, 2, 8, 300, '2024X01X29X13X10X1715834.png', 'Chapters', 'Pendding', NULL, '2024-01-29', '2024-01-29'),
+(24, 2, 8, 300, '2024X01X29X13X10X4853924.png', 'Chapters', 'Pendding', NULL, '2024-01-29', '2024-01-29'),
+(25, 2, 8, 300, '2024X01X29X13X11X1448174.png', 'Chapters', 'Pendding', NULL, '2024-01-29', '2024-01-29'),
+(26, 4, 8, 300, '2024X01X30X07X26X4649074.png', 'Chapters', 'Rejected', NULL, '2024-01-30', '2024-02-05'),
+(27, 5, 8, 350, NULL, 'Chapters', 'Pendding', NULL, '2024-02-12', '2024-02-12'),
+(28, 7, 8, 100, '2024X02X12X12X51X237693202301101726mvf_dark_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-12', '2024-02-12'),
+(29, 5, 8, 100, '2024X02X12X13X15X199673202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-12', '2024-02-12'),
+(30, 7, 8, 550, '2024X02X13X12X59X048766202301101726mvf_dark_logo.png', 'Chapters', 'Rejected', NULL, '2024-02-13', '2024-02-13'),
+(31, 7, 8, 60, '2024X02X22X12X38X4710000202301111020C5631746XA3DDX43F6XA634X158716ABFA8B.jpeg', 'Package', 'Pendding', NULL, '2024-02-22', '2024-02-22'),
+(32, 7, 8, 60, '2024X02X22X12X39X331211202304300850download.png', 'Package', 'Pendding', NULL, '2024-02-22', '2024-02-22'),
+(33, 2, 8, 60, '2024X02X22X12X41X22581202301101725mvf_dark_logo.png', 'Package', 'Pendding', NULL, '2024-02-22', '2024-02-22'),
+(34, 7, 8, 400, '2024X02X22X13X19X297222202301111020C5631746XA3DDX43F6XA634X158716ABFA8B.jpeg', 'Chapters', 'Pendding', NULL, '2024-02-22', '2024-02-22'),
+(35, 4, 8, 500, '2024X02X24X09X51X30568202301101726mvf_dark_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-24', '2024-02-24'),
+(36, 7, 8, 500, '2024X02X24X09X54X31504202301111011mvf_light_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-24', '2024-02-24'),
+(37, 7, 8, 500, '2024X02X24X09X55X469681202301111011mvf_light_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-24', '2024-02-24'),
+(38, 7, 8, 500, '2024X02X24X09X58X087623202301111011mvf_light_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-24', '2024-02-24'),
+(39, 7, 8, 500, '2024X02X24X09X58X296531202301111011mvf_light_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-24', '2024-02-24'),
+(40, 2, 8, 500, '2024X02X24X11X28X297125202301111011mvf_light_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-24', '2024-02-24'),
+(41, 2, 8, 60, '2024X02X25X14X04X0175577922024X02X19X07X46X04202301101725mvf_dark_logo.png', 'Package', 'Approve', NULL, '2024-02-25', '2024-02-27'),
+(42, 7, 8, 60, '2024X02X27X08X35X2155602024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Package', 'Approve', NULL, '2024-02-27', '2024-02-27'),
+(43, 2, 8, 68, '2024X02X28X08X39X35772024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-28', '2024-02-28'),
+(44, 7, 8, 68, '2024X02X28X09X00X5528542024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-28', '2024-02-28'),
+(45, 7, 8, 400, '2024X02X28X09X11X1750042024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-28', '2024-02-28'),
+(46, 7, 8, 400, '2024X02X28X09X12X1653722024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-28', '2024-02-28'),
+(47, 7, 8, 400, '2024X02X28X09X14X1064582024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-28', '2024-02-28'),
+(48, 7, 8, 400, '2024X02X28X09X14X179652024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-28', '2024-02-28'),
+(49, 7, 8, 400, '2024X02X28X09X14X3066252024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-28', '2024-02-28'),
+(50, 7, 8, 500, '2024X02X28X09X28X3088652024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-28', '2024-02-28'),
+(51, 7, 8, 500, '2024X02X28X09X31X3315882024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-28', '2024-02-28'),
+(52, 7, 8, 500, '2024X02X28X09X32X4651172024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-28', '2024-02-28'),
+(53, 7, 8, 500, '2024X02X28X09X40X2712732024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-28', '2024-02-28'),
+(54, 7, 8, 500, '2024X02X28X09X44X0899562024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-28', '2024-02-28'),
+(55, 7, 8, 500, '2024X02X28X09X44X5762522024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-28', '2024-02-28'),
+(56, 7, 8, 500, '2024X02X28X09X45X1078692024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-28', '2024-02-28'),
+(57, 7, 8, 500, '2024X02X28X09X47X2725422024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-28', '2024-02-28'),
+(58, 7, 8, 500, '2024X02X28X09X49X5766112024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-28', '2024-02-28'),
+(59, 7, 8, 400, '2024X02X28X09X50X3424812024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-28', '2024-02-28'),
+(60, 7, 8, 400, '2024X02X28X09X50X5243942024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-28', '2024-02-28'),
+(61, 7, 8, 400, '2024X02X28X09X51X0395002024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-28', '2024-02-28'),
+(62, 7, 8, 400, '2024X02X28X09X51X3374182024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Chapters', 'Pendding', NULL, '2024-02-28', '2024-02-28'),
+(63, 7, 8, 60, '2024X02X29X10X02X0355692024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Package', 'Rejected', 'sdfsdfsd', '2024-02-29', '2024-03-13'),
+(64, 7, 8, 60, '2024X02X29X10X03X1477212024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Package', 'Approve', NULL, '2024-02-29', '2024-02-29'),
+(65, 7, 8, 60, '2024X02X29X10X03X5515912024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Package', 'Approve', NULL, '2024-02-29', '2024-02-29'),
+(66, 7, 8, 60, '2024X02X29X10X04X386382024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Package', 'Approve', NULL, '2024-02-29', '2024-02-29'),
+(67, 7, 8, 111, '2024X02X29X12X13X2837192024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Package', 'Approve', NULL, '2024-02-29', '2024-02-29'),
+(68, 7, 8, 111, '2024X02X29X12X19X0299222024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Package', 'Approve', NULL, '2024-02-29', '2024-02-29'),
+(69, 7, 8, 60, '2024X02X29X12X29X2282812024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Package', 'Approve', NULL, '2024-02-29', '2024-02-29'),
+(70, NULL, 8, 57, NULL, 'Chapters', 'Pendding', NULL, '2024-03-07', '2024-03-07'),
+(71, NULL, 8, 57, NULL, 'Chapters', 'Pendding', NULL, '2024-03-07', '2024-03-07'),
+(72, NULL, 8, 57, NULL, 'Chapters', 'Pendding', NULL, '2024-03-07', '2024-03-07'),
+(73, NULL, 8, 400, NULL, 'Chapters', 'Pendding', NULL, '2024-03-07', '2024-03-07'),
+(74, NULL, 8, 400, NULL, 'Chapters', 'Pendding', NULL, '2024-03-07', '2024-03-07'),
+(75, NULL, 8, 400, NULL, 'Chapters', 'Pendding', NULL, '2024-03-07', '2024-03-07'),
+(76, NULL, 8, 400, NULL, 'Chapters', 'Pendding', NULL, '2024-03-07', '2024-03-07'),
+(77, NULL, 8, 400, NULL, 'Chapters', 'Pendding', NULL, '2024-03-07', '2024-03-07'),
+(78, NULL, 8, 400, NULL, 'Chapters', 'Pendding', NULL, '2024-03-07', '2024-03-07'),
+(79, NULL, 8, 400, NULL, 'Chapters', 'Pendding', NULL, '2024-03-07', '2024-03-07'),
+(80, NULL, 8, 400, NULL, 'Chapters', 'Pendding', NULL, '2024-03-07', '2024-03-07'),
+(81, NULL, 8, 400, NULL, 'Chapters', 'Pendding', NULL, '2024-03-07', '2024-03-07'),
+(82, NULL, 8, 400, NULL, 'Chapters', 'Pendding', NULL, '2024-03-07', '2024-03-07'),
+(83, NULL, 8, 400, NULL, 'Chapters', 'Pendding', NULL, '2024-03-07', '2024-03-07'),
+(84, NULL, 8, 400, NULL, 'Chapters', 'Pendding', NULL, '2024-03-07', '2024-03-07'),
+(85, NULL, 8, 68, NULL, 'Chapters', 'Pendding', NULL, '2024-03-07', '2024-03-07'),
+(86, NULL, 8, 68, NULL, 'Chapters', 'Pendding', NULL, '2024-03-07', '2024-03-07'),
+(87, NULL, 8, 68, NULL, 'Chapters', 'Pendding', NULL, '2024-03-07', '2024-03-07'),
+(88, NULL, 8, 68, NULL, 'Chapters', 'Approve', NULL, '2024-03-07', '2024-03-07'),
+(89, NULL, 8, 60, NULL, 'Package', 'Approve', NULL, '2024-03-07', '2024-03-07'),
+(90, NULL, 8, 60, NULL, 'Package', 'Approve', NULL, '2024-03-07', '2024-03-07'),
+(91, NULL, 8, 60, NULL, 'Package', 'Approve', NULL, '2024-03-07', '2024-03-07'),
+(92, NULL, 8, 60, NULL, 'Package', 'Approve', NULL, '2024-03-07', '2024-03-07'),
+(93, NULL, 8, 111, NULL, 'Package', 'Approve', NULL, '2024-03-07', '2024-03-07'),
+(94, NULL, 8, 111, NULL, 'Package', 'Approve', NULL, '2024-03-14', '2024-03-14'),
+(95, NULL, 8, 111, NULL, 'Package', 'Approve', NULL, '2024-03-14', '2024-03-14'),
+(96, NULL, 8, 111, NULL, 'Package', 'Approve', NULL, '2024-03-14', '2024-03-14'),
+(97, NULL, 8, 111, NULL, 'Package', 'Approve', NULL, '2024-03-15', '2024-03-15'),
+(98, NULL, 8, 60, NULL, 'Package', 'Approve', NULL, '2024-03-15', '2024-03-15'),
+(99, NULL, 8, 111, NULL, 'Package', 'Approve', NULL, '2024-03-16', '2024-03-16');
 
 -- --------------------------------------------------------
 
@@ -2394,7 +2408,22 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (309, 'App\\Models\\User', 8, 'user', 'e80a3b194faf6b89578ce61c568ac2a3d111e69c53367de1634a7cf389616ef9', '[\"*\"]', NULL, NULL, '2024-03-11 10:03:25', '2024-03-11 10:03:25'),
 (310, 'App\\Models\\User', 8, 'user', '2d6601bfa1b0c0e082f63d1dbb2ab660bbcffca9135c052bbd68c2983bc0f8b8', '[\"*\"]', NULL, NULL, '2024-03-11 10:04:06', '2024-03-11 10:04:06'),
 (311, 'App\\Models\\User', 8, 'user', 'c6c57887c26a9b0ddf365b0ea4501db9243e43620f5083b7e5e97887f0f939dd', '[\"*\"]', NULL, NULL, '2024-03-11 10:15:11', '2024-03-11 10:15:11'),
-(312, 'App\\Models\\User', 8, 'user', 'd09bb09529bb16f23fa8755ff15d02f0da90f18162602fcb9a2aea881f408d11', '[\"*\"]', NULL, NULL, '2024-03-12 05:05:18', '2024-03-12 05:05:18');
+(312, 'App\\Models\\User', 8, 'user', 'd09bb09529bb16f23fa8755ff15d02f0da90f18162602fcb9a2aea881f408d11', '[\"*\"]', NULL, NULL, '2024-03-12 05:05:18', '2024-03-12 05:05:18'),
+(313, 'App\\Models\\User', 8, 'user', 'ed33b7d49921f75fa282aab54395f4effb7b90d97f2401eaeeacedbd1568a710', '[\"*\"]', NULL, NULL, '2024-03-12 09:00:07', '2024-03-12 09:00:07'),
+(314, 'App\\Models\\User', 8, 'user', '6bea93b632c6798d78cf3664253a1a39a1c9cafe38f9b8f8a991c8ff697a6ef1', '[\"*\"]', NULL, NULL, '2024-03-12 10:27:01', '2024-03-12 10:27:01'),
+(315, 'App\\Models\\User', 8, 'user', '1a5d64ef229648c64397013e3e641bdc11ad1282f00627f789f29f2506b58d6a', '[\"*\"]', NULL, NULL, '2024-03-12 10:27:14', '2024-03-12 10:27:14'),
+(316, 'App\\Models\\User', 8, 'user', '0a38e1717d49abe4e71c245b4e0e673c9115ba419f015e1ab08dbe9b19427c28', '[\"*\"]', NULL, NULL, '2024-03-12 10:27:49', '2024-03-12 10:27:49'),
+(317, 'App\\Models\\User', 8, 'user', '92d57b91803f8882d2ab3cc872a68927e5937cbf3abe7f977b63f408587f8e0a', '[\"*\"]', NULL, NULL, '2024-03-12 10:28:06', '2024-03-12 10:28:06'),
+(318, 'App\\Models\\User', 8, 'user', '03d66c34456878008b733d546b720961f9909b5c4b86ac52b2382fd3f18b1961', '[\"*\"]', NULL, NULL, '2024-03-13 06:59:45', '2024-03-13 06:59:45'),
+(319, 'App\\Models\\User', 8, 'user', '2f9111a3a259bf59473a390b775c63bfb0874ab02873b4c717f5d81b11a17139', '[\"*\"]', NULL, NULL, '2024-03-13 10:17:31', '2024-03-13 10:17:31'),
+(320, 'App\\Models\\User', 8, 'user', '003b979796094211b9bf3647e665fd7c31487e5a4736681f22b85f4717af502d', '[\"*\"]', NULL, NULL, '2024-03-13 10:23:56', '2024-03-13 10:23:56'),
+(321, 'App\\Models\\User', 8, 'user', '62a5bc75cb303ddbbe66a170540917dc49bbb0062aa883dbb6c43e773ba564a0', '[\"*\"]', NULL, NULL, '2024-03-13 10:24:24', '2024-03-13 10:24:24'),
+(322, 'App\\Models\\User', 8, 'user', '2f6aeeda1aa8038a09510109647600dc5a730e28b520f237438c4bbd7c5895a4', '[\"*\"]', NULL, NULL, '2024-03-14 09:08:03', '2024-03-14 09:08:03'),
+(323, 'App\\Models\\User', 8, 'user', '189d7090e209189d1cd4b63e358ebcc627fbdde5944fabf38e378e541342bc0d', '[\"*\"]', NULL, NULL, '2024-03-15 17:01:28', '2024-03-15 17:01:28'),
+(324, 'App\\Models\\User', 8, 'user', 'd62e776ba361f7f421c825bd87fa92696ed6febf60e8566635951e3bf9f506ec', '[\"*\"]', NULL, NULL, '2024-03-15 18:41:46', '2024-03-15 18:41:46'),
+(325, 'App\\Models\\User', 8, 'user', 'ced39071d94a5d90515570eb5c75a92a82676c215713cecfc23660a1c0ab6fee', '[\"*\"]', NULL, NULL, '2024-03-15 18:46:53', '2024-03-15 18:46:53'),
+(326, 'App\\Models\\User', 8, 'user', '3655ebe3d9a4f3fb5ec493363fdc93f9872386e1a5ab27f7d18e4a1ea7cb3551', '[\"*\"]', NULL, NULL, '2024-03-15 18:49:58', '2024-03-15 18:49:58'),
+(327, 'App\\Models\\User', 8, 'user', '378fd9102c2dea7a119cf284746d7c8f366c2b2e6b428a60abe3cb11825483b4', '[\"*\"]', NULL, NULL, '2024-03-16 05:14:52', '2024-03-16 05:14:52');
 
 -- --------------------------------------------------------
 
@@ -2518,6 +2547,30 @@ INSERT INTO `questions` (`id`, `lesson_id`, `question`, `state`, `q_url`, `q_cod
 (19, 4, 'Question 2', '2', '2.png', 'sad', 'Trail', 3, '4', 2022, '1', 'A', 'MCQ', '2024-01-29', NULL),
 (20, 4, 'question 2', '0', NULL, '1234', 'Parallel', 3, '2', 2022, '2', 'A', 'Grid_in', '2024-01-29', '2024-01-29'),
 (21, 4, 'question 2', '0', NULL, '1234', 'Parallel', 3, '2', 2022, '2', 'A', 'Grid_in', '2024-01-29', '2024-01-29');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `question_history`
+--
+
+CREATE TABLE `question_history` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `question_id` bigint(20) UNSIGNED NOT NULL,
+  `answer` tinyint(1) NOT NULL,
+  `time` time DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `question_history`
+--
+
+INSERT INTO `question_history` (`id`, `user_id`, `question_id`, `answer`, `time`, `created_at`, `updated_at`) VALUES
+(1, 8, 1, 0, NULL, '2024-03-14 11:50:41', '2024-03-14 11:50:41'),
+(2, 8, 1, 0, NULL, '2024-03-14 12:00:38', '2024-03-14 12:00:38');
 
 -- --------------------------------------------------------
 
@@ -2949,7 +3002,7 @@ CREATE TABLE `student_quizzes` (
 --
 
 INSERT INTO `student_quizzes` (`id`, `date`, `student_id`, `lesson_id`, `quizze_id`, `score`, `time`, `r_questions`, `created_at`, `updated_at`) VALUES
-(1, '2024-02-15', 8, 4, 12, 50, '$req->time', 50, '2024-02-15', '2024-02-15'),
+(1, '2024-02-15', 8, 4, 12, 50, '$req->time', 3, '2024-02-15', '2024-02-15'),
 (2, '2024-03-02', 8, 4, 12, 0, '0', 0, '2024-03-02', '2024-03-02');
 
 -- --------------------------------------------------------
@@ -3083,10 +3136,8 @@ CREATE TABLE `users` (
   `f_name` varchar(255) DEFAULT NULL,
   `l_name` varchar(255) DEFAULT NULL,
   `name` varchar(191) NOT NULL,
+  `nick_name` varchar(255) DEFAULT NULL,
   `email` varchar(191) NOT NULL,
-  `exam_number` int(11) NOT NULL DEFAULT 0,
-  `q_number` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `live_number` int(11) NOT NULL DEFAULT 0,
   `profile_photo_path` varchar(2048) DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `phone` varchar(191) NOT NULL,
@@ -3113,21 +3164,21 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `f_name`, `l_name`, `name`, `email`, `exam_number`, `q_number`, `live_number`, `profile_photo_path`, `email_verified_at`, `phone`, `parent_phone`, `parent_email`, `image`, `city_id`, `position`, `grade`, `course_id`, `category_id`, `password`, `state`, `avatar`, `remember_token`, `extra_email`, `created_at`, `updated_at`, `last_login_at`, `last_login_ip`) VALUES
-(1, NULL, NULL, 'Ahmed', 'Ahmed@gmail.com', 0, 0, 0, NULL, NULL, '0113443534', '012345346', 'Ali@gmail.com', '1972024X01X27X10X03X326.jpg', NULL, 'teacher', NULL, 2, 1, '$2y$10$O4pDFFvEQGAkfZ.mcGIhaOb0MQCocleYwEySm4OYgq9./pKT021de', 'Show', NULL, NULL, NULL, NULL, '2024-01-27 08:03:32', NULL, NULL),
-(5, NULL, NULL, 'Teacher 1', 'admin3@gmail.com', 0, 0, 0, NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X42X459672202304300850download.png', NULL, 'super_admin', NULL, NULL, NULL, '$2y$10$abRantqLN7R8dKUzWPGSLebir7D.GcznzfflGYjquM59GZo9f5y3a', 'Show', NULL, NULL, NULL, '2023-12-18 09:42:45', '2023-12-18 09:42:45', NULL, NULL),
-(7, NULL, NULL, 'Teacher 1', 'admin4@gmail.com', 0, 0, 0, NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X43X297615202304300850download.png', NULL, 'super_admin', NULL, NULL, NULL, '$2y$10$CWyZzMn0kdjZKf1f5z0ey.xXzyHVVwkvCFGwakJchI9dwNSyOEyQa', 'Show', NULL, NULL, NULL, '2023-12-18 09:43:29', '2023-12-18 09:43:29', NULL, NULL),
-(8, NULL, NULL, 'Teacher 1', 'admin@gmail.com', 0, 7, 0, NULL, NULL, '0109947345', NULL, NULL, '7452024X02X19X09X11X19202301101725mvf_dark_logo.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$Oj4cP4avEst9pP/kadNnWuJxlqGzp098jei5PZNL3bVebYVZtjpEO', 'Show', NULL, NULL, NULL, '2023-12-18 09:44:14', '2024-03-09 10:12:48', NULL, NULL),
-(10, NULL, NULL, 'Teacher', 'teacher@gmail.com', 0, 0, 0, NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X50X119775202304090932egyptXflagXwaveXiconX32.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$EFSKaqvOqy3o.ihNqVWi7uCPCrFtflwUJGqEBFP1woOuxlRaIqN5u', 'Show', NULL, NULL, NULL, '2023-12-18 09:50:11', '2024-01-27 08:02:15', NULL, NULL),
-(11, NULL, NULL, 'Teacher12', 'teacher2@gmail.com', 0, 0, 0, NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X52X277966202304090932egyptXflagXwaveXiconX32.png', NULL, 'teacher', NULL, 1, 1, '$2y$10$Y4fg1B5EpujC8OVSCO6fNOyxdAj2lPJDZWibbtD8j55Jik6fU4Uq6', 'Show', NULL, NULL, NULL, '2023-12-18 09:52:27', '2024-02-05 10:45:46', NULL, NULL),
-(44, NULL, NULL, 'admin@gmail.com', 'sad@gmail.com', 0, 0, 0, NULL, NULL, '123', '123', NULL, 'default.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$RkeDuqhtAqMTRC7gfMFxG.Vl8pLtWGgj1jisi0ZkphX9LDVUQaZpO', 'Show', NULL, NULL, NULL, '2023-12-31 06:31:28', '2024-02-05 10:15:37', NULL, NULL),
-(46, NULL, NULL, 'asd12', 'asd12@gmail.com', 0, 0, 0, NULL, NULL, '123', '123', NULL, 'default.png', NULL, 'student', '1', NULL, NULL, '$2y$10$o4wXrnMK7wU81NWLWO7WxOGObzZJqjweO7VW.dwgaig1EU84HXLgm', 'hidden', NULL, NULL, NULL, '2023-12-31 06:33:52', '2024-02-28 10:53:54', NULL, NULL),
-(57, NULL, NULL, 'ahmed1', 'ahmedyahia@yahoo.com', 0, 0, 0, NULL, NULL, '123456789', NULL, NULL, 'default.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$4CuUgVeM.E8K16Tbs5ZdJ.5SvzhdLRr08.J4gkehsTsGNl7g43eVu', 'hidden', NULL, NULL, NULL, '2024-01-01 09:54:47', '2024-01-28 05:55:03', NULL, NULL),
-(59, 'as', 'as', 'as', 'admin2312@gmail.com', 0, 0, 0, NULL, NULL, '213', NULL, NULL, 'default.png', NULL, 'student', '1', NULL, NULL, '$2y$10$UT7CEpaDZ6etgdvQDjN5huCPzvCM/xdiLbT02hZIZh.doXV6/SLRS', 'hidden', NULL, NULL, NULL, '2024-01-03 07:52:53', '2024-01-03 07:52:53', NULL, NULL),
-(65, NULL, NULL, 'wdwe', 'admin1234@gmail.com', 0, 0, 0, NULL, NULL, 'ewfwef', NULL, NULL, 'default.png', NULL, 'teacher', NULL, 12, 9, '$2y$10$oK/jrMZawz/dg0fgQBAp2OHA8WpEfHIdGbSJnXZgl4QRbZq5zdVT2', 'hidden', NULL, NULL, NULL, '2024-02-27 10:45:08', '2024-02-27 10:45:08', NULL, NULL),
-(66, NULL, NULL, 'xcas', 'admin332@gmail.com', 0, 0, 0, NULL, NULL, '32423243', '011324567611', 'yasen@gmail.com', 'default.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$BzpILuoESKJAgcYPg2muY.NLOL0DUrqPpAo7dUBz7c5mZBTJCzCwq', 'hidden', NULL, NULL, NULL, '2024-02-27 10:57:38', '2024-02-27 10:57:38', NULL, NULL),
-(67, NULL, NULL, 'adminstration', 'adminstration@gmail.com', 0, 0, 0, NULL, NULL, '01099475854', NULL, NULL, 'default.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$iuvcvulm3GeVclL9sZOFP.FaE6J7WeKbBvSyzhZpf9VkoI.sj9bCK', 'hidden', NULL, NULL, NULL, '2024-03-02 09:21:42', '2024-03-02 09:21:42', NULL, NULL),
-(68, 'Ahmed', 'Yahia', 'Ahmed_Yahia', 'student@gmail.com', 0, 0, 0, NULL, NULL, '0123456789', '0123456789', NULL, 'default.png', NULL, 'student', NULL, NULL, NULL, '$2y$10$o694AWL8QgiCJQCwxbKTh.ny2Uf1bORwKgy5BHbPL8q396p2lU/xK', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `users` (`id`, `f_name`, `l_name`, `name`, `nick_name`, `email`, `profile_photo_path`, `email_verified_at`, `phone`, `parent_phone`, `parent_email`, `image`, `city_id`, `position`, `grade`, `course_id`, `category_id`, `password`, `state`, `avatar`, `remember_token`, `extra_email`, `created_at`, `updated_at`, `last_login_at`, `last_login_ip`) VALUES
+(1, NULL, NULL, 'Ahmed', NULL, 'Ahmed@gmail.com', NULL, NULL, '0113443534', '012345346', 'Ali@gmail.com', '1972024X01X27X10X03X326.jpg', NULL, 'teacher', NULL, 2, 1, '$2y$10$O4pDFFvEQGAkfZ.mcGIhaOb0MQCocleYwEySm4OYgq9./pKT021de', 'Show', NULL, NULL, NULL, NULL, '2024-01-27 08:03:32', NULL, NULL),
+(5, NULL, NULL, 'Teacher 1', NULL, 'admin3@gmail.com', NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X42X459672202304300850download.png', NULL, 'super_admin', NULL, NULL, NULL, '$2y$10$abRantqLN7R8dKUzWPGSLebir7D.GcznzfflGYjquM59GZo9f5y3a', 'Show', NULL, NULL, NULL, '2023-12-18 09:42:45', '2023-12-18 09:42:45', NULL, NULL),
+(7, NULL, NULL, 'Teacher 1', NULL, 'admin4@gmail.com', NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X43X297615202304300850download.png', NULL, 'super_admin', NULL, NULL, NULL, '$2y$10$CWyZzMn0kdjZKf1f5z0ey.xXzyHVVwkvCFGwakJchI9dwNSyOEyQa', 'Show', NULL, NULL, NULL, '2023-12-18 09:43:29', '2023-12-18 09:43:29', NULL, NULL),
+(8, NULL, NULL, 'Teacher 1', 'ad', 'admin@gmail.com', NULL, NULL, '0109947345', NULL, NULL, '7452024X02X19X09X11X19202301101725mvf_dark_logo.png', NULL, 'student', NULL, NULL, NULL, '$2y$10$lmzviWeGoBUllS8MgFA0ZuEh/oCkstCoKhVKldEgJKAAoE45WMzgq', 'Show', NULL, NULL, NULL, '2023-12-18 09:44:14', '2024-03-14 09:35:31', NULL, NULL),
+(10, NULL, NULL, 'Teacher', NULL, 'teacher@gmail.com', NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X50X119775202304090932egyptXflagXwaveXiconX32.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$EFSKaqvOqy3o.ihNqVWi7uCPCrFtflwUJGqEBFP1woOuxlRaIqN5u', 'Show', NULL, NULL, NULL, '2023-12-18 09:50:11', '2024-01-27 08:02:15', NULL, NULL),
+(11, NULL, NULL, 'Teacher12', NULL, 'teacher2@gmail.com', NULL, NULL, '01099475854', NULL, NULL, '2023X12X18X11X52X277966202304090932egyptXflagXwaveXiconX32.png', NULL, 'teacher', NULL, 1, 1, '$2y$10$Y4fg1B5EpujC8OVSCO6fNOyxdAj2lPJDZWibbtD8j55Jik6fU4Uq6', 'Show', NULL, NULL, NULL, '2023-12-18 09:52:27', '2024-02-05 10:45:46', NULL, NULL),
+(44, NULL, NULL, 'admin@gmail.com', NULL, 'sad@gmail.com', NULL, NULL, '123', '123', NULL, 'default.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$RkeDuqhtAqMTRC7gfMFxG.Vl8pLtWGgj1jisi0ZkphX9LDVUQaZpO', 'Show', NULL, NULL, NULL, '2023-12-31 06:31:28', '2024-02-05 10:15:37', NULL, NULL),
+(46, NULL, NULL, 'asd12', NULL, 'asd12@gmail.com', NULL, NULL, '123', '123', NULL, 'default.png', NULL, 'student', '1', NULL, NULL, '$2y$10$o4wXrnMK7wU81NWLWO7WxOGObzZJqjweO7VW.dwgaig1EU84HXLgm', 'hidden', NULL, NULL, NULL, '2023-12-31 06:33:52', '2024-02-28 10:53:54', NULL, NULL),
+(57, NULL, NULL, 'ahmed1', NULL, 'ahmedyahia@yahoo.com', NULL, NULL, '123456789', NULL, NULL, 'default.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$4CuUgVeM.E8K16Tbs5ZdJ.5SvzhdLRr08.J4gkehsTsGNl7g43eVu', 'hidden', NULL, NULL, NULL, '2024-01-01 09:54:47', '2024-01-28 05:55:03', NULL, NULL),
+(59, 'as', 'as', 'as', NULL, 'admin2312@gmail.com', NULL, NULL, '213', NULL, NULL, 'default.png', NULL, 'student', '1', NULL, NULL, '$2y$10$UT7CEpaDZ6etgdvQDjN5huCPzvCM/xdiLbT02hZIZh.doXV6/SLRS', 'hidden', NULL, NULL, NULL, '2024-01-03 07:52:53', '2024-01-03 07:52:53', NULL, NULL),
+(65, NULL, NULL, 'wdwe', NULL, 'admin1234@gmail.com', NULL, NULL, 'ewfwef', NULL, NULL, 'default.png', NULL, 'teacher', NULL, 12, 9, '$2y$10$oK/jrMZawz/dg0fgQBAp2OHA8WpEfHIdGbSJnXZgl4QRbZq5zdVT2', 'hidden', NULL, NULL, NULL, '2024-02-27 10:45:08', '2024-02-27 10:45:08', NULL, NULL),
+(66, NULL, NULL, 'xcas', NULL, 'admin332@gmail.com', NULL, NULL, '32423243', '011324567611', 'yasen@gmail.com', 'default.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$BzpILuoESKJAgcYPg2muY.NLOL0DUrqPpAo7dUBz7c5mZBTJCzCwq', 'hidden', NULL, NULL, NULL, '2024-02-27 10:57:38', '2024-02-27 10:57:38', NULL, NULL),
+(67, NULL, NULL, 'adminstration', NULL, 'adminstration@gmail.com', NULL, NULL, '01099475854', NULL, NULL, 'default.png', NULL, 'admin', NULL, NULL, NULL, '$2y$10$iuvcvulm3GeVclL9sZOFP.FaE6J7WeKbBvSyzhZpf9VkoI.sj9bCK', 'hidden', NULL, NULL, NULL, '2024-03-02 09:21:42', '2024-03-02 09:21:42', NULL, NULL),
+(68, 'Ahmed', 'Yahia', 'Ahmed_Yahia', NULL, 'student@gmail.com', NULL, NULL, '0123456789', '0123456789', NULL, 'default.png', NULL, 'student', NULL, NULL, NULL, '$2y$10$o694AWL8QgiCJQCwxbKTh.ny2Uf1bORwKgy5BHbPL8q396p2lU/xK', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -3178,6 +3229,7 @@ CREATE TABLE `wallets` (
   `image` varchar(255) DEFAULT NULL,
   `state` enum('Pendding','Approve','Rejected') NOT NULL DEFAULT 'Pendding',
   `payment_request_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `payment_method_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   `updated_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -3186,47 +3238,56 @@ CREATE TABLE `wallets` (
 -- Dumping data for table `wallets`
 --
 
-INSERT INTO `wallets` (`id`, `student_id`, `wallet`, `date`, `image`, `state`, `payment_request_id`, `created_at`, `updated_at`) VALUES
-(1, 8, 1000, '2024-01-28', NULL, 'Approve', NULL, '2024-01-28', '2024-01-28'),
-(2, 8, 4, '2024-01-28', NULL, 'Approve', NULL, '2024-01-28', '2024-01-28'),
-(3, 8, 7, '2024-01-28', NULL, 'Pendding', NULL, '2024-01-28', '2024-01-28'),
-(4, 8, 4, '2024-01-28', NULL, 'Pendding', NULL, '2024-01-28', '2024-01-28'),
-(5, 8, 2, '2024-01-28', NULL, 'Pendding', NULL, '2024-01-28', '2024-01-28'),
-(6, 59, 2, '2024-01-28', NULL, 'Pendding', NULL, '2024-01-28', '2024-01-28'),
-(7, 8, 11, '2024-03-07', NULL, 'Pendding', NULL, '2024-03-07', '2024-03-07'),
-(8, 8, 11, '2024-03-07', NULL, 'Pendding', NULL, '2024-03-07', '2024-03-07'),
-(9, 8, 5, '2024-03-07', '4242024X03X07X09X29X372024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Pendding', NULL, '2024-03-07', '2024-03-07'),
-(10, 8, -57, '2024-03-07', NULL, 'Pendding', NULL, '2024-03-07', '2024-03-07'),
-(11, 8, -57, '2024-03-07', NULL, 'Pendding', NULL, '2024-03-07', '2024-03-07'),
-(12, 8, -57, '2024-03-07', NULL, 'Pendding', NULL, '2024-03-07', '2024-03-07'),
-(13, 8, -57, '2024-03-07', NULL, 'Pendding', NULL, '2024-03-07', '2024-03-07'),
-(14, 8, -57, '2024-03-07', NULL, 'Pendding', NULL, '2024-03-07', '2024-03-07'),
-(15, 8, -57, '2024-03-07', NULL, 'Pendding', NULL, '2024-03-07', '2024-03-07'),
-(16, 8, -57, '2024-03-07', NULL, 'Pendding', NULL, '2024-03-07', '2024-03-07'),
-(17, 8, -57, '2024-03-07', NULL, 'Pendding', NULL, '2024-03-07', '2024-03-07'),
-(18, 8, -57, '2024-03-07', NULL, 'Pendding', NULL, '2024-03-07', '2024-03-07'),
-(19, 8, -57, '2024-03-07', NULL, 'Pendding', NULL, '2024-03-07', '2024-03-07'),
-(20, 8, -400, '2024-03-07', NULL, 'Pendding', NULL, '2024-03-07', '2024-03-07'),
-(21, 46, 3, '2024-03-07', NULL, 'Pendding', NULL, '2024-03-07', '2024-03-07'),
-(22, 46, 3, '2024-03-07', NULL, '', NULL, '2024-03-07', '2024-03-07'),
-(23, 8, 400, '2024-03-07', NULL, 'Pendding', 74, '2024-03-07', '2024-03-07'),
-(24, 8, 400, '2024-03-07', NULL, 'Approve', 75, '2024-03-07', '2024-03-07'),
-(25, 8, 400, '2024-03-07', NULL, 'Approve', 76, '2024-03-07', '2024-03-07'),
-(26, 8, 400, '2024-03-07', NULL, 'Approve', 77, '2024-03-07', '2024-03-07'),
-(27, 8, 400, '2024-03-07', NULL, 'Approve', 78, '2024-03-07', '2024-03-07'),
-(28, 8, -400, '2024-03-07', NULL, 'Approve', 79, '2024-03-07', '2024-03-07'),
-(29, 8, -400, '2024-03-07', NULL, 'Approve', 80, '2024-03-07', '2024-03-07'),
-(30, 8, -400, '2024-03-07', NULL, 'Approve', 81, '2024-03-07', '2024-03-07'),
-(31, 8, 400, '2024-03-07', NULL, 'Approve', 82, '2024-03-07', '2024-03-07'),
-(32, 8, 400, '2024-03-07', NULL, 'Approve', 83, '2024-03-07', '2024-03-07'),
-(33, 8, 400, '2024-03-07', NULL, 'Approve', 84, '2024-03-07', '2024-03-07'),
-(34, 8, -68, '2024-03-07', NULL, 'Approve', 85, '2024-03-07', '2024-03-07'),
-(35, 8, -68, '2024-03-07', NULL, 'Approve', 86, '2024-03-07', '2024-03-07'),
-(36, 8, -68, '2024-03-07', NULL, 'Approve', 87, '2024-03-07', '2024-03-07'),
-(37, 8, -68, '2024-03-07', NULL, 'Approve', 88, '2024-03-07', '2024-03-07'),
-(38, 8, -60, '2024-03-07', NULL, 'Approve', 90, '2024-03-07', '2024-03-07'),
-(39, 8, -60, '2024-03-07', NULL, 'Approve', 92, '2024-03-07', '2024-03-07'),
-(40, 8, -111, '2024-03-07', NULL, 'Approve', 93, '2024-03-07', '2024-03-07');
+INSERT INTO `wallets` (`id`, `student_id`, `wallet`, `date`, `image`, `state`, `payment_request_id`, `payment_method_id`, `created_at`, `updated_at`) VALUES
+(1, 8, 1000, '2024-01-28', NULL, 'Approve', NULL, NULL, '2024-01-28', '2024-01-28'),
+(2, 8, 4, '2024-01-28', NULL, 'Approve', NULL, NULL, '2024-01-28', '2024-01-28'),
+(3, 8, 7, '2024-01-28', NULL, 'Pendding', NULL, NULL, '2024-01-28', '2024-01-28'),
+(4, 8, 4, '2024-01-28', NULL, 'Pendding', NULL, NULL, '2024-01-28', '2024-01-28'),
+(5, 8, 2, '2024-01-28', NULL, 'Pendding', NULL, NULL, '2024-01-28', '2024-01-28'),
+(6, 59, 2, '2024-01-28', NULL, 'Pendding', NULL, NULL, '2024-01-28', '2024-01-28'),
+(7, 8, 11, '2024-03-07', NULL, 'Pendding', NULL, NULL, '2024-03-07', '2024-03-07'),
+(8, 8, 11, '2024-03-07', NULL, 'Pendding', NULL, NULL, '2024-03-07', '2024-03-07'),
+(9, 8, 5, '2024-03-07', '4242024X03X07X09X29X372024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Pendding', NULL, NULL, '2024-03-07', '2024-03-07'),
+(10, 8, -57, '2024-03-07', NULL, 'Pendding', NULL, NULL, '2024-03-07', '2024-03-07'),
+(11, 8, -57, '2024-03-07', NULL, 'Pendding', NULL, NULL, '2024-03-07', '2024-03-07'),
+(12, 8, -57, '2024-03-07', NULL, 'Pendding', NULL, NULL, '2024-03-07', '2024-03-07'),
+(13, 8, -57, '2024-03-07', NULL, 'Pendding', NULL, NULL, '2024-03-07', '2024-03-07'),
+(14, 8, -57, '2024-03-07', NULL, 'Pendding', NULL, NULL, '2024-03-07', '2024-03-07'),
+(15, 8, -57, '2024-03-07', NULL, 'Pendding', NULL, NULL, '2024-03-07', '2024-03-07'),
+(16, 8, -57, '2024-03-07', NULL, 'Pendding', NULL, NULL, '2024-03-07', '2024-03-07'),
+(17, 8, -57, '2024-03-07', NULL, 'Pendding', NULL, NULL, '2024-03-07', '2024-03-07'),
+(18, 8, -57, '2024-03-07', NULL, 'Pendding', NULL, NULL, '2024-03-07', '2024-03-07'),
+(19, 8, -57, '2024-03-07', NULL, 'Pendding', NULL, NULL, '2024-03-07', '2024-03-07'),
+(20, 8, -400, '2024-03-07', NULL, 'Pendding', NULL, NULL, '2024-03-07', '2024-03-07'),
+(21, 46, 3, '2024-03-07', NULL, 'Pendding', NULL, NULL, '2024-03-07', '2024-03-07'),
+(22, 46, 3, '2024-03-07', NULL, '', NULL, NULL, '2024-03-07', '2024-03-07'),
+(23, 8, 400, '2024-03-07', NULL, 'Pendding', 74, NULL, '2024-03-07', '2024-03-07'),
+(24, 8, 400, '2024-03-07', NULL, 'Approve', 75, NULL, '2024-03-07', '2024-03-07'),
+(25, 8, 400, '2024-03-07', NULL, 'Approve', 76, NULL, '2024-03-07', '2024-03-07'),
+(26, 8, 400, '2024-03-07', NULL, 'Approve', 77, NULL, '2024-03-07', '2024-03-07'),
+(27, 8, 400, '2024-03-07', NULL, 'Approve', 78, NULL, '2024-03-07', '2024-03-07'),
+(28, 8, -400, '2024-03-07', NULL, 'Approve', 79, NULL, '2024-03-07', '2024-03-07'),
+(29, 8, -400, '2024-03-07', NULL, 'Approve', 80, NULL, '2024-03-07', '2024-03-07'),
+(30, 8, -400, '2024-03-07', NULL, 'Approve', 81, NULL, '2024-03-07', '2024-03-07'),
+(31, 8, 400, '2024-03-07', NULL, 'Approve', 82, NULL, '2024-03-07', '2024-03-07'),
+(32, 8, 400, '2024-03-07', NULL, 'Approve', 83, NULL, '2024-03-07', '2024-03-07'),
+(33, 8, 400, '2024-03-07', NULL, 'Approve', 84, NULL, '2024-03-07', '2024-03-07'),
+(34, 8, -68, '2024-03-07', NULL, 'Approve', 85, NULL, '2024-03-07', '2024-03-07'),
+(35, 8, -68, '2024-03-07', NULL, 'Approve', 86, NULL, '2024-03-07', '2024-03-07'),
+(36, 8, -68, '2024-03-07', NULL, 'Approve', 87, NULL, '2024-03-07', '2024-03-07'),
+(37, 8, -68, '2024-03-07', NULL, 'Approve', 88, NULL, '2024-03-07', '2024-03-07'),
+(38, 8, -60, '2024-03-07', NULL, 'Approve', 90, NULL, '2024-03-07', '2024-03-07'),
+(39, 8, -60, '2024-03-07', NULL, 'Approve', 92, NULL, '2024-03-07', '2024-03-07'),
+(40, 8, -111, '2024-03-07', NULL, 'Approve', 93, NULL, '2024-03-07', '2024-03-07'),
+(41, 8, 18, '2024-03-13', NULL, 'Pendding', NULL, NULL, '2024-03-13', '2024-03-13'),
+(42, 8, -111, '2024-03-14', NULL, 'Approve', 94, NULL, '2024-03-14', '2024-03-14'),
+(43, 8, -111, '2024-03-14', NULL, 'Approve', 95, NULL, '2024-03-14', '2024-03-14'),
+(44, 8, -111, '2024-03-14', NULL, 'Approve', 96, NULL, '2024-03-14', '2024-03-14'),
+(45, 8, -111, '2024-03-15', NULL, 'Approve', 97, NULL, '2024-03-15', '2024-03-15'),
+(46, 8, -60, '2024-03-15', NULL, 'Approve', 98, NULL, '2024-03-15', '2024-03-15'),
+(47, 8, 3, '2024-03-16', '5662024X03X16X07X52X342024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Pendding', NULL, 7, '2024-03-16', '2024-03-16'),
+(48, 8, 1, '2024-03-16', '3882024X03X16X08X07X112024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'Pendding', NULL, 7, '2024-03-16', '2024-03-16'),
+(49, 8, -111, '2024-03-16', NULL, 'Approve', 99, NULL, '2024-03-16', '2024-03-16');
 
 --
 -- Indexes for dumped tables
@@ -3590,6 +3651,12 @@ ALTER TABLE `questions`
   ADD KEY `FK_Q_Lesson` (`lesson_id`);
 
 --
+-- Indexes for table `question_history`
+--
+ALTER TABLE `question_history`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `question_times`
 --
 ALTER TABLE `question_times`
@@ -3739,7 +3806,8 @@ ALTER TABLE `user_sessions`
 --
 ALTER TABLE `wallets`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_Wallet_Student` (`student_id`);
+  ADD KEY `FK_Wallet_Student` (`student_id`),
+  ADD KEY `FK_Wallet_Method` (`payment_method_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -3965,13 +4033,13 @@ ALTER TABLE `payment_orders`
 -- AUTO_INCREMENT for table `payment_package_order`
 --
 ALTER TABLE `payment_package_order`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `payment_requests`
 --
 ALTER TABLE `payment_requests`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT for table `payouts`
@@ -3989,7 +4057,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=313;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=328;
 
 --
 -- AUTO_INCREMENT for table `private_request`
@@ -4020,6 +4088,12 @@ ALTER TABLE `promo_users`
 --
 ALTER TABLE `questions`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `question_history`
+--
+ALTER TABLE `question_history`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `question_times`
@@ -4139,7 +4213,7 @@ ALTER TABLE `user_sessions`
 -- AUTO_INCREMENT for table `wallets`
 --
 ALTER TABLE `wallets`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- Constraints for dumped tables
@@ -4467,6 +4541,7 @@ ALTER TABLE `user_packages`
 -- Constraints for table `wallets`
 --
 ALTER TABLE `wallets`
+  ADD CONSTRAINT `FK_Wallet_Method` FOREIGN KEY (`payment_method_id`) REFERENCES `payment_method` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_Wallet_Student` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 

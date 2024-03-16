@@ -652,7 +652,7 @@
 		var iTEM  = $(".ch_price_discount");
 
 		$(iTEM).each((ele,val)=>{
-			var price = parseInt($(val).val());
+			var price = parseFloat($(val).val());
 			console.log(ele);
 			console.log($(val).val());
 			console.log("disc_price",$(".disc_price").text());

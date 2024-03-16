@@ -67,14 +67,6 @@
                 $ch_arr[$item->lessons->chapter->chapter_name] = $item->lessons->chapter->chapter_name;
             @endphp
             @endforeach
-
-            <form action="{{route('dia_buy_chapters')}}" method="POST">
-                @csrf
-                <input type="hidden" name="ids" value="{{json_encode($arr_id)}}" />
-                <button class="btn btn-primary mb-5">
-                    Buy All
-                </button>
-            </form>
         </div>
     </div>
 </div>
