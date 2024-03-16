@@ -16,6 +16,9 @@ use App\Models\StudentQuizzeMistake;
 use App\Models\Question;
 use App\Models\Mcq_ans;
 use App\Models\Chapter;
+use App\Models\PaymentPackageOrder;
+use App\Models\User;
+use App\Models\Package;
 
 use Carbon\Carbon;
 
@@ -98,6 +101,52 @@ class Stu_MyCourseController extends Controller
         $chapter_id = $id;  
         return view('Student.MyCourses.Lessons', compact('payment_request', 'chapter_id', 'L_id', 'idea_num'));
 
+    }
+
+    public function quizze_ques_ans( $id ){
+        
+
+        if ( empty(auth()->user()) ) {
+            if ( !session()->has('previous_page') ) {
+                session(['previous_page' => url()->current()]);
+            }
+            return redirect()->route('login.index');
+        }
+        else{  
+            $payments = PaymentPackageOrder::
+            where('state', 1)
+            ->with('pay_req')
+            ->with('package')
+            ->get();
+            $user = User::where('id', auth()->user()->id)
+            ->first();
+
+            foreach ( $payments as $item ) { 
+                $newTime = Carbon::now()->subDays($item->package->number);
+                $question = Question::where('id', $id)
+                ->first();
+
+                if ( $item->package->module == 'Question' && 
+                $item->pay_req->user_id == auth()->user()->id &&
+                $item->date > $newTime &&
+                $item->number > 0
+                 ) 
+                 {  
+
+                    PaymentPackageOrder::where('id', $item->id)
+                    ->update([
+                        'number' => $item->number - 1
+                    ]);
+                    return view('Student.Question_History.Question_Ans', compact('question')); 
+                }
+            } 
+            $package = Package::
+            where('module', 'Question')
+            ->get();
+            return view('Student.Exam.Exam_Package', compact('package'));
+             
+            
+        }
     }
 
     public function stu_quizze($quizze_id)

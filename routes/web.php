@@ -378,11 +378,12 @@ Route::middleware(['auth','auth.student'])->prefix('student')->group(function(){
         Route::get('/Courses','courses')->name('stu_courses');
         Route::get('/Chapters/{id}','stu_chapters')->name('stu_chapters');
         Route::get('/Lesson/{id}/{L_id}/{idea}','stu_lessons')->name('stu_lessons');
-        Route::get('/Quizze/{id}','stu_quizze')->name('stu_quizze');
         Route::post('/Quizze/Answer','quizze_ans')->name('quizze_ans');
         Route::get('/Quizze/Parallel/{id}','question_parallel')->name('question_parallel');
         Route::post('/Quizze/Solve_Parallel/{id}','solve_parallel')->name('solve_parallel');
+        Route::get('/Quizze/{id}','stu_quizze')->name('stu_quizze');
         Route::get('/HistoryQuizze','quizze_history')->name('quizze_history');
+        Route::get('/Quizze/Question/{id}','quizze_ques_ans')->name('quizze_ques_ans');
         Route::get('/Buy_Chapter/{id}','buy_chapter')->name('buy_chapter');
         Route::post('/Buy_Chapters','dia_buy_chapters')->name('dia_buy_chapters');
     });

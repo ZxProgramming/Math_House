@@ -71,26 +71,32 @@
                             <img style="width: 200px; height: 200px;"
                                 src="{{ asset('images/questions/' . $item->q_url) }}" />
                             @endif
-                            <button class="btn btn-primary ans_item_btn my-2">View Answer</button>
-                            <div class="ans_item d-none">
-                                <b> Answer :
-                                @if ( $item->ans_type == 'MCQ' )
-                                    {{$item->mcq[0]->mcq_answers}}
-                                @else 
-                                {{$item->g_ans[0]->grid_ans}}
-                                @endif
-                                </b>
-                                <br />
-                                @foreach ( $item->q_ans as $q_ans )
-                                @if ( !empty($q_ans->ans_video) )
-                                <iframe width="560" height="315" src="{{$q_ans->ans_video}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                            
-                                @endif
-                                @endforeach
-                              </div>
-                            @foreach ( $item->q_ans as $q_ans)
-                            <a href="{{asset('files/q_pdf/' . $q_ans->ans_pdf)}}" class="btn btn-success my-2" download>Download Pdf {{$loop->iteration}}</a>
-                            @endforeach
+                            <button type="button" class="my-2 btn ans_item_btn btn-primary wallet_btn" data-bs-toggle="modal" data-bs-target="#modalCentermodalCenter{{$item->id}}">
+                                View Answer
+                            </button>
+                            <div class="modal q_ans_item show_wallet d-none" id="modalCenter{{$item->id}}" tabindex="-1" style="display: block;" aria-modal="true" role="dialog">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="modalCenterTitle">Quizze</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col mb-3">
+                                            Are You Sure You Want to View Answer For this Question ?
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-label-secondary close_qiuzze_btn" data-bs-dismiss="modal">
+                                        Close
+                                    </button>
+                                    <a href="{{route('quizze_ques_ans', ['id' => $item->id])}}" class="btn btn-primary">OK</a>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
             
                             <a href="{{route('question_parallel', ['id' => $item->id])}}" class="btn btn-info my-2" >Solve Parallel</a>
             
@@ -109,13 +115,23 @@
     let mistakes_questions = document.querySelectorAll('.mistakes_questions');
     let mistake_btn = document.querySelectorAll('.mistake_btn');
     let ans_item_btn = document.querySelectorAll('.ans_item_btn');
-    let ans_item = document.querySelectorAll('.ans_item');
+    let q_ans_item = document.querySelectorAll('.q_ans_item');
+    let close_qiuzze_btn = document.querySelectorAll('.close_qiuzze_btn');
     
     for (let i = 0, end = ans_item_btn.length; i < end; i++) {
         ans_item_btn[i].addEventListener('click', ( e ) => {
             for (let j = 0; j < end; j++) {
                 if ( e.target == ans_item_btn[j] ) {
-                    ans_item[j].classList.toggle('d-none');
+                    q_ans_item[j].classList.toggle('d-none');
+                }
+            }
+        })
+    }
+    for (let i = 0, end = close_qiuzze_btn.length; i < end; i++) {
+        close_qiuzze_btn[i].addEventListener('click', ( e ) => {
+            for (let j = 0; j < end; j++) {
+                if ( e.target == close_qiuzze_btn[j] ) {
+                    q_ans_item[j].classList.toggle('d-none');
                 }
             }
         })

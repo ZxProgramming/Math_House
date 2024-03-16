@@ -14,6 +14,7 @@ class Wallet extends Model
         'wallet', 
         'date',
         'image',
+        'payment_method_id',
         'state',
         'payment_request_id',
     ];
