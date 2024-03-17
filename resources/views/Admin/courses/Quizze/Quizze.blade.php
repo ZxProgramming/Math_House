@@ -1591,7 +1591,7 @@
                 success: function(data) {
                     console.log(data);
                     console.log(allDataEdite);
-                    location.reload()
+                    location.reload();
                 }});
             })
 
