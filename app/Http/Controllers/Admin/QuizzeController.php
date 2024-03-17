@@ -65,30 +65,32 @@ class QuizzeController extends Controller
         return redirect()->back();
     }
 
-    public function edit_quizze( $id, Request $req ){
-        $arr = $req->only('title', 'description', 'time', 'score', 'pass_score', 'lesson_id', 'quizze_order');
-        $arr['state'] = $req->state == 1 ? 1 : 0;
-        $quizze = quizze::where('id', $id)
-        ->update($arr);
+    public function edit_quizze( Request $req ){
+        $quizze_data = $req->data[0][0];
+        $state = $quizze_data['state'] == 1 ? 1 : 0;
+        $quizze = quizze::where('id', $quizze_data['quizzeID'])
+        ->update([
+            'title' => $quizze_data['title'] ,
+            'description' => $quizze_data['description'] ,
+            'time' => $quizze_data['time'] ,
+            'score' => $quizze_data['score'] ,
+            'pass_score' => $quizze_data['pass_score'] ,
+            'quizze_order' => $quizze_data['quizze_order'] ,
+            'state' => $state ,
+        ]); 
+
+        QQuize::
+        where('quizze_id', $quizze_data['quizzeID'])
+        ->delete();
         
-        if ( is_array($req->questions_id) ) {
-            for ( $i=0, $end = count($req->questions_id); $i < $end; $i++ ) { 
-                QQuize::
-                where('quizze_id', $id)
-                ->where('question_id', $req->questions_id[$i])
-                ->delete();
-            }
+        for ( $i= 1, $end = count($req->data); $i < $end; $i++ ) { 
+            QQuize::create([
+                'quizze_id' => $quizze_data['quizzeID'],
+                'question_id' => $req->data[$i]['question_ID'],
+            ]);
         }
-        if ( is_array($req->ques_id) ) {
-            for ( $i=0, $end = count($req->ques_id); $i < $end; $i++ ) { 
-                QQuize::create([
-                    'quizze_id' => $id,
-                    'question_id' => $req->ques_id[$i],
-                ]);
-            }
-    
-        }
-        return redirect()->back();
+        
+        return $quizze_data;
     }
 
     public function del_quizze($id){
