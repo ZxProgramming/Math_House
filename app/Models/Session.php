@@ -49,6 +49,12 @@ class Session extends Model
     {
         return $this->belongsToMany(User::class, 'session_students');
     }
+ 
+    public function user_attend()
+    {
+        return $this->belongsToMany(User::class, 'session_attendance')
+        ->where('user_id', auth()->user()->id);
+    }
 
     public function days(){
         return $this->hasMany(SessionDay::class, 'session_id');

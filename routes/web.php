@@ -30,6 +30,7 @@ use App\Http\Controllers\Student\Stu_PaymentController;
 use App\Http\Controllers\Student\Stu_WalletController;
 use App\Http\Controllers\Student\Stu_MyPackagesController;
 use App\Http\Controllers\Student\Stu_QuestionController;
+use App\Http\Controllers\Student\Stu_LiveController;
 
 use App\Http\Controllers\Visitor\HomeController;
 use App\Http\Controllers\Visitor\ContactController;
@@ -337,6 +338,11 @@ Route::middleware(['auth','auth.student'])->prefix('student')->group(function(){
     Route::controller(Stu_DashboardController::class)->group(function(){
         Route::get('Student','index')->name('stu_dashboard');
     });
+
+    Route::controller(Stu_LiveController::class)->group(function(){
+        Route::get('MySessions', 'stu_mysessions')->name('stu_mysessions');
+        Route::get('UseLive/{id}', 'use_live')->name('use_live');
+    }); 
 
     Route::controller(Stu_PackageController::class)->group(function(){
         Route::get('Package/Checkout/{id}', 'package_checkout')->name('package_checkout');
