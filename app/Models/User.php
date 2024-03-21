@@ -11,6 +11,7 @@ use Spatie\Permission\Traits\HasRoles;
 use App\Models\Course;
 use App\Models\Category;
 use App\Models\Package;
+use App\Models\Session;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -79,6 +80,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function package()
     {
         return $this->belongsToMany(Package::class, 'user_packages');
+    }
+    
+    public function session_attendance()
+    {
+        return $this->belongsToMany(Session::class, 'session_attendance');
     }
 
     public function addresses()

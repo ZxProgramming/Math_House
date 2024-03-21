@@ -52,7 +52,7 @@ class LiveController extends Controller
 
     public function session_edit( $id, Request $req ){
         $arr = $req->only('link', 'name', 'date', 'from', 'to', 'lesson_id', 
-        'type', 'access_dayes', 'price', 'teacher_id', 'repeat', 'group_id', 'material_link');
+        'type', 'access_dayes', 'price', 'teacher_id', 'repeat', 'group_id', 'material_link', 'duration');
         $req->validate([
             'link' => 'required',
             'date' => 'required',
@@ -92,7 +92,7 @@ class LiveController extends Controller
     public function add_session( Request $req ){
          
         $arr = $req->only('link', 'date', 'from', 'to', 'lesson_id', 'name', 'material_link',
-        'type', 'teacher_id', 'price', 'access_dayes', 'repeat', 'group_id');
+        'type', 'teacher_id', 'price', 'access_dayes', 'repeat', 'group_id', 'duration');
         
         $req->validate([
             'link' => 'required',

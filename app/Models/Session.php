@@ -25,6 +25,7 @@ class Session extends Model
         'teacher_id', 
         'group_id',
         'type', 
+        'duration', 
         'price',
         'access_dayes',
         'repeat',

@@ -341,6 +341,8 @@ Route::middleware(['auth','auth.student'])->prefix('student')->group(function(){
 
     Route::controller(Stu_LiveController::class)->group(function(){
         Route::get('MySessions', 'stu_mysessions')->name('stu_mysessions');
+        Route::get('Live/Lessons', 'stu_mylivelesson')->name('stu_mylivelesson');
+        Route::get('Live/Lesson/{idea}', 'stu_live_lesson')->name('stu_live_lesson');
         Route::get('UseLive/{id}', 'use_live')->name('use_live');
     }); 
 

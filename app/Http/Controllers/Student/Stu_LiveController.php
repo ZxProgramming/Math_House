@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Session;
 use App\Models\SessionStudent;
 use App\Models\PaymentPackageOrder;
+use App\Models\User;
+use App\Models\IdeaLesson;
 
 use Carbon\Carbon;
 
@@ -41,6 +43,8 @@ class Stu_LiveController extends Controller
                     ->update([
                         'number' => $item->number - 1
                     ]);
+                    $user = User::findorfail(auth()->user()->id);
+                    $user->session_attendance()->syncWithoutDetaching($session->id);
 
                     return redirect($session->link);
                 }
@@ -49,6 +53,24 @@ class Stu_LiveController extends Controller
 
         session()->flash('faild', 'Your package Expired');
         return redirect()->back();
+    }
+
+    public function stu_mylivelesson(){
+        $user = User::where('id', auth()->user()->id)
+        ->first();
+        $sessions = $user->session_attendance; 
+
+        return view('Student.Live.MyLiveLessons', compact('sessions'));
+    }
+
+    public function stu_live_lesson( $idea ){
+        $user = User::where('id', auth()->user()->id)
+        ->first();
+        $sessions = $user->session_attendance; 
+        $idea = IdeaLesson::where('id', $idea)
+        ->first();
+
+        return view('Student.Live.Idea', compact('sessions', 'idea'));
     }
 
 }
