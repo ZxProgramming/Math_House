@@ -854,9 +854,6 @@
                                                                                 Difficulty</th>
                                                                             <th scope="col"
                                                                                 style="font-weight: 500; font-size: 1.1rem">
-                                                                                Select</th>
-                                                                            <th scope="col"
-                                                                                style="font-weight: 500; font-size: 1.1rem">
                                                                                 Action</th>
                                                                         </tr>
                                                                     </thead>
@@ -879,9 +876,6 @@
                                                                                     <input type="hidden"
                                                                                         value="{{ $question->question_id }}"
                                                                                         class="exam_id" />
-                                                                                    <th scope="row" class="idd">
-                                                                                        {{ $question->question_id }}
-                                                                                    </th>
                                                                                     <th>{{ $loop->iteration }}</th>
                                                                                     <td class="type">
                                                                                         {{ $question->q_type }}</td>
