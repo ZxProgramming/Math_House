@@ -27,6 +27,11 @@ class PaymentPackageOrder extends Model
     {
         return $this->belongsTo(Package::class, 'package_id');
     }
+    public function package_live()
+    {
+        return $this->belongsTo(Package::class, 'package_id')
+        ->where('module', 'Live');
+    }
     public function pay_req()
     {
         return $this->belongsTo(PaymentRequest::class, 'payment_request_id');

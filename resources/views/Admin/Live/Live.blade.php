@@ -173,6 +173,13 @@
                                 </div>
                                 <div class="mb-10 fv-row">
                                     <label>
+                                        Duration
+                                    </label>
+                                    <input class="form-control" name="duration" type="number"
+                                        placeholder="Duration by Days">
+                                </div>
+                                <div class="mb-10 fv-row">
+                                    <label>
                                         Teacher
                                     </label>
                                     <select class="form-control" name="teacher_id">
@@ -496,6 +503,8 @@
             <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1"
                 colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">To</th>
             <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1"
+                colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Duration</th>
+            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1"
                 colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">
                 Category</th>
             <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1"
@@ -531,6 +540,9 @@
                     </td>
                     <td>
                         {{ $session->to }}
+                    </td>
+                    <td>
+                        {{ $session->duration }}
                     </td>
                     <td>
                         {{ $session->lesson->chapter->course->category->cate_name }}
@@ -625,10 +637,17 @@
                                                     </div>
                                                     <div class="mb-10 fv-row">
                                                         <label>
+                                                            Duration
+                                                        </label>
+                                                        <input class="form-control" name="duration" type="number"
+                                                            placeholder="Duration by Days" value="{{$session->duration}}">
+                                                    </div>
+                                                    <div class="mb-10 fv-row">
+                                                        <label>
                                                             Teacher
                                                         </label>
                                                         <select class="form-control" name="teacher_id">
-                                                            <option value="{{ $session->teacher->name }}"
+                                                            <option value="{{ $session->teacher->id }}"
                                                                 selected>
                                                                 {{ $session->teacher->name }}
                                                             </option>

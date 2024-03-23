@@ -290,6 +290,7 @@ class Stu_MyCourseController extends Controller
         }
         $chapters_price = $min->price;
         $chapter_discount = $min->price - ($min->price * $min->discount / 100);
+        $chapters->ch_price = $chapters_price;
         
         Cache::store('file')->put('marketing', $chapters, 10000);
         Cache::store('file')->put('chapters_price', $chapters_price, 10000);

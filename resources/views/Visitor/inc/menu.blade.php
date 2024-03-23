@@ -15,7 +15,7 @@
 		        </div>
 		        <a href="{{route('home')}}" class="navbar_brand float-left dn-smd">
 		            <img class="logo1 img-fluid" style="height: 50px;" src="{{asset('assets/media/logos/Maths_house.png')}}" alt="header-logo6.png">
-		            <span class="color-black22">Math House</span>
+		            <span class="color-black22">Maths House</span>
 		        </a>
 		        <!-- Responsive Menu Structure-->
 		        <!--Note: declare the Menu style in the data-menu-style="horizontal" (options: horizontal, vertical, accordion) -->

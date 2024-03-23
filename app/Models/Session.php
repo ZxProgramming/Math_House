@@ -25,6 +25,7 @@ class Session extends Model
         'teacher_id', 
         'group_id',
         'type', 
+        'duration', 
         'price',
         'access_dayes',
         'repeat',
@@ -48,6 +49,12 @@ class Session extends Model
     public function users()
     {
         return $this->belongsToMany(User::class, 'session_students');
+    }
+ 
+    public function user_attend()
+    {
+        return $this->belongsToMany(User::class, 'session_attendance')
+        ->where('user_id', auth()->user()->id);
     }
 
     public function days(){

@@ -599,8 +599,7 @@
                                     style="max-width: 1300px !important; display: flex;align-items: center;justify-content: center;"
                                     role="document">
                                     <div class="modal-content" style="border-radius: 15px;">
-                                        <form class="form_editquizze"
-                                            action="{{ route('edit_quizze', ['id' => $item->id]) }}" method="POST">
+                                        <div class="form_editquizze" >
                                             @csrf
                                             <div class="modal-header" style="border-bottom: 0 !important;">
                                                 <h2 class="modal-title" id="exampleModalLongTitle">Edit Quizze</h2>
@@ -1026,7 +1025,7 @@
                                                 <button type="submit" class="btn btn-primary add_btn btn_Edit_quizze"
                                                     id="btn_Edit_quizze{{ $item->id }}">Edit</button>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1480,6 +1479,8 @@
                 /* Parent from Modal */
                 var parModel =
                     `#${$(btn_editee).closest(".form_editquizze").find(".tab-content").attr("id")}`;
+                /* Quizze ID */
+                var quizze_ID = $(parModel).find(".quizze_idd").val();
                 /* Quizze Title */
                 var info_Title = $(parModel).find(".quizze_title").val();
                 /* Quizze Description */
@@ -1504,6 +1505,7 @@
 
 
                 var info_obj = {
+                    quizzeID: quizze_ID,
                     title: info_Title,
                     description: info_Description,
                     time: info_Duration,
@@ -1585,15 +1587,17 @@
                     allDataEdite.push(question_obj);
                 })
 
-                $("#allQuestion").val(JSON.stringify(allDataEdite))
-                console.log("#############")
-                // console.log("parEdite", parEdite)
-                // console.log("parModel", parModel)
-                console.log("#############")
-                console.log("InfoEdite", InfoEdite)
-                console.log("allDataEdite", allDataEdite)
-                console.log("#############")
-
+                $("#allQuestion").val(JSON.stringify(allDataEdite)) 
+                
+            $.ajax({
+                url:"{{ route('edit_quizze') }}",
+                type: 'GET', // http method
+                data: {data: allDataEdite}, // data to submit
+                success: function(data) {
+                    console.log(data);
+                    console.log(allDataEdite);
+                    location.reload();
+                }});
             })
 
             $(".clickc").click(function() {

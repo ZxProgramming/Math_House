@@ -79,7 +79,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                     <h5 class="modal-title" id="modalCenterTitle">Quizze</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <button type="button" class="btn-close close_form_btn" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                     <div class="row">
@@ -117,6 +117,7 @@
     let ans_item_btn = document.querySelectorAll('.ans_item_btn');
     let q_ans_item = document.querySelectorAll('.q_ans_item');
     let close_qiuzze_btn = document.querySelectorAll('.close_qiuzze_btn');
+    let close_form_btn = document.querySelectorAll('.close_form_btn');
     
     for (let i = 0, end = ans_item_btn.length; i < end; i++) {
         ans_item_btn[i].addEventListener('click', ( e ) => {
@@ -131,6 +132,15 @@
         close_qiuzze_btn[i].addEventListener('click', ( e ) => {
             for (let j = 0; j < end; j++) {
                 if ( e.target == close_qiuzze_btn[j] ) {
+                    q_ans_item[j].classList.toggle('d-none');
+                }
+            }
+        })
+    }
+    for (let i = 0, end = close_form_btn.length; i < end; i++) {
+        close_form_btn[i].addEventListener('click', ( e ) => {
+            for (let j = 0; j < end; j++) {
+                if ( e.target == close_form_btn[j] ) {
                     q_ans_item[j].classList.toggle('d-none');
                 }
             }

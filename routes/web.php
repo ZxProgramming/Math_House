@@ -30,6 +30,7 @@ use App\Http\Controllers\Student\Stu_PaymentController;
 use App\Http\Controllers\Student\Stu_WalletController;
 use App\Http\Controllers\Student\Stu_MyPackagesController;
 use App\Http\Controllers\Student\Stu_QuestionController;
+use App\Http\Controllers\Student\Stu_LiveController;
 
 use App\Http\Controllers\Visitor\HomeController;
 use App\Http\Controllers\Visitor\ContactController;
@@ -131,7 +132,7 @@ Route::middleware(['auth','auth.Admin'])->prefix('Admin')->group(function(){
         Route::get('/', 'quizze')->name('quizze');
         Route::get('/Del/{id}', 'del_quizze')->name('del_quizze');
         Route::post('/Add', 'add_quizze')->name('add_quizze');
-        Route::post('/Edit/{id}', 'edit_quizze')->name('edit_quizze');
+        Route::get('/Edit', 'edit_quizze')->name('edit_quizze');
     });
 
 // Payment 
@@ -311,6 +312,8 @@ Route::controller(LessonController::class)->group(function(){
 // Packages 
 Route::controller(Ad_PackagesController::class)->group(function(){
     Route::get('Packages','index')->name('admin_packages');
+    Route::get('Packages/Stu_Add','add_stu_package')->name('add_stu_package');
+    Route::post('Packages/Student/Add','stu_package_add')->name('stu_package_add');
     Route::get('Packages/Del/{id}','del_package')->name('del_package');
     Route::post('Packages/Edit/{id}','edit_package')->name('edit_package');
     Route::post('Packages/Add','add_package')->name('add_package');
@@ -337,6 +340,13 @@ Route::middleware(['auth','auth.student'])->prefix('student')->group(function(){
     Route::controller(Stu_DashboardController::class)->group(function(){
         Route::get('Student','index')->name('stu_dashboard');
     });
+
+    Route::controller(Stu_LiveController::class)->group(function(){
+        Route::get('MySessions', 'stu_mysessions')->name('stu_mysessions');
+        Route::get('Live/Lessons', 'stu_mylivelesson')->name('stu_mylivelesson');
+        Route::get('Live/Lesson/{idea}', 'stu_live_lesson')->name('stu_live_lesson');
+        Route::get('UseLive/{id}', 'use_live')->name('use_live');
+    }); 
 
     Route::controller(Stu_PackageController::class)->group(function(){
         Route::get('Package/Checkout/{id}', 'package_checkout')->name('package_checkout');
