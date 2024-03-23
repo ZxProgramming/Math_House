@@ -12,6 +12,7 @@ use App\Models\Course;
 use App\Models\Category;
 use App\Models\Package;
 use App\Models\Session;
+use App\Models\Admin_role;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -80,6 +81,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function package()
     {
         return $this->belongsToMany(Package::class, 'user_packages');
+    }
+    
+    public function roles()
+    {
+        return $this->hasMany(Admin_role::class, 'user_id');
     }
     
     public function session_attendance()

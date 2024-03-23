@@ -19,6 +19,7 @@ use App\Models\Chapter;
 use App\Models\PaymentPackageOrder;
 use App\Models\User;
 use App\Models\Package;
+use App\Models\SmallPackage;
 
 use Carbon\Carbon;
 
@@ -151,21 +152,86 @@ class Stu_MyCourseController extends Controller
 
     public function stu_quizze($quizze_id)
     {
-        $quizze = quizze::where('id', $quizze_id)
+        if ( empty(auth()->user()) ) {
+            if ( !session()->has('previous_page') ) {
+                session(['previous_page' => url()->current()]);
+            }
+            return redirect()->route('login.index');
+        }
+        else{  
+            $payments = PaymentPackageOrder::
+            where('state', 1)
+            ->with('pay_req')
+            ->with('package')
+            ->get();
+            $user = User::where('id', auth()->user()->id)
             ->first();
 
-        $stu_quizze = StudentQuizze::where('student_id', auth()->user()->id)
-            ->with('quizze')
-            ->get();
+            $small_package = SmallPackage::where('user_id', auth()->user()->id)
+            ->where('module', 'Question')
+            ->where('number', '>', 0)
+            ->first();
 
-        foreach ($stu_quizze as $item) {
-            if ($item->quizze->quizze_order < $quizze->quizze_order) {
-                session()->flash('faild', 'You Must Pass Last Quizze First');
-                return redirect()->back();
+            if ( !empty($small_package) ) { 
+                SmallPackage::where('user_id', auth()->user()->id)
+                ->where('module', 'Question')
+                ->where('number', '>', 0)
+                ->update([
+                    'number' => $small_package->number - 1
+                ]);
+                // Return Exam
+                $quizze = quizze::where('id', $quizze_id)
+                ->first();
+
+                $stu_quizze = StudentQuizze::where('student_id', auth()->user()->id)
+                    ->with('quizze')
+                    ->get();
+
+                foreach ($stu_quizze as $item) {
+                    if ($item->quizze->quizze_order < $quizze->quizze_order) {
+                        session()->flash('faild', 'You Must Pass Last Quizze First');
+                        return redirect()->back();
+                    }
+                }
+    
+                return view('Student.MyCourses.Quizze', compact('quizze'));
             }
-        }
-        
-        return view('Student.MyCourses.Quizze', compact('quizze'));
+
+            foreach ( $payments as $item ) { 
+                $newTime = Carbon::now()->subDays($item->package->number);
+
+                if ( $item->package->module == 'Question' && 
+                $item->pay_req->user_id == auth()->user()->id &&
+                $item->date > $newTime &&
+                $item->number > 0
+                 ) 
+                 {  
+
+                    PaymentPackageOrder::where('id', $item->id)
+                    ->update([
+                        'number' => $item->number - 1
+                    ]);
+                    $quizze = quizze::where('id', $quizze_id)
+                        ->first();
+            
+                    $stu_quizze = StudentQuizze::where('student_id', auth()->user()->id)
+                        ->with('quizze')
+                        ->get();
+            
+                    foreach ($stu_quizze as $item) {
+                        if ($item->quizze->quizze_order < $quizze->quizze_order) {
+                            session()->flash('faild', 'You Must Pass Last Quizze First');
+                            return redirect()->back();
+                        }
+                    }
+                    
+                    return view('Student.MyCourses.Quizze', compact('quizze'));
+                }
+            } }
+            $package = Package::
+            where('module', 'Question')
+            ->get();
+            return view('Student.Exam.Exam_Package', compact('package'));
     }
 
 
@@ -174,7 +240,7 @@ class Stu_MyCourseController extends Controller
         $quizze_id = json_decode($req->quizze)->id;
         $quizze = quizze::where('id', $quizze_id)
         ->first();
-        return $req->all();
+        
         $deg = 0;
         $mistakes = [];
         $total_question = 0;
@@ -210,6 +276,7 @@ class Stu_MyCourseController extends Controller
 
         $right_question = $deg;
         $deg =  $deg / $total_question * 100;
+        $deg = round($deg, 2);
         $score = ($quizze->score / $total_question) * $right_question;
 
         $stu_q = StudentQuizze::where('student_id', auth()->user()->id)
@@ -223,7 +290,7 @@ class Stu_MyCourseController extends Controller
                 'quizze_id' => $quizze->id,
                 'student_id' => auth()->user()->id,
                 'score' => $score,
-                'time' => $req->timer,
+                'time' => '$req->timer',
                 'r_questions' => $right_question,
             ]);
 
