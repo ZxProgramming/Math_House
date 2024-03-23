@@ -469,7 +469,7 @@
                                                 </tr>
                                             </thead>
 
-                                            <tbody class="Diag_Exam_Item"></tbody>
+                                            <tbody class="quizze_item"></tbody>
 
                                         </table>
                                     </div>
@@ -594,8 +594,10 @@
                                             action="{{ route('edit_dia_exam', ['id' => $item->id]) }}"
                                             method="POST">
                                             @csrf
+                                            <input type="hidden" value="{{ $item->id }}" id="dia_id">
                                             <div class="modal-header" style="border-bottom: 0 !important;">
-                                                <h2 class="modal-title" id="exampleModalLongTitle">Edit Exam</h2>
+                                                <h2 class="modal-title" id="exampleModalLongTitle">Edit Diagnostic
+                                                </h2>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true" class="cls_edite"
@@ -614,13 +616,15 @@
                                                     <li class="nav-item nav-question"
                                                         style="width: calc(100% / 2);text-align: center;">
                                                         <a class="nav-link" data-bs-toggle="tab"
-                                                            href="#Diag_Exam_edit{{ $item->id }}">QUESTIONS</a>
+                                                            href="#question_edit{{ $item->id }}">QUESTIONS</a>
                                                     </li>
                                                 </ul>
 
                                                 <!-- Tab panes -->
                                                 <div class="tab-content" id="tab_info{{ $item->id }}">
                                                     {{-- Info --}}
+                                                    <input type="hidden" value="{{ $item->id }}"
+                                                        id="dia_id">
                                                     <div class="tab-pane container active"
                                                         style="min-height: 300px; max-width: 1340px !important;margin: 15px 0;"
                                                         id="info_edit{{ $item->id }}">
@@ -631,17 +635,18 @@
                                                             <div
                                                                 class="col-md-12 d-flex align-items-center justify-content-around">
                                                                 <span class="col-md-2"
-                                                                    style="font-size: 1.2rem;">Title: </span>
+                                                                    style="font-size: 1.2rem;">Title:
+                                                                </span>
                                                                 <input type="text" name="title"
                                                                     value="{{ $item->title }}"
-                                                                    class="col-md-9 form-control Diag_Exam">
+                                                                    class="col-md-9 form-control quizze_title">
                                                             </div>
 
                                                             <div
                                                                 class="col-md-12 d-flex align-items-center justify-content-around">
                                                                 <span class="col-md-2"
                                                                     style="font-size: 1.2rem;">Description: </span>
-                                                                <textarea class="col-md-9 form-control Diag_Exam_Description" name="description" id="dec_quizze" cols="30"
+                                                                <textarea class="col-md-9 form-control quizze_description" name="description" id="dec_quizze" cols="30"
                                                                     rows="3">{{ $item->description }}</textarea>
                                                             </div>
 
@@ -653,16 +658,16 @@
                                                                     style="display: flex; align-items: center;padding: 0;justify-content: start">
                                                                     <input name="time" value="{{ $item->time }}"
                                                                         max="60" min="1"
-                                                                        class="col-md-4 form-control Diag_Exam_Duration">
+                                                                        class="col-md-4 form-control quizze_duration">
                                                                 </div>
                                                             </div>
 
                                                             <div
                                                                 class="col-md-12 d-flex align-items-center justify-content-around">
                                                                 <span class="col-md-2"
-                                                                    style="font-size: 1.2rem;">Score Name: </span>
-                                                                <select class="col-md-9 form-control Diag_Exam_Score_Id"
-                                                                    name="score_id">
+                                                                    style="font-size: 1.2rem;">Score
+                                                                    Name: </span>
+                                                                <select class="col-md-9 form-control" name="score_id">
                                                                     <option value="{{ $item->score_id }}">
                                                                         {{ $item->dia_score->name }}
                                                                     </option>
@@ -677,10 +682,11 @@
                                                             <div
                                                                 class="col-md-12 d-flex align-items-center justify-content-around">
                                                                 <span class="col-md-2"
-                                                                    style="font-size: 1.2rem;">Total Score: </span>
+                                                                    style="font-size: 1.2rem;">Total
+                                                                    Score: </span>
                                                                 <input type="text" name="score"
                                                                     value="{{ $item->score }}"
-                                                                    class="col-md-9 form-control Diag_Exam_Total_Score">
+                                                                    class="col-md-9 form-control quizze_Total_Score">
                                                             </div>
 
                                                             <div
@@ -689,22 +695,24 @@
                                                                     Score: </span>
                                                                 <input type="text" name="pass_score"
                                                                     value="{{ $item->pass_score }}"
-                                                                    class="col-md-9 form-control Diag_Exam_Pass_Score">
+                                                                    class="col-md-9 form-control quizze_Pass_Score">
                                                             </div>
+
 
                                                             <div
                                                                 class="col-md-12 d-flex align-items-center justify-content-around">
                                                                 <span class="col-md-2"
-                                                                    style="font-size: 1.2rem;">Active: </span>
+                                                                    style="font-size: 1.2rem;">Active:
+                                                                </span>
                                                                 <div class="col-md-9 p-0">
                                                                     <label class="btn-container">
                                                                         @if ($item->state == 0)
                                                                             <input name="state" value="0"
                                                                                 type="checkbox"
-                                                                                class="Diag_Exam_Active" />
+                                                                                class="quizze_Active" />
                                                                         @else
                                                                             <input name="state"
-                                                                                class="Diag_Exam_Active" value="1"
+                                                                                class="quizze_Active" value="1"
                                                                                 type="checkbox" checked />
                                                                         @endif
                                                                         <div class="checkmark"></div>
@@ -714,14 +722,14 @@
                                                         </div>
 
                                                         {{-- <div class="d-flex justify-content-end" style="column-gap: 16px">
-                                <a class="btnNext btn_add_quizz nex_btn">Next</a>
-                              </div> --}}
+                              <a class="btnNext btn_add_quizz nex_btn">Next</a>
+                            </div> --}}
                                                     </div>
                                                     {{-- Questions --}}
 
-                                                    <div class="tab-pane container fade Diag_Exam_edit_parQ"
+                                                    <div class="tab-pane container fade question_edit_parQ"
                                                         style="min-height: 300px; max-width: 1340px !important;margin: 10px 0;"
-                                                        id="Diag_Exam_edit{{ $item->id }}">
+                                                        id="question_edit{{ $item->id }}">
 
                                                         <div class=""
                                                             style="display: flex;flex-direction: column;justify-content: space-between;height: 100%;">
@@ -817,7 +825,7 @@
                                                             <div
                                                                 style="max-height: 300px;overflow: scroll;padding: 12px 0; border-bottom: 2px solid #8f8f8f">
                                                                 <table class="table table-striped"
-                                                                    id="tblData_Diag_Exam_edit">
+                                                                    id="tblData_Quizzes_Edite">
                                                                     <thead class="border-bottom">
                                                                         <tr>
                                                                             <th scope="col"
@@ -847,23 +855,33 @@
                                                                             <th scope="col"
                                                                                 style="font-weight: 500; font-size: 1.1rem">
                                                                                 Select</th>
+                                                                            <th scope="col"
+                                                                                style="font-weight: 500; font-size: 1.1rem">
+                                                                                Action</th>
                                                                         </tr>
                                                                     </thead>
-                                                                    <tbody class="Diag_Exam_Item lesson_Diag_Exam">
+                                                                    <tbody class="quizze_item lesson_quizze">
                                                                         @foreach ($questions as $question)
                                                                             @if ($question->course_id == $item->course_id)
                                                                                 <input type="hidden"
-                                                                                    value="{{ $item->id }}"
-                                                                                    name="Diag_Exam_Id"
-                                                                                    class="Diag_Exam_Idd" />
+                                                                                    value="{{ $question->id }}"
+                                                                                    class="question_id" />
+
+                                                                                <input type="hidden"
+                                                                                    value="{{ $question->question_id }}"
+                                                                                    class="diagnostic_id" />
 
                                                                                 <input type="hidden"
                                                                                     value="{{ $item->id }}"
-                                                                                    name="exam_id" class="exam_id" />
+                                                                                    name="quizze_id"
+                                                                                    class="quizze_idd" />
                                                                                 <tr>
                                                                                     <input type="hidden"
-                                                                                        value="{{ $question->id }}"
-                                                                                        class="question_id ques_id" />
+                                                                                        value="{{ $question->question_id }}"
+                                                                                        class="exam_id" />
+                                                                                    <th scope="row" class="idd">
+                                                                                        {{ $question->question_id }}
+                                                                                    </th>
                                                                                     <th>{{ $loop->iteration }}</th>
                                                                                     <td class="type">
                                                                                         {{ $question->q_type }}</td>
@@ -934,54 +952,68 @@
                                                                     <tbody class="sel_quz sel_quz_edit"
                                                                         id="sel_quz_edit{{ $item->id }}">
 
+                                                                        {{-- <input type="text" id="allQuestion"
+                                                                        name="questions" value="" /> --}}
                                                                         @foreach ($item->question as $question)
+                                                                            {{-- <input type="hidden" class="e_questions"
+                                                                            value="{{ $question }}" /> --}}
+                                                                            {{-- <input type="hidden"
+                                                                            value="{{ $question->question_id }}"
+                                                                            name="questions_id[]"
+                                                                            class="question_id" /> --}}
                                                                             <tr class="tr_edite{{ $item->id }}"
                                                                                 id="tr_edite{{ $question->id }}">
 
                                                                                 <input type="hidden"
                                                                                     value="{{ $question->id }}"
                                                                                     name="question_id[]"
-                                                                                    class="Diag_Exam_edite_id"
-                                                                                    id="Diag_Exam_edite_id{{ $question->id }}" />
+                                                                                    class="question_edite_id"
+                                                                                    id="question_edite_id{{ $question->id }}" />
 
-                                                                                <td class="Diag_Exam_edite_type"
-                                                                                    id="Diag_Exam_edite_type{{ $question->id }}"
+                                                                                <input type="hidden"
+                                                                                    value={{ $item->id }}
+                                                                                    name='diagnostic_edite_id[]'
+                                                                                    class='diagnostic_edite_id'
+                                                                                    id='diagnostic_edite_id{{ $question->id }}' />
+
+                                                                                <td class="question_edite_type"
+                                                                                    id="question_edite_type{{ $question->id }}"
                                                                                     style="font-weight: 500; font-size: 1.1rem">
                                                                                     {{ $question->q_type }}
                                                                                 </td>
 
-                                                                                <td class="Diag_Exam_edite_year"
-                                                                                    id="Diag_Exam_edite_year{{ $question->id }}"
+                                                                                <td class="question_edite_year"
+                                                                                    id="question_edite_year{{ $question->id }}"
                                                                                     style="font-weight: 500; font-size: 1.1rem">
                                                                                     {{ $question->year }}
                                                                                 </td>
 
-                                                                                <td class="Diag_Exam_edite_month"
-                                                                                    id="Diag_Exam_edite_month{{ $question->id }}"
+                                                                                <td class="question_edite_month"
+                                                                                    id="question_edite_month{{ $question->id }}"
                                                                                     style="font-weight: 500; font-size: 1.1rem">
                                                                                     {{ $question->month }}
                                                                                 </td>
 
-                                                                                <td class="Diag_Exam_edite_code"
-                                                                                    id="Diag_Exam_edite_code{{ $question->id }}"
+                                                                                <td class="question_edite_code"
+                                                                                    id="question_edite_code{{ $question->id }}"
                                                                                     style="font-weight: 500; font-size: 1.1rem">
                                                                                     {{ $question->q_code }}
                                                                                 </td>
 
-                                                                                <td class="Diag_Exam_edite_section"
-                                                                                    id="Diag_Exam_edite_section{{ $question->id }}"
+                                                                                <td class="question_edite_section"
+                                                                                    id="question_edite_section{{ $question->id }}"
                                                                                     style="font-weight: 500; font-size: 1.1rem">
                                                                                     {{ $question->section }}
                                                                                 </td>
 
-                                                                                <td class="Diag_Exam_edite_num"
-                                                                                    id="Diag_Exam_edite_num{{ $question->id }}"
+                                                                                <td class="question_edite_num"
+                                                                                    id="question_edite_num{{ $question->id }}"
                                                                                     style="font-weight: 500; font-size: 1.1rem">
                                                                                     {{ $question->q_num }}
                                                                                 </td>
 
-                                                                                <td class="Diag_Exam_edite_difficulty"
-                                                                                    id="Diag_Exam_edite_difficulty{{ $question->id }}"
+                                                                                <td class="question_edite_difficulty"
+                                                                                    id="question_edite_difficulty{{ $question->id }}"
                                                                                     style="font-weight: 500; font-size: 1.1rem">
                                                                                     {{ $question->difficulty }}
                                                                                 </td>
@@ -999,8 +1031,8 @@
                                                             </div>
 
                                                             {{-- <div class="d-flex justify-content-end" style="column-gap: 16px; margin-top: 10px">
-                                  <a class="btnPrevious btn_add_quizz pre_btn">Prev</a>
-                                </div> --}}
+                                <a class="btnPrevious btn_add_quizz pre_btn">Prev</a>
+                              </div> --}}
 
                                                         </div>
                                                     </div>
@@ -1043,7 +1075,7 @@
                                                 data-bs-dismiss="modal">
                                                 Close
                                             </button>
-                                            <a href="{{ route('del_quizze', ['id' => $item->id]) }}"
+                                            <a href="{{ route('del_dia_exam', ['id' => $item->id]) }}"
                                                 class="btn btn-danger">Delete</a>
                                         </div>
                                     </div>
@@ -1121,8 +1153,8 @@
                 if ($("#tblData_Edite tbody").html() == "") {
                     $("#tblData_Edite tbody").append(emptyRow);
                 };
-                if ($("#tblData_Diag_Exam_edit tbody").html() == "") {
-                    $("#tblData_Diag_Exam_edit tbody").append(emptyRow);
+                if ($("#tblData_Quizzes_Edite tbody").html() == "") {
+                    $("#tblData_Quizzes_Edite tbody").append(emptyRow);
                 };
             };
             addEmptyRow();
@@ -1151,70 +1183,70 @@
 
         sel_category.addEventListener('change', () => {
             sel_course.innerHTML = `
-          <option selected disabled>
-            Select Course
-          </option>
-          `;
+            <option selected disabled>
+                Select Course
+            </option>
+            `;
             course.forEach(element => {
                 if (sel_category.value == element.category_id) {
                     sel_course.innerHTML += `
-      <option value="${element.id}">
-      ${element.course_name}
-      </option>
-      `;
+                <option value="${element.id}">
+                ${element.course_name}
+                </option>
+                `;
                 }
             })
         });
 
         sel_course.addEventListener('change', () => {
             sel_chapter.innerHTML = `
-      <option selected disabled>
-        Select Chapter
-      </option>
-      `;
+                <option selected disabled>
+                    Select Chapter
+                </option>
+                `;
             chapter.forEach(element => {
                 if (sel_course.value == element.course_id) {
                     sel_chapter.innerHTML += `
-      <option value="${element.id}">
-      ${element.chapter_name}
-      </option>
-      `;
+                <option value="${element.id}">
+                ${element.chapter_name}
+                </option>
+                `;
                 }
             });
         });
 
         sel_chapter.addEventListener('change', () => {
             sel_lesson.innerHTML = `
-      <option selected disabled>
-        Select Lesson
-      </option>
-      `;
+                    <option selected disabled>
+                    Select Lesson
+                    </option>
+                    `;
             lesson.forEach(element => {
                 if (sel_chapter.value == element.chapter_id) {
                     sel_lesson.innerHTML += `
-      <option value="${element.id}">
-      ${element.lesson_name}
-      </option>
-      `;
+                    <option value="${element.id}">
+                    ${element.lesson_name}
+                    </option>
+                    `;
                 }
             });
         });
 
-        let Diag_Exam_Item = document.querySelector('.Diag_Exam_Item');
+        let quizze_item = document.querySelector('.quizze_item');
 
         let add_question_btn = document.querySelectorAll('.add_question');
         let ques_id = document.querySelectorAll('.ques_id');
-        let Diag_Exam_Id = document.querySelectorAll('.Diag_Exam_Id');
+        let quizze_id = document.querySelectorAll('.quizze_id');
         let arr = [];
         // for (let i = 0, end = add_question_btn.length; i < end; i++) {
         //     add_question_btn[i].addEventListener('click', (e) => {
         //         for (let j = 0; j < end; j++) {
         //             if (e.target == add_question_btn[j]) {
         //                 let ques = ques_id[j].value;
-        //                 let quizze = Diag_Exam_Idd[j].value;
+        //                 let quizze = quizze_idd[j].value;
         //                 let obj = {
         //                     'ques_id': ques,
-        //                     'Diag_Exam_Id': quizze
+        //                     'quizze_id': quizze
         //                 }
         //                 arr = [...arr, obj];
         //             }
@@ -1232,22 +1264,22 @@
                     lesson: sel_lesson.value
                 }, // data to submit
                 success: function(data) {
-                    Diag_Exam_Item.innerHTML = null;
+                    quizze_item.innerHTML = null;
                     data.forEach((element, index) => {
-                        Diag_Exam_Item.innerHTML += `<tr>
-                            <th scope="row" class="idd d-none">${element.id}</th>
-                            <th>${index + 1}</th>
-                            <td class="type">${element.q_type}</td>
-                            <td class="year">${element.year}</td>
-                            <td class="month">${element.month}</td>
-                            <td class="code">${element.q_code}</td>
-                            <td class="section">${element.section}</td>
-                            <td class="noNum">${element.q_num}</td>
-                            <td class="diff">${element.difficulty}</td>
-                            <td class="p-0">
-                              <button type="button" class="add_qz">Add</button>
-                            </td>
-                          </tr>`;
+                        quizze_item.innerHTML += `<tr>
+                          <th scope="row" class="idd d-none">${element.id}</th>
+                          <th>${index + 1}</th>
+                          <td class="type">${element.q_type}</td>
+                          <td class="year">${element.year}</td>
+                          <td class="month">${element.month}</td>
+                          <td class="code">${element.q_code}</td>
+                          <td class="section">${element.section}</td>
+                          <td class="noNum">${element.q_num}</td>
+                          <td class="diff">${element.difficulty}</td>
+                          <td class="p-0">
+                            <button type="button" class="add_qz">Add</button>
+                          </td>
+                        </tr>`;
                     });
 
                     var quizzes = [];
@@ -1354,14 +1386,15 @@
             });
         });
     </script>
+
     <script>
         $(document).ready(() => {
 
             var quizzesEdit = [];
             $(".edit_qz").click(function() {
 
-                var question_idd = $(this).closest("tr").find(".ques_id").val();
-                var Diag_Exam_Idd = $(this).closest(".lesson_Diag_Exam").find(".Diag_Exam_Idd").val();
+                var question_idd = $(this).closest("tr").find(".exam_id").val();
+                var quizze_idd = $(this).closest(".lesson_quizze").find(".quizze_idd").val();
 
                 // var quziId = $(this).closest("tr").find(".idd").text();
                 var quziType = $(this).closest("tr").find(".type").text();
@@ -1386,7 +1419,7 @@
 
 
                 console.log("question_idd", question_idd);
-                console.log("Diag_Exam_Idd", Diag_Exam_Idd);
+                console.log("quizze_idd", quizze_idd);
 
                 // console.log("quziId", quziId);
                 console.log("quziType", quziType);
@@ -1399,30 +1432,36 @@
                 console.log("##########")
                 console.log("edit_eray", edit_eray);
 
-                var new_Ele_Edit = `<tr class='tr_edite${Diag_Exam_Idd}' id='tr_edite${question_idd}'>
-                                      <input type="hidden"
-                                      value=${question_idd}
-                                      name='question_id[]'
-                                      class='Diag_Exam_edite_id' id='Diag_Exam_edite_id${question_idd}'/>
-                                      <td class="Diag_Exam_edite_type" id='Diag_Exam_edite_type${question_idd}' style="font-weight: 500; font-size: 1.1rem">
-                                          ${quziType}
-                                      </td>
-                                      <td class="Diag_Exam_edite_year" id='Diag_Exam_edite_year${question_idd}' style="font-weight: 500; font-size: 1.1rem">
-                                          ${quziYear}</td>
-                                      <td class="Diag_Exam_edite_month" id='Diag_Exam_edite_month${question_idd}' style="font-weight: 500; font-size: 1.1rem">
-                                          ${quziMonth}</td>
-                                      <td class="Diag_Exam_edite_code" id='Diag_Exam_edite_code${question_idd}' style="font-weight: 500; font-size: 1.1rem">
-                                          ${quziCode}</td>
-                                      <td class="Diag_Exam_edite_section" id='Diag_Exam_edite_section${question_idd}' style="font-weight: 500; font-size: 1.1rem">
-                                          ${quziSection}</td>
-                                      <td class="Diag_Exam_edite_num" id='Diag_Exam_edite_num${question_idd}' style="font-weight: 500; font-size: 1.1rem">
-                                          ${quziNoNum}</td>
-                                      <td class="Diag_Exam_edite_difficulty" id='Diag_Exam_edite_difficulty${question_idd}' style="font-weight: 500; font-size: 1.1rem">
-                                          ${quziDiff}</td>
-                                      <td style="width: 150px !important; padding: 0 !important;">
-                                          <button type="button" class="remove_qz_edit">Remove</button>
-                                      </td>
-                                  </tr>`
+                var new_Ele_Edit = `<tr class='tr_edite${quizze_idd}' id='tr_edite${question_idd}'>
+                                    <input type="hidden"
+                                    value=${question_idd}
+                                    name='question_id[]'
+                                    class='question_edite_id' id='question_edite_id${question_idd}'/>
+                                    
+                                    <input type="hidden"
+                                    value=${quizze_idd}
+                                    name='diagnostic_edite_id[]'
+                                    class='diagnostic_edite_id' id='diagnostic_edite_id${question_idd}'/>
+
+                                    <td class="question_edite_type" id='question_edite_type${question_idd}' style="font-weight: 500; font-size: 1.1rem">
+                                        ${quziType}
+                                    </td>
+                                    <td class="question_edite_year" id='question_edite_year${question_idd}' style="font-weight: 500; font-size: 1.1rem">
+                                        ${quziYear}</td>
+                                    <td class="question_edite_month" id='question_edite_month${question_idd}' style="font-weight: 500; font-size: 1.1rem">
+                                        ${quziMonth}</td>
+                                    <td class="question_edite_code" id='question_edite_code${question_idd}' style="font-weight: 500; font-size: 1.1rem">
+                                        ${quziCode}</td>
+                                    <td class="question_edite_section" id='question_edite_section${question_idd}' style="font-weight: 500; font-size: 1.1rem">
+                                        ${quziSection}</td>
+                                    <td class="question_edite_num" id='question_edite_num${question_idd}' style="font-weight: 500; font-size: 1.1rem">
+                                        ${quziNoNum}</td>
+                                    <td class="question_edite_difficulty" id='question_edite_difficulty${question_idd}' style="font-weight: 500; font-size: 1.1rem">
+                                        ${quziDiff}</td>
+                                    <td style="width: 150px !important; padding: 0 !important;">
+                                        <button type="button" class="remove_qz_edit">Remove</button>
+                                    </td>
+                                </tr>`
 
                 $(edit_eray).append(new_Ele_Edit);
 
@@ -1468,21 +1507,24 @@
                 /* Parent from Modal */
                 var parModel =
                     `#${$(btn_editee).closest(".form_editquizze").find(".tab-content").attr("id")}`;
+
+                /* ########### */
+                // var diagnostic_edit_id =
+                //     `#${$(parModel).find(".diagnostic_edite_id").attr("id")}`;
+                var diag_ID = $(parModel).find("#dia_id").val();
+
                 /* Quizze Title */
-                var info_Title = $(parModel).find(".Diag_Exam").val();
+                var info_Title = $(parModel).find(".quizze_title").val();
                 /* Quizze Description */
-                var info_Description = $(parModel).find(".Diag_Exam_Description").val();
+                var info_Description = $(parModel).find(".quizze_description").val();
                 /* Quizze Duration */
-                var info_Duration = $(parModel).find(".Diag_Exam_Duration").val();
+                var info_Duration = $(parModel).find(".quizze_duration").val();
                 /* Quizze Total Score */
-                var info_Total_Score = $(parModel).find(".Diag_Exam_Total_Score").val();
-                /* Quizze Score Id */
-                var info_score_id = $(parModel).find(".Diag_Exam_Score_Id").val();
+                var info_Total_Score = $(parModel).find(".quizze_Total_Score").val();
                 /* Quizze Pass Score */
-                var info_Pass_Score = $(parModel).find(".Diag_Exam_Pass_Score").val();
+                var info_Pass_Score = $(parModel).find(".quizze_Pass_Score").val();
                 /* Quizze Active */
-                // var info_Active = $(parModel).find(".Diag_Exam_Active").val();
-                var info_Active = $(parModel).find(".Diag_Exam_Active");
+                var info_Active = $(parModel).find(".quizze_Active");
 
                 if ($(info_Active).is(":checked") == true) {
                     info_Active = 1;
@@ -1492,11 +1534,11 @@
 
 
                 var info_obj = {
+                    diagnostic_ID: diag_ID,
                     title: info_Title,
                     description: info_Description,
                     time: info_Duration,
                     score: info_Total_Score,
-                    score_id: info_score_id,
                     pass_score: info_Pass_Score,
                     state: info_Active,
                 }
@@ -1517,42 +1559,43 @@
                 $(childEdite).each((childEle, childVal) => {
 
                     var parEle = `#${$(childVal).attr("id")}`;
-                    /* ########### */
-                    var Diag_Exam_edit_id = `#${$(parEle).find(".Diag_Exam_edite_id").attr("id")}`;
-                    var ques_ID = $(Diag_Exam_edit_id).val();
 
                     /* ########### */
-                    var Diag_Exam_edit_type =
-                        `#${$(parEle).find(".Diag_Exam_edite_type").attr("id")}`;
-                    var ques_TYPE = $(Diag_Exam_edit_type).text().trim();
+                    var question_edit_id = `#${$(parEle).find(".question_edite_id").attr("id")}`;
+                    var ques_ID = $(question_edit_id).val();
 
                     /* ########### */
-                    var Diag_Exam_edit_year =
-                        `#${$(parEle).find(".Diag_Exam_edite_year").attr("id")}`;
-                    var ques_YEAR = $(Diag_Exam_edit_year).text();
+                    var question_edit_type =
+                        `#${$(parEle).find(".question_edite_type").attr("id")}`;
+                    var ques_TYPE = $(question_edit_type).text().trim();
 
                     /* ########### */
-                    var Diag_Exam_edit_month =
-                        `#${$(parEle).find(".Diag_Exam_edite_month").attr("id")}`;
-                    var ques_MONTH = $(Diag_Exam_edit_month).text();
+                    var question_edit_year =
+                        `#${$(parEle).find(".question_edite_year").attr("id")}`;
+                    var ques_YEAR = $(question_edit_year).text();
 
                     /* ########### */
-                    var Diag_Exam_edit_code =
-                        `#${$(parEle).find(".Diag_Exam_edite_code").attr("id")}`;
-                    var ques_CODE = $(Diag_Exam_edit_code).text().trim();
+                    var question_edit_month =
+                        `#${$(parEle).find(".question_edite_month").attr("id")}`;
+                    var ques_MONTH = $(question_edit_month).text();
 
                     /* ########### */
-                    var Diag_Exam_edit_section =
-                        `#${$(parEle).find(".Diag_Exam_edite_section").attr("id")}`;
-                    var ques_SECTION = $(Diag_Exam_edit_section).text();
+                    var question_edit_code =
+                        `#${$(parEle).find(".question_edite_code").attr("id")}`;
+                    var ques_CODE = $(question_edit_code).text().trim();
 
                     /* ########### */
-                    var Diag_Exam_edit_num = `#${$(parEle).find(".Diag_Exam_edite_num").attr("id")}`;
-                    var ques_NUM = $(Diag_Exam_edit_num).text();
+                    var question_edit_section =
+                        `#${$(parEle).find(".question_edite_section").attr("id")}`;
+                    var ques_SECTION = $(question_edit_section).text();
+
                     /* ########### */
-                    var Diag_Exam_edit_difficulty =
-                        `#${$(parEle).find(".Diag_Exam_edite_difficulty").attr("id")}`;
-                    var ques_DIFFICULTY = $(Diag_Exam_edit_difficulty).text().trim();
+                    var question_edit_num = `#${$(parEle).find(".question_edite_num").attr("id")}`;
+                    var ques_NUM = $(question_edit_num).text();
+                    /* ########### */
+                    var question_edit_difficulty =
+                        `#${$(parEle).find(".question_edite_difficulty").attr("id")}`;
+                    var ques_DIFFICULTY = $(question_edit_difficulty).text().trim();
                     /* ########### */
 
 
