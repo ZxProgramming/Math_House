@@ -1141,8 +1141,6 @@
         });
     </script>
 
-    <script></script>
-
     <script>
         $("#menu_action").css("display", "none");
 
@@ -1495,7 +1493,14 @@
                 /* Quizze Quizze Order */
                 var info_Quizze_Order = $(parModel).find(".quizze_Quizze_Order").val();
                 /* Quizze Active */
-                var info_Active = $(parModel).find(".quizze_Active").val();
+                // var info_Active = $(parModel).find(".quizze_Active").val();
+                var info_Active = $(parModel).find(".quizze_Active");
+
+                if ($(info_Active).is(":checked") == true) {
+                    info_Active = 1;
+                } else {
+                    info_Active = 0;
+                }
 
 
                 var info_obj = {
@@ -1589,6 +1594,15 @@
                 console.log("allDataEdite", allDataEdite)
                 console.log("#############")
 
+            })
+
+            $(".clickc").click(function() {
+                var id_active = `#${$(this).attr("id")}`;
+
+                $(id_active).click(() => {
+
+                })
+                console.log("id_active", $(id_active).attr("checked"))
             })
 
         });
