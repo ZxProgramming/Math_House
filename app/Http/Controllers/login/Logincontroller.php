@@ -66,6 +66,9 @@ class Logincontroller extends Controller
          
          
                                 }
+                                elseif( $user->position == 'user_admin'){
+                                        return redirect()->route('dashboard')->with(['success'=>'Loged In']);
+                                }
                                 elseif( $user->position == 'teacher'){
                                         return 'Welcome Teacher';
                                 }
@@ -116,6 +119,9 @@ class Logincontroller extends Controller
                                 $token = $user->createToken("user")->plainTextToken;
                                 $user->token =$token ;
                                 if( $user->position == 'admin'){
+                                        return redirect()->route('course_payment');
+                                }
+                                elseif( $user->position == 'user_admin'){
                                         return redirect()->route('course_payment');
                                 }
                                 elseif( $user->position == 'teacher'){
