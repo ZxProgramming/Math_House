@@ -325,10 +325,10 @@ Route::middleware(['auth','auth.Admin'])->prefix('Admin')->group(function(){
 });
 
 //  Hello MR Ahmed 
-Route::middleware(['auth','can:Marketing','auth.user_admin'])->prefix('Admin')->group(function(){
+Route::middleware(['auth','auth.user_admin'])->prefix('Admin')->group(function(){
             
     Route::get('/', [DashboardController::class, 'index']);
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('can:Marketing');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Quizze 
     Route::controller(QuizzeController::class)->prefix('Quizze')->group(function(){

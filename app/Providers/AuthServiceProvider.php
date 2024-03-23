@@ -35,6 +35,7 @@ class AuthServiceProvider extends ServiceProvider
                 }
                 return false;
             }
+            return  $user->position == 'admin';
         });
     }
 }

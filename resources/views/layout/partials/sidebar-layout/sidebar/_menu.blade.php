@@ -4,7 +4,7 @@
 		margin-top:3px;
 	}
 </style>
-@if ( 1 == 1 )
+@if ( fun_admin() == 'admin' )
 <!--begin::sidebar menu-->
 <div class="app-sidebar-menu overflow-hidden flex-column-fluid">
 	<!--begin::Menu wrapper-->
@@ -351,7 +351,6 @@
 				</div>
 			</div>
 
-
 			<div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('user-management.*') ? 'here show' : '' }}">
 				<!--begin:Menu link-->
 				<span class="menu-link">
@@ -401,8 +400,6 @@
 					</div>
 
 			<!--end:Menu item-->
-		
-
 			<div class="menu-item">
 				<!--begin:Menu link-->
 				<a class="menu-link {{ request()->routeIs('user-management.users.*') ? 'active' : '' }}" href="{{ route('logout') }}">

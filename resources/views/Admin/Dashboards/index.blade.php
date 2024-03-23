@@ -1,4 +1,9 @@
- 
+
+@php
+  function fun_admin(){
+    return 'admin';
+  }
+@endphp
 <x-default-layout>
 
 @section('title','Dashboard')
@@ -87,9 +92,3 @@
     </div>
     <!--end::Row-->
 </x-default-layout>
-
-
-
-
-
-
