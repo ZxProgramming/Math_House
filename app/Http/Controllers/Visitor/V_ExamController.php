@@ -17,6 +17,7 @@ use App\Models\PaymentPackageOrder;
 use App\Models\ScoreList;
 use App\Models\ExamHistory;
 use App\Models\ExamMistake;
+use App\Models\SmallPackage;
 
 use Carbon\Carbon;
 
@@ -96,6 +97,24 @@ class V_ExamController extends Controller
             ->get();
             $user = User::where('id', auth()->user()->id)
             ->first();
+
+            $small_package = SmallPackage::where('user_id', auth()->user()->id)
+            ->where('module', 'Exam')
+            ->where('number', '>', 0)
+            ->first();
+
+            if ( !empty($small_package) ) { SmallPackage::where('user_id', auth()->user()->id)
+                ->where('module', 'Exam')
+                ->where('number', '>', 0)
+                ->update([
+                    'number' => $small_package->number - 1
+                ]);
+                // Return Exam
+                $exam = Exam::where('id', $id)
+                ->first();
+                
+                return view('Visitor.Exam.Exam_Question', compact('exam'));
+            }
 
             foreach ( $payments as $item ) { 
                 $newTime = Carbon::now()->subDays($item->package->number); 

@@ -12,6 +12,7 @@ use App\Models\UserPackage;
 use App\Models\PaymentPackageOrder;
 use App\Models\QuestionTime;
 use App\Models\QuestionHistory;
+use App\Models\SmallPackage;
 
 use Carbon\Carbon;
 
@@ -91,6 +92,24 @@ class V_QuestionController extends Controller
             ->get();
             $user = User::where('id', auth()->user()->id)
             ->first();
+
+            $small_package = SmallPackage::where('user_id', auth()->user()->id)
+            ->where('module', 'Question')
+            ->where('number', '>', 0)
+            ->first();
+
+            if ( !empty($small_package) ) { SmallPackage::where('user_id', auth()->user()->id)
+                ->where('module', 'Question')
+                ->where('number', '>', 0)
+                ->update([
+                    'number' => $small_package->number - 1
+                ]);
+                // Return Exam
+                $question = Question::where('id', $id)
+                ->first();
+                
+                return view('Visitor.Question.Show_Question', compact('question'));
+            }
 
             foreach ( $payments as $item ) { 
                 $newTime = Carbon::now()->subDays($item->package->number);

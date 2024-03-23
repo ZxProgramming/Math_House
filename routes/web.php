@@ -312,6 +312,8 @@ Route::controller(LessonController::class)->group(function(){
 // Packages 
 Route::controller(Ad_PackagesController::class)->group(function(){
     Route::get('Packages','index')->name('admin_packages');
+    Route::get('Packages/Stu_Add','add_stu_package')->name('add_stu_package');
+    Route::post('Packages/Student/Add','stu_package_add')->name('stu_package_add');
     Route::get('Packages/Del/{id}','del_package')->name('del_package');
     Route::post('Packages/Edit/{id}','edit_package')->name('edit_package');
     Route::post('Packages/Add','add_package')->name('add_package');

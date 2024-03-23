@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Package;
+use App\Models\User;
+use App\Models\SmallPackage;
 
 class PackagesController extends Controller
 {
@@ -48,6 +50,20 @@ class PackagesController extends Controller
         $arr = $req->only('name', 'module', 'number', 'price', 'duration');
         Package::create($arr);
 
+        return redirect()->back();
+    }
+
+    public function add_stu_package(){
+        $users = User::where('position', 'student')
+        ->get();
+        
+        return view('Admin.Packages.Add_Package', compact('users'));
+    }
+
+    public function stu_package_add( Request $req ){
+        $arr = $req->only('user_id', 'module', 'number');
+        SmallPackage::create($arr);
+        
         return redirect()->back();
     }
 

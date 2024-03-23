@@ -81,9 +81,6 @@
                         <button type="button" class="btn btn-label-secondary close_wallet_btn" data-bs-dismiss="modal">
                             Close
                         </button>
-                        <a class="btn btn-success" href="{{route('use_live', ['id' => $item->session->id])}}">
-                            Start
-                        </a>
                         </div>
                     </div>
                     </div>

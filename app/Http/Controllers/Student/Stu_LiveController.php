@@ -10,6 +10,7 @@ use App\Models\SessionStudent;
 use App\Models\PaymentPackageOrder;
 use App\Models\User;
 use App\Models\IdeaLesson;
+use App\Models\SmallPackage;
 
 use Carbon\Carbon;
 
@@ -33,6 +34,25 @@ class Stu_LiveController extends Controller
         where('number', '>', 0)
         ->with('package_live')
         ->get();
+
+        $small_package = SmallPackage::where('user_id', auth()->user()->id)
+        ->where('module', 'Live')
+        ->where('number', '>', 0)
+        ->first();
+
+        if ( !empty($small_package) ) {
+            SmallPackage::where('user_id', auth()->user()->id)
+            ->where('module', 'Live')
+            ->where('number', '>', 0)
+            ->update([
+                'number' => $small_package->number - 1
+            ]);
+            // Return Exam
+            $user = User::findorfail(auth()->user()->id);
+            $user->session_attendance()->syncWithoutDetaching($session->id);
+
+            return redirect($session->link);
+        }
         
         foreach ( $package as $item ) {
             if ( $item->package_live != null ) {
