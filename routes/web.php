@@ -325,207 +325,207 @@ Route::middleware(['auth','auth.Admin'])->prefix('Admin')->group(function(){
 });
 
 //  Hello MR Ahmed 
-Route::middleware(['auth','auth.user_admin'])->prefix('Admin')->group(function(){
+// Route::middleware(['auth','auth.user_admin'])->prefix('Admin')->group(function(){
             
-    Route::get('/', [DashboardController::class, 'index']);
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+//     Route::get('/', [DashboardController::class, 'index']);
+//     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // Quizze 
-    Route::controller(QuizzeController::class)->prefix('Quizze')->group(function(){
-        Route::get('/', 'quizze')->name('quizze');
-        Route::get('/Del/{id}', 'del_quizze')->name('del_quizze');
-        Route::post('/Add', 'add_quizze')->name('add_quizze');
-        Route::get('/Edit', 'edit_quizze')->name('edit_quizze');
-    });
+//     // Quizze 
+//     Route::controller(QuizzeController::class)->prefix('Quizze')->group(function(){
+//         Route::get('/', 'quizze')->name('quizze');
+//         Route::get('/Del/{id}', 'del_quizze')->name('del_quizze');
+//         Route::post('/Add', 'add_quizze')->name('add_quizze');
+//         Route::get('/Edit', 'edit_quizze')->name('edit_quizze');
+//     });
 
-    // Payment 
-    Route::controller(PaymentController::class)->prefix('Payment')->group(function(){
-        Route::get('/', 'payment')->name('payment');
-        Route::post('/Add', 'payment_add')->name('payment_add');
-        Route::post('/Edit', 'payment_edit')->name('payment_edit');
-        Route::get('/Del', 'del_payment')->name('del_payment');
-    });
+//     // Payment 
+//     Route::controller(PaymentController::class)->prefix('Payment')->group(function(){
+//         Route::get('/', 'payment')->name('payment');
+//         Route::post('/Add', 'payment_add')->name('payment_add');
+//         Route::post('/Edit', 'payment_edit')->name('payment_edit');
+//         Route::get('/Del', 'del_payment')->name('del_payment');
+//     });
 
-    // Payment Request
-    Route::controller(PaymentRequestController::class)->group(function(){
-        Route::get('/PenddingPayment','pendding_payment')->name('pendding_payment');
-        Route::post('/PenddingPayment','filter_pendding_payment')->name('filter_pendding_payment');
-        Route::get('/PaymentRequest','payment_request')->name('payment_request');
-        Route::post('/PaymentRequest','filter_payment_req')->name('filter_payment_req');
-        Route::get('/ApprovePayment/{id}','approve_payment')->name('approve_payment');
-        Route::post('/RejectedPayment/{id}','rejected_payment')->name('rejected_payment');
-    });
+//     // Payment Request
+//     Route::controller(PaymentRequestController::class)->group(function(){
+//         Route::get('/PenddingPayment','pendding_payment')->name('pendding_payment');
+//         Route::post('/PenddingPayment','filter_pendding_payment')->name('filter_pendding_payment');
+//         Route::get('/PaymentRequest','payment_request')->name('payment_request');
+//         Route::post('/PaymentRequest','filter_payment_req')->name('filter_payment_req');
+//         Route::get('/ApprovePayment/{id}','approve_payment')->name('approve_payment');
+//         Route::post('/RejectedPayment/{id}','rejected_payment')->name('rejected_payment');
+//     });
 
-    // Marketing
-    Route::controller(MarketingController::class)->prefix('Marketing')->group(function(){
-        Route::get('/PromoCode', 'promo_code')->name('promo_code');
-        Route::post('/PromoCode/Add', 'add_promo')->name('add_promo');
-        Route::post('/PromoCode/Edit/{id}', 'edit_promo')->name('edit_promo');
-        Route::get('/PromoCode/Del/{id}', 'del_promo')->name('del_promo');
-        Route::get('/Commission', 'commission')->name('commission');
-        Route::post('/Commission/Edit', 'edit_commission')->name('edit_commission');
-        Route::get('/Users', 'users')->name('m_users');
-        Route::get('/Add_Users', 'm_add_users')->name('m_add_users');
-        Route::post('/Users/Add', 'affilate_add')->name('affilate_add');
-        Route::get('/Payouts', 'payout_r')->name('payout_r');
-        Route::post('/Payouts_Reject/{id}', 'reject_payout')->name('reject_payout');
-        Route::get('/Accept_Payouts/{id}', 'accept_payout')->name('accept_payout');
-        Route::post('/Filter_Payouts', 'filter_payment')->name('filter_payment');
-        Route::get('/Filter_Payouts', 'filter_payment')->name('filter_payment');
-    });
+//     // Marketing
+//     Route::controller(MarketingController::class)->prefix('Marketing')->group(function(){
+//         Route::get('/PromoCode', 'promo_code')->name('promo_code');
+//         Route::post('/PromoCode/Add', 'add_promo')->name('add_promo');
+//         Route::post('/PromoCode/Edit/{id}', 'edit_promo')->name('edit_promo');
+//         Route::get('/PromoCode/Del/{id}', 'del_promo')->name('del_promo');
+//         Route::get('/Commission', 'commission')->name('commission');
+//         Route::post('/Commission/Edit', 'edit_commission')->name('edit_commission');
+//         Route::get('/Users', 'users')->name('m_users');
+//         Route::get('/Add_Users', 'm_add_users')->name('m_add_users');
+//         Route::post('/Users/Add', 'affilate_add')->name('affilate_add');
+//         Route::get('/Payouts', 'payout_r')->name('payout_r');
+//         Route::post('/Payouts_Reject/{id}', 'reject_payout')->name('reject_payout');
+//         Route::get('/Accept_Payouts/{id}', 'accept_payout')->name('accept_payout');
+//         Route::post('/Filter_Payouts', 'filter_payment')->name('filter_payment');
+//         Route::get('/Filter_Payouts', 'filter_payment')->name('filter_payment');
+//     });
 
-    // Live 
-    Route::controller(LiveController::class)->prefix('Live')->group(function(){
-        Route::get('/', 'index')->name('sessions');
-        Route::post('/Edit/{id}', 'session_edit')->name('session_edit');
-        Route::post('/Add', 'add_session')->name('add_session');
-        Route::get('/Del/{id}', 'del_session')->name('del_session');
-        Route::get('/Groups', 'session_g')->name('session_g');
-        Route::get('/Session_G/Del/{id}', 'del_session_g')->name('del_session_g');
-        Route::post('/Session_G', 'g_session_edit')->name('g_session_edit');
-        Route::post('/Session_G/Add', 'g_session_add')->name('g_session_add');
-        Route::get('/Private_Request', 'private_request')->name('private_request');
-        Route::get('/Private_Request/Approve/{id}', 'private_session_approve')->name('private_session_approve');
-        Route::post('/Private_Request/Rejected', 'private_request_rejected')->name('private_request_rejected');
-        Route::get('/Cancelation', 'cancelation')->name('cancelation');
-        Route::get('/Cancelation/Approve/{id}', 'approve_cancelation')->name('approve_cancelation');
-        Route::get('/Cancelation/Rejected/{id}', 'reject_cancelation')->name('reject_cancelation');
-        Route::get('/Live/Calender', 'live_calender')->name('live_calender');
-    });
+//     // Live 
+//     Route::controller(LiveController::class)->prefix('Live')->group(function(){
+//         Route::get('/', 'index')->name('sessions');
+//         Route::post('/Edit/{id}', 'session_edit')->name('session_edit');
+//         Route::post('/Add', 'add_session')->name('add_session');
+//         Route::get('/Del/{id}', 'del_session')->name('del_session');
+//         Route::get('/Groups', 'session_g')->name('session_g');
+//         Route::get('/Session_G/Del/{id}', 'del_session_g')->name('del_session_g');
+//         Route::post('/Session_G', 'g_session_edit')->name('g_session_edit');
+//         Route::post('/Session_G/Add', 'g_session_add')->name('g_session_add');
+//         Route::get('/Private_Request', 'private_request')->name('private_request');
+//         Route::get('/Private_Request/Approve/{id}', 'private_session_approve')->name('private_session_approve');
+//         Route::post('/Private_Request/Rejected', 'private_request_rejected')->name('private_request_rejected');
+//         Route::get('/Cancelation', 'cancelation')->name('cancelation');
+//         Route::get('/Cancelation/Approve/{id}', 'approve_cancelation')->name('approve_cancelation');
+//         Route::get('/Cancelation/Rejected/{id}', 'reject_cancelation')->name('reject_cancelation');
+//         Route::get('/Live/Calender', 'live_calender')->name('live_calender');
+//     });
 
-    Route::controller(UserController::class)->prefix('Users')->group(function(){
-        Route::post('/Admin/Edit', 'admin_edit')->name('admin_edit');
-        Route::get('/Admin/Del/{id}', 'del_admin')->name('del_admin');
-        Route::get('/Admin_Add', 'admin_add')->name('admin_add');
-        Route::post('/Admin/Add', 'add_admin')->name('add_admin');
+//     Route::controller(UserController::class)->prefix('Users')->group(function(){
+//         Route::post('/Admin/Edit', 'admin_edit')->name('admin_edit');
+//         Route::get('/Admin/Del/{id}', 'del_admin')->name('del_admin');
+//         Route::get('/Admin_Add', 'admin_add')->name('admin_add');
+//         Route::post('/Admin/Add', 'add_admin')->name('add_admin');
         
-        Route::get('/RoleAdmin', 'role_admins')->name('role_admins_list');
-        Route::post('/RoleAdmin/Edit', 'role_admin_edit')->name('role_admin_edit');
-        Route::get('/RoleAdmin/Del/{id}', 'role_del_admin')->name('role_del_admin');
-        Route::get('/Admin', 'admins')->name('admins_list');
-        Route::post('/Admin/Filter', 'admin_filter')->name('admin_filter');
-        Route::get('/Admin/Filter', 'admin_filter')->name('admin_filter');
-        // Admin
-        Route::post('/Admin/Edit', 'admin_edit')->name('admin_edit');
-        Route::get('/Admin/Del/{id}', 'del_admin')->name('del_admin');
-        Route::get('/Admin_Add', 'admin_add')->name('admin_add');
-        Route::post('/Admin/Add', 'add_admin')->name('add_admin');
+//         Route::get('/RoleAdmin', 'role_admins')->name('role_admins_list');
+//         Route::post('/RoleAdmin/Edit', 'role_admin_edit')->name('role_admin_edit');
+//         Route::get('/RoleAdmin/Del/{id}', 'role_del_admin')->name('role_del_admin');
+//         Route::get('/Admin', 'admins')->name('admins_list');
+//         Route::post('/Admin/Filter', 'admin_filter')->name('admin_filter');
+//         Route::get('/Admin/Filter', 'admin_filter')->name('admin_filter');
+//         // Admin
+//         Route::post('/Admin/Edit', 'admin_edit')->name('admin_edit');
+//         Route::get('/Admin/Del/{id}', 'del_admin')->name('del_admin');
+//         Route::get('/Admin_Add', 'admin_add')->name('admin_add');
+//         Route::post('/Admin/Add', 'add_admin')->name('add_admin');
         
-        // Teacher 
-        Route::post('/Teacher_Filter', 'teacher_filter')->name('teacher_filter');
-        Route::get('/Teacher_Filter', 'teacher_filter')->name('teacher_filter');
-        Route::get('/Teacher', 'teacher')->name('teacher');
-        Route::post('/Teacher_Edit', 'teacher_edit')->name('teacher_edit');
-        Route::post('/Teacher/Add', 'add_teacher')->name('add_teacher');
-        Route::get('/Teacher_Add', 'teacher_add')->name('teacher_add');
-        Route::get('/Teacher/Del/{id}', 'del_teacher')->name('del_teacher');
+//         // Teacher 
+//         Route::post('/Teacher_Filter', 'teacher_filter')->name('teacher_filter');
+//         Route::get('/Teacher_Filter', 'teacher_filter')->name('teacher_filter');
+//         Route::get('/Teacher', 'teacher')->name('teacher');
+//         Route::post('/Teacher_Edit', 'teacher_edit')->name('teacher_edit');
+//         Route::post('/Teacher/Add', 'add_teacher')->name('add_teacher');
+//         Route::get('/Teacher_Add', 'teacher_add')->name('teacher_add');
+//         Route::get('/Teacher/Del/{id}', 'del_teacher')->name('del_teacher');
         
-        // Students  
-        Route::post('/Add_Wallet', 'ad_add_wallet')->name('ad_add_wallet');
-        Route::get('/Student', 'student')->name('student');
-        Route::post('/Student_Filter', 'student_filter')->name('student_filter');
-        Route::get('/Student/Info', 'stu_info')->name('stu_info');
-        Route::get('/Add_Student', 'add_student')->name('add_student');
-        Route::get('/Student/Del/{id}', 'del_stu')->name('del_stu');
-        Route::post('/Student/Add', 'student_add')->name('student_add');
-        Route::post('/Student/Edit', 'stu_edit')->name('stu_edit');
-    });
+//         // Students  
+//         Route::post('/Add_Wallet', 'ad_add_wallet')->name('ad_add_wallet');
+//         Route::get('/Student', 'student')->name('student');
+//         Route::post('/Student_Filter', 'student_filter')->name('student_filter');
+//         Route::get('/Student/Info', 'stu_info')->name('stu_info');
+//         Route::get('/Add_Student', 'add_student')->name('add_student');
+//         Route::get('/Student/Del/{id}', 'del_stu')->name('del_stu');
+//         Route::post('/Student/Add', 'student_add')->name('student_add');
+//         Route::post('/Student/Edit', 'stu_edit')->name('stu_edit');
+//     });
 
-    Route::get('/', [DashboardController::class, 'index']);
-    Route::get('/dashboard', [ DashboardController::class, 'index'])->name('dashboard');
+//     Route::get('/', [DashboardController::class, 'index']);
+//     Route::get('/dashboard', [ DashboardController::class, 'index'])->name('dashboard');
 
 
-    // Courses 
-    Route::controller(CoursesController::class)->group(function(){
-        Route::get('/Courses','courses')->name('courses');
-        Route::post('/Courses_Filter','course_filter')->name('course_filter');
-        Route::get('/Courses_Filter','course_filter')->name('course_filter');
-        Route::post('/Courses/Edit','course_edit')->name('course_edit');
-        Route::get('/Courses/Del/{id}','del_course')->name('del_course');
-        Route::get('/Courses/Add_Courses','add_courses')->name('add_courses');
-        Route::post('/Courses/Courses/Add','course_add')->name('course_add');
-    });
+//     // Courses 
+//     Route::controller(CoursesController::class)->group(function(){
+//         Route::get('/Courses','courses')->name('courses');
+//         Route::post('/Courses_Filter','course_filter')->name('course_filter');
+//         Route::get('/Courses_Filter','course_filter')->name('course_filter');
+//         Route::post('/Courses/Edit','course_edit')->name('course_edit');
+//         Route::get('/Courses/Del/{id}','del_course')->name('del_course');
+//         Route::get('/Courses/Add_Courses','add_courses')->name('add_courses');
+//         Route::post('/Courses/Courses/Add','course_add')->name('course_add');
+//     });
 
-    // Chapters 
-    Route::controller(ChaptersController::class)->group(function(){
-        Route::get('/Chapter','chapter')->name('chapter');
-        Route::post('/Chapter_Filter','ch_filter')->name('ch_filter');
-        Route::get('/Chapter_Filter','ch_filter')->name('ch_filter');
-        Route::post('/Chapter/Edit','chapter_edit')->name('chapter_edit');
-        Route::post('/Chapter/Add','add_chapter')->name('add_chapter');
-        Route::get('/Chapter/Del/{id}','del_chapter')->name('del_chapter');
-    });
+//     // Chapters 
+//     Route::controller(ChaptersController::class)->group(function(){
+//         Route::get('/Chapter','chapter')->name('chapter');
+//         Route::post('/Chapter_Filter','ch_filter')->name('ch_filter');
+//         Route::get('/Chapter_Filter','ch_filter')->name('ch_filter');
+//         Route::post('/Chapter/Edit','chapter_edit')->name('chapter_edit');
+//         Route::post('/Chapter/Add','add_chapter')->name('add_chapter');
+//         Route::get('/Chapter/Del/{id}','del_chapter')->name('del_chapter');
+//     });
 
-    // Questions 
-    Route::controller(QuestionController::class)->group(function(){
-        Route::get('/Question','question')->name('question');
-        Route::post('/Question/Edit/{id}','q_edit')->name('q_edit');
-        Route::post('/Question/Add','add_q')->name('add_q');
-        Route::post('/Question/Filter','filter_question')->name('filter_question');
-        Route::get('/Question/Filter','filter_question')->name('filter_question');
-        Route::get('/Question/Del/{id}','del_q')->name('del_q');
-    });
+//     // Questions 
+//     Route::controller(QuestionController::class)->group(function(){
+//         Route::get('/Question','question')->name('question');
+//         Route::post('/Question/Edit/{id}','q_edit')->name('q_edit');
+//         Route::post('/Question/Add','add_q')->name('add_q');
+//         Route::post('/Question/Filter','filter_question')->name('filter_question');
+//         Route::get('/Question/Filter','filter_question')->name('filter_question');
+//         Route::get('/Question/Del/{id}','del_q')->name('del_q');
+//     });
 
-    //Course Setting
-    Route::controller(CourseSettingController::class)->group(function(){
-        Route::get('/Courses/CodeExam','course_setting')->name('course_setting');
-        Route::post('/Courses/CodeExam/Add','code_exam_add')->name('code_exam_add');
-        Route::post('/Courses/CodeExam/Edit/{id}','examCodeEdit')->name('examCodeEdit');
-        Route::get('/Courses/CodeExam/Del/{id}','examCodeDelete')->name('examCodeDelete');
-    });
+//     //Course Setting
+//     Route::controller(CourseSettingController::class)->group(function(){
+//         Route::get('/Courses/CodeExam','course_setting')->name('course_setting');
+//         Route::post('/Courses/CodeExam/Add','code_exam_add')->name('code_exam_add');
+//         Route::post('/Courses/CodeExam/Edit/{id}','examCodeEdit')->name('examCodeEdit');
+//         Route::get('/Courses/CodeExam/Del/{id}','examCodeDelete')->name('examCodeDelete');
+//     });
 
-    // Diagnostic Exam 
-    Route::controller(DiagnosticExamController::class)->group(function(){ 
-        Route::get('/Diagnostic_Exam','index')->name('dia_exam');
-        Route::post('/Diagnostic_Exam/Add','add_diaexam')->name('add_diaexam');
-        Route::get('/Diagnostic_Exam/Del/{id}','del_dia_exam')->name('del_dia_exam');
-        Route::post('/Diagnostic_Exam/Edit/{id}','edit_dia_exam')->name('edit_dia_exam');
-    });
+//     // Diagnostic Exam 
+//     Route::controller(DiagnosticExamController::class)->group(function(){ 
+//         Route::get('/Diagnostic_Exam','index')->name('dia_exam');
+//         Route::post('/Diagnostic_Exam/Add','add_diaexam')->name('add_diaexam');
+//         Route::get('/Diagnostic_Exam/Del/{id}','del_dia_exam')->name('del_dia_exam');
+//         Route::post('/Diagnostic_Exam/Edit/{id}','edit_dia_exam')->name('edit_dia_exam');
+//     });
 
-    // Exam 
-    Route::controller(ExamController::class)->group(function(){
-        Route::get('/Exam/Del/{id}','del_exam')->name('del_exam');
-        Route::post('/Exam/Edit/{id}','edit_exam')->name('edit_exam'); 
-        Route::get('/Exam','index')->name('exam');
-        Route::post('/Exam/Add','add_exam')->name('add_exam');
-        Route::get('/ScoreSheet','score_sheet')->name('score_sheet');
-        Route::post('/ScoreSheet/Add','addScore')->name('addScore'); 
-        Route::get('/ScoreSheet/Del/{id}','scoreDelete')->name('scoreDelete'); 
-        Route::post('/ScoreSheet/Edit/{id}','scoreEdit')->name('scoreEdit'); 
-    });
+//     // Exam 
+//     Route::controller(ExamController::class)->group(function(){
+//         Route::get('/Exam/Del/{id}','del_exam')->name('del_exam');
+//         Route::post('/Exam/Edit/{id}','edit_exam')->name('edit_exam'); 
+//         Route::get('/Exam','index')->name('exam');
+//         Route::post('/Exam/Add','add_exam')->name('add_exam');
+//         Route::get('/ScoreSheet','score_sheet')->name('score_sheet');
+//         Route::post('/ScoreSheet/Add','addScore')->name('addScore'); 
+//         Route::get('/ScoreSheet/Del/{id}','scoreDelete')->name('scoreDelete'); 
+//         Route::post('/ScoreSheet/Edit/{id}','scoreEdit')->name('scoreEdit'); 
+//     });
 
-    // Category
-    Route::controller(CategoryController::class)->group(function(){
-        Route::get('/category/Information','index')->name('category');
-        Route::post('/category/categoryAdd','createCategory')->name('addCategories');
-        Route::get('/category/categoryDelete/{id}','categoryDelete')->name('categoryDelete');
-        Route::post('/category/categoryEdit','editCategory')->name('categoryEdit');
-    });
+//     // Category
+//     Route::controller(CategoryController::class)->group(function(){
+//         Route::get('/category/Information','index')->name('category');
+//         Route::post('/category/categoryAdd','createCategory')->name('addCategories');
+//         Route::get('/category/categoryDelete/{id}','categoryDelete')->name('categoryDelete');
+//         Route::post('/category/categoryEdit','editCategory')->name('categoryEdit');
+//     });
 
-    // Lesson 
-    Route::controller(LessonController::class)->group(function(){
-        Route::get('Lesson/Lessons','index')->name('lesson');
-        Route::post('Lesson/AddLesson','addLesson')->name('addLesson');
-        Route::post('Lesson/Edit','lesson_edit')->name('lesson_edit');
-        Route::get('Lesson/Del/{id}','del_lesson')->name('del_lesson');
-        Route::post('Lesson/Filter','filter_lesson')->name('filter_lesson');
-        Route::get('Lesson/Filter','filter_lesson')->name('filter_lesson');
-    });
+//     // Lesson 
+//     Route::controller(LessonController::class)->group(function(){
+//         Route::get('Lesson/Lessons','index')->name('lesson');
+//         Route::post('Lesson/AddLesson','addLesson')->name('addLesson');
+//         Route::post('Lesson/Edit','lesson_edit')->name('lesson_edit');
+//         Route::get('Lesson/Del/{id}','del_lesson')->name('del_lesson');
+//         Route::post('Lesson/Filter','filter_lesson')->name('filter_lesson');
+//         Route::get('Lesson/Filter','filter_lesson')->name('filter_lesson');
+//     });
 
-    // Packages 
-    Route::controller(Ad_PackagesController::class)->group(function(){
-        Route::get('Packages','index')->name('admin_packages');
-        Route::get('Packages/Stu_Add','add_stu_package')->name('add_stu_package');
-        Route::post('Packages/Student/Add','stu_package_add')->name('stu_package_add');
-        Route::get('Packages/Del/{id}','del_package')->name('del_package');
-        Route::post('Packages/Edit/{id}','edit_package')->name('edit_package');
-        Route::post('Packages/Add','add_package')->name('add_package');
-    });
+//     // Packages 
+//     Route::controller(Ad_PackagesController::class)->group(function(){
+//         Route::get('Packages','index')->name('admin_packages');
+//         Route::get('Packages/Stu_Add','add_stu_package')->name('add_stu_package');
+//         Route::post('Packages/Student/Add','stu_package_add')->name('stu_package_add');
+//         Route::get('Packages/Del/{id}','del_package')->name('del_package');
+//         Route::post('Packages/Edit/{id}','edit_package')->name('edit_package');
+//         Route::post('Packages/Add','add_package')->name('add_package');
+//     });
 
  
    
 
-});
+// });
 
           
     // Student
