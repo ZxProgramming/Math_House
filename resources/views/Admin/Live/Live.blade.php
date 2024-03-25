@@ -186,9 +186,9 @@
                                         <option disabled="" selected="">
                                             Select Teacher ...
                                         </option>
-                                        @foreach ( $teachers as $item ) 
-                                            <option value="{{$item->id}}">
-                                                {{$item->name}}
+                                        @foreach ($teachers as $item)
+                                            <option value="{{ $item->id }}">
+                                                {{ $item->name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -221,9 +221,9 @@
                                             Select Group ...
                                         </option>
                                         @foreach ($groups as $item)
-                                        <option value="{{$item->id}}">
-                                            {{$item->name}}
-                                        </option>
+                                            <option value="{{ $item->id }}">
+                                                {{ $item->name }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -374,8 +374,8 @@
                                             <option disabled selected>
                                                 Select Category ...
                                             </option>
-                                            @foreach ( $categories as $item)
-                                            <option value="{{$item->id}}">{{$item->cate_name}}</option>
+                                            @foreach ($categories as $item)
+                                                <option value="{{ $item->id }}">{{ $item->cate_name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -488,38 +488,39 @@
     <table id="kt_profile_overview_table"
         class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable no-footer">
         <thead class="fs-7 text-gray-500 text-uppercase">
-            <th class="min-w-250px sorting sorting_desc" tabindex="0" aria-controls="kt_profile_overview_table"
+            <th class="min-w-20px sorting sorting_desc" tabindex="0" aria-controls="kt_profile_overview_table"
                 rowspan="1" colspan="1" aria-label="Manager: activate to sort column ascending"
                 style="width: 336.359px;" aria-sort="descending">#</th>
-            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1"
+            <th class="min-w-85px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1"
                 colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Session
                 Date</th>
-            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1"
+            <th class="min-w-60px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1"
                 colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Session
                 Name</th>
-            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1"
+            <th class="min-w-60px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1"
                 colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">From
             </th>
-            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1"
+            <th class="min-w-60px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1"
                 colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">To</th>
-            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1"
-                colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Duration</th>
-            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1"
+            {{-- <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1"
+                colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">
+                Duration</th> --}}
+            <th class="min-w-60px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1"
                 colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">
                 Category</th>
-            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1"
+            <th class="min-w-60px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1"
                 colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Course
             </th>
-            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1"
+            <th class="min-w-60px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1"
                 colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Lesson
             </th>
-            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1"
+            <th class="min-w-60px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1"
                 colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Type
             </th>
-            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1"
+            <th class="min-w-60px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1"
                 colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Teacher
             </th>
-            <th class="min-w-150px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1"
+            <th class="min-w-60px sorting" tabindex="0" aria-controls="kt_profile_overview_table" rowspan="1"
                 colspan="1" aria-label="Date: activate to sort column ascending" style="width: 205.188px;">Action
             </th>
         </thead>
@@ -541,9 +542,9 @@
                     <td>
                         {{ $session->to }}
                     </td>
-                    <td>
+                    {{-- <td>
                         {{ $session->duration }}
-                    </td>
+                    </td> --}}
                     <td>
                         {{ $session->lesson->chapter->course->category->cate_name }}
                     </td>
@@ -611,44 +612,44 @@
                                                         <label>
                                                             Session Name
                                                         </label>
-                                                        <input class="form-control" name="name" value="{{ $session->name }}"
-                                                            placeholder="Session Name">
+                                                        <input class="form-control" name="name"
+                                                            value="{{ $session->name }}" placeholder="Session Name">
                                                     </div>
                                                     <div class="mb-10 fv-row">
                                                         <label>
                                                             Session Date
                                                         </label>
-                                                        <input class="form-control" name="date" type="date" value="{{ $session->date }}"
-                                                            placeholder="Session Date">
+                                                        <input class="form-control" name="date" type="date"
+                                                            value="{{ $session->date }}" placeholder="Session Date">
                                                     </div>
                                                     <div class="mb-10 fv-row">
                                                         <label>
                                                             From
                                                         </label>
-                                                        <input class="form-control" name="from" type="time" value="{{ $session->from }}"
-                                                            placeholder="Session From">
+                                                        <input class="form-control" name="from" type="time"
+                                                            value="{{ $session->from }}" placeholder="Session From">
                                                     </div>
                                                     <div class="mb-10 fv-row">
                                                         <label>
                                                             To
                                                         </label>
-                                                        <input class="form-control" value="{{ $session->to }}" name="to" type="time"
-                                                            placeholder="Session To">
+                                                        <input class="form-control" value="{{ $session->to }}"
+                                                            name="to" type="time" placeholder="Session To">
                                                     </div>
                                                     <div class="mb-10 fv-row">
                                                         <label>
                                                             Duration
                                                         </label>
                                                         <input class="form-control" name="duration" type="number"
-                                                            placeholder="Duration by Days" value="{{$session->duration}}">
+                                                            placeholder="Duration by Days"
+                                                            value="{{ $session->duration }}">
                                                     </div>
                                                     <div class="mb-10 fv-row">
                                                         <label>
                                                             Teacher
                                                         </label>
                                                         <select class="form-control" name="teacher_id">
-                                                            <option value="{{ $session->teacher->id }}"
-                                                                selected>
+                                                            <option value="{{ $session->teacher->id }}" selected>
                                                                 {{ $session->teacher->name }}
                                                             </option>
                                                             @foreach ($teachers as $teacher)
@@ -682,8 +683,7 @@
                                                             Group
                                                         </label>
                                                         <select class="form-control" name="group_id">
-                                                            <option value="{{ $session->group_id }}"
-                                                                selected>
+                                                            <option value="{{ $session->group_id }}" selected>
                                                                 {{ @$session->group->name }}
                                                             </option>
                                                             @foreach ($groups as $group)
@@ -701,22 +701,19 @@
                                                             <div class="position-relative" data-select2-id="443">
                                                                 <select id="select2Danger" name="user_id[]"
                                                                     class="select2 form-select select2-hidden-accessible"
-                                                                    multiple=""  
+                                                                    multiple=""
                                                                     data-select2-id="select2Danger{{ $session->id }}"
                                                                     tabindex="-1" aria-hidden="true">
                                                                     @foreach ($session->users as $user)
-                                                                    <option
-                                                                        value="{{ $user->id }}"
-                                                                        selected
-                                                                        data-select2-id="{{ $user->id }}">
-                                                                        {{ $user->name }}</option>
-                                                                @endforeach
-                                                                @foreach ($users as $user)
-                                                                    <option
-                                                                        value="{{ $user->id }}"
-                                                                        data-select2-id="{{ $user->id }}">
-                                                                        {{ $user->name }}</option>
-                                                                @endforeach
+                                                                        <option value="{{ $user->id }}" selected
+                                                                            data-select2-id="{{ $user->id }}">
+                                                                            {{ $user->name }}</option>
+                                                                    @endforeach
+                                                                    @foreach ($users as $user)
+                                                                        <option value="{{ $user->id }}"
+                                                                            data-select2-id="{{ $user->id }}">
+                                                                            {{ $user->name }}</option>
+                                                                    @endforeach
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -726,8 +723,7 @@
                                                             Repeat
                                                         </label>
                                                         <select class="form-control s_repeat" name="repeat">
-                                                            <option value="{{ $session->repeat }}"
-                                                                selected>
+                                                            <option value="{{ $session->repeat }}" selected>
                                                                 {{ $session->repeat }}
                                                             </option>
                                                             <option value="Once">
@@ -838,7 +834,8 @@
                                                     </button>
                                                 </div>
                                                 {{-- Details Tap --}}
-                                                <div class="details_section d-none" id="details_section{{ $session->id }}">
+                                                <div class="details_section d-none"
+                                                    id="details_section{{ $session->id }}">
                                                     <!--begin::Wrapper-->
                                                     <div class="w-100">
                                                         <div class="pb-2">
@@ -854,15 +851,15 @@
                                                             </label>
                                                             <select class="form-control sel_cate2">
                                                                 <option
-                                                                value="{{ $session->lesson->chapter->course->category->id }}"
-                                                                selected>
-                                                                {{ $session->lesson->chapter->course->category->cate_name }}
-                                                            </option>
-                                                            @foreach ($categories as $category)
-                                                                <option value="{{ $category->id }}">
-                                                                    {{ $category->cate_name }}
+                                                                    value="{{ $session->lesson->chapter->course->category->id }}"
+                                                                    selected>
+                                                                    {{ $session->lesson->chapter->course->category->cate_name }}
                                                                 </option>
-                                                            @endforeach
+                                                                @foreach ($categories as $category)
+                                                                    <option value="{{ $category->id }}">
+                                                                        {{ $category->cate_name }}
+                                                                    </option>
+                                                                @endforeach
                                                             </select>
                                                         </div>
 
@@ -872,10 +869,10 @@
                                                             </label>
                                                             <select class="form-control sel_course2">
                                                                 <option
-                                                                value="{{ $session->lesson->chapter->course->id }}"
-                                                                selected>
-                                                                {{ $session->lesson->chapter->course->course_name }}
-                                                            </option>
+                                                                    value="{{ $session->lesson->chapter->course->id }}"
+                                                                    selected>
+                                                                    {{ $session->lesson->chapter->course->course_name }}
+                                                                </option>
                                                             </select>
                                                         </div>
 
@@ -884,11 +881,10 @@
                                                                 Chapter
                                                             </label>
                                                             <select class="form-control sel_chapter2">
-                                                                <option
-                                                                value="{{ $session->lesson->chapter->id }}"
-                                                                selected>
-                                                                {{ $session->lesson->chapter->chapter_name }}
-                                                            </option>
+                                                                <option value="{{ $session->lesson->chapter->id }}"
+                                                                    selected>
+                                                                    {{ $session->lesson->chapter->chapter_name }}
+                                                                </option>
                                                             </select>
                                                         </div>
 
@@ -897,8 +893,7 @@
                                                                 Lesson
                                                             </label>
                                                             <select name="lesson_id" class="form-control sel_lesson2">
-                                                                <option value="{{ $session->lesson_id }}"
-                                                                    selected>
+                                                                <option value="{{ $session->lesson_id }}" selected>
                                                                     {{ $session->lesson->lesson_name }}
                                                                 </option>
                                                             </select>
@@ -913,7 +908,8 @@
                                                     </button>
                                                 </div>
                                                 {{-- Priceing Tap --}}
-                                                <div class="priceing_section d-none" id="priceing_section{{ $session->id }}">
+                                                <div class="priceing_section d-none"
+                                                    id="priceing_section{{ $session->id }}">
                                                     <!--begin::Wrapper-->
                                                     <div class="w-100">
 
@@ -931,8 +927,8 @@
                                                                 <div class="section_idea">
                                                                     <span>Session Link</span>
                                                                     <input name="link"
-                                                                            value="{{ $session->link }}"
-                                                                            class="form-control form-control-lg form-control-solid">
+                                                                        value="{{ $session->link }}"
+                                                                        class="form-control form-control-lg form-control-solid">
                                                                 </div>
                                                                 <div class="section_syllabus">
                                                                     <span>Material Link</span>
@@ -1002,7 +998,7 @@
             @endforeach
         </tbody>
     </table>
-    
+
     <script>
         let sel_cate2 = document.querySelectorAll('.sel_cate2');
         let sel_course2 = document.querySelectorAll('.sel_course2');
@@ -1019,10 +1015,10 @@
         lesson = lesson.value;
         lesson = JSON.parse(lesson);
 
-        for (let i = 0, end = sel_cate2.length; i < end; i++) { 
-            sel_cate2[i].addEventListener('change', ( e ) => {
+        for (let i = 0, end = sel_cate2.length; i < end; i++) {
+            sel_cate2[i].addEventListener('change', (e) => {
                 for (let j = 0; j < end; j++) {
-                    if ( e.target == sel_cate2[j] ) {
+                    if (e.target == sel_cate2[j]) {
                         sel_course2[j].innerHTML = `
                         <option disabled selected>
                             Select Course ...
@@ -1040,9 +1036,9 @@
             });
         }
         for (let i = 0, end = sel_course2.length; i < end; i++) {
-            sel_course2[i].addEventListener('change', ( e ) => {
+            sel_course2[i].addEventListener('change', (e) => {
                 for (let j = 0; j < end; j++) {
-                    if ( e.target == sel_course2[j] ) {
+                    if (e.target == sel_course2[j]) {
                         sel_chapter2[j].innerHTML = `
                         <option disabled selected>
                             Select Chapter ...
@@ -1060,9 +1056,9 @@
             });
         }
         for (let i = 0, end = sel_chapter2.length; i < end; i++) {
-            sel_chapter2[i].addEventListener('change', ( e ) => {
+            sel_chapter2[i].addEventListener('change', (e) => {
                 for (let j = 0; j < end; j++) {
-                    if ( e.target == sel_chapter2[j] ) {
+                    if (e.target == sel_chapter2[j]) {
                         sel_lesson2[j].innerHTML = `
                         <option disabled selected>
                             Select Lesson ...
@@ -1079,7 +1075,7 @@
                 }
             });
         }
-        
+
 
         let sel_cate1 = document.querySelector('.sel_cate1');
         let sel_course1 = document.querySelector('.sel_course1');
