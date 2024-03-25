@@ -1,4 +1,9 @@
 
+@php
+  function fun_admin(){
+    return 'admin';
+  }
+@endphp
 <x-default-layout>
 
 @section('title','Dashboard')

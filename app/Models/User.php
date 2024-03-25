@@ -12,6 +12,7 @@ use App\Models\Course;
 use App\Models\Category;
 use App\Models\Package;
 use App\Models\Session;
+
 use App\Models\Admin_role;
 
 class User extends Authenticatable implements MustVerifyEmail

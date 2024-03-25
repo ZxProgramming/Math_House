@@ -131,3 +131,4 @@ Route::prefix('v1')->group(function () {
 
 
 Route::post('login', [ApiController::class, 'login'])->name('login');
+Route::post('logout', [ApiController::class, 'logout'])->name('logout');
