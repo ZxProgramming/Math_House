@@ -57,7 +57,7 @@
                                     stroke-linecap="round" stroke-linejoin="round" class="feather feather-bookmark">
                                     <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
                                 </svg>
-                                Quizze history
+                                Quizes history
                             </a>
                         </li>
                         <li>
@@ -127,7 +127,8 @@
                         <li>
                             {{-- Group --}}
                             <span id="showChild" class="col-md-12 d-flex align-items-center justify-content-between"
-                                style="color: #5f6c76; cursor: pointer;">Group
+                                style="color: #5f6c76; cursor: pointer;">
+                                Live Sessions
                                 <i class="fa-solid fa-angle-down"></i></span>
                             <ul id="child" class="hidee" style="overflow: hidden;">
 

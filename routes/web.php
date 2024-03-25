@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\MarketingController;
 use App\Http\Controllers\Admin\QuizzeController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\LiveController;
+use App\Http\Controllers\Admin\Ad_Slider;
 use App\Http\Controllers\Admin\PaymentRequestController;
 use App\Http\Controllers\Admin\PackagesController as Ad_PackagesController;
 
@@ -126,6 +127,11 @@ Route::middleware(['auth','auth.Admin'])->prefix('Admin')->group(function(){
             
     Route::get('/', [DashboardController::class, 'index']);
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::controller(Ad_Slider::class)->prefix('Slider')->group(function(){
+        Route::get('/', 'index')->name('slider_imgs');
+        Route::get('/Update', 'update_slider')->name('update_slider');
+    });
 
     // Quizze 
     Route::controller(QuizzeController::class)->prefix('Quizze')->group(function(){

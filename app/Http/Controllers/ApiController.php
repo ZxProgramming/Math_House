@@ -23,16 +23,14 @@ class ApiController extends Controller
         }
     }
 
-    public function logout( Request $req ){
-        $headerToken = $req->header();
-        $token = response()->json($headerToken['authorization']);
-        $user = $req->user();
-
+    public function logout( Request $request ){
+        $user = $request->user();
+             $request->user() ;
         if ( empty($user) ) {
-            return response()->json(['faild' => 'You are not Login'], 401);
+            return response()->json(['faild' => 'You are not Login'], 403);
         }
         if ( $user->tokens()->delete() ) {
-            return response()->json(['success' => 'Logout Success', 'token' => $token], 200);
+            return response()->json(['success' => 'Logout Success'], 200);
         }
     }
 
