@@ -15,7 +15,7 @@ class AdminMiddleWare
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if( auth()->user()->position == 'admin'){
+        if( auth()->user()->position == 'admin' || auth()->user()->position == 'user_admin' ){
             return $next($request);
         }
     }

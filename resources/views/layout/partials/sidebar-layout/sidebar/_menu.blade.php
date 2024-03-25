@@ -400,6 +400,7 @@
 					</div>
 
 			<!--end:Menu item-->
+			
 			<div class="menu-item">
 				<!--begin:Menu link-->
 				<a class="menu-link {{ request()->routeIs('user-management.users.*') ? 'active' : '' }}" href="{{ route('logout') }}">

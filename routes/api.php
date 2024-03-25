@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Visitor\CoursesController;
 use App\Http\Controllers\Student\Stu_MyCourseController;
 
+use App\Http\Controllers\ApiController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -127,3 +128,6 @@ Route::prefix('v1')->group(function () {
         return app(SamplePermissionApi::class)->delete($id);
     });
 });
+
+
+Route::post('login', [ApiController::class, 'login'])->name('login');
