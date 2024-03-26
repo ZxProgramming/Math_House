@@ -43,7 +43,8 @@ class ApiController extends Controller
         ->get();
         
         return response()->json([
-            'courses' => $courses
+            'courses' => $courses,
+            'storage' => public_path()
         ], 200);
     }
 

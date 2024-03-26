@@ -76,4 +76,4 @@
         </div> 
     </div>
 @endsection
-@include('Visitor.inc.footer')
+@include('Student.inc.footer')
