@@ -39,6 +39,7 @@ class ApiController extends Controller
         $courses = Marketing::where('student_id', auth()->user()->id)
         ->where('course_id', '!=', null)
         ->orderBy('course_id')
+        ->with('course')
         ->get();
         
         return response()->json([
