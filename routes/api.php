@@ -132,3 +132,9 @@ Route::prefix('v1')->group(function () {
 
 Route::post('login', [ApiController::class, 'login'])->name('login');
 Route::post('logout', [ApiController::class, 'logout'])->name('logout')->middleware('auth:sanctum');
+
+Route::middleware('auth:sanctum')->prefix('MobileStudent')->group(function(){
+    Route::controller(ApiController::class)->prefix('ApiMyCourses')->group(function(){
+        Route::get('/stu_courses','api_stu_my_courses')->name('api_stu_my_courses');
+    });
+});

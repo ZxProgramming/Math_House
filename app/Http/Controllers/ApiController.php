@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Marketing;
 
 class ApiController extends Controller
 {
@@ -32,6 +33,17 @@ class ApiController extends Controller
         if ( $user->tokens()->delete() ) {
             return response()->json(['success' => 'Logout Success'], 200);
         }
+    }
+
+    public function api_stu_my_courses( Request $req ){
+        $courses = Marketing::where('student_id', auth()->user()->id)
+        ->where('course_id', '!=', null)
+        ->orderBy('course_id')
+        ->get();
+        
+        return response()->json([
+            'courses' => $courses
+        ], 200);
     }
 
 }
