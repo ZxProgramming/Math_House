@@ -374,7 +374,7 @@
 					</div>
 				</div>
 			</div>
-
+			
 			<div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('user-management.*') ? 'here show' : '' }}">
 				<!--begin:Menu link-->
 				<span class="menu-link">

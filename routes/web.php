@@ -130,7 +130,8 @@ Route::middleware(['auth','auth.Admin'])->prefix('Admin')->group(function(){
 
     Route::controller(Ad_Slider::class)->prefix('Slider')->group(function(){
         Route::get('/', 'index')->name('slider_imgs');
-        Route::get('/Update', 'update_slider')->name('update_slider');
+        Route::post('/Update', 'update_slider')->name('update_slider');
+        Route::post('/Add', 'add_img_slider')->name('add_img_slider');
     });
 
     // Quizze 
@@ -281,6 +282,7 @@ Route::middleware(['auth','auth.Admin'])->prefix('Admin')->group(function(){
     Route::controller(DiagnosticExamController::class)->group(function(){ 
         Route::get('/Diagnostic_Exam','index')->name('dia_exam');
         Route::post('/Diagnostic_Exam/Add','add_diaexam')->name('add_diaexam');
+        Route::get('/Diagnostic_Exam/edit_q_dia_exam','edit_q_dia_exam')->name('edit_q_dia_exam');
         Route::get('/Diagnostic_Exam/Del/{id}','del_dia_exam')->name('del_dia_exam');
         Route::post('/Diagnostic_Exam/Edit/{id}','edit_dia_exam')->name('edit_dia_exam');
     });
