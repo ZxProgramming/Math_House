@@ -647,9 +647,7 @@
                                     style="max-width: 1300px !important; display: flex;align-items: center;justify-content: center;"
                                     role="document">
                                     <div class="modal-content" style="border-radius: 15px;">
-                                        <form class="form_editquizze"
-                                            action="{{ route('edit_exam', ['id' => $item->id]) }}" method="POST">
-                                            @csrf
+                                        <div class="form_editquizze">
                                             <input type="hidden" value="{{ $item->id }}" id="dia_id">
                                             <div class="modal-header" style="border-bottom: 0 !important;">
                                                 <h2 class="modal-title" id="exampleModalLongTitle">Edit Exam
@@ -723,7 +721,7 @@
                                                                 <span class="col-md-2"
                                                                     style="font-size: 1.2rem;">Score
                                                                     Name: </span>
-                                                                <select class="col-md-9 form-control" name="score_id">
+                                                                <select class="col-md-9 form-control" id="scoreID" name="score_id">
                                                                     <option value="{{ $item->score_id }}">
                                                                         {{ $item->exam_score->name }}
                                                                     </option>
@@ -1096,7 +1094,6 @@
                                                 <button type="submit" class="btn btn-primary add_btn btn_Edit_quizze"
                                                     id="btn_Edit_quizze{{ $item->id }}">Edit</button>
                                             </div>
-                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -1569,6 +1566,8 @@
                 var info_Description = $(parModel).find(".quizze_description").val();
                 /* Quizze Duration */
                 var info_Duration = $(parModel).find(".quizze_duration").val();
+                /* Quizze Total Id */
+                var info_Score_Id = $(parModel).find("#scoreID").val();
                 /* Quizze Total Score */
                 var info_Total_Score = $(parModel).find(".quizze_Total_Score").val();
                 /* Quizze Pass Score */
@@ -1588,6 +1587,7 @@
                     title: info_Title,
                     description: info_Description,
                     time: info_Duration,
+                    scoreId: info_Score_Id,
                     score: info_Total_Score,
                     pass_score: info_Pass_Score,
                     state: info_Active,
@@ -1674,6 +1674,15 @@
                 console.log("InfoEdite", InfoEdite)
                 console.log("allDataEdite", allDataEdite)
                 console.log("#############")
+                $.ajax({
+                url:"{{ route('edit_q_exam') }}",
+                type: 'GET', // http method
+                data: {data: allDataEdite}, // data to submit
+                success: function(data) {
+                    console.log(data);
+                    console.log(allDataEdite);
+                    location.reload();
+                }});
 
             })
 
