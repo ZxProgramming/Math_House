@@ -41,10 +41,11 @@ class ApiController extends Controller
         ->orderBy('course_id')
         ->with('course')
         ->get();
+
+        $courses['storage'] = public_path();
         
         return response()->json([
             'courses' => $courses,
-            'storage' => public_path()
         ], 200);
     }
 
