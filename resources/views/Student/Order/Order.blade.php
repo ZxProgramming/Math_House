@@ -515,4 +515,4 @@
     
 <a class="scrollToHome" href="#"><i class="flaticon-up-arrow-1"></i></a>
 </div>
-@include('Student.inc.footer')
+@include('Visitor.inc.footer')

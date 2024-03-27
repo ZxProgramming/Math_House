@@ -47,6 +47,11 @@
             }
         </script>
 
+        <style>
+            a.btn{
+                color: #fff !important;
+            }
+        </style>
     </head>
 
 

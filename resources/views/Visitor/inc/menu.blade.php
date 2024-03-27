@@ -44,7 +44,13 @@
 		        </ul>
 				<ul class="sign_up_btn pull-right dn-smd mt20">
 	                <li class="list-inline-item list_s">
+						@if ( empty(auth()->user()) )	
 						<a href="{{route('login.index')}}" class="btn flaticon-user"> <span class="dn-lg">Login</span></a>
+						@elseif( auth()->user()->position == 'admin' || auth()->user()->position == 'user_admin' )
+						<a href="{{route('dashboard')}}" class="btn flaticon-user"> <span class="dn-lg">Dashboard</span></a>
+						@else
+						<a href="{{route('login.index')}}" class="btn flaticon-user"> <span class="dn-lg">Dashboard</span></a>
+						@endif
 					</li>
 	                  
 	            </ul>

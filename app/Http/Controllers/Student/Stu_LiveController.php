@@ -75,7 +75,23 @@ class Stu_LiveController extends Controller
         return redirect()->back();
     }
 
-    public function stu_mylivelesson(){
+    public function stu_myLiveCourse(){
+        $user = User::where('id', auth()->user()->id)
+        ->first();
+        $sessions = $user->session_attendance; 
+
+        return view('Student.Live.MyLiveCourses', compact('sessions'));
+    }
+
+    public function stu_live_chapters(){
+        $user = User::where('id', auth()->user()->id)
+        ->first();
+        $sessions = $user->session_attendance; 
+
+        return view('Student.Live.MyLiveChapters', compact('sessions'));
+    }
+
+    public function stu_myLiveLesson(){
         $user = User::where('id', auth()->user()->id)
         ->first();
         $sessions = $user->session_attendance; 

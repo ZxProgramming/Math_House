@@ -145,7 +145,7 @@
                                     </a>
                                 </li>
                                 <li style="padding-left: 20px;">
-                                    <a href="{{ route('stu_mylivelesson') }}">
+                                    <a href="{{ route('stu_myLiveCourse') }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -225,7 +225,7 @@
                                     </div>
                                     <div class="dashboardarea__right">
                                         <div class="dashboardarea__right__button">
-                                            <a class="default__button bg-dark" href="{{ route('wallet') }}">My Wallet
+                                            <a class="default__button bg-dark text-light" href="{{ route('wallet') }}">My Wallet
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
