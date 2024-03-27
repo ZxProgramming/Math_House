@@ -43,12 +43,16 @@ class ApiController extends Controller
         $payment_request = PaymentRequest::where('user_id', auth()->user()->id)
             ->where('state', 'Approve')
             ->get();
-        $courses = [];
+        $courses_name = [];
         $iter = 0;
         foreach ($payment_request as $item) {
             foreach ($item->order as $value) {
-                $courses[$iter++] = $value->course;
+                $courses_name[$value->course->course_name] = $value->course;
             }
+        }
+        $courses = [];
+        foreach ($courses_name as $key => $item) {
+            $courses[] = $item;
         }
         // for ($i=0, $end = count($courses); $i < $end; $i++) { 
         //     $courses[$i]['storage'] = 'https://login.mathshouse.net/'. 
