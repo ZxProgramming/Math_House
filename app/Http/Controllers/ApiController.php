@@ -37,12 +37,16 @@ class ApiController extends Controller
         }
     }
 
-    public function api_stu_my_courses( Request $req ){
-        $courses = Marketing::where('student_id', auth()->user()->id)
-        ->where('course_id', '!=', null)
-        ->orderBy('course_id')
-        ->with('course')
-        ->get();
+    public function api_stu_my_courses( Request $req ){ 
+        $payment_request = PaymentRequest::where('user_id', auth()->user()->id)
+            ->where('state', 'Approve')
+            ->get();
+        $courses = [];
+        foreach ($payment_request as $item) {
+            foreach ($item->order as $value) {
+                $courses[$value->course->course_name] = $value->course;
+            }
+        }
 
         for ($i=0, $end = count($courses); $i < $end; $i++) { 
             $courses[$i]['storage'] = 'https://login.mathshouse.net/'. 
