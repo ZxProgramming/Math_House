@@ -102,8 +102,7 @@ class LessonController extends Controller
         'pre_requisition', 'gain');
         $req->validate([
             'lesson_name'=>'required',
-            'chapter_id'=>'required|numeric', 
-            'idea_order'=>'required|numeric',
+            'chapter_id'=>'required|numeric',
             ]);
         $img_name = null;
         extract($_FILES['lesson_url']);
