@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Marketing;
 use App\Models\Chapter;
+use App\Models\Lesson;
 
 class ApiController extends Controller
 {
@@ -58,6 +59,14 @@ class ApiController extends Controller
         
         return response()->json([
             'chapters' => $chapters,
+        ], 200);
+    }
+
+    public function api_stu_lesson( Request $req ){
+        $lessons = Lesson::all();
+
+        return response()->json([
+            'lessons' => $lessons
         ], 200);
     }
 
