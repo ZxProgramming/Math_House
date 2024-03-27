@@ -44,9 +44,10 @@ class ApiController extends Controller
             ->where('state', 'Approve')
             ->get();
         $courses = [];
+        $iter = 0;
         foreach ($payment_request as $item) {
             foreach ($item->order as $value) {
-                $courses[$value->course->course_name] = $value->course;
+                $courses[$iter++] = $value->course;
             }
         }
         // for ($i=0, $end = count($courses); $i < $end; $i++) { 
