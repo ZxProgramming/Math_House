@@ -49,6 +49,10 @@ class ApiController extends Controller
                 $courses[$value->course->course_name] = $value->course;
             }
         }
+        // for ($i=0, $end = count($courses); $i < $end; $i++) { 
+        //     $courses[$i]['storage'] = 'https://login.mathshouse.net/'. 
+        //     public_path() . '/images/courses/' . $courses[$i]['course']['course_url'];
+        // }
 
         return response()->json([
             'courses' => $courses,
