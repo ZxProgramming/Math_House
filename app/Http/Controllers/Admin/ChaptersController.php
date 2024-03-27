@@ -100,13 +100,12 @@ class ChaptersController extends Controller
     }
 
     public function add_chapter( Request $req ){
-        $arr = $req->only('chapter_name', 'ch_des', 'ch_price', 'pre_requisition', 
+        $arr = $req->only('chapter_name', 'ch_des', 'pre_requisition', 
         'gain', 'course_id', 'teacher_id');
         
         $req->validate([
             'chapter_name' => 'required',
             'teacher_id'   => 'required|numeric',
-            'ch_price'     => 'required|numeric',
             'course_id'    => 'required|numeric',
            ]);
         $img_name = null;
