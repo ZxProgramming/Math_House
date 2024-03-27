@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Marketing;
+use App\Models\Chapter;
 
 class ApiController extends Controller
 {
@@ -49,6 +50,14 @@ class ApiController extends Controller
         
         return response()->json([
             'courses' => $courses,
+        ], 200);
+    }
+
+    public function api_stu_my_chapter( Request $req ){
+        $chapters = Chapter::all();
+        
+        return response()->json([
+            'chapters' => $chapters,
         ], 200);
     }
 
