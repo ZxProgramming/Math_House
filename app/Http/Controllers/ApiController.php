@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Marketing;
 use App\Models\Chapter;
 use App\Models\Lesson;
+use App\Models\PaymentRequest;
 
 class ApiController extends Controller
 {
