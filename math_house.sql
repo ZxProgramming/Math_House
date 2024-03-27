@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2024 at 12:36 PM
+-- Generation Time: Mar 27, 2024 at 01:53 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -175,7 +175,9 @@ INSERT INTO `chapters` (`id`, `chapter_name`, `course_id`, `ch_des`, `ch_url`, `
 (4, 'Chapter 1', 1, 'Chapter One', 'Default.jfif', 'to', 'what', 1, NULL, '2024-01-30 10:00:54'),
 (5, 'Chapter 22', 1, 'errw', 'Default.jfif', 'hfgh', 'h', 5, '2024-01-03 00:34:57', '2024-01-03 00:34:57'),
 (6, 'Chapter 228', 1, 'errw', '20230826085456153827_2318787155110616_6392255175880343552_n.jpg', 'jfdgh', 'o', 5, '2024-01-03 00:35:50', '2024-01-24 10:11:46'),
-(15, 'Chapter 99', 1, 'ghfg', '', 'jhv', 'jih', 5, '2024-01-30 13:49:37', '2024-01-30 13:49:37');
+(15, 'Chapter 99', 1, 'ghfg', '', 'jhv', 'jih', 5, '2024-01-30 13:49:37', '2024-01-30 13:49:37'),
+(16, 'Chapter 1', 2, '0', 'Default.jfif', NULL, NULL, 7, NULL, NULL),
+(18, 'Chapter 22', 2, 'sda', '2582024X03X27X12X20X462024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'fdsf', 'dsf', 7, '2024-03-27 12:20:46', '2024-03-27 12:20:46');
 
 -- --------------------------------------------------------
 
@@ -205,10 +207,11 @@ INSERT INTO `chapter_prices` (`id`, `duration`, `price`, `discount`, `chapter_id
 (10, '33', 23, 231, NULL, '2024-01-30', '2024-01-30'),
 (11, '11', 236, 77, NULL, '2024-01-30', '2024-01-30'),
 (12, '11', 33, 33, NULL, '2024-01-30', '2024-01-30'),
-(13, '33', 12, 11, NULL, '2024-01-30', '2024-01-30'),
+(13, '33', 12, 11, 16, '2024-01-30', '2024-01-30'),
 (20, '35', 100, 32, 4, '2024-01-30', '2024-01-30'),
 (21, '13', 43, 12, 4, '2024-01-30', '2024-01-30'),
-(22, '2', 23, 15, 15, '2024-01-30', '2024-01-30');
+(22, '2', 23, 15, 15, '2024-01-30', '2024-01-30'),
+(24, '22', 23, 231, 18, '2024-03-27', '2024-03-27');
 
 -- --------------------------------------------------------
 
@@ -553,7 +556,9 @@ INSERT INTO `courses` (`id`, `course_name`, `category_id`, `course_des`, `course
 (6, 'erwe', 1, 'asd', '2024X01X24X11X14X1187535.jpg', 'das', 'asd', '2024-01-24 09:14:11', '2024-01-24 09:14:53', 1, NULL),
 (9, 'dddddd', 1, 'ddddd', '2024X01X28X10X16X1464223.png', 'sdsdsd', 'sdsdd', '2024-01-28 08:16:14', '2024-01-28 08:16:14', 1, NULL),
 (10, 'Course Eleven', 1, 'Course Eleven', '2024X02X05X12X54X4940013.jpg', 'asd', 'asd', '2024-02-05 10:54:49', '2024-02-05 10:54:49', 10, NULL),
-(12, 'IS', 9, 'hello', '2024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'dfg', 'fgg', '2024-02-19 05:47:01', '2024-02-19 06:05:42', 10, NULL);
+(12, 'IS', 9, 'hello', '2024X02X19X07X47X0129202301101725mvf_dark_logo.png', 'dfg', 'fgg', '2024-02-19 05:47:01', '2024-02-19 06:05:42', 10, NULL),
+(13, 'course 21', 1, 'sad', '2024X03X27X12X32X3648672024X02X19X07X46X506890202301101725mvf_dark_logo.png', 'df', 'sd', '2024-03-27 10:32:36', '2024-03-27 10:32:36', 1, NULL),
+(14, 'Course 13', 1, 'sxas', 'Default.jfif', 'sad', 'asdsda', '2024-03-27 10:37:06', '2024-03-27 10:37:06', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -581,7 +586,10 @@ INSERT INTO `course_prices` (`id`, `course_id`, `duration`, `price`, `discount`,
 (21, 1, 4, 400, 3, '2024-02-05', '2024-02-05'),
 (22, 10, 1, 23, 22, '2024-02-05', '2024-02-05'),
 (23, 10, 1, 100, 1, '2024-02-05', '2024-02-05'),
-(27, 12, 1, 23, 22, '2024-02-19', '2024-02-19');
+(27, 12, 1, 23, 22, '2024-02-19', '2024-02-19'),
+(28, 2, 30, 600, 5, NULL, NULL),
+(29, 13, 11, 21, 12, '2024-03-27', '2024-03-27'),
+(30, 14, 12, 23, 12, '2024-03-27', '2024-03-27');
 
 -- --------------------------------------------------------
 
@@ -1873,7 +1881,9 @@ INSERT INTO `payment_orders` (`id`, `payment_request_id`, `chapter_id`, `duratio
 (69, 87, 15, 2, NULL, 0, NULL, '2024-03-07', '2024-03-07'),
 (70, 88, 5, 33, NULL, 0, NULL, '2024-03-07', '2024-03-07'),
 (71, 88, 6, 22, NULL, 0, NULL, '2024-03-07', '2024-03-07'),
-(72, 88, 15, 2, NULL, 0, NULL, '2024-03-07', '2024-03-07');
+(72, 88, 15, 2, NULL, 0, NULL, '2024-03-07', '2024-03-07'),
+(73, 108, 16, 0, NULL, 0, NULL, '2024-03-27', '2024-03-27'),
+(74, 108, 18, 0, NULL, 0, NULL, '2024-03-27', '2024-03-27');
 
 -- --------------------------------------------------------
 
@@ -1918,7 +1928,7 @@ INSERT INTO `payment_package_order` (`id`, `payment_request_id`, `package_id`, `
 (18, 104, 3, NULL, 1, '2024-03-26 13:38:45.0', 11, '2024-03-26', '2024-03-26'),
 (19, 105, 3, NULL, 1, '2024-03-26 13:39:12.0', 11, '2024-03-26', '2024-03-26'),
 (20, 106, 3, NULL, 1, '2024-03-26 13:39:24.0', 11, '2024-03-26', '2024-03-26'),
-(21, 107, 2, NULL, 1, '2024-03-27 11:08:46.0', 9, '2024-03-27', '2024-03-27');
+(21, 107, 2, NULL, 1, '2024-03-27 11:08:46.0', 7, '2024-03-27', '2024-03-27');
 
 -- --------------------------------------------------------
 
@@ -2050,7 +2060,8 @@ INSERT INTO `payment_requests` (`id`, `payment_method_id`, `user_id`, `price`, `
 (104, NULL, 8, 111, NULL, 'Package', 'Approve', NULL, '2024-03-26', '2024-03-26'),
 (105, NULL, 8, 111, NULL, 'Package', 'Approve', NULL, '2024-03-26', '2024-03-26'),
 (106, NULL, 8, 111, NULL, 'Package', 'Approve', NULL, '2024-03-26', '2024-03-26'),
-(107, NULL, 8, 60, NULL, 'Package', 'Approve', NULL, '2024-03-27', '2024-03-27');
+(107, NULL, 8, 60, NULL, 'Package', 'Approve', NULL, '2024-03-27', '2024-03-27'),
+(108, NULL, 8, 570, NULL, 'Chapters', 'Approve', NULL, '2024-03-27', '2024-03-27');
 
 -- --------------------------------------------------------
 
@@ -2188,7 +2199,12 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (375, 'App\\Models\\User', 8, 'personal access tokens', 'f9c26e0713f8adc0a4bde9efaa6de9ce6f3f061f6719299205b34a81f51f4d92', '[\"*\"]', NULL, NULL, '2024-03-26 11:24:17', '2024-03-26 11:24:17'),
 (376, 'App\\Models\\User', 8, 'personal access tokens', '89f568370538c39fe942898687c850515cb4ad442d40fcc3fd43dc5ffae1183a', '[\"*\"]', '2024-03-26 11:35:03', NULL, '2024-03-26 11:24:37', '2024-03-26 11:35:03'),
 (377, 'App\\Models\\User', 8, 'user', '39eb012ac2efe3126dd8af200a13469bc78030f2c966609695f28b078f4f0913', '[\"*\"]', NULL, NULL, '2024-03-27 06:44:09', '2024-03-27 06:44:09'),
-(378, 'App\\Models\\User', 8, 'user', '0f0f519ba783cae1d5b264b2f728ff9ae846919bc683891b0285f2efd6721d63', '[\"*\"]', NULL, NULL, '2024-03-27 06:58:21', '2024-03-27 06:58:21');
+(378, 'App\\Models\\User', 8, 'user', '0f0f519ba783cae1d5b264b2f728ff9ae846919bc683891b0285f2efd6721d63', '[\"*\"]', NULL, NULL, '2024-03-27 06:58:21', '2024-03-27 06:58:21'),
+(379, 'App\\Models\\User', 68, 'personal access tokens', 'c79ffdc1c890d57fba46af160360b04fcf85db1765770b3fd6d7830625e22a98', '[\"*\"]', '2024-03-27 09:52:02', NULL, '2024-03-27 09:51:06', '2024-03-27 09:52:02'),
+(380, 'App\\Models\\User', 68, 'user', 'cdbf7e7e5aafe6e526b2615a0afd194714a87484cfecad120a62f199c95b8ad8', '[\"*\"]', NULL, NULL, '2024-03-27 10:16:53', '2024-03-27 10:16:53'),
+(381, 'App\\Models\\User', 8, 'user', '996be8d25f6c9ba287e54db0ab9fa2a1a8dbc51276d20db74a1c7929dc285e49', '[\"*\"]', NULL, NULL, '2024-03-27 10:25:48', '2024-03-27 10:25:48'),
+(382, 'App\\Models\\User', 68, 'user', 'de595f35a791ec943dd6d06ec3eeb11c110167fb6dae8d6794f7200b54cbe168', '[\"*\"]', NULL, NULL, '2024-03-27 10:27:40', '2024-03-27 10:27:40'),
+(383, 'App\\Models\\User', 8, 'user', 'bf8ed786df26ecab364521fea49b159930f7ea723f4b6495b5fe9a4434666d81', '[\"*\"]', NULL, NULL, '2024-03-27 10:48:53', '2024-03-27 10:48:53');
 
 -- --------------------------------------------------------
 
@@ -3137,7 +3153,8 @@ INSERT INTO `wallets` (`id`, `student_id`, `wallet`, `date`, `image`, `state`, `
 (54, 8, -111, '2024-03-26', NULL, 'Approve', 104, NULL, '2024-03-26', '2024-03-26'),
 (55, 8, -111, '2024-03-26', NULL, 'Approve', 105, NULL, '2024-03-26', '2024-03-26'),
 (56, 8, -111, '2024-03-26', NULL, 'Approve', 106, NULL, '2024-03-26', '2024-03-26'),
-(57, 8, -60, '2024-03-27', NULL, 'Approve', 107, NULL, '2024-03-27', '2024-03-27');
+(57, 8, -60, '2024-03-27', NULL, 'Approve', 107, NULL, '2024-03-27', '2024-03-27'),
+(58, 8, -570, '2024-03-27', NULL, 'Approve', 108, NULL, '2024-03-27', '2024-03-27');
 
 --
 -- Indexes for dumped tables
@@ -3718,13 +3735,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `chapters`
 --
 ALTER TABLE `chapters`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `chapter_prices`
 --
 ALTER TABLE `chapter_prices`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `cities`
@@ -3760,13 +3777,13 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `course_prices`
 --
 ALTER TABLE `course_prices`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `dai_exam_mistakes`
@@ -3856,13 +3873,13 @@ ALTER TABLE `group_students`
 -- AUTO_INCREMENT for table `idea_lessons`
 --
 ALTER TABLE `idea_lessons`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `lessons`
 --
 ALTER TABLE `lessons`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `marketings`
@@ -3898,7 +3915,7 @@ ALTER TABLE `payment_method`
 -- AUTO_INCREMENT for table `payment_orders`
 --
 ALTER TABLE `payment_orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `payment_package_order`
@@ -3910,7 +3927,7 @@ ALTER TABLE `payment_package_order`
 -- AUTO_INCREMENT for table `payment_requests`
 --
 ALTER TABLE `payment_requests`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
 -- AUTO_INCREMENT for table `payouts`
@@ -3928,7 +3945,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=379;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=384;
 
 --
 -- AUTO_INCREMENT for table `private_request`
@@ -4102,7 +4119,7 @@ ALTER TABLE `user_sessions`
 -- AUTO_INCREMENT for table `wallets`
 --
 ALTER TABLE `wallets`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- Constraints for dumped tables

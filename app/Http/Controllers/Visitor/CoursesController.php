@@ -37,7 +37,7 @@ class CoursesController extends Controller
         ->get();
         $course = Course::where('id', $id)
         ->first(); 
-        foreach ($chapters as $key => $item) {
+        foreach ($chapters as $key => $item) { 
             $min =  $item->price[0]->price;
             foreach (  $item->price as $element ) {
                 if ( $min > $element->price ) {
