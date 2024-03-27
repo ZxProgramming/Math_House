@@ -42,13 +42,8 @@ class ApiController extends Controller
         $payment_request = PaymentRequest::where('user_id', auth()->user()->id)
             ->where('state', 'Approve')
             ->get();
-        $courses = [];
-        foreach ($payment_request as $item) {
-            foreach ($item->order as $value) {
-                $courses[$value->course->course_name] = $value->course;
-            }
-        }
-        
+        $courses = []; 
+
         return response()->json([
             'courses' => $courses,
         ], 200);
