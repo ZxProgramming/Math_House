@@ -45,9 +45,9 @@ class ApiController extends Controller
         $courses = [];
         foreach ($payment_request as $item) {
             foreach ($item->order as $value) {
-                $courses[$value->course->course_name] = $value->course; 
+                $courses[$value->course->course_name] = $value->course;
             }
-        } 
+        }
         
         return response()->json([
             'courses' => $courses,
