@@ -12,7 +12,7 @@ use App\Models\User;
 
 class CoursesController extends Controller
 {
-    protected $requestCourse = ['course_name', 'teacher_id', 'course_des', 'category_id', 'gain', 'pre_requisition', 'course_price'
+    protected $requestCourse = ['course_name', 'teacher_id', 'course_des', 'category_id', 'gain', 'pre_requisition'
     ];
     public function courses(){
         $courses = Course::all();
@@ -28,7 +28,6 @@ class CoursesController extends Controller
         $req->validate([
          'course_name'  => 'required',
          'teacher_id'   => 'required|numeric',
-         'course_price' => 'required|numeric',
          'category_id'  => 'required|numeric',
         ]);
         extract($_FILES['course_url']);
@@ -80,12 +79,11 @@ class CoursesController extends Controller
     public function course_add( Request $req ){
         
         $arr = $req->only('course_name', 'category_id', 'course_des', 'teacher_id', 
-        'pre_requisition', 'gain', 'course_price');
+        'pre_requisition', 'gain');
 
         $req->validate([
             'course_name'  => 'required',
             'teacher_id'   => 'required|numeric',
-            'course_price' => 'required|numeric',
             'category_id'  => 'required|numeric',
            ]);
         extract($_FILES['course_url']);
