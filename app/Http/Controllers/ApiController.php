@@ -39,10 +39,16 @@ class ApiController extends Controller
     }
 
     public function api_stu_my_courses( Request $req ){ 
+       
         $payment_request = PaymentRequest::where('user_id', auth()->user()->id)
             ->where('state', 'Approve')
             ->get();
-        $courses = []; 
+        $courses = [];
+        foreach ($payment_request as $item) {
+            foreach ($item->order as $value) {
+                $courses[$value->course->course_name] = $value->course;
+            }
+        }
 
         return response()->json([
             'courses' => $courses,
