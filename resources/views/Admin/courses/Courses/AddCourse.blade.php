@@ -149,10 +149,12 @@
                         <div class="w-100">
                             {{-- Page Three --}}
                             <div class="pricing_data">
-                                <div class='my-3'>
-                                    <label>Duration</label>
-                                    <input class='form-control' name="duration[]" placeholder="Duration" />
+                                <div class="section_idea my-3 d-flex align-items-center">
+                                    <span>Duration</span>
+                                    <input type="number" name="duration[]" class="form-control mx-2 form-control-lg" placeholder="Duration" />
+                                    <span>Dayes</span>
                                 </div>
+
                                 <div class='my-3'>
                                     <label>Price</label>
                                     <input class='form-control' name="price[]" placeholder="Price" />

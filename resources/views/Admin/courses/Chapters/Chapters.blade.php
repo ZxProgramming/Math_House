@@ -216,7 +216,7 @@
                                   @foreach( $item->price as $price )
                                   <div class='my-3'>
                                         <label>Duration</label>
-                                        <input class='form-control' value="{{$price->duration}}" name="duration[]" placeholder="Duration" />
+                                        <input class='form-control' type="number" value="{{$price->duration}}" name="duration[]" placeholder="Duration" />
                                     </div>
                                     <div class='my-3'>
                                         <label>Price</label>
