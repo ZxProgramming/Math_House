@@ -45,8 +45,6 @@ class ApiController extends Controller
         $courses = [];
         foreach ($payment_request as $item) {
             foreach ($item->order as $value) {
-                $value['course']['storage'] = 'https://login.mathshouse.net/'. 
-                public_path() . '/images/courses/' . $courses[$i]['course']['course_url'];
                 $courses[$value->course->course_name] = $value->course; 
             }
         } 
