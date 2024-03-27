@@ -46,9 +46,10 @@ class ApiController extends Controller
         foreach ($payment_request as $item) {
             foreach ($item->order as $value) {
                 $courses[$value->course->course_name] = $value->course;
+                $courses[$value->course->course_name]['storage'] = 'https://login.mathshouse.net/'. 
+                public_path() . '/images/courses/' . $courses[$i]['course']['course_url'];
             }
-        }
-
+        } 
         
         return response()->json([
             'courses' => $courses,
