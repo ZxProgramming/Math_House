@@ -252,7 +252,8 @@
 				<div class="col-lg-12">
 					<div class="main-banner-wrapper">
 					    <div class="banner-style-one owl-theme owl-carousel home13">
-					        <div class="slide slide-one home13" style="background-image: url(images/home/h1.jpg);">
+							@foreach ($slider as $item)
+					        <div class="slide slide-one home13" style="background-image: url(images/Slider/{{$item->slider_img}});">
 					            <div class="container">
 					                <div class="row">
 					                    <div class="col-lg-8 offset-lg-2 text-center">
@@ -266,34 +267,7 @@
 					                </div>
 					            </div>
 					        </div>
-					        <div class="slide slide-one home13" style="background-image: url(images/home/h2.jpg);">
-					            <div class="container">
-					                <div class="row">
-					                    <div class="col-lg-8 offset-lg-2 text-center">
-					                        <div class="banner-sub-title text-capitalize fwb">Build Skills With Experts</div>
-					                        <div class="banner-title text-capitalize fwb mb0">Any Time, Anywhere</div>
-					                        <P>Reach out to the most competent & passionate mentors</P>
-					                        <div class="btn-block">
-					                            <a href="#" class="banner-btn bdrs3">FIND COURSES</a>
-					                        </div>
-					                    </div>
-					                </div>
-					            </div>
-					        </div>
-					        <div class="slide slide-one home13" style="background-image: url(images/home/h3.jpg);">
-					            <div class="container">
-					                <div class="row">
-					                    <div class="col-lg-8 offset-lg-2 text-center">
-					                        <div class="banner-sub-title text-capitalize fwb">Build Skills With Experts</div>
-					                        <div class="banner-title text-capitalize fwb mb0">Any Time, Anywhere</div>
-					                        <P>Reach out to the most competent & passionate mentors</P>
-					                        <div class="btn-block">
-					                            <a href="#" class="banner-btn bdrs3">FIND COURSES</a>
-					                        </div>
-					                    </div>
-					                </div>
-					            </div>
-					        </div>
+							@endforeach
 					    </div>
 					    <div class="carousel-btn-block banner-carousel-btn dn">
 					        <span class="carousel-btn left-btn"><i class="flaticon-back left"></i></span>
