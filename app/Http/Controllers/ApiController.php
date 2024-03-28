@@ -9,6 +9,8 @@ use App\Models\Marketing;
 use App\Models\Chapter;
 use App\Models\Lesson;
 use App\Models\PaymentRequest;
+use App\Models\Exam;
+use App\Models\Mcq_ans;
 
 class ApiController extends Controller
 {
@@ -77,6 +79,25 @@ class ApiController extends Controller
 
         return response()->json([
             'lessons' => $lessons
+        ], 200);
+    }
+
+    public function api_stu_exam( $id ){
+        $exams = Exam::with('question')
+        ->first();
+        $arr = [];
+
+        foreach ($exams->question as $item) {
+            $ans = Mcq_ans::where('q_id' , $item->id)
+            ->get();
+            $arr[] = [
+                'question' => $item,
+                'Answers' => $ans 
+            ];
+        }
+
+        return response()->json([
+            'exam' => $arr
         ], 200);
     }
 

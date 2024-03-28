@@ -70,8 +70,8 @@ class Logincontroller extends Controller
                                         return redirect()->route('dashboard')->with(['success'=>'Loged In']);
                                 }
                                 elseif( $user->position == 'teacher'){
-                                        return 'Welcome Teacher';
-                                }
+                                        return redirect()->route('t_dashboard')->with(['success'=>'Loged In']);
+                               }
                                 elseif( $user->position == 'student'){
                                  return redirect()->route('stu_dashboard');
                                 }

@@ -42,9 +42,15 @@ use App\Http\Controllers\Visitor\V_LiveController;
 use App\Http\Controllers\Visitor\V_DiaExamController;
 use App\Http\Controllers\Visitor\CoursesController as V_CoursesController;
 
+use App\Http\Controllers\Teacher\TDashboardController;
+use App\Http\Controllers\Teacher\TProfileController;
+use App\Http\Controllers\Teacher\TLiveController;
+
 use App\Http\Controllers\login\LoginController;
 
 use Illuminate\Support\Facades\Route;
+
+use App\Models\Wallet;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -336,7 +342,6 @@ Route::middleware(['auth','auth.Admin'])->prefix('Admin')->group(function(){
 
           
     // Student
-use App\Models\Wallet;
 
 Route::middleware(['auth','auth.student'])->prefix('student')->group(function(){
     \App::singleton('wallet', function(){
@@ -412,6 +417,21 @@ Route::middleware(['auth','auth.student'])->prefix('student')->group(function(){
     
 });
 
+// Teacher
+
+Route::middleware(['auth','auth.teacher'])->prefix('Teacher')->group(function(){
+    Route::get('/',  [TDashboardController::class, 'index'])->name('t_dashboard');
+    
+    Route::controller(TProfileController::class)->prefix('Profile')->group(function(){
+        Route::get('/', 'index')->name('t_profile');
+        Route::post('/Edit', 't_edit_profile')->name('t_edit_profile');
+    });
+    
+    Route::controller(TLiveController::class)->prefix('Live')->group(function(){
+        Route::get('/', 'index')->name('t_live'); 
+    });
+});
+
 Route::get('/logout',  [LoginController::class, 'destroy'])->name('logout');
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -422,6 +442,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
 });
+
 
 Route::fallback(function () {
     return view('errors.404');

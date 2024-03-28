@@ -4,9 +4,9 @@
     use Carbon\Carbon;
 @endphp
 @section('title','Live')
-@include('Student.inc.header')
-@include('Student.inc.menu')
-@extends('Student.inc.nav')
+@include('Teacher.inc.header')
+@include('Teacher.inc.menu')
+@extends('Teacher.inc.nav')
 
 @section('page_content')
 
@@ -34,16 +34,16 @@
         @foreach( $sessions as $item )
         <tr>
             <td>{{$loop->iteration}}</td>
-            <td>{{$item->session->name}}</td>
-            <td>{{$item->session->date}}</td>
-            <td>{{$item->session->from}}</td>
-            <td>{{$item->session->to}}</td>
+            <td>{{$item->name}}</td>
+            <td>{{$item->date}}</td>
+            <td>{{$item->from}}</td>
+            <td>{{$item->to}}</td>
             <td>
                 <button class="btn btn-primary wallet_btn">
                     Attend 
                 </button>
 
-                @if ( $item->session->date == date('Y-m-d') && ( Carbon::now()->addMinutes(10)->format('H:i:s') >= $item->session->from ) )
+                @if ( $item->date == date('Y-m-d') && ( Carbon::now()->addMinutes(10)->format('H:i:s') >= $item->session->from ) )
                     
                 <div class="modal show_wallet fade show d-none" id="modalCenter" tabindex="-1" style="display: block;" aria-modal="true" role="dialog">
                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -59,7 +59,7 @@
                         <button type="button" class="btn btn-label-secondary close_wallet_btn" data-bs-dismiss="modal">
                             Close
                         </button>
-                        <a class="btn btn-success" href="{{route('use_live', ['id' => $item->session->id])}}">
+                        <a class="btn btn-success" href="{{route('use_live', ['id' => $item->id])}}">
                             Start
                         </a>
                         </div>
@@ -106,12 +106,12 @@
         @foreach( $sessions as $item )
         <tr>
             <td>{{$loop->iteration}}</td>
-            <td>{{$item->session->name}}</td>
-            <td>{{$item->session->date}}</td>
-            <td>{{$item->session->from}}</td>
-            <td>{{$item->session->to}}</td>
+            <td>{{$item->name}}</td>
+            <td>{{$item->date}}</td>
+            <td>{{$item->from}}</td>
+            <td>{{$item->to}}</td>
             <td>
-                {{count($item->session->user_attend) == 0 ? 'Missed' : 'Attend'}}</td>
+                {{count($item->user_attend) == 0 ? 'Missed' : 'Attend'}}</td>
         </tr>
         @endforeach
     </tbody>
@@ -168,4 +168,4 @@
 </script>
 @endsection
 
-@include('Student.inc.footer')
+@include('Teacher.inc.footer')
