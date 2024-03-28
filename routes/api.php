@@ -139,5 +139,6 @@ Route::middleware('auth:sanctum')->prefix('MobileStudent')->group(function(){
         Route::get('/stu_chapters','api_stu_my_chapter')->name('api_stu_my_chapter');
         Route::get('/stu_lessons','api_stu_lesson')->name('api_stu_lesson');
         Route::get('/stu_exam/{id}','api_stu_exam')->name('api_stu_exam');
+        Route::get('/stu_live','api_stu_live')->name('api_stu_live');
     });
 });

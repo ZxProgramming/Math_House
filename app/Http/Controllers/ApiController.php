@@ -9,6 +9,7 @@ use App\Models\Marketing;
 use App\Models\Chapter;
 use App\Models\Lesson;
 use App\Models\PaymentRequest;
+use App\Models\SessionStudent;
 use App\Models\Exam;
 use App\Models\Mcq_ans;
 
@@ -98,6 +99,17 @@ class ApiController extends Controller
 
         return response()->json([
             'exam' => $arr
+        ], 200);
+    }
+
+    public function api_stu_live( ){
+       
+        $sessions = SessionStudent::
+        where('user_id', auth()->user()->id)
+        ->get();
+
+        return response()->json([
+            'sessions' => $sessions
         ], 200);
     }
 

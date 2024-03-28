@@ -48,6 +48,8 @@
 						<a href="{{route('login.index')}}" class="btn flaticon-user"> <span class="dn-lg">Login</span></a>
 						@elseif( auth()->user()->position == 'admin' || auth()->user()->position == 'user_admin' )
 						<a href="{{route('dashboard')}}" class="btn flaticon-user"> <span class="dn-lg">Dashboard</span></a>
+						@elseif( auth()->user()->position == 'teacher' )
+						<a href="{{route('t_dashboard')}}" class="btn flaticon-user"> <span class="dn-lg">Dashboard</span></a>
 						@else
 						<a href="{{route('login.index')}}" class="btn flaticon-user"> <span class="dn-lg">Dashboard</span></a>
 						@endif
